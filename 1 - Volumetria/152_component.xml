@@ -1,0 +1,3174 @@
+<gadget >
+  <local-vars>
+    <var  id="V_DESCRGRUPO" label="V_DESCRGRUPO">
+      <expression type="sql" data-source="MGEDS">
+        <![CDATA[
+        
+        
+        
+        
+        
+        
+        
+        SELECT DESCRGRUPOPROD
+FROM TGFGRU
+WHERE CODGRUPOPROD = :A_CODGRUPOPROD
+      
+      
+      
+      
+      
+      
+      
+      ]]>
+      </expression>
+    </var>
+    <var  id="V_DESCROPER" label="V_DESCROPER">
+      <expression type="sql" data-source="MGEDS">
+        <![CDATA[
+        
+        
+        
+        
+        
+        
+        
+        SELECT MAX(DESCROPER)
+FROM TGFTOP
+WHERE CODTIPOPER = :A_CODTIPOPER
+
+      
+      
+      
+      
+      
+      
+      
+      ]]>
+      </expression>
+    </var>
+    <var  id="V_DESCRORIGPROD" label="V_DESCRORIGPROD">
+      <expression type="sql" data-source="MGEDS">
+        <![CDATA[
+        
+        
+        
+        
+        
+        
+        
+        SELECT F_DESCROPC('TGFPRO','ORIGPROD',:A_ORIGPROD)
+FROM DUAL
+
+      
+      
+      
+      
+      
+      
+      
+      ]]>
+      </expression>
+    </var>
+    <var  id="V_DESCRTIPMOV" label="V_DESCRTIPMOV">
+      <expression type="sql" data-source="MGEDS">
+        <![CDATA[
+        
+        
+        
+        
+        
+        
+        
+        SELECT F_DESCROPC('TGFTOP','TIPMOV',:A_TIPMOV)
+FROM DUAL
+
+      
+      
+      
+      
+      
+      
+      
+      ]]>
+      </expression>
+    </var>
+    <var  id="V_DESCRUSOPROD" label="V_DESCRUSOPROD">
+      <expression type="sql" data-source="MGEDS">
+        <![CDATA[
+        
+        
+        
+        
+        
+        
+        
+        SELECT F_DESCROPC('TGFPRO','USOPROD',:A_USOPROD)
+FROM DUAL
+
+      
+      
+      
+      
+      
+      
+      
+      ]]>
+      </expression>
+    </var>
+  </local-vars>
+  <level id="lvl_adkcmjm" description="Capa">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_adkcmnb" entryPoint="nivel_1.jsp">
+      </html5component>
+    </container>
+  </level>
+  <level id="lvl_a1magup" description="Comercial">
+    <container orientacao="H" tamanhoRelativo="100">
+      <html5component id="html5_a1magur" entryPoint="volumetria.jsp">
+      </html5component>
+    </container>
+  </level>
+  <level id="lvl_adkcmp6" description="Folha">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_adkcmp7" entryPoint="volumetria_folha.jsp">
+      </html5component>
+    </container>
+  </level>
+  <level id="lvl_a1mpu50" description="1 - Financeiro">
+    <args >
+      <arg id="A_TIPO_CONTA" type="text"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="49.7659522049766">
+        <grid id="grd_a1mpu51" useNewGrid="S">
+          <title>
+            <![CDATA[Financeiro]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+    CASE 
+        WHEN F.RECDESP = 1  THEN 'CONTAS A RECEBER'
+        WHEN F.RECDESP = -1 THEN 'CONTAS A PAGAR'
+        WHEN F.RECDESP = 0  THEN 'ERRO'
+        ELSE 'OUTROS'
+    END AS TIPO_CONTA,
+    COUNT(*) AS QTD_REGISTROS
+FROM TGFFIN F
+GROUP BY 
+    CASE 
+        WHEN F.RECDESP = 1  THEN 'CONTAS A RECEBER'
+        WHEN F.RECDESP = -1 THEN 'CONTAS A PAGAR'
+        WHEN F.RECDESP = 0  THEN 'ERRO'
+        ELSE 'OUTROS'
+    END
+ORDER BY TIPO_CONTA]]>
+          </expression>
+          <metadata>
+            <field name="TIPO_CONTA" label="Tipo" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTD_REGISTROS" label="Qtd. Registros" type="I" visible="true" useFooter="SUM">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a1mpu54">
+            <param id="A_TIPO_CONTA">$TIPO_CONTA</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="51.24414880512441">
+        <grid id="grd_a1mpu54" useNewGrid="S">
+          <args>
+            <arg id="A_TIPO_CONTA" type="text">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Financeiros: :A_TIPO_CONTA]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+    F.NUFIN,
+    F.NUNOTA,
+    F.DTVENC,
+    F.VLRDESDOB,
+    CASE 
+        WHEN F.RECDESP = 1  THEN 'CONTAS A RECEBER'
+        WHEN F.RECDESP = -1 THEN 'CONTAS A PAGAR'
+        WHEN F.RECDESP = 0  THEN 'ERRO'
+        ELSE 'OUTROS'
+    END AS TIPO_CONTA
+FROM TGFFIN F
+WHERE CASE 
+        WHEN F.RECDESP = 1  THEN 'CONTAS A RECEBER'
+        WHEN F.RECDESP = -1 THEN 'CONTAS A PAGAR'
+        WHEN F.RECDESP = 0  THEN 'ERRO'
+        ELSE 'OUTROS'
+    END = :A_TIPO_CONTA
+ORDER BY TIPO_CONTA, F.DTVENC]]>
+          </expression>
+          <metadata>
+            <field name="NUFIN" label="Nro. Único Fin." type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NUNOTA" label="Nro. Único Nota" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DTVENC" label="Dt. Venct." type="D" visible="true" useFooter="false">
+            </field>
+            <field name="VLRDESDOB" label="Vlr. Desdob." type="F" visible="true" useFooter="SUM" mask="#.##0,00">
+            </field>
+            <field name="TIPO_CONTA" label="Tipo" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.fin.cad.movimentacaoFinanceira">
+            <NUFIN>$NUFIN</NUFIN>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a1mpvbi" description="2 - Entradas e Saídas">
+    <args >
+      <arg id="A_CODUSU" type="integer" label="A_CODUSU : Número Inteiro"/>
+      <arg id="A_TIPMOV" type="text" label="A_TIPMOV : Texto"/>
+    </args>
+    <container orientacao="H" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <container orientacao="H" tamanhoRelativo="50">
+          <container orientacao="V" tamanhoRelativo="50">
+            <grid id="grd_a1rx0ac" useNewGrid="S">
+              <title>
+                <![CDATA[Entradas e Saídas - Tipos Movimento]]>
+              </title>
+              <expression type="sql" data-source="MGEDS">
+                <![CDATA[SELECT
+    C.TIPMOV,
+    CASE WHEN C.TIPMOV = 'Z' THEN 'Z-Modelo' ELSE F_DESCROPC('TGFTOP','TIPMOV',C.TIPMOV) END AS OPCAO,
+    COUNT(*) AS QTD
+FROM TGFCAB C
+GROUP BY
+    C.TIPMOV
+ORDER BY
+    C.TIPMOV]]>
+              </expression>
+              <metadata>
+                <field name="TIPMOV" label="TIPMOV" type="S" visible="false" useFooter="false">
+                </field>
+                <field name="OPCAO" label="Tipo Mov." type="S" visible="true" useFooter="false">
+                </field>
+                <field name="QTD" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+                </field>
+              </metadata>
+              <refresh-details  ui-list="grd_a1rx0ai">
+                <param id="A_TIPMOV">$TIPMOV</param>
+              </refresh-details>
+            </grid>
+          </container>
+          <container orientacao="V" tamanhoRelativo="50">
+            <grid id="grd_a1rx0ai" useNewGrid="S">
+              <args>
+                <arg id="A_TIPMOV" type="text">
+                </arg>
+              </args>
+              <title>
+                <![CDATA[Registro por TOPs - Tipo de Movimento: $V_DESCRTIPMOV]]>
+              </title>
+              <expression type="sql" data-source="MGEDS">
+                <![CDATA[SELECT
+    C.TIPMOV,
+    O.OPCAO        AS DESC_TIPMOV,
+    C.CODTIPOPER,
+    TOPX.DESCROPER AS DESC_OPERACAO,
+    COUNT(*)       AS QTD
+FROM TGFCAB C
+JOIN TDDCAM D
+       ON D.NOMETAB   = 'TGFCAB'
+      AND D.NOMECAMPO = 'TIPMOV'
+JOIN TDDOPC O
+       ON O.NUCAMPO = D.NUCAMPO
+      AND O.VALOR   = C.TIPMOV
+LEFT JOIN (
+    SELECT T.CODTIPOPER, T.DESCROPER, T.DHALTER
+    FROM TGFTOP T
+    JOIN (
+        SELECT CODTIPOPER, MAX(DHALTER) AS MAX_DHALTER
+        FROM TGFTOP
+        GROUP BY CODTIPOPER
+    ) M
+      ON M.CODTIPOPER   = T.CODTIPOPER
+     AND M.MAX_DHALTER  = T.DHALTER
+) TOPX
+   ON TOPX.CODTIPOPER = C.CODTIPOPER
+WHERE C.TIPMOV = :A_TIPMOV
+GROUP BY
+    C.TIPMOV,
+    O.OPCAO,
+    C.CODTIPOPER,
+    TOPX.DESCROPER
+ORDER BY
+    C.TIPMOV,
+    QTD DESC,
+    C.CODTIPOPER]]>
+              </expression>
+              <metadata>
+                <field name="TIPMOV" label="TIPMOV" type="S" visible="false" useFooter="false">
+                </field>
+                <field name="DESC_TIPMOV" label="Tipo Mov." type="S" visible="true" useFooter="false">
+                </field>
+                <field name="CODTIPOPER" label="Cód. TOP" type="I" visible="true" useFooter="false">
+                </field>
+                <field name="DESC_OPERACAO" label="TOP" type="S" visible="true" useFooter="false">
+                </field>
+                <field name="QTD" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+                </field>
+              </metadata>
+              <refresh-details  ui-list="grd_a1rx0az">
+                <param id="A_CODTIPOPER">$CODTIPOPER</param>
+              </refresh-details>
+            </grid>
+          </container>
+        </container>
+        <container orientacao="V" tamanhoRelativo="50">
+          <grid id="grd_a1rx0az" useNewGrid="S">
+            <args>
+              <arg id="A_CODTIPOPER" type="integer">
+              </arg>
+            </args>
+            <title>
+              <![CDATA[Registros com a TOP - :A_CODTIPOPER-$V_DESCROPER]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT
+    C.NUNOTA,
+    C.CODEMP,
+    C.NUMNOTA,
+    C.SERIENOTA,
+    C.DTNEG,
+    C.TIPMOV,
+    O.OPCAO        AS DESC_TIPMOV,
+    C.CODTIPOPER,
+    TOPX.DESCROPER AS DESC_OPERACAO,
+    C.VLRNOTA,
+    C.AD_ORIGDEPLOY
+FROM TGFCAB C
+JOIN TDDCAM D
+       ON D.NOMETAB   = 'TGFCAB'
+      AND D.NOMECAMPO = 'TIPMOV'
+JOIN TDDOPC O
+       ON O.NUCAMPO = D.NUCAMPO
+      AND O.VALOR   = C.TIPMOV
+LEFT JOIN (
+    SELECT T.CODTIPOPER, T.DESCROPER, T.DHALTER
+    FROM TGFTOP T
+    JOIN (
+        SELECT CODTIPOPER, MAX(DHALTER) AS MAX_DHALTER
+        FROM TGFTOP
+        GROUP BY CODTIPOPER
+    ) M
+      ON M.CODTIPOPER = T.CODTIPOPER
+     AND M.MAX_DHALTER = T.DHALTER
+) TOPX
+   ON TOPX.CODTIPOPER = C.CODTIPOPER
+WHERE C.CODTIPOPER = :A_CODTIPOPER
+ORDER BY
+    C.DTNEG DESC]]>
+            </expression>
+            <metadata>
+              <field name="NUNOTA" label="Nro. Único" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="NUMNOTA" label="Nro. Nota" type="I" visible="true" useFooter="null">
+              </field>
+              <field name="SERIENOTA" label="Série" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="DTNEG" label="Dt. Neg." type="D" visible="true" useFooter="false">
+              </field>
+              <field name="TIPMOV" label="TIPMOV" type="S" visible="false" useFooter="false">
+              </field>
+              <field name="DESC_TIPMOV" label="Tipo Mov." type="S" visible="true" useFooter="false">
+              </field>
+              <field name="CODTIPOPER" label="Cód. TOP" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="DESC_OPERACAO" label="TOP" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="VLRNOTA" label="Vlr. Nota" type="F" visible="true" useFooter="SUM" mask="#.##0,00">
+              </field>
+              <field name="AD_ORIGDEPLOY" label="AD_ORIGDEPLOY" type="S" visible="true" useFooter="false">
+              </field>
+            </metadata>
+            <on-click-launcher  resource-id="br.com.sankhya.com.mov.CentralNotas">
+              <NUNOTA>$NUNOTA</NUNOTA>
+            </on-click-launcher>
+          </grid>
+        </container>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a1rx0c0" description="3 - Produtos por USOPROD">
+    <args >
+      <arg id="A_USOPROD" type="text" label="A_USOPROD : Texto"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a1rx0c1" useNewGrid="S">
+          <title>
+            <![CDATA[Produtos por USOPROD]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT
+    PRO.USOPROD,
+    CASE 
+        WHEN PRO.USOPROD = 'S' THEN 'Serviço'
+        ELSE OPC.OPCAO 
+    END AS DESC_USOPROD, 
+    COUNT(*) AS QTDE_PRODUTOS
+FROM TGFPRO PRO
+LEFT JOIN TDDCAM CAM ON CAM.NOMETAB = 'TGFPRO' AND CAM.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC ON OPC.NUCAMPO = CAM.NUCAMPO AND OPC.VALOR = PRO.USOPROD
+WHERE PRO.CODPROD <> 0
+GROUP BY PRO.USOPROD, OPC.OPCAO
+ORDER BY PRO.USOPROD]]>
+          </expression>
+          <metadata>
+            <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="DESC_USOPROD" label="Uso Produto" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTDE_PRODUTOS" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a1rx0du">
+            <param id="A_USOPROD">$USOPROD</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a1rx0du" useNewGrid="S">
+          <args>
+            <arg id="A_USOPROD" type="text">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Produtos - Uso Produto: $V_DESCRUSOPROD]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT
+    PRO.CODPROD,
+    PRO.DESCRPROD,
+    PRO.CODVOL,
+    VOL.DESCRVOL,
+    PRO.USOPROD,
+    PRO.DECVLR,
+    PRO.DECQTD,
+    PRO.DESCMAX,
+    F_DESCROPC('TGFPRO','TEMICMS',PRO.TEMICMS) AS TEMICMS,
+    F_DESCROPC('TGFPRO','TEMISS',PRO.TEMISS) AS TEMISS,
+    F_DESCROPC('TGFPRO','TEMIPIVENDA',PRO.TEMIPIVENDA) AS TEMIPIVENDA,
+    F_DESCROPC('TGFPRO','TEMIPICOMPRA',PRO.TEMIPICOMPRA) AS TEMIPICOMPRA,
+    F_DESCROPC('TGFPRO','TEMIRF',PRO.TEMIRF) AS TEMIRF,
+    PRO.PERCIRF,
+    F_DESCROPC('TGFPRO','TEMINSS',PRO.TEMINSS) AS TEMINSS,
+    PRO.REFERENCIA,
+    PRO.CODGRUPOPROD,
+    PRO.AD_ORIGDEPLOY
+FROM TGFPRO PRO
+JOIN TGFVOL VOL
+  ON PRO.CODVOL = VOL.CODVOL
+WHERE PRO.USOPROD = :A_USOPROD]]>
+          </expression>
+          <metadata>
+            <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODVOL" label="Cód. Unidade" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRVOL" label="Unidade" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="DECVLR" label="Decimal Vlr." type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DECQTD" label="Decimal Qtd." type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCMAX" label="Desconto Máx." type="F" visible="true" useFooter="false">
+            </field>
+            <field name="TEMICMS" label="Tem ICMS?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMISS" label="Tem ISS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMIPIVENDA" label="Tem IPI na Venda" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMIPICOMPRA" label="Tem IPI na Compra" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMIRF" label="Tem IRF" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="PERCIRF" label="% IRF" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="TEMINSS" label="Tem INSS?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="REFERENCIA" label="Referência" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODGRUPOPROD" label="Cód. Grupo Produto" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+            <CODPROD>$CODPROD</CODPROD>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a2qo6ix" description="4 - Produtos por Grupos de Produtos">
+    <args >
+      <arg id="A_CODGRUPOPROD" type="integer" label="A_CODGRUPOPROD : Número Inteiro"/>
+      <arg id="A_USOPROD" type="text" label="A_USOPROD : Texto"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a2qo6iy" useNewGrid="S">
+          <title>
+            <![CDATA[Produtos por Grupo de Produtos]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT
+    PRO.CODGRUPOPROD,
+    GRU.DESCRGRUPOPROD,
+    PRO.USOPROD,
+    CASE 
+        WHEN PRO.USOPROD = 'S' THEN 'Serviço'
+        ELSE NVL(OPC.OPCAO, 'Outro (' || PRO.USOPROD || ')') 
+    END AS DESC_USOPROD,
+    COUNT(*) AS QTDE_PRODUTOS
+FROM TGFPRO PRO
+INNER JOIN TGFGRU GRU ON PRO.CODGRUPOPROD = GRU.CODGRUPOPROD
+LEFT JOIN TDDCAM CAM ON CAM.NOMETAB = 'TGFPRO' AND CAM.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC ON OPC.NUCAMPO = CAM.NUCAMPO AND OPC.VALOR = PRO.USOPROD
+WHERE PRO.CODPROD <> 0
+GROUP BY 
+    PRO.CODGRUPOPROD, 
+    GRU.DESCRGRUPOPROD, 
+    PRO.USOPROD, 
+    OPC.OPCAO
+ORDER BY PRO.CODGRUPOPROD, PRO.USOPROD]]>
+          </expression>
+          <metadata>
+            <field name="CODGRUPOPROD" label="Cód. Grupo" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRGRUPOPROD" label="Grupo de Produto" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="DESC_USOPROD" label="Uso Produto" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTDE_PRODUTOS" label="Qtd. Registros" type="I" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a2qo6jn">
+            <param id="A_CODGRUPOPROD">$CODGRUPOPROD</param>
+            <param id="A_USOPROD">$USOPROD</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a2qo6jn" useNewGrid="S">
+          <args>
+            <arg id="A_CODGRUPOPROD" type="integer">
+            </arg>
+            <arg id="A_USOPROD" type="integer">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Produtos do grupo :A_CODGRUPOPROD-$V_DESCRGRUPO - Uso: $V_DESCRUSOPROD]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT
+    PRO.CODPROD,
+    PRO.DESCRPROD,
+    PRO.CODVOL,
+    VOL.DESCRVOL,
+    PRO.USOPROD,
+    PRO.DECVLR,
+    PRO.DECQTD,
+    PRO.DESCMAX,
+    F_DESCROPC('TGFPRO','TEMICMS',PRO.TEMICMS) AS TEMICMS,
+    F_DESCROPC('TGFPRO','TEMISS',PRO.TEMISS) AS TEMISS,
+    F_DESCROPC('TGFPRO','TEMIPIVENDA',PRO.TEMIPIVENDA) AS TEMIPIVENDA,
+    F_DESCROPC('TGFPRO','TEMIPICOMPRA',PRO.TEMIPICOMPRA) AS TEMIPICOMPRA,
+    F_DESCROPC('TGFPRO','TEMIRF',PRO.TEMIRF) AS TEMIRF,
+    PRO.PERCIRF,
+    F_DESCROPC('TGFPRO','TEMINSS',PRO.TEMINSS) AS TEMINSS,
+    PRO.REFERENCIA,
+    PRO.CODGRUPOPROD,
+    PRO.AD_ORIGDEPLOY
+FROM TGFPRO PRO
+JOIN TGFVOL VOL
+  ON PRO.CODVOL = VOL.CODVOL
+WHERE PRO.CODGRUPOPROD = :A_CODGRUPOPROD
+AND PRO.USOPROD = :A_USOPROD]]>
+          </expression>
+          <metadata>
+            <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODVOL" label="Cód. Unidade" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRVOL" label="Unidade" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="DECVLR" label="Decimal p/ Vlr." type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DECQTD" label="Decimal p/ Qtd." type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCMAX" label="Desconto Máx." type="F" visible="true" useFooter="false">
+            </field>
+            <field name="TEMICMS" label="Tem ICMS?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMISS" label="Tem ISS?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMIPIVENDA" label="Tem IPI na Venda?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMIPICOMPRA" label="Tem IPI na Compra?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TEMIRF" label="Tem IRF?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="PERCIRF" label="% IRF" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="TEMINSS" label="Tem INSS?" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="REFERENCIA" label="Referência" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODGRUPOPROD" label="Cód. Grupo" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a2qo6my" description="5 - Referências Duplicadas">
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a2qo6m0" useNewGrid="S">
+          <title>
+            <![CDATA[Referências de Produtos Duplicadas]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+    P.REFERENCIA,
+    COUNT(*) AS QTD_PRODUTOS
+FROM TGFPRO P
+WHERE P.REFERENCIA IS NOT NULL
+GROUP BY P.REFERENCIA
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*) DESC]]>
+          </expression>
+          <metadata>
+            <field name="REFERENCIA" label="Referência" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTD_PRODUTOS" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a2qo6nu">
+            <param id="A_REFERENCIA">$REFERENCIA</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a2qo6nu" useNewGrid="S">
+          <args>
+            <arg id="A_REFERENCIA" type="text">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Produtos com a Referência: :A_REFERENCIA]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+    P.CODPROD,
+    P.DESCRPROD,
+    P.REFERENCIA,
+    P.AD_ORIGDEPLOY
+FROM TGFPRO P
+WHERE P.REFERENCIA = :A_REFERENCIA
+ORDER BY P.REFERENCIA, P.CODPROD]]>
+          </expression>
+          <metadata>
+            <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Descrição" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="REFERENCIA" label="Referência" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+            <CODPROD>$CODPROD</CODPROD>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a2qo6dr" description="6 - Descrições Duplicadas">
+    <args>
+      <arg  id="A_DESCRPROD" type="text" label="A_DESCRPROD : Texto"/>
+      <arg  id="A_NCM" type="text" label="A_NCM : Texto"/>
+      <arg  id="A_ORIGPROD" type="text" label="A_ORIGPROD : Texto"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a2qo6d0" useNewGrid="S">
+          <title>
+            <![CDATA[Descrições de Produtos Duplicadas]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT NCM, DESCRPROD, F_DESCROPC('TGFPRO','ORIGPROD',ORIGPROD) DESCRORIGPROD,
+ORIGPROD, COUNT(1) AS QTD_PRODUTOS
+FROM TGFPRO
+GROUP BY NCM, DESCRPROD, ORIGPROD
+HAVING COUNT(*) > 1
+ORDER BY DESCRPROD]]>
+          </expression>
+          <metadata>
+            <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Descrição" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRORIGPROD" label="Origem" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ORIGPROD" label="ORIGPROD" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="QTD_PRODUTOS" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a2qo6e1">
+            <param id="A_DESCRPROD">$DESCRPROD</param>
+            <param id="A_NCM">$NCM</param>
+            <param id="A_ORIGPROD">$ORIGPROD</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a2qo6e1" useNewGrid="S">
+          <args>
+            <arg id="A_DESCRPROD" type="text">
+            </arg>
+            <arg id="A_NCM" type="text">
+            </arg>
+            <arg id="A_ORIGPROD" type="text">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Descrição: :A_DESCRPROD - NCM: :A_NCM - Origem: $V_DESCRORIGPROD]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT CODPROD, 
+DESCRPROD, 
+NCM,
+F_DESCROPC('TGFPRO','ORIGPROD',ORIGPROD) AS DESCRORIGPROD,
+MARCA,
+REFFORN,
+REFERENCIA,
+AD_IDEXTERNO,
+AD_ORIGDEPLOY
+FROM TGFPRO
+WHERE DESCRPROD = :A_DESCRPROD
+AND NCM = :A_NCM
+AND ORIGPROD = :A_ORIGPROD]]>
+          </expression>
+          <metadata>
+            <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Descrição" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRORIGPROD" label="Origem" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="MARCA" label="Marca" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="REFFORN" label="Ref. Fornecedor" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="REFERENCIA" label="Cód. Barras" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="AD_IDEXTERNO" label="AD_IDEXTERNO" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+            <CODPROD>$CODPROD</CODPROD>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a20n31h" description="7 - CNPJ/CPF Repetidos">
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a20n31i" useNewGrid="S">
+          <title>
+            <![CDATA[Parceiros com CNPJ/CPF Repetidos]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+    Formatar_Cpf_Cnpj(PAR.CGC_CPF) AS CGF_CPF,
+    PAR.CODPARC,
+    PAR.AD_IDEXTERNO,
+    PAR.RAZAOSOCIAL,
+    PAR.NOMEPARC,
+    PAR.IDENTINSCESTAD,
+    PAR.CODCID,
+    CID.NOMECID,
+    PAR.CODEND,
+    END.NOMEEND,
+    PAR.NUMEND,
+    PAR.CODBAI,
+    BAI.NOMEBAI,
+    PAR.CEP,
+    PAR.COMPLEMENTO,
+    F_DESCROPC('TGFPAR','CLIENTE',PAR.CLIENTE) AS CLIENTE,
+    F_DESCROPC('TGFPAR','FORNECEDOR',PAR.FORNECEDOR) AS FORNECEDOR,
+    (
+        SELECT COUNT(*)
+        FROM TGFCAB CAB
+        WHERE CAB.CODPARC = PAR.CODPARC
+    ) AS QTD_TGFCAB,
+    PAR.DTALTER
+FROM TGFPAR PAR
+INNER JOIN TSIEND END ON (PAR.CODEND = END.CODEND)
+INNER JOIN TSIBAI BAI ON (PAR.CODBAI = BAI.CODBAI)
+INNER JOIN TSICID CID ON (PAR.CODCID = CID.CODCID)
+WHERE PAR.CGC_CPF IS NOT NULL
+AND PAR.CGC_CPF IN (
+    SELECT CGC_CPF
+    FROM TGFPAR
+    WHERE CGC_CPF IS NOT NULL
+    GROUP BY CGC_CPF
+    HAVING COUNT(*) > 1
+)
+ORDER BY PAR.CGC_CPF]]>
+          </expression>
+          <metadata>
+            <field name="CGF_CPF" label="CNPJ/CPF" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODPARC" label="CODPARC" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="AD_IDEXTERNO" label="AD_IDEXTERNO" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="RAZAOSOCIAL" label="RAZAOSOCIAL" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="NOMEPARC" label="NOMEPARC" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="IDENTINSCESTAD" label="IDENTINSCESTAD" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODCID" label="CODCID" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NOMECID" label="NOMECID" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODEND" label="CODEND" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NOMEEND" label="NOMEEND" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="NUMEND" label="NUMEND" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODBAI" label="CODBAI" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NOMEBAI" label="NOMEBAI" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CEP" label="CEP" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="COMPLEMENTO" label="COMPLEMENTO" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CLIENTE" label="CLIENTE" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="FORNECEDOR" label="FORNECEDOR" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTD_TGFCAB" label="QTD_TGFCAB" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DTALTER" label="DTALTER" type="D" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.core.cad.parceiros">
+            <CODPARC>$CODPARC_1</CODPARC>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a20n33r" description="8 - Financeiros sem Nota">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_a20n33s" useNewGrid="S">
+        <title>
+          <![CDATA[Financeiros sem Nota]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT DISTINCT f.nufin, f.NUNOTA, f.codtipoper, (select max(descroper) from tgftop where codtipoper = f.codtipoper) as descroper
+FROM TGFFIN f
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM TGFCAB c
+    WHERE c.NUNOTA = f.NUNOTA
+)
+ORDER BY f.nufin, f.NUNOTA]]>
+        </expression>
+        <metadata>
+          <field name="NUFIN" label="Nro. Único Fin." type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NUNOTA" label="Nro. Único Nota" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODTIPOPER" label="Cód. TOP" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCROPER" label="TOP" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.fin.cad.movimentacaoFinanceira">
+          <NUFIN>$NUFIN</NUFIN>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_a20n34r" description="9 - Notas sem Financeiro">
+    <args >
+      <arg id="A_CODUSU" type="integer"/>
+      <arg id="A_TIPMOV" type="text"/>
+      <arg id="A_CODTIPOPER" type="integer"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="H" tamanhoRelativo="50">
+        <container orientacao="V" tamanhoRelativo="50">
+          <grid id="grd_a20n34s" useNewGrid="S">
+            <title>
+              <![CDATA[Notas sem Financeiro - Por Tipo de Movimento]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT 
+       CAB.TIPMOV,
+       TIPMOV_DESC.OPCAO AS DESC_TIPMOV,
+       COUNT(*) AS QTD_REGISTROS
+FROM TGFCAB CAB
+LEFT JOIN TDDCAM CAM_TIPMOV
+       ON CAM_TIPMOV.NOMETAB = 'TGFCAB'
+      AND CAM_TIPMOV.NOMECAMPO = 'TIPMOV'
+LEFT JOIN TDDOPC TIPMOV_DESC
+       ON TIPMOV_DESC.NUCAMPO = CAM_TIPMOV.NUCAMPO
+      AND TIPMOV_DESC.VALOR   = CAB.TIPMOV
+WHERE CAB.NUNOTA IN (
+    SELECT DISTINCT C.NUNOTA
+    FROM TGFCAB C
+    INNER JOIN TGFTOP T ON (C.CODTIPOPER = T.CODTIPOPER AND C.DHTIPOPER = T.DHALTER)
+    WHERE T.ATUALFIN <> 0
+      AND C.TIPMOV <> 'Z'
+      AND NOT EXISTS (
+          SELECT 1
+          FROM TGFFIN F
+          WHERE F.NUNOTA = C.NUNOTA
+      )
+)
+GROUP BY 
+    CAB.TIPMOV,
+    TIPMOV_DESC.OPCAO
+ORDER BY QTD_REGISTROS DESC]]>
+            </expression>
+            <metadata>
+              <field name="TIPMOV" label="TIPMOV" type="S" visible="false" useFooter="false">
+              </field>
+              <field name="DESC_TIPMOV" label="Tipo de Movimento" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="QTD_REGISTROS" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+              </field>
+            </metadata>
+            <refresh-details  ui-list="grd_a20n38v">
+              <param id="A_TIPMOV">$TIPMOV</param>
+            </refresh-details>
+          </grid>
+        </container>
+        <container orientacao="V" tamanhoRelativo="50">
+          <grid id="grd_a20n38v" useNewGrid="S">
+            <args>
+              <arg id="A_TIPMOV" type="text">
+              </arg>
+            </args>
+            <title>
+              <![CDATA[TOPs Tipo de Movimento - $V_DESCRTIPMOV]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT 
+       CAB.TIPMOV,
+       TIPMOV_DESC.OPCAO AS DESC_TIPMOV,
+       CAB.CODTIPOPER,
+       TOPS.DESCROPER,
+       COUNT(*) AS QTD_REGISTROS
+FROM TGFCAB CAB
+JOIN (
+    SELECT T.CODTIPOPER, T.DESCROPER
+    FROM TGFTOP T
+    JOIN (
+        SELECT CODTIPOPER, MAX(DHALTER) AS MAX_DHALTER
+        FROM TGFTOP
+        GROUP BY CODTIPOPER
+    ) M
+      ON M.CODTIPOPER = T.CODTIPOPER
+     AND M.MAX_DHALTER = T.DHALTER
+) TOPS
+  ON TOPS.CODTIPOPER = CAB.CODTIPOPER
+LEFT JOIN TDDCAM CAM_TIPMOV
+       ON CAM_TIPMOV.NOMETAB = 'TGFCAB'
+      AND CAM_TIPMOV.NOMECAMPO = 'TIPMOV'
+LEFT JOIN TDDOPC TIPMOV_DESC
+       ON TIPMOV_DESC.NUCAMPO = CAM_TIPMOV.NUCAMPO
+      AND TIPMOV_DESC.VALOR   = CAB.TIPMOV
+
+WHERE CAB.TIPMOV = :A_TIPMOV
+  AND CAB.NUNOTA IN (
+    SELECT DISTINCT C.NUNOTA
+    FROM TGFCAB C
+    INNER JOIN TGFTOP T ON (C.CODTIPOPER = T.CODTIPOPER AND C.DHTIPOPER = T.DHALTER)
+    WHERE T.ATUALFIN <> 0
+      AND C.TIPMOV <> 'Z'
+      AND NOT EXISTS (
+          SELECT 1
+          FROM TGFFIN F
+          WHERE F.NUNOTA = C.NUNOTA
+      )
+)
+GROUP BY 
+    CAB.TIPMOV,
+    TIPMOV_DESC.OPCAO,
+    CAB.CODTIPOPER, 
+    TOPS.DESCROPER
+ORDER BY QTD_REGISTROS DESC]]>
+            </expression>
+            <metadata>
+              <field name="TIPMOV" label="TIPMOV" type="S" visible="false" useFooter="false">
+              </field>
+              <field name="DESC_TIPMOV" label="Tipo de Movimento" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="CODTIPOPER" label="Cód. TOP" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="DESCROPER" label="TOP" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="QTD_REGISTROS" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+              </field>
+            </metadata>
+            <refresh-details  ui-list="grd_a20n39y">
+              <param id="A_CODTIPOPER">$CODTIPOPER</param>
+            </refresh-details>
+          </grid>
+        </container>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a20n39y" useNewGrid="S">
+          <args>
+            <arg id="A_CODTIPOPER" type="integer">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Notas com a TOP :A_CODTIPOPER-$V_DESCROPER]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+    CAB.NUNOTA,
+    CAB.CODTIPOPER,
+    TOPS.DESCROPER,
+
+    TOPS.CODCFO_ENTRADA,
+    CFO_E.DESCRCFO        AS DESC_CODCFO_ENTRADA,
+
+    TOPS.CODCFO_SAIDA,
+    CFO_S.DESCRCFO        AS DESC_CODCFO_SAIDA,
+
+    TOPS.CODCFO_ENTRADA_FORA,
+    CFO_EF.DESCRCFO       AS DESC_CODCFO_ENTRADA_FORA,
+
+    TOPS.CODCFO_SAIDA_FORA,
+    CFO_SF.DESCRCFO       AS DESC_CODCFO_SAIDA_FORA
+
+FROM TGFCAB CAB
+JOIN (
+    SELECT 
+        T.CODTIPOPER,
+        T.DESCROPER,
+        T.CODCFO_ENTRADA,
+        T.CODCFO_SAIDA,
+        T.CODCFO_ENTRADA_FORA,
+        T.CODCFO_SAIDA_FORA
+    FROM TGFTOP T
+    JOIN (
+        SELECT CODTIPOPER, MAX(DHALTER) AS MAX_DHALTER
+        FROM TGFTOP
+        GROUP BY CODTIPOPER
+    ) M
+      ON M.CODTIPOPER = T.CODTIPOPER
+     AND M.MAX_DHALTER = T.DHALTER
+) TOPS
+  ON TOPS.CODTIPOPER = CAB.CODTIPOPER
+LEFT JOIN TGFCFO CFO_E
+       ON CFO_E.CODCFO = TOPS.CODCFO_ENTRADA
+LEFT JOIN TGFCFO CFO_S
+       ON CFO_S.CODCFO = TOPS.CODCFO_SAIDA
+LEFT JOIN TGFCFO CFO_EF
+       ON CFO_EF.CODCFO = TOPS.CODCFO_ENTRADA_FORA
+LEFT JOIN TGFCFO CFO_SF
+       ON CFO_SF.CODCFO = TOPS.CODCFO_SAIDA_FORA
+
+WHERE CAB.CODTIPOPER = :A_CODTIPOPER
+  AND CAB.NUNOTA IN (
+    SELECT DISTINCT C.NUNOTA
+    FROM TGFCAB C
+    WHERE C.TIPMOV <> 'Z'
+      AND NOT EXISTS (
+          SELECT 1
+          FROM TGFFIN F
+          WHERE F.NUNOTA = C.NUNOTA
+      )
+)
+ORDER BY CAB.CODTIPOPER]]>
+          </expression>
+          <metadata>
+            <field name="NUNOTA" label="Nro. Único" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="CODTIPOPER" label="Cód. TOP" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCROPER" label="TOP" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODCFO_ENTRADA" label="Cód. CFOP Entrada (Dentro UF)" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESC_CODCFO_ENTRADA" label="CFOP Entrada (Dentro UF)" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODCFO_SAIDA" label="Cód. CFOP Saída (Dentro UF)" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESC_CODCFO_SAIDA" label="CFOP Saída (Dentro UF)" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODCFO_ENTRADA_FORA" label="Cód. CFOP Entrada (Fora UF)" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESC_CODCFO_ENTRADA_FORA" label="CFOP Entrada (Fora UF)" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODCFO_SAIDA_FORA" label="Cód. CFOP Saída (Fora UF)" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESC_CODCFO_SAIDA_FORA" label="CFOP Saída (Fora UF)" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.com.mov.CentralNotas">
+            <NUNOTA>$NUNOTA</NUNOTA>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a20n4cr" description="10 - Produtos Vend. sem Entrada">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_a20n4cs" useNewGrid="S">
+        <title>
+          <![CDATA[Produtos Vendidos sem Registro de Entrada]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT DISTINCT 
+       I.CODPROD,
+       P.DESCRPROD,
+       P.USOPROD        AS USOPROD_PRO,
+       OPC_P.OPCAO      AS DESC_USOPROD_PRO,
+       I.USOPROD        AS USOPROD_ITE,
+       OPC_I.OPCAO      AS DESC_USOPROD_ITE,
+       P.NCM,
+       P.AD_ORIGDEPLOY
+FROM   TGFITE I
+JOIN   TGFCAB C
+       ON C.NUNOTA = I.NUNOTA
+JOIN   TGFPRO P
+       ON P.CODPROD = I.CODPROD
+LEFT JOIN TDDCAM CAM_P
+       ON CAM_P.NOMETAB = 'TGFPRO'
+      AND CAM_P.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC_P
+       ON OPC_P.NUCAMPO = CAM_P.NUCAMPO
+      AND OPC_P.VALOR = P.USOPROD
+
+-- descrição do USOPROD do item
+LEFT JOIN TDDCAM CAM_I
+       ON CAM_I.NOMETAB = 'TGFITE'
+      AND CAM_I.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC_I
+       ON OPC_I.NUCAMPO = CAM_I.NUCAMPO
+      AND OPC_I.VALOR = I.USOPROD
+
+WHERE  C.TIPMOV = 'V'
+  AND I.CODPROD NOT IN (
+    SELECT DISTINCT IC.CODPROD 
+    FROM TGFITE IC
+    INNER JOIN TGFCAB CC ON CC.NUNOTA = IC.NUNOTA AND CC.TIPMOV = 'C')
+ORDER BY P.NCM, I.CODPROD]]>
+        </expression>
+        <metadata>
+          <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="USOPROD_PRO" label="USOPROD_PRO" type="S" visible="false" useFooter="false">
+          </field>
+          <field name="DESC_USOPROD_PRO" label="Uso Produto (TGFPRO)" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="USOPROD_ITE" label="USOPROD_ITE" type="S" visible="false" useFooter="false">
+          </field>
+          <field name="DESC_USOPROD_ITE" label="Uso Produto (TGFITE)" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+          <CODPROD>$CODPROD</CODPROD>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_a20n4ek" description="11 - Produtos com Custo Zero">
+    <args >
+      <arg id="A_CODUSU" type="integer" label="A_CODUSU : Número Inteiro"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="61.11843068364808">
+        <container orientacao="V" tamanhoRelativo="57.444675765286455">
+          <grid id="grd_a20n4em" useNewGrid="S">
+            <args>
+              <arg id="CODPROD" type="integer">
+              </arg>
+            </args>
+            <title>
+              <![CDATA[Produtos com Custo Zero]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT 
+    C.CODEMP, 
+    P.CODPROD, 
+    MAX(C.DTATUAL) AS ULTIMA_ALTERACAO,
+    MAX(C.CUSSEMICM) AS MAIOR_CUSTO,
+    P.USOPROD,
+    P.AD_ORIGDEPLOY,
+    OPC.OPCAO AS DESC_USOPROD,
+    'CUSTO IGUAL A ZERO' AS SITUACAO
+FROM TGFPRO P
+INNER JOIN TGFCUS C ON C.CODPROD = P.CODPROD
+LEFT JOIN TDDCAM CAM ON (CAM.NOMETAB = 'TGFPRO' AND CAM.NOMECAMPO = 'USOPROD')
+LEFT JOIN TDDOPC OPC ON (OPC.NUCAMPO = CAM.NUCAMPO AND OPC.VALOR = P.USOPROD)
+WHERE P.USOPROD IN ('V', 'R')
+  AND C.DTATUAL <> TO_DATE('01/01/1900', 'DD/MM/YYYY')
+GROUP BY 
+    C.CODEMP, 
+    P.CODPROD, 
+    P.USOPROD, 
+    P.AD_ORIGDEPLOY,
+    OPC.OPCAO
+HAVING MAX(C.CUSSEMICM) = 0
+ORDER BY C.CODEMP, P.CODPROD]]>
+            </expression>
+            <metadata>
+              <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="CODPROD" label="Cód. Prod." type="I" visible="true" useFooter="false">
+              </field>
+              <field name="ULTIMA_ALTERACAO" label="ULTIMA_ALTERACAO" type="D" visible="true" useFooter="false">
+              </field>
+              <field name="MAIOR_CUSTO" label="MAIOR_CUSTO" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+              </field>
+              <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="DESC_USOPROD" label="Uso Produto" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+              </field>
+            </metadata>
+            <refresh-details  ui-list="grd_2G4">
+              <param id="A_CODPROD">$CODPROD</param>
+            </refresh-details>
+          </grid>
+        </container>
+        <container orientacao="V" tamanhoRelativo="43.56542524481456">
+          <grid id="grd_2G4" useNewGrid="S">
+            <args>
+              <arg id="A_CODPROD" type="integer">
+              </arg>
+            </args>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT 
+    I.NUNOTA, 
+    C.CODTIPOPER, 
+    I.CODPROD, 
+    NVL(I.VLRUNIT, 0) AS VLRUNIT, 
+    NVL(I.QTDNEG, 0) AS QTDNEG, 
+    NVL(I.BASEICMS, 0) AS BASEICMS, 
+    NVL(I.VLRICMS, 0) AS VLRICMS, 
+    NVL(I.BASEIPI, 0) AS BASEIPI, 
+    -- Removi a duplicidade do VLRICMS que estava na sua query original
+    NVL(I.CODCFO, 0) AS CODCFO, 
+    NVL(I.VLRTOT, 0) AS VLRTOT, 
+    NVL(C.OBSERVACAO, ' ') AS OBSERVACAO -- Campos de texto costumam ser os maiores vilões
+FROM TGFITE I
+JOIN TGFCAB C ON C.NUNOTA = I.NUNOTA
+WHERE I.CODPROD = :A_CODPROD]]>
+            </expression>
+            <metadata>
+              <field name="NUNOTA" label="NUNOTA" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="CODTIPOPER" label="CODTIPOPER" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="CODPROD" label="CODPROD" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="VLRUNIT" label="VLRUNIT" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="QTDNEG" label="QTDNEG" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="BASEICMS" label="BASEICMS" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="VLRICMS" label="VLRICMS" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="BASEIPI" label="BASEIPI" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="CODCFO" label="CODCFO" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="VLRTOT" label="VLRTOT" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="OBSERVACAO" label="OBSERVACAO" type="S" visible="true" useFooter="false">
+              </field>
+            </metadata>
+            <on-click-launcher  resource-id="br.com.sankhya.com.mov.CentralNotas">
+              <NUNOTA>$NUNOTA</NUNOTA>
+            </on-click-launcher>
+          </grid>
+        </container>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a2qo6g1" description="12 - Produtos sem Custo">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_a20n36c" useNewGrid="S">
+        <title>
+          <![CDATA[Produtos sem Custo]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT
+    P.CODPROD,
+    P.DESCRPROD,
+    P.USOPROD,
+    MAX(OPC.OPCAO) AS DESC_USOPROD, -- Usando MAX para simplificar o GROUP BY
+    'SEM REGISTRO NA TGFCUS' AS SITUACAO,
+    CASE 
+        WHEN EXISTS (SELECT 1 FROM TGFITE I WHERE I.CODPROD = P.CODPROD) 
+            THEN 'COM REGISTRO NA TGFITE' 
+        ELSE 'SEM REGISTRO NA TGFITE' 
+    END AS SITUACAO2,
+    LISTAGG(DISTINCT CAB.TIPMOV, ' | ') WITHIN GROUP (ORDER BY CAB.TIPMOV) AS MOVIMENTOS,
+    P.AD_ORIGDEPLOY
+FROM TGFPRO P
+-- Joins de Movimentação
+LEFT JOIN TGFITE I2 ON I2.CODPROD = P.CODPROD
+LEFT JOIN TGFCAB CAB ON CAB.NUNOTA = I2.NUNOTA
+-- O segredo: filtrar a TOP no ON do Join para não "quebrar" o Left Join
+LEFT JOIN TGFTOP TPO ON TPO.CODTIPOPER = CAB.CODTIPOPER AND TPO.DHALTER = CAB.DHTIPOPER
+                     AND (TPO.PRECIFICA <> 'N')
+-- Join de Custo
+LEFT JOIN TGFCUS CUS ON CUS.CODPROD = P.CODPROD
+-- Dicionário de Dados
+LEFT JOIN TDDCAM CAM ON CAM.NOMETAB = 'TGFPRO' AND CAM.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC ON OPC.NUCAMPO = CAM.NUCAMPO AND OPC.VALOR = P.USOPROD
+WHERE CUS.CODPROD IS NULL  -- Filtro mestre: Produto sem custo
+  AND P.USOPROD IN ('V', 'R')
+  AND P.CODPROD <> 0
+GROUP BY
+    P.CODPROD,
+    P.DESCRPROD,
+    P.USOPROD,
+    P.AD_ORIGDEPLOY
+ORDER BY
+    P.CODPROD]]>
+        </expression>
+        <metadata>
+          <field name="CODPROD" label="Cód. Prod." type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+          </field>
+          <field name="DESC_USOPROD" label="Uso Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO2" label="Situação_2" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="MOVIMENTOS" label="Movimentos" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+          <CODPROD>$CODPROD</CODPROD>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_a20n4ix" description="13 - Itens sem Cabeçalho">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_a20n4iy" useNewGrid="S">
+        <title>
+          <![CDATA[Itens Sem Cabeçalho de Nota]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT I.NUNOTA, I.CODEMP, I.CODPROD, P.DESCRPROD, P.AD_ORIGDEPLOY
+FROM TGFITE i
+INNER JOIN TGFPRO P ON (I.CODPROD = P.CODPROD)
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM TGFCAB c
+    WHERE c.NUNOTA = i.NUNOTA
+)
+ORDER BY i.NUNOTA]]>
+        </expression>
+        <metadata>
+          <field name="NUNOTA" label="Nro. Único Nota" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_a20n4jm" description="14 - Cabeçalho sem Itens">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_a20n4jn" useNewGrid="S">
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT     c.NUNOTA,
+    c.codtipoper,
+    t.descroper,
+    tipmov_desc.OPCAO AS DESC_TIPMOV,
+    C.DTNEG,
+    C.AD_ORIGDEPLOY
+FROM TGFCAB c
+INNER JOIN TGFTOP T ON (C.CODTIPOPER = T.CODTIPOPER AND C.DHTIPOPER = T.DHALTER)
+LEFT JOIN TDDCAM cam_tipmov
+       ON cam_tipmov.NOMETAB   = 'TGFCAB'
+      AND cam_tipmov.NOMECAMPO = 'TIPMOV'
+LEFT JOIN TDDOPC tipmov_desc
+       ON tipmov_desc.NUCAMPO = cam_tipmov.NUCAMPO
+      AND tipmov_desc.VALOR   = c.TIPMOV
+WHERE NOT EXISTS (
+          SELECT 1
+          FROM TGFITE i
+          WHERE i.NUNOTA = c.NUNOTA
+      )
+  AND c.TIPMOV <> 'Z'
+ORDER BY c.NUNOTA]]>
+        </expression>
+        <metadata>
+          <field name="NUNOTA" label="Nro. Único Nota" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODTIPOPER" label="Cód. TOP" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCROPER" label="TOP" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DESC_TIPMOV" label="Tipo de Movimento" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTNEG" label="Dt. Neg." type="D" visible="true" useFooter="false">
+          </field>
+          <field name="AD_ORIGDEPLOY" label="AD_ORIGDEPLOY" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.com.mov.CentralNotas">
+          <NUNOTA>$NUNOTA</NUNOTA>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_a20n4kc" description="15 - Cidades Duplicadas">
+    <args >
+      <arg id="A_CODMUNFIS" type="integer"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a20n4kd" useNewGrid="S">
+          <title>
+            <![CDATA[Cidades com Códigos Fiscais Duplicados]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+       CODMUNFIS,
+       COUNT(*) AS QTD,
+       RTRIM(
+         XMLAGG(
+           XMLELEMENT(e, CODCID || ' - ' || NOMECID || ' - ' || UF || ', ')
+           ORDER BY CODCID
+         ).getClobVal(),
+         ', '
+       ) AS CIDADES
+FROM   TSICID
+WHERE  CODMUNFIS IS NOT NULL
+GROUP  BY CODMUNFIS
+HAVING COUNT(*) > 1
+ORDER  BY CODMUNFIS]]>
+          </expression>
+          <metadata>
+            <field name="CODMUNFIS" label="Cód. Fiscal" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="QTD" label="Qtd. Registros" type="I" visible="true" useFooter="SUM" mask="#.##0">
+            </field>
+            <field name="CIDADES" label="CIDADES" type="S" visible="false" useFooter="false">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a20n4ls">
+            <param id="A_CODMUNFIS">$CODMUNFIS</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a20n4ls" useNewGrid="S">
+          <args>
+            <arg id="A_CODMUNFIS" type="integer">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Cidades com Código Fiscal :A_CODMUNFIS]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+       CID.CODMUNFIS,
+       CID.CODCID,
+       CID.NOMECID,
+       UFS.UF
+FROM   TSICID CID
+INNER JOIN TSIUFS UFS ON (CID.UF = UFS.CODUF)
+WHERE CID.CODMUNFIS = :A_CODMUNFIS
+  AND CID.CODMUNFIS IN (
+        SELECT CODMUNFIS
+        FROM   TSICID
+        WHERE  CODMUNFIS IS NOT NULL
+        GROUP  BY CODMUNFIS
+        HAVING COUNT(*) > 1
+  )
+ORDER BY CID.CODMUNFIS, CID.CODCID]]>
+          </expression>
+          <metadata>
+            <field name="CODMUNFIS" label="Cód. Fiscal" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="CODCID" label="Cód. Cidade" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NOMECID" label="Cidade" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="UF" label="UF" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.core.cad.cidades">
+            <CODCID>$CODCID</CODCID>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_a20n4s4" description="16 - Classificação Fiscal">
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a20n4s5" useNewGrid="S">
+          <title>
+            <![CDATA[Parceiros com Classificação Fiscal Divergente do Esperado]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[WITH BASE AS (
+    SELECT
+        P.CODPARC,
+        P.TIPPESSOA,
+        P.CLASSIFICMS,
+        -- Código esperado (R, P ou C) conforme as regras
+        CASE
+            WHEN (P.TIPPESSOA = 'J'
+                  AND P.IDENTINSCESTAD IS NOT NULL
+                  AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
+                 THEN 'R'  -- Revendedor
+            WHEN (P.TIPPESSOA = 'F'
+                  AND P.IDENTINSCESTAD IS NOT NULL
+                  AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
+                 THEN 'P'  -- Produtor Rural
+            WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
+                 THEN 'C'  -- Consumidor Final Não Contribuinte
+        END AS CLASSIFICMS_ESPERADO
+    FROM TGFPAR P
+)
+SELECT B.TIPPESSOA,
+    TIP_DESC.OPCAO AS DESC_TIPPESSOA,
+    COUNT(*) AS QTD_DIVERGENCIAS
+FROM BASE B
+-- descrição do TIPPESSOA
+LEFT JOIN TDDCAM CAM_TIP
+       ON CAM_TIP.NOMETAB   = 'TGFPAR'
+      AND CAM_TIP.NOMECAMPO = 'TIPPESSOA'
+LEFT JOIN TDDOPC TIP_DESC
+       ON TIP_DESC.NUCAMPO = CAM_TIP.NUCAMPO
+      AND TIP_DESC.VALOR   = B.TIPPESSOA
+WHERE
+    B.CLASSIFICMS_ESPERADO IS NOT NULL
+    AND B.CLASSIFICMS <> B.CLASSIFICMS_ESPERADO
+GROUP BY
+    B.TIPPESSOA,TIP_DESC.OPCAO
+ORDER BY
+    TIP_DESC.OPCAO]]>
+          </expression>
+          <metadata>
+            <field name="TIPPESSOA" label="TIPPESSOA" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="DESC_TIPPESSOA" label="Tipo Parceiro" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTD_DIVERGENCIAS" label="Qtd. Divergências" type="I" visible="true" useFooter="SUM" mask="#.##0">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_a20n4tx">
+            <param id="A_TIPPESSOA">$TIPPESSOA</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_a20n4tx" useNewGrid="S">
+          <args>
+            <arg id="A_TIPPESSOA" type="text">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Parceiros com divergência]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 
+       P.CODPARC,
+       P.RAZAOSOCIAL,
+       P.TIPPESSOA,
+       TIP_DESC.OPCAO AS DESC_TIPPESSOA,  -- descrição do TIPPESSOA
+       P.IDENTINSCESTAD,
+       F_DESCROPC('TGFPAR','CLASSIFICMS', P.CLASSIFICMS) AS CLASSIFICMS,
+       CASE 
+            WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'R')
+                 THEN 'R-Revendedor'
+            WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'P')
+                 THEN 'P-Produtor Rural'
+            WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO' AND P.CLASSIFICMS <> 'C')
+                 THEN 'C-Consumidor Final Não Contribuinte'
+       END AS CLASSIFICMS_ESPERADO
+FROM TGFPAR P
+-- descrição do TIPPESSOA
+LEFT JOIN TDDCAM CAM_TIP
+       ON CAM_TIP.NOMETAB   = 'TGFPAR'
+      AND CAM_TIP.NOMECAMPO = 'TIPPESSOA'
+LEFT JOIN TDDOPC TIP_DESC
+       ON TIP_DESC.NUCAMPO = CAM_TIP.NUCAMPO
+      AND TIP_DESC.VALOR   = P.TIPPESSOA
+WHERE P.TIPPESSOA = :A_TIPPESSOA
+  AND ((P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'R')
+   OR (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'P')
+   OR (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO' AND P.CLASSIFICMS <> 'C'))
+ORDER BY P.CODPARC]]>
+          </expression>
+          <metadata>
+            <field name="CODPARC" label="Cód. Pessoa" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="RAZAOSOCIAL" label="Razão Social" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TIPPESSOA" label="TIPPESSOA" type="S" visible="false" useFooter="false">
+            </field>
+            <field name="DESC_TIPPESSOA" label="Tipo Parceiro" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="IDENTINSCESTAD" label="Inscrição Estadual" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CLASSIFICMS" label="Classif. ICMS Atual" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CLASSIFICMS_ESPERADO" label="Classif. ICMS Esperada" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.core.cad.parceiros">
+            <CODPARC>$CODPARC</CODPARC>
+          </on-click-launcher>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_zc6jly" description="17 - Itens sem Tabela de Preço">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_zc6jl0" useNewGrid="S">
+        <title>
+          <![CDATA[Produtos Vendidos sem Tabela de Preço]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT
+    X.CODPROD,
+    X.DESCRPROD,
+    X.USOPROD,
+    X.DESC_USOPROD,
+    X.AD_IDEXTERNO,
+    X.AD_ORIGDEPLOY,
+    LISTAGG(X.CODTIPOPER, ' | ')
+        WITHIN GROUP (ORDER BY X.CODTIPOPER) AS MOVIMENTOS
+FROM (
+    SELECT DISTINCT
+        P.CODPROD,
+        P.DESCRPROD,
+        P.USOPROD,
+        OPC.OPCAO AS DESC_USOPROD,
+        P.AD_IDEXTERNO,
+        P.AD_ORIGDEPLOY,
+        C.CODTIPOPER
+    FROM TGFITE I
+    JOIN TGFCAB C ON C.NUNOTA = I.NUNOTA
+    JOIN TGFPRO P ON P.CODPROD = I.CODPROD
+    LEFT JOIN TDDCAM CAM
+      ON CAM.NOMETAB   = 'TGFPRO'
+     AND CAM.NOMECAMPO = 'USOPROD'
+    LEFT JOIN TDDOPC OPC
+      ON OPC.NUCAMPO = CAM.NUCAMPO
+     AND OPC.VALOR   = P.USOPROD
+    WHERE C.TIPMOV = 'V'
+      AND NOT EXISTS (SELECT 1 FROM TGFEXC E WHERE E.CODPROD = P.CODPROD)
+) X
+GROUP BY
+    X.CODPROD,
+    X.DESCRPROD,
+    X.USOPROD,
+    X.DESC_USOPROD,
+    X.AD_IDEXTERNO,
+    X.AD_ORIGDEPLOY
+ORDER BY
+    X.CODPROD]]>
+        </expression>
+        <metadata>
+          <field name="CODPROD" label="Cód. Prod." type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false">
+          </field>
+          <field name="DESC_USOPROD" label="Uso Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_IDEXTERNO" label="AD_IDEXTERNO" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="MOVIMENTOS" label="TOPs" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+          <CODPROD>$CODPROD</CODPROD>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_af9lkrx" description="18 - Itens com Descrição Similar">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_af9lkry" useNewGrid="S">
+        <title>
+          <![CDATA[Produtos Com Descrições Similares]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[WITH PROD_HASH AS (
+  SELECT CODPROD,
+         DESCRPROD,
+         AD_IDEXTERNO,
+         NCM,
+         CODPARCFORN,
+         AD_ORIGDEPLOY,
+         ORA_HASH(UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')), 999999) AS HASH_DESCR,
+         UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')) AS DESCRNORM,
+         (SELECT COUNT(1)
+            FROM TGFITE I
+            INNER JOIN TGFCAB C ON (I.NUNOTA = C.NUNOTA)
+           WHERE I.CODPROD = TGFPRO.CODPROD
+             AND C.TIPMOV = 'C') AS QTDCOMPRA,
+         (SELECT COUNT(1)
+            FROM TGFITE I
+            INNER JOIN TGFCAB C ON (I.NUNOTA = C.NUNOTA)
+           WHERE I.CODPROD = TGFPRO.CODPROD
+             AND C.TIPMOV = 'V') AS QTDVENDA
+  FROM TGFPRO
+)
+SELECT
+    A.CODPROD AS CODPROD_A,
+    B.CODPROD AS CODPROD_B,
+    A.DESCRPROD AS DESCRPROD_A,
+    B.DESCRPROD AS DESCRPROD_B,
+    A.AD_IDEXTERNO AS AD_IDEXTERNO_A,
+    B.AD_IDEXTERNO AS AD_IDEXTERNO_B,
+    A.NCM AS NCM_A,
+    B.NCM AS NCM_B,
+    A.AD_ORIGDEPLOY AS ORIGEM_A,
+    B.AD_ORIGDEPLOY AS ORIGEM_B,
+    A.CODPARCFORN AS CODPARCFORN_A,
+    B.CODPARCFORN AS CODPARCFORN_B,
+    UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) AS SIMILARIDADE,
+    CASE WHEN A.QTDCOMPRA > 0 AND A.QTDVENDA > 0 THEN 'CV'
+         WHEN A.QTDCOMPRA > 0 AND A.QTDVENDA = 0 THEN 'C'
+         WHEN A.QTDCOMPRA = 0 AND A.QTDVENDA > 0 THEN 'V' END AS COMPRAVENDA_A,
+    CASE WHEN B.QTDCOMPRA > 0 AND B.QTDVENDA > 0 THEN 'CV'
+         WHEN B.QTDCOMPRA > 0 AND B.QTDVENDA = 0 THEN 'C'
+         WHEN B.QTDCOMPRA = 0 AND B.QTDVENDA > 0 THEN 'V' END AS COMPRAVENDA_B
+FROM PROD_HASH A
+JOIN PROD_HASH B
+  ON A.HASH_DESCR = B.HASH_DESCR
+ AND A.CODPROD < B.CODPROD  -- garante que não compara consigo mesmo nem repete pares invertidos
+WHERE UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) > 85
+ORDER BY SIMILARIDADE DESC]]>
+        </expression>
+        <metadata>
+          <field name="CODPROD_A" label="Cód Prod. A" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODPROD_B" label="Cód. Prod. B" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD_A" label="Descrição A" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD_B" label="Descrição B" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_IDEXTERNO_A" label="AD_IDEXTERNO A" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_IDEXTERNO_B" label="AD_IDEXTERNO B" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="NCM_A" label="NCM A" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="NCM_B" label="NCM B" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="ORIGEM_A" label="ORIGEM_A" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="ORIGEM_B" label="ORIGEM_B" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CODPARCFORN_A" label="Cód. Parc. Forn. A" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODPARCFORN_B" label="Cód. Parc Forn. B" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="SIMILARIDADE" label="SIMILARIDADE" type="I" visible="false" useFooter="false">
+          </field>
+          <field name="COMPRAVENDA_A" label="Compra e Venda A" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="COMPRAVENDA_B" label="Compra e Venda B" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+          <CODPROD>$CODPROD_A</CODPROD>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_5lj0cl" description="19 - CNPJ Matrizes">
+    <args >
+      <arg id="A_RAIZ" type="text"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_5lj0cm" useNewGrid="S">
+          <title>
+            <![CDATA[CNPJ Matrizes]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT p.CODPARC,
+       NVL(p.RAZAOSOCIAL,p.NOMEPARC) AS NOMEPARC,
+       Formatar_Cpf_Cnpj(p.CGC_CPF) AS CNPJ_MATRIZ,
+       SUBSTR(p.CGC_CPF,1,8) AS RAIZ_CNPJ,
+       (SELECT COUNT(1)
+          FROM TGFPAR f
+         WHERE SUBSTR(f.CGC_CPF,1,8) = SUBSTR(p.CGC_CPF,1,8)
+           AND SUBSTR(f.CGC_CPF,9,4) <> '0001'
+           AND LENGTH(f.CGC_CPF) = 14) AS QTDFILIAIS
+  FROM TGFPAR p
+ WHERE SUBSTR(p.CGC_CPF,9,4) = '0001' /*SOMENTE MATRIZ*/
+   AND LENGTH(p.CGC_CPF) = 14 /* SOMENTE CNPJ */
+   AND SUBSTR(p.CGC_CPF,1,8) <> '00000000'
+   AND EXISTS (
+       SELECT 1
+         FROM TGFPAR f
+        WHERE SUBSTR(f.CGC_CPF,1,8) = SUBSTR(p.CGC_CPF,1,8)
+          AND SUBSTR(f.CGC_CPF,9,4) <> '0001'
+          AND LENGTH(f.CGC_CPF) = 14
+   )
+ORDER BY p.NOMEPARC]]>
+          </expression>
+          <metadata>
+            <field name="CODPARC" label="Cód. Parceiro" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NOMEPARC" label="Parceiro" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CNPJ_MATRIZ" label="CNPJ Matriz" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="RAIZ_CNPJ" label="Raíz CNPJ" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="QTDFILIAIS" label="Qtd. Filiais" type="I" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <refresh-details  ui-list="grd_5lj0jk">
+            <param id="A_RAIZ">$RAIZ_CNPJ</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_5lj0jk" entityName="Parceiro" multiplaSelecao="N" useNewGrid="S">
+          <args>
+            <arg id="A_RAIZ" type="text">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Parceiros com CNPJ Raiz :A_RAIZ]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT f.CODPARC,
+       NVL(f.RAZAOSOCIAL,f.NOMEPARC) AS NOMEPARC,
+       Formatar_Cpf_Cnpj(f.CGC_CPF) AS CNPJ,
+       SUBSTR(f.CGC_CPF,1,8) AS RAIZ_CNPJ,
+       f.CODPARCMATRIZ
+  FROM TGFPAR f
+ WHERE SUBSTR(f.CGC_CPF,9,4) <> '0001' /*NAO MATRIZ*/
+   AND LENGTH(f.CGC_CPF) = 14 /* SOMENTE CNPJ */
+   AND SUBSTR(f.CGC_CPF,1,8) = :A_RAIZ
+ORDER BY f.NOMEPARC]]>
+          </expression>
+          <metadata>
+            <field name="CODPARC" label="Cód. Parceiro" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NOMEPARC" label="Parceiro" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CNPJ" label="CNPJ" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="RAIZ_CNPJ" label="Raíz CNPJ" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODPARCMATRIZ" label="Cód. Parc. Matriz" type="I" visible="true" useFooter="false">
+            </field>
+          </metadata>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_aselmol" description="20 - Produtos Comprados sem Saida">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_aselmon" useNewGrid="S">
+        <title>
+          <![CDATA[Produtos Comprados sem Registro de Saída]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT DISTINCT 
+       I.CODPROD,
+       P.DESCRPROD,
+       P.USOPROD        AS USOPROD_PRO,
+       OPC_P.OPCAO      AS DESC_USOPROD_PRO,
+       I.USOPROD        AS USOPROD_ITE,
+       OPC_I.OPCAO      AS DESC_USOPROD_ITE,
+       P.NCM,
+       P.AD_ORIGDEPLOY
+FROM   TGFITE I
+JOIN   TGFCAB C
+       ON C.NUNOTA = I.NUNOTA
+JOIN   TGFPRO P
+       ON P.CODPROD = I.CODPROD
+LEFT JOIN TDDCAM CAM_P
+       ON CAM_P.NOMETAB = 'TGFPRO'
+      AND CAM_P.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC_P
+       ON OPC_P.NUCAMPO = CAM_P.NUCAMPO
+      AND OPC_P.VALOR = P.USOPROD
+
+-- descrição do USOPROD do item
+LEFT JOIN TDDCAM CAM_I
+       ON CAM_I.NOMETAB = 'TGFITE'
+      AND CAM_I.NOMECAMPO = 'USOPROD'
+LEFT JOIN TDDOPC OPC_I
+       ON OPC_I.NUCAMPO = CAM_I.NUCAMPO
+      AND OPC_I.VALOR = I.USOPROD
+
+WHERE  C.TIPMOV = 'C'
+  AND NOT EXISTS (
+        SELECT 1
+        FROM   TGFITE IC
+        JOIN   TGFCAB CC
+               ON CC.NUNOTA = IC.NUNOTA
+              AND CC.TIPMOV = 'V'
+        WHERE  IC.CODPROD = I.CODPROD
+      )
+ORDER BY P.NCM, I.CODPROD]]>
+        </expression>
+        <metadata>
+          <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="USOPROD_PRO" label="USOPROD_PRO" type="S" visible="false" useFooter="false">
+          </field>
+          <field name="DESC_USOPROD_PRO" label="Uso Produto (TGFPRO)" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="USOPROD_ITE" label="USOPROD_ITE" type="S" visible="false" useFooter="false">
+          </field>
+          <field name="DESC_USOPROD_ITE" label="Uso Produto (TGFITE)" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+        <on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+          <CODPROD>$CODPROD</CODPROD>
+        </on-click-launcher>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_03U" description="Menu Regras Tributárias">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_regras" entryPoint="regras_tributarias.jsp">
+      </html5component>
+    </container>
+  </level>
+  <level id="lvl_produtos_regra" description="21 - RegrasTributárias">
+    <args >
+      <arg id="A_CODUSU" type="integer" label="A_CODUSU : Número Inteiro"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="52.87247474747474">
+        <grid id="grd_0WH" useNewGrid="S">
+          <title>
+            <![CDATA[Mapa Tributário de Produtos]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT * FROM TTKPITI]]>
+          </expression>
+          <metadata>
+            <field name="SEQUENCIA" label="SEQUENCIA" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="OPERACAO" label="OPERACAO" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DATA" label="DATA" type="D" visible="true" useFooter="false">
+            </field>
+            <field name="ESPECIE" label="ESPECIE" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="SERIE" label="SERIE" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="NUMERO" label="NUMERO" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="CPFCNPJORIG" label="CPFCNPJORIG" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TIPOORIG" label="TIPOORIG" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="RAZAOSOCORIG" label="RAZAOSOCORIG" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="UFORIG" label="UFORIG" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CPFCNPJDEST" label="CPFCNPJDEST" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="TIPODEST" label="TIPODEST" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="RAZAOSOCDEST" label="RAZAOSOCDEST" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="UFDEST" label="UFDEST" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CFOP" label="CFOP" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODIGO" label="CODIGO" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRICAO" label="DESCRICAO" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CEST" label="CEST" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ORIGEM" label="ORIGEM" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="UNIDADE" label="UNIDADE" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CSTCSOSN" label="CSTCSOSN" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQICMS" label="ALIQICMS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="MVA" label="MVA" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQICMSFCP" label="ALIQICMSFCP" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="PERREDBCICMS" label="PERREDBCICMS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="MODBCICMSST" label="MODBCICMSST" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NUPROC" label="NUPROC" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="ASISMVA" label="ASISMVA" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ASISALIQICMS" label="ASISALIQICMS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ASISPERREDBCICMS" label="ASISPERREDBCICMS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="VALIDASIS" label="VALIDASIS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ASISVALORMVA" label="ASISVALORMVA" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ASISVALORALIQICMS" label="ASISVALORALIQICMS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ASISVALORPERREDBCICMS" label="ASISVALORPERREDBCICMS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CSTIPI" label="CSTIPI" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQIPI" label="ALIQIPI" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="CSTPIS" label="CSTPIS" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQPIS" label="ALIQPIS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="VALIQPIS" label="VALIQPIS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQPISST" label="ALIQPISST" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="VALIQPISST" label="VALIQPISST" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="CSTCOFINS" label="CSTCOFINS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQCOFINS" label="ALIQCOFINS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="VALIQCOFINS" label="VALIQCOFINS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQCOFINSST" label="ALIQCOFINSST" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="VALIQCOFINSST" label="VALIQCOFINSST" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="IDDEST" label="IDDEST" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="INDFINAL" label="INDFINAL" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="FINNFE" label="FINNFE" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="CHAVE" label="CHAVE" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQSUBTRIB" label="ALIQSUBTRIB" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="PERREDBCST" label="PERREDBCST" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQFCPST" label="ALIQFCPST" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="MODBCICMS" label="MODBCICMS" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="CBENEFUF" label="CBENEFUF" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CPAISDEST" label="CPAISDEST" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ISUF" label="ISUF" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="MOTDESICMS" label="MOTDESICMS" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="INSCESTAD" label="INSCESTAD" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="DHPROC" label="DHPROC" type="D" visible="true" useFooter="false">
+            </field>
+            <field name="INDPRES" label="INDPRES" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="NATOP" label="NATOP" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="PERCDIF" label="PERCDIF" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="VALICMS" label="VALICMS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="VALICMSST" label="VALICMSST" type="F" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click  navigate-to="lvl_5A4"/>
+        </grid>
+      </container>
+      <container orientacao="H" tamanhoRelativo="48.13762626262626">
+        <container orientacao="H" tamanhoRelativo="33.1769436997319">
+          <grid id="grd_3T4" useNewGrid="S">
+            <title>
+              <![CDATA[Regras criadas ICMS]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[/* PARTE 1: Busca apenas se EXISTIREM restrições especiais */
+SELECT
+    O.OPCAO,
+    I.TIPRESTRICAO,
+    UFORIG.UF AS UFORIG,
+    UFDEST.UF AS UFDEST,
+    I.CODRESTRICAO,
+    I.CODTRIB,
+    I.ALIQUOTA,
+    I.REDBASE,
+    I.MVASTUFDEST,
+    I.MARGLUCROEST,
+    I.CSOSN
+FROM TGFICM I
+JOIN TDDCAM C ON C.NOMETAB = 'TGFICM' AND C.NOMECAMPO = 'TIPRESTRICAO'
+JOIN TDDOPC O ON O.NUCAMPO = C.NUCAMPO AND O.VALOR = I.TIPRESTRICAO
+JOIN TSIUFS UFORIG ON UFORIG.CODUF = I.UFORIG
+JOIN TSIUFS UFDEST ON UFDEST.CODUF = I.UFDEST
+WHERE I.TIPRESTRICAO NOT IN ('S','X', 'N')
+
+UNION ALL
+
+/* PARTE 2: Exibe a mensagem APENAS se não existir nenhuma restrição especial na tabela */
+SELECT
+    'Todas as operações analisadas são tributadas integralmente, sendo assim as regras da base modelo atendem o cliente' AS OPCAO,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+FROM DUAL -- Ou (SELECT 1) em alguns bancos
+WHERE NOT EXISTS (
+    SELECT 1 FROM TGFICM WHERE TIPRESTRICAO NOT IN ('S','X', 'N')
+)
+
+ORDER BY CODRESTRICAO]]>
+            </expression>
+            <metadata>
+              <field name="OPCAO" label="Tipo Restrição" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="TIPRESTRICAO" label="TIPRESTRICAO" type="S" visible="false" useFooter="false">
+              </field>
+              <field name="UFORIG" label="UF Origem" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="UFDEST" label="UF Destino" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="CODRESTRICAO" label="Cód. Restrição" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="CODTRIB" label="CST" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="ALIQUOTA" label="Alíquota" type="F" visible="true" useFooter="true">
+              </field>
+              <field name="REDBASE" label="Redução de Base" type="F" visible="true" useFooter="false">
+              </field>
+              <field name="MVASTUFDEST" label="MVA" type="F" visible="true" useFooter="false">
+              </field>
+              <field name="MARGLUCROEST" label="MARGLUCROEST" type="F" visible="true" useFooter="false">
+              </field>
+              <field name="CSOSN" label="CSOSN" type="F" visible="true" useFooter="false">
+              </field>
+            </metadata>
+            <on-click  navigate-to="lvl_produtos_regra_detalhe">
+              <param id="A_CODRESTRICAO">$CODRESTRICAO</param>
+              <param id="A_TIPRESTRICAO">$TIPRESTRICAO</param>
+            </on-click>
+          </grid>
+        </container>
+        <container orientacao="H" tamanhoRelativo="33.1769436997319">
+          <grid id="grd_533" useNewGrid="S">
+            <title>
+              <![CDATA[Regras criadas PIS/COFINS]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT
+    CODEMP,
+    GRUPOIMP,
+    CST,
+    MAX(CASE WHEN NOMEIMP = 'PIS'    THEN ALIQ END) AS ALIQ_PIS,
+    MAX(CASE WHEN NOMEIMP = 'COFINS' THEN ALIQ END) AS ALIQ_COFINS
+FROM TGFIFE
+WHERE ENTSAI = 'S'
+  AND NOMEIMP IN ('PIS', 'COFINS')
+GROUP BY
+    CODEMP,
+    GRUPOIMP,
+    CST
+ORDER BY CST, GRUPOIMP]]>
+            </expression>
+            <metadata>
+              <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="GRUPOIMP" label="Grupo" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="CST" label="CST" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="ALIQ_PIS" label="Alíquota PIS" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="ALIQ_COFINS" label="Alíquota COFINS" type="I" visible="true" useFooter="false">
+              </field>
+            </metadata>
+          </grid>
+        </container>
+        <container orientacao="H" tamanhoRelativo="34.048257372654156">
+          <grid id="grd_09J" useNewGrid="S">
+            <title>
+              <![CDATA[Regras criadas IPI]]>
+            </title>
+            <expression type="sql" data-source="MGEDS">
+              <![CDATA[SELECT
+    PRO.NCM,
+    IPI.PERCENTUAL AS ALIQ_CADASTRADO,
+    PRO.CSTIPISAI AS CST_IPI_CADASTRADO,
+    PITI.ALIQIPI AS ALIQ_MAPEADO,
+    PITI.CSTIPI AS CST_MAPEADO,
+    CASE
+        WHEN IPI.PERCENTUAL <> PITI.ALIQIPI THEN '#FC5B50' -- Faltava o THEN
+        ELSE NULL
+    END AS BKCOLOR
+FROM TGFPRO PRO
+INNER JOIN TGFIPI IPI ON IPI.CODIPI = PRO.CODIPI
+INNER JOIN TTKPITI PITI ON PITI.CODIGO = PRO.AD_IDEXTERNO
+WHERE PITI.ALIQIPI > 0
+GROUP BY PRO.NCM, IPI.PERCENTUAL, PRO.CSTIPISAI, PITI.ALIQIPI, PITI.CSTIPI]]>
+            </expression>
+            <metadata>
+              <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+              </field>
+              <field name="ALIQ_CADASTRADO" label="Alíquota Cadastrada" type="F" visible="true" useFooter="false">
+              </field>
+              <field name="CST_IPI_CADASTRADO" label="CST Cadastrado" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="ALIQ_MAPEADO" label="Alíquota Mapeada" type="F" visible="true" useFooter="false">
+              </field>
+              <field name="CST_MAPEADO" label="CST Mapeado" type="I" visible="true" useFooter="false">
+              </field>
+              <field name="BKCOLOR" label="BKCOLOR" type="S" visible="false" useFooter="false">
+              </field>
+            </metadata>
+          </grid>
+        </container>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_produtos_regra_detalhe" description="Produtos Vinculados à Regra">
+    <args >
+      <arg id="A_CODRESTRICAO" type="text" label="Restrição"/>
+      <arg id="A_TIPRESTRICAO" type="text" label="Tipo"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_prod_regra" useNewGrid="S">
+        <title>
+          <![CDATA[Produtos da Regra :A_CODRESTRICAO]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT CODPROD, DESCRPROD, NCM, GRUPOICMS, GRUPOICMS2 
+          FROM TGFPRO 
+          WHERE 
+            (:A_TIPRESTRICAO = 'I' AND GRUPOICMS = :A_CODRESTRICAO)
+            OR 
+            (:A_TIPRESTRICAO = 'K' AND GRUPOICMS2 = :A_CODRESTRICAO)
+            OR 
+            (:A_TIPRESTRICAO = 'H' AND NCM = :A_CODRESTRICAO)]]>
+        </expression>
+        <metadata>
+          <field name="CODPROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRPROD" label="Descrição" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="NCM" label="NCM" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="GRUPOICMS" label="Grup. 1" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="GRUPOICMS2" label="Grup. 2" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_5A4" description="TGFPEM">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_5A6" useNewGrid="S">
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[WITH VendasBase AS (
+    SELECT DISTINCT
+        CODIGO,
+        CPFCNPJORIG,
+        CFOP
+    FROM TTKPITI
+    WHERE CFOP IN (5101, 5102, 5401, 5403, 6101, 6102, 6401, 6403)
+)
+SELECT 
+    V1.CODIGO AS COD_PRODUTO,
+    -- Empresa que Produz
+    V1.CPFCNPJORIG AS CNPJ_PRODUCAO,
+    V1.CFOP AS CFOP_PRODUCAO,
+    'PRODUÇÃO' AS PERFIL_A,
+    -- Empresa que Revende
+    V2.CPFCNPJORIG AS CNPJ_REVENDA,
+    V2.CFOP AS CFOP_REVENDA,
+    'REVENDA' AS PERFIL_B
+FROM VendasBase V1
+INNER JOIN VendasBase V2 ON V1.CODIGO = V2.CODIGO
+    AND V1.CPFCNPJORIG <> V2.CPFCNPJORIG
+WHERE (
+    (V1.CFOP = 5101 AND V2.CFOP = 5102) OR -- Estadual Normal
+    (V1.CFOP = 5401 AND V2.CFOP = 5403) OR -- Estadual ST
+    (V1.CFOP = 6101 AND V2.CFOP = 6102) OR -- Interestadual Normal
+    (V1.CFOP = 6401 AND V2.CFOP = 6403)    -- Interestadual ST
+)
+ORDER BY V1.CODIGO]]>
+        </expression>
+        <metadata>
+          <field name="COD_PRODUTO" label="COD_PRODUTO" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CNPJ_PRODUCAO" label="CNPJ_PRODUCAO" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CFOP_PRODUCAO" label="CFOP_PRODUCAO" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="PERFIL_A" label="PERFIL_A" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CNPJ_REVENDA" label="CNPJ_REVENDA" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CFOP_REVENDA" label="CFOP_REVENDA" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="PERFIL_B" label="PERFIL_B" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt5rf" description="217 - Dependentes Duplicados">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt5rg" useNewGrid="S">
+        <title>
+          <![CDATA[Dependentes Duplicados]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+                    F.CODEMP, 
+                    F.CODFUNC, 
+                    F.NOMEFUNC AS NOME_FUNCIONARIO,
+                    F.CPF AS CPF_FUNCIONARIO,
+                    D.NOMEDEPEND AS NOME_DEPENDENTE,
+                    D.CPF AS CPF_DEPENDENTE,
+                    F.DTADM, 
+                    F.SITUACAO, 
+                    F.MATRICULA,
+                    D.DTNASC AS DT_NASC_DEPENDENTE
+                FROM TFPFUN F
+                INNER JOIN TFPDPD D ON F.CODEMP = D.CODEMP AND F.CODFUNC = D.CODFUNC
+                WHERE (D.CODEMP, D.CODFUNC, D.CPF) IN (
+                    SELECT DX.CODEMP, DX.CODFUNC, DX.CPF
+                    FROM TFPDPD DX
+                    GROUP BY DX.CODEMP, DX.CODFUNC, DX.CPF
+                    HAVING COUNT(*) > 1
+                )]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOME_FUNCIONARIO" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF_FUNCIONARIO" label="CPF Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="NOME_DEPENDENTE" label="Dependente" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF_DEPENDENTE" label="CPF Dependente" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTADM" label="Dt. Admissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULA" label="Matrícula" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DT_NASC_DEPENDENTE" label="Dt. Nascimento" type="D" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt5uh" description="218 - Dependentes sem CPF">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt5ui" useNewGrid="S">
+        <title>
+          <![CDATA[Dependentes sem CPF]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    F.CODEMP, 
+    F.CODFUNC, 
+    F.NOMEFUNC, 
+    F.CPF AS CPF_FUNCIONARIO,
+    F.SITUACAO,
+    D.SEQUENCIA,
+    D.NOMEDEPEND, 
+    D.DEPENDIRF, 
+    D.DTNASC AS DT_NASC_DEPENDENTE,
+    D.CPF AS CPF_DEPENDENTE
+FROM TFPDPD D
+INNER JOIN TFPFUN F ON D.CODEMP = F.CODEMP AND D.CODFUNC = F.CODFUNC
+WHERE F.SITUACAO IN (1, 5, 6)
+  AND (D.CPF IS NULL OR D.CPF = '' OR D.CPF = '00000000000')
+ORDER BY F.NOMEFUNC, D.NOMEDEPEND]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF_FUNCIONARIO" label="CPF Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SEQUENCIA" label="Sequência" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEDEPEND" label="Dependente" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DEPENDIRF" label="Dep. IRF" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DT_NASC_DEPENDENTE" label="Dt. Nasc. Dep." type="D" visible="true" useFooter="false">
+          </field>
+          <field name="CPF_DEPENDENTE" label="CPF Dep." type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt5wl" description="219 - Funcionarios Duplicados">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt5wn" useNewGrid="S">
+        <title>
+          <![CDATA[Funcionários Duplicados]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    CODEMP, 
+    CODFUNC, 
+    NOMEFUNC, 
+    DTADM, 
+    DTDEM, 
+    VINCULO, 
+    SITUACAO, 
+    MATRICULA, 
+    MATRICULAOLD, 
+    CPF
+FROM TFPFUN
+WHERE CPF IN (
+    SELECT CPF 
+    FROM TFPFUN 
+    WHERE SITUACAO = 1
+    GROUP BY CPF 
+    HAVING COUNT(CPF) > 1)
+AND SITUACAO IN (1,5,6)
+ORDER BY CPF, NOMEFUNC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTADM" label="Dt. Admissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTDEM" label="Dt. Demissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="VINCULO" label="Vínculo" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULA" label="Matrícula" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULAOLD" label="Matrícula Anterior" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF" label="CPF" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt5zv" description="220 - Funcionarios Duplicados sem Folha">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt5zx" useNewGrid="S">
+        <title>
+          <![CDATA[Funcionários Duplicados sem Folha]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    F.CODEMP, 
+    F.CODFUNC, 
+    F.NOMEFUNC, 
+    F.CPF,
+    F.VINCULO,
+    F.MATRICULA,
+    F.SITUACAO,
+    F.DTADM,
+    F.DTDEM
+FROM TFPFUN F
+LEFT JOIN TFPFOL L ON F.CODEMP = L.CODEMP AND F.CODFUNC = L.CODFUNC
+WHERE F.CPF IN (
+    -- Subconsulta para identificar os CPFs com mais de 2 registros ativos
+    SELECT CPF 
+    FROM TFPFUN 
+    WHERE SITUACAO = 1
+    GROUP BY CPF 
+    HAVING COUNT(CPF) > 1
+)
+AND F.SITUACAO IN (1, 5, 6)
+AND L.CODFUNC IS NULL -- Filtra apenas quem NÃO tem registros na TFPFOL
+ORDER BY F.CPF, F.NOMEFUNC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF" label="CPF" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="VINCULO" label="Vínculo" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULA" label="Matrícula" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTADM" label="Dt. Admissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTDEM" label="Dt. Demissão" type="D" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt514" description="221 - Vínculo Vazio">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt516" useNewGrid="S">
+        <title>
+          <![CDATA[Vínculo Vazio]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT CODEMP,CODFUNC,NOMEFUNC,DTADM,DTDEM,VINCULO,SITUACAO,MATRICULA,MATRICULAOLD,CPF,SALBASE,REMUNBASE FROM TFPFUN WHERE VINCULO IS NULL AND SITUACAO IN (1,5,6)]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTADM" label="Dt. Admissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTDEM" label="Dt. Demissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="VINCULO" label="Vínculo" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULA" label="Matrícula" type="I" visible="true" useFooter="null">
+          </field>
+          <field name="MATRICULAOLD" label="Matrícula Anterior" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF" label="CPF" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SALBASE" label="Salário Base" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="REMUNBASE" label="Remuneração Base" type="F" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt55j" description="222 - Salário Base Vazio">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt57x" useNewGrid="S">
+        <title>
+          <![CDATA[Salário Base Vazio]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT CODEMP,CODFUNC,NOMEFUNC,DTADM,DTDEM,VINCULO,SITUACAO,MATRICULA,MATRICULAOLD,CPF,REMUNBASE FROM TFPFUN WHERE SALBASE IS NULL AND SITUACAO IN (1,5,6)]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTADM" label="Dt. Admissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTDEM" label="Dt. Demissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="VINCULO" label="Vínculo" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULA" label="Matrícula" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULAOLD" label="Matrícula Anterior" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF" label="CPF" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="REMUNBASE" label="Remuneração Base" type="F" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt599" description="223 - Salário Histórico x Salário Atual">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt6ab" useNewGrid="S">
+        <title>
+          <![CDATA[Salário Histórico x Salário Atual]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    F.CODEMP, 
+    F.CODFUNC, 
+    F.NOMEFUNC, 
+    F.CPF,
+    F.SALBASE AS SALARIO_CADASTRO, 
+    B.SALBASE AS SALARIO_HISTORICO,
+    B.REFERENCIA AS ULTIMA_REF_HISTORICO,
+    (F.SALBASE - B.SALBASE) AS DIFERENCA
+FROM TFPFUN F
+INNER JOIN TFPBAS B ON F.CODEMP = B.CODEMP AND F.CODFUNC = B.CODFUNC
+WHERE B.REFERENCIA = (
+    -- Subconsulta para pegar a maior (última) data de referência do funcionário na TFPBAS
+    SELECT MAX(REFERENCIA) 
+    FROM TFPBAS 
+    WHERE CODEMP = F.CODEMP AND CODFUNC = F.CODFUNC
+)
+AND F.SALBASE <> B.SALBASE -- Filtra apenas onde os valores são diferentes
+ORDER BY F.NOMEFUNC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="CPF" label="CPF" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SALARIO_CADASTRO" label="Salário Cadastro" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="SALARIO_HISTORICO" label="Salário Histórico" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="ULTIMA_REF_HISTORICO" label="Ult. Ref. Histórico" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DIFERENCA" label="Diferença" type="F" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt6du" description="224 - Sem Linhas na TFPFER">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt6dw" useNewGrid="S">
+        <title>
+          <![CDATA[Sem Linhas na TFPFER]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    F.CODEMP, 
+    F.CODFUNC, 
+    F.NOMEFUNC,
+    F.VINCULO,
+    F.SITUACAO, 
+    F.DTADM, 
+    F.MATRICULA
+FROM TFPFUN F
+WHERE F.SITUACAO = 1
+AND NOT EXISTS (
+    -- Verifica se NÃO existe uma linha na TFPFER para este funcionário que esteja sem data de saída
+    SELECT 1 
+    FROM TFPFER E 
+    WHERE E.CODEMP = F.CODEMP 
+    AND E.CODFUNC = F.CODFUNC 
+    AND E.DTSAIDA IS NULL)
+ORDER BY F.NOMEFUNC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NOMEFUNC" label="Funcionário" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="VINCULO" label="Vínculo" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="SITUACAO" label="Situação" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTADM" label="Dt. Admissão" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="MATRICULA" label="Matrícula" type="I" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt6hi" description="225 - Período de Férias Negativo">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt6hk" useNewGrid="S">
+        <title>
+          <![CDATA[Período de Férias Negativo]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT CODEMP,CODFUNC,DTINIAQUI,SEQUENCIA,DTFINAQUI,DTPREVISTA,DTSAIDA,NUMDIASFER,ATUALFERGOZ FROM TFPFER WHERE NUMDIASFER<=0]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DTINIAQUI" label="Dt. Início Aquisitivo" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="SEQUENCIA" label="Sequência" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DTFINAQUI" label="Dt. Fim Aquisitivo" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTPREVISTA" label="Dt. Prevista" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTSAIDA" label="Dt. Saída" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="NUMDIASFER" label="Dias de Férias" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="ATUALFERGOZ" label="Atualiza Férias Gozadas" type="S" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt6j1" description="226 - Eventos Com Índice em Média como Decimais">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt6j3" useNewGrid="S">
+        <title>
+          <![CDATA[Eventos Com Índice em Média como Decimais]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    F.CODEMP, 
+    F.CODFUNC, 
+    F.TIPFOLHA,
+    F.REFERENCIA, 
+    F.CODEVENTO, 
+    E.DESCREVENTO,
+    E.INCSOBREMEDIAS,
+    F.SEQUENCIA, 
+    F.VLREVENTO, 
+    F.INDICE,
+    F.INDICE AS ORIGINAL_DECIMAL,
+    FLOOR(F.INDICE) + ((F.INDICE - FLOOR(F.INDICE)) * 0.60) AS SIMULACAO_SEXAGESIMAL
+FROM TFPFOL F
+INNER JOIN TFPEVE E ON F.CODEVENTO = E.CODEVENTO
+WHERE (F.INDICE - FLOOR(F.INDICE)) >= 0.60
+  AND E.INCSOBREMEDIAS = 'I'
+ORDER BY F.CODEMP, F.CODFUNC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="TIPFOLHA" label="Tipo Folha" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="REFERENCIA" label="Referência" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="CODEVENTO" label="Cód. Evento" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCREVENTO" label="Evento" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="INCSOBREMEDIAS" label="Incide Sobre Médias" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SEQUENCIA" label="Sequência" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="VLREVENTO" label="Vlr. Evento" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDICE" label="Índice" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="ORIGINAL_DECIMAL" label="Original Decimal" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="SIMULACAO_SEXAGESIMAL" label="Simulação Sexagesimal" type="F" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt6nv" description="227 - Acumulados que Estão Decimal">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt6nx" useNewGrid="S">
+        <title>
+          <![CDATA[Acumulados Que Estão Decimal]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    A.CODEMP, 
+    A.CODFUNC, 
+    A.CODEVENTO, 
+    E.DESCREVENTO,
+    E.INCSOBREMEDIAS,
+    A.SEQUENCIA, 
+    A.ANO, 
+    A.INDJANEIRO, 
+    A.INDFEVEREIRO, 
+    A.INDMARCO, 
+    A.INDABRIL, 
+    A.INDMAIO, 
+    A.INDJUNHO, 
+    A.INDJULHO, 
+    A.INDAGOSTO, 
+    A.INDSETEMBRO, 
+    A.INDOUTUBRO, 
+    A.INDNOVEMBRO, 
+    A.INDDEZEMBRO
+FROM TFPACU A
+INNER JOIN TFPEVE E ON A.CODEVENTO = E.CODEVENTO
+WHERE E.INCSOBREMEDIAS = 'I'
+  AND (
+       (A.INDJANEIRO   - FLOOR(A.INDJANEIRO))   >= 0.60 OR
+       (A.INDFEVEREIRO - FLOOR(A.INDFEVEREIRO)) >= 0.60 OR
+       (A.INDMARCO     - FLOOR(A.INDMARCO))     >= 0.60 OR
+       (A.INDABRIL     - FLOOR(A.INDABRIL))     >= 0.60 OR
+       (A.INDMAIO      - FLOOR(A.INDMAIO))      >= 0.60 OR
+       (A.INDJUNHO     - FLOOR(A.INDJUNHO))     >= 0.60 OR
+       (A.INDJULHO     - FLOOR(A.INDJULHO))     >= 0.60 OR
+       (A.INDAGOSTO    - FLOOR(A.INDAGOSTO))    >= 0.60 OR
+       (A.INDSETEMBRO  - FLOOR(A.INDSETEMBRO))  >= 0.60 OR
+       (A.INDOUTUBRO   - FLOOR(A.INDOUTUBRO))   >= 0.60 OR
+       (A.INDNOVEMBRO  - FLOOR(A.INDNOVEMBRO))  >= 0.60 OR
+       (A.INDDEZEMBRO  - FLOOR(A.INDDEZEMBRO))  >= 0.60
+  )
+ORDER BY A.ANO DESC, A.CODEMP, A.CODFUNC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODEVENTO" label="Cód. Evento" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCREVENTO" label="Evento" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="INCSOBREMEDIAS" label="Incide Sobre Médias" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="SEQUENCIA" label="Sequência" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="ANO" label="Ano" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="INDJANEIRO" label="Índice Janeiro" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDFEVEREIRO" label="Índice Fevereiro" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDMARCO" label="Índice Março" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDABRIL" label="Índice Abril" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDMAIO" label="Índice Maio" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDJUNHO" label="Índice Junho" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDJULHO" label="Índice Julho" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDAGOSTO" label="Índice Agosto" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDSETEMBRO" label="Índice Setembro" type="F" visible="true" useFooter="null">
+          </field>
+          <field name="INDOUTUBRO" label="Índice Outubro" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDNOVEMBRO" label="Índice Novembro" type="F" visible="true" useFooter="false">
+          </field>
+          <field name="INDDEZEMBRO" label="Índice Dezembro" type="F" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_admt6qi" description="228 - Ocorrências Sem Dt. Final Preenchida">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_admt6qk" useNewGrid="S">
+        <title>
+          <![CDATA[Ocorrências Sem Dt. Final Preenchida]]>
+        </title>
+        <expression type="sql" data-source="MGEDS">
+          <![CDATA[SELECT 
+    O.CODEMP,
+    O.CODFUNC,
+    O.NUOCOR,
+    O.CODHISTOCOR,
+    H.DESCRHISTOCOR, -- Descrição Oficial (do Cadastro de Históricos)
+    O.DESCROCOR,     -- Detalhe Específico (Digitado no lançamento)
+    O.DTINICOCOR,
+    O.DTFINALOCOR
+FROM TFPOCO O
+INNER JOIN TFPHIS H ON O.CODHISTOCOR = H.CODHISTOCOR
+WHERE O.DTFINALOCOR IS NULL
+ORDER BY O.CODEMP, O.CODFUNC, O.DTINICOCOR DESC]]>
+        </expression>
+        <metadata>
+          <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODFUNC" label="Cód. Funcionário" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="NUOCOR" label="Nro. Único" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="CODHISTOCOR" label="Cód. Ocorrência" type="I" visible="true" useFooter="false">
+          </field>
+          <field name="DESCRHISTOCOR" label="Descrição Oficial" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DESCROCOR" label="Descrição Ocorrência" type="S" visible="true" useFooter="false">
+          </field>
+          <field name="DTINICOCOR" label="Dt. Início" type="D" visible="true" useFooter="false">
+          </field>
+          <field name="DTFINALOCOR" label="Dt. Final" type="D" visible="true" useFooter="false">
+          </field>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+  <level id="lvl_transporte" description="21.2 - Regras Tributarias - Transporte">
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_0BV" useNewGrid="S">
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 'Em construção' AS MENSAGEM FROM DUAL]]>
+          </expression>
+          <metadata>
+            <field name="MENSAGEM" label="MENSAGEM" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+        </grid>
+      </container>
+      <container orientacao="V" tamanhoRelativo="50">
+        <grid id="grd_21G" useNewGrid="S">
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT 'Em construção' AS MENSAGEM FROM DUAL]]>
+          </expression>
+          <metadata>
+            <field name="MENSAGEM" label="MENSAGEM" type="S" visible="true" useFooter="false">
+            </field>
+          </metadata>
+        </grid>
+      </container>
+    </container>
+  </level>
+  <level id="lvl_servicos_gerais" description="21.3 - Regras Tributarias - Serviços">
+    <args >
+      <arg id="A_COD_PROD" type="integer" label="A_COD_PROD : Número Inteiro"/>
+    </args>
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="H" tamanhoRelativo="50">
+        <grid id="grd_0J0" useNewGrid="S">
+          <title>
+            <![CDATA[Mapa Tributário de Serviços Gerais]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT
+C.NUNOTA,
+C.DTNEG,
+C.CODEMP,
+I.CODPROD AS COD_PROD,
+P.DESCRPROD,
+D.ALIQUOTA AS ALIQ_ISS,
+CASE I.CODTRIBISS 
+  WHEN 00 THEN 'TRIBUTADO'
+  WHEN 01 THEN 'ISS RETIDO'
+  WHEN 07 THEN 'NÃO TRIBUTADO'
+  WHEN 06 THEN 'ISENTO'
+END AS INC_ISS,
+M.ALIQUOTA AS ALIQ_PIS,
+M2.ALIQUOTA AS ALIQ_COFINS,
+M3.ALIQUOTA AS ALIQ_CSLL,
+M4.ALIQUOTA AS ALIQ_IR,
+M5.ALIQUOTA AS ALIQ_INSS
+FROM TGFCAB C
+JOIN TTKNOT N ON N.NUNOTA = C.NUNOTA
+JOIN TSICID CID ON C.CODCIDPREST = CID.CODCID
+JOIN TGFITE I ON I.NUNOTA = C.NUNOTA
+JOIN TGFPRO P ON P.CODPROD = I.CODPROD
+LEFT JOIN TGFDIN D ON D.NUNOTA = I.NUNOTA AND I.SEQUENCIA = D.SEQUENCIA AND D.CODIMP = 4
+LEFT JOIN TGFIMN M ON M.NUNOTA = I.NUNOTA AND I.SEQUENCIA = M.SEQUENCIA AND M.CODIMP = 2
+LEFT JOIN TGFIMN M2 ON M2.NUNOTA = I.NUNOTA AND I.SEQUENCIA = M2.SEQUENCIA AND M2.CODIMP = 3
+LEFT JOIN TGFIMN M3 ON M3.NUNOTA = I.NUNOTA AND I.SEQUENCIA = M3.SEQUENCIA AND M3.CODIMP = 4
+LEFT JOIN TGFIMN M4 ON M4.NUNOTA = I.NUNOTA AND I.SEQUENCIA = M4.SEQUENCIA AND M4.CODIMP = 7
+LEFT JOIN TGFIMN M5 ON M5.NUNOTA = I.NUNOTA AND I.SEQUENCIA = M5.SEQUENCIA AND M4.CODIMP = 6
+WHERE C.CODTIPOPER = 1106]]>
+          </expression>
+          <metadata>
+            <field name="NUNOTA" label="NUNOTA" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DTNEG" label="Dt. Negociação" type="D" visible="true" useFooter="false">
+            </field>
+            <field name="CODEMP" label="Cód. Empresa" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="COD_PROD" label="Cód. Produto" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Descrição" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_ISS" label="Alíquota ISS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="INC_ISS" label="Incidência" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_PIS" label="Alíquota PIS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_COFINS" label="Alíquota COFINS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_CSLL" label="Alíquota CSLL" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_IR" label="Alíquota IR" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_INSS" label="Alíquota INSS" type="F" visible="true" useFooter="false">
+            </field>
+          </metadata>
+          <on-click-launcher  resource-id="br.com.sankhya.com.mov.CentralNotas">
+            <NUNOTA>$NUNOTA</NUNOTA>
+          </on-click-launcher>
+          <refresh-details  ui-list="grd_1F5">
+            <param id="A_COD_PROD">$COD_PROD</param>
+          </refresh-details>
+        </grid>
+      </container>
+      <container orientacao="H" tamanhoRelativo="50">
+        <grid id="grd_1F5" useNewGrid="S">
+          <args>
+            <arg id="A_COD_PROD" type="integer">
+            </arg>
+          </args>
+          <title>
+            <![CDATA[Tributação do serviço - :A_COD_PROD]]>
+          </title>
+          <expression type="sql" data-source="MGEDS">
+            <![CDATA[SELECT
+DISTINCT
+ISS.CODEMP,
+PRO.DESCRPROD,
+CID.NOMECID,
+ISS.PERCINSS,
+CASE ISS.CODTRIBISS 
+  WHEN 00 THEN 'TRIBUTADO'
+  WHEN 01 THEN 'ISS RETIDO'
+  WHEN 07 THEN 'NÃO TRIBUTADO'
+  WHEN 06 THEN 'ISENTO'
+END AS INC_ISS,
+ISS.CODLST,
+M.ALIQUOTA AS ALIQ_PIS,
+M2.ALIQUOTA AS ALIQ_COFINS,
+M3.ALIQUOTA AS ALIQ_CSLL,
+M4.ALIQUOTA AS ALIQ_IR,
+M5.ALIQUOTA AS ALIQ_INSS
+FROM TGFPRO PRO
+JOIN TGFITE ITE ON ITE.CODPROD = PRO.CODPROD
+JOIN TGFISS ISS ON ISS.CODPROD = PRO.CODPROD
+JOIN TSICID CID ON CID.CODCID = ISS.CODCID
+JOIN TGFCAB CAB ON CAB.NUNOTA = ITE.NUNOTA
+JOIN TTKNOT NT ON NT.NUNOTA = CAB.NUNOTA
+LEFT JOIN TGFIMA M ON M.CODIGO = PRO.CODPROD AND M.CODIMP = 2
+LEFT JOIN TGFIMA M2 ON M2.CODIGO = PRO.CODPROD AND M2.CODIMP = 3
+LEFT JOIN TGFIMA M3 ON M3.CODIGO = PRO.CODPROD AND M3.CODIMP = 4
+LEFT JOIN TGFIMA M4 ON M4.CODIGO = PRO.CODPROD AND M4.CODIMP = 7
+LEFT JOIN TGFIMA M5 ON M5.CODIGO = PRO.CODPROD AND M4.CODIMP = 6 
+WHERE PRO.CODPROD = :A_COD_PROD
+ORDER BY ISS.CODEMP]]>
+          </expression>
+          <metadata>
+            <field name="CODEMP" label="CODEMP" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="DESCRPROD" label="Descrição" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="NOMECID" label="Cidade" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="PERCINSS" label="Alíquota ISS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="INC_ISS" label="Incidência" type="S" visible="true" useFooter="false">
+            </field>
+            <field name="CODLST" label="Lista de Serviço" type="I" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_PIS" label="Alíquota PIS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_COFINS" label="Alíquota COFINS" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_CSLL" label="Alíquota CSLL" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_IR" label="Alíquota IR" type="F" visible="true" useFooter="false">
+            </field>
+            <field name="ALIQ_INSS" label="Alíquota INSS" type="F" visible="true" useFooter="false">
+            </field>
+          </metadata>
+        </grid>
+      </container>
+    </container>
+  </level>
+</gadget>
