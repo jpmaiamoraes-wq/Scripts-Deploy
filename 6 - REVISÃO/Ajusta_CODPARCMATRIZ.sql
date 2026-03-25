@@ -1,0 +1,31 @@
+-- Atualiza o campo CODPARCMATRIZ conforme regra da raiz do CNPJ
+UPDATE TGFPAR PAR
+SET PAR.CODPARCMATRIZ =
+    (
+        SELECT CODPARC_MATRIZ
+        FROM (
+            SELECT 
+                SUBSTR(LPAD(P2.CGC_CPF, 14, '0'), 1, 8) AS RAIZCGC,
+                CASE 
+                    WHEN COUNT(*) > 1 THEN 
+                        MIN(CODPARC) KEEP (DENSE_RANK FIRST ORDER BY SUBSTR(LPAD(P2.CGC_CPF,14,'0'),9,4))
+                    ELSE 
+                        MIN(CODPARC)
+                END AS CODPARC_MATRIZ
+            FROM TGFPAR P2
+            WHERE P2.TIPPESSOA = 'J'
+            GROUP BY SUBSTR(LPAD(P2.CGC_CPF, 14, '0'), 1, 8)
+        ) X
+        WHERE X.RAIZCGC = SUBSTR(LPAD(PAR.CGC_CPF, 14, '0'), 1, 8)
+    )
+WHERE PAR.TIPPESSOA = 'J'
+  --AND PAR.CODPARCMATRIZ IS NULL
+  AND PAR.CGC_CPF IS NOT NULL; COMMIT;
+  
+UPDATE TGFPAR PAR
+SET PAR.CODPARCMATRIZ = PAR.CODPARC
+WHERE PAR.TIPPESSOA = 'F';
+--AND PAR.CODPARCMATRIZ IS NULL; 
+COMMIT;
+  
+
