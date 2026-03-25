@@ -1,0 +1,39 @@
+WITH ITENS AS (
+    SELECT 
+        CAB.NUNOTA,
+        CAB.CODEMP,
+        CAB.DTNEG,
+        ITE.CODPROD,
+        UFS.UF,
+        DIN.BASE,
+        ITE.QTDNEG,
+        ROW_NUMBER() OVER (
+            PARTITION BY ITE.CODPROD, UFS.UF      -- última por produto + UF
+            ORDER BY CAB.DTNEG DESC, CAB.NUNOTA DESC
+        ) AS RN
+    FROM TGFCAB CAB
+    JOIN TGFITE ITE 
+        ON ITE.NUNOTA = CAB.NUNOTA
+    JOIN TGFDIN DIN 
+        ON DIN.NUNOTA    = ITE.NUNOTA 
+       AND DIN.SEQUENCIA = ITE.SEQUENCIA 
+       AND DIN.CODIMP    = 2
+    JOIN TGFPAR PAR 
+        ON PAR.CODPARC = CAB.CODPARC            -- corrigido: era C.CODPARC
+    JOIN TSICID CID 
+        ON PAR.CODCID = CID.CODCID
+    JOIN TSIUFS UFS 
+        ON CID.UF = UFS.CODUF
+    WHERE DIN.BASE > 0
+    AND CAB.TIPMOV = 'V'
+    AND CAB.DTNEG > '01/01/2025'
+)
+SELECT 
+    NUNOTA,
+    CODEMP,
+    DTNEG,
+    CODPROD,
+    UF,
+    BASE / NULLIF(QTDNEG, 0) AS VLR_PAUTA_ST
+FROM ITENS
+WHERE RN = 1

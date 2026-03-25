@@ -1,0 +1,35 @@
+WITH ResumoMovimentacao AS (
+    SELECT
+        CODEMP,
+        UFORIG,
+        CBENEFUF,
+        CSTCSOSN,
+        CFOP,
+        ROW_NUMBER() OVER (
+            PARTITION BY CODEMP, UFORIG, CSTCSOSN, CFOP 
+            ORDER BY COUNT(*) DESC
+        ) AS RANKING
+    FROM TTKPITI PITI
+    JOIN TSIEMP EMP ON EMP.CGC = PITI.CPFCNPJORIG
+    WHERE CFOP IN (5908,6916,551)
+      AND CBENEFUF IS NOT NULL
+      AND CSTCSOSN <> '00'
+    GROUP BY CODEMP, UFORIG, CBENEFUF, CSTCSOSN, CFOP
+)
+SELECT
+    ROW_NUMBER() OVER (ORDER BY UFORIG, CFOP) AS LINHA,
+    CODEMP, 
+    UFORIG,
+    CBENEFUF,
+    CSTCSOSN,
+    CFOP,
+    -- Substituído "LINHA" pela função ROW_NUMBER() para evitar o erro ORA-00904
+    'INSERT INTO TGFBEN (NUMBEN, CODEMP, CODBENEFNAUF, DESCRBEN, CODTRIB, INDOPINTEST) VALUES ('
+    || ROW_NUMBER() OVER (ORDER BY UFORIG, CFOP)  || ', '
+    || CODEMP || ', ''' 
+    || CBENEFUF || ''', ''' 
+    || 'CFOP '|| CFOP || ' - CST ' || CSTCSOSN || ''', ''' 
+    || CSTCSOSN || ''', ''N'');' AS COMANDO_INSERT
+FROM ResumoMovimentacao
+WHERE RANKING = 1
+ORDER BY UFORIG, CFOP;

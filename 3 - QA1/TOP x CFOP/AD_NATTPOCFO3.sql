@@ -1,0 +1,21 @@
+CREATE OR REPLACE VIEW AD_NATTPOCFO3
+AS
+    SELECT
+        ITE.CODCFO,
+        ITE.CODCFO AS CODCFOITE,
+        ITE.CODPROD,
+        CAB.CODTIPOPER,
+        ITE.NUNOTA,
+        ITE.QTDNEG,
+        ITE.SEQUENCIA,
+        ITE.VLRTOT,
+        ITE.VLRUNIT 
+    
+FROM
+    TGFITE ITE
+    
+INNER JOIN
+    TGFCAB CAB 
+        ON (
+            ITE.NUNOTA = CAB.NUNOTA
+        )

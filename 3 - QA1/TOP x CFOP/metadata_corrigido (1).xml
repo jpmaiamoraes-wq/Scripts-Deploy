@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<metadata>
+  <exportInfo>
+    <exportTime>29/09/2025 16:28:55</exportTime>
+    <systemVersion>4.35b181</systemVersion>
+    <systemCharSet>ISO-8859-1</systemCharSet>
+    <dbMetadata>
+      <dbUser>SANKHYA</dbUser>
+      <urlConnection>jdbc:oracle:thin:@10.100.106.25:1521/mmarraprd.sankhyacloud.com.br</urlConnection>
+      <jdbcDriver>Oracle JDBC driver 19.26.0.0.0</jdbcDriver>
+      <DBMS>Oracle - Oracle Database 19c EE High Perf Release 19.0.0.0.0 - Production
+Version 19.26.0.0.0</DBMS>
+    </dbMetadata>
+  </exportInfo>
+  <instances>
+    <instance name="AD_NATTPOCFO2" isUpdate="false">
+      <instanceDescription>Notas</instanceDescription>
+      <tableInfo name="AD_NATTPOCFO2" sequenceType="M">
+        <category>Deploy Agent</category>
+        <tableDescription>Notas</tableDescription>
+        <primaryKey>
+          <CODCFO />
+          <CODTIPOPER />
+          <NUNOTA />
+        </primaryKey>
+      </tableInfo>
+      <fields>
+        <field name="CODCFO" systemField="N" dataType="S" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>CFOP</description>
+          <properties>
+            <prop name="PKOrder">9</prop>
+          </properties>
+        </field>
+        <field name="NUNOTA" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="10">
+          <description>Nro. Único</description>
+          <properties>
+            <prop name="nullable">N</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+            <prop name="PKOrder">11</prop>
+          </properties>
+        </field>
+        <field name="CODTIPOPER" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="5">
+          <description>Tipo de Operação</description>
+          <properties>
+            <prop name="PKOrder">10</prop>
+          </properties>
+        </field>
+        <field name="VLRNOTA" systemField="N" dataType="F" presentationType="P" calculated="N" allowSearch="N" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Vlr. Nota</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="nuCasasDecimais">2</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+            <prop name="gridFooterOper">sum</prop>
+          </properties>
+        </field>
+        <field name="CODEMP" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="5">
+          <description>Empresa</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="CODPARC" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="10">
+          <description>Parceiro</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="DTNEG" systemField="N" dataType="D" presentationType="P" calculated="N" allowSearch="N" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Dt. Negociação</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="CODNAT" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="10">
+          <description>Natureza</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+      </fields>
+      <relationShip>
+        <relation entityName="Parceiro" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFPAR" />
+          <fields>
+            <field localName="CODPARC" targetName="CODPARC" />
+          </fields>
+        </relation>
+        <relation entityName="Natureza" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFNAT" />
+          <fields>
+            <field localName="CODNAT" targetName="CODNAT" />
+          </fields>
+        </relation>
+        <relation entityName="Empresa" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TSIEMP" />
+          <fields>
+            <field localName="CODEMP" targetName="CODEMP" />
+          </fields>
+        </relation>
+        <relation entityName="AD_NATTPOCFO3" type="I" insert="N" update="N" remove="S">
+          <targetInfo systemInstance="N" tableName="AD_NATTPOCFO3" />
+          <fields>
+            <field localName="CODTIPOPER" targetName="CODTIPOPER" />
+            <field localName="NUNOTA" targetName="NUNOTA" />
+            <field localName="CODCFO" targetName="CODCFO" />
+          </fields>
+        </relation>
+      </relationShip>
+      <actions>
+        <action type="SP">
+          <description>Atualizar CFOP dos itens</description>
+          <actionConfig>
+            <dbCall name="STP_BTN_ALT_CFOP_AD_NATTPOCFO2" refreshType="SEL" txManual="false" rootEntity="AD_NATTPOCFO2" />
+            <params>
+              <promptParam label="CFOP" name="CODCFO" required="true" saveLast="false" entityName="ClassificacaoFiscalOperacao" paramType="ENTITY" />
+            </params>
+          </actionConfig>
+          <storedProcedure>CREATE OR REPLACE  PROCEDURE "STP_BTN_ALT_CFOP_AD_NATTPOCFO2" (
+       P_CODUSU NUMBER,        -- Código do usuário logado
+       P_IDSESSAO VARCHAR2,    -- Identificador da execução. Serve para buscar informações dos parâmetros/campos da execução.
+       P_QTDLINHAS NUMBER,     -- Informa a quantidade de registros selecionados no momento da execução.
+       P_MENSAGEM OUT VARCHAR2 -- Caso seja passada uma mensagem aqui, ela será exibida como uma informação ao usuário.
+) AS
+       PARAM_CODCFO VARCHAR2(4000);
+       FIELD_CODCFO VARCHAR2(4000);
+       FIELD_CODTIPOPER NUMBER;
+       FIELD_NUNOTA NUMBER;
+       V_MSGERRO VARCHAR2(4000);
+BEGIN
+
+       -- Os valores informados pelo formulário de parâmetros, podem ser obtidos com as funções:
+       --     ACT_INT_PARAM
+       --     ACT_DEC_PARAM
+       --     ACT_TXT_PARAM
+       --     ACT_DTA_PARAM
+       -- Estas funções recebem 2 argumentos:
+       --     ID DA SESSÃO - Identificador da execução (Obtido através de P_IDSESSAO))
+       --     NOME DO PARAMETRO - Determina qual parametro deve se deseja obter.
+
+       /* Objetivo: Atualizar CFOP dos itens da nota selecionada */
+
+       PARAM_CODCFO := ACT_TXT_PARAM(P_IDSESSAO, 'CODCFO');
+
+       FOR I IN 1..P_QTDLINHAS -- Este loop permite obter o valor de campos dos registros envolvidos na execução.
+       LOOP                    -- A variável "I" representa o registro corrente.
+              -- Para obter o valor dos campos utilize uma das seguintes funções:
+              --     ACT_INT_FIELD (Retorna o valor de um campo tipo NUMÉRICO INTEIRO))
+              --     ACT_DEC_FIELD (Retorna o valor de um campo tipo NUMÉRICO DECIMAL))
+              --     ACT_TXT_FIELD (Retorna o valor de um campo tipo TEXTO),
+              --     ACT_DTA_FIELD (Retorna o valor de um campo tipo DATA)
+              -- Estas funções recebem 3 argumentos:
+              --     ID DA SESSÃO - Identificador da execução (Obtido através do parâmetro P_IDSESSAO))
+              --     NÚMERO DA LINHA - Relativo a qual linha selecionada.
+              --     NOME DO CAMPO - Determina qual campo deve ser obtido.
+              FIELD_CODCFO := ACT_TXT_FIELD(P_IDSESSAO, I, 'CODCFO');
+              FIELD_CODTIPOPER := ACT_INT_FIELD(P_IDSESSAO, I, 'CODTIPOPER');
+              FIELD_NUNOTA := ACT_INT_FIELD(P_IDSESSAO, I, 'NUNOTA');
+
+              /* SE NAO INFORMOU A CFOP */
+              IF NVL(PARAM_CODCFO,0) = 0 THEN
+
+
+                     V_MSGERRO := '&lt;p align="left"&gt;&lt;font size="12" face="arial"&gt;&lt;br&gt;&lt;b&gt;Atenção:  &lt;/b&gt; Erro na atualização!&lt;br&gt;&lt;br&gt;' ||
+                                  '&lt;b&gt;Motivo: &lt;/b&gt; Não é permitido informar CFOP zero.&lt;br&gt;&lt;br&gt;' ||
+                                  '&lt;b&gt;Solução: &lt;/b&gt;Informe uma CFOP válida e em seguida tente novamente.&lt;br&gt;&lt;br&gt;';
+
+                     RAISE_APPLICATION_ERROR(-20101, V_MSGERRO);
+
+              END IF;             
+
+              /* ATUALIZA CFOP NA TGFITE */
+              UPDATE TGFITE SET CODCFO = PARAM_CODCFO
+               WHERE NUNOTA = FIELD_NUNOTA
+                 AND CODCFO = FIELD_CODCFO;
+
+
+       END LOOP;
+
+       P_MENSAGEM := 'Atualização realizada com sucesso!';
+
+END;</storedProcedure>
+        </action>
+        <action type="LC">
+          <description>Abrir na Central de Notas</description>
+          <actionConfig>
+            <laucher resourceID="br.com.sankhya.com.mov.CentralNotas" />
+            <params>
+              <param localField="NUNOTA" targetField="NUNOTA" />
+            </params>
+          </actionConfig>
+        </action>
+        <action type="SP">
+          <description>Atualização de TOP</description>
+          <actionConfig>
+            <dbCall name="STP_BTN_ATUAL_TOP" refreshType="SEL" txManual="false" rootEntity="AD_NATTPOCFO2" />
+            <params />
+          </actionConfig>
+          <storedProcedure>CREATE OR REPLACE  PROCEDURE "STP_BTN_ATUAL_TOP" (
+  P_CODUSU    NUMBER,
+  P_IDSESSAO  VARCHAR2,
+  P_QTDLINHAS NUMBER,
+  P_MENSAGEM  OUT VARCHAR2
+) AS
+  -- Campos vindos da linha selecionada (da sua VIEW)
+  FIELD_NUNOTA NUMBER;     -- &lt;&lt; chave do cabeçalho
+  FIELD_CODTIPOPER NUMBER; -- TOP atual exibida na linha
+  FIELD_CODCFO VARCHAR2(4000);        -- CFOP do item (se a sua view expõe)
+
+  -- Calculados
+  V_CODTIPOPERNOVA  TGFTOP.CODTIPOPER%TYPE; -- TOP de destino (mapeamento)
+  V_DHTOP           TGFTOP.DHALTER%TYPE;    -- última versão da TOP destino
+  V_TIPMOV          TGFTOP.TIPMOV%TYPE;
+
+  V_MSGERRO         VARCHAR2(4000);
+BEGIN
+  FOR I IN 1..P_QTDLINHAS LOOP
+    --------------------------------------------------------------------
+    -- 1) Ler os valores da LINHA selecionada na grid (vêm da sua VIEW)
+    --------------------------------------------------------------------
+    -- OBS: se na sua view o campo se chama NROUNICO, troque abaixo:
+    -- V_NUNOTA := ACT_INT_FIELD(P_IDSESSAO, I, 'NROUNICO');
+              FIELD_CODCFO := ACT_TXT_FIELD(P_IDSESSAO, I, 'CODCFO');
+              FIELD_CODTIPOPER := ACT_INT_FIELD(P_IDSESSAO, I, 'CODTIPOPER');
+              FIELD_NUNOTA := ACT_INT_FIELD(P_IDSESSAO, I, 'NUNOTA');
+
+
+    IF FIELD_NUNOTA IS NULL THEN
+      RAISE_APPLICATION_ERROR(-20100, 'A view precisa expor a chave (NUNOTA/NROUNICO) para atualizar apenas as linhas selecionadas.');
+    END IF;
+
+    --------------------------------------------------------------------
+    -- 2) Descobrir a TOP de destino (tabela de mapeamento AD_NATTPOCFO)
+    --------------------------------------------------------------------
+    BEGIN
+      SELECT CODTIPOPERNOVA
+        INTO V_CODTIPOPERNOVA
+        FROM AD_NATTPOCFO
+       WHERE CODTIPOPER = FIELD_CODTIPOPER
+         AND CODCFO     = FIELD_CODCFO;      -- se o seu mapeamento não usa CFOP da linha,
+                                             -- substitua aqui pelo campo/param correto
+    EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+        V_MSGERRO :=
+          'Sem mapeamento em AD_NATTPOCFO para CODTIPOPER='||FIELD_CODTIPOPER||
+          ' e CODCFO='||FIELD_CODCFO||' (NUNOTA '||FIELD_NUNOTA||').';
+        RAISE_APPLICATION_ERROR(-20101, V_MSGERRO);
+      WHEN TOO_MANY_ROWS THEN
+        V_MSGERRO :=
+          'Mapeamento duplicado em AD_NATTPOCFO para CODTIPOPER='||FIELD_CODTIPOPER||
+          ' e CODCFO='||FIELD_CODCFO||' (NUNOTA '||FIELD_NUNOTA||').';
+        RAISE_APPLICATION_ERROR(-20102, V_MSGERRO);
+    END;
+
+    --------------------------------------------------------------------
+    -- 3) Buscar a ÚLTIMA versão dessa TOP (mesma DH para TIPMOV e DHTIPOPER)
+    --------------------------------------------------------------------
+    SELECT
+      MAX(t.DHALTER) KEEP (DENSE_RANK LAST ORDER BY t.DHALTER) AS DH,
+      MAX(t.TIPMOV)  KEEP (DENSE_RANK LAST ORDER BY t.DHALTER) AS TP
+      INTO V_DHTOP, V_TIPMOV
+      FROM TGFTOP t
+     WHERE t.CODTIPOPER = V_CODTIPOPERNOVA;
+
+    IF V_DHTOP IS NULL THEN
+      RAISE_APPLICATION_ERROR(-20103, 'TOP destino '||V_CODTIPOPERNOVA||' sem versão em TGFTOP.');
+    END IF;
+
+    --------------------------------------------------------------------
+    -- 4) Atualizar SOMENTE a nota selecionada (pelo cabeçalho TGFCAB)
+    --    Mantemos salvaguardas: só troca se TOP atual confere e a nota tem item com o CFOP
+    --------------------------------------------------------------------
+    UPDATE TGFCAB C
+       SET C.CODTIPOPER = V_CODTIPOPERNOVA,
+           C.DHTIPOPER  = V_DHTOP,
+           C.TIPMOV     = V_TIPMOV
+     WHERE C.NUNOTA     = FIELD_NUNOTA
+       AND C.CODTIPOPER = FIELD_CODTIPOPER
+       AND EXISTS (
+             SELECT 1
+               FROM TGFITE I
+              WHERE I.NUNOTA = C.NUNOTA
+                AND I.CODCFO = FIELD_CODCFO
+           );
+    -- Se quiser garantir que pelo menos 1 linha foi afetada, você pode checar SQL%ROWCOUNT aqui.
+  END LOOP;
+
+  P_MENSAGEM := 'Atualização realizada com sucesso apenas para as linhas selecionadas.';
+EXCEPTION
+  WHEN OTHERS THEN
+    IF SQLCODE BETWEEN -20999 AND -20000 THEN
+      RAISE;
+    ELSE
+      RAISE_APPLICATION_ERROR(-20199, 'Falha na atualização: '||SQLCODE||' - '||SQLERRM);
+    END IF;
+END;</storedProcedure>
+        </action>
+      </actions>
+    </instance>
+    <instance name="AD_NATTPOCFO3" isUpdate="false">
+      <instanceDescription>Itens</instanceDescription>
+      <tableInfo name="AD_NATTPOCFO3" sequenceType="M">
+        <category>Deploy Agent</category>
+        <tableDescription>Itens</tableDescription>
+        <primaryKey>
+          <CODCFO />
+          <CODTIPOPER />
+          <NUNOTA />
+          <SEQUENCIA />
+        </primaryKey>
+      </tableInfo>
+      <fields>
+        <field name="SEQUENCIA" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Sequência</description>
+          <properties>
+            <prop name="nullable">N</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+            <prop name="PKOrder">11</prop>
+          </properties>
+        </field>
+        <field name="NUNOTA" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Nro. Único</description>
+          <properties>
+            <prop name="PKOrder">10</prop>
+          </properties>
+        </field>
+        <field name="CODTIPOPER" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Tipo de Operação</description>
+          <properties>
+            <prop name="PKOrder">9</prop>
+          </properties>
+        </field>
+        <field name="CODCFO" systemField="N" dataType="S" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>CFOP</description>
+          <properties>
+            <prop name="PKOrder">8</prop>
+          </properties>
+        </field>
+        <field name="CODTRIB" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Tributação</description>
+        </field>
+        <field name="VLRTOT" systemField="N" dataType="F" presentationType="P" calculated="N" allowSearch="N" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Vlr. Total</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="nuCasasDecimais">2</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="CODPROD" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="10">
+          <description>Produto</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="CODCFOITE" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="10">
+          <description>CFOP</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="QTDNEG" systemField="N" dataType="F" presentationType="P" calculated="N" allowSearch="N" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Qtd. Neg.</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="nuCasasDecimais">2</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="VLRUNIT" systemField="N" dataType="F" presentationType="P" calculated="N" allowSearch="N" allowDefault="S" visibleOnSearch="S" allowNull="S">
+          <description>Vlr. Unitário</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="nuCasasDecimais">2</prop>
+            <prop name="readOnly">S</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+      </fields>
+      <relationShip>
+        <relation entityName="Produto" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFPRO" />
+          <fields>
+            <field localName="CODPROD" targetName="CODPROD" />
+          </fields>
+        </relation>
+        <relation entityName="ClassificacaoFiscalOperacao" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFCFO" />
+          <fields>
+            <field localName="CODCFOITE" targetName="CODCFO" />
+          </fields>
+        </relation>
+      </relationShip>
+    </instance>
+    <instance name="AD_NATTPOCFO" isUpdate="false">
+      <instanceDescription>Atualização de Naturezas (TOP x CFOP)</instanceDescription>
+      <tableInfo name="AD_NATTPOCFO" sequenceType="M">
+        <category>Deploy Agent</category>
+        <tableDescription>Atualização de Naturezas (TOP x CFOP)</tableDescription>
+        <primaryKey>
+          <CODTIPOPER />
+          <CODCFO />
+        </primaryKey>
+      </tableInfo>
+      <fields>
+        <field name="CODTIPOPER" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="N" size="5">
+          <description>Tipo de Operação</description>
+          <properties>
+            <prop name="filterConsFilLig">S</prop>
+            <prop name="filterVoidExpression">N</prop>
+            <prop name="filterKeepLast">S</prop>
+            <prop name="filterOrder">0</prop>
+            <prop name="nullable">N</prop>
+            <prop name="filterDefaultValue">NaN</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">N</prop>
+            <prop name="filterRequired">N</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+            <prop name="filterType">default</prop>
+          </properties>
+        </field>
+        <field name="CODCFO" systemField="N" dataType="S" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="N">
+          <description>CFOP</description>
+          <properties>
+            <prop name="filterConsFilLig">S</prop>
+            <prop name="filterVoidExpression">N</prop>
+            <prop name="filterKeepLast">S</prop>
+            <prop name="filterOrder">1</prop>
+            <prop name="filterRequired">N</prop>
+            <prop name="filterType">default</prop>
+          </properties>
+        </field>
+        <field name="CODTIPOPERNOVA" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="5">
+          <description>Tipo Operação Nova</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">N</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+        <field name="CODNAT" systemField="N" dataType="I" presentationType="P" calculated="N" allowSearch="S" allowDefault="S" visibleOnSearch="S" allowNull="S" size="10">
+          <description>Natureza</description>
+          <properties>
+            <prop name="nullable">S</prop>
+            <prop name="UITabName">__main</prop>
+            <prop name="visivel">S</prop>
+            <prop name="readOnly">N</prop>
+            <prop name="requerido">N</prop>
+            <prop name="combobox">N</prop>
+          </properties>
+        </field>
+      </fields>
+      <relationShip>
+        <relation entityName="Natureza" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFNAT" />
+          <fields>
+            <field localName="CODNAT" targetName="CODNAT" />
+          </fields>
+        </relation>
+        <relation entityName="TipoOperacao" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFTOP" />
+          <expression>@ref-param[force-one-to-one=true]</expression>
+          <fields>
+            <field localName="CODTIPOPER" targetName="CODTIPOPER" />
+          </fields>
+        </relation>
+        <relation entityName="ClassificacaoFiscalOperacao" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFCFO" />
+          <fields>
+            <field localName="CODCFO" targetName="CODCFO" />
+          </fields>
+        </relation>
+        <relation entityName="AD_NATTPOCFO2" type="I" insert="N" update="N" remove="S">
+          <targetInfo systemInstance="N" tableName="AD_NATTPOCFO2" />
+          <fields>
+            <field localName="CODTIPOPER" targetName="CODTIPOPER" />
+            <field localName="CODCFO" targetName="CODCFO" />
+          </fields>
+        </relation>
+        <relation entityName="TipoOperacao" type="I" insert="N" update="N" remove="N">
+          <targetInfo systemInstance="S" tableName="TGFTOP" />
+          <expression>@ref-param[force-one-to-one=true]</expression>
+          <fields>
+            <field localName="CODTIPOPERNOVA" targetName="CODTIPOPER" />
+          </fields>
+        </relation>
+      </relationShip>
+      <actions>
+        <action type="SP">
+          <description>Atualizar natureza</description>
+          <actionConfig>
+            <dbCall name="STP_BTN_ATUAL_NAT_TPO_CFO" refreshType="SEL" txManual="false" rootEntity="AD_NATTPOCFO" />
+          </actionConfig>
+          <storedProcedure>CREATE OR REPLACE  PROCEDURE "STP_BTN_ATUAL_NAT_TPO_CFO" (
+       P_CODUSU NUMBER,        -- Código do usuário logado
+       P_IDSESSAO VARCHAR2,    -- Identificador da execução. Serve para buscar informações dos parâmetros/campos da execução.
+       P_QTDLINHAS NUMBER,     -- Informa a quantidade de registros selecionados no momento da execução.
+       P_MENSAGEM OUT VARCHAR2 -- Caso seja passada uma mensagem aqui, ela será exibida como uma informação ao usuário.
+) AS
+       FIELD_CODTIPOPER NUMBER;
+       FIELD_CODCFO     VARCHAR2(4000);
+       V_MSGERRO        VARCHAR2(4000);
+       V_CODNAT         TGFNAT.CODNAT%TYPE;
+BEGIN
+
+       -- Os valores informados pelo formulário de parâmetros, podem ser obtidos com as funções:
+       --     ACT_INT_PARAM
+       --     ACT_DEC_PARAM
+       --     ACT_TXT_PARAM
+       --     ACT_DTA_PARAM
+       -- Estas funções recebem 2 argumentos:
+       --     ID DA SESSÃO - Identificador da execução (Obtido através de P_IDSESSAO))
+       --     NOME DO PARAMETRO - Determina qual parametro deve se deseja obter.
+
+       /* Objetivo: Atualizar naturezas de notas de acordo com a TOP e CFOP */
+
+       FOR I IN 1..P_QTDLINHAS -- Este loop permite obter o valor de campos dos registros envolvidos na execução.
+       LOOP                    -- A variável "I" representa o registro corrente.
+              -- Para obter o valor dos campos utilize uma das seguintes funções:
+              --     ACT_INT_FIELD (Retorna o valor de um campo tipo NUMÉRICO INTEIRO))
+              --     ACT_DEC_FIELD (Retorna o valor de um campo tipo NUMÉRICO DECIMAL))
+              --     ACT_TXT_FIELD (Retorna o valor de um campo tipo TEXTO),
+              --     ACT_DTA_FIELD (Retorna o valor de um campo tipo DATA)
+              -- Estas funções recebem 3 argumentos:
+              --     ID DA SESSÃO - Identificador da execução (Obtido através do parâmetro P_IDSESSAO))
+              --     NÚMERO DA LINHA - Relativo a qual linha selecionada.
+              --     NOME DO CAMPO - Determina qual campo deve ser obtido.
+              FIELD_CODTIPOPER := ACT_INT_FIELD(P_IDSESSAO, I, 'CODTIPOPER');
+              FIELD_CODCFO := ACT_TXT_FIELD(P_IDSESSAO, I, 'CODCFO');
+
+              /* BUSCA NATUREZA QUE SERA UTILIZADA PARA ATUALIZAR NOTAS */
+              SELECT CODNAT
+                INTO V_CODNAT
+                FROM AD_NATTPOCFO
+               WHERE CODTIPOPER = FIELD_CODTIPOPER
+                 AND CODCFO = FIELD_CODCFO;
+
+              /* SE NAO INFORMOU A NATUREZA */
+              IF NVL(V_CODNAT,0) = 0 THEN
+
+
+                     V_MSGERRO := '&lt;p align="left"&gt;&lt;font size="12" face="arial"&gt;&lt;br&gt;&lt;b&gt;Atenção:  &lt;/b&gt; Erro na atualização!&lt;br&gt;&lt;br&gt;' ||
+                                  '&lt;b&gt;Motivo: &lt;/b&gt; Não foi informada a natureza para a TOP ' || FIELD_CODTIPOPER || ' e CFOP ' || FIELD_CODCFO || '.&lt;br&gt;&lt;br&gt;' ||
+                                  '&lt;b&gt;Solução: &lt;/b&gt;Informe a natureza e em seguida tente novamente.&lt;br&gt;&lt;br&gt;';
+
+                     RAISE_APPLICATION_ERROR(-20101, V_MSGERRO);
+
+              END IF;
+
+              /* ATUALIZA TGFCAB */
+              UPDATE TGFCAB SET CODNAT = V_CODNAT
+               WHERE EXISTS (SELECT 1
+                               FROM TGFCAB C
+                               INNER JOIN TGFITE I ON (C.NUNOTA = I.NUNOTA)
+                              WHERE C.NUNOTA = TGFCAB.NUNOTA
+                                AND C.CODTIPOPER = FIELD_CODTIPOPER
+                                AND I.CODCFO = FIELD_CODCFO);
+
+              /* ATUALIZA FINANCEIRO */
+              UPDATE TGFFIN SET CODNAT = V_CODNAT
+               WHERE EXISTS (SELECT 1
+                               FROM TGFCAB C
+                               INNER JOIN TGFITE I ON (C.NUNOTA = I.NUNOTA)
+                              WHERE C.NUNOTA = TGFFIN.NUNOTA
+                                AND C.CODTIPOPER = FIELD_CODTIPOPER
+                                AND I.CODCFO = FIELD_CODCFO);
+
+
+       END LOOP;
+
+       P_MENSAGEM := 'Atualização realizada com sucesso!';
+
+END;</storedProcedure>
+        </action>
+        <action type="SP">
+          <description>Carregar dados</description>
+          <actionConfig>
+            <dbCall name="STP_BTN_DADOS_AD_NATTPOCFO" refreshType="ALL" txManual="false" rootEntity="AD_NATTPOCFO" />
+          </actionConfig>
+          <storedProcedure>CREATE OR REPLACE  PROCEDURE "STP_BTN_DADOS_AD_NATTPOCFO" (
+       P_CODUSU NUMBER,        -- Código do usuário logado
+       P_IDSESSAO VARCHAR2,    -- Identificador da execução. Serve para buscar informações dos parâmetros/campos da execução.
+       P_QTDLINHAS NUMBER,     -- Informa a quantidade de registros selecionados no momento da execução.
+       P_MENSAGEM OUT VARCHAR2 -- Caso seja passada uma mensagem aqui, ela será exibida como uma informação ao usuário.
+) AS
+       FIELD_CODTIPOPER NUMBER;
+       FIELD_CODCFO VARCHAR2(4000);
+BEGIN
+
+       -- Os valores informados pelo formulário de parâmetros, podem ser obtidos com as funções:
+       --     ACT_INT_PARAM
+       --     ACT_DEC_PARAM
+       --     ACT_TXT_PARAM
+       --     ACT_DTA_PARAM
+       -- Estas funções recebem 2 argumentos:
+       --     ID DA SESSÃO - Identificador da execução (Obtido através de P_IDSESSAO))
+       --     NOME DO PARAMETRO - Determina qual parametro deve se deseja obter.
+
+       /* Objetivo: Inserir TOPs e CFOPs na tabela de atualizacao de naturezas AD_NATTPOCFO */
+
+       /* INSERE TOPS E CFOS NA TABELA AD_NATTPOCFO */
+       INSERT INTO AD_NATTPOCFO (CODTIPOPER, CODCFO)
+                 SELECT DISTINCT CAB.CODTIPOPER, ITE.CODCFO
+                   FROM TGFCAB CAB   
+                   INNER JOIN TGFITE ITE ON (CAB.NUNOTA = ITE.NUNOTA)
+                  WHERE NOT EXISTS (SELECT 1 
+                                      FROM AD_NATTPOCFO
+                                     WHERE CODTIPOPER = CAB.CODTIPOPER
+                                       AND CODCFO = ITE.CODCFO)
+                        AND CAB.TIPMOV &lt;&gt; 'Z';     
+
+       P_MENSAGEM := 'Dados carregados com sucesso!';
+
+END;</storedProcedure>
+        </action>
+      </actions>
+    </instance>
+  </instances>
+</metadata>
