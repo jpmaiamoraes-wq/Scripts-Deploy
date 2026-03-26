@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.definition"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.band.1" value="pageHeader"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Observação" class="java.lang.String"/>
+	<parameter name="PDIR_MODELO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_FORMATO" class="java.lang.String">
+		<parameterDescription><![CDATA["Formato"]]></parameterDescription>
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT RAZAOSOCIAL FROM TSIEMP WHERE CODEMP = 1]]>
+	</queryString>
+	<field name="RAZAOSOCIAL" class="java.lang.String"/>
+	<pageHeader>
+		<band height="50">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="33" backcolor="#2D394C"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="155" y="31" width="400" height="8" backcolor="#58B461"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="0" width="205" height="33" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Deploy Tributos]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement key="image-1" x="462" y="2" width="90" height="27"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{PDIR_MODELO} + "logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{P_FORMATO}.equals("RESUMO")]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="sub_empresas" positionType="Float" x="0" y="8" width="555" height="20"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_empresas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$P{P_FORMATO}.equals("RESUMO")]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="sub_nfe" positionType="Float" x="0" y="8" width="555" height="20"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_nfe.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$P{P_FORMATO}.equals("DETALHADO")]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="sub_prod" positionType="Float" x="0" y="7" width="555" height="20"/>
+				<subreportParameter name="P_FORMATO">
+					<subreportParameterExpression><![CDATA[$P{P_FORMATO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_prod.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$P{P_FORMATO}.equals("RESUMO")]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="sub_cfop" positionType="Float" x="0" y="7" width="555" height="20"/>
+				<subreportParameter name="P_FORMATO">
+					<subreportParameterExpression><![CDATA[$P{P_FORMATO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_cfop.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$P{P_FORMATO}.equals("RESUMO")]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="sub_piscofins" positionType="Float" x="0" y="8" width="555" height="20"/>
+				<subreportParameter name="P_FORMATO">
+					<subreportParameterExpression><![CDATA[$P{P_FORMATO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_piscofins.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="35">
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="16" forecolor="#2D394D"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5. Observações]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-10" x="0" y="17" width="555" height="18"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement markup="html"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Observação}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

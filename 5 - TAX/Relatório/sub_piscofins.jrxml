@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_piscofins" language="groovy" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+    CODEMP,
+    GRUPOIMP,
+    CST,
+    MAX(CASE WHEN NOMEIMP = 'PIS'    THEN ALIQ END) AS ALIQ_PIS,
+    MAX(CASE WHEN NOMEIMP = 'COFINS' THEN ALIQ END) AS ALIQ_COFINS
+FROM TGFIFE
+WHERE ENTSAI = 'S'
+  AND NOMEIMP IN ('PIS', 'COFINS')
+GROUP BY
+    CODEMP,
+    GRUPOIMP,
+    CST
+ORDER BY CST, GRUPOIMP]]>
+	</queryString>
+	<field name="GRUPOIMP" class="java.lang.String"/>
+	<field name="CST" class="java.lang.String"/>
+	<field name="ALIQ_PIS" class="java.lang.String"/>
+	<field name="ALIQ_COFINS" class="java.lang.String"/>
+	<field name="CODEMP" class="java.lang.String"/>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#2C384D"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4. Regras PIS/COFINS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="24" width="555" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Calibri" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Para o PIS/COFINS foram criados os grupos abaixo, para mais detalhes acesse o relatório detalhado.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="0" width="552" height="14"/>
+				<textElement markup="html">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["• <b>Grupo:</b> " + $F{GRUPOIMP} +
+" | <b>CST:</b> " + $F{CST} +
+" | <b>Aliq PIS:</b> " + $F{ALIQ_PIS}.toString() + "%" +
+" | <b>Aliq COFINS:</b> " + $F{ALIQ_COFINS}.toString() + "%" +
+" | <b>Cod. Empresa:</b> " + $F{CODEMP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_nfe" language="groovy" pageWidth="555" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_FORMATO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+    MIN(DATA_MOV) AS DATA_INICIO,
+    MAX(DATA_MOV) AS DATA_FIM,
+    COUNT(DISTINCT CHAVE_PITI) AS QTD_NFE_PROCESSADOS,
+    COUNT(DISTINCT CHAVE_CAB)- COUNT(DISTINCT CHAVE_PITI) AS QTD_NFE_DESCARTADOS,
+    LISTAGG(DISTINCT CNPJ, ' | ') WITHIN GROUP (ORDER BY CNPJ) AS CNPJS_ANALISADOS
+FROM (
+    SELECT
+        PITI.CHAVE AS CHAVE_PITI,
+        CAB.CHAVENFE AS CHAVE_CAB,
+        PITI.DATA AS DATA_MOV,
+        PITI.CPFCNPJORIG AS CNPJ
+    FROM TTKPITI PITI
+    FULL OUTER JOIN TGFCAB CAB ON CAB.CHAVENFE = PITI.CHAVE
+    WHERE (CAB.TIPMOV <> 'Z' OR CAB.TIPMOV IS NULL)
+)]]>
+	</queryString>
+	<field name="DATA_INICIO" class="java.util.Date"/>
+	<field name="DATA_FIM" class="java.util.Date"/>
+	<field name="QTD_NFE_PROCESSADOS" class="java.lang.String"/>
+	<field name="QTD_NFE_DESCARTADOS" class="java.lang.String"/>
+	<field name="CNPJS_ANALISADOS" class="java.lang.String"/>
+	<columnHeader>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="200" height="20" forecolor="#2C384D"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. XMLs Analisados]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="20" width="555" height="62"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<html>A partir do volume total de XMLs, foram aplicados filtros para a análise.<br><br>" +
+"<b>Data de início da análise:</b> " + new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_INICIO}) + "<br>" +
+"<b>Data final da análise:</b> " + new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_FIM}) + "<br>" +
+"<b>CNPJs analisados:</b> " + $F{CNPJS_ANALISADOS} + "<br><br>" +
+"Com esses filtros, obtivemos os seguintes resultados:<br>" +
+"<b>Quantidade de documentos processados:</b> " + $F{QTD_NFE_PROCESSADOS} + "<br>" +
+"<b>Quantidade de documentos descartados:</b> " + $F{QTD_NFE_DESCARTADOS} + "<br><br>" +
+"Nem todos os XMLs foram analisados, pois priorizamos o último ano para refletir a tributação mais recente. Além disso, apenas documentos de emissão própria são considerados."]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

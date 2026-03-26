@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_cfop" language="groovy" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.5937424601000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_FORMATO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[/* PARTE 1: Busca apenas se EXISTIREM restrições especiais */
+SELECT
+    O.OPCAO,
+    UFORIG.UF AS UFORIG,
+    UFDEST.UF AS UFDEST,
+    I.CODRESTRICAO,
+    I.CODTRIB,
+    I.ALIQUOTA,
+    I.REDBASE,
+    I.MARGLUCRO,
+    I.MARGLUCROEST,
+    I.CSOSN
+FROM TGFICM I
+JOIN TDDCAM C ON C.NOMETAB = 'TGFICM' AND C.NOMECAMPO = 'TIPRESTRICAO'
+JOIN TDDOPC O ON O.NUCAMPO = C.NUCAMPO AND O.VALOR = I.TIPRESTRICAO
+JOIN TSIUFS UFORIG ON UFORIG.CODUF = I.UFORIG
+JOIN TSIUFS UFDEST ON UFDEST.CODUF = I.UFDEST
+WHERE I.TIPRESTRICAO NOT IN ('S','X', 'N')
+
+UNION ALL
+
+/* PARTE 2: Exibe a mensagem APENAS se não existir nenhuma restrição especial na tabela */
+SELECT
+    'Todas as operações analisadas são tributadas integralmente, sendo assim as regras da base modelo atendem o cliente' AS OPCAO,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+FROM DUAL -- Ou (SELECT 1) em alguns bancos
+WHERE NOT EXISTS (
+    SELECT 1 FROM TGFICM WHERE TIPRESTRICAO NOT IN ('S','X', 'N')
+)
+
+ORDER BY CODRESTRICAO]]>
+	</queryString>
+	<field name="OPCAO" class="java.lang.String"/>
+	<field name="UFORIG" class="java.lang.String"/>
+	<field name="UFDEST" class="java.lang.String"/>
+	<field name="CODRESTRICAO" class="java.lang.String"/>
+	<field name="CODTRIB" class="java.lang.String"/>
+	<field name="ALIQUOTA" class="java.lang.String"/>
+	<field name="REDBASE" class="java.lang.String"/>
+	<field name="MARGLUCRO" class="java.lang.String"/>
+	<field name="MARGLUCROEST" class="java.lang.String"/>
+	<field name="CSOSN" class="java.lang.String"/>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#2C384D"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3. Regras Criadas ICMS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="14"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Calibri" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Após a análise dos XMLs foram criadas as seguintes regras:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="0" width="57" height="11">
+					<printWhenExpression><![CDATA[$F{UFORIG} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement markup="html">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["• <b>" + $F{UFORIG} + " - " + $F{UFDEST} + "</b>"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="57" y="0" width="498" height="11">
+					<printWhenExpression><![CDATA[$F{UFORIG} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement markup="html">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<b>| Restrição: " + $F{CODRESTRICAO} + "</b>" +
+" | CST: " + $F{CODTRIB} +
+($F{CSOSN} != null ? " | CSOSN: " + $F{CSOSN} : "") +
+" | Aliq: " + $F{ALIQUOTA} + "%" +
+($F{REDBASE} != null && !$F{REDBASE}.toString().equals("0") && !$F{REDBASE}.toString().equals("0.0") ? " | Red.Base: " + $F{REDBASE} : "") +
+($F{MARGLUCRO} != null ? " | MVA: " + $F{MARGLUCRO} : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="0" width="555" height="11"/>
+				<textElement markup="html">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{OPCAO}.equals("Todas as operações analisadas são tributadas integralmente, sendo assim as regras da base modelo atendem o cliente") ? $F{OPCAO} : null)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
