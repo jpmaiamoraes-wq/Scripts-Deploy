@@ -339,16 +339,20 @@
                          THEN 'R'
                     WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'P'
-                    WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
+                    WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'C'
+                    WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
+                         THEN 'I'
                 END) <> P.CLASSIFICMS
                 AND (CASE
                     WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'R'
                     WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'P'
-                    WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
+                    WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'C'
+                    WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
+                         THEN 'I'
                 END) IS NOT NULL), 'FM999G999G990') AS RESULTADO
         FROM DUAL
         UNION ALL
