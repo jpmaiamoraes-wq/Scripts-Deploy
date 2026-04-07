@@ -1,0 +1,19 @@
+CREATE TABLE TGFFIN_BKP AS SELECT * FROM TGFFIN;
+
+DELETE FROM TGFFIN FIN
+WHERE FIN.DTVENC >= DATE '2026-05-01' -- usar a data que foi processado o sprint pois os arquivos de EFD definem este dia de processamento de data como vencimento
+  AND FIN.CODTIPOPER = 0
+  AND FIN.CODTIPTIT = 0
+  AND FIN.DESDOBRAMENTO = 0
+  AND FIN.DTVENC - FIN.DTNEG > 120
+  AND EXISTS (
+        SELECT 1
+        FROM TGFFIN F2
+        JOIN TGFCAB CAB ON CAB.NUNOTA = F2.NUNOTA
+        WHERE F2.NUNOTA = FIN.NUNOTA
+        GROUP BY F2.NUNOTA, CAB.VLRNOTA
+        HAVING COUNT(F2.NUFIN) >= 2
+           AND SUM(NVL(F2.VLRDESDOB, 0)) > CAB.VLRNOTA
+  );
+
+COMMIT;
