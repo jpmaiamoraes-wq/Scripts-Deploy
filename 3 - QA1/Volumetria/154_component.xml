@@ -736,8 +736,7 @@ ORDER BY CID.CODMUNFIS, CID.CODCID]]></expression><metadata><field name="CODMUNF
                   AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                  THEN 'P'  -- Produtor Rural
             WHEN (P.TIPPESSOA = 'F'
-                  AND P.IDENTINSCESTAD IS NULL
-                  AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
+                  AND P.IDENTINSCESTAD IS NULL)
                  THEN 'C'  -- Produtor Rural
             WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
                  THEN 'I'  -- Consumidor Final Não Contribuinte
@@ -764,35 +763,40 @@ ORDER BY
     TIP_DESC.OPCAO]]></expression><metadata><field name="TIPPESSOA" label="TIPPESSOA" type="S" visible="false" useFooter="false"></field><field name="DESC_TIPPESSOA" label="Tipo Parceiro" type="S" visible="true" useFooter="false"></field><field name="QTD_DIVERGENCIAS" label="Qtd. Divergências" type="I" visible="true" useFooter="SUM" mask="#.##0"></field></metadata><refresh-details  ui-list="grd_a20n4tx">
             <param id="A_TIPPESSOA">$TIPPESSOA</param>
           </refresh-details></grid></container><container orientacao="V" tamanhoRelativo="50"><grid id="grd_a20n4tx" useNewGrid="S"><args><arg id="A_TIPPESSOA" type="text"></arg></args><title><![CDATA[Parceiros com divergência]]></title><expression type="sql" data-source="MGEDS"><![CDATA[SELECT 
-       P.CODPARC,
-       P.RAZAOSOCIAL,
-       P.TIPPESSOA,
-       TIP_DESC.OPCAO AS DESC_TIPPESSOA,  -- descrição do TIPPESSOA
-       P.IDENTINSCESTAD,
-       F_DESCROPC('TGFPAR','CLASSIFICMS', P.CLASSIFICMS) AS CLASSIFICMS,
-       CASE 
-            WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'R')
-                 THEN 'R-Revendedor'
-            WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'P')
-                 THEN 'P-Produtor Rural'
-            WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'C')
-                 THEN 'C-Consumidor Final Não Contribuinte'
-            WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO' AND P.CLASSIFICMS <> 'I')
-                 THEN 'I-Isento de ICMS'
-       END AS CLASSIFICMS_ESPERADO
+    P.CODPARC,
+    P.RAZAOSOCIAL,
+    P.TIPPESSOA,
+    TIP_DESC.OPCAO AS DESC_TIPPESSOA,
+    P.IDENTINSCESTAD,
+    F_DESCROPC('TGFPAR','CLASSIFICMS', P.CLASSIFICMS) AS CLASSIFICMS_ATUAL,
+    CASE 
+        -- Primeira condição (Revendedor)
+        WHEN P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO'
+            THEN 'R-Revendedor'
+        -- Segunda condição (Produtor Rural)
+        WHEN P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO'
+            THEN 'P-Produtor Rural'
+        -- Terceira condição (Consumidor Final) - Mais específica, vem antes de Isento
+        WHEN P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL
+            THEN 'C-Consumidor Final Não Contribuinte'
+        -- Quarta condição (Isento) - Mais genérica, vem por último
+        WHEN NVL(UPPER(P.IDENTINSCESTAD), 'ISENTO') = 'ISENTO'
+            THEN 'I-Isento de ICMS'
+    END AS CLASSIFICMS_ESPERADO
 FROM TGFPAR P
-LEFT JOIN TDDCAM CAM_TIP
-       ON CAM_TIP.NOMETAB   = 'TGFPAR'
-      AND CAM_TIP.NOMECAMPO = 'TIPPESSOA'
-LEFT JOIN TDDOPC TIP_DESC
-       ON TIP_DESC.NUCAMPO = CAM_TIP.NUCAMPO
-      AND TIP_DESC.VALOR   = P.TIPPESSOA
+LEFT JOIN TDDCAM CAM_TIP ON CAM_TIP.NOMETAB = 'TGFPAR' AND CAM_TIP.NOMECAMPO = 'TIPPESSOA'
+LEFT JOIN TDDOPC TIP_DESC ON TIP_DESC.NUCAMPO = CAM_TIP.NUCAMPO AND TIP_DESC.VALOR = P.TIPPESSOA
 WHERE P.TIPPESSOA = :A_TIPPESSOA
-  AND ((P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'R')
-   OR (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'P')
-   OR (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'C')       
-   OR (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO' AND P.CLASSIFICMS <> 'I'))
-ORDER BY P.CODPARC]]></expression><metadata><field name="CODPARC" label="Cód. Pessoa" type="I" visible="true" useFooter="false"></field><field name="RAZAOSOCIAL" label="Razão Social" type="S" visible="true" useFooter="false"></field><field name="TIPPESSOA" label="TIPPESSOA" type="S" visible="false" useFooter="false"></field><field name="DESC_TIPPESSOA" label="Tipo Parceiro" type="S" visible="true" useFooter="false"></field><field name="IDENTINSCESTAD" label="Inscrição Estadual" type="S" visible="true" useFooter="false"></field><field name="CLASSIFICMS" label="Classif. ICMS Atual" type="S" visible="true" useFooter="false"></field><field name="CLASSIFICMS_ESPERADO" label="Classif. ICMS Esperada" type="S" visible="true" useFooter="false"></field></metadata><on-click-launcher  resource-id="br.com.sankhya.core.cad.parceiros">
+AND
+    -- A cláusula WHERE deve encontrar qualquer parceiro que NÃO corresponda à classificação esperada
+    (
+        (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'R') OR
+        (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'P') OR
+        -- A mesma lógica de reordenação é aplicada aqui
+        (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND P.CLASSIFICMS <> 'C') OR
+        (NVL(UPPER(P.IDENTINSCESTAD), 'ISENTO') = 'ISENTO' AND P.CLASSIFICMS <> 'I' AND NOT (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL)) -- Adicionado NOT para não pegar casos já cobertos
+    )
+ORDER BY P.CODPARC]]></expression><metadata><field name="CODPARC" label="Cód. Pessoa" type="I" visible="true" useFooter="false"></field><field name="RAZAOSOCIAL" label="Razão Social" type="S" visible="true" useFooter="false"></field><field name="TIPPESSOA" label="TIPPESSOA" type="S" visible="false" useFooter="false"></field><field name="DESC_TIPPESSOA" label="Tipo Parceiro" type="S" visible="true" useFooter="false"></field><field name="IDENTINSCESTAD" label="Inscrição Estadual" type="S" visible="true" useFooter="false"></field><field name="CLASSIFICMS_ATUAL" label="CLASSIFICMS_ATUAL" type="S" visible="true" useFooter="false"></field><field name="CLASSIFICMS_ESPERADO" label="Classif. ICMS Esperada" type="S" visible="true" useFooter="false"></field></metadata><on-click-launcher  resource-id="br.com.sankhya.core.cad.parceiros">
             <CODPARC>$CODPARC</CODPARC>
           </on-click-launcher></grid></container></container></level><level id="lvl_zc6jly" description="17 - Itens sem Tabela de Preço"><container orientacao="V" tamanhoRelativo="100"><grid id="grd_zc6jl0" useNewGrid="S"><title><![CDATA[Produtos Vendidos sem Tabela de Preço]]></title><expression type="sql" data-source="MGEDS"><![CDATA[SELECT
     X.CODPROD,
@@ -835,26 +839,27 @@ ORDER BY
     X.CODPROD]]></expression><metadata><field name="CODPROD" label="Cód. Prod." type="I" visible="true" useFooter="false"></field><field name="DESCRPROD" label="Produto" type="S" visible="true" useFooter="false"></field><field name="USOPROD" label="USOPROD" type="S" visible="false" useFooter="false"></field><field name="DESC_USOPROD" label="Uso Produto" type="S" visible="true" useFooter="false"></field><field name="AD_IDEXTERNO" label="AD_IDEXTERNO" type="S" visible="true" useFooter="false"></field><field name="AD_ORIGDEPLOY" label="Origem" type="S" visible="true" useFooter="false"></field><field name="MOVIMENTOS" label="TOPs" type="S" visible="true" useFooter="false"></field></metadata><on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
           <CODPROD>$CODPROD</CODPROD>
         </on-click-launcher></grid></container></level><level id="lvl_af9lkrx" description="18 - Itens com Descrição Similar"><container orientacao="V" tamanhoRelativo="100"><grid id="grd_af9lkry" useNewGrid="S"><title><![CDATA[Produtos Com Descrições Similares]]></title><expression type="sql" data-source="MGEDS"><![CDATA[WITH PROD_HASH AS (
-  SELECT CODPROD,
-         DESCRPROD,
-         AD_IDEXTERNO,
-         NCM,
-         CODPARCFORN,
-         AD_ORIGDEPLOY,
-         ORA_HASH(UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')), 999999) AS HASH_DESCR,
-         UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')) AS DESCRNORM,
-         (SELECT COUNT(1)
-            FROM TGFITE I
-            INNER JOIN TGFCAB C ON (I.NUNOTA = C.NUNOTA)
-           WHERE I.CODPROD = TGFPRO.CODPROD
-             AND C.TIPMOV = 'C') AS QTDCOMPRA,
-         (SELECT COUNT(1)
-            FROM TGFITE I
-            INNER JOIN TGFCAB C ON (I.NUNOTA = C.NUNOTA)
-           WHERE I.CODPROD = TGFPRO.CODPROD
-             AND C.TIPMOV = 'V') AS QTDVENDA
-  FROM TGFPRO
+    -- Etapa 1: Pré-processamento dos produtos (igual à sua query original)
+    SELECT CODPROD,
+           DESCRPROD,
+           AD_IDEXTERNO,
+           NCM,
+           CODPARCFORN,
+           AD_ORIGDEPLOY,
+           ORA_HASH(UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')), 999999) AS HASH_DESCR,
+           UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')) AS DESCRNORM,
+           (SELECT COUNT(1) FROM TGFITE I INNER JOIN TGFCAB C ON (I.NUNOTA = C.NUNOTA) WHERE I.CODPROD = TGFPRO.CODPROD AND C.TIPMOV = 'C') AS QTDCOMPRA,
+           (SELECT COUNT(1) FROM TGFITE I INNER JOIN TGFCAB C ON (I.NUNOTA = C.NUNOTA) WHERE I.CODPROD = TGFPRO.CODPROD AND C.TIPMOV = 'V') AS QTDVENDA
+    FROM TGFPRO
+),
+PROD_RANK AS (
+    -- Etapa 2: Nova CTE para ranquear os produtos dentro de cada grupo de hash
+    SELECT
+        P.*, -- Seleciona todas as colunas da CTE anterior
+        ROW_NUMBER() OVER(PARTITION BY P.HASH_DESCR ORDER BY P.CODPROD) AS RN
+    FROM PROD_HASH P
 )
+-- Etapa 3: Query final que agora usa PROD_RANK e a nova validação
 SELECT
     A.CODPROD AS CODPROD_A,
     B.CODPROD AS CODPROD_B,
@@ -869,18 +874,27 @@ SELECT
     A.CODPARCFORN AS CODPARCFORN_A,
     B.CODPARCFORN AS CODPARCFORN_B,
     UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) AS SIMILARIDADE,
-    CASE WHEN A.QTDCOMPRA > 0 AND A.QTDVENDA > 0 THEN 'CV'
-         WHEN A.QTDCOMPRA > 0 AND A.QTDVENDA = 0 THEN 'C'
-         WHEN A.QTDCOMPRA = 0 AND A.QTDVENDA > 0 THEN 'V' END AS COMPRAVENDA_A,
-    CASE WHEN B.QTDCOMPRA > 0 AND B.QTDVENDA > 0 THEN 'CV'
-         WHEN B.QTDCOMPRA > 0 AND B.QTDVENDA = 0 THEN 'C'
-         WHEN B.QTDCOMPRA = 0 AND B.QTDVENDA > 0 THEN 'V' END AS COMPRAVENDA_B
-FROM PROD_HASH A
-JOIN PROD_HASH B
-  ON A.HASH_DESCR = B.HASH_DESCR
- AND A.CODPROD < B.CODPROD  -- garante que não compara consigo mesmo nem repete pares invertidos
-WHERE UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) > 85
-ORDER BY SIMILARIDADE DESC]]></expression><metadata><field name="CODPROD_A" label="Cód Prod. A" type="I" visible="true" useFooter="false"></field><field name="CODPROD_B" label="Cód. Prod. B" type="I" visible="true" useFooter="false"></field><field name="DESCRPROD_A" label="Descrição A" type="S" visible="true" useFooter="false"></field><field name="DESCRPROD_B" label="Descrição B" type="S" visible="true" useFooter="false"></field><field name="AD_IDEXTERNO_A" label="AD_IDEXTERNO A" type="S" visible="true" useFooter="false"></field><field name="AD_IDEXTERNO_B" label="AD_IDEXTERNO B" type="S" visible="true" useFooter="false"></field><field name="NCM_A" label="NCM A" type="S" visible="true" useFooter="false"></field><field name="NCM_B" label="NCM B" type="S" visible="true" useFooter="false"></field><field name="ORIGEM_A" label="ORIGEM_A" type="S" visible="true" useFooter="false"></field><field name="ORIGEM_B" label="ORIGEM_B" type="S" visible="true" useFooter="false"></field><field name="CODPARCFORN_A" label="Cód. Parc. Forn. A" type="I" visible="true" useFooter="false"></field><field name="CODPARCFORN_B" label="Cód. Parc Forn. B" type="I" visible="true" useFooter="false"></field><field name="SIMILARIDADE" label="SIMILARIDADE" type="I" visible="false" useFooter="false"></field><field name="COMPRAVENDA_A" label="Compra e Venda A" type="S" visible="true" useFooter="false"></field><field name="COMPRAVENDA_B" label="Compra e Venda B" type="S" visible="true" useFooter="false"></field></metadata><on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
+    CASE
+        WHEN A.QTDCOMPRA > 0 AND A.QTDVENDA > 0 THEN 'CV'
+        WHEN A.QTDCOMPRA > 0 AND A.QTDVENDA = 0 THEN 'C'
+        WHEN A.QTDCOMPRA = 0 AND A.QTDVENDA > 0 THEN 'V'
+    END AS COMPRAVENDA_A,
+    CASE
+        WHEN B.QTDCOMPRA > 0 AND B.QTDVENDA > 0 THEN 'CV'
+        WHEN B.QTDCOMPRA > 0 AND B.QTDVENDA = 0 THEN 'C'
+        WHEN B.QTDCOMPRA = 0 AND B.QTDVENDA > 0 THEN 'V'
+    END AS COMPRAVENDA_B
+FROM
+    PROD_RANK A  -- Alterado de PROD_HASH para PROD_RANK
+JOIN
+    PROD_RANK B  -- Alterado de PROD_HASH para PROD_RANK
+ON
+    A.HASH_DESCR = B.HASH_DESCR AND A.CODPROD < B.CODPROD
+WHERE
+    A.RN = 1 -- <<-- A VALIDAÇÃO ESSENCIAL
+    AND UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) BETWEEN 85 AND 99
+ORDER BY
+    SIMILARIDADE DESC]]></expression><metadata><field name="CODPROD_A" label="Cód Prod. A" type="I" visible="true" useFooter="false"></field><field name="CODPROD_B" label="Cód. Prod. B" type="I" visible="true" useFooter="false"></field><field name="DESCRPROD_A" label="Descrição A" type="S" visible="true" useFooter="false"></field><field name="DESCRPROD_B" label="Descrição B" type="S" visible="true" useFooter="false"></field><field name="AD_IDEXTERNO_A" label="AD_IDEXTERNO A" type="S" visible="true" useFooter="false"></field><field name="AD_IDEXTERNO_B" label="AD_IDEXTERNO B" type="S" visible="true" useFooter="false"></field><field name="NCM_A" label="NCM A" type="S" visible="true" useFooter="false"></field><field name="NCM_B" label="NCM B" type="S" visible="true" useFooter="false"></field><field name="ORIGEM_A" label="ORIGEM_A" type="S" visible="true" useFooter="false"></field><field name="ORIGEM_B" label="ORIGEM_B" type="S" visible="true" useFooter="false"></field><field name="CODPARCFORN_A" label="Cód. Parc. Forn. A" type="I" visible="true" useFooter="false"></field><field name="CODPARCFORN_B" label="Cód. Parc Forn. B" type="I" visible="true" useFooter="false"></field><field name="SIMILARIDADE" label="SIMILARIDADE" type="I" visible="false" useFooter="false"></field><field name="COMPRAVENDA_A" label="Compra e Venda A" type="S" visible="true" useFooter="false"></field><field name="COMPRAVENDA_B" label="Compra e Venda B" type="S" visible="true" useFooter="false"></field></metadata><on-click-launcher  resource-id="br.com.sankhya.core.cad.produtos">
           <CODPROD>$CODPROD_A</CODPROD>
         </on-click-launcher></grid></container></level><level id="lvl_5lj0cl" description="19 - CNPJ Matrizes"><args >
       <arg id="A_RAIZ" type="text"/>

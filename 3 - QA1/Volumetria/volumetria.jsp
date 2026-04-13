@@ -185,7 +185,6 @@
 
 </head>
 <body>
-     
     <snk:query var="contadores">          
         WITH PROD_HASH AS (
           SELECT CODPROD,
@@ -200,6 +199,12 @@
                  ORA_HASH(UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')), 999999) AS HASH_DESCR,
                  UPPER(REGEXP_REPLACE(DESCRPROD, '[^A-Z0-9 ]', '')) AS DESCRNORM
           FROM TGFPRO
+        ),
+        PROD_RANK AS (
+            SELECT
+                CODPROD, HASH_DESCR, DESCRNORM,
+                ROW_NUMBER() OVER(PARTITION BY HASH_DESCR ORDER BY CODPROD) AS RN
+            FROM PROD_HASH
         )
         SELECT 1 AS ID, 'Financeiro' AS TIPO,
                'Registros de títulos financeiros' AS TIPO2,
@@ -339,7 +344,7 @@
                          THEN 'R'
                     WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'P'
-                    WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
+                    WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL)
                          THEN 'C'
                     WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
                          THEN 'I'
@@ -367,13 +372,15 @@
                                             WHERE CODPROD = ITE.CODPROD)), 'FM999G999G990') AS RESULTADO
         FROM DUAL
         UNION ALL
+        -- VERSÃO CORRIGIDA
         SELECT 18 AS ID, 'Itens Com Descrições Similares' AS TIPO,
-               'Produtos que possuem descrições similares' AS TIPO2,
+                         'Produtos que possuem descrições similares' AS TIPO2,
                 TO_CHAR((SELECT COUNT(1)
-                           FROM PROD_HASH A
-                           JOIN PROD_HASH B ON A.HASH_DESCR = B.HASH_DESCR AND A.CODPROD < B.CODPROD
-                          WHERE UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) > 85), 'FM999G999G990') AS RESULTADO
-          FROM DUAL
+                        FROM PROD_RANK A  -- <<-- CORREÇÃO AQUI
+                        JOIN PROD_RANK B ON A.HASH_DESCR = B.HASH_DESCR AND A.CODPROD < B.CODPROD
+                        WHERE A.RN = 1 -- Agora sim, a coluna RN existe em "A" (PROD_RANK)
+                        AND UTL_MATCH.JARO_WINKLER_SIMILARITY(A.DESCRNORM, B.DESCRNORM) BETWEEN 85 AND 99), 'FM999G999G990') AS RESULTADO
+        FROM DUAL
         UNION ALL
         SELECT 19 AS ID, 'CNPJ Matrizes' AS TIPO,
                'CNPJ de parceiros que possuem filiais cadastradas' AS TIPO2,
@@ -425,7 +432,6 @@
         FROM DUAL
         ORDER BY ID
     </snk:query>
-
     <div class="container">
         <header class="dashboard-header">
             <h1><i class="fas fa-rocket"></i> Volumetria Deploy Agent</h1>
@@ -435,7 +441,6 @@
                 </a>
             </div>
         </header>
-
         <main class="dashboard">
             <div class="card-grid">
 
