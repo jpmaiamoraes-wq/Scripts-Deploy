@@ -342,6 +342,8 @@
                 WHERE (CASE
                     WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'R'
+                    WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NULL)
+                         THEN 'C'
                     WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'P'
                     WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL)
@@ -352,9 +354,11 @@
                 AND (CASE
                     WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'R'
+                    WHEN (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NULL)
+                         THEN 'C'
                     WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                          THEN 'P'
-                    WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
+                    WHEN (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL)
                          THEN 'C'
                     WHEN (NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO')
                          THEN 'I'

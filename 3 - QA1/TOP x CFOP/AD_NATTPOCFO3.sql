@@ -9,7 +9,8 @@ AS
         ITE.QTDNEG,
         ITE.SEQUENCIA,
         ITE.VLRTOT,
-        ITE.VLRUNIT 
+        ITE.VLRUNIT,
+        ITE.CODTRIB 
     
 FROM
     TGFITE ITE
