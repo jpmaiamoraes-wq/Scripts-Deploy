@@ -731,6 +731,9 @@ ORDER BY CID.CODMUNFIS, CID.CODCID]]></expression><metadata><field name="CODMUNF
                   AND P.IDENTINSCESTAD IS NOT NULL
                   AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
                  THEN 'R'  -- Revendedor
+            WHEN (P.TIPPESSOA = 'J'
+                  AND P.IDENTINSCESTAD IS NULL)
+                 THEN 'C'
             WHEN (P.TIPPESSOA = 'F'
                   AND P.IDENTINSCESTAD IS NOT NULL
                   AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO')
@@ -773,6 +776,8 @@ ORDER BY
         -- Primeira condição (Revendedor)
         WHEN P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO'
             THEN 'R-Revendedor'
+        WHEN P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NULL
+            THEN 'C-Consumidor Final Não Contribuinte'
         -- Segunda condição (Produtor Rural)
         WHEN P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO'
             THEN 'P-Produtor Rural'
@@ -791,6 +796,7 @@ AND
     -- A cláusula WHERE deve encontrar qualquer parceiro que NÃO corresponda à classificação esperada
     (
         (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'R') OR
+        (P.TIPPESSOA = 'J' AND P.IDENTINSCESTAD IS NULL AND P.CLASSIFICMS <> 'C') OR
         (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NOT NULL AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO' AND P.CLASSIFICMS <> 'P') OR
         -- A mesma lógica de reordenação é aplicada aqui
         (P.TIPPESSOA = 'F' AND P.IDENTINSCESTAD IS NULL AND P.CLASSIFICMS <> 'C') OR
