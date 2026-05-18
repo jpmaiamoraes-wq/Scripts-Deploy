@@ -1,0 +1,239 @@
+<gadget>
+  <prompt-parameters>
+    <parameter id="P_DATA_INI" description="Data Inicial" metadata="date" required="false" keep-last="true" keep-date="false" show-inactives="false" label="P_DATA_INI : Data" order="0"/>
+    <parameter id="P_DATA_FIM" description="Data Final" metadata="date" required="false" keep-last="true" keep-date="false" show-inactives="false" label="P_DATA_FIM : Data" order="1"/>
+    <parameter id="P_EMPRESA" description="EMPRESA" metadata="multiList:Text" listType="sql" required="false" keep-last="true" keep-date="false" show-inactives="false" label="P_EMPRESA : multiList:Text" order="2">
+      <expression type="SQL"><![CDATA[
+         SELECT EMP.CODEMP AS VALUE, EMP.CODEMP || ' - ' || EMP.RAZAOSOCIAL AS LABEL FROM TSIEMP EMP ORDER BY EMP.CODEMP
+      ]]></expression>
+    </parameter>
+    <parameter id="P_UF" description="ESTADO" metadata="multiList:Text" listType="sql" required="false" keep-last="false" keep-date="false" show-inactives="false" label="P_UF : multiList:Text" order="3">
+      <expression type="SQL"><![CDATA[
+         SELECT CODUF AS VALUE, UF || ' - ' || DESCRICAO AS LABEL FROM TSIUFS ORDER BY UF
+      ]]></expression>
+    </parameter>
+    <parameter id="P_TOP" description="TIPO DE OPERAÇÃO" metadata="multiList:Text" listType="sql" required="false" keep-last="false" keep-date="false" show-inactives="false" label="P_TOP : multiList:Text" order="4">
+      <expression type="SQL"><![CDATA[
+      SELECT
+          TOP.CODTIPOPER AS VALUE,
+          TOP.CODTIPOPER || ' - ' || TOP.DESCROPER AS LABEL
+      FROM TGFTOP TOP
+      WHERE TOP.ATIVO = 'S'
+        AND EXISTS (
+            SELECT 1
+            FROM TGFITE ITE
+            INNER JOIN TGFCAB CAB ON ITE.NUNOTA = CAB.NUNOTA
+            INNER JOIN TGFPRO PRO ON ITE.CODPROD = PRO.CODPROD
+            WHERE CAB.CODTIPOPER = TOP.CODTIPOPER
+              AND PRO.USOPROD = 'S'
+              AND CAB.DTNEG >= ADD_MONTHS(SYSDATE, -6)
+        )
+      GROUP BY TOP.CODTIPOPER, TOP.DESCROPER
+      ORDER BY TOP.CODTIPOPER
+      ]]></expression>
+    </parameter>
+  </prompt-parameters>
+
+  <level id="lvl_serv_capa" description="Cockpit de Serviços">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_0DS" entryPoint="0_bi_servicos_capa_redesenhada_corrigido(1)_OTIMIZADO.jsp"></html5component>
+    </container>
+  </level>
+
+  <level id="lvl_tomadores" description="Maiores Tomadores">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_0G8" entryPoint="10_dashboard_curva_abc_novos_redesenhado(1)_OTIMIZADO.jsp"></html5component>
+    </container>
+  </level>
+
+  <level id="lvl_mapa_tributario" description="Mapa Tributário de Serviços">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_1CD" entryPoint="dashboard_auditoria_impostos_QUERIES_OTIMIZADAS.jsp"></html5component>
+    </container>
+  </level>
+
+  <level id="lvl_fat_cidade" description="Faturamento por Cidade / UF">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_1DN" entryPoint="11_dashboard_fat_cidade_redesenhado_mapa_lado_uf(3)_OTIMIZADO.jsp"></html5component>
+    </container>
+  </level>
+
+  <level id="lvl_iss_zerado" description="Auditoria Fiscal - Impostos">
+    <container orientacao="V" tamanhoRelativo="100">
+      <container orientacao="H" tamanhoRelativo="50.076687116564415">
+        <grid id="grd_detalhe" useNewGrid="S">
+          <expression type="sql" data-source="MGEDS"><![CDATA[
+WITH BASE AS (
+    SELECT
+        CAB.NUNOTA,
+        CAB.DTNEG,
+        PAR.NOMEPARC,
+        PRO.DESCRPROD,
+        CAB.CODTIPOPER,
+        CAB.ISSRETIDO AS ISS_RETIDO_CAB,
+        ITE.SEQUENCIA,
+        ITE.CODTRIBISS,
+        ITE.VLRTOT AS VALOR_BRUTO
+    FROM TGFCAB CAB
+    INNER JOIN TGFPAR PAR ON PAR.CODPARC = CAB.CODPARC
+    INNER JOIN TSICID CID ON CID.CODCID = PAR.CODCID
+    INNER JOIN TGFITE ITE ON ITE.NUNOTA = CAB.NUNOTA
+    INNER JOIN TGFPRO PRO ON PRO.CODPROD = ITE.CODPROD
+    WHERE CAB.STATUSNOTA = 'L'
+      AND CAB.TIPMOV = 'V'
+      AND PRO.USOPROD = 'S'
+      AND NVL(CAB.VLRISS, 0) = 0
+      AND (:P_DATA_INI IS NULL OR CAB.DTNEG >= :P_DATA_INI)
+      AND (:P_DATA_FIM IS NULL OR CAB.DTNEG <= :P_DATA_FIM)
+      AND CAB.CODEMP IN :P_EMPRESA
+      AND CAB.CODTIPOPER IN :P_TOP
+      AND CID.UF IN :P_UF
+),
+ISS_AGR AS (
+    SELECT
+        D.NUNOTA,
+        D.SEQUENCIA,
+        SUM(NVL(D.VALOR, 0)) AS VLR_ISS
+    FROM TGFDIN D
+    INNER JOIN BASE B ON B.NUNOTA = D.NUNOTA AND B.SEQUENCIA = D.SEQUENCIA
+    WHERE D.CODIMP = 4
+    GROUP BY D.NUNOTA, D.SEQUENCIA
+),
+IMPOSTOS_AGR AS (
+    SELECT
+        M.NUNOTA,
+        M.SEQUENCIA,
+        SUM(CASE WHEN M.CODIMP = 2 THEN NVL(M.VALOR, 0) ELSE 0 END) AS VLR_PIS,
+        SUM(CASE WHEN M.CODIMP = 3 THEN NVL(M.VALOR, 0) ELSE 0 END) AS VLR_COFINS,
+        SUM(CASE WHEN M.CODIMP = 4 THEN NVL(M.VALOR, 0) ELSE 0 END) AS VLR_CSLL,
+        SUM(CASE WHEN M.CODIMP = 7 THEN NVL(M.VALOR, 0) ELSE 0 END) AS VLR_IR,
+        SUM(CASE WHEN M.CODIMP = 6 THEN NVL(M.VALOR, 0) ELSE 0 END) AS VLR_INSS
+    FROM TGFIMN M
+    INNER JOIN BASE B ON B.NUNOTA = M.NUNOTA AND B.SEQUENCIA = M.SEQUENCIA
+    WHERE M.CODIMP IN (2, 3, 4, 6, 7)
+    GROUP BY M.NUNOTA, M.SEQUENCIA
+)
+SELECT
+    B.NUNOTA,
+    B.DTNEG,
+    B.NOMEPARC,
+    B.DESCRPROD,
+    B.CODTIPOPER,
+    B.VALOR_BRUTO,
+    B.ISS_RETIDO_CAB,
+    NVL(ISS.VLR_ISS, 0) AS VLR_ISS,
+    NVL(IMP.VLR_PIS, 0) AS VLR_PIS,
+    NVL(IMP.VLR_COFINS, 0) AS VLR_COFINS,
+    NVL(IMP.VLR_CSLL, 0) AS VLR_CSLL,
+    NVL(IMP.VLR_IR, 0) AS VLR_IR,
+    NVL(IMP.VLR_INSS, 0) AS VLR_INSS,
+    B.VALOR_BRUTO - (
+        NVL(IMP.VLR_PIS, 0) + NVL(IMP.VLR_COFINS, 0) + NVL(IMP.VLR_CSLL, 0) +
+        NVL(IMP.VLR_IR, 0) + NVL(IMP.VLR_INSS, 0) +
+        CASE WHEN B.CODTRIBISS = 1 THEN NVL(ISS.VLR_ISS, 0) ELSE 0 END
+    ) AS VALOR_LIQUIDO
+FROM BASE B
+LEFT JOIN ISS_AGR ISS ON ISS.NUNOTA = B.NUNOTA AND ISS.SEQUENCIA = B.SEQUENCIA
+LEFT JOIN IMPOSTOS_AGR IMP ON IMP.NUNOTA = B.NUNOTA AND IMP.SEQUENCIA = B.SEQUENCIA
+ORDER BY B.DTNEG DESC, B.NUNOTA DESC
+          ]]></expression>
+          <metadata>
+            <field name="NUNOTA" label="Nota" type="I" visible="true" useFooter="false"></field>
+            <field name="DTNEG" label="Data" type="D" visible="true" useFooter="false"></field>
+            <field name="NOMEPARC" label="Cliente" type="S" visible="true" useFooter="false"></field>
+            <field name="DESCRPROD" label="Serviço" type="S" visible="true" useFooter="false"></field>
+            <field name="CODTIPOPER" label="TOP" type="I" visible="true" useFooter="false"></field>
+            <field name="VALOR_BRUTO" label="Total Bruto" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="ISS_RETIDO_CAB" label="ISS Retido (Cab)" type="S" visible="true" useFooter="false"></field>
+            <field name="VLR_ISS" label="ISS" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="VLR_PIS" label="PIS" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="VLR_COFINS" label="COFINS" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="VLR_CSLL" label="CSLL" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="VLR_IR" label="IRRF" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="VLR_INSS" label="INSS" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+            <field name="VALOR_LIQUIDO" label="Valor Líquido" type="F" visible="true" useFooter="true" mask="R$ #.##0,00"></field>
+          </metadata>
+          <on-click-launcher resource-id="br.com.sankhya.com.mov.CentralNotas">
+            <NUNOTA>$NUNOTA</NUNOTA>
+          </on-click-launcher>
+        </grid>
+      </container>
+      <container orientacao="H" tamanhoRelativo="50.076687116564415">
+        <chart id="cht_evolucao" type="column">
+          <expression type="sql" data-source="MGEDS"><![CDATA[
+SELECT
+    TO_CHAR(CAB.DTNEG, 'MM/YYYY') AS MES,
+    COUNT(DISTINCT CAB.NUNOTA) AS TOTAL
+FROM TGFCAB CAB
+INNER JOIN TGFPAR PAR ON PAR.CODPARC = CAB.CODPARC
+INNER JOIN TSICID CID ON CID.CODCID = PAR.CODCID
+WHERE CAB.STATUSNOTA = 'L'
+  AND CAB.TIPMOV = 'V'
+  AND NVL(CAB.VLRISS, 0) = 0
+  AND (:P_DATA_INI IS NULL OR CAB.DTNEG >= :P_DATA_INI)
+  AND (:P_DATA_FIM IS NULL OR CAB.DTNEG <= :P_DATA_FIM)
+  AND CAB.CODEMP IN :P_EMPRESA
+  AND CAB.CODTIPOPER IN :P_TOP
+  AND CID.UF IN :P_UF
+  AND EXISTS (
+      SELECT 1
+      FROM TGFITE ITE
+      INNER JOIN TGFPRO PRO ON PRO.CODPROD = ITE.CODPROD
+      WHERE ITE.NUNOTA = CAB.NUNOTA
+        AND PRO.USOPROD = 'S'
+  )
+GROUP BY TO_CHAR(CAB.DTNEG, 'MM/YYYY'), TO_CHAR(CAB.DTNEG, 'YYYYMM')
+ORDER BY TO_CHAR(CAB.DTNEG, 'YYYYMM')
+          ]]></expression>
+          <metadata>
+            <field name="MES" label="Mês" type="S" visible="true" useFooter="false"></field>
+            <field name="TOTAL" label="Notas" type="I" visible="true" useFooter="true"></field>
+          </metadata>
+          <series>
+            <serie type="column">
+              <xField>$MES</xField>
+              <yField>$TOTAL</yField>
+            </serie>
+          </series>
+        </chart>
+        <chart id="cht_clientes" type="bar">
+          <expression type="sql" data-source="MGEDS"><![CDATA[
+SELECT *
+FROM (
+    SELECT
+        PAR.NOMEPARC AS CLIENTE,
+        SUM(ITE.VLRTOT) AS TOTAL
+    FROM TGFCAB CAB
+    INNER JOIN TGFPAR PAR ON PAR.CODPARC = CAB.CODPARC
+    INNER JOIN TSICID CID ON CID.CODCID = PAR.CODCID
+    INNER JOIN TGFITE ITE ON ITE.NUNOTA = CAB.NUNOTA
+    INNER JOIN TGFPRO PRO ON PRO.CODPROD = ITE.CODPROD
+    WHERE CAB.STATUSNOTA = 'L'
+      AND CAB.TIPMOV = 'V'
+      AND PRO.USOPROD = 'S'
+      AND NVL(CAB.VLRISS, 0) = 0
+      AND (:P_DATA_INI IS NULL OR CAB.DTNEG >= :P_DATA_INI)
+      AND (:P_DATA_FIM IS NULL OR CAB.DTNEG <= :P_DATA_FIM)
+      AND CAB.CODEMP IN :P_EMPRESA
+      AND CAB.CODTIPOPER IN :P_TOP
+      AND CID.UF IN :P_UF
+    GROUP BY PAR.NOMEPARC
+    ORDER BY TOTAL DESC
+)
+WHERE ROWNUM <= 5
+          ]]></expression>
+          <metadata>
+            <field name="CLIENTE" label="Cliente" type="S" visible="true" useFooter="false"></field>
+            <field name="TOTAL" label="Total" type="F" visible="true" useFooter="true"></field>
+          </metadata>
+          <series>
+            <serie type="bar">
+              <xField>$CLIENTE</xField>
+              <yField>$TOTAL</yField>
+            </serie>
+          </series>
+        </chart>
+      </container>
+    </container>
+  </level>
+</gadget>
