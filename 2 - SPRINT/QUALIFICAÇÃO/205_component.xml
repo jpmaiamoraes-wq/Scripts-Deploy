@@ -1,0 +1,81 @@
+<gadget>
+  <prompt-parameters>
+    <parameter id="P_DATA_INI" description="Data Inicial" metadata="date" required="false" keep-last="true" keep-date="false" show-inactives="false" label="P_DATA_INI : Data" order="0"/>
+    <parameter id="P_DATA_FIM" description="Data Final" metadata="date" required="false" keep-last="true" keep-date="false" show-inactives="false" label="P_DATA_FIM : Data" order="1"/>
+    <parameter id="P_EMPRESA" description="Empresa" metadata="multiList:Text" listType="sql" required="false" keep-last="true" keep-date="false" show-inactives="false" label="P_EMPRESA : multiList:Text" order="2">
+      <expression type="SQL"><![CDATA[
+        SELECT EMP.CODEMP AS VALUE,
+               EMP.CODEMP || ' - ' || EMP.RAZAOSOCIAL AS LABEL
+        FROM TSIEMP EMP
+        ORDER BY EMP.CODEMP
+      ]]></expression>
+    </parameter>
+  </prompt-parameters>
+
+  <level id="lvl_qualificacao_xml" description="Qualificação de XML">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_qualificacao_xml_v2" entryPoint="dashboard_qualificacao_xml_v2.jsp"></html5component>
+    </container>
+  </level>
+
+  <level id="03W" description="Legado - Qualificação">
+    <container orientacao="V" tamanhoRelativo="100">
+      <grid id="grd_legado_qualificacao" useNewGrid="S">
+        <title><![CDATA[Qualificação - visão legada]]></title>
+        <expression type="sql" data-source="MGEDS"><![CDATA[
+WITH RESUMO AS (
+    SELECT
+        C.CODEMP,
+        E.CGC,
+        E.RAZAOSOCIAL,
+        MIN(C.DTNEG) AS DT_NF_ANTIGA,
+        MAX(C.DTNEG) AS DT_NF_RECENTE,
+        SUM(CASE WHEN T.CODMODDOC = 55 AND T.NFE IN ('N','D') THEN 1 ELSE 0 END) AS QTD_NFE_PROP,
+        SUM(CASE WHEN T.CODMODDOC = 55 AND T.NFE = 'T' THEN 1 ELSE 0 END) AS QTD_NFE_TERC,
+        SUM(CASE WHEN T.CODMODDOC = 1 AND T.NFSE = 'N' THEN 1 ELSE 0 END) AS QTD_NFSE_PROP,
+        SUM(CASE WHEN T.CODMODDOC = 1 AND T.NFSE = 'M' THEN 1 ELSE 0 END) AS QTD_NFSE_TERC,
+        SUM(CASE WHEN (T.CODMODDOC IN (57,67) OR T.CTE IS NOT NULL) AND T.CTE = 'N' THEN 1 ELSE 0 END) AS QTD_CTE_PROP,
+        SUM(CASE WHEN (T.CODMODDOC IN (57,67) OR T.CTE IS NOT NULL) AND T.CTE = 'T' THEN 1 ELSE 0 END) AS QTD_CTE_TERC
+    FROM TGFCAB C
+    INNER JOIN TSIEMP E ON E.CODEMP = C.CODEMP
+    INNER JOIN TGFTOP T
+        ON T.CODTIPOPER = C.CODTIPOPER
+       AND T.DHALTER = C.DHTIPOPER
+    WHERE C.TIPMOV <> 'Z'
+      AND (:P_DATA_INI IS NULL OR C.DTNEG >= :P_DATA_INI)
+      AND (:P_DATA_FIM IS NULL OR C.DTNEG <= :P_DATA_FIM)
+      AND (:P_EMPRESA IS NULL OR C.CODEMP IN (:P_EMPRESA))
+    GROUP BY C.CODEMP, E.CGC, E.RAZAOSOCIAL
+)
+SELECT
+    CODEMP,
+    CGC,
+    RAZAOSOCIAL,
+    DT_NF_ANTIGA,
+    DT_NF_RECENTE,
+    QTD_NFE_PROP,
+    QTD_NFE_TERC,
+    QTD_NFSE_PROP,
+    QTD_NFSE_TERC,
+    QTD_CTE_PROP,
+    QTD_CTE_TERC
+FROM RESUMO
+ORDER BY CODEMP
+        ]]></expression>
+        <metadata>
+          <field name="CODEMP" label="Empresa" type="I" visible="true" useFooter="false"/>
+          <field name="CGC" label="CNPJ/CPF" type="S" visible="true" useFooter="false"/>
+          <field name="RAZAOSOCIAL" label="Razão Social" type="S" visible="true" useFooter="false"/>
+          <field name="DT_NF_ANTIGA" label="Menor Data" type="D" visible="true" useFooter="false"/>
+          <field name="DT_NF_RECENTE" label="Maior Data" type="D" visible="true" useFooter="false"/>
+          <field name="QTD_NFE_PROP" label="NF-e Própria" type="F" visible="true" useFooter="SUM"/>
+          <field name="QTD_NFE_TERC" label="NF-e Terceiros" type="F" visible="true" useFooter="SUM"/>
+          <field name="QTD_NFSE_PROP" label="NFS-e Própria" type="F" visible="true" useFooter="SUM"/>
+          <field name="QTD_NFSE_TERC" label="NFS-e Terceiros" type="F" visible="true" useFooter="SUM"/>
+          <field name="QTD_CTE_PROP" label="CT-e Próprio" type="F" visible="true" useFooter="SUM"/>
+          <field name="QTD_CTE_TERC" label="CT-e Terceiros" type="F" visible="true" useFooter="SUM"/>
+        </metadata>
+      </grid>
+    </container>
+  </level>
+</gadget>
