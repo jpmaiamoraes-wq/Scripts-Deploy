@@ -24,6 +24,7 @@ PROMPT [03] Padronizacao de Dados
 PROMPT [04] Limpeza / Normalizacao de Unidades
 PROMPT [05] Ajuste TGFCGM / Preferencias
 PROMPT [06] Ajuste CODPARCMATRIZ
+PROMPT [07] Ajuste Cards Deploy_Agent
 PROMPT -------------------------
 PROMPT
 
@@ -67,6 +68,13 @@ PROMPT [06] INICIO - Ajuste CODPARCMATRIZ
 PROMPT ============================================================
 @@Ajusta_CODPARCMATRIZ.sql
 PROMPT [06] FIM - Ajuste CODPARCMATRIZ
+PROMPT
+
+-- ============================================================
+PROMPT [07] INICIO - Ajuste Cards Deploy_Agent
+PROMPT ============================================================
+@@Ajusta_Cards_Deploy.sql
+PROMPT [07] FIM - Ajuste Cards Deploy_Agent
 PROMPT
 
 PROMPT
