@@ -250,10 +250,4 @@ WHERE ROWNUM <= 5
     <container orientacao="V" tamanhoRelativo="100">
       <html5component id="html5_SERV_PREST_TOM_DET" entryPoint="dashboard_servicos_prestados_tomados_detalhe.jsp"></html5component>
     </container>
-  </level>
-
-  <level id="lvl_ajuda_painel" description="Ajuda / FAQ do Painel">
-    <container orientacao="V" tamanhoRelativo="100">
-      <html5component id="html5_AJUDA_PAINEL" entryPoint="dashboard_ajuda_painel.jsp"></html5component>
-    </container>
   </level></gadget>
