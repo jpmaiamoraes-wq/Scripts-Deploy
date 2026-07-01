@@ -1,0 +1,7 @@
+<gadget>
+  <level id="lvl_saneamento_unidades" description="Saneamento de Unidades">
+    <container orientacao="V" tamanhoRelativo="100">
+      <html5component id="html5_saneamento_unidades" entryPoint="saneamento_unidades.html"></html5component>
+    </container>
+  </level>
+</gadget>
