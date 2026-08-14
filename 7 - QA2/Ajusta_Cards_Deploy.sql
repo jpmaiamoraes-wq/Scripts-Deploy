@@ -89,4 +89,4 @@ FROM
       COUNT(CASE WHEN status IS NULL THEN 1 END) AS pendente
     FROM TTKEVT EVT
   ) q_eventos
-  ) WHERE T.SEQUENCIA = 1
+  ) WHERE T.SEQUENCIA = 1;

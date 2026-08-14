@@ -152,7 +152,7 @@ BEGIN
   COMMIT;
 
   -- 11) Habilitar ruptura de estoque nas empresas.
-  UPDATE TGFEMP
+/*  UPDATE TGFEMP
      SET RUPTURAEST           = 'S'
    WHERE NVL(RUPTURAEST,'N')  <> 'S'
      AND EXISTS (SELECT 1 
@@ -162,7 +162,65 @@ BEGIN
                   
   v_rows := SQL%ROWCOUNT;
   DBMS_OUTPUT.PUT_LINE('11) TGFEMP (RUPTURAEST=S) - linhas atualizadas: '||v_rows);
-  COMMIT;
+  COMMIT;*/
+
+-------------------------------------------------------------------------------
+-- 11) HABILITAR RUPTURA DE ESTOQUE NAS EMPRESAS
+-- Executa somente se a tabela AD_SEGMENTACAOEMPRESAS existir.
+-------------------------------------------------------------------------------
+DECLARE
+  v_exists NUMBER := 0;
+  v_rows   NUMBER := 0;
+BEGIN
+
+  SELECT COUNT(*)
+    INTO v_exists
+    FROM ALL_TABLES
+   WHERE OWNER      = USER
+     AND TABLE_NAME = 'AD_SEGMENTACAOEMPRESAS';
+
+  IF v_exists > 0 THEN
+
+    EXECUTE IMMEDIATE '
+      UPDATE TGFEMP E
+         SET E.RUPTURAEST = ''S''
+       WHERE NVL(E.RUPTURAEST, ''N'') <> ''S''
+         AND EXISTS (
+               SELECT 1
+                 FROM AD_SEGMENTACAOEMPRESAS S
+                 JOIN TSIEMP T
+                   ON T.CGC = S.CGC
+                WHERE S.SEGMENTACAO <> ''S''
+                  AND T.CODEMP = E.CODEMP
+             )';
+
+    v_rows := SQL%ROWCOUNT;
+
+    DBMS_OUTPUT.PUT_LINE(
+      '11) TGFEMP (RUPTURAEST=S) - linhas atualizadas: ' || v_rows
+    );
+
+    COMMIT;
+
+  ELSE
+
+    DBMS_OUTPUT.PUT_LINE(
+      '11) TGFEMP (RUPTURAEST=S) - bloco ignorado: '
+      || 'tabela AD_SEGMENTACAOEMPRESAS inexistente.'
+    );
+
+  END IF;
+
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+
+    DBMS_OUTPUT.PUT_LINE(
+      '11) TGFEMP (RUPTURAEST=S) - erro: ' || SQLERRM
+    );
+
+    RAISE;
+END;
                   
   -- 12) REVISÃO DAS TOPS PARA GIRO E GOL (* REGRA ATUAL NAO ESTA COMPLETA, AINDA NAO MAPEADO TOPS DE VENDA ENTREGA FUTURA, ENTRE OUTRAS *)
     UPDATE TGFTOP TOP

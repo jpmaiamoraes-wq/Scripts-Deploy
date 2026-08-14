@@ -19,7 +19,7 @@ PROMPT
 PROMPT -------------------------
 PROMPT INDICE / BLOCOS
 PROMPT [01] Scripts Variados
-PROMPT [02] TSICFG (RAINHA)
+PROMPT [02] TSICFG (ELETRIKA)
 PROMPT [03] Padronizacao de Dados
 PROMPT [04] Limpeza / Normalizacao de Unidades
 PROMPT [05] Ajuste TGFCGM / Preferencias
@@ -36,10 +36,10 @@ PROMPT [01] FIM - Scripts Variados
 PROMPT
 
 -- ============================================================
-PROMPT [02] INICIO - TSICFG RAINHA
+PROMPT [02] INICIO - TSICFG ELETRIKA
 PROMPT ============================================================
-@@TSICFG_RAINHA.sql
-PROMPT [02] FIM - TSICFG RAINHA
+@@TSICFG_ELETRIKA.sql
+PROMPT [02] FIM - TSICFG ELETRIKA
 PROMPT
 
 -- ============================================================
