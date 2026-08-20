@@ -1,5 +1,5 @@
---CREATE TABLE TGFPRO_BKP AS SELECT * FROM TGFPRO;
---CREATE TABLE TGFITE_BKP AS SELECT * FROM TGFITE;
+CREATE TABLE TGFPRO_BKP AS SELECT * FROM TGFPRO;
+CREATE TABLE TGFITE_BKP AS SELECT * FROM TGFITE;
 
 
 DECLARE
@@ -24,6 +24,7 @@ BEGIN
                 WHERE P4.DESCRPROD = P.DESCRPROD
                   --AND P4.AD_IDEXTERNO = P.AD_IDEXTERNO
                   --AND P4.CODVOL      = P.CODVOL
+                  --AND P4.USOPROD = 'S'
              ) AS MENOR
         FROM TGFPRO P
        WHERE EXISTS (
@@ -32,6 +33,7 @@ BEGIN
                 WHERE P2.DESCRPROD = P.DESCRPROD
                   --AND P2.AD_IDEXTERNO = P.AD_IDEXTERNO
                   --AND P2.CODVOL      = P.CODVOL
+                  --AND P2.USOPROD = 'S'
                 GROUP BY P2.DESCRPROD
                HAVING COUNT(*) > 1
                   --AND COUNT(DISTINCT P2.AD_IDEXTERNO) = 1
@@ -43,7 +45,9 @@ BEGIN
                 WHERE P3.DESCRPROD = P.DESCRPROD
                   --AND P3.AD_IDEXTERNO = P.AD_IDEXTERNO
                   --AND P3.CODVOL      = P.CODVOL
+                  --AND P3.USOPROD = 'S'
              )
+          AND USOPROD = 'S'
     )
     LOOP
       -- Redireciona movimentos para o menor CODPROD
