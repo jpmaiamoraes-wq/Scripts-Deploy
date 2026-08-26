@@ -20,7 +20,6 @@ SET (
     T.FINANCEIROSPAGAR,
     T.FINANCEIROSRECEBER
 ) = (
-
 SELECT
  q_eventos.TOTAL as TOTAL,
  (q_eventos.ERRO + q_eventos.duplicada + q_eventos.cancelada) AS ERROS_TOTAL, 
@@ -33,15 +32,14 @@ SELECT
  q_config.TIPOSDEOPERACAO,
  q_config.PARCEIROS,
  q_produtos.PRODUTOS,
- q_produtos.VOLUMES,
  q_config.ENDERECOS,
+ q_produtos.VOLUMES,
  q_notas.notasDevolucaoCompras,
  q_notas.notasDeCompras,
  q_notas.notasDevolucaoVendas,
  q_notas.notasDeVendas,
  q_financeiro.financeirosAPagar,
  q_financeiro.financeirosAReceber
- 
 FROM
   (
     SELECT
@@ -90,3 +88,5 @@ FROM
     FROM TTKEVT EVT
   ) q_eventos
   ) WHERE T.SEQUENCIA = 1;
+
+COMMIT;
