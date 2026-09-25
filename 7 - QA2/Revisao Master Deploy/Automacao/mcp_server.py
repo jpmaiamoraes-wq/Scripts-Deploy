@@ -68,14 +68,17 @@ def _oracle_python() -> str:
 
     Não é necessariamente o mesmo que roda este servidor MCP: aquele só
     precisa do pacote `mcp`, este precisa do `oracledb`. Prioridade:
-    ORACLE_PYTHON (env) > "<Automacao>/.venv/bin/python3" > sys.executable.
+    ORACLE_PYTHON (env) > "<Automacao>/.venv" > "<raiz do repo>/.venv"
+    (onde o .venv já usado por oracle_direct.py normalmente vive) >
+    sys.executable.
     """
     override = os.environ.get("ORACLE_PYTHON")
     if override and Path(override).exists():
         return override
-    venv_python = HERE / ".venv" / "bin" / "python3"
-    if venv_python.exists():
-        return str(venv_python)
+    for candidate_root in (HERE, PROJECT_ROOT.parent):
+        venv_python = candidate_root / ".venv" / "bin" / "python3"
+        if venv_python.exists():
+            return str(venv_python)
     return sys.executable
 
 
