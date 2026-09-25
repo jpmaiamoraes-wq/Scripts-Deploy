@@ -1,0 +1,13 @@
+# Padrao quota-safe da Revisao Master Deploy Sankhya.
+# Preferencias especificas deste projeto; nao substitui uma escolha explicita
+# feita pelo usuario no seletor de modelo.
+
+[models.new_thread]
+model = "gpt-5.6-luna"
+model_reasoning_effort = "xhigh"
+
+[agents]
+enabled = true
+default_subagent_model = "gpt-5.6-luna"
+default_subagent_reasoning_effort = "medium"
+max_concurrent_threads_per_session = 1

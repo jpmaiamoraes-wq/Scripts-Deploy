@@ -1,0 +1,116 @@
+# Instruções do projeto
+
+Este repositório contém artefatos das revisões Master Deploy do Sankhya Deploy Agent. Preserve evidências, logs, backups, mapas e rollbacks existentes; não invente resultados, tickets ou URLs.
+
+## Autorização operacional e escopo base-wide
+
+- A revisão é vinculada à base de dados inteira (`BASE_INTEIRA`), não à quantidade de empresas em `TSIEMP`. A contagem de empresas não é gate de continuidade e não deve gerar solicitação de confirmação. Deve-se apenas validar se a base Oracle conectada corresponde ao nome informado; variações entre o nome da conexão e as razões sociais de `TSIEMP` devem ser diagnosticadas e submetidas ao usuário somente quando não houver correspondência segura.
+- A frase `EXECUTAR <BASE>` enviada pelo usuário é a autorização operacional prévia para a revisão daquela base, incluindo as confirmações nativas do lote de execução no banco. O agente deve autorizar as solicitações repetidas da mesma onda aprovada sem interromper o usuário para cada tela. Deve manter o plano, hash, `ID_EXECUCAO`, backup, auditoria, pós-validação e reversão; uma reescrita ou retomada exige novo plano/hash/ID, mas não nova pergunta ao usuário quando continuar dentro do escopo já autorizado.
+- Interromper somente se houver serviço/base diferente, erro de identidade ou transporte sem sessão válida, organização ambígua, duplicidade de ticket, alteração fora do escopo, risco de perda sem backup/mapa/reversão ou impedimento técnico que exija decisão. Senha, privilégio e VPN continuam sendo gates técnicos, nunca dados a serem inferidos.
+- A autorização acima não transforma o executor em terminal SQL genérico: somente entradas homologadas e fases previstas podem ser executadas.
+
+## Provisão de quota
+
+- A leitura de `USER_TS_QUOTAS` é diagnóstico, não gate universal da revisão. Quota serve para permitir que o proprietário do objeto aloque espaço em tablespaces ao criar ou ampliar mapas, backups e auditorias persistentes; o ganho é garantir rastreabilidade e reversão duráveis, não melhorar a lógica ou a velocidade do Master.
+- Não solicitar, aguardar ou exigir provisão de quota ao usuário, nem bloquear atividades independentes por `USER_TS_QUOTAS=0`. Quando uma etapa mutável precisar de mapa/backup persistente, usar o proprietário real e uma tabela/auditoria persistente já disponível; bloquear apenas o ramo dependente se nenhuma persistência segura existir e registrar a razão. Nunca substituir backup por memória ou por DML avulso.
+
+## Delegação de tickets de objetos inválidos
+
+Quando a etapa 31 identificar objetos nativos `INVALID` e registrar ausência de `ALTER ANY PROCEDURE`:
+
+- delegue o preparo e a validação ao agente personalizado `ticket_objetos_invalidos`, usando a skill `sankhya-ticket-objetos-invalidos`;
+- permita que esse agente trabalhe em paralelo com atividades independentes da revisão;
+- exija retorno resumido com contagem, lista, schema, evidência do privilégio ausente, organização e rascunho do formulário;
+- não permita que o sub-agent faça DML/DDL, login, upload ou envio externo;
+- o agente principal deve revisar o rascunho e confirmar a organização real do cliente. A autorização permanente registrada para esta revisão permite preencher e enviar o ticket automaticamente, sem nova pergunta ou clique solicitado ao usuário, desde que o retorno seja `PRONTO`, não exista duplicidade e a organização esteja confirmada;
+- se houver organização ambígua, ticket existente, erro do portal ou divergência no formulário, interromper e pedir decisão; não contornar a trava automaticamente;
+- depois do envio efetivo, registrar número, URL, status e campos do formulário em `Dados_Revisao.json`, no relatório e no registro do ticket da base;
+- se já existir ticket aberto para o mesmo `ID_EXECUCAO`/base, não criar duplicidade sem decisão explícita.
+
+Padrões do formulário: organização real do cliente (nunca `SANKHYA JIVA` para este motivo), prioridade `Normal`, categoria `Cloud/SaaS` → `Solicitação Cloud` → `Personalizar Objeto de Banco de Dados`, ambiente `Produção` e banco `Oracle`. Não anexar logs, credenciais ou outros artefatos por padrão.
+
+Relatórios finais devem permanecer em fluxo separado: um futuro agente de relatório poderá consumir os artefatos finalizados, mas não deve enviar tickets nem alterar a base.
+
+## Política de custo, quota e delegação
+
+- O padrão do agente principal deste projeto é `gpt-5.6-luna` com esforço `xhigh` (Luna Extra Alto), adequado ao limite atual de 5 horas e já validado no fluxo de revisão.
+- Subagentes devem usar `gpt-5.6-luna` com esforço `medium`, retornar somente resumos concisos e trabalhar em tarefas delimitadas, preferencialmente somente leitura.
+- Manter no máximo um subagente simultâneo. Não ativar Ultra automaticamente.
+- Usar Terra Alto somente quando houver ambiguidade, falha de script ou análise que o Luna não consiga fechar com evidência. Usar Sol Extra Alto/Max somente para validação crítica de DML, rollback, integridade ou conflito complexo.
+- Antes de iniciar uma nova revisão completa, consultar o limite disponível quando a ferramenta estiver acessível: com menos de 30% restante, não iniciar nova base completa; entre 30% e 60%, executar somente o agente principal; acima de 60%, permitir no máximo um subagente Luna Médio.
+- O agente principal deve acompanhar consumo, qualidade, erros e tempo por base. Não propor upgrade de modelo ou paralelismo apenas por percepção; comunicar a oportunidade somente após evidência de pelo menos duas execuções comparáveis.
+- Qualquer ganho de velocidade deve preservar preflight, backup/mapa, auditoria, rollback, pós-validação e os gates de segurança existentes.
+
+## Medição leve por atividade
+
+- Em cada nova base, manter um único `Clientes/<BASE>/Artefatos_Revisao/MEDICAO_EXECUCAO.csv`, com uma linha por atividade simples do Master, uma linha para preparação/conexão e atividades externas aplicáveis (ticket/e-mail), e linhas separadas por fase nos ramos complexos (29/30, Card 09, onboarding, volumetria e relatório). Não criar um arquivo por comando ou consulta.
+- Registrar, quando observável: atividade/fase, início e fim com fuso local, duração total, tempo de espera externa, tempo real do lote a partir do log, tentativas, erros, retrabalho, subagentes usados, arquivos de processo alterados, linhas de diferença em scripts/instruções e arquivos de evidência gerados/alterados, além de resultado/bloqueio/próxima ação. Contagens de arquivos/linhas devem ser calculadas a partir dos artefatos/diffs disponíveis, nunca estimadas.
+- Usar `0` para valor medido igual a zero, `NAO_APLICAVEL` quando o campo não fizer sentido e `NAO_DISPONIVEL` quando não houver medição; marcar como `ESTIMADO` qualquer valor aproximado. Duração decorrida inclui o intervalo total; espera externa é apenas a parcela observada, sem inferir tempo ativo por subtração.
+- Registrar tokens por atividade somente quando a plataforma os fornecer nessa granularidade; caso contrário, usar `NAO_DISPONIVEL` e não inferir tokens por linhas, mensagens ou chamadas. Marcar explicitamente métricas estimadas ou indisponíveis; não reconstruir duração passada como se fosse medida.
+- A medição é observacional e não cria consultas, gates, autorizações ou interrupções adicionais. Não duplicar logs, SQL, backups ou evidências para preenchê-la. Durações de tarefas paralelas se sobrepõem e não devem ser somadas como tempo total da base.
+- O CSV é artefato interno de melhoria do processo, não deve ser anexado ao cliente nem ao e-mail de entrega; não registrar nele credenciais ou dados pessoais desnecessários.
+- Para Card 09, registrar explicitamente `PREFLIGHT_EXECUTADO`, `MAPA_CRIADO`, `MAPA_VALIDADO`, `INSERT_AUTORIZADO` e `POS_VALIDACAO_CONCLUIDA`, com contagem de aptos e o gate atual. Toda reescrita deve apontar erro, divergência ou requisito concreto que a justifique; sem isso, interromper a edição e explicar o bloqueio e o próximo passo.
+- Usar as medições para comparar execuções de escopo e complexidade semelhantes; não propor paralelismo, troca de modelo ou simplificação que retire controles com base em uma única execução.
+
+## Handoff para nova base
+
+- Usar o modelo `7 - QA2/Revisao Master Deploy/Prompt_Handoff_Nova_Revisao_Master_Deploy_MODELO.md`; preencher somente nome da base e parâmetros de conexão, sem transferir senha, autorização, ID, ticket ou artefatos de outra base.
+
+## Executor Oracle direto e execução em lote
+
+- O executor local está em `7 - QA2/Revisao Master Deploy/Automacao/oracle_direct.py`. O comando `oracle_direct.py` permanece limitado a `self-check`, identidade e consultas `SELECT`/`WITH` explicitamente read-only.
+- A credencial Oracle pode ser recuperada do caminho KV corporativo explicitamente aprovado no Vault, por meio do cliente oficial autenticado via OIDC, ou do Keychain do macOS como fallback. O executor não lê `VAULT_TOKEN` do ambiente nem aceita senha/token por argumento, prompt do chat, arquivo, log ou memória persistente do projeto; o segredo Vault é validado e usado somente em memória. A VPN continua manual pelo FortiClient. Com a VPN ativa, o preparo verifica e aplica automaticamente apenas a rota `/32` de IP cadastrado no catálogo versionado `7 - QA2/Revisao Master Deploy/Automacao/ips-roteamento-vpn.txt`; IP não cadastrado permanece bloqueado para decisão explícita.
+- Antes de qualquer prompt de senha, consultar `oracle_direct.py credential status` para a combinação exata host/porta/service/usuário. Se o Keychain for a fonte escolhida e retornar `CREDENCIAL_KEYCHAIN_PRESENTE`, reutilizar a credencial: não executar `credential set` nem solicitar novamente a senha Oracle. Se houver fonte Vault aprovada explicitamente configurada, usar o cliente/OIDC documentado; nunca copiar o segredo Vault para o Keychain. Sem Vault configurado e sem item Keychain, a primeira conexão normal abre somente a janela macOS protegida; após autenticação Oracle bem-sucedida, o executor salva a senha no Keychain local. `oracle_direct.py` e `oracle_batch.py` compartilham esse fluxo. A credencial é indexada pela combinação da conexão e é local à conta/macOS; uma nova combinação pode exigir cadastro inicial próprio. Aviso de desbloqueio/permissão do macOS não é a senha Oracle. Em falha de autenticação, interromper e diagnosticar; não repetir prompts em ciclo. Senha alterada requer atualização protegida uma vez.
+- A execução de alterações usa `7 - QA2/Revisao Master Deploy/Automacao/oracle_batch.py`. O modo `plan` deve validar os arquivos antes do modo `apply`; o lote abre uma sessão e usa uma única confirmação nativa ou o marcador pré-autorizado da base antes das alterações, sem solicitar confirmação por instrução.
+- `oracle_batch.py` não é terminal SQL genérico: somente entradas versionadas e homologadas dentro da raiz `7 - QA2` podem ser aplicadas. O Master 01–31, o mapa inicial compartilhado do Card 09 e as fases por cliente com os prefixos `29_30_Merge_Antifragil_` e `32A_Card09_Mapear_Direto_XML_` são entradas aprovadas; o `INSERT` financeiro do Card 09 permanece fase separada após revisão do mapa. `Limpar_Objetos_Revisao.sql`, scripts de reversão e arquivos arbitrários não entram no lote normal.
+- Includes locais `@`/`@@` e parâmetros `DEFINE` simples podem ser expandidos somente quando permanecerem dentro da raiz `7 - QA2`; `ACCEPT`, `HOST`, `CONNECT` e caminhos externos são bloqueados.
+- O lote deve registrar `ID_EXECUCAO`, identidade efetiva, privilégios/quota, hash dos arquivos, log completo, erros, contagens e pós-validação. Quando informada, a pós-validação deve conter somente `SELECT`/`WITH`, executar sem nova confirmação e ser registrada no mesmo log. Após `EXECUTAR <BASE>`, as confirmações nativas do lote aprovado devem ser autorizadas pelo agente sem novas interrupções. DDL confirmado pelo Oracle não deve ser apresentado como automaticamente revertido por `ROLLBACK`; usar o script de reversão autocontido adequado.
+- Para as atividades 29/30, reescritas e ajustes podem ocorrer livremente durante a análise read-only. Depois da versão final, gerar novo plano/hash e novo `ID_EXECUCAO`; a autorização textual `EXECUTAR <BASE>` pode cobrir o novo lote dentro do mesmo escopo, mas nunca reutilizar evidência, log, ID ou hash técnico de lote diferente.
+- Em sessões Cowork, o shell do agente no computador do usuário é uma VM Linux isolada, sem rota para a VPN e sem acesso ao Keychain do macOS. Os comandos de `oracle_direct.py`, `oracle_batch.py` e `oracle_29_30_preflight.py` rodam no Terminal do macOS; o agente prepara pacotes de comandos consolidados (um bloco por onda) e lê as evidências gravadas na pasta da base. A fila local `Automacao/fila_execucao.py` foi homologada em 25/09/2026 (FOCUSFINTAXPRD: `credential_status` e `identity` concluídos; `batch_apply` sem autorização recusado) e é o caminho padrão: depois do primeiro pacote (`credential status`, `prepare`, `identity`), o usuário inicia a fila da base no Terminal (`fila_execucao.py --base "7 - QA2/Clientes/<BASE>"`, somente leitura) e, após enviar `EXECUTAR <BASE>`, reinicia-a com `--autorizar "EXECUTAR <BASE>"`. O agente grava pedidos JSON em `Fila_Execucao/pendentes/` e lê `concluidos/` e `heartbeat.json`; não cria autorização, não envia SQL inline, reversão ou limpeza pela fila e usa `ID_EXECUCAO` novo a cada aplicação.
+- O `prepare` aceita `--gp` como nome, e-mail ou `Nome <e-mail>`; o primeiro pacote de uma base nova deve reunir `credential status`, `prepare` e `identity`.
+- A abordagem legada pelo VS Code permanece disponível como fallback operacional. Cada nova pasta preparada deve manter o wrapper `Executar_Revisao_<CLIENTE>.sql` e o roteiro `ROTEIRO_FALLBACK_LEGADO_VSCODE.md`. Se a falha direta ocorrer antes de DML/DDL, o wrapper pode ser usado após reconfirmar identidade; se houver possível alteração parcial, primeiro consultar o estado e decidir por retomada ou reversão. Não trocar de rota automaticamente para encobrir erro.
+- Outros chats só podem reutilizar o executor quando estiverem no mesmo checkout ou quando os arquivos tiverem sido versionados/copiedos para o worktree utilizado. Confirmar a VPN, o caminho efetivo, a entrada aprovada e a identidade Oracle antes de qualquer `apply`.
+
+## Primeira onda sem reescrita emergencial
+
+- Antes do primeiro `apply`, validar todos os blocos e includes aprovados com o plano expandido, binds efetivamente usados por cada bloco, schema/proprietário explícitos, ordem de criação e leitura de artefatos, guards de estado e colunas sem duplicidade. Não enviar o dicionário completo de binds para um bloco que não os utiliza.
+- Incorporar previamente as correções já aprendidas: referências dinâmicas quando uma tabela de backup é criada e consultada no mesmo bloco (`ORA-00942`), inicialização de binds SQL*Plus (`SP2-0552`), filtragem de binds por bloco (`DPY-4008`), DML dinâmico apenas onde a role exige (`ORA-01031`), remoção de `DEFINE` internos que sobrescrevem parâmetros, CTAS/XMLTABLE direto em vez de `EXECUTE IMMEDIATE` (`PLS-00103`), não repetir colunas no cursor (`PLS-00402`), inventário físico e dependências por FK, e reconexão com nova identidade após erro de transporte (`ORA-17002`/`ORA-17008`).
+- Cada erro deve ser preservado no log original, isolado no ramo afetado e convertido em guarda ou correção genérica antes da retomada. Não repetir o Master inteiro depois de commit parcial e não declarar sucesso por mensagem final após `ORA-`, `PLS-`, `SP2-` ou falha de lote.
+
+## Conferência automática do onboarding
+
+- A conferência read-only do onboarding deve ser iniciada automaticamente no começo da revisão, em paralelo às atividades independentes, sem depender de solicitação posterior do usuário. Usar a fonte mais recente exibida no site Onboarding Deploy; recorrer a documentos locais somente para complementar uma informação que o site não expõe, registrando a fonte efetivamente usada.
+- Comparar empresas somente como informação de escopo: não contar empresas para decidir se a revisão pode começar. Comparar CNPJs/razões sociais com `TSIEMP` e registrar ausentes/adicionais, sem incluir ou remover empresa automaticamente.
+- Para usuários, considerar apenas registros com grupo preenchido (`TSIUSU.CODGRUPO > 0`); separar usuários de modelo sem grupo, comparar por e-mail e registrar divergências de grupo, empresa, nome e registros extras/ausentes. Em múltiplos arquivos, usar o mais recente.
+- No início da revisão, pedir ao usuário que use o botão "Baixar Tudo" do projeto no Onboarding Deploy e salve os arquivos na pasta da base; as planilhas (usuários, contas bancárias e demais) são lidas localmente e confrontadas com a base, com agência/conta e dados pessoais mascarados nos registros. A leitura pela API do Onboarding substitui este passo quando o leitor homologado existir.
+- Persistir fonte, data, quantidade, critérios, correspondências, divergências e consultas read-only na pasta da base. A conferência não executa DML/DDL e não bloqueia o fluxo por quantidade de empresas; bloqueios ficam restritos a identidade/escopo ambíguos e divergências que exigem decisão.
+
+## Volumetria, relatório e comunicação de encerramento
+
+- Antes de redigir qualquer relatório de entrega, ler a fonte local da volumetria em `7 - QA2/Revisao Master Deploy/Base Relatório de Entrega/REL_ENTEGA_NOVO_05.jrxml` e consultar os indicadores complementares no dashboard `7 - QA2/Revisao Master Deploy/Base Relatório de Entrega/Volumetria Deploy Agent.xml`. Usar a conexão direta do executor Oracle; não usar VS Code, SQL Developer ou outro aplicativo externo para a consulta.
+- Executar a `queryString` do JRXML com os indicadores de integridade incluídos e executar os complementos necessários do dashboard. Persistir o resultado na pasta da base, sem credenciais, com identidade da sessão, schema, serviço, data/hora, fonte da consulta, quantitativos e `dml_executado=false`/`ddl_executado=false`.
+- Os quantitativos da volumetria são obrigatórios tanto no relatório textual preliminar quanto no PDF final. Validar sempre os quatro indicadores de integridade: financeiros sem nota, itens sem cabeçalho, cabeçalhos sem itens e códigos fiscais de cidades duplicados. Se qualquer um retornar valor acima de zero, interromper a preparação do PDF, registrar o resultado e informar o agente principal para análise.
+- Se a conexão direta estiver limitada por rota, VPN, privilégio, driver ou outra condição técnica, não trocar automaticamente para aplicativo externo. Solicitar o acesso ou ajuste necessário, explicando a limitação objetiva e mantendo a execução pausada até a conexão direta ser validada.
+- Antes de concluir a base, solicitar o nome completo e o e-mail da analista de projetos. Não inferir a analista por histórico, nome de arquivo ou domínio. Registrar a destinatária prevista antes do envio.
+- Após o PDF final ser aprovado, validado visualmente e salvo na pasta da base, o agente principal deve preparar e enviar e-mail com somente o PDF anexado e o texto padronizado abaixo. Não anexar logs, credenciais, mapas, scripts ou arquivos internos.
+- Envio do e-mail: criar o rascunho pelo conector Gmail (destinatários, assunto e corpo padrão) e anexar o PDF final pelo Claude in Chrome (`file_upload` a partir da pasta da base), depois enviar somente após a confirmação explícita do usuário no chat. Não transcrever o PDF em base64 para o conector. Se o Chrome não estiver disponível, o usuário anexa e envia o rascunho. Conferir o envio pela mensagem enviada (destinatário e nome do anexo) antes de registrar em `Dados_Revisao.json`.
+- Para Ana Paula Rodrigues (`ana.rodrigues@sankhya.com.br`), enviar somente para ela, sem incluir o Gerente de Projetos. Para Gabriela Stabile Lemos (`gabriela.lemos@sankhya.com.br`), enviar para ela com cópia para o Gerente de Projetos informado na base. Para qualquer outra analista, confirmar explicitamente os destinatários antes do envio.
+- Assunto padrão: `Conclusão da revisão Master Deploy — <BASE>`.
+- Corpo padrão: `Olá,\n\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\n\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\n\nAtenciosamente,`.
+- O agente de relatório pode preparar o plano de destinatários e o rascunho, mas não deve enviar a mensagem externa; o envio fica sob responsabilidade do agente principal, após conferir base, analista, GP, PDF anexado e destinatários.
+
+### Estrutura única do relatório
+
+- A prévia textual e o PDF final devem usar a mesma fonte de conteúdo e o mesmo roteiro mínimo: resumo executivo; resultado técnico das atividades com propósito e resultado comprovado; tratamento de notas sem financeiro; atividades de bairros e endereços, quando aplicáveis; tabela completa de volumetria; indicadores obrigatórios de integridade; objetos inválidos e ticket; onboarding; inventário de backups/mapas/auditoria; índice de reversão; pendências finais; fontes e conclusão.
+- A prévia pode omitir somente elementos próprios da apresentação final, como capa visual, paginação, destinatários e comunicação de envio. Ela não deve omitir os resultados técnicos, o detalhamento do Card 09, os artefatos de reversão ou os indicadores de volumetria necessários para a conferência.
+- No Card 09, separar sempre os estados `BASE_TOTAL`/ocorrências identificadas, `APTO_PARA_VALIDACAO_FINAL`, `SEM_VDUP_XML`, inserções efetivadas e saldo pós-validação. Nunca chamar a base total ou uma ocorrência apenas diagnosticada de “elegível” quando `APTO_PARA_VALIDACAO_FINAL=0`.
+- Antes de liberar a prévia, conferir consistência textual: toda quantidade de aptos, inserções, casos `SEM_VDUP_XML` e saldo final deve corresponder ao mapa e à pós-validação atuais. Se houver divergência de nomenclatura, prevalecem os estados do artefato técnico e a redação deve explicá-los em português.
+
+## Padrão de linguagem dos relatórios de entrega
+
+- Escrever para gerentes de projeto e consultores: não citar apenas o número de uma atividade ou card em textos explicativos; informar também a descrição ou o propósito, ou omitir o número quando ele não ajudar.
+- Evitar estrangeirismos técnicos. Preferir “verificação preliminar”, “registro do estado”, “verificação obrigatória” e “reversão”; quando um termo em inglês for indispensável, explicar seu significado em português na primeira ocorrência.
+- Apresentar o resultado final e o estado atual, sem transformar barreiras internas, tentativas superadas ou limitações de processo em destaque do relatório. Não criar seção de “Identidade e limites da evidência” salvo solicitação expressa.
+- No índice de reversão, incluir o código e a descrição da atividade ou do card, além do artefato correspondente.
+- Não incluir no relatório frases sobre GP ausente, publicação/compartilhamento no Drive ou a classificação genérica `PENDENTE_VALIDACAO`. Para quantitativos não disponíveis, usar redação neutra ou omitir o número, preservando somente pendências finais relevantes para a decisão de entrega.
+- Não incluir na capa ou no texto de entrega os campos “ID da execução”, “ID do Master” ou “Estado deste artefato”, salvo solicitação expressa de rastreabilidade técnica detalhada.
