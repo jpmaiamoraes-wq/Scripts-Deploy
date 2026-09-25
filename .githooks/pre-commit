@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Pre-commit hook da Revisão Master Deploy (Sankhya).
+#
+# Roda o preflight estático (oracle_batch.py plan) em qualquer entrypoint SQL
+# novo ou alterado sob "7 - QA2/Clientes/" ou "7 - QA2/Revisao Master Deploy/"
+# antes do commit. NÃO conecta no Oracle (plan/preflight são 100% locais) —
+# só detecta erro de bind/DEFINE/ordenação/COMMIT embutido antes de o script
+# chegar perto de um banco real.
+#
+# Instalação (uma vez por clone):
+#   git config core.hooksPath .githooks
+#
+# Para pular pontualmente (ex.: arquivo é só um include, não um entrypoint):
+#   git commit --no-verify
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+AUTOMACAO="$REPO_ROOT/7 - QA2/Revisao Master Deploy/Automacao"
+BATCH_SCRIPT="$AUTOMACAO/oracle_batch.py"
+
+if [ ! -f "$BATCH_SCRIPT" ]; then
+  # Repositório sem a automação (ex.: checkout parcial) — não bloqueia.
+  exit 0
+fi
+
+PY="python3"
+command -v "$PY" >/dev/null 2>&1 || { echo "[pre-commit] python3 não encontrado; pulando preflight."; exit 0; }
+
+# Arquivos .sql staged, criados ou modificados, sob as pastas de entrypoints.
+mapfile -d '' -t CANDIDATES < <(
+  git diff --cached --name-only --diff-filter=ACMR -z -- \
+    "7 - QA2/Clientes/*.sql" \
+    "7 - QA2/Clientes/**/*.sql" \
+    "7 - QA2/Revisao Master Deploy/*.sql"
+)
+
+if [ "${#CANDIDATES[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+fail=0
+for rel in "${CANDIDATES[@]}"; do
+  abs="$REPO_ROOT/$rel"
+  [ -f "$abs" ] || continue  # arquivo deletado no commit, nada a validar
+
+  echo "[pre-commit] preflight: $rel"
+  if ! output=$("$PY" "$BATCH_SCRIPT" plan --script "$abs" 2>&1); then
+    echo "$output"
+    echo "[pre-commit] ERRO ao rodar o preflight em: $rel"
+    fail=1
+    continue
+  fi
+
+  status=$(printf '%s' "$output" | "$PY" -c "import json,sys; print(json.load(sys.stdin).get('status',''))" 2>/dev/null || echo "")
+  if [ "$status" = "PLANO_LOTE_BLOQUEADO" ]; then
+    echo "$output"
+    echo "[pre-commit] PREFLIGHT BLOQUEADO em: $rel"
+    fail=1
+  fi
+done
+
+if [ "$fail" -ne 0 ]; then
+  echo ""
+  echo "[pre-commit] Commit bloqueado: corrija os bloqueios acima ou, se o(s)"
+  echo "arquivo(s) listado(s) forem só include/fragmento (não um entrypoint"
+  echo "standalone), use: git commit --no-verify"
+  exit 1
+fi
+
+exit 0
