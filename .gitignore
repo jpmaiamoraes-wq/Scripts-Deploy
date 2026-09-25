@@ -4,3 +4,5 @@ __pycache__/
 .oracle-direct-runtime/
 .DS_Store
 **/.DS_Store
+.mcp-venv/
+Logs/mcp_server/
