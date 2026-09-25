@@ -1,0 +1,291 @@
+RELATÓRIO TÉCNICO - REVISÃO MASTER DEPLOY
+
+Base: INSTITUTO MOREIRA SALLES
+Serviço: IMSPRD.SANKHYACLOUD.COM.BR
+Host: 10.100.106.5
+Porta: 1521
+Schema: SANKHYA
+Usuário da execução: FRANCISCO_JUNIOR
+Gerente de Projetos: Monyque Duarte de Carli
+Data da revisão: 14/09/2026
+Status do documento: PRÉVIA TEXTUAL PARA CONFERÊNCIA - PDF NÃO GERADO
+
+==================== QUEBRA DE PÁGINA ====================
+
+RESUMO EXECUTIVO
+
+Esta prévia consolida somente os resultados comprovados na execução Oracle e
+nas pós-validações read-only da base INSTITUTO MOREIRA SALLES.
+
+As atividades 01 a 28 foram executadas com conclusão comprovada. As atividades
+29 e 30 inicialmente terminaram com colisões preservadas, mas foram finalizadas
+por merge controlado, com mapas persistentes, backups, auditoria das
+dependências, exclusão protegida dos códigos obsoletos e pós-validação
+independente.
+
+A atividade 31 não foi executada por falta do privilégio ALTER ANY PROCEDURE.
+Permaneceram 39 funções inválidas no schema SANKHYA.
+
+O Card 09 foi submetido a preflight. Foram identificados 40 candidatos aptos
+para validação final e 24 casos sem a tag <Dup>. Nenhuma linha foi inserida em
+TGFFIN. A inclusão financeira permanece pendente de confirmação operacional
+explícita própria, mapa final e auditoria.
+
+O snapshot read-only de onboarding foi executado na conexão IMSPRD sem exibir
+credenciais. A conferência contra os arquivos mais recentes da pasta de
+onboarding/Drive ainda não está comprovada; por isso este documento permanece
+como prévia e o PDF não deve ser gerado nesta etapa.
+
+1. RESULTADO EXECUTIVO
+
+Atividades 01 a 28: concluídas conforme o último status comprovado no log.
+Atividade 29: concluída após merge definitivo; 418 bairros obsoletos excluídos.
+Atividade 30: concluída após merge definitivo; 7.094 endereços obsoletos excluídos.
+Atividade 31: pendente por privilégio; 39 funções inválidas, sem ALTER ANY PROCEDURE.
+Card 09 / atividade regular 32: preflight concluído; nenhuma inclusão em TGFFIN.
+Pós-validação do merge: referências remanescentes=0, duplicidades normalizadas=0, exceções=0.
+Reversão: não executada; roteiro autocontido preservado para os Cards 29/30.
+
+2. IDENTIDADE E CONFERÊNCIA READ-ONLY
+
+Identidade comprovada no log Master:
+USUARIO=FRANCISCO_JUNIOR
+SCHEMA=SANKHYA
+SERVIÇO=imsprd.sankhyacloud.com.br
+TSIEMP.CODEMP=1; TSIEMP.RAZAOSOCIAL=INSTITUTO MOREIRA SALLES
+
+O snapshot de onboarding também confirmou:
+TSIEMP=5; TSICID=5578; TSIPAR=2351; TSICTA=5; TSIUSU=31;
+TGFVEN=3; TGFGRU=1; TSICUS=1; TGFNAT=210; TGFLOC=1.
+
+O SMTP global foi registrado apenas como metadado: servidor/porta,
+criptografia e remetente. A credencial foi marcada como presente, mas não foi
+exibida. As configurações SMTP por empresa foram preservadas sem exibição de
+usuário ou senha.
+
+Pendência de conferência: localizar a fonte mais recente do onboarding no
+Drive, confrontar empresas/cidades, SMTP, contas, usuários, vendedores, grupos,
+centros, naturezas e locais, e registrar as correspondências ou divergências.
+
+3. TABELA TÉCNICA DAS ATIVIDADES 01 A 31
+
+01 | Preparar controle de objetos temporariamente desabilitados | CONCLUÍDA; ID_MASTER=RMD_RUN_20260914135047221; controle criado e validado.
+02 | Liberar filtros de portais | CONCLUÍDA; ID=RMD_PORT_20260914135048458; 4 registros alterados.
+03 | Padronizar DANFE das empresas | CONCLUÍDA; ID=RMD_DANF_20260914135049349; 4 registros alterados.
+04 | Desativar custo nas TOPs de devolução | CONCLUÍDA; ID=RMD_TOPC_20260914135050349; 136 registros alterados.
+05 | Habilitar cálculo de giro dos produtos | CONCLUÍDA; ID=RMD_GIRO_20260914135051349; 95 registros alterados.
+06 | Zerar parcelas das condições de negociação | CONCLUÍDA; ID=RMD_PARC_20260914135052352; 17 registros alterados.
+07 | Preencher data de movimento | CONCLUÍDA; ID=RMD_DTMV_20260914135053242; 0 registros alterados.
+08 | Preencher protocolos de documentos legados | CONCLUÍDA; ID=RMD_PROT_20260914135054255; 0 registros alterados.
+09 | Liberar itens de documentos legados | CONCLUÍDA; ID=RMD_ITEM_20260914135055257; 0 itens alterados; trigger restaurada.
+10 | Habilitar ICMS gerencial | CONCLUÍDA; ID=RMD_ICMG_20260914135056425; 5 registros alterados.
+11 | Habilitar ruptura de produtos | CONCLUÍDA; ID=RMD_RUPP_20260914135057237; 6 registros alterados.
+12 | Habilitar ruptura por empresa | CONCLUÍDA; ID=RMD_RUPE_20260914135057930; 0 empresas alteradas.
+13 | Configurar TOPs de giro/Gerente On-Line | CONCLUÍDA; ID=RMD_TOPG_20260914135058854; 1.443 registros alterados.
+14 | Aplicar configuração da análise de giro 848 | CONCLUÍDA; ID=RMD_G848_20260914135100097; 1 configuração atualizada.
+15 | Desativar rastro sem controle aplicável | CONCLUÍDA; ID=RMD_RAST_20260914135100889; 0 registros alterados.
+16 | Higienizar TSICFG | CONCLUÍDA; ID=RMD_CFG_20260914135101930; snapshot de 892 registros preservado.
+17 | Normalizar unidades e relacionamentos | CONCLUÍDA; ID=RMD_UNID_20260914135324803; backup=0; descrições ajustadas=0.
+18 | Ajustar preferências do Gerente On-Line | CONCLUÍDA; ID=RMD_GOL_20260914135329520; TSIPAR=1; TGFCGM=4; TGFCMV=1.
+19 | Definir parceiro matriz | CONCLUÍDA; ID=RMD_MAT_20260914135330318; 5 parceiros ajustados.
+20 | Atualizar indicadores persistidos do dashboard | CONCLUÍDA; ID=RMD_CARD_20260914135331127; 1 linha atualizada.
+21 | Classificar parceiros para ICMS | CONCLUÍDA; ID=CLASSICMS_20260914135332304; 30 parceiros processados.
+22 | Ajustar números nos nomes de parceiros | CONCLUÍDA; ID=AJNP_20260914135334253; 0 backups e 0 alterações.
+23 | Validar e reabilitar objetos da revisão | CONCLUÍDA; OBJETOS_DA_REVISAO_PENDENTES=0; nenhuma trigger permaneceu desabilitada.
+24 | Padronizar parceiros | CONCLUÍDA; ID=RMD_PAR_20260914135336019; 0 registros alterados.
+25 | Padronizar produtos | CONCLUÍDA; ID=RMD_PRO_20260914135336786; 0 registros alterados.
+26 | Padronizar tipos de título | CONCLUÍDA; ID=RMD_TIT_20260914135337595; 0 registros alterados.
+27 | Padronizar cidades | CONCLUÍDA; ID=RMD_CID_20260914135338339; 0 registros alterados.
+28 | Padronizar tipos de venda | CONCLUÍDA; ID=RMD_TPV_20260914135339167; 0 registros alterados.
+29 | Normalizar bairros e remover obsoletos | CONCLUÍDA após merge; inicial=45.045 registros; colisões preservadas=420; merge=418 excluídos.
+30 | Normalizar endereços e remover obsoletos | CONCLUÍDA após merge; inicial=646.110 registros; colisões preservadas=6.943; merge=7.094 excluídos.
+31 | Diagnosticar/recompilar objetos inválidos | PENDENTE; 39 funções inválidas; sessão sem ALTER ANY PROCEDURE; nenhuma recompilação executada.
+
+4. ATIVIDADES 29/30 - MERGE DEFINITIVO
+
+ID_EXECUCAO=RMD_2930_IMS_20260914154001
+Mapa persistente: BKP_RMD_MRG_IMS_20260914
+Mapa de bairros: 418 pares obsoleto -> mantido.
+Mapa de endereços: 7.094 pares obsoleto -> mantido, considerando TIPO.
+Backup de bairros: BKP_RMD_MRG_IMS_20260914_BAI; 828 registros.
+Backup de endereços: BKP_RMD_MRG_IMS_20260914_END; 13.890 registros.
+Auditoria de dependências: BKP_RMD_MRG_IMS_20260914_DEP; 59.275 alterações.
+Mapa de exceções: BKP_RMD_MRG_IMS_20260914_EXC; 0 registros.
+Índice de consulta do mapa: IX_RMD_IMS_MAP.
+Referências obsoletas remanescentes: 0.
+Bairros obsoletos presentes após o merge: 0.
+Endereços obsoletos presentes após o merge: 0.
+Duplicidades normalizadas de bairros após o merge: 0.
+Duplicidades normalizadas de endereços após o merge: 0.
+Status final: CONCLUÍDO.
+
+5. CARD 09 - NOTAS SEM FINANCEIRO
+
+Preflight: 7 - QA2/Clientes/INSTITUTO MOREIRA SALLES/32_Card09_Preflight_INSTITUTO_MOREIRA_SALLES.sql
+Log: Logs/Card09_Preflight_20260914.log
+Candidatos aptos para validação final: 40.
+Casos sem <Dup>: 24.
+Processados: 0.
+Inseridos em TGFFIN: 0.
+Notas/financeiros existentes preservados: não houve inclusão.
+Saldo elegível restante: 40 candidatos aguardando confirmação operacional e auditoria final.
+
+O tratamento financeiro não foi executado. Para concluir a atividade regular
+32 será necessário revisar o mapa por NUNOTA, valor, vencimento XML, duplicata,
+tipo de título e sentido financeiro, e fornecer confirmação explícita própria
+imediatamente antes da inclusão controlada. Não foi realizado INSERT avulso em
+TGFFIN.
+
+6. VOLUMETRIA E ORIENTAÇÃO AOS CONSULTORES
+
+Os quantitativos dos 21 cards do dashboard não foram recalculados nesta
+conferência final. Não foram assumidos resultados zero sem coleta comprovada.
+As orientações abaixo devem acompanhar o refinamento:
+
+01 Financeiro | títulos extraídos dos artefatos disponibilizados; validar escopo.
+02 Entradas e Saídas | visão por TOP e tipo de movimento; validar funcionalmente.
+03 Produtos por USOPROD | produtos/serviços agrupados por uso; validar classificação.
+04 Produtos por Grupo | associação aos grupos do onboarding; refinamento manual quando aplicável.
+05 Referências Duplicadas | investigar reaproveitamento, obsolescência, equivalência ou regra de negócio.
+06 Descrições Duplicadas | investigar descrições repetidas pelos critérios complementares.
+07 CNPJ/CPF Repetidos | avaliar variações cadastrais entre parceiros com o mesmo documento.
+08 Financeiros sem Nota | resultado esperado zero; qualquer saldo exige análise de incompletude.
+09 Notas sem Financeiro | separar <Dup>/<dVenc> válidos, ausência de <Dup> e XML inválido; inserir somente com mapa e confirmação.
+10 Produtos Vendidos | avaliar saídas sem entrada correspondente e equivalências.
+11 Produtos com Custo Zero | revisar linhas de custo com valor zerado.
+12 Produtos sem Custo | avaliar produtos sem linha na TGFCUS.
+13 Itens sem Cabeçalho | resultado esperado zero; ocorrência bloqueia conclusão até análise.
+14 Cabeçalho sem Itens | resultado esperado zero; ocorrência bloqueia conclusão até análise.
+15 Cidades Duplicadas | resultado esperado zero; ocorrência bloqueia conclusão até análise.
+16 Classificação Fiscal | validar divergências da classificação dos parceiros.
+17 Itens sem Tabela de Preço | revisar itens sem saída elegível para preço.
+18 Itens com Descrições Similares | tratar similaridades iguais ou superiores ao critério do card.
+19 CNPJ Matrizes | agrupar pelo radical de CNPJ e validar a matriz definida.
+20 Produtos Comprados | interpretar entradas sem saída conforme o uso do produto.
+21 Regras Tributárias Inseridas | conferir regras tributárias cadastradas pelo Deploy Agent.
+
+Os cards 08, 13, 14 e 15 devem ser comprovadamente zero antes da aprovação
+do texto e novamente antes da geração do PDF.
+
+7. OBJETOS DE CONTROLE, BACKUP E AUDITORIA
+
+RMD_CONTROLE_OBJETOS: controle de estado e reabilitação de objetos da revisão.
+BKP_RMD_TSICFG: snapshot persistente da TSICFG, associado ao ID RMD_CFG.
+BKP_RMD_CARD_TTKINDAGT: backup do indicador persistido do dashboard.
+BKP_RMD_MRG_IMS_20260914: mapa obsoleto -> mantido dos Cards 29/30.
+BKP_RMD_MRG_IMS_20260914_BAI: backup das versões de bairros mantidas/obsoletas.
+BKP_RMD_MRG_IMS_20260914_END: backup das versões de endereços mantidas/obsoletas.
+BKP_RMD_MRG_IMS_20260914_DEP: ROWIDs e valores anterior/novo das dependências.
+BKP_RMD_MRG_IMS_20260914_EXC: exceções isoladas do merge.
+
+Os demais backups das atividades 01 a 28 permanecem na base conforme os
+scripts executados e seus IDs. O utilitário Limpar_Objetos_Revisao.sql é
+opcional, não foi executado e, quando usado, remove backups e inviabiliza os
+rollbacks correspondentes.
+
+8. ÍNDICE DE REVERSÃO
+
+01: não aplicável; preparação e controle.
+02: Reverter_02_Liberar_Filtros_Portais.sql.
+03: Reverter_03_Padronizar_DANFE_Empresas.sql.
+04: Reverter_04_Desativar_Custo_TOP_Devolucao.sql.
+05: Reverter_05_Habilitar_Calculo_Giro_Produtos.sql.
+06: Reverter_06_Zerar_Parcelas_Tipos_Negociacao.sql.
+07: Reverter_07_Preencher_Data_Movimento.sql.
+08: Reverter_08_Preencher_Protocolos_Documentos_Legados.sql.
+09: Reverter_09_Liberar_Itens_Documentos_Legados.sql.
+10: Reverter_10_Habilitar_ICMS_Gerencial.sql.
+11: Reverter_11_Habilitar_Ruptura_Produtos.sql.
+12: Reverter_12_Habilitar_Ruptura_Empresas.sql.
+13: Reverter_13_Configurar_TOPs_Giro_GOL.sql.
+14: Reverter_14_Configurar_Analise_Giro_848.sql.
+15: Reverter_15_Desativar_Rastro_Sem_Controle.sql.
+16: Reverter_16_Aplicar_Higienizacao_TSICFG.sql.
+17: Reverter_17_Normalizacao_Unidades.sql.
+18: Reverter_18_Preferencias_GOL.sql.
+19: Reverter_19_Parceiro_Matriz.sql.
+20: Reverter_20_Cards_Deploy.sql.
+21: Reverter_21_Classificacao_ICMS_Parceiros.sql.
+22: Reverter_22_Ajuste_Nomes_Parceiros.sql.
+23: não aplicável; validação/reabilitação.
+24: Reverter_24_Padronizacao_Parceiros.sql.
+25: Reverter_25_Padronizacao_Produtos.sql.
+26: Reverter_26_Padronizacao_Tipos_Titulo.sql.
+27: Reverter_27_Padronizacao_Cidades.sql.
+28: Reverter_28_Padronizacao_Tipos_Venda.sql.
+29/30: Artefatos_Revisao/Rollback/Reverter_29_30_Merge_Definitivo_20260914.sql; ID=RMD_2930_IMS_20260914154001.
+31: não aplicável; recompilação não realizada.
+32: não aplicável neste momento; nenhum TGFFIN inserido.
+
+9. OBJETOS INVÁLIDOS E PENDÊNCIA DE PRIVILÉGIO
+
+A atividade 31 registrou STATUS=IGNORADO_SEM_PRIVILEGIO com 39 funções
+inválidas. A sessão FRANCISCO_JUNIOR não possui ALTER ANY PROCEDURE. Solicita-se
+chamado ao Sankhya Cloud para análise de dependências, erros de compilação e
+recompilação/correção com privilégio adequado.
+
+ACL_GET_ALIQPART
+FSP_DATA_DIA_UTIL
+FSP_RETURN_DATAS_UTEIS
+F_OBTEMPRECO_DATA
+F_OBTEM_SALDO_INDENIZ
+GET_CODPROD_REF
+GET_INDICE_AJUSTE_NOTA
+GET_PREVISAO_CREDITO_DEBITO
+GET_PROXIMO_DIA_UTIL
+QTDEVOLPADRAO
+QTDEVOLPADRAO2
+SNK_GETCODPRODALT
+SNK_GETDTBAIXABEM
+SNK_GETMESESSEMPIS
+SNK_GETPRODUTOAGRUPADOGIRO
+SNK_GETVLRREA
+SNK_GET_CENTROCUSTO_EFD
+SNK_GET_CFO_NOTA
+SNK_GET_CODCFO
+SNK_GET_CODIGO_PRODUTO
+SNK_GET_CONTACONTABIL_EFD
+SNK_GET_CONTACONTABIL_IMOB_EFD
+SNK_GET_CTACTB_CADASTROS_EFD
+SNK_GET_DENTRO_FORA_ESTADO
+SNK_GET_ICMS_ESPECIAL_CAB
+SNK_GET_INDITENS
+SNK_GET_NUNOTA
+SNK_GET_SATUSCONFERENCIA
+SNK_GET_ST_RECUPERAR
+SNK_MATGIR_GET_MULTCPA
+SNK_MATGIR_GET_QTDTOTALMULTCPA
+SNK_PRECO
+TIM_ASSINAFIADOR
+TIM_ASSINAINQUILINO
+TIM_ASSINALOCADOR
+TIM_MONTAFIADOR
+TIM_MONTAFORMAREPASSE
+TIM_MONTAINQUILINO
+TIM_MONTAPROPRIETARIOS
+
+10. ARTEFATOS DE RASTREABILIDADE
+
+Log Master: Logs/Revisao_Master_20260914_121048.log
+Preflight 29/30: Logs/29_30_Preflight_Merge_20260914.log
+Merge definitivo 29/30: Logs/29_30_Merge_Definitivo_20260914.log
+Pós-validação independente 29/30: Logs/33_Posvalidacao_29_30_20260914.log
+Preflight Card 09: Logs/Card09_Preflight_20260914.log
+Snapshot read-only onboarding: Logs/34_Verificacao_Onboarding_ReadOnly_20260914.log
+Script do merge: 29_30_Merge_Definitivo_INSTITUTO_MOREIRA_SALLES.sql
+Script de pós-validação: 33_Posvalidacao_29_30_INSTITUTO_MOREIRA_SALLES.sql
+Rollback do merge: Artefatos_Revisao/Rollback/Reverter_29_30_Merge_Definitivo_20260914.sql
+
+11. CONSIDERAÇÕES FINAIS
+
+O tratamento pendente das atividades 29 e 30 foi concluído com sucesso e
+validado de forma independente na conexão IMSPRD. Não há referências obsoletas,
+duplicidades normalizadas residuais ou exceções registradas no merge.
+
+O encerramento formal da revisão ainda depende de três pontos: conferência dos
+arquivos de onboarding mais recentes, coleta comprovada dos 21 cards com
+validação dos cards críticos 08/13/14/15, e decisão operacional específica para
+o Card 09. A atividade 31 depende de atendimento com privilégio adequado.
+
+Enquanto esses pontos não forem comprovados, esta prévia não deve ser convertida
+em PDF nem classificada como entrega final aprovada.

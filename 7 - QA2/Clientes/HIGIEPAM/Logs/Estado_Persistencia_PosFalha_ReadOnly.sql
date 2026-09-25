@@ -1,0 +1,15 @@
+SELECT ITEM,
+       QTD,
+       DETALHE
+  FROM (
+        SELECT 'BKP_RMD_01_TSIPAR' AS ITEM,
+               COUNT(*) AS QTD,
+               'LINHAS_PERSISTIDAS' AS DETALHE
+          FROM BKP_RMD_01_TSIPAR
+        UNION ALL
+        SELECT 'RMD_CONTROLE_OBJETOS' AS ITEM,
+               COUNT(*) AS QTD,
+               'LINHAS_DE_CONTROLE' AS DETALHE
+          FROM RMD_CONTROLE_OBJETOS
+       )
+ ORDER BY ITEM;

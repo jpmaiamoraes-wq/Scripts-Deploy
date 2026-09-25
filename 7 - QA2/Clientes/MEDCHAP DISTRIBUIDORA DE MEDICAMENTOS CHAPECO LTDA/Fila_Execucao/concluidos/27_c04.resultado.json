@@ -1,0 +1,12 @@
+{
+  "pedido": "27_c04.json",
+  "inicio_local": "2026-09-25T10:03:08-03:00",
+  "id": "MEDCHAP_C04_20260925_01",
+  "tipo": "query",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/C04_Teste_Dicionario_20260925.json",
+  "log_lote": null,
+  "fim_local": "2026-09-25T10:03:18-03:00",
+  "duracao_s": 9.4
+}

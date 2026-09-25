@@ -1,0 +1,104 @@
+-- Card 09 - preflight e mapa persistente, sem inclusao em TGFFIN.
+SET DEFINE OFF
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/INSTITUTO MOREIRA SALLES/Logs/Card09_Preflight_20260914.log"
+
+PROMPT === CARD 09 - PREFLIGHT INSTITUTO MOREIRA SALLES ===
+
+DECLARE
+  v_exists NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_exists
+    FROM ALL_TABLES
+   WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+     AND TABLE_NAME = 'BKP_RMD_IMS_DUP_20260914';
+  IF v_exists > 0 THEN
+    RAISE_APPLICATION_ERROR(-20320, 'Mapa BKP_RMD_IMS_DUP_20260914 ja existe; nao repetir sem novo ID.');
+  END IF;
+
+  EXECUTE IMMEDIATE q'~
+    CREATE TABLE BKP_RMD_IMS_DUP_20260914 AS
+    WITH C AS (
+      SELECT C.NUNOTA, C.CODEMP, C.NUMNOTA, C.SERIENOTA, C.DTNEG, C.DTMOV,
+             C.CODPARC, C.CODTIPOPER, C.CODTIPVENDA, C.DHTIPVENDA,
+             C.TIPMOV, C.VLRNOTA,
+             (SELECT MAX(X.VALOR)
+                FROM TGFNFE N,
+                     XMLTABLE(
+                       '//*[upper-case(local-name()) = "VDUP" and upper-case(local-name(parent::*)) = "DUP"][1]'
+                       PASSING XMLTYPE(N.XML)
+                       COLUMNS VALOR VARCHAR2(4000) PATH 'string(.)'
+                     ) X
+               WHERE N.NUNOTA = C.NUNOTA) AS VDUP_XML,
+             (SELECT MAX(X.VALOR)
+                FROM TGFNFE N,
+                     XMLTABLE(
+                       '//*[upper-case(local-name()) = "DVENC" and upper-case(local-name(parent::*)) = "DUP"][1]'
+                       PASSING XMLTYPE(N.XML)
+                       COLUMNS VALOR VARCHAR2(4000) PATH 'string(.)'
+                     ) X
+               WHERE N.NUNOTA = C.NUNOTA) AS DVENC_XML,
+             (SELECT MAX(X.VALOR)
+                FROM TGFNFE N,
+                     XMLTABLE(
+                       '//*[upper-case(local-name()) = "NDUP" and upper-case(local-name(parent::*)) = "DUP"][1]'
+                       PASSING XMLTYPE(N.XML)
+                       COLUMNS VALOR VARCHAR2(4000) PATH 'string(.)'
+                     ) X
+               WHERE N.NUNOTA = C.NUNOTA) AS NDUP_XML
+        FROM TGFCAB C
+        JOIN TGFTOP T ON T.CODTIPOPER = C.CODTIPOPER
+                     AND T.DHALTER = (SELECT MAX(T2.DHALTER) FROM TGFTOP T2
+                                       WHERE T2.CODTIPOPER = C.CODTIPOPER
+                                         AND T2.DHALTER <= C.DHTIPOPER)
+       WHERE T.ATUALFIN <> 0
+         AND C.TIPMOV <> 'Z'
+         AND NOT EXISTS (SELECT 1 FROM TGFFIN F WHERE F.NUNOTA = C.NUNOTA)
+    ), P AS (
+      SELECT C.*, P.TIPOEMP, P.CODEMP AS CODEMP_PPG, P.TIPOPAR,
+             P.CODPARC AS CODPARC_PPG, P.SEQUENCIA AS SEQ_PPG,
+             P.PRAZO, P.CODTIPTITPAD, P.CODBCOPAD, P.CODCTABCOINT,
+             P.CODCENCUSPAD, P.CODNATPAD, P.CODPROJPAD, P.TIPRECDESP,
+             P.TIPOFIN, P.PERCENTUAL,
+             COUNT(P.CODTIPVENDA) OVER (PARTITION BY C.NUNOTA) AS QTD_PPG,
+             COUNT(P.CODTIPVENDA) OVER (PARTITION BY C.NUNOTA, P.SEQUENCIA) AS QTD_PPG_SEQ
+        FROM C LEFT JOIN TGFPPG P ON P.CODTIPVENDA = C.CODTIPVENDA
+    )
+    SELECT 'RMD_IMS_CARD09_20260914' AS ID_EXECUCAO, SYSTIMESTAMP AS DH_EXECUCAO,
+           SYS_CONTEXT('USERENV','SESSION_USER') AS USUARIO_EXECUCAO,
+           P.*,
+           CASE
+             WHEN P.VDUP_XML IS NULL THEN 'SEM_DUP_XML'
+             WHEN NOT REGEXP_LIKE(P.DVENC_XML, '^[0-9]{4}-[0-9]{2}-[0-9]{2}$') THEN 'DVENC_XML_INVALIDO'
+             WHEN P.QTD_PPG = 0 THEN 'SEM_TGFPPG'
+             WHEN P.QTD_PPG_SEQ > 1 THEN 'REVISAR_DUPLICIDADE_TGFPPG'
+             WHEN P.CODTIPTITPAD IS NULL THEN 'SEM_CODTIPTITPAD'
+             WHEN NOT EXISTS (SELECT 1 FROM TGFTIT T WHERE T.CODTIPTIT=P.CODTIPTITPAD) THEN 'CODTIPTITPAD_INVALIDO'
+             ELSE 'APTO_PARA_VALIDACAO_FINAL'
+           END AS STATUS_MAPA
+      FROM P
+  ~';
+  COMMIT;
+END;
+/
+
+PROMPT === RESUMO DO MAPA ===
+SELECT STATUS_MAPA, COUNT(*) AS QTD
+  FROM BKP_RMD_IMS_DUP_20260914
+ GROUP BY STATUS_MAPA
+ ORDER BY STATUS_MAPA;
+
+PROMPT === CANDIDATOS APTOS ===
+SELECT NUNOTA, CODEMP, NUMNOTA, SERIENOTA, CODTIPOPER, CODTIPVENDA,
+       VDUP_XML, DVENC_XML, NDUP_XML, CODTIPTITPAD, CODBCOPAD,
+       CODCTABCOINT, TIPRECDESP, SEQ_PPG
+  FROM BKP_RMD_IMS_DUP_20260914
+ WHERE STATUS_MAPA = 'APTO_PARA_VALIDACAO_FINAL'
+ ORDER BY NUNOTA, SEQ_PPG;
+
+PROMPT === CARD 09 - PREFLIGHT CONCLUIDO; NENHUM TGFFIN FOI INSERIDO ===
+
+SPOOL OFF

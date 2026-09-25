@@ -1,0 +1,12 @@
+-- Dependencias e referencias da atividade 12; somente leitura.
+SELECT OWNER,
+       NAME,
+       TYPE,
+       LINE,
+       TEXT
+  FROM ALL_SOURCE
+ WHERE OWNER='SANKHYA'
+   AND TYPE IN ('TRIGGER','PROCEDURE','FUNCTION','PACKAGE','PACKAGE BODY')
+   AND (UPPER(TEXT) LIKE '%RUPTURAEST%'
+        OR UPPER(TEXT) LIKE '%AD_SEGMENTACAOEMPRESAS%')
+ ORDER BY NAME, TYPE, LINE;

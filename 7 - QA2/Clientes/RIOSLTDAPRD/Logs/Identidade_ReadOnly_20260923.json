@@ -1,0 +1,19 @@
+{
+  "status": "IDENTIDADE_VALIDADA_READ_ONLY",
+  "executado_em_local": "2026-09-23T10:04:00-03:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "service_esperado": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
+  "service_compativel": true,
+  "empresas": [
+    {
+      "codemp": 1,
+      "razao_social": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LT"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false,
+  "senha_armazenada_no_projeto": false
+}

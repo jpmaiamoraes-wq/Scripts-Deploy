@@ -1,0 +1,10 @@
+-- Inventario somente leitura dos triggers do schema corrente.
+SELECT OWNER,
+       TRIGGER_NAME,
+       TABLE_NAME,
+       STATUS,
+       TRIGGER_TYPE,
+       TRIGGERING_EVENT
+  FROM ALL_TRIGGERS
+ WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ ORDER BY TABLE_NAME, TRIGGER_NAME;

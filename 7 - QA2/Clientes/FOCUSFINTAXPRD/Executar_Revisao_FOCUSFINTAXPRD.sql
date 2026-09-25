@@ -1,0 +1,32 @@
+-- Gerado automaticamente. Nao contem senha.
+-- Abra este arquivo conectado a base correta e execute como SCRIPT (F5).
+SET DEFINE ON
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Logs/Revisao_Master_20260923_145754.log"
+
+PROMPT === IDENTIDADE DA CONEXAO ===
+SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+       SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+       SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO
+  FROM DUAL;
+-- A revisão é BASE_INTEIRA; a quantidade de empresas não é gate.
+SELECT CODEMP, RAZAOSOCIAL, CGC FROM TSIEMP ORDER BY CODEMP;
+
+ACCEPT P_CONFIRMA CHAR PROMPT 'Digite EXECUTAR FOCUSFINTAXPRD para confirmar a base: '
+BEGIN
+  IF UPPER(TRIM('&&P_CONFIRMA')) <> 'EXECUTAR FOCUSFINTAXPRD' THEN
+    RAISE_APPLICATION_ERROR(-20500,'Execucao cancelada: confirmacao da base divergente.');
+  END IF;
+  IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR' THEN
+    RAISE_APPLICATION_ERROR(-20501,'Execucao cancelada: SERVICE_NAME diferente do esperado (FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR).');
+  END IF;
+END;
+/
+UNDEFINE P_CONFIRMA
+
+@@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql"
+
+SPOOL OFF

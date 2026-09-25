@@ -1,0 +1,41 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_local": "2026-09-23T10:06:38-03:00",
+  "source": "REL_ENTEGA_NOVO_05.jrxml :: queryString :: indicadores excluídos incluídos",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "dml_executado": false,
+  "ddl_executado": false,
+  "quantitativos": {
+    "Total de notas/cabecalhos processados": 3362,
+    "Total de itens processados": 7016,
+    "Total de registros financeiros": 3227,
+    "Contas a receber": 3092,
+    "Contas a pagar": 135,
+    "Financeiros sem nota": 0,
+    "Notas sem financeiro": 0,
+    "Total de produtos cadastrados": 92,
+    "Total de parceiros cadastrados": 336,
+    "Codigos fiscais de cidades duplicados": 0,
+    "Referencias duplicadas": 0,
+    "Produtos envolvidos em referencias duplicadas": 0,
+    "Descricoes duplicadas": 2,
+    "Produtos envolvidos em descricoes duplicadas": 4,
+    "Produtos vendidos sem registro de entrada": 30,
+    "CNPJ/CPF repetidos": 0,
+    "Parceiros envolvidos em CNPJ/CPF repetido": 0,
+    "Classificacao fiscal divergente": 4,
+    "Produtos com custo zero": 63,
+    "Produtos sem registro de custo": 0,
+    "Itens sem cabecalho": 0,
+    "Cabecalhos sem itens": 0
+  },
+  "indicadores_integridade_obrigatorios": {
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 0,
+    "codigos_fiscais_cidades_duplicados": 0
+  }
+}

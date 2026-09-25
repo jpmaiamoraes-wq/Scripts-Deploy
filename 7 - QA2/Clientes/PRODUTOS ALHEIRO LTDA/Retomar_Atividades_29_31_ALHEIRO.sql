@@ -1,0 +1,73 @@
+-- Retomada da Revisao Master Deploy para PRODUTOS ALHEIRO LTDA.
+-- Nao contem senha. Execute como SCRIPT (F5) no VS Code conectado a base correta.
+-- As atividades 01-28 ja possuem evidencias; este runner executa somente 29-31.
+SET DEFINE OFF
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+SET ECHO ON
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS ALHEIRO LTDA/Logs/Revisao_Master_20260916_Retomada_29_31_retry2.log"
+
+PROMPT ============================================================
+PROMPT RETOMADA MASTER DEPLOY - PRODUTOS ALHEIRO LTDA - INICIO
+PROMPT ATIVIDADES 01-28 NAO SERAO REPETIDAS
+SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY HH24:MI:SS') DATA_HORA_INICIO FROM DUAL;
+PROMPT ============================================================
+
+PROMPT === PREFLIGHT SOMENTE LEITURA ===
+@@00_Preflight_Gate_ALHEIRO.sql
+
+PROMPT === CONFIRMACAO FORMAL DA BASE ===
+BEGIN
+  IF UPPER(TRIM('EXECUTAR PRODUTOS ALHEIRO LTDA'))<>'EXECUTAR PRODUTOS ALHEIRO LTDA' THEN
+    RAISE_APPLICATION_ERROR(-20500,'Retomada cancelada: confirmacao da base divergente.');
+  END IF;
+  IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME'))<>'ALHEIROPRD.SANKHYACLOUD.COM.BR' THEN
+    RAISE_APPLICATION_ERROR(-20501,'Retomada cancelada: SERVICE_NAME diferente do esperado.');
+  END IF;
+END;
+/
+
+PROMPT === VALIDACAO DOS BACKUPS PERSISTENTES ANTES DAS ATIVIDADES 29-30 ===
+DECLARE
+  v_missing NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_missing
+    FROM (
+      SELECT 'BKP_RMD_PAD_TSIBAI' TABLE_NAME FROM DUAL
+      UNION ALL SELECT 'BKP_RMD_PAD_TSIEND' FROM DUAL
+    ) R
+   WHERE NOT EXISTS (
+     SELECT 1 FROM ALL_TABLES T
+      WHERE T.OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+        AND T.TABLE_NAME=R.TABLE_NAME
+   );
+  IF v_missing<>0 THEN
+    RAISE_APPLICATION_ERROR(-20510,'Backups persistentes obrigatorios ausentes. QTD='||v_missing);
+  END IF;
+  DBMS_OUTPUT.PUT_LINE('BACKUPS_PERSISTENTES_29_30=VALIDADOS');
+END;
+/
+
+SELECT 'BKP_RMD_PAD_TSIBAI' OBJETO,COUNT(*) QTD FROM BKP_RMD_PAD_TSIBAI
+UNION ALL
+SELECT 'BKP_RMD_PAD_TSIEND',COUNT(*) FROM BKP_RMD_PAD_TSIEND;
+
+PROMPT === ATIVIDADES 29/30 NOMINAIS CONCLUIDAS NA TENTATIVA ANTERIOR ===
+PROMPT 29_Padronizar_Bairros.sql: STATUS=CONCLUIDO; REGISTROS=0
+PROMPT 30_Padronizar_Enderecos.sql: STATUS=CONCLUIDO; REGISTROS=0
+
+PROMPT === CARD 29/30 - MAPA, BACKUP, FKs E EXCLUSAO QUALIFICADA ===
+@@29_30_Merge_Antifragil_ALHEIRO.sql
+PROMPT === FIM CARD 29/30 ANTIFRAGIL ===
+
+PROMPT === [31/31] INICIO - 31_Recompilar_Objetos_Invalidos.sql ===
+@@"../../Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+PROMPT === [31/31] FIM - 31_Recompilar_Objetos_Invalidos.sql ===
+
+PROMPT ============================================================
+PROMPT RETOMADA MASTER DEPLOY - ATIVIDADES 29-31 - FIM
+SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY HH24:MI:SS') DATA_HORA_FIM FROM DUAL;
+PROMPT ============================================================
+SPOOL OFF

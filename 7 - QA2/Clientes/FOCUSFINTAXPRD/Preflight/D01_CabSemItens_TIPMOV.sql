@@ -1,0 +1,6 @@
+-- Diagnostico read-only: cabecalhos sem itens por TIPMOV (indicador oficial exclui TIPMOV='Z').
+SELECT C.TIPMOV, COUNT(*) AS QTD
+  FROM TGFCAB C
+ WHERE NOT EXISTS (SELECT 1 FROM TGFITE I WHERE I.NUNOTA = C.NUNOTA)
+ GROUP BY C.TIPMOV
+ ORDER BY C.TIPMOV

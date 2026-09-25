@@ -1,0 +1,12 @@
+ID_EXECUCAO_LOTE=RMD_JCLM_20260919211412
+ENTRADA=Revisao Master Deploy/Revisao_Master_Deploy.sql
+SHA256_SUITE=8ff5f3d598027015c8dfbad2072d23e2fbe5491cb37c397cb3b391dc3df0ed3b
+POS_VALIDACAO=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Artefatos_Revisao/Preflight/00_Precheck_Etapas_18_31_PostValidation.sql
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=jclmprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[OK 1/1062] SELECT Revisao Master Deploy/Revisao_Master_Deploy.sql:12 ROWCOUNT=0
+[ERRO 2/1062] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/01_Preparar_Controle_Objetos.sql:6 DatabaseError: DPY-4008: no bind placeholder named ":RMD_ID_TSICFG" was found in the SQL text
+STATUS=LOTE_COM_ERRO

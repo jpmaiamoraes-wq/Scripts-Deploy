@@ -1,0 +1,81 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:58:13.405926+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P16_Card09_Objetos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 10,
+  "colunas": [
+    "OBJETO",
+    "TIPO_ESPERADO",
+    "TIPO_ENCONTRADO",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "OBJETO": "FNC_BUSCA_TAG_XML_GERAL",
+      "TIPO_ESPERADO": "FUNCTION",
+      "TIPO_ENCONTRADO": "AUSENTE",
+      "STATUS": "AUSENTE"
+    },
+    {
+      "OBJETO": "TGFCAB",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFFIN",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFNFE",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFNUM",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFPPG",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFTIT",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFTOP",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFTPV",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TSICTA",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

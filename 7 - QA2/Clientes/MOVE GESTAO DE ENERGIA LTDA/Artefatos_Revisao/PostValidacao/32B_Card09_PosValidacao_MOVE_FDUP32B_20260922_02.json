@@ -1,0 +1,42 @@
+{
+  "status": "POS_VALIDACAO_INDEPENDENTE_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T00:05:25.260451+00:00",
+  "execution_id_lote": "MOVE_FDUP32B_20260922_02",
+  "execution_id_mapa_auditoria": "MOVE_FDUP_20260922_01",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "metricas": {
+    "MAPA_TOTAL": 185,
+    "MAPA_APTOS": 184,
+    "MAPA_SEM_VDUP": 1,
+    "AUDITORIA_INS": 184,
+    "FINANCEIROS_AUDITADOS": 184,
+    "AUDITORIA_SEM_TGFFIN": 0,
+    "APTOS_SEM_FINANCEIRO": 0,
+    "DUPLICADOS_TGFFIN_POR_NUNOTA": 0,
+    "FINANCEIROS_SEM_AUDITORIA": 0,
+    "DIVERGENCIA_VALOR_XML": 0,
+    "DIVERGENCIA_VENCIMENTO_XML": 0,
+    "DIVERGENCIA_CODCTABCOINT": 0,
+    "SOMA_VDUP_XML_APTOS": 3393212.27,
+    "SOMA_AUDITORIA": 3393212.27,
+    "TGFNUM_ROWS": 1,
+    "TGFNUM_ULTCOD_FINAL": 13952,
+    "TGFNUM_STATUS": "CONSISTENTE",
+    "EXCECAO_13881_COM_FINANCEIRO": 0,
+    "APTOS_COM_TGFFIN_ATUAL": 184
+  },
+  "observacoes": [
+    "A primeira tentativa foi revertida pelo Oracle ao rejeitar o CODCTABCOINT fixo 4; a auditoria read-only confirmou zero financeiros e ULTCOD preservado.",
+    "A segunda tentativa preservou o CODCTABCOINT nulo configurado na TGFPPG para os 184 candidatos.",
+    "APTOS_ULTCOD_MAPA_DIFERE_DO_ATUAL=184 na consulta posterior e esperado: o mapa guarda o ULTCOD inicial 13768, e o contador atual avancou para 13952 apos as insercoes."
+  ],
+  "fonte_lote": "Logs/MOVE_FDUP32B_20260922_02.log",
+  "fonte_validacao_independente": "Artefatos_Revisao/PostValidacao/32B_Card09_PosValidacao_MOVE_READONLY.sql",
+  "dml_executado": false,
+  "ddl_executado": false
+}

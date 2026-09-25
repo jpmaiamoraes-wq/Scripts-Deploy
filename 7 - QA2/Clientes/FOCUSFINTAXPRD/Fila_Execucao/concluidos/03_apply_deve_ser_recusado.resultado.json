@@ -1,0 +1,10 @@
+{
+  "pedido": "03_apply_deve_ser_recusado.json",
+  "inicio_local": "2026-09-25T07:46:20-03:00",
+  "id": "HOMOLOG_FILA_03_apply_recusado",
+  "tipo": "batch_apply",
+  "status": "RECUSADO",
+  "motivo": "alteracao recusada: fila iniciada sem --autorizar",
+  "fim_local": "2026-09-25T07:46:20-03:00",
+  "duracao_s": 0.0
+}

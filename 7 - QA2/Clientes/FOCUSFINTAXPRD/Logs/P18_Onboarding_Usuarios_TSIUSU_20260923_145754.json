@@ -1,0 +1,134 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:58:15.150461+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P18_Onboarding_Usuarios_TSIUSU.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 16,
+  "colunas": [
+    "CODUSU",
+    "NOMEUSU",
+    "EMAIL",
+    "CODGRUPO",
+    "CODEMP"
+  ],
+  "linhas": [
+    {
+      "CODUSU": 14,
+      "NOMEUSU": "RAMON.PACHECO",
+      "EMAIL": "adm@grupoagfcontabil.com.br",
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 11,
+      "NOMEUSU": "VANESSA.FERREIRA",
+      "EMAIL": "controller@grupoagfcontabil.com.br",
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 12,
+      "NOMEUSU": "RAQUEL.CANTON",
+      "EMAIL": "financeiro@grupoagfcontabil.com.br",
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 13,
+      "NOMEUSU": "JESSICA.SOUTO",
+      "EMAIL": "juridico@grupoagfcontabil.com.br",
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 15,
+      "NOMEUSU": "PABLO.MARCOS",
+      "EMAIL": "paulo.marcos@grupoagfcontabil.com.br",
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 0,
+      "NOMEUSU": "SUP",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 1,
+      "NOMEUSU": "COTACAOB2B",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 2,
+      "NOMEUSU": "SKWCLOUD",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": null
+    },
+    {
+      "CODUSU": 3,
+      "NOMEUSU": "VENDEDOR",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 4,
+      "NOMEUSU": "GERENTE",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 5,
+      "NOMEUSU": "SANKHYA",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 6,
+      "NOMEUSU": "LIBERADOR",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 7,
+      "NOMEUSU": "INTEGRAÇÃO.PONTOTEL",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 8,
+      "NOMEUSU": "INTEGRAÇÃO.MINDSIGHT",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 9,
+      "NOMEUSU": "INTEGRAÇÃO.VIXTING",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": 1
+    },
+    {
+      "CODUSU": 10,
+      "NOMEUSU": "SKWCLOUDAPI",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP": null
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

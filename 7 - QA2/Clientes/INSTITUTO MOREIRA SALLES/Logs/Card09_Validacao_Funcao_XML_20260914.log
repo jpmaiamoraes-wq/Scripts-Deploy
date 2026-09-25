@@ -1,0 +1,12 @@
+=== CARD 09 - VALIDACAO DA FUNCAO XML CONTRA O PREFLIGHT ===
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                VALID  
+
+
+TOTAL_APTOS DIVERGENCIAS
+----------- ------------
+         40            0
+
+=== CARD 09 - VALIDACAO DA FUNCAO XML CONCLUIDA ===

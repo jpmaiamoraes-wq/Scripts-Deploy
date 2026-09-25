@@ -1,0 +1,97 @@
+=== POS-VALIDACAO INDEPENDENTE CARD 29/30 - INSTITUTO MOREIRA SALLES ===
+
+SCHEMA_ATUAL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DB_NAME
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE_NAME                                                                                                                                                                                                                                                    
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SANKHYA                                                                                                                                                                                                                                                          
+IMSPRD                                                                                                                                                                                                                                                           
+imsprd.sankhyacloud.com.br                                                                                                                                                                                                                                      
+
+
+
+TIPO                 QTD
+------------- ----------
+MAPA_BAI             418
+MAPA_END            7094
+BACKUP_BAI           828
+BACKUP_END         13890
+AUDITORIA_DEP      59275
+EXCECOES               0
+
+6 rows selected. 
+
+
+TIPO                           QTD
+----------------------- ----------
+OBSOLETOS_BAI_PRESENTES          0
+OBSOLETOS_END_PRESENTES          0
+
+
+TIPO                             QTD
+------------------------- ----------
+DUPLICIDADE_BAI_POS_MERGE          0
+
+
+TIPO                             QTD
+------------------------- ----------
+DUPLICIDADE_END_POS_MERGE          0
+
+VALIDACAO_REFERENCIAS_REMANESCENTES=0
+
+
+PL/SQL procedure successfully completed.
+
+
+TIPO                     QTD
+----------------- ----------
+OBJETOS_INVALIDOS         39
+
+
+OBJETO_INVALIDO                                                                                                                                         
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+FUNCTION|ACL_GET_ALIQPART
+FUNCTION|FSP_DATA_DIA_UTIL
+FUNCTION|FSP_RETURN_DATAS_UTEIS
+FUNCTION|F_OBTEMPRECO_DATA
+FUNCTION|F_OBTEM_SALDO_INDENIZ
+FUNCTION|GET_CODPROD_REF
+FUNCTION|GET_INDICE_AJUSTE_NOTA
+FUNCTION|GET_PREVISAO_CREDITO_DEBITO
+FUNCTION|GET_PROXIMO_DIA_UTIL
+FUNCTION|QTDEVOLPADRAO
+FUNCTION|QTDEVOLPADRAO2
+FUNCTION|SNK_GETCODPRODALT
+FUNCTION|SNK_GETDTBAIXABEM
+FUNCTION|SNK_GETMESESSEMPIS
+FUNCTION|SNK_GETPRODUTOAGRUPADOGIRO
+FUNCTION|SNK_GETVLRREA
+FUNCTION|SNK_GET_CENTROCUSTO_EFD
+FUNCTION|SNK_GET_CFO_NOTA
+FUNCTION|SNK_GET_CODCFO
+FUNCTION|SNK_GET_CODIGO_PRODUTO
+FUNCTION|SNK_GET_CONTACONTABIL_EFD
+FUNCTION|SNK_GET_CONTACONTABIL_IMOB_EFD
+FUNCTION|SNK_GET_CTACTB_CADASTROS_EFD
+FUNCTION|SNK_GET_DENTRO_FORA_ESTADO
+FUNCTION|SNK_GET_ICMS_ESPECIAL_CAB
+FUNCTION|SNK_GET_INDITENS
+FUNCTION|SNK_GET_NUNOTA
+FUNCTION|SNK_GET_SATUSCONFERENCIA
+FUNCTION|SNK_GET_ST_RECUPERAR
+FUNCTION|SNK_MATGIR_GET_MULTCPA
+FUNCTION|SNK_MATGIR_GET_QTDTOTALMULTCPA
+FUNCTION|SNK_PRECO
+FUNCTION|TIM_ASSINAFIADOR
+FUNCTION|TIM_ASSINAINQUILINO
+FUNCTION|TIM_ASSINALOCADOR
+FUNCTION|TIM_MONTAFIADOR
+FUNCTION|TIM_MONTAFORMAREPASSE
+FUNCTION|TIM_MONTAINQUILINO
+FUNCTION|TIM_MONTAPROPRIETARIOS
+
+39 rows selected. 
+
+=== POS-VALIDACAO CARD 29/30 CONCLUIDA ===

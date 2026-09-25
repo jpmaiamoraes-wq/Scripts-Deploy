@@ -1,0 +1,57 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:19.129491+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P04_Identidade_Empresa_Variacoes.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 5,
+  "colunas": [
+    "CODEMP",
+    "NOMEFANTASIA",
+    "RAZAOSOCIAL",
+    "CNPJ",
+    "CLASSIFICACAO"
+  ],
+  "linhas": [
+    {
+      "CODEMP": 1,
+      "NOMEFANTASIA": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "RAZAOSOCIAL": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "CNPJ": "00577604000103",
+      "CLASSIFICACAO": "VARIACAO_MEDCHAP"
+    },
+    {
+      "CODEMP": 2,
+      "NOMEFANTASIA": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "RAZAOSOCIAL": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "CNPJ": "00577604000367",
+      "CLASSIFICACAO": "VARIACAO_MEDCHAP"
+    },
+    {
+      "CODEMP": 3,
+      "NOMEFANTASIA": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "RAZAOSOCIAL": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "CNPJ": "00577604000448",
+      "CLASSIFICACAO": "VARIACAO_MEDCHAP"
+    },
+    {
+      "CODEMP": 4,
+      "NOMEFANTASIA": "PROWIN COMPANY",
+      "RAZAOSOCIAL": "PROWIN COMPANY LTDA",
+      "CNPJ": "31794188000110",
+      "CLASSIFICACAO": "SEM_TOKEN"
+    },
+    {
+      "CODEMP": 5,
+      "NOMEFANTASIA": "SALUTH ADMINISTRADORA E LOCADORA DE BENS",
+      "RAZAOSOCIAL": "SALUTH ADMINISTRADORA E LOCADORA DE BENS",
+      "CNPJ": "42824603000158",
+      "CLASSIFICACAO": "SEM_TOKEN"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

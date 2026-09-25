@@ -1,0 +1,30 @@
+PACOTE1_READ_ONLY base=MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA TS=20260925_075545 inicio=2026-09-25T07:55:45-0300
+P00_credential_status;inicio=2026-09-25T07:55:53-0300;fim=2026-09-25T07:55:53-0300;dur_s=0;rc=1
+"status": "CREDENCIAL_KEYCHAIN_AUSENTE"
+prepare;inicio=2026-09-25T07:58:58-0300;fim=2026-09-25T07:58:58-0300;dur_s=0;rc=0
+P00_identity;inicio=2026-09-25T07:58:58-0300;fim=2026-09-25T07:59:16-0300;dur_s=18;rc=0
+P01_Versao_Identidade;inicio=2026-09-25T07:59:16-0300;fim=2026-09-25T07:59:17-0300;dur_s=1;rc=0
+P02_Privilegios_Roles;inicio=2026-09-25T07:59:17-0300;fim=2026-09-25T07:59:17-0300;dur_s=0;rc=0
+P03_Quota_Tablespace;inicio=2026-09-25T07:59:17-0300;fim=2026-09-25T07:59:18-0300;dur_s=1;rc=0
+P04_Identidade_Empresa_Variacoes;inicio=2026-09-25T07:59:18-0300;fim=2026-09-25T07:59:19-0300;dur_s=1;rc=0
+P05_Estado_Execucoes_Anteriores;inicio=2026-09-25T07:59:19-0300;fim=2026-09-25T07:59:20-0300;dur_s=1;rc=0
+P06A_Unidades_TGFVOL;inicio=2026-09-25T07:59:20-0300;fim=2026-09-25T07:59:20-0300;dur_s=0;rc=0
+P06B_Unidades_Candidatos_Automaticos;inicio=2026-09-25T07:59:20-0300;fim=2026-09-25T07:59:21-0300;dur_s=1;rc=0
+P06C_Unidades_Descricao_Maiusculas;inicio=2026-09-25T07:59:21-0300;fim=2026-09-25T07:59:22-0300;dur_s=1;rc=0
+P07_Etapas_18_22_Volumes;inicio=2026-09-25T07:59:22-0300;fim=2026-09-25T07:59:23-0300;dur_s=1;rc=0
+P08_Objetos_Obrigatorios_18_31;inicio=2026-09-25T07:59:23-0300;fim=2026-09-25T07:59:24-0300;dur_s=1;rc=0
+P09_Volumes_24_28;inicio=2026-09-25T07:59:24-0300;fim=2026-09-25T07:59:24-0300;dur_s=0;rc=0
+P10_Etapa29_Bairros_Colisoes;inicio=2026-09-25T07:59:24-0300;fim=2026-09-25T07:59:25-0300;dur_s=1;rc=0
+P11_Etapa30_Enderecos_Colisoes;inicio=2026-09-25T07:59:25-0300;fim=2026-09-25T07:59:30-0300;dur_s=5;rc=0
+P12_Etapa31_Invalidos_Privilegio;inicio=2026-09-25T07:59:30-0300;fim=2026-09-25T07:59:30-0300;dur_s=0;rc=0
+P13_Etapa31_Lista_Objetos_Invalidos;inicio=2026-09-25T07:59:30-0300;fim=2026-09-25T07:59:31-0300;dur_s=1;rc=0
+P14_Triggers_Status;inicio=2026-09-25T07:59:31-0300;fim=2026-09-25T07:59:33-0300;dur_s=2;rc=0
+P15_Triggers_Desabilitados;inicio=2026-09-25T07:59:33-0300;fim=2026-09-25T07:59:34-0300;dur_s=1;rc=0
+P16_Card09_Objetos;inicio=2026-09-25T07:59:34-0300;fim=2026-09-25T07:59:34-0300;dur_s=0;rc=0
+P17_Card09_TGFNUM_TGFFIN;inicio=2026-09-25T07:59:34-0300;fim=2026-09-25T07:59:35-0300;dur_s=1;rc=0
+P18_Onboarding_Usuarios_TSIUSU;inicio=2026-09-25T07:59:35-0300;fim=2026-09-25T07:59:36-0300;dur_s=1;rc=0
+P19_Card09_Estado_Inicial;inicio=2026-09-25T07:59:36-0300;fim=2026-09-25T08:00:07-0300;dur_s=31;rc=0
+P20_Versao_Sistema;inicio=2026-09-25T08:00:07-0300;fim=2026-09-25T08:00:08-0300;dur_s=1;rc=0
+V01_Volumetria_Inicial_JRXML;inicio=2026-09-25T08:00:08-0300;fim=2026-09-25T08:00:19-0300;dur_s=11;rc=0
+P21_Preflight_29_30;inicio=2026-09-25T08:00:19-0300;fim=2026-09-25T08:01:31-0300;dur_s=72;rc=0
+FIM_PREFLIGHT 2026-09-25T08:01:31-0300

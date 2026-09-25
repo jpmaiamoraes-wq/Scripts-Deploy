@@ -1,0 +1,24 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/29_30_Merge_Antifragil_MEDCHAP.sql",
+  "arquivos": [
+    "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/29_30_Merge_Antifragil_MEDCHAP.sql"
+  ],
+  "qtd_instrucoes": 3,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 3
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [],
+  "sha256_suite": "f0fa62a4e6f67b111b6145e6d8d7f6ca45d505a3579c4b059f63d53eb439e24b",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "preflight": {
+    "status": "PREFLIGHT_APROVADO",
+    "qtd_bloqueios": 0,
+    "qtd_avisos": 0,
+    "bloqueios": [],
+    "avisos": []
+  },
+  "dml_ddl_executado": false
+}

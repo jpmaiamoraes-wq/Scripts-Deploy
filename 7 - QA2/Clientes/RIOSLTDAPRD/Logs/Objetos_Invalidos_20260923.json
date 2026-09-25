@@ -1,0 +1,297 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T13:20:27.561189+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/Objetos_Invalidos_ReadOnly_RIOSLTDAPRD.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "service_esperado": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 46,
+  "colunas": [
+    "OWNER",
+    "OBJECT_NAME",
+    "OBJECT_TYPE",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "ACL_GET_ALIQPART",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "FSP_DATA_DIA_UTIL",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "FSP_RETURN_DATAS_UTEIS",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "F_OBTEMPRECO_DATA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "F_OBTEM_SALDO_INDENIZ",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "GET_CODPROD_REF",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "GET_INDICE_AJUSTE_NOTA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "GET_PREVISAO_CREDITO_DEBITO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "GET_PROXIMO_DIA_UTIL",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "QTDEVOLPADRAO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "QTDEVOLPADRAO2",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "RECEBIMENTO_M3_TOTAL",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "RECEBIMENTO_PESO_TOTAL",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GETCODPRODALT",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GETDTBAIXABEM",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GETMESESSEMPIS",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GETPRODUTOAGRUPADOGIRO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GETVLRREA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_BASEFINESTOQUERENEGGOL",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CENTROCUSTO_EFD",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CFO_NOTA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CODCFO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CODIGO_PRODUTO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CONTACONTABIL_EFD",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CONTACONTABIL_IMOB_EFD",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CTACTB_CADASTROS_EFD",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_CUS_VAR_TIT",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_DENTRO_FORA_ESTADO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_ICMS_ESPECIAL_CAB",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_INDITENS",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_NUFIN",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_NUNOTA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_SATUSCONFERENCIA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_ST_RECUPERAR",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_VLRITENS",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_GET_VLRTOT_SERVICO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_MATGIR_GET_QTDTOTALMULTCPA",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "SNK_PRECO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_ASSINAFIADOR",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_ASSINAINQUILINO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_ASSINALOCADOR",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_MONTAFIADOR",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_MONTAFORMAREPASSE",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_MONTAINQUILINO",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_MONTAPROPRIETARIOS",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "TIM_POSSUI_FIN_JUR",
+      "OBJECT_TYPE": "FUNCTION",
+      "STATUS": "INVALID"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

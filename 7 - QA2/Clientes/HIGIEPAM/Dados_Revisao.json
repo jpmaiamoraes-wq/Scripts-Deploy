@@ -1,0 +1,309 @@
+{
+  "cliente_informado": "HIGIEPAM",
+  "pasta_cliente": "HIGIEPAM",
+  "hostname": "10.100.106.5",
+  "port": 1521,
+  "servicename": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "username": "FRANCISCO_JUNIOR",
+  "gp_email": "ronan.junior@sankhya.com.br",
+  "gp_nome": null,
+  "analista_projetos": {
+    "nome": null,
+    "email": null,
+    "confirmada": false
+  },
+  "comunicacao_email": {
+    "status": "AGUARDANDO_PDF_FINAL_E_CONFIRMACAO_DOS_DESTINATARIOS",
+    "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
+    "corpo_modelo": "Olá,\\n\\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\\n\\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\\n\\nAtenciosamente,",
+    "anexo_permitido": "somente o PDF final validado"
+  },
+  "preparado_em": "2026-09-21T15:12:25-03:00",
+  "id_execucao": "RMD_HIGIEPAM_20260921164038",
+  "escopo": "BASE_INTEIRA",
+  "autorizacao_operacional": "EXECUTAR HIGIEPAM",
+  "preflight_local": {
+    "checkout_confirmado": true,
+    "master": "7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql",
+    "entrada_lote": "7 - QA2/Clientes/HIGIEPAM/Continuacao_Master_Deploy_HIGIEPAM_18_31.sql",
+    "plano_status": "PLANO_LOTE_VALIDADO",
+    "qtd_instrucoes": 22,
+    "qtd_arquivos_expandidos": 15,
+    "sha256_suite": "9d6372942eaf8c661ea034f921eda0f25b549d06efd5f708e5f8f7248ef2af93",
+    "binds_sqlplus": ["RMD_ID_MASTER"],
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "bloqueios_tecnicos": [
+    {
+      "status": "IDENTIDADE_ORACLE_VALIDADA",
+      "evidencia": "SESSION_USER=FRANCISCO_JUNIOR; CURRENT_SCHEMA=SANKHYA; SERVICE_NAME=HIGIEPAMPRD.SANKHYACLOUD.COM.BR; DB_NAME=HIGIEPAMPRD.",
+      "acao_necessaria": null,
+      "dml_executado": false,
+      "ddl_executado": false
+    }
+  ],
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--apply",
+    "codigo": 0,
+    "saida": "OK: 10.100.106.5:1521 já está acessível. Nenhuma alteração necessária.",
+    "checagem_inicial": {
+      "modo": "--check",
+      "codigo": 10,
+      "saida": "ROTA_NECESSARIA: 10.100.106.5 cadastrado; VPN=utun4/10.250.0.97; porta 1521 inacessível."
+    }
+  },
+  "roteamento_automatico": false,
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": true,
+  "identidade_oracle": {
+    "status": "IDENTIDADE_VALIDADA_READ_ONLY",
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+    "db_name": "HIGIEPAMPRD",
+    "qtd_empresas_observadas": 3,
+    "fonte": "Logs/Identidade_Oracle_ReadOnly_20260921_153040.json",
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Continuacao_Master_18_31_20260921_164038.log",
+  "rotas_execucao": {
+    "primaria": "ORACLE_DIRETO_LOTE",
+    "fallback": "VSCODE_SCRIPT_LEGADO",
+    "wrapper_legado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Executar_Revisao_HIGIEPAM.sql",
+    "roteiro_fallback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/ROTEIRO_FALLBACK_LEGADO_VSCODE.md",
+    "troca_automatica": false,
+    "catalogo_ips": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/ips-roteamento-vpn.txt",
+    "aplica_rota_cadastrada_automaticamente": true
+  },
+  "onboarding_read_only": {
+    "status": "CONFERENCIA_ONBOARDING_READ_ONLY_CONCLUIDA",
+    "fonte": "Onboarding Deploy > HIGIEPAM > Ver Registros",
+    "arquivo_usuarios": "(MODELO SANKHYA) Usuarios.xlsx",
+    "arquivo_enviado_em": "2026-09-15 11:38",
+    "qtd_linhas_usuarios": 17,
+    "qtd_empresas_onboarding": 3,
+    "qtd_empresas_oracle": 3,
+    "qtd_usuarios_oracle_com_codgrupo": 0,
+    "qtd_usuarios_oracle_modelo_codgrupo_zero": 17,
+    "evidencia_json": "Onboarding_Comparacao_ReadOnly_HIGIEPAM.json",
+    "evidencia_markdown": "Onboarding_Comparacao_ReadOnly_HIGIEPAM.md",
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "volumetria_read_only": {
+    "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+    "fonte": "7 - QA2/Revisao Master Deploy/Base Relatório de Entrega/REL_ENTEGA_NOVO_05.jrxml",
+    "evidencia": "Logs/Volumetria_JRXML_ReadOnly_20260921.log",
+    "qtd_notas_cabecalhos": 10766,
+    "qtd_itens": 33686,
+    "qtd_financeiros": 12669,
+    "indicadores_obrigatorios": {
+      "financeiros_sem_nota": 0,
+      "itens_sem_cabecalho": 0,
+      "cabecalhos_sem_itens": 0,
+      "codigos_fiscais_cidades_duplicados": 0
+    },
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "resultado_lote": {
+    "colisoes_29_30": {
+      "status": "CONCLUIDO_COM_COLISOES_TRATADAS_E_POS_VALIDADO",
+      "merge": {
+        "id_execucao": "RMD_HIGIEPAM_2930_MERGE_20260922082832",
+        "sha256_suite": "73b2ef3fbc87c126496db54f17aaee62f864df74964b15d5c2e912c9fa9374ff",
+        "evidencia_lote": "Logs/Merge_29_30_HIGIEPAM_20260922_082832.log",
+        "evidencia_pos_validacao": "Logs/Merge_29_30_HIGIEPAM_20260922_082832.log",
+        "mapa_bairros": 429,
+        "mapa_enderecos": 7285,
+        "dependencias_redirecionadas": 61222,
+        "excecoes": 0,
+        "referencias_remanescentes": 0
+      },
+      "exclusao": {
+        "id_execucao": "RMD_HIGIEPAM_2930_EXCL_20260922084148",
+        "sha256_suite": "449b82b0c9dad0dbf92db65d61ae3f01deb4b66416d95eb6378e2f6657920816",
+        "status_lote": "COMMIT_LOTE_OK; pos-validacao refeita diretamente em modo read-only",
+        "evidencia_lote": "Logs/Exclusao_29_30_HIGIEPAM_20260922_084148.log",
+        "evidencia_pos_validacao": "Logs/PosValidacao_29_30_Exclusao_HIGIEPAM_ReadOnly_20260922.log",
+        "evidencia_referencias": "Logs/PosValidacao_29_30_Referencias_HIGIEPAM_ReadOnly_20260922.log",
+        "bairros_obsoletos_excluidos": 429,
+        "enderecos_obsoletos_excluidos": 7285,
+        "bairros_mantidos_normalizados": 421,
+        "enderecos_mantidos_normalizados": 6945,
+        "backup_bairros": 850,
+        "backup_enderecos": 14230,
+        "duplicidades_normalizadas_remanescentes": 0,
+        "referencias_remanescentes": 0,
+        "excecoes": 0
+      },
+      "rollback": {
+        "arquivo": "29_30_Rollback_Antifragil_HIGIEPAM_20260922.sql",
+        "sha256_suite": "e8cf6e5b11f5afa587661bf13f1d7fa0cdb4357a047533d26c2db8fc13cd2b49",
+        "status": "PREPARADO_E_PLANO_VALIDADO_NAO_EXECUTADO"
+      },
+      "pos_validacao_independente": {
+        "ramos_fisicos_e_fk": 85,
+        "referencias_remanescentes": 0,
+        "ramos_com_referencia": 0
+      },
+      "falha_transitoria_preservada": {
+        "id_execucao": "RMD_HIGIEPAM_2930_EXCL_20260922083703",
+        "erro": "ORA-30926 na consolidacao de grupos com mais de dois registros; DML de exclusao nao confirmado",
+        "evidencia": "Logs/Exclusao_29_30_HIGIEPAM_20260922_083703.log"
+      }
+    },
+    "card_09": {
+      "status": "CONCLUIDO_SEM_CANDIDATOS_APTOS",
+      "fase_32A_mapa_direto_xml": {
+        "id_execucao": "RMD_HIG_C09_2609220917",
+        "status_lote": "LOTE_CONCLUIDO_POS_VALIDADO",
+        "sha256_suite": "4c8e79608282dd4645a52293ae3c4b774b442a61a0d895376de32b3e42ad508a",
+        "entrada": "32A_Card09_Mapear_Direto_XML_HIGIEPAM.sql",
+        "evidencia_lote": "Logs/Card09_Mapa_Direto_XML_HIGIEPAM_2609220917.log",
+        "evidencia_pos_validacao": "Logs/Card09_Mapa_Direto_XML_HIGIEPAM_2609220917.log",
+        "base_total": 0,
+        "apto_para_validacao_final": 0,
+        "sem_vdup_xml": 0,
+        "revisar_multiplos_xml": 0,
+        "insercoes_financeiras": 0
+      },
+      "fase_32B_insert_financeiro": {
+        "status": "NAO_EXECUTADA_SEM_APTOS",
+        "motivo": "Nao existem linhas APTO_PARA_VALIDACAO_FINAL no mapa."
+      },
+      "fase_32D_pos_validacao": {
+        "status": "CONCLUIDA_SEM_INSERCAO",
+        "evidencia": "Logs/Card09_Mapa_Direto_XML_HIGIEPAM_2609220917.log"
+      },
+      "rollback": {
+        "arquivo": "Card09_Rollback_Mapa_HIGIEPAM_2609220917.sql",
+        "status": "PREPARADO_NAO_EXECUTADO"
+      },
+      "volumetria_correspondente": {
+        "notas_sem_financeiro": 0,
+        "fonte": "Logs/Volumetria_JRXML_ReadOnly_20260921.log"
+      },
+      "dml_executado": false,
+      "ddl_executado": true
+    },
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+    "id_execucao": "RMD_HIGIEPAM_20260921164038",
+    "id_master": "RMD_RUN_20260921155603190",
+    "escopo_executado": "ETAPAS_18_31_SEM_REPETIR_ETAPAS_01_17_E_PREP_18_30",
+    "etapas_concluidas_no_fluxo": ["01", "02-17", "PREP_18_30", "18-31"],
+    "evidencia_lote": "Logs/Continuacao_Master_18_31_20260921_164038.log",
+    "evidencia_pos_validacao": "Logs/PosValidacao_Master_ReadOnly_Ajustada_20260921_164838.log",
+    "plano_lote": "Logs/Plano_Continuacao_18_31_20260921_1642.json",
+    "sha256_suite": "9d6372942eaf8c661ea034f921eda0f25b549d06efd5f708e5f8f7248ef2af93",
+    "integridade_final": {
+      "financeiros_sem_nota": 0,
+      "itens_sem_cabecalho": 0,
+      "cabecalhos_sem_itens": 0,
+      "codigos_fiscais_cidades_duplicados": 0
+    },
+    "objetos_invalidos": 35,
+    "objetos_invalidos_ticket": {
+      "status": "RESOLVIDO",
+      "numero": 711939,
+      "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/711939",
+      "enviado_em": "2026-09-21T16:54:29-03:00",
+      "organizacao": "HIGIEPAM-83893",
+      "prioridade": "Normal",
+      "categoria_produto": "Cloud/SaaS > Solicitação Cloud > Executar Script de Banco de Dados > Personalizar Objeto de Banco de Dados",
+      "ambiente": "Produção",
+      "ambiente_banco": "Oracle",
+      "anexos": [],
+      "privilegio_ausente": "ALTER ANY PROCEDURE",
+      "evidencia_objetos": "Logs/Consulta_Objetos_Invalidos_ReadOnly_20260921.log",
+      "evidencia_execucao": "Logs/Continuacao_Master_18_31_20260921_164038.log",
+      "envio_externo_realizado": true,
+      "ultima_verificacao_read_only": {
+        "executada_em": "2026-09-22T16:55:40.759600+00:00",
+        "quantidade_objetos_invalidos": 0,
+        "status_ticket": "RESOLVIDO_VALIDADO_READ_ONLY",
+        "evidencia_objetos": "Logs/Consulta_Objetos_Invalidos_ReadOnly_20260922_165540.log",
+        "evidencia_privilegio": "Logs/Consulta_Privilegios_ReadOnly_20260922_123054.log",
+        "privilegio_alter_any_procedure_presente": false,
+        "dml_executado": false,
+        "ddl_executado": false
+      }
+    },
+    "dml_executado": true,
+    "ddl_executado": true
+  },
+  "tentativas_lote": [
+    {
+      "id_execucao": "RMD_HIGIEPAM_20260921155009",
+      "id_master": "RMD_RUN_20260921155103187",
+      "sha256_suite": "7bf0dbfec4eee8040fe2560413ca8f9dee03fa0de786d81cf326fcdf63ea7c20",
+      "status": "LOTE_COM_ERRO",
+      "ponto_falha": "02_Liberar_Filtros_Portais.sql",
+      "erro": "ORA-06502 em STP_GRAVATABLOG, acionado por TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "dml_funcional_persistido": false,
+      "ddl_auxiliar_persistido": true,
+      "evidencia": "Logs/Revisao_Master_20260921_155009.log",
+      "inventario_pos_falha": "Logs/Inventario_PosFalha_ReadOnly_20260921.log",
+      "estado_parametros": "Logs/Estado_PosFalha_TSIPAR_ReadOnly_20260921.log"
+    },
+    {
+      "id_execucao": "RMD_HIGIEPAM_20260921155437",
+      "id_master": "RMD_RUN_20260921155603190",
+      "sha256_suite": "e5ca03f0133903f383aaa782fa2c30e465dd7212a7382e2843f7c6e1f82062bc",
+      "status": "LOTE_COM_ERRO",
+      "ponto_falha": "02_Liberar_Filtros_Portais.sql",
+      "erro": "ORA-06502 em STP_GRAVA_TSIPARLOG, acionado por TRG_TSIPAR_LOG após isolamento do primeiro trigger de auditoria",
+      "dml_funcional_persistido": false,
+      "ddl_auxiliar_persistido": true,
+      "evidencia": "Logs/Revisao_Master_20260921_155437.log"
+    },
+    {
+      "id_execucao": "RMD_HIGIEPAM_20260921155836",
+      "status": "BLOQUEADO_CREDENCIAL_ANTES_DA_SESSAO",
+      "ponto_falha": "Autenticação nativa Oracle",
+      "erro": "Entrada de senha cancelada; nenhuma sessão Oracle foi aberta e nenhuma alteração foi executada.",
+      "dml_funcional_persistido": false,
+      "ddl_auxiliar_persistido": false,
+      "evidencia": "saída do executor sem log de lote"
+    },
+    {
+      "id_execucao": "RMD_HIGIEPAM_20260921163234",
+      "sha256_suite": "f080cc5a12043f97cdb9f5582837239d571e51cc3fb9fb7d925ed2ca877783c7",
+      "status": "LOTE_COM_ERRO",
+      "escopo": "ETAPAS_02_31_SEM_REPETIR_ETAPA_01",
+      "ponto_inicio": "02_Liberar_Filtros_Portais.sql",
+      "erro": "ORA-01400 em RMD_CONTROLE_OBJETOS: a retomada não inicializou o bind RMD_ID_MASTER; nenhuma alteração funcional persistiu.",
+      "evidencia": "Logs/Continuacao_Master_20260921_163234.log",
+      "dml_funcional_persistido": false,
+      "ddl_auxiliar_persistido": false
+    },
+    {
+      "id_execucao": "RMD_HIGIEPAM_20260921163426",
+      "sha256_suite": "d15869760761273d75ffbf87206d0bd0eb4bc4851e915a46c7ca0427956e4fd4",
+      "status": "LOTE_COM_ERRO",
+      "escopo": "ETAPAS_02_31_SEM_REPETIR_ETAPA_01",
+      "etapas_concluidas": ["02-17", "PREP_18_30"],
+      "ponto_falha": "18_Ajustar_Preferencias_GOL.sql",
+      "erro": "ORA-06502 em STP_GRAVATABLOG, acionado por TRG_INC_UPD_DLT_TSIPAR_LOG; nenhuma etapa 19-31 foi iniciada.",
+      "evidencia": "Logs/Continuacao_Master_20260921_163426.log",
+      "dml_funcional_persistido": true,
+      "ddl_auxiliar_persistido": true
+    },
+    {
+      "id_execucao": "RMD_HIGIEPAM_20260921164038",
+      "sha256_suite": "9d6372942eaf8c661ea034f921eda0f25b549d06efd5f708e5f8f7248ef2af93",
+      "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+      "escopo": "ETAPAS_18_31_SEM_REPETIR_ETAPAS_01_17_E_PREP_18_30",
+      "ponto_inicio": "18_Ajustar_Preferencias_GOL.sql",
+      "id_master_reutilizado": "RMD_RUN_20260921155603190",
+      "evidencia_plano": "Logs/Plano_Continuacao_18_31_20260921_1642.json",
+      "evidencia_lote": "Logs/Continuacao_Master_18_31_20260921_164038.log",
+      "evidencia_pos_validacao": "Logs/PosValidacao_Master_ReadOnly_Ajustada_20260921_164838.log",
+      "dml_funcional_persistido": true,
+      "ddl_auxiliar_persistido": true
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T12:33:17.190954+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Onboarding/O01_Empresas.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 5,
+  "colunas": [
+    "CODEMP",
+    "RAZAOSOCIAL",
+    "NOMEFANTASIA",
+    "CNPJ",
+    "IE",
+    "NOMECID",
+    "UF"
+  ],
+  "linhas": [
+    {
+      "CODEMP": 1,
+      "RAZAOSOCIAL": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "NOMEFANTASIA": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "CNPJ": "00577604000103",
+      "IE": "253078067",
+      "NOMECID": "CHAPECO",
+      "UF": "SC"
+    },
+    {
+      "CODEMP": 2,
+      "RAZAOSOCIAL": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "NOMEFANTASIA": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "CNPJ": "00577604000367",
+      "IE": "258178124",
+      "NOMECID": "CURITIBANOS",
+      "UF": "SC"
+    },
+    {
+      "CODEMP": 3,
+      "RAZAOSOCIAL": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "NOMEFANTASIA": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+      "CNPJ": "00577604000448",
+      "IE": "9089483783",
+      "NOMECID": "SAO JOSE DOS PINHAIS",
+      "UF": "PR"
+    },
+    {
+      "CODEMP": 4,
+      "RAZAOSOCIAL": "PROWIN COMPANY LTDA",
+      "NOMEFANTASIA": "PROWIN COMPANY",
+      "CNPJ": "31794188000110",
+      "IE": "262325691",
+      "NOMECID": "CHAPECO",
+      "UF": "SC"
+    },
+    {
+      "CODEMP": 5,
+      "RAZAOSOCIAL": "SALUTH ADMINISTRADORA E LOCADORA DE BENS",
+      "NOMEFANTASIA": "SALUTH ADMINISTRADORA E LOCADORA DE BENS",
+      "CNPJ": "42824603000158",
+      "IE": "ISENTO",
+      "NOMECID": "CHAPECO",
+      "UF": "SC"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

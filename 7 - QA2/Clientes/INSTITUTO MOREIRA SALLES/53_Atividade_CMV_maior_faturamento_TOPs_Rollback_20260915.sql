@@ -1,0 +1,96 @@
+-- Atividade: CMV sem ICMS acima do faturamento
+-- Fase: rollback opcional do ajuste de PRECIFICA
+-- Base: INSTITUTO MOREIRA SALLES
+-- Backup: BKP_CMV_TOP_20260915_140624
+-- Por seguranca, o rollback nao executa enquanto CONFIRMA_ROLLBACK permanecer NAO.
+
+SET DEFINE ON
+DEFINE CONFIRMA_ROLLBACK = 'NAO'
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+SET LINESIZE 250
+SET PAGESIZE 500
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/INSTITUTO MOREIRA SALLES/Logs/53_Atividade_CMV_maior_faturamento_TOPs_Rollback_20260915.log"
+
+PROMPT === ROLLBACK DO AJUSTE DAS TOPS ===
+SELECT SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA,
+       SYS_CONTEXT('USERENV','SESSION_USER') AS SESSION_USER,
+       SYSTIMESTAMP AS DH_ROLLBACK,
+       'RMD_CMV_IMS_20260915_140624' AS ID_EXECUCAO,
+       '&&CONFIRMA_ROLLBACK' AS CONFIRMACAO
+  FROM DUAL;
+
+DECLARE
+  v_confirm VARCHAR2(10):=UPPER(TRIM('&&CONFIRMA_ROLLBACK'));
+  v_backup NUMBER;
+  v_target NUMBER;
+  v_conflict NUMBER;
+  v_updated NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_backup FROM BKP_CMV_TOP_20260915_140624;
+  IF v_backup=0 THEN
+    RAISE_APPLICATION_ERROR(-20360,'Backup sem registros; rollback interrompido.');
+  END IF;
+
+  IF v_confirm<>'SIM' THEN
+    DBMS_OUTPUT.PUT_LINE('STATUS=NAO_EXECUTADO; altere CONFIRMA_ROLLBACK para SIM apos revisar.');
+    RETURN;
+  END IF;
+
+  SELECT COUNT(*) INTO v_target
+    FROM TGFTOP T
+    JOIN BKP_CMV_TOP_20260915_140624 B
+      ON B.ROWID_ORIGINAL=ROWIDTOCHAR(T.ROWID);
+  IF v_target<>v_backup THEN
+    RAISE_APPLICATION_ERROR(-20361,
+      'Quantidade de linhas alvo diverge do backup; rollback interrompido.');
+  END IF;
+
+  SELECT COUNT(*) INTO v_conflict
+    FROM TGFTOP T
+    JOIN BKP_CMV_TOP_20260915_140624 B
+      ON B.ROWID_ORIGINAL=ROWIDTOCHAR(T.ROWID)
+   WHERE NVL(T.PRECIFICA,'#')<>'N';
+  IF v_conflict>0 THEN
+    RAISE_APPLICATION_ERROR(-20362,
+      'Ha linhas das TOPs alvo com valor atual diferente de N; revise antes de reverter.');
+  END IF;
+
+  UPDATE TGFTOP T
+     SET PRECIFICA=(SELECT B.PRECIFICA
+                      FROM BKP_CMV_TOP_20260915_140624 B
+                     WHERE B.ROWID_ORIGINAL=ROWIDTOCHAR(T.ROWID))
+   WHERE EXISTS (SELECT 1
+                   FROM BKP_CMV_TOP_20260915_140624 B
+                  WHERE B.ROWID_ORIGINAL=ROWIDTOCHAR(T.ROWID));
+  v_updated:=SQL%ROWCOUNT;
+
+  IF v_updated<>v_backup THEN
+    RAISE_APPLICATION_ERROR(-20363,
+      'Quantidade revertida diverge do backup; rollback revertido.');
+  END IF;
+
+  SELECT COUNT(*) INTO v_conflict
+    FROM TGFTOP T
+    JOIN BKP_CMV_TOP_20260915_140624 B
+      ON B.ROWID_ORIGINAL=ROWIDTOCHAR(T.ROWID)
+   WHERE DECODE(T.PRECIFICA,B.PRECIFICA,1,0)=0;
+  IF v_conflict>0 THEN
+    RAISE_APPLICATION_ERROR(-20364,
+      'A validacao pos-rollback encontrou divergencias; rollback revertido.');
+  END IF;
+
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO=RMD_CMV_IMS_20260915_140624');
+  DBMS_OUTPUT.PUT_LINE('REGISTROS_REVERTIDOS='||v_updated);
+  DBMS_OUTPUT.PUT_LINE('STATUS=ROLLBACK_EXECUTADO_COMMIT');
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+    RAISE;
+END;
+/
+
+SPOOL OFF

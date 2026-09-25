@@ -1,0 +1,12 @@
+{
+  "pedido": "06_merge_2930_fase2.json",
+  "inicio_local": "2026-09-25T08:49:12-03:00",
+  "id": "MEDCHAP_DEL_20260925_01",
+  "tipo": "batch_apply",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_DEL_20260925_01_console.txt",
+  "log_lote": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_DEL_20260925_01.log",
+  "fim_local": "2026-09-25T08:49:18-03:00",
+  "duracao_s": 5.7
+}

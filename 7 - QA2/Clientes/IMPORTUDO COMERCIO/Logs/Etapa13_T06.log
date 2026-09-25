@@ -1,0 +1,69 @@
+SQL> PROMPT CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 13 A 31
+CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 13 A 31
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [13/31] INICIO
+[13/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql"
+SQL> -- Bloco 12. Mantem a regra funcional aprovada com snapshot das linhas.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_12_TGFTOP';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_12_TGFTOP AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  4   CAST(NULL AS TIMESTAMP) DH_EXECUCAO, CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL, T.GOLSINAL GOLSINAL_ANTES, T.GOLMPSINAL GOLMPSINAL_ANTES, T.GOLDEV GOLDEV_ANTES, T.ANALISEGIRO ANALISEGIRO_ANTES, T.ATUALULTIMAVEND ATUALULTIMAVEND_ANTES, T.ATUALULTIMACOMP ATUALULTIMACOMP_ANTES FROM TGFTOP T WHERE 1=0]'; END IF;
+  6  END;
+  7  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v_id VARCHAR2(30):='RMD_TOPG_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); v_b PLS_INTEGER; v_u PLS_INTEGER;
+  2  BEGIN
+  3   INSERT INTO BKP_RMD_12_TGFTOP
+  4   (ID_EXECUCAO,DH_EXECUCAO,USUARIO_EXECUCAO,ROWID_ORIGINAL,
+  5    GOLSINAL_ANTES,GOLMPSINAL_ANTES,GOLDEV_ANTES,ANALISEGIRO_ANTES,
+  6    ATUALULTIMAVEND_ANTES,ATUALULTIMACOMP_ANTES)
+  7   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),
+  8          GOLSINAL,GOLMPSINAL,GOLDEV,ANALISEGIRO,ATUALULTIMAVEND,ATUALULTIMACOMP
+  9   FROM TGFTOP WHERE 1=1;
+ 10   v_b:=SQL%ROWCOUNT;
+ 11   UPDATE TGFTOP SET GOLSINAL=CASE WHEN ATUALEST='B' AND TIPMOV='V' AND ATUALFIN=1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN -1 WHEN ATUALEST='E' AND TIPMOV='D' AND ATUALFIN=-1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN -1 WHEN ATUALEST='E' AND TIPMOV='C' AND ATUALFIN=-1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 1 WHEN ATUALEST='B' AND TIPMOV='E' AND ATUALFIN=1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 1 ELSE 0 END,
+ 12   GOLMPSINAL=CASE WHEN ATUALEST='B' AND TIPMOV='V' AND ATUALFIN=1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN -1 WHEN ATUALEST='E' AND TIPMOV='D' AND ATUALFIN=-1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN -1 WHEN ATUALEST='E' AND TIPMOV='C' AND ATUALFIN=-1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 1 WHEN ATUALEST='B' AND TIPMOV='E' AND ATUALFIN=1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 1 ELSE 0 END,
+ 13   GOLDEV=CASE WHEN TIPMOV IN ('D','E') AND ATUALEST IN ('E','B') AND CODMODDOC IN (55,59,65) AND (ATUALFIN<>0 OR TIPATUALFIN<>'P') THEN -1 ELSE 1 END,
+ 14   ANALISEGIRO=CASE WHEN TIPMOV='V' AND ATUALEST='B' AND ATUALFIN=1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN -1 WHEN TIPMOV='D' AND ATUALEST='E' AND ATUALFIN=-1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 1 ELSE 0 END,
+ 15   ATUALULTIMAVEND=CASE WHEN TIPMOV='V' AND ATUALEST='B' AND ATUALFIN=1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 'G' ELSE 'N' END,
+ 16   ATUALULTIMACOMP=CASE WHEN TIPMOV='C' AND ATUALEST='E' AND ATUALFIN=-1 AND TIPATUALFIN='I' AND CODMODDOC IN (55,59,65) THEN 'E' ELSE 'N' END WHERE 1=1;
+ 17   v_u:=SQL%ROWCOUNT;
+ 18   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20210,'Backup e atualizacao divergiram em Configurar_TOPs_Giro_GOL.'); END IF;
+ 19   COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id); DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 20   DBMS_OUTPUT.PUT_LINE('AVISO=Mapeamento de TOPs possui cobertura parcial aprovada.');
+ 21  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END;
+ 22  /
+ID_EXECUCAO=RMD_TOPG_20260910155057201
+REGISTROS_ALTERADOS=1507
+AVISO=Mapeamento de TOPs possui cobertura parcial aprovada.
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [13/31] FIM
+[13/31] FIM
+SQL> SPOOL OFF

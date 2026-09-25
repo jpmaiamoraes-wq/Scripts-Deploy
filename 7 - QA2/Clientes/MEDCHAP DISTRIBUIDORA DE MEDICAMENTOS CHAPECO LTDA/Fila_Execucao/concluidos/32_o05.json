@@ -1,0 +1,1 @@
+{"id": "MEDCHAP_O05_20260925_01", "tipo": "query", "sql_file": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Onboarding/O05_SMTP_Empresas.sql", "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/O05_SMTP_Empresas_20260925.json", "descricao": "smtp empresas sem senha"}

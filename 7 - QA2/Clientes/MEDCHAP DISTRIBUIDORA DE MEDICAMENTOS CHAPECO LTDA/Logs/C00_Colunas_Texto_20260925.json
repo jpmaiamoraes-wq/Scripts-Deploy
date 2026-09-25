@@ -1,0 +1,4353 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T12:45:06.335022+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Caracteres/C00_Colunas_Texto.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 481,
+  "colunas": [
+    "TIPO",
+    "TABLE_NAME",
+    "COLUMN_NAME",
+    "DATA_TYPE",
+    "DATA_LENGTH",
+    "CHAR_LENGTH",
+    "CHAR_USED"
+  ],
+  "linhas": [
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "AD_IDEXTERNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "AGENCIA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "AGRONOMO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "AGRUPAR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "AGRUPBOLEMPDIF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ALUNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "APLICLEITRANSP",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ARREDPRIMEIRAPARC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ARTPRECAD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ASSOCIACAODESP",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ASYNCCONSULTAID",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 250,
+      "CHAR_LENGTH": 250,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ATIVO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ATUNUVERSAO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "BLOQUEAR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "BOLDESTEMAIL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CAIXAPOSTAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CALCFETHAB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CALCINSS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CEI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 12,
+      "CHAR_LENGTH": 12,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CEP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "CHAR_LENGTH": 8,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CGC_CPF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 14,
+      "CHAR_LENGTH": 14,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CHAVEPIX",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 77,
+      "CHAR_LENGTH": 77,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CLASSIFICMS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CLIENTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CNAE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CODAGE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 5,
+      "CHAR_LENGTH": 5,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CODCTABCO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 17,
+      "CHAR_LENGTH": 17,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CODIDENTCONSSTR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CODUNIMED",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 17,
+      "CHAR_LENGTH": 17,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "COMOCONHECEU",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "COMPLEMENTO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CONSIDTOTITENSTRIB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CONSPARCADRCST",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CONTACESSO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CPFPRODRURAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 11,
+      "CHAR_LENGTH": 11,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CTAADIANT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "DEDUZIPIBCPISCF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "DESCBONIF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "DESCONSDESCINSS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "DESCONSIDESCBASE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "DESCSTIVA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ECOMPRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EMAILCTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EMAILDANFE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EMAILNFE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EMAILNFSE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EMAILNOTIFENTREGA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ENQART227",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ENTREGAENDCONTATO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ENVIADANFEREDESPACHO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ENVIPEDEMAILTOP",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ESTABTRANSP",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EVENDA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EXIGCONTATOENTCAB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EXIGELAUDOPRD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "EXIGENOMEPARC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "FAX",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 13,
+      "CHAR_LENGTH": 13,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "FLEX",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "FORNECEDOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "GERCTRCAUTO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "GRUPOAUTOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "HOMEPAGE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "IDENTINSCESTAD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 16,
+      "CHAR_LENGTH": 16,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "IDESTRANGEIRO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "IMPAGRUPFIN",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "IMPLAUDOLOTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INAPLICPRODEPE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INDAQUISICAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 5,
+      "CHAR_LENGTH": 5,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INDCOMERCIALIZACAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 5,
+      "CHAR_LENGTH": 5,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INDNATRET",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INSCESTADNAUF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 16,
+      "CHAR_LENGTH": 16,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INSCMUN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 16,
+      "CHAR_LENGTH": 16,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INSCRCNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 12,
+      "CHAR_LENGTH": 12,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "INTEGRAECONECT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "IPIINCICMS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "LATITUDE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "LONGITUDE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "MEDICO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "MEIRJ",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "MODELONFDES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "MOTBLOQ",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "MOTNAORETERISSQN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "MOTORISTA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "NATUREZAOPERDES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "NOMEAGE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 19,
+      "CHAR_LENGTH": 19,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "NOMEPARC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "NUMEND",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "OBSERVACOES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "OPERLOGIST",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ORDSUBST",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ORGAOPUB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "ORGPUBLNFSE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PARCELAMECONECT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 32,
+      "CHAR_LENGTH": 32,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PARCINTER",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PARCSUBSTISS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PERFILECONECT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PERMITECORTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PRAZOPARCECONECT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 32,
+      "CHAR_LENGTH": 32,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PRODUTORTEMNF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "PROFESSOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RAZAOSOCIAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "REDE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "REGAPUR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "REGIMEESPTRIBISS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "REGISTROANS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RETEMCOFINS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RETEMCSL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RETEMINSS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RETEMISS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RETEMPIS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "RETSTVENDA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SELECIONADO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SENHAECONECT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 32,
+      "CHAR_LENGTH": 32,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SERIENFDES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4,
+      "CHAR_LENGTH": 4,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SEXO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SIMPLES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SITCCF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SITESPECIALRESP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SITRECEITA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SITSINTEGRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "SITUACAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "STATUSEDZ",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TARE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TELEFONE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 13,
+      "CHAR_LENGTH": 13,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TEMIPI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TERMACORD",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMCARTREGIMEBENSV",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 3,
+      "CHAR_LENGTH": 3,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMCOMPRADOR",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMCORRESPBANCARIO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMCORRETOR",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMESTADOCIVIL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMFAIXASALARIAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMFIADOR",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMINQUILINO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMMAE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMORGAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMOUTTELS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 400,
+      "CHAR_LENGTH": 400,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMPAI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMPROPRIETA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMPROPVENDA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMQUERCOMPRAR",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMREFERENCIA01",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 40,
+      "CHAR_LENGTH": 40,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMREFERENCIA02",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 40,
+      "CHAR_LENGTH": 40,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMSENHADESC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "CHAR_LENGTH": 8,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMSENHASITE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "CHAR_LENGTH": 8,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMTELEFONE01",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 40,
+      "CHAR_LENGTH": 40,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMTELEFONE02",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIMTIPOMORADIA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPANEXONFE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPGERBOLCENT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPJURO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPOAPICONSULTA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPOFATUR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPOGERBOLETO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPOGERBOLETODUP",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPPESSOA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TIPTRANSP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TPCOMPRAGOV",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 5,
+      "CHAR_LENGTH": 5,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TRANSPORTADORA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TRANSPPROPRIA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "TRUNCPARCELA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "USATABCRFORN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "USUARIO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "UTILIZANUCADPARC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "VALDESCGRDCAR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "VENDEDOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "VLRLIQITEMNFCE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "VLRLIQITEMNFE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "AD_IDEXTERNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "AD_ORIGDEPLOY",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ALERTAESTMIN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "AP1RCTEGO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "APLICASAZO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "APRESDETALHE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "APRESFORM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "APURAPRODEPE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ARMAZELOTE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ATIVO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ATUNUVERSAO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "BALANCA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "BLOQVENDAFRAC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CALCDIFAL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CALCFUNTTELPRO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CALCFUSTPRO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CALCULOGIRO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CALRUPTURAESTOQUE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CARACTERISTICAS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CAT1799SPRES",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CIENTIFICO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CNPJFABRICANTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 14,
+      "CHAR_LENGTH": 14,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODAGREGACAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODANVISA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 13,
+      "CHAR_LENGTH": 13,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODATIVREINTEGRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "CHAR_LENGTH": 8,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODAUTCODIF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 21,
+      "CHAR_LENGTH": 21,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODBARBALANCA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODBARCOMP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODBARDIFGTIN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODBARTRIBDIFGTIN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODBENEFNAUF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODCLASTRIBNAC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODCPRB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "CHAR_LENGTH": 8,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODFCI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 36,
+      "CHAR_LENGTH": 36,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODIGONFCOM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODINDOPERPROD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODINDOPERPROD_TMP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODNBS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 9,
+      "CHAR_LENGTH": 9,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODPRODROI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODREGMAPA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODTRIBMUNISS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOLCOMPRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOLFETHAB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOLKANBAN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOLPESOVAR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOLPLAN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CODVOLRES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 6,
+      "CHAR_LENGTH": 6,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "COMERCIALIZACAOAGRI",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "COMPLDESC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "COMPONOBRIG",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONCENTRACAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONESTORIGPROD",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONFCEGAPESO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONFERE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONFIRMAIMP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONSPRODCAT42",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONTARPORPESO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONTROLADO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CONTROLMEDIC",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "CULTURA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESCPRODDRCST",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESCRANP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 95,
+      "CHAR_LENGTH": 95,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESCRPROD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESCRPRODNFE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESCRUTILBEM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESCVENCONSUL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DESDESCCALCPIS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DIMENSOES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "DTVALDIF",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ENDIMAGEM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 200,
+      "CHAR_LENGTH": 200,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ENDMODROTULO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ENQREINTEGRA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "EPOCAAPLIC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 120,
+      "CHAR_LENGTH": 120,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "EXCLUIRCONF",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "EXIBCOMPEXPKIT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "EXIGEBENEFIC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "EXIGELASTROCAMADAS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FABRICANTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FATTOTAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FIXOAGENDA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FLEX",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FORCAEXPECONECT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FORMULACAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 180,
+      "CHAR_LENGTH": 180,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "FRAGMENTALOTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GERACUSTCOMPSEG",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GERAPLAPROD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GERIMPNRETREINFAQ",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GRUPOCOFINS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GRUPOCSSL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GRUPODESCPROD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "GRUPOPIS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "HOMEPAGE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "HRDOBRADA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ICMSGERENCIA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IDENCORRELATO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IDENCOSME",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IDENOTC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IDENPORTARIA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IMPETIQCONF",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IMPETIQSEPWMS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IMPLAUDOLOTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IMPORDEMCORTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "IMPRIMIR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "INDESCALA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "INDESPPRODEPE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "INDTIPREFBCICMSST",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "INFPUREZA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "INTEGRAECONECT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "LISCONTEST",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "LISTALPM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "LOCAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "LOCALIZACAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "MANEJOINT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 120,
+      "CHAR_LENGTH": 120,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "MARCA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "MD5PAF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 32,
+      "CHAR_LENGTH": 32,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "MODOAPLIC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 240,
+      "CHAR_LENGTH": 240,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "MOTISENCAOANVISA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "MOTIVOINCEXC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NATBCPISCOFINS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NATUREZAOPERDES",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NCM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NOMETAB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 32,
+      "CHAR_LENGTH": 32,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NOTIFCONF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 500,
+      "CHAR_LENGTH": 500,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NPROCSUFRAMA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 12,
+      "CHAR_LENGTH": 12,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "NROPROCESSO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "OBSETIQUETA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 120,
+      "CHAR_LENGTH": 120,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "OBTSTANTMEDENT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ONEROSO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "OPEEXPFETHAB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "OPEINTESTFETHAB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "OPEINTFETHAB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ORIGEMFAT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "ORIGPROD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PADRAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PARTICIPAADRCST",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PERMCOMPPROD",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PRODALIADRCST",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PRODFALTA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PRODINTERNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PRODSUJFECOP",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PRODUZAUT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "PROMOCAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "QTDPECAFRAC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "RASTRESTOQUE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "RECEITUARIO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "RECUPAVARIA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "REFERENCIA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "REFFORN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "REFMERCMED",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "REGISTRARPESO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "REGRAWMS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "REMETER",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "RENDIMENTO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "RENDIMENTOPR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "SELECIONADO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "SERFATURCON",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 3,
+      "CHAR_LENGTH": 3,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "SERVDESPNTRIB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "SERVPARAINDUST",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "SERVPRESTTER",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "SOLCOMPRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "STATUSINCEXC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "STATUSNCM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMCIAP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMCOMISSAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMCREDPISCOFINSAQUI",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMCREDPISCOFINSDEPR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMICMS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMINSS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMIPICOMPRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMIPIVENDA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMIRF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMISS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMMEDICAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TEMRASTROLOTE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TERMOLABIL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPCONTEST",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPCONTESTWMS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPLANCNOTA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOCLASSEAGT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOCLASSETOX",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOCONTAGEM",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOGRUPOQUIMICO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOIDENTIF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOINSSESPECIAL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOITEMSPED",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOKIT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPOPRINCATIVO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPSERNFE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TIPSUBST",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TITCONTEST",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 10,
+      "CHAR_LENGTH": 10,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "TPCREDPRESIBSZFM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "UNIDADE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "UNIDMINARMAZ",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USACODBARRASQTD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USACONTPESOVAR",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USAIMPAGRUPMIN",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USALOCAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USALOTEDTFAB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USALOTEDTVAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USAPONTOS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USASERIEFAB",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USASERIESEPWMS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USASTATUSLOTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "USOPROD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "UTILIZAENDFLUT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "UTILIZAWMS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "UTILORDCORTE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "UTILSMARTCARD",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "VALCAPM3",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "VALCBGLOBAL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "VENCOMPINDIV",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "VISIVELAPPOS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "VOLDOSAGEM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "VOLDOSAGEMPOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 2,
+      "CHAR_LENGTH": 2,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFPRO",
+      "COLUMN_NAME": "WMSPRODRASTSERMED",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "AD_IDEXTERNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "APELIDO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "ATIVO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "ATUACOMPRADOR",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "COMCM",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "GRUPODESCVEND",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "GRUPORETENCAO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "RECHREXTRA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "TIPCALC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "TIPFECHCOM",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "TIPVALOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TGFVEN",
+      "COLUMN_NAME": "TIPVEND",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ABREGAVETA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACCOUNTEMAIL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 256,
+      "CHAR_LENGTH": 256,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACCOUNTID",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACCOUNTNOMEFOTO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 255,
+      "CHAR_LENGTH": 255,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACESSAFORMULAREL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACESSOPDVCANCITENS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACESSOPDVSANG",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACESSOPDVSANGPDESP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACESSOPDVSUPR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ACESSOVISUALCAB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "AD_IDEXTERNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ALTCTAFAT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ALTCTAIMPBOL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ALTORDCFECH",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "APENASCOMPLIB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "APROVCOT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "ATUNUVERSAO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "AVISAVARPRECO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "BAIXADESP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "BAIXAREC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CAIXA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CODIDECONECT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 40,
+      "CHAR_LENGTH": 40,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CONTACESSO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CONTAGOL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CPF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 11,
+      "CHAR_LENGTH": 11,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "DESCTOTALNOTAPDV",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "EMAILSOLLIB",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "EXCLIBORC",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "EXIBIRVALANALRENT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "GESTOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "GRUPOREDE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IDENTIFICGW2",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 64,
+      "CHAR_LENGTH": 64,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IDPERFILECONECT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IGNORAHORASCRUZ",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IGNORALDAP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IMP2SANSUPCAI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IMPLANTADOR",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IMPNFCENTRAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "IMPSEP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 250,
+      "CHAR_LENGTH": 250,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "INFBIOMDIG",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "INFRECSEN",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4000,
+      "CHAR_LENGTH": 4000,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "INSTALAPACOTESS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "INTEGRAECONECT",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "INTERNO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 32,
+      "CHAR_LENGTH": 32,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "LOCALE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "CHAR_LENGTH": 8,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NIVELACESSO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NOMEFILA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 30,
+      "CHAR_LENGTH": 30,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NOMEUSU",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NOMEUSUALTER",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 20,
+      "CHAR_LENGTH": 20,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NOMEUSUCPLT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 40,
+      "CHAR_LENGTH": 40,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NOTSLAFILA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "OPERACIONAL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "OPTGAT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "PERMALTMOEDA",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "PERMEXPREL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "PERMIMPRIMEREL",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "PERMREPERRO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "PROPRIETARIO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "RESTRINGECART",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "RG",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 15,
+      "CHAR_LENGTH": 15,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "SEGURANCASMTP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "SELECTWCAPO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "SENHANUNCAEXPIRA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "SENHASMTP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 250,
+      "CHAR_LENGTH": 250,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "SERVIDORSMTP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TEMECF",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TIMBAIXAWORD",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TIMBAIXTITRECABE",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TIMPATHSCANNER",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 100,
+      "CHAR_LENGTH": 100,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TIMVERTODASFACS",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TIPENVNOTSOL",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TIPOSMTP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "TOKENCHECKOUT",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 13,
+      "CHAR_LENGTH": 13,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "USER_NAME",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 50,
+      "CHAR_LENGTH": 50,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "USUARIOSMTP",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 80,
+      "CHAR_LENGTH": 80,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "USUREDE",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 200,
+      "CHAR_LENGTH": 200,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "VERCABPROPRIA",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "VERIMPCURS",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "COLUNA",
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "VISACESOUTUSU",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 1,
+      "CHAR_LENGTH": 1,
+      "CHAR_USED": "B"
+    },
+    {
+      "TIPO": "NLS",
+      "TABLE_NAME": "NLS_CHARACTERSET",
+      "COLUMN_NAME": "WE8MSWIN1252",
+      "DATA_TYPE": null,
+      "DATA_LENGTH": null,
+      "CHAR_LENGTH": null,
+      "CHAR_USED": null
+    },
+    {
+      "TIPO": "NLS",
+      "TABLE_NAME": "NLS_LENGTH_SEMANTICS",
+      "COLUMN_NAME": "BYTE",
+      "DATA_TYPE": null,
+      "DATA_LENGTH": null,
+      "CHAR_LENGTH": null,
+      "CHAR_USED": null
+    },
+    {
+      "TIPO": "NLS",
+      "TABLE_NAME": "NLS_NCHAR_CHARACTERSET",
+      "COLUMN_NAME": "AL16UTF16",
+      "DATA_TYPE": null,
+      "DATA_LENGTH": null,
+      "CHAR_LENGTH": null,
+      "CHAR_USED": null
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

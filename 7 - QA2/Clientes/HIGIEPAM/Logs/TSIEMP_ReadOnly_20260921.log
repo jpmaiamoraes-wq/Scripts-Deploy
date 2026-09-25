@@ -1,0 +1,7 @@
+{
+  "status": "EXECUTOR_BLOQUEADO",
+  "mensagem": "Credencial Vault bloqueada: O Vault recusou a leitura ou a sessão OIDC não está autenticada (código 2).",
+  "senha_em_arquivo": false,
+  "dml_executado": false,
+  "ddl_executado": false
+}

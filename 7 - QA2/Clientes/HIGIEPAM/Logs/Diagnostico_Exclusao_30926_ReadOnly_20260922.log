@@ -1,0 +1,2248 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T11:40:24.455998+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Diagnostico_Exclusao_30926_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 318,
+  "colunas": [
+    "TABELA",
+    "RID",
+    "CODIGO",
+    "CONTEXTO",
+    "NOME"
+  ],
+  "linhas": [
+    {
+      "TABELA": "TSIBAI",
+      "RID": "AAAzpyAARAAAmYJABw",
+      "CODIGO": 8179,
+      "CONTEXTO": 0,
+      "NOME": "Jardim São Luís"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 9800,
+      "CONTEXTO": null,
+      "NOME": "SHANGRI-LA"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8179,
+      "CONTEXTO": null,
+      "NOME": "JARDIM SAO LUIS"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 15469,
+      "CONTEXTO": null,
+      "NOME": "PARAISO DAS AGUAS"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 487,
+      "CONTEXTO": null,
+      "NOME": "AREA RURAL"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 14898,
+      "CONTEXTO": null,
+      "NOME": "JARDIM SHANGRI-LA"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 23886,
+      "CONTEXTO": null,
+      "NOME": "GUAIUBA"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 3106,
+      "CONTEXTO": null,
+      "NOME": "OLHO D'AGUA"
+    },
+    {
+      "TABELA": "MAP_BAI_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1136,
+      "CONTEXTO": null,
+      "NOME": "CAIXA D'AGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 950765,
+      "CONTEXTO": null,
+      "NOME": "15 DE NOVEMBRO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 155688,
+      "CONTEXTO": null,
+      "NOME": "ALOES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 343662,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO DAMASIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 62868,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO DOMINGOS DA SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 173752,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO FAVERO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 970501,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO FRANCISCO DA SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 697332,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO NERI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 465409,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO PADULA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 899282,
+      "CONTEXTO": null,
+      "NOME": "BEM-ME-QUER"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 321326,
+      "CONTEXTO": null,
+      "NOME": "ARABUTA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 261849,
+      "CONTEXTO": null,
+      "NOME": "ARACAIBA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 40273,
+      "CONTEXTO": null,
+      "NOME": "ARAMACA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10896,
+      "CONTEXTO": null,
+      "NOME": "CARAJAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1153875,
+      "CONTEXTO": null,
+      "NOME": "CARLOPOLIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 167966,
+      "CONTEXTO": null,
+      "NOME": "CAURE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 950442,
+      "CONTEXTO": null,
+      "NOME": "CECILIA MEIRELES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1106573,
+      "CONTEXTO": null,
+      "NOME": "BURITI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 6653,
+      "CONTEXTO": null,
+      "NOME": "CONDE D'EU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1033046,
+      "CONTEXTO": null,
+      "NOME": "DA FAMILIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 836814,
+      "CONTEXTO": null,
+      "NOME": "DOS ARACAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 948941,
+      "CONTEXTO": null,
+      "NOME": "DO EUCALIPTO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 892440,
+      "CONTEXTO": null,
+      "NOME": "ERICO VERISSIMO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 17428,
+      "CONTEXTO": null,
+      "NOME": "GUACUI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 17443,
+      "CONTEXTO": null,
+      "NOME": "GUARATA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1125989,
+      "CONTEXTO": null,
+      "NOME": "HELICONIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10931,
+      "CONTEXTO": null,
+      "NOME": "ICARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 3104,
+      "CONTEXTO": null,
+      "NOME": "IMBUIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 671220,
+      "CONTEXTO": null,
+      "NOME": "ITAPIRAPUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 334676,
+      "CONTEXTO": null,
+      "NOME": "JOAO MANHAES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1507816,
+      "CONTEXTO": null,
+      "NOME": "SEM NOME 1"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1066923,
+      "CONTEXTO": null,
+      "NOME": "PAU D'ALHO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8109,
+      "CONTEXTO": null,
+      "NOME": "MARCILIO DIAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 269634,
+      "CONTEXTO": null,
+      "NOME": "TAMOIOS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 257593,
+      "CONTEXTO": null,
+      "NOME": "QUIPAPA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 476685,
+      "CONTEXTO": null,
+      "NOME": "XAREU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1308428,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO CARLOS DOS SANTOS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 248699,
+      "CONTEXTO": null,
+      "NOME": "ANITAPOLIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1287327,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO RICCI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1080231,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO TOME"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11733,
+      "CONTEXTO": null,
+      "NOME": "ARACE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 254031,
+      "CONTEXTO": null,
+      "NOME": "CARICE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 585763,
+      "CONTEXTO": null,
+      "NOME": "CAMACA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 107650,
+      "CONTEXTO": null,
+      "NOME": "CAMBOATA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 262750,
+      "CONTEXTO": null,
+      "NOME": "CAMBORIU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 660431,
+      "CONTEXTO": null,
+      "NOME": "CINQUENTA E SEIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1007734,
+      "CONTEXTO": null,
+      "NOME": "DOS EUCALIPTOS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 948636,
+      "CONTEXTO": null,
+      "NOME": "DOS LIRIOS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11580,
+      "CONTEXTO": null,
+      "NOME": "DAS CAMELIAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 222,
+      "CONTEXTO": null,
+      "NOME": "EPITACIO PESSOA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1281091,
+      "CONTEXTO": null,
+      "NOME": "ESPIRITO SANTO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1037647,
+      "CONTEXTO": null,
+      "NOME": "GOIANIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 931502,
+      "CONTEXTO": null,
+      "NOME": "GOIAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 13096,
+      "CONTEXTO": null,
+      "NOME": "GUAICARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1005040,
+      "CONTEXTO": null,
+      "NOME": "GUARATINGUETA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 7413,
+      "CONTEXTO": null,
+      "NOME": "HERACLES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 592224,
+      "CONTEXTO": null,
+      "NOME": "FLOR DE AMARILIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11080,
+      "CONTEXTO": null,
+      "NOME": "IGAPORA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 100183,
+      "CONTEXTO": null,
+      "NOME": "ITA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 265816,
+      "CONTEXTO": null,
+      "NOME": "JARUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1298352,
+      "CONTEXTO": null,
+      "NOME": "JOSE FERREIRA DA SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1589910,
+      "CONTEXTO": null,
+      "NOME": "JOSE MARIA NOCERA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1691517,
+      "CONTEXTO": null,
+      "NOME": "LAZARO JOSE AFONSO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 96887,
+      "CONTEXTO": null,
+      "NOME": "SAPE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 29555,
+      "CONTEXTO": null,
+      "NOME": "SEBASTIAO ARAUJO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 918947,
+      "CONTEXTO": null,
+      "NOME": "PAO DE ACUCAR"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 306610,
+      "CONTEXTO": null,
+      "NOME": "PIEN"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8851,
+      "CONTEXTO": null,
+      "NOME": "SUINA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1005065,
+      "CONTEXTO": null,
+      "NOME": "POR DO SOL"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1030861,
+      "CONTEXTO": null,
+      "NOME": "PRESIDENTE COSTA E SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 767626,
+      "CONTEXTO": null,
+      "NOME": "PRIMEIRO DE MAIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 214005,
+      "CONTEXTO": null,
+      "NOME": "TAPIRAPE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 989951,
+      "CONTEXTO": null,
+      "NOME": "MARIO LAGO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1039698,
+      "CONTEXTO": null,
+      "NOME": "PROFESSOR JOAO CANDIDO FERREIRA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 960184,
+      "CONTEXTO": null,
+      "NOME": "PROPRIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 950020,
+      "CONTEXTO": null,
+      "NOME": "RIO GRANDE DO SUL"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 4623,
+      "CONTEXTO": null,
+      "NOME": "VINICIUS DE MORAES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 438,
+      "CONTEXTO": null,
+      "NOME": "NOSSA SENHORA DE FATIMA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1088691,
+      "CONTEXTO": null,
+      "NOME": "SANTA CECILIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 180408,
+      "CONTEXTO": null,
+      "NOME": "VITORIA-REGIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 621623,
+      "CONTEXTO": null,
+      "NOME": "ACAIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 114055,
+      "CONTEXTO": null,
+      "NOME": "ACAUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 207990,
+      "CONTEXTO": null,
+      "NOME": "AGOSTINHO T. MONACO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 192499,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO JOSE DE OLIVEIRA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 566144,
+      "CONTEXTO": null,
+      "NOME": "AVILA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 23727,
+      "CONTEXTO": null,
+      "NOME": "CARTAGO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 465772,
+      "CONTEXTO": null,
+      "NOME": "BEM-TE-VI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 262685,
+      "CONTEXTO": null,
+      "NOME": "CACULE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 864588,
+      "CONTEXTO": null,
+      "NOME": "DAS ALPINEAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 853921,
+      "CONTEXTO": null,
+      "NOME": "DOM HELDER CAMARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 12183,
+      "CONTEXTO": null,
+      "NOME": "DAS PEROLAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 531179,
+      "CONTEXTO": null,
+      "NOME": "EMBIRUCU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 203458,
+      "CONTEXTO": null,
+      "NOME": "GRAPIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 203596,
+      "CONTEXTO": null,
+      "NOME": "HERVAL D'OESTE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 940503,
+      "CONTEXTO": null,
+      "NOME": "FLOR DE LOTUS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 265532,
+      "CONTEXTO": null,
+      "NOME": "IPIAU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 317381,
+      "CONTEXTO": null,
+      "NOME": "ITAITE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 959722,
+      "CONTEXTO": null,
+      "NOME": "JOANA D'ARC"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1320506,
+      "CONTEXTO": null,
+      "NOME": "JOAO GONCALVES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 17708,
+      "CONTEXTO": null,
+      "NOME": "JUPARANA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 12603,
+      "CONTEXTO": null,
+      "NOME": "MANAGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 396734,
+      "CONTEXTO": null,
+      "NOME": "OSVALDO CORREA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 267855,
+      "CONTEXTO": null,
+      "NOME": "PAU-D'ALHO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 90290,
+      "CONTEXTO": null,
+      "NOME": "SETENTA E QUATRO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 205470,
+      "CONTEXTO": null,
+      "NOME": "PIRAPORA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 162453,
+      "CONTEXTO": null,
+      "NOME": "POR-DO-SOL"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 207924,
+      "CONTEXTO": null,
+      "NOME": "TAMBIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 515440,
+      "CONTEXTO": null,
+      "NOME": "RAUL D'AVILA POMPEIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1409,
+      "CONTEXTO": null,
+      "NOME": "MURICI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 291981,
+      "CONTEXTO": null,
+      "NOME": "RIO JAPURA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 706113,
+      "CONTEXTO": null,
+      "NOME": "URUACU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 982152,
+      "CONTEXTO": null,
+      "NOME": "VINTE E SETE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 671082,
+      "CONTEXTO": null,
+      "NOME": "NOVA CANAA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 27431,
+      "CONTEXTO": null,
+      "NOME": "9 DE MARCO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 744183,
+      "CONTEXTO": null,
+      "NOME": "ACUCENA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 304492,
+      "CONTEXTO": null,
+      "NOME": "AGUA MARINHA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1025564,
+      "CONTEXTO": null,
+      "NOME": "AMARILIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 201328,
+      "CONTEXTO": null,
+      "NOME": "ANACA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1113983,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO CANDIDO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1139330,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO JOSE MACHADO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 680884,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO DE FELICIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1146686,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO JOSE DE SOUZA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 618187,
+      "CONTEXTO": null,
+      "NOME": "ARERE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 287083,
+      "CONTEXTO": null,
+      "NOME": "CAETE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 144702,
+      "CONTEXTO": null,
+      "NOME": "CAMBUCA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 202424,
+      "CONTEXTO": null,
+      "NOME": "COLIBRI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 537808,
+      "CONTEXTO": null,
+      "NOME": "DOM HELDER PESSOA CAMARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 12704,
+      "CONTEXTO": null,
+      "NOME": "DENDE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1097757,
+      "CONTEXTO": null,
+      "NOME": "DIARIO DE PERNAMBUCO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 330503,
+      "CONTEXTO": null,
+      "NOME": "EUZEBIO DE QUEIROS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 203420,
+      "CONTEXTO": null,
+      "NOME": "GLORIA DO GOITA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10366,
+      "CONTEXTO": null,
+      "NOME": "GUARACAI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 931590,
+      "CONTEXTO": null,
+      "NOME": "FLOR DE LIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1014823,
+      "CONTEXTO": null,
+      "NOME": "GABRIEL GARCIA MARQUEZ"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11242,
+      "CONTEXTO": null,
+      "NOME": "IBIPORA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 687967,
+      "CONTEXTO": null,
+      "NOME": "INDIANAPOLIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11625,
+      "CONTEXTO": null,
+      "NOME": "JAPAO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 386710,
+      "CONTEXTO": null,
+      "NOME": "JARANA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 155318,
+      "CONTEXTO": null,
+      "NOME": "JEOVA JIRE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 129190,
+      "CONTEXTO": null,
+      "NOME": "JOSE FRANCISCO DA ROCHA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 132823,
+      "CONTEXTO": null,
+      "NOME": "JOSE GONCALVES DE ARAUJO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1609424,
+      "CONTEXTO": null,
+      "NOME": "SEM NOME 30"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8030,
+      "CONTEXTO": null,
+      "NOME": "PEROLA NEGRA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10508,
+      "CONTEXTO": null,
+      "NOME": "PINDOBACU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 353740,
+      "CONTEXTO": null,
+      "NOME": "MARIA DA CONCEICAO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10655,
+      "CONTEXTO": null,
+      "NOME": "MASSAPE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 9072,
+      "CONTEXTO": null,
+      "NOME": "RIO ICA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 679065,
+      "CONTEXTO": null,
+      "NOME": "NICARAGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1220240,
+      "CONTEXTO": null,
+      "NOME": "SANTO ANTONIO DE PADUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1315484,
+      "CONTEXTO": null,
+      "NOME": "8 DE DEZEMBRO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 158980,
+      "CONTEXTO": null,
+      "NOME": "ANDIROBA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 321308,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO LOPES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 34382,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO DE SOUZA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1047912,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO FELIX DA SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 220387,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO RODRIGUES JUNIOR"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 22721,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO TEIXEIRA DE CARVALHO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11161,
+      "CONTEXTO": null,
+      "NOME": "BATURITE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 348,
+      "CONTEXTO": null,
+      "NOME": "BELA VISTA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 114385,
+      "CONTEXTO": null,
+      "NOME": "APA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 832124,
+      "CONTEXTO": null,
+      "NOME": "ARTEMIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 287089,
+      "CONTEXTO": null,
+      "NOME": "CAJA-MANGA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 262716,
+      "CONTEXTO": null,
+      "NOME": "CAJAPIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 17431,
+      "CONTEXTO": null,
+      "NOME": "GUAIMBE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 706237,
+      "CONTEXTO": null,
+      "NOME": "FOZ DO IGUACU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10354,
+      "CONTEXTO": null,
+      "NOME": "GENERAL CAMARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11702,
+      "CONTEXTO": null,
+      "NOME": "GENOVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 7482,
+      "CONTEXTO": null,
+      "NOME": "ICA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 699764,
+      "CONTEXTO": null,
+      "NOME": "ILHEUS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1289972,
+      "CONTEXTO": null,
+      "NOME": "IRAJA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 597553,
+      "CONTEXTO": null,
+      "NOME": "JAPIACU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 575148,
+      "CONTEXTO": null,
+      "NOME": "JAPURA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 303229,
+      "CONTEXTO": null,
+      "NOME": "JOAO DE BARRO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 171348,
+      "CONTEXTO": null,
+      "NOME": "JOSE DE ALENCAR"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 7830,
+      "CONTEXTO": null,
+      "NOME": "JOSE MACEDO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8530,
+      "CONTEXTO": null,
+      "NOME": "PADRE ANTONIO VIEIRA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 468,
+      "CONTEXTO": null,
+      "NOME": "PADRE MANOEL DA NOBREGA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 12663,
+      "CONTEXTO": null,
+      "NOME": "PANDIA CALOGERAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 479,
+      "CONTEXTO": null,
+      "NOME": "PARANA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 161392,
+      "CONTEXTO": null,
+      "NOME": "PASSARO-PRETO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 269619,
+      "CONTEXTO": null,
+      "NOME": "TAIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 5815,
+      "CONTEXTO": null,
+      "NOME": "TAPIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 163995,
+      "CONTEXTO": null,
+      "NOME": "TEOFILO OTONI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1118675,
+      "CONTEXTO": null,
+      "NOME": "MAURICIO DE NASSAU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 151511,
+      "CONTEXTO": null,
+      "NOME": "QUEOPS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 814,
+      "CONTEXTO": null,
+      "NOME": "QUINTINO BOCAIUVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 949184,
+      "CONTEXTO": null,
+      "NOME": "MEXICO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 6049,
+      "CONTEXTO": null,
+      "NOME": "MOGI GUACU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 354491,
+      "CONTEXTO": null,
+      "NOME": "MOLIERE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 488252,
+      "CONTEXTO": null,
+      "NOME": "URUGUAI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 54702,
+      "CONTEXTO": null,
+      "NOME": "NAPOLIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 606460,
+      "CONTEXTO": null,
+      "NOME": "NESPERA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 687628,
+      "CONTEXTO": null,
+      "NOME": "ROMENIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 471137,
+      "CONTEXTO": null,
+      "NOME": "SAIRA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 846623,
+      "CONTEXTO": null,
+      "NOME": "ACARI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 261212,
+      "CONTEXTO": null,
+      "NOME": "AGISSE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10524,
+      "CONTEXTO": null,
+      "NOME": "ALVARES DE AZEVEDO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 671495,
+      "CONTEXTO": null,
+      "NOME": "ANHANGUERA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 540710,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO BERGAMO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 51257,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO GOES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 279246,
+      "CONTEXTO": null,
+      "NOME": "ARACARI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 307802,
+      "CONTEXTO": null,
+      "NOME": "ARACUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 321331,
+      "CONTEXTO": null,
+      "NOME": "ARACUAI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 2023,
+      "CONTEXTO": null,
+      "NOME": "ARAGUAIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1125178,
+      "CONTEXTO": null,
+      "NOME": "ARCO IRIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 201642,
+      "CONTEXTO": null,
+      "NOME": "ARUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 906130,
+      "CONTEXTO": null,
+      "NOME": "DA MACA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 50814,
+      "CONTEXTO": null,
+      "NOME": "CRATEUS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1108141,
+      "CONTEXTO": null,
+      "NOME": "DOS MANACAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 2451,
+      "CONTEXTO": null,
+      "NOME": "DO DENDE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 160691,
+      "CONTEXTO": null,
+      "NOME": "GUAIRACA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 231902,
+      "CONTEXTO": null,
+      "NOME": "GURIATA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8179,
+      "CONTEXTO": null,
+      "NOME": "FRANCA JUNIOR"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 304401,
+      "CONTEXTO": null,
+      "NOME": "FRANCISCO ANTONIO DE LIMA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 207458,
+      "CONTEXTO": null,
+      "NOME": "JANDAIA DO SUL"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 350879,
+      "CONTEXTO": null,
+      "NOME": "IGARAPE GRANDE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 33165,
+      "CONTEXTO": null,
+      "NOME": "ITAPE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1559167,
+      "CONTEXTO": null,
+      "NOME": "JELIOVAL MAGALHAES TENORIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1176945,
+      "CONTEXTO": null,
+      "NOME": "JOSE EUGENIO DA SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 59839,
+      "CONTEXTO": null,
+      "NOME": "JOSE FELIX DE LIMA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 6940,
+      "CONTEXTO": null,
+      "NOME": "MACAU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 948646,
+      "CONTEXTO": null,
+      "NOME": "MACEIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 118152,
+      "CONTEXTO": null,
+      "NOME": "LAGO ERIE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1507803,
+      "CONTEXTO": null,
+      "NOME": "SEM NOME 5"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 673578,
+      "CONTEXTO": null,
+      "NOME": "MARIA DAS DORES SILVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 161535,
+      "CONTEXTO": null,
+      "NOME": "POATA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 100013,
+      "CONTEXTO": null,
+      "NOME": "PORTO PRINCIPE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 17970,
+      "CONTEXTO": null,
+      "NOME": "MURIAE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 7883,
+      "CONTEXTO": null,
+      "NOME": "NAPOLES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1243409,
+      "CONTEXTO": null,
+      "NOME": "SABIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 48382,
+      "CONTEXTO": null,
+      "NOME": "NOSSA SENHORA DA CONCEICAO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 695273,
+      "CONTEXTO": null,
+      "NOME": "NOSSA SENHORA DO PERPETUO SOCORRO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 661045,
+      "CONTEXTO": null,
+      "NOME": "VITORIA REGIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 270231,
+      "CONTEXTO": null,
+      "NOME": "XAMBRE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1138,
+      "CONTEXTO": null,
+      "NOME": "SANTA JOANA D'ARC"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 286437,
+      "CONTEXTO": null,
+      "NOME": "ANGELO MORO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 261544,
+      "CONTEXTO": null,
+      "NOME": "ALVARO MACEDO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 627676,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO CANDIDO DE OLIVEIRA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 521676,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO CORREA DE ALMEIDA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 4694,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO CORREIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 261827,
+      "CONTEXTO": null,
+      "NOME": "APUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 49548,
+      "CONTEXTO": null,
+      "NOME": "ARUANA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 883846,
+      "CONTEXTO": null,
+      "NOME": "CINQUENTA E TRES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 917888,
+      "CONTEXTO": null,
+      "NOME": "DA CAIXA D'AGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 107105,
+      "CONTEXTO": null,
+      "NOME": "DOS ALAMOS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 3946,
+      "CONTEXTO": null,
+      "NOME": "DAS PEROBAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 510080,
+      "CONTEXTO": null,
+      "NOME": "DINA SILVEIRA DE QUEIROZ"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1471296,
+      "CONTEXTO": null,
+      "NOME": "DO BEM-TE-VI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 13052,
+      "CONTEXTO": null,
+      "NOME": "DOS TUIUIUS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1007736,
+      "CONTEXTO": null,
+      "NOME": "EM PROJETO A"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 42060,
+      "CONTEXTO": null,
+      "NOME": "ESTRELA-D'ALVA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 147442,
+      "CONTEXTO": null,
+      "NOME": "GUAIANA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 193558,
+      "CONTEXTO": null,
+      "NOME": "JAO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10378,
+      "CONTEXTO": null,
+      "NOME": "IBATE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 207864,
+      "CONTEXTO": null,
+      "NOME": "IRERE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 254658,
+      "CONTEXTO": null,
+      "NOME": "ITAPUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 832345,
+      "CONTEXTO": null,
+      "NOME": "JORDANIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 340034,
+      "CONTEXTO": null,
+      "NOME": "JO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 6966,
+      "CONTEXTO": null,
+      "NOME": "MAMBORE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 8753,
+      "CONTEXTO": null,
+      "NOME": "PARICA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 3947,
+      "CONTEXTO": null,
+      "NOME": "PIACABUCU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 738926,
+      "CONTEXTO": null,
+      "NOME": "POLO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 96984,
+      "CONTEXTO": null,
+      "NOME": "TACHA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 317758,
+      "CONTEXTO": null,
+      "NOME": "MAUES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 205699,
+      "CONTEXTO": null,
+      "NOME": "QUIROA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 163958,
+      "CONTEXTO": null,
+      "NOME": "TRINTA E TRES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 211866,
+      "CONTEXTO": null,
+      "NOME": "NOVA ARACA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 56418,
+      "CONTEXTO": null,
+      "NOME": "SANDALO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 143182,
+      "CONTEXTO": null,
+      "NOME": "ADONIS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 97739,
+      "CONTEXTO": null,
+      "NOME": "AGUA-MARINHA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 11848,
+      "CONTEXTO": null,
+      "NOME": "AMA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 343464,
+      "CONTEXTO": null,
+      "NOME": "ANAMA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 562749,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO MARCON"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 898549,
+      "CONTEXTO": null,
+      "NOME": "ANTONIO ZECA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 107261,
+      "CONTEXTO": null,
+      "NOME": "APIACAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 49431,
+      "CONTEXTO": null,
+      "NOME": "AQUARIUS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 143909,
+      "CONTEXTO": null,
+      "NOME": "ARAGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 124032,
+      "CONTEXTO": null,
+      "NOME": "CARAXUE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 213667,
+      "CONTEXTO": null,
+      "NOME": "CACU"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 935466,
+      "CONTEXTO": null,
+      "NOME": "CAIXA D'AGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 227845,
+      "CONTEXTO": null,
+      "NOME": "CAMARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 5960,
+      "CONTEXTO": null,
+      "NOME": "DAS AZALEIAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 17017,
+      "CONTEXTO": null,
+      "NOME": "CLOVIS BEVILACQUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 899764,
+      "CONTEXTO": null,
+      "NOME": "COLONIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 865747,
+      "CONTEXTO": null,
+      "NOME": "DOS CICLAMES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 949854,
+      "CONTEXTO": null,
+      "NOME": "DOS PASSAROS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 830237,
+      "CONTEXTO": null,
+      "NOME": "EBENEZER"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 671004,
+      "CONTEXTO": null,
+      "NOME": "GUARANTA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 283225,
+      "CONTEXTO": null,
+      "NOME": "FLOR DE LIZ"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1038340,
+      "CONTEXTO": null,
+      "NOME": "FLOR-DE-LOTUS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1043251,
+      "CONTEXTO": null,
+      "NOME": "JACANA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 203763,
+      "CONTEXTO": null,
+      "NOME": "ITACAIUNAS"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 159221,
+      "CONTEXTO": null,
+      "NOME": "ITAPOA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 7612,
+      "CONTEXTO": null,
+      "NOME": "ITAUNA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 33249,
+      "CONTEXTO": null,
+      "NOME": "JATAUBA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 918440,
+      "CONTEXTO": null,
+      "NOME": "JOSE MAURICIO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 102313,
+      "CONTEXTO": null,
+      "NOME": "JULIA LOPES DE ALMEIDA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 95818,
+      "CONTEXTO": null,
+      "NOME": "LAPIS-LAZULI"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 910339,
+      "CONTEXTO": null,
+      "NOME": "LIBERO BADARO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 139077,
+      "CONTEXTO": null,
+      "NOME": "LUIS DE CAMOES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 679070,
+      "CONTEXTO": null,
+      "NOME": "SARA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 1046130,
+      "CONTEXTO": null,
+      "NOME": "MARIA JOSEFA DA CONCEICAO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 9912,
+      "CONTEXTO": null,
+      "NOME": "TAILANDIA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 153953,
+      "CONTEXTO": null,
+      "NOME": "TIE-SANGUE"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 859104,
+      "CONTEXTO": null,
+      "NOME": "TOMAS ANTONIO GONZAGA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 200660,
+      "CONTEXTO": null,
+      "NOME": "TRES CORACOES"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 10369,
+      "CONTEXTO": null,
+      "NOME": "TUPA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 206570,
+      "CONTEXTO": null,
+      "NOME": "VALPARAISO"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 653618,
+      "CONTEXTO": null,
+      "NOME": "SABIA-UNA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 277883,
+      "CONTEXTO": null,
+      "NOME": "OLHO D'AGUA"
+    },
+    {
+      "TABELA": "MAP_END_DUP_KEPT",
+      "RID": null,
+      "CODIGO": 367602,
+      "CONTEXTO": null,
+      "NOME": "OLIVIA LOPES"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

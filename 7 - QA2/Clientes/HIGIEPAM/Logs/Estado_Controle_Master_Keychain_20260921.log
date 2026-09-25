@@ -1,0 +1,29 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:33:57.047143+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Estado_Controle_Master_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "ID_MASTER",
+    "QTD_REGISTROS",
+    "PRIMEIRO_REGISTRO",
+    "ULTIMO_REGISTRO",
+    "ULTIMO_ID_EXECUCAO"
+  ],
+  "linhas": [
+    {
+      "ID_MASTER": "RMD_RUN_20260921155603190",
+      "QTD_REGISTROS": 1,
+      "PRIMEIRO_REGISTRO": "2026-09-21 15:56:03.840514",
+      "ULTIMO_REGISTRO": "2026-09-21 15:56:03.840514",
+      "ULTIMO_ID_EXECUCAO": "RMD_TSPAR_20260921155603737"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

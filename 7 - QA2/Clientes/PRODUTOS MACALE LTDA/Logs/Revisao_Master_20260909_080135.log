@@ -1,0 +1,307 @@
+=== IDENTIDADE DA CONEXAO ===
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          macaleprd.sankhyacloud.com.br                                                                                                                                                                                                                                   
+
+
+    CODEMP RAZAOSOCIAL                             
+---------- ----------------------------------------
+         1 PRODUTOS MACALE LTDA                    
+
+
+PL/SQL procedure successfully completed.
+
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT ============================================================
+============================================================
+SQL> PROMPT REVISAO MASTER DEPLOY - INICIO
+REVISAO MASTER DEPLOY - INICIO
+SQL> SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY HH24:MI:SS') DATA_HORA_INICIO FROM DUAL;
+
+DATA_HORA_INICIO
+-------------------
+09/09/2026 08:29:27
+
+SQL> PROMPT ============================================================
+============================================================
+SQL> 
+SQL> PROMPT [01/31] INICIO - 01_Preparar_Controle_Objetos.sql
+[01/31] INICIO - 01_Preparar_Controle_Objetos.sql
+SQL> @@01_Preparar_Controle_Objetos.sql
+SQL> -- Cria o registro dos objetos temporariamente desabilitados pela revisao.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN
+  2   :RMD_ID_MASTER:='RMD_RUN_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   DBMS_OUTPUT.PUT_LINE('ID_MASTER='||:RMD_ID_MASTER);
+  4  END;
+  5  /
+ID_MASTER=RMD_RUN_20260909082928236
+
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v NUMBER;BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES
+  3    WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  4      AND TABLE_NAME='RMD_CONTROLE_OBJETOS';
+  5   IF v=0 THEN
+  6    EXECUTE IMMEDIATE q'[CREATE TABLE RMD_CONTROLE_OBJETOS (
+  7      ID_MASTER VARCHAR2(30) NOT NULL,
+  8      ID_EXECUCAO VARCHAR2(30) NOT NULL,
+  9      DH_REGISTRO TIMESTAMP NOT NULL,
+ 10      USUARIO_EXECUCAO VARCHAR2(128) NOT NULL,
+ 11      OBJECT_TYPE VARCHAR2(30) NOT NULL,
+ 12      OBJECT_NAME VARCHAR2(128) NOT NULL,
+ 13      STATUS_ANTES VARCHAR2(30),
+ 14      STATUS_DEPOIS VARCHAR2(30),
+ 15      DH_REABILITACAO TIMESTAMP
+ 16    )]';
+ 17    DBMS_OUTPUT.PUT_LINE('CONTROLE_CRIADO=RMD_CONTROLE_OBJETOS');
+ 18   ELSE
+ 19    DBMS_OUTPUT.PUT_LINE('CONTROLE_EXISTENTE=RMD_CONTROLE_OBJETOS');
+ 20   END IF;
+ 21  END;
+ 22  /
+CONTROLE_EXISTENTE=RMD_CONTROLE_OBJETOS
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [01/31] FIM - 01_Preparar_Controle_Objetos.sql
+[01/31] FIM - 01_Preparar_Controle_Objetos.sql
+SQL> 
+SQL> PROMPT [02/31] INICIO - 02_Liberar_Filtros_Portais.sql
+[02/31] INICIO - 02_Liberar_Filtros_Portais.sql
+SQL> @@02_Liberar_Filtros_Portais.sql
+SQL> -- Bloco 01_Liberar_Filtros_Portais; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_01_TSIPAR';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_01_TSIPAR AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.INTEIRO VALOR_ANTES, CAST(NULL AS NUMBER) VALOR_DEPOIS FROM TSIPAR T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_PORT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_01_TSIPAR
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),INTEIRO,CAST(NULL AS NUMBER)
+  7   FROM TSIPAR WHERE CHAVE IN ('MAXDIASPORTAIS','MAXDIASPORTVEND','MAXDIASPORTCOMP','MAXDIASMOVFIN') AND INTEIRO IS NOT NULL;
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TSIPAR SET INTEIRO=NULL WHERE CHAVE IN ('MAXDIASPORTAIS','MAXDIASPORTVEND','MAXDIASPORTCOMP','MAXDIASMOVFIN') AND INTEIRO IS NOT NULL;
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 01_Liberar_Filtros_Portais.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_PORT_20260909082929173
+REGISTROS_ALTERADOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [02/31] FIM - 02_Liberar_Filtros_Portais.sql
+[02/31] FIM - 02_Liberar_Filtros_Portais.sql
+SQL> 
+SQL> PROMPT [03/31] INICIO - 03_Padronizar_DANFE_Empresas.sql
+[03/31] INICIO - 03_Padronizar_DANFE_Empresas.sql
+SQL> @@03_Padronizar_DANFE_Empresas.sql
+SQL> -- Bloco 02. Mantem a regra funcional aprovada com snapshot das linhas.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_02_TGFEMP';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_02_TGFEMP AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  4   CAST(NULL AS TIMESTAMP) DH_EXECUCAO, CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL, T.CODMODDANFESIMPLIFNFE CODMODDANFESIMPLIFNFE_ANTES, T.CONTINGENCIANFE CONTINGENCIANFE_ANTES, T.ENVIOSINCRONONFE ENVIOSINCRONONFE_ANTES, T.NURFE NURFE_ANTES, T.NURFECARTACORR NURFECARTACORR_ANTES, T.TIPODANFE TIPODANFE_ANTES, T.NFE NFE_ANTES, T.VERSAONFE VERSAONFE_ANTES, T.VERSAONT VERSAONT_ANTES, T.UTILIZAMDE UTILIZAMDE_ANTES, T.LOGODANFE LOGODANFE_ANTES FROM TGFEMP T WHERE 1=0]'; END IF;
+  6  END;
+  7  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v_id VARCHAR2(30):='RMD_DANF_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); v_b PLS_INTEGER; v_u PLS_INTEGER;
+  2  BEGIN
+  3   INSERT INTO BKP_RMD_02_TGFEMP SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),CODMODDANFESIMPLIFNFE,CONTINGENCIANFE,ENVIOSINCRONONFE,NURFE,NURFECARTACORR,TIPODANFE,NFE,VERSAONFE,VERSAONT,UTILIZAMDE,LOGODANFE FROM TGFEMP WHERE CODEMP<>1;
+  4   v_b:=SQL%ROWCOUNT;
+  5   UPDATE TGFEMP SET CODMODDANFESIMPLIFNFE=(SELECT CODMODDANFESIMPLIFNFE FROM TGFEMP WHERE CODEMP=1),
+  6   CONTINGENCIANFE=(SELECT CONTINGENCIANFE FROM TGFEMP WHERE CODEMP=1),
+  7   ENVIOSINCRONONFE=(SELECT ENVIOSINCRONONFE FROM TGFEMP WHERE CODEMP=1),
+  8   NURFE=(SELECT NURFE FROM TGFEMP WHERE CODEMP=1), NURFECARTACORR=(SELECT NURFECARTACORR FROM TGFEMP WHERE CODEMP=1),
+  9   TIPODANFE=(SELECT TIPODANFE FROM TGFEMP WHERE CODEMP=1), NFE=(SELECT NFE FROM TGFEMP WHERE CODEMP=1),
+ 10   VERSAONFE=(SELECT VERSAONFE FROM TGFEMP WHERE CODEMP=1), VERSAONT=(SELECT VERSAONT FROM TGFEMP WHERE CODEMP=1),
+ 11   UTILIZAMDE=(SELECT UTILIZAMDE FROM TGFEMP WHERE CODEMP=1),
+ 12   LOGODANFE=COALESCE(LOGODANFE,(SELECT LOGODANFE FROM TGFEMP WHERE CODEMP=1)) WHERE CODEMP<>1;
+ 13   v_u:=SQL%ROWCOUNT;
+ 14   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20210,'Backup e atualizacao divergiram em Padronizar_DANFE_Empresas.'); END IF;
+ 15   COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id); DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 16  
+ 17  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END;
+ 18  /
+ID_EXECUCAO=RMD_DANF_20260909082930029
+REGISTROS_ALTERADOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [03/31] FIM - 03_Padronizar_DANFE_Empresas.sql
+[03/31] FIM - 03_Padronizar_DANFE_Empresas.sql
+SQL> 
+SQL> PROMPT [04/31] INICIO - 04_Desativar_Custo_TOP_Devolucao.sql
+[04/31] INICIO - 04_Desativar_Custo_TOP_Devolucao.sql
+SQL> @@04_Desativar_Custo_TOP_Devolucao.sql
+SQL> -- Bloco 03_Desativar_Custo_TOP_Devolucao; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_03_TGFTOP';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_03_TGFTOP AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.PRECIFICA VALOR_ANTES, CAST('N' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFTOP T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_TOPC_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_03_TGFTOP
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),PRECIFICA,CAST('N' AS VARCHAR2(1))
+  7   FROM TGFTOP WHERE TIPMOV='D' AND NVL(PRECIFICA,'?')<>'N';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFTOP SET PRECIFICA='N' WHERE TIPMOV='D' AND NVL(PRECIFICA,'?')<>'N';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 03_Desativar_Custo_TOP_Devolucao.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_TOPC_20260909082930797
+REGISTROS_ALTERADOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [04/31] FIM - 04_Desativar_Custo_TOP_Devolucao.sql
+[04/31] FIM - 04_Desativar_Custo_TOP_Devolucao.sql
+SQL> 
+SQL> PROMPT [05/31] INICIO - 05_Habilitar_Calculo_Giro_Produtos.sql
+[05/31] INICIO - 05_Habilitar_Calculo_Giro_Produtos.sql
+SQL> @@05_Habilitar_Calculo_Giro_Produtos.sql
+SQL> -- Bloco 04_Habilitar_Calculo_Giro_Produtos; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_04_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_04_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.CALCULOGIRO VALOR_ANTES, CAST('G' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_GIRO_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_04_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),CALCULOGIRO,CAST('G' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE USOPROD IN ('V','R') AND NVL(CALCULOGIRO,'?')<>'G';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET CALCULOGIRO='G' WHERE USOPROD IN ('V','R') AND NVL(CALCULOGIRO,'?')<>'G';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 04_Habilitar_Calculo_Giro_Produtos.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_GIRO_20260909082931589
+REGISTROS_ALTERADOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [05/31] FIM - 05_Habilitar_Calculo_Giro_Produtos.sql
+[05/31] FIM - 05_Habilitar_Calculo_Giro_Produtos.sql
+SQL> 
+SQL> PROMPT [06/31] INICIO - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+[06/31] INICIO - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+SQL> @@06_Zerar_Parcelas_Tipos_Negociacao.sql
+SQL> -- Bloco 05_Zerar_Parcelas_Tipos_Negociacao; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_05_TGFTPV';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_05_TGFTPV AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.NROPARCELAS VALOR_ANTES, CAST(0 AS NUMBER) VALOR_DEPOIS FROM TGFTPV T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_PARC_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_05_TGFTPV
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),NROPARCELAS,CAST(0 AS NUMBER)
+  7   FROM TGFTPV WHERE NVL(NROPARCELAS,-1)<>0;
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFTPV SET NROPARCELAS=0 WHERE NVL(NROPARCELAS,-1)<>0;
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 05_Zerar_Parcelas_Tipos_Negociacao.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_PARC_20260909082932365
+REGISTROS_ALTERADOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [06/31] FIM - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+[06/31] FIM - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+SQL> 
+SQL> PROMPT [07/31] INICIO - 07_Preencher_Data_Movimento.sql
+[07/31] INICIO - 07_Preencher_Data_Movimento.sql
+SQL> @@07_Preencher_Data_Movimento.sql
+SQL> -- Bloco 06_Preencher_Data_Movimento; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AN

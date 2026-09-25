@@ -1,0 +1,43 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T11:00:07.606308+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P19_Card09_Estado_Inicial.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 6,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "ESCOPO_DASHBOARD_NOTAS_SEM_FIN",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "TABELAS_FDUP_ANTERIORES",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "LINHAS_TGFNUM_TGFFIN",
+      "VALOR": "1"
+    },
+    {
+      "METRICA": "ULTCOD_TGFNUM_TGFFIN",
+      "VALOR": "1354826"
+    },
+    {
+      "METRICA": "TOTAL_TGFFIN",
+      "VALOR": "1329720"
+    },
+    {
+      "METRICA": "TGFNFE_COM_XML",
+      "VALOR": "434621"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

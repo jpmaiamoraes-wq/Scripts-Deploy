@@ -1,0 +1,94 @@
+-- Rollback autocontido do merge antifragil dos Cards 29/30.
+-- ID fixado pela execucao concluida: RMD_VDA_2930_20260918085910599.
+-- Restaura primeiro os pais excluidos a partir do backup e depois devolve
+-- cada referencia ao valor anterior usando a trilha RMD_VDA_2930_DEP.
+-- Nao contem senha. Execute somente se a reversao for formalmente solicitada.
+SET DEFINE ON
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+SET WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+ACCEPT P_CONFIRMA CHAR DEFAULT 'N' PROMPT 'Digite S para confirmar o rollback de 29/30: '
+
+DECLARE
+  c_id CONSTANT VARCHAR2(40):='RMD_VDA_2930_20260918085910599';
+  v_owner VARCHAR2(128):=SYS_CONTEXT('USERENV','CURRENT_SCHEMA');
+  v_sql VARCHAR2(32767);
+  v_cols VARCHAR2(32767);
+  v_src_cols VARCHAR2(32767);
+  v_expected NUMBER;
+  v_missing NUMBER;
+  v_drift NUMBER;
+  v_restored NUMBER:=0;
+  v_reverted NUMBER:=0;
+  PROCEDURE prepara_colunas(p_tabela VARCHAR2) IS
+  BEGIN
+    SELECT LISTAGG('"'||COLUMN_NAME||'"',',') WITHIN GROUP(ORDER BY COLUMN_ID),
+           LISTAGG('B."'||COLUMN_NAME||'"',',') WITHIN GROUP(ORDER BY COLUMN_ID)
+      INTO v_cols,v_src_cols
+      FROM ALL_TAB_COLUMNS
+     WHERE OWNER=v_owner
+       AND TABLE_NAME=p_tabela
+       AND COLUMN_NAME NOT IN ('ID_EXECUCAO','DH_EXECUCAO','USUARIO_EXECUCAO');
+    IF v_cols IS NULL THEN
+      RAISE_APPLICATION_ERROR(-20501,'Colunas de '||p_tabela||' nao encontradas.');
+    END IF;
+  END;
+  PROCEDURE restaura_pais(p_tabela VARCHAR2,p_backup VARCHAR2,p_chave VARCHAR2) IS
+  BEGIN
+    prepara_colunas(p_tabela);
+    v_sql:='SELECT COUNT(*) FROM '||p_backup||' B WHERE B.ID_EXECUCAO=:1 AND NOT EXISTS (SELECT 1 FROM '||p_tabela||' T WHERE T.'||p_chave||'=B.'||p_chave||')';
+    EXECUTE IMMEDIATE v_sql INTO v_missing USING c_id;
+    v_sql:='INSERT INTO '||p_tabela||' ('||v_cols||') SELECT '||v_src_cols||' FROM '||p_backup||' B WHERE B.ID_EXECUCAO=:1 AND NOT EXISTS (SELECT 1 FROM '||p_tabela||' T WHERE T.'||p_chave||'=B.'||p_chave||')';
+    EXECUTE IMMEDIATE v_sql USING c_id;
+    IF SQL%ROWCOUNT<>v_missing THEN
+      RAISE_APPLICATION_ERROR(-20502,'Quantidade restaurada divergente em '||p_tabela||': esperado='||v_missing||', obtido='||SQL%ROWCOUNT);
+    END IF;
+    v_restored:=v_restored+SQL%ROWCOUNT;
+  END;
+BEGIN
+  IF UPPER(TRIM('&&P_CONFIRMA'))<>'S' THEN
+    DBMS_OUTPUT.PUT_LINE('ROLLBACK_NAO_EXECUTADO_CONFIRMACAO_AUSENTE');
+    RETURN;
+  END IF;
+
+  SELECT COUNT(*) INTO v_expected FROM RMD_VDA_2930_MAP WHERE ID_EXECUCAO=c_id;
+  IF v_expected=0 THEN RAISE_APPLICATION_ERROR(-20503,'Mapa do ID fixado nao encontrado.'); END IF;
+
+  -- Os pais precisam existir antes da devolucao das FKs e referencias.
+  restaura_pais('TSIBAI','RMD_VDA_2930_BAI_BKP','CODBAI');
+  restaura_pais('TSIEND','RMD_VDA_2930_END_BKP','CODEND');
+
+  -- Guarda contra restaurar por cima de alteracao posterior ao merge.
+  FOR r IN (SELECT DISTINCT TABLE_NAME,COLUMN_NAME FROM RMD_VDA_2930_DEP WHERE ID_EXECUCAO=c_id ORDER BY TABLE_NAME,COLUMN_NAME) LOOP
+    v_sql:='SELECT COUNT(*) FROM RMD_VDA_2930_DEP D WHERE D.ID_EXECUCAO=:1 AND NOT EXISTS (SELECT 1 FROM '||r.TABLE_NAME||' T WHERE T.ROWID=CHARTOROWID(D.RID))';
+    EXECUTE IMMEDIATE v_sql INTO v_drift USING c_id;
+    IF v_drift<>0 THEN RAISE_APPLICATION_ERROR(-20504,'ROWID ausente no rollback: '||r.TABLE_NAME||'.'||r.COLUMN_NAME||' qtd='||v_drift); END IF;
+    v_sql:='SELECT COUNT(*) FROM RMD_VDA_2930_DEP D JOIN '||r.TABLE_NAME||' T ON T.ROWID=CHARTOROWID(D.RID) WHERE D.ID_EXECUCAO=:1 AND (T.'||r.COLUMN_NAME||'<>D.NEW_VALUE OR (T.'||r.COLUMN_NAME||' IS NULL AND D.NEW_VALUE IS NOT NULL) OR (T.'||r.COLUMN_NAME||' IS NOT NULL AND D.NEW_VALUE IS NULL))';
+    EXECUTE IMMEDIATE v_sql INTO v_drift USING c_id;
+    IF v_drift<>0 THEN RAISE_APPLICATION_ERROR(-20505,'Valor divergente no rollback: '||r.TABLE_NAME||'.'||r.COLUMN_NAME||' qtd='||v_drift); END IF;
+  END LOOP;
+
+  FOR r IN (SELECT DISTINCT TABLE_NAME,COLUMN_NAME FROM RMD_VDA_2930_DEP WHERE ID_EXECUCAO=c_id ORDER BY TABLE_NAME,COLUMN_NAME) LOOP
+    v_sql:='UPDATE '||r.TABLE_NAME||' T SET '||r.COLUMN_NAME||'=(SELECT D.OLD_VALUE FROM RMD_VDA_2930_DEP D WHERE D.ID_EXECUCAO=:1 AND D.TABLE_NAME=:2 AND D.COLUMN_NAME=:3 AND D.RID=ROWIDTOCHAR(T.ROWID)) WHERE EXISTS (SELECT 1 FROM RMD_VDA_2930_DEP D WHERE D.ID_EXECUCAO=:4 AND D.TABLE_NAME=:5 AND D.COLUMN_NAME=:6 AND D.RID=ROWIDTOCHAR(T.ROWID))';
+    EXECUTE IMMEDIATE v_sql USING c_id,r.TABLE_NAME,r.COLUMN_NAME,c_id,r.TABLE_NAME,r.COLUMN_NAME;
+    v_reverted:=v_reverted+SQL%ROWCOUNT;
+  END LOOP;
+
+  FOR r IN (SELECT DISTINCT TABLE_NAME,COLUMN_NAME FROM RMD_VDA_2930_DEP WHERE ID_EXECUCAO=c_id ORDER BY TABLE_NAME,COLUMN_NAME) LOOP
+    v_sql:='SELECT COUNT(*) FROM RMD_VDA_2930_DEP D JOIN '||r.TABLE_NAME||' T ON T.ROWID=CHARTOROWID(D.RID) WHERE D.ID_EXECUCAO=:1 AND D.TABLE_NAME=:2 AND D.COLUMN_NAME=:3 AND (T.'||r.COLUMN_NAME||'<>D.OLD_VALUE OR (T.'||r.COLUMN_NAME||' IS NULL AND D.OLD_VALUE IS NOT NULL) OR (T.'||r.COLUMN_NAME||' IS NOT NULL AND D.OLD_VALUE IS NULL))';
+    EXECUTE IMMEDIATE v_sql INTO v_drift USING c_id,r.TABLE_NAME,r.COLUMN_NAME;
+    IF v_drift<>0 THEN RAISE_APPLICATION_ERROR(-20506,'Pos-validacao divergente: '||r.TABLE_NAME||'.'||r.COLUMN_NAME||' qtd='||v_drift); END IF;
+  END LOOP;
+
+  SELECT COUNT(*) INTO v_missing FROM RMD_VDA_2930_MAP M WHERE M.ID_EXECUCAO=c_id AND M.TIPO='BAI' AND NOT EXISTS (SELECT 1 FROM TSIBAI B WHERE B.CODBAI=M.COD_OBSOLETO);
+  IF v_missing<>0 THEN RAISE_APPLICATION_ERROR(-20507,'Pais BAI ausente apos rollback: '||v_missing); END IF;
+  SELECT COUNT(*) INTO v_missing FROM RMD_VDA_2930_MAP M WHERE M.ID_EXECUCAO=c_id AND M.TIPO='END' AND NOT EXISTS (SELECT 1 FROM TSIEND E WHERE E.CODEND=M.COD_OBSOLETO);
+  IF v_missing<>0 THEN RAISE_APPLICATION_ERROR(-20508,'Pais END ausente apos rollback: '||v_missing); END IF;
+
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('STATUS=ROLLBACK_29_30_CONCLUIDO; ID_EXECUCAO='||c_id||'; PAIS_RESTAURADOS='||v_restored||'; REFERENCIAS_REVERTIDAS='||v_reverted);
+EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+END;
+/
+UNDEFINE P_CONFIRMA

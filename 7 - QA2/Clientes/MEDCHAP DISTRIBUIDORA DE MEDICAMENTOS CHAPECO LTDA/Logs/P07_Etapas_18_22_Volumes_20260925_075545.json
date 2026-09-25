@@ -1,0 +1,55 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:23.114499+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P07_Etapas_18_22_Volumes.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 9,
+  "colunas": [
+    "ITEM",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "ITEM": "18_TGFCGM_ORIGEM_EMP1_1900_1",
+      "QTD": 1
+    },
+    {
+      "ITEM": "18_TGFCMV_CODCONFIG_1",
+      "QTD": 1
+    },
+    {
+      "ITEM": "18_TGFCGM_DESTINOS",
+      "QTD": 4
+    },
+    {
+      "ITEM": "19_PARCEIROS_TOTAL",
+      "QTD": 9180
+    },
+    {
+      "ITEM": "20_TTKINDAGT_SEQUENCIA_1",
+      "QTD": 1
+    },
+    {
+      "ITEM": "20_TTKNOT_TOTAL",
+      "QTD": 1201277
+    },
+    {
+      "ITEM": "20_TTKEVT_TOTAL",
+      "QTD": 1543515
+    },
+    {
+      "ITEM": "21_ICMS_DIVERGENTES",
+      "QTD": 234
+    },
+    {
+      "ITEM": "22_PARCEIROS_A_ANALISAR",
+      "QTD": 9179
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

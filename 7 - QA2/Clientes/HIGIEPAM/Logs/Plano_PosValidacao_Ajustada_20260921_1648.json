@@ -1,0 +1,15 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/HIGIEPAM/PosValidacao_Master_ReadOnly.sql",
+  "arquivos": [
+    "Clientes/HIGIEPAM/PosValidacao_Master_ReadOnly.sql"
+  ],
+  "qtd_instrucoes": 1,
+  "tipos": {
+    "SELECT": 1
+  },
+  "binds_sqlplus": [],
+  "sha256_suite": "0d04fc08669f87effb95edab446b56fe9dd648387ab264370aa853cb511e358e",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false
+}

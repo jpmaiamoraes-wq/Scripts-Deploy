@@ -1,0 +1,5 @@
+-- Backup da atividade 14 apos rollback; somente leitura.
+SELECT 'BKP_RMD_13_TSIIMP' AS OBJETO,
+       COUNT(*) AS QTD_REGISTROS_BACKUP,
+       COUNT(DISTINCT ID_EXECUCAO) AS QTD_EXECUCOES
+  FROM BKP_RMD_13_TSIIMP;

@@ -1,0 +1,12 @@
+-- Fonte dos triggers que incidem sobre a TGFEMP; somente leitura.
+SELECT OWNER,
+       NAME,
+       TYPE,
+       LINE,
+       TEXT
+  FROM ALL_SOURCE
+ WHERE OWNER='SANKHYA'
+   AND NAME IN ('TRG_DLT_TGFEMP','TRG_FX_TGFEMP','TRG_INC_UPT_TGFEMP',
+                'TRG_INC_UPT_TGFEMP_AFTER','TRG_INC_UPT_TGFEMP_WMS',
+                'TRG_UPD_TGFEMP_ENOTAS','TRG_UPT_TGFEMP_ESTTERC')
+ ORDER BY NAME, TYPE, LINE;

@@ -1,0 +1,257 @@
+SQL> 
+SQL> PROMPT === POS-VALIDACAO INDEPENDENTE SOMENTE LEITURA ===
+=== POS-VALIDACAO INDEPENDENTE SOMENTE LEITURA ===
+SQL> @@Pos_Validacao_Retomada_20260916.sql
+SQL> -- Pos-validacao independente, somente leitura, da retomada 29-31.
+SQL> -- Nao contem senha e nao executa DML/DDL.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET PAGESIZE 200
+SQL> SET LINESIZE 240
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === IDENTIDADE FINAL ===
+=== IDENTIDADE FINAL ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') SESSION_USER,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') CURRENT_SCHEMA,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICE_NAME,
+  4         SYS_CONTEXT('USERENV','DB_NAME') DB_NAME
+  5    FROM DUAL;
+
+SESSION_USER
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CURRENT_SCHEMA
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DB_NAME                                                                                                                                                                                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+SANKHYA                                                                                                                                                                                                                                         
+alheiroprd.sankhyacloud.com.br                                                                                                                                                                                                                  
+ALHEIROPRD                                                                                                                                                                                                                                      
+
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT CODEMP,RAZAOSOCIAL
+  2    FROM TSIEMP
+  3   WHERE UPPER(TRIM(RAZAOSOCIAL))='PRODUTOS ALHEIRO LTDA';
+
+    CODEMP RAZAOSOCIAL                             
+---------- ----------------------------------------
+         1 PRODUTOS ALHEIRO LTDA                   
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT REGEXP_SUBSTR(TEXTO,'[0-9]+\.[0-9]+[[:alpha:]][0-9]+') VERSAO_CURTA
+  2    FROM TSIPAR
+  3   WHERE CHAVE='VERSAOSKWBIN';
+
+VERSAO_CURTA                                                                                                                                                                                                                                    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.36b146
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === BACKUPS, MAPA E EXCECOES ===
+=== BACKUPS, MAPA E EXCECOES ===
+SQL> SELECT 'BKP_RMD_PAD_TSIBAI' OBJETO,COUNT(*) QTD FROM BKP_RMD_PAD_TSIBAI
+  2  UNION ALL
+  3  SELECT 'BKP_RMD_PAD_TSIEND',COUNT(*) FROM BKP_RMD_PAD_TSIEND
+  4  UNION ALL
+  5  SELECT 'RMD_ALH_2930_MAP_ID',COUNT(*) FROM RMD_ALH_2930_MAP
+  6   WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236'
+  7  UNION ALL
+  8  SELECT 'RMD_ALH_2930_BAI_BKP_ID',COUNT(*) FROM RMD_ALH_2930_BAI_BKP
+  9   WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236'
+ 10  UNION ALL
+ 11  SELECT 'RMD_ALH_2930_END_BKP_ID',COUNT(*) FROM RMD_ALH_2930_END_BKP
+ 12   WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236'
+ 13  UNION ALL
+ 14  SELECT 'RMD_ALH_2930_DEP_ID',COUNT(*) FROM RMD_ALH_2930_DEP
+ 15   WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236'
+ 16  UNION ALL
+ 17  SELECT 'RMD_ALH_2930_EXC_ID',COUNT(*) FROM RMD_ALH_2930_EXC
+ 18   WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236';
+
+OBJETO                         QTD
+----------------------- ----------
+BKP_RMD_PAD_TSIBAI           45047
+BKP_RMD_PAD_TSIEND          646115
+RMD_ALH_2930_MAP_ID           7711
+RMD_ALH_2930_BAI_BKP_ID        848
+RMD_ALH_2930_END_BKP_ID      14226
+RMD_ALH_2930_DEP_ID          61263
+RMD_ALH_2930_EXC_ID              0
+
+7 rows selected. 
+
+SQL> 
+SQL> PROMPT === PAIS OBSOLETOS E DUPLICIDADES ===
+=== PAIS OBSOLETOS E DUPLICIDADES ===
+SQL> SELECT 'TSIBAI_OBSOLETOS_REMANESCENTES' ITEM,COUNT(*) QTD
+  2    FROM TSIBAI
+  3   WHERE CODBAI IN (SELECT COD_OBSOLETO FROM RMD_ALH_2930_MAP WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236' AND TIPO='BAI')
+  4  UNION ALL
+  5  SELECT 'TSIEND_OBSOLETOS_REMANESCENTES',COUNT(*)
+  6    FROM TSIEND
+  7   WHERE CODEND IN (SELECT COD_OBSOLETO FROM RMD_ALH_2930_MAP WHERE ID_EXECUCAO='RMD_ALH_2930_20260916161842236' AND TIPO='END')
+  8  UNION ALL
+  9  SELECT 'TSIBAI_GRUPOS_COLISAO_REMANESCENTES',COUNT(*)
+ 10    FROM (
+ 11      SELECT REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+ 12        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+ 13        FROM TSIBAI WHERE NOMEBAI IS NOT NULL
+ 14       GROUP BY REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+ 15        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+ 16      HAVING COUNT(*)>1
+ 17    )
+ 18  UNION ALL
+ 19  SELECT 'TSIEND_GRUPOS_COLISAO_REMANESCENTES',COUNT(*)
+ 20    FROM (
+ 21      SELECT TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 22        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+ 23        FROM TSIEND WHERE NOMEEND IS NOT NULL
+ 24       GROUP BY TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 25        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+ 26      HAVING COUNT(*)>1
+ 27    );
+
+ITEM                                       QTD
+----------------------------------- ----------
+TSIBAI_OBSOLETOS_REMANESCENTES               0
+TSIEND_OBSOLETOS_REMANESCENTES               0
+TSIBAI_GRUPOS_COLISAO_REMANESCENTES          0
+TSIEND_GRUPOS_COLISAO_REMANESCENTES          0
+
+4 rows selected. 
+
+SQL> 
+SQL> PROMPT === REFERENCIAS FISICAS REMANESCENTES ===
+=== REFERENCIAS FISICAS REMANESCENTES ===
+SQL> DECLARE
+  2    v_owner VARCHAR2(128):=SYS_CONTEXT('USERENV','CURRENT_SCHEMA');
+  3    v_id VARCHAR2(40):='RMD_ALH_2930_20260916161842236';
+  4    v_sql VARCHAR2(32767);
+  5    v_n NUMBER;
+  6    v_refs NUMBER:=0;
+  7    v_erros NUMBER:=0;
+  8  BEGIN
+  9    FOR r IN (
+ 10      SELECT DISTINCT C.TABLE_NAME,C.COLUMN_NAME
+ 11        FROM ALL_TAB_COLUMNS C
+ 12        JOIN ALL_TABLES T ON T.OWNER=C.OWNER AND T.TABLE_NAME=C.TABLE_NAME
+ 13       WHERE C.OWNER=v_owner
+ 14         AND C.COLUMN_NAME IN ('CODBAI','CODEND')
+ 15         AND C.TABLE_NAME NOT IN ('TSIBAI','TSIEND')
+ 16         AND C.TABLE_NAME NOT LIKE 'BKP_RMD%'
+ 17         AND C.TABLE_NAME NOT LIKE 'RMD_ALH_2930%'
+ 18    ) LOOP
+ 19      BEGIN
+ 20        IF r.COLUMN_NAME='CODBAI' THEN
+ 21          v_sql:='SELECT COUNT(*) FROM '||r.TABLE_NAME||' T WHERE EXISTS (SELECT 1 FROM RMD_ALH_2930_MAP M WHERE M.ID_EXECUCAO=:1 AND M.TIPO=''BAI'' AND M.COD_OBSOLETO=T.CODBAI)';
+ 22        ELSE
+ 23          v_sql:='SELECT COUNT(*) FROM '||r.TABLE_NAME||' T WHERE EXISTS (SELECT 1 FROM RMD_ALH_2930_MAP M WHERE M.ID_EXECUCAO=:1 AND M.TIPO=''END'' AND M.COD_OBSOLETO=T.CODEND)';
+ 24        END IF;
+ 25        EXECUTE IMMEDIATE v_sql INTO v_n USING v_id;
+ 26        v_refs:=v_refs+v_n;
+ 27      EXCEPTION WHEN OTHERS THEN
+ 28        v_erros:=v_erros+1;
+ 29        DBMS_OUTPUT.PUT_LINE('ERRO_VALIDACAO_RAMO|'||r.TABLE_NAME||'|'||r.COLUMN_NAME||'|'||SQLERRM);
+ 30      END;
+ 31    END LOOP;
+ 32  
+ 33    FOR r IN (
+ 34      SELECT DISTINCT C.TABLE_NAME,CC.COLUMN_NAME,P.TABLE_NAME PAI
+ 35        FROM ALL_CONSTRAINTS C
+ 36        JOIN ALL_CONS_COLUMNS CC
+ 37          ON CC.OWNER=C.OWNER AND CC.CONSTRAINT_NAME=C.CONSTRAINT_NAME
+ 38         AND CC.POSITION IS NOT NULL
+ 39        JOIN ALL_CONSTRAINTS P
+ 40          ON P.OWNER=C.R_OWNER AND P.CONSTRAINT_NAME=C.R_CONSTRAINT_NAME
+ 41        JOIN ALL_CONS_COLUMNS PC
+ 42          ON PC.OWNER=P.OWNER AND PC.CONSTRAINT_NAME=P.CONSTRAINT_NAME
+ 43         AND PC.POSITION=CC.POSITION
+ 44       WHERE C.OWNER=v_owner AND C.CONSTRAINT_TYPE='R'
+ 45         AND P.OWNER=v_owner AND P.TABLE_NAME IN ('TSIBAI','TSIEND')
+ 46         AND PC.COLUMN_NAME IN ('CODBAI','CODEND')
+ 47         AND CC.COLUMN_NAME NOT IN ('CODBAI','CODEND')
+ 48         AND C.TABLE_NAME NOT IN ('TSIBAI','TSIEND')
+ 49         AND C.TABLE_NAME NOT LIKE 'BKP_RMD%'
+ 50         AND C.TABLE_NAME NOT LIKE 'RMD_ALH_2930%'
+ 51    ) LOOP
+ 52      BEGIN
+ 53        IF r.PAI='TSIBAI' THEN
+ 54          v_sql:='SELECT COUNT(*) FROM '||r.TABLE_NAME||' T WHERE EXISTS (SELECT 1 FROM RMD_ALH_2930_MAP M WHERE M.ID_EXECUCAO=:1 AND M.TIPO=''BAI'' AND M.COD_OBSOLETO=T.'||r.COLUMN_NAME||')';
+ 55        ELSE
+ 56          v_sql:='SELECT COUNT(*) FROM '||r.TABLE_NAME||' T WHERE EXISTS (SELECT 1 FROM RMD_ALH_2930_MAP M WHERE M.ID_EXECUCAO=:1 AND M.TIPO=''END'' AND M.COD_OBSOLETO=T.'||r.COLUMN_NAME||')';
+ 57        END IF;
+ 58        EXECUTE IMMEDIATE v_sql INTO v_n USING v_id;
+ 59        v_refs:=v_refs+v_n;
+ 60      EXCEPTION WHEN OTHERS THEN
+ 61        v_erros:=v_erros+1;
+ 62        DBMS_OUTPUT.PUT_LINE('ERRO_VALIDACAO_FK|'||r.TABLE_NAME||'|'||r.COLUMN_NAME||'|'||SQLERRM);
+ 63      END;
+ 64    END LOOP;
+ 65    DBMS_OUTPUT.PUT_LINE('REFERENCIAS_REMANESCENTES_FINAL='||v_refs||'; ERROS_VALIDACAO='||v_erros);
+ 66  END;
+ 67  /
+REFERENCIAS_REMANESCENTES_FINAL=0; ERROS_VALIDACAO=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === OBJETOS TEMPORARIOS E INVALIDOS ===
+=== OBJETOS TEMPORARIOS E INVALIDOS ===
+SQL> SELECT ID_MASTER,ID_EXECUCAO,OBJECT_TYPE,OBJECT_NAME,STATUS_ANTES,STATUS_DEPOIS,DH_REABILITACAO
+  2    FROM RMD_CONTROLE_OBJETOS
+  3   WHERE ID_MASTER='RMD_RUN_20260916135606162'
+  4   ORDER BY DH_REGISTRO;
+
+ID_MASTER                      ID_EXECUCAO                    OBJECT_TYPE                    OBJECT_NAME
+------------------------------ ------------------------------ ------------------------------ --------------------------------------------------------------------------------------------------------------------------------
+STATUS_ANTES                   STATUS_DEPOIS                  DH_REABILITACAO            
+------------------------------ ------------------------------ ---------------------------
+RMD_RUN_20260916135606162      RMD_ITEM_20260916135618809     TRIGGER                        TRG_UPT_TGFITE                                                                                                                   
+ENABLED                        ENABLED                        16/09/26 13:56:19,830077000
+
+RMD_RUN_20260916135606162      RMD_UNID_20260916135952034     TRIGGER                        TRG_INC_UPD_TGFITE                                                                                                               
+ENABLED                        ENABLED                        16/09/26 13:59:55,778836000
+
+RMD_RUN_20260916135606162      RMD_UNID_20260916135952034     TRIGGER                        TRG_UPT_TGFITE                                                                                                                   
+ENABLED                        ENABLED                        16/09/26 13:59:55,778836000
+
+
+3 rows selected. 
+
+SQL> 
+SQL> SELECT OWNER,OBJECT_TYPE,OBJECT_NAME,STATUS
+  2    FROM ALL_OBJECTS
+  3   WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  4     AND STATUS='INVALID'
+  5   ORDER BY OBJECT_TYPE,OBJECT_NAME;
+
+0 rows selected. 
+
+SQL> 
+SQL> SELECT 'USER_TS_QUOTAS' ITEM,COUNT(*) QTD FROM USER_TS_QUOTAS
+  2  UNION ALL
+  3  SELECT 'ALTER_ANY_PROCEDURE',COUNT(*) FROM SESSION_PRIVS WHERE PRIVILEGE='ALTER ANY PROCEDURE';
+
+ITEM                       QTD
+------------------- ----------
+USER_TS_QUOTAS               0
+ALTER_ANY_PROCEDURE          0
+
+2 rows selected. 
+
+SQL> 
+SQL> PROMPT === FIM POS-VALIDACAO RETOMADA 29-31 ===
+=== FIM POS-VALIDACAO RETOMADA 29-31 ===
+SQL> 
+SQL> SPOOL OFF

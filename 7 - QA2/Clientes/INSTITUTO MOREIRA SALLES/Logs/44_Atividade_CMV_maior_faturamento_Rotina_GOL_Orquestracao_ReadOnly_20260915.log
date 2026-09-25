@@ -1,0 +1,1958 @@
+SQL> SELECT LISTAGG(ARGUMENT_NAME||'|'||POSITION||'|'||IN_OUT||'|'||DATA_TYPE||'|'||DEFAULTED,'; ') WITHIN GROUP(ORDER BY POSITION) AS ASSINATURA FROM ALL_ARGUMENTS WHERE OWNER='SANKHYA' AND OBJECT_NAME='PFCM_CONSOLIDACAO';
+
+ASSINATURA
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+1 row selected. 
+
+SQL> SELECT LINE||'|'||TEXT FROM ALL_SOURCE WHERE OWNER='SANKHYA' AND NAME='PFCM_CONSOLIDACAO' ORDER BY LINE;
+
+LINE||'|'||TEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1|PROCEDURE PFCM_CONSOLIDACAO AS
+2|   P_HOJE DATE;
+3|   P_DIA INT;
+4|   P_DIASRETROAGIR INT;
+5|BEGIN   
+6|   P_DIASRETROAGIR := 372;
+7|   P_HOJE := TRUNC(SYSDATE);
+8|   P_DIA := 0;
+9|   
+10|   DELETE FROM TFCM_CONSOLIDACAO;
+11|   
+12|   WHILE P_DIA <= P_DIASRETROAGIR
+13|   LOOP
+14|      BEGIN
+15|         INSERT INTO TFCM_CONSOLIDACAO( CODNAT,CODCENCUS,CODPROJ,NUFIN,DTNEG,DTVENC,VLRDESDOB,VLRLIQUIDO,DTREF) 
+16|		    SELECT  
+17|  FIN.CODNAT AS CODNAT,
+18|  FIN.CODCENCUS AS CODCENCUS,
+19|  FIN.CODPROJ AS CODPROJ,
+20|  FIN.NUFIN,
+21|  FIN.DTNEG,
+22|  FIN.DTVENC,
+23|  (FIN.VLRDESDOB * FIN.RECDESP) AS VLRDESDOB,
+24|  (FIN.VLRLIQUIDO * FIN.RECDESP) AS VLRLIQUIDO,
+25|  FIN.DTNEG AS DTREF
+26|FROM VGFFIN FIN
+27|WHERE
+28|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+29|AND FIN.RECDESP <> 0
+30|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+31|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+32|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+33|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+34|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+35|/*NATUREZA ESPECIAL*/
+36|/*ANTECIPACAO*/ 
+37|UNION ALL
+38|
+39|SELECT
+40|  RAT.CODNAT AS CODNAT,
+41|  RAT.CODCENCUS AS CODCENCUS,
+42|  RAT.CODPROJ AS CODPROJ,
+43|  FIN.NUFIN,
+44|  FIN.DTNEG,
+45|  FIN.DTVENC AS DTVENC,
+46|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESDOB = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESDOB * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+47|  /* TEMRATADVALOR CASE WHEN FIN.VLRLIQUIDO = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRLIQUIDO * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+48|  FIN.DTNEG AS DTREF
+49|FROM VGFFIN FIN
+50|  , TGFRAT RAT
+51|WHERE
+52|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+53|AND FIN.RECDESP <> 0
+54|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+55|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+56|/*NATUREZA ESPECIAL*/
+57|/*ANTECIPACAO*/ 
+58|UNION ALL
+59|
+60|SELECT
+61|  RAT.CODNAT AS CODNAT,
+62|  RAT.CODCENCUS AS CODCENCUS,
+63|  RAT.CODPROJ AS CODPROJ,
+64|  FIN.NUFIN,
+65|  FIN.DTNEG,
+66|  FIN.DTVENC AS DTVENC,
+67|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESDOB = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESDOB * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+68|  /* TEMRATADVALOR CASE WHEN FIN.VLRLIQUIDO = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRLIQUIDO * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+69|  FIN.DTNEG AS DTREF
+70|FROM VGFFIN FIN
+71|  , TGFRAT RAT
+72|WHERE
+73|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+74|AND FIN.RECDESP <> 0
+75|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+76|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+77|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+78|/*NATUREZA ESPECIAL*/
+79|/*ANTECIPACAO*/ 
+80|UNION ALL
+81|
+82|SELECT
+83|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECJURO' AND CODUSU = 0), 0) AS CODNAT,
+84|  FIN.CODCENCUS AS CODCENCUS,
+85|  FIN.CODPROJ AS CODPROJ,
+86|  FIN.NUFIN,
+87|  FIN.DTNEG,
+88|  FIN.DTVENC,
+89|  ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * FIN.RECDESP) AS VLRDESDOB,
+90|  ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * FIN.RECDESP) AS VLRLIQUIDO,
+91|  FIN.DTNEG AS DTREF
+92|FROM VGFFIN FIN
+93|WHERE
+94|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+95|AND FIN.RECDESP <> 0
+96|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+97|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+98|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+99|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+100|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+101|AND (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) <> 0 AND FIN.RECDESP = 1 AND  FIN.TIPJURO = '1'
+102|/*ANTECIPACAO*/ 
+103|UNION ALL
+104|
+105|SELECT
+106|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECMULTA' AND CODUSU = 0), 0) AS CODNAT,
+107|  FIN.CODCENCUS AS CODCENCUS,
+108|  FIN.CODPROJ AS CODPROJ,
+109|  FIN.NUFIN,
+110|  FIN.DTNEG,
+111|  FIN.DTVENC,
+112|  ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * FIN.RECDESP) AS VLRDESDOB,
+113|  ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * FIN.RECDESP) AS VLRLIQUIDO,
+114|  FIN.DTNEG AS DTREF
+115|FROM VGFFIN FIN
+116|WHERE
+117|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+118|AND FIN.RECDESP <> 0
+119|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+120|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+121|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+122|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+123|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+124|AND (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) <> 0 AND FIN.RECDESP = 1 AND  FIN.TIPMULTA = '1'
+125|/*ANTECIPACAO*/ 
+126|UNION ALL
+127|
+128|SELECT
+129|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECDESC' AND CODUSU = 0), 0) AS CODNAT,
+130|  FIN.CODCENCUS AS CODCENCUS,
+131|  FIN.CODPROJ AS CODPROJ,
+132|  FIN.NUFIN,
+133|  FIN.DTNEG,
+134|  FIN.DTVENC,
+135|  (FIN.VLRDESC * -1 * FIN.RECDESP) AS VLRDESDOB,
+136|  (FIN.VLRDESC * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+137|  FIN.DTNEG AS DTREF
+138|FROM VGFFIN FIN
+139|WHERE
+140|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+141|AND FIN.RECDESP <> 0
+142|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+143|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+144|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+145|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+146|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+147|AND FIN.VLRDESC <> 0 AND FIN.RECDESP = 1
+148|/*ANTECIPACAO*/ 
+149|UNION ALL
+150|
+151|SELECT
+152|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECDESPCART' AND CODUSU = 0), 0) AS CODNAT,
+153|  FIN.CODCENCUS AS CODCENCUS,
+154|  FIN.CODPROJ AS CODPROJ,
+155|  FIN.NUFIN,
+156|  FIN.DTNEG,
+157|  FIN.DTVENC,
+158|  (FIN.DESPCART * FIN.RECDESP) AS VLRDESDOB,
+159|  (FIN.DESPCART * FIN.RECDESP) AS VLRLIQUIDO,
+160|  FIN.DTNEG AS DTREF
+161|FROM VGFFIN FIN
+162|WHERE
+163|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+164|AND FIN.RECDESP <> 0
+165|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+166|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+167|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+168|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+169|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+170|AND FIN.DESPCART <> 0 AND FIN.RECDESP = 1
+171|/*ANTECIPACAO*/ 
+172|UNION ALL
+173|
+174|SELECT
+175|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECVARCAMB' AND CODUSU = 0), 0) AS CODNAT,
+176|  FIN.CODCENCUS AS CODCENCUS,
+177|  FIN.CODPROJ AS CODPROJ,
+178|  FIN.NUFIN,
+179|  FIN.DTNEG,
+180|  FIN.DTVENC,
+181|  (FIN.VLRVARCAMBIAL * FIN.RECDESP) AS VLRDESDOB,
+182|  (FIN.VLRVARCAMBIAL * FIN.RECDESP) AS VLRLIQUIDO,
+183|  FIN.DTNEG AS DTREF
+184|FROM VGFFIN FIN
+185|WHERE
+186|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+187|AND FIN.RECDESP <> 0
+188|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+189|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+190|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+191|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+192|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+193|AND FIN.VLRVARCAMBIAL <> 0 AND FIN.RECDESP = 1
+194|/*ANTECIPACAO*/ 
+195|UNION ALL
+196|
+197|SELECT
+198|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECINSS' AND CODUSU = 0), 0) AS CODNAT,
+199|  FIN.CODCENCUS AS CODCENCUS,
+200|  FIN.CODPROJ AS CODPROJ,
+201|  FIN.NUFIN,
+202|  FIN.DTNEG,
+203|  FIN.DTVENC,
+204|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRDESDOB,
+205|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+206|  FIN.DTNEG AS DTREF
+207|FROM VGFFIN FIN
+208|WHERE
+209|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+210|AND FIN.RECDESP <> 0
+211|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+212|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+213|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+214|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+215|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+216|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = 1 AND  FIN.INSSRETIDO = 'N'
+217|/*ANTECIPACAO*/ 
+218|UNION ALL
+219|
+220|SELECT
+221|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECINSSRET' AND CODUSU = 0), 0) AS CODNAT,
+222|  FIN.CODCENCUS AS CODCENCUS,
+223|  FIN.CODPROJ AS CODPROJ,
+224|  FIN.NUFIN,
+225|  FIN.DTNEG,
+226|  FIN.DTVENC,
+227|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRDESDOB,
+228|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+229|  FIN.DTNEG AS DTREF
+230|FROM VGFFIN FIN
+231|WHERE
+232|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+233|AND FIN.RECDESP <> 0
+234|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+235|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+236|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+237|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+238|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+239|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = 1 AND  FIN.INSSRETIDO = 'S'
+240|/*ANTECIPACAO*/ 
+241|UNION ALL
+242|
+243|SELECT
+244|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECIRRF' AND CODUSU = 0), 0) AS CODNAT,
+245|  FIN.CODCENCUS AS CODCENCUS,
+246|  FIN.CODPROJ AS CODPROJ,
+247|  FIN.NUFIN,
+248|  FIN.DTNEG,
+249|  FIN.DTVENC,
+250|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRDESDOB,
+251|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+252|  FIN.DTNEG AS DTREF
+253|FROM VGFFIN FIN
+254|WHERE
+255|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+256|AND FIN.RECDESP <> 0
+257|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+258|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+259|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+260|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+261|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+262|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = 1 AND  FIN.IRFRETIDO = 'N'
+263|/*ANTECIPACAO*/ 
+264|UNION ALL
+265|
+266|SELECT
+267|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECIRRFRET' AND CODUSU = 0), 0) AS CODNAT,
+268|  FIN.CODCENCUS AS CODCENCUS,
+269|  FIN.CODPROJ AS CODPROJ,
+270|  FIN.NUFIN,
+271|  FIN.DTNEG,
+272|  FIN.DTVENC,
+273|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRDESDOB,
+274|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+275|  FIN.DTNEG AS DTREF
+276|FROM VGFFIN FIN
+277|WHERE
+278|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+279|AND FIN.RECDESP <> 0
+280|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+281|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+282|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+283|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+284|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+285|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = 1 AND  FIN.IRFRETIDO = 'S'
+286|/*ANTECIPACAO*/ 
+287|UNION ALL
+288|
+289|SELECT
+290|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECISS' AND CODUSU = 0), 0) AS CODNAT,
+291|  FIN.CODCENCUS AS CODCENCUS,
+292|  FIN.CODPROJ AS CODPROJ,
+293|  FIN.NUFIN,
+294|  FIN.DTNEG,
+295|  FIN.DTVENC,
+296|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRDESDOB,
+297|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+298|  FIN.DTNEG AS DTREF
+299|FROM VGFFIN FIN
+300|WHERE
+301|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+302|AND FIN.RECDESP <> 0
+303|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+304|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+305|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+306|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+307|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+308|AND FIN.VLRISS <> 0 AND FIN.RECDESP = 1 AND  FIN.ISSRETIDO = 'N'
+309|/*ANTECIPACAO*/ 
+310|UNION ALL
+311|
+312|SELECT
+313|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECISSRET' AND CODUSU = 0), 0) AS CODNAT,
+314|  FIN.CODCENCUS AS CODCENCUS,
+315|  FIN.CODPROJ AS CODPROJ,
+316|  FIN.NUFIN,
+317|  FIN.DTNEG,
+318|  FIN.DTVENC,
+319|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRDESDOB,
+320|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+321|  FIN.DTNEG AS DTREF
+322|FROM VGFFIN FIN
+323|WHERE
+324|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+325|AND FIN.RECDESP <> 0
+326|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+327|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+328|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+329|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+330|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+331|AND FIN.VLRISS <> 0 AND FIN.RECDESP = 1 AND  FIN.ISSRETIDO = 'S'
+332|/*ANTECIPACAO*/ 
+333|UNION ALL
+334|
+335|SELECT
+336|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECVENDOR' AND CODUSU = 0), 0) AS CODNAT,
+337|  FIN.CODCENCUS AS CODCENCUS,
+338|  FIN.CODPROJ AS CODPROJ,
+339|  FIN.NUFIN,
+340|  FIN.DTNEG,
+341|  FIN.DTVENC,
+342|  (FIN.VLRVENDOR * FIN.RECDESP) AS VLRDESDOB,
+343|  (FIN.VLRVENDOR * FIN.RECDESP) AS VLRLIQUIDO,
+344|  FIN.DTNEG AS DTREF
+345|FROM VGFFIN FIN
+346|WHERE
+347|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+348|AND FIN.RECDESP <> 0
+349|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+350|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+351|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+352|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+353|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+354|AND FIN.VLRVENDOR <> 0 AND FIN.RECDESP = 1
+355|/*ANTECIPACAO*/ 
+356|UNION ALL
+357|
+358|SELECT
+359|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECTAXAADM' AND CODUSU = 0), 0) AS CODNAT,
+360|  FIN.CODCENCUS AS CODCENCUS,
+361|  FIN.CODPROJ AS CODPROJ,
+362|  FIN.NUFIN,
+363|  FIN.DTNEG,
+364|  FIN.DTVENC,
+365|  (FIN.CARTAODESC * -1 * FIN.RECDESP) AS VLRDESDOB,
+366|  (FIN.CARTAODESC * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+367|  FIN.DTNEG AS DTREF
+368|FROM VGFFIN FIN
+369|WHERE
+370|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+371|AND FIN.RECDESP <> 0
+372|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+373|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+374|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+375|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+376|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+377|AND FIN.CARTAODESC <> 0 AND FIN.RECDESP = 1
+378|/*ANTECIPACAO*/ 
+379|UNION ALL
+380|
+381|SELECT
+382|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECOUTIMP' AND CODUSU = 0), 0) AS CODNAT,
+383|  FIN.CODCENCUS AS CODCENCUS,
+384|  FIN.CODPROJ AS CODPROJ,
+385|  FIN.NUFIN,
+386|  FIN.DTNEG,
+387|  FIN.DTVENC,
+388|  (IMF.VALOR * -1 * FIN.RECDESP) AS VLRDESDOB,
+389|  (IMF.VALOR * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+390|  FIN.DTNEG AS DTREF
+391|FROM VGFFIN FIN, TGFIMF IMF
+392|WHERE
+393|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+394|AND FIN.RECDESP <> 0
+395|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+396|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+397|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+398|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+399|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+400|AND IMF.VALOR <> 0 AND FIN.RECDESP = 1 AND  FIN.NUFIN = IMF.NUFIN AND IMF.TIPIMP = -1
+401|/*ANTECIPACAO*/ 
+402|UNION ALL
+403|
+404|SELECT
+405|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPJURO' AND CODUSU = 0), 0) AS CODNAT,
+406|  FIN.CODCENCUS AS CODCENCUS,
+407|  FIN.CODPROJ AS CODPROJ,
+408|  FIN.NUFIN,
+409|  FIN.DTNEG,
+410|  FIN.DTVENC,
+411|  ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * FIN.RECDESP) AS VLRDESDOB,
+412|  ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * FIN.RECDESP) AS VLRLIQUIDO,
+413|  FIN.DTNEG AS DTREF
+414|FROM VGFFIN FIN
+415|WHERE
+416|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+417|AND FIN.RECDESP <> 0
+418|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+419|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+420|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+421|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+422|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+423|AND (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) <> 0 AND FIN.RECDESP = -1 AND  FIN.TIPJURO = '1'
+424|/*ANTECIPACAO*/ 
+425|UNION ALL
+426|
+427|SELECT
+428|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPMULTA' AND CODUSU = 0), 0) AS CODNAT,
+429|  FIN.CODCENCUS AS CODCENCUS,
+430|  FIN.CODPROJ AS CODPROJ,
+431|  FIN.NUFIN,
+432|  FIN.DTNEG,
+433|  FIN.DTVENC,
+434|  ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * FIN.RECDESP) AS VLRDESDOB,
+435|  ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * FIN.RECDESP) AS VLRLIQUIDO,
+436|  FIN.DTNEG AS DTREF
+437|FROM VGFFIN FIN
+438|WHERE
+439|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+440|AND FIN.RECDESP <> 0
+441|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+442|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+443|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+444|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+445|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+446|AND (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) <> 0 AND FIN.RECDESP = -1 AND  FIN.TIPMULTA = '1'
+447|/*ANTECIPACAO*/ 
+448|UNION ALL
+449|
+450|SELECT
+451|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPDESC' AND CODUSU = 0), 0) AS CODNAT,
+452|  FIN.CODCENCUS AS CODCENCUS,
+453|  FIN.CODPROJ AS CODPROJ,
+454|  FIN.NUFIN,
+455|  FIN.DTNEG,
+456|  FIN.DTVENC,
+457|  (FIN.VLRDESC * -1 * FIN.RECDESP) AS VLRDESDOB,
+458|  (FIN.VLRDESC * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+459|  FIN.DTNEG AS DTREF
+460|FROM VGFFIN FIN
+461|WHERE
+462|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+463|AND FIN.RECDESP <> 0
+464|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+465|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+466|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+467|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+468|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+469|AND FIN.VLRDESC <> 0 AND FIN.RECDESP = -1
+470|/*ANTECIPACAO*/ 
+471|UNION ALL
+472|
+473|SELECT
+474|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPDESPCART' AND CODUSU = 0), 0) AS CODNAT,
+475|  FIN.CODCENCUS AS CODCENCUS,
+476|  FIN.CODPROJ AS CODPROJ,
+477|  FIN.NUFIN,
+478|  FIN.DTNEG,
+479|  FIN.DTVENC,
+480|  (FIN.DESPCART * FIN.RECDESP) AS VLRDESDOB,
+481|  (FIN.DESPCART * FIN.RECDESP) AS VLRLIQUIDO,
+482|  FIN.DTNEG AS DTREF
+483|FROM VGFFIN FIN
+484|WHERE
+485|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+486|AND FIN.RECDESP <> 0
+487|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+488|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+489|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+490|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+491|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+492|AND FIN.DESPCART <> 0 AND FIN.RECDESP = -1
+493|/*ANTECIPACAO*/ 
+494|UNION ALL
+495|
+496|SELECT
+497|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPVARCAMB' AND CODUSU = 0), 0) AS CODNAT,
+
+LINE||'|'||TEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+498|  FIN.CODCENCUS AS CODCENCUS,
+499|  FIN.CODPROJ AS CODPROJ,
+500|  FIN.NUFIN,
+501|  FIN.DTNEG,
+502|  FIN.DTVENC,
+503|  (FIN.VLRVARCAMBIAL * FIN.RECDESP) AS VLRDESDOB,
+504|  (FIN.VLRVARCAMBIAL * FIN.RECDESP) AS VLRLIQUIDO,
+505|  FIN.DTNEG AS DTREF
+506|FROM VGFFIN FIN
+507|WHERE
+508|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+509|AND FIN.RECDESP <> 0
+510|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+511|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+512|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+513|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+514|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+515|AND FIN.VLRVARCAMBIAL <> 0 AND FIN.RECDESP = -1
+516|/*ANTECIPACAO*/ 
+517|UNION ALL
+518|
+519|SELECT
+520|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPINSS' AND CODUSU = 0), 0) AS CODNAT,
+521|  FIN.CODCENCUS AS CODCENCUS,
+522|  FIN.CODPROJ AS CODPROJ,
+523|  FIN.NUFIN,
+524|  FIN.DTNEG,
+525|  FIN.DTVENC,
+526|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRDESDOB,
+527|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+528|  FIN.DTNEG AS DTREF
+529|FROM VGFFIN FIN
+530|WHERE
+531|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+532|AND FIN.RECDESP <> 0
+533|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+534|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+535|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+536|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+537|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+538|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = -1 AND  FIN.INSSRETIDO = 'N'
+539|/*ANTECIPACAO*/ 
+540|UNION ALL
+541|
+542|SELECT
+543|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPINSSRET' AND CODUSU = 0), 0) AS CODNAT,
+544|  FIN.CODCENCUS AS CODCENCUS,
+545|  FIN.CODPROJ AS CODPROJ,
+546|  FIN.NUFIN,
+547|  FIN.DTNEG,
+548|  FIN.DTVENC,
+549|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRDESDOB,
+550|  (FIN.VLRINSS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+551|  FIN.DTNEG AS DTREF
+552|FROM VGFFIN FIN
+553|WHERE
+554|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+555|AND FIN.RECDESP <> 0
+556|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+557|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+558|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+559|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+560|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+561|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = -1 AND  FIN.INSSRETIDO = 'S'
+562|/*ANTECIPACAO*/ 
+563|UNION ALL
+564|
+565|SELECT
+566|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPIRRF' AND CODUSU = 0), 0) AS CODNAT,
+567|  FIN.CODCENCUS AS CODCENCUS,
+568|  FIN.CODPROJ AS CODPROJ,
+569|  FIN.NUFIN,
+570|  FIN.DTNEG,
+571|  FIN.DTVENC,
+572|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRDESDOB,
+573|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+574|  FIN.DTNEG AS DTREF
+575|FROM VGFFIN FIN
+576|WHERE
+577|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+578|AND FIN.RECDESP <> 0
+579|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+580|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+581|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+582|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+583|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+584|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = -1 AND  FIN.IRFRETIDO = 'N'
+585|/*ANTECIPACAO*/ 
+586|UNION ALL
+587|
+588|SELECT
+589|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPIRRFRET' AND CODUSU = 0), 0) AS CODNAT,
+590|  FIN.CODCENCUS AS CODCENCUS,
+591|  FIN.CODPROJ AS CODPROJ,
+592|  FIN.NUFIN,
+593|  FIN.DTNEG,
+594|  FIN.DTVENC,
+595|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRDESDOB,
+596|  (FIN.VLRIRF * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+597|  FIN.DTNEG AS DTREF
+598|FROM VGFFIN FIN
+599|WHERE
+600|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+601|AND FIN.RECDESP <> 0
+602|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+603|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+604|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+605|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+606|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+607|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = -1 AND  FIN.IRFRETIDO = 'S'
+608|/*ANTECIPACAO*/ 
+609|UNION ALL
+610|
+611|SELECT
+612|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPISS' AND CODUSU = 0), 0) AS CODNAT,
+613|  FIN.CODCENCUS AS CODCENCUS,
+614|  FIN.CODPROJ AS CODPROJ,
+615|  FIN.NUFIN,
+616|  FIN.DTNEG,
+617|  FIN.DTVENC,
+618|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRDESDOB,
+619|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+620|  FIN.DTNEG AS DTREF
+621|FROM VGFFIN FIN
+622|WHERE
+623|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+624|AND FIN.RECDESP <> 0
+625|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+626|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+627|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+628|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+629|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+630|AND FIN.VLRISS <> 0 AND FIN.RECDESP = -1 AND  FIN.ISSRETIDO = 'N'
+631|/*ANTECIPACAO*/ 
+632|UNION ALL
+633|
+634|SELECT
+635|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPISSRET' AND CODUSU = 0), 0) AS CODNAT,
+636|  FIN.CODCENCUS AS CODCENCUS,
+637|  FIN.CODPROJ AS CODPROJ,
+638|  FIN.NUFIN,
+639|  FIN.DTNEG,
+640|  FIN.DTVENC,
+641|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRDESDOB,
+642|  (FIN.VLRISS * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+643|  FIN.DTNEG AS DTREF
+644|FROM VGFFIN FIN
+645|WHERE
+646|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+647|AND FIN.RECDESP <> 0
+648|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+649|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+650|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+651|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+652|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+653|AND FIN.VLRISS <> 0 AND FIN.RECDESP = -1 AND  FIN.ISSRETIDO = 'S'
+654|/*ANTECIPACAO*/ 
+655|UNION ALL
+656|
+657|SELECT
+658|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPVENDOR' AND CODUSU = 0), 0) AS CODNAT,
+659|  FIN.CODCENCUS AS CODCENCUS,
+660|  FIN.CODPROJ AS CODPROJ,
+661|  FIN.NUFIN,
+662|  FIN.DTNEG,
+663|  FIN.DTVENC,
+664|  (FIN.VLRVENDOR * FIN.RECDESP) AS VLRDESDOB,
+665|  (FIN.VLRVENDOR * FIN.RECDESP) AS VLRLIQUIDO,
+666|  FIN.DTNEG AS DTREF
+667|FROM VGFFIN FIN
+668|WHERE
+669|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+670|AND FIN.RECDESP <> 0
+671|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+672|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+673|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+674|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+675|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+676|AND FIN.VLRVENDOR <> 0 AND FIN.RECDESP = -1
+677|/*ANTECIPACAO*/ 
+678|UNION ALL
+679|
+680|SELECT
+681|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPTAXAADM' AND CODUSU = 0), 0) AS CODNAT,
+682|  FIN.CODCENCUS AS CODCENCUS,
+683|  FIN.CODPROJ AS CODPROJ,
+684|  FIN.NUFIN,
+685|  FIN.DTNEG,
+686|  FIN.DTVENC,
+687|  (FIN.CARTAODESC * -1 * FIN.RECDESP) AS VLRDESDOB,
+688|  (FIN.CARTAODESC * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+689|  FIN.DTNEG AS DTREF
+690|FROM VGFFIN FIN
+691|WHERE
+692|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+693|AND FIN.RECDESP <> 0
+694|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+695|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+696|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+697|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+698|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+699|AND FIN.CARTAODESC <> 0 AND FIN.RECDESP = -1
+700|/*ANTECIPACAO*/ 
+701|UNION ALL
+702|
+703|SELECT
+704|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPOUTIMP' AND CODUSU = 0), 0) AS CODNAT,
+705|  FIN.CODCENCUS AS CODCENCUS,
+706|  FIN.CODPROJ AS CODPROJ,
+707|  FIN.NUFIN,
+708|  FIN.DTNEG,
+709|  FIN.DTVENC,
+710|  (IMF.VALOR * -1 * FIN.RECDESP) AS VLRDESDOB,
+711|  (IMF.VALOR * -1 * FIN.RECDESP) AS VLRLIQUIDO,
+712|  FIN.DTNEG AS DTREF
+713|FROM VGFFIN FIN, TGFIMF IMF
+714|WHERE
+715|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+716|AND FIN.RECDESP <> 0
+717|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+718|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+719|                 WHERE RAT.ORIGEM = 'F' AND RAT.NUFIN = FIN.NUFIN)
+720|AND NOT EXISTS ( SELECT 1 FROM TGFRAT RAT
+721|                 WHERE RAT.ORIGEM = 'E' AND RAT.NUFIN = FIN.NUNOTA)
+722|AND IMF.VALOR <> 0 AND FIN.RECDESP = -1 AND  FIN.NUFIN = IMF.NUFIN AND IMF.TIPIMP = -1
+723|/*ANTECIPACAO*/ 
+724|UNION ALL
+725|
+726|SELECT
+727|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECJURO' AND CODUSU = 0), 0) AS CODNAT,
+728|  RAT.CODCENCUS AS CODCENCUS,
+729|  RAT.CODPROJ AS CODPROJ,
+730|  FIN.NUFIN,
+731|  FIN.DTNEG,
+732|  FIN.DTVENC AS DTVENC,
+733|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+734|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+735|  FIN.DTNEG AS DTREF
+736|FROM VGFFIN FIN
+737|  , TGFRAT RAT
+738|WHERE
+739|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+740|AND FIN.RECDESP <> 0
+741|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+742|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+743|AND (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) <> 0 AND FIN.RECDESP = 1 AND  FIN.TIPJURO = '1'
+744|/*ANTECIPACAO*/ 
+745|UNION ALL
+746|
+747|SELECT
+748|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECMULTA' AND CODUSU = 0), 0) AS CODNAT,
+749|  RAT.CODCENCUS AS CODCENCUS,
+750|  RAT.CODPROJ AS CODPROJ,
+751|  FIN.NUFIN,
+752|  FIN.DTNEG,
+753|  FIN.DTVENC AS DTVENC,
+754|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+755|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+756|  FIN.DTNEG AS DTREF
+757|FROM VGFFIN FIN
+758|  , TGFRAT RAT
+759|WHERE
+760|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+761|AND FIN.RECDESP <> 0
+762|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+763|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+764|AND (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) <> 0 AND FIN.RECDESP = 1 AND  FIN.TIPMULTA = '1'
+765|/*ANTECIPACAO*/ 
+766|UNION ALL
+767|
+768|SELECT
+769|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECDESC' AND CODUSU = 0), 0) AS CODNAT,
+770|  RAT.CODCENCUS AS CODCENCUS,
+771|  RAT.CODPROJ AS CODPROJ,
+772|  FIN.NUFIN,
+773|  FIN.DTNEG,
+774|  FIN.DTVENC AS DTVENC,
+775|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+776|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+777|  FIN.DTNEG AS DTREF
+778|FROM VGFFIN FIN
+779|  , TGFRAT RAT
+780|WHERE
+781|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+782|AND FIN.RECDESP <> 0
+783|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+784|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+785|AND FIN.VLRDESC <> 0 AND FIN.RECDESP = 1
+786|/*ANTECIPACAO*/ 
+787|UNION ALL
+788|
+789|SELECT
+790|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECDESPCART' AND CODUSU = 0), 0) AS CODNAT,
+791|  RAT.CODCENCUS AS CODCENCUS,
+792|  RAT.CODPROJ AS CODPROJ,
+793|  FIN.NUFIN,
+794|  FIN.DTNEG,
+795|  FIN.DTVENC AS DTVENC,
+796|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+797|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+798|  FIN.DTNEG AS DTREF
+799|FROM VGFFIN FIN
+800|  , TGFRAT RAT
+801|WHERE
+802|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+803|AND FIN.RECDESP <> 0
+804|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+805|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+806|AND FIN.DESPCART <> 0 AND FIN.RECDESP = 1
+807|/*ANTECIPACAO*/ 
+808|UNION ALL
+809|
+810|SELECT
+811|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECVARCAMB' AND CODUSU = 0), 0) AS CODNAT,
+812|  RAT.CODCENCUS AS CODCENCUS,
+813|  RAT.CODPROJ AS CODPROJ,
+814|  FIN.NUFIN,
+815|  FIN.DTNEG,
+816|  FIN.DTVENC AS DTVENC,
+817|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+818|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+819|  FIN.DTNEG AS DTREF
+820|FROM VGFFIN FIN
+821|  , TGFRAT RAT
+822|WHERE
+823|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+824|AND FIN.RECDESP <> 0
+825|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+826|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+827|AND FIN.VLRVARCAMBIAL <> 0 AND FIN.RECDESP = 1
+828|/*ANTECIPACAO*/ 
+829|UNION ALL
+830|
+831|SELECT
+832|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECINSS' AND CODUSU = 0), 0) AS CODNAT,
+833|  RAT.CODCENCUS AS CODCENCUS,
+834|  RAT.CODPROJ AS CODPROJ,
+835|  FIN.NUFIN,
+836|  FIN.DTNEG,
+837|  FIN.DTVENC AS DTVENC,
+838|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+839|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+840|  FIN.DTNEG AS DTREF
+841|FROM VGFFIN FIN
+842|  , TGFRAT RAT
+843|WHERE
+844|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+845|AND FIN.RECDESP <> 0
+846|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+847|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+848|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = 1 AND  FIN.INSSRETIDO = 'N'
+849|/*ANTECIPACAO*/ 
+850|UNION ALL
+851|
+852|SELECT
+853|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECINSSRET' AND CODUSU = 0), 0) AS CODNAT,
+854|  RAT.CODCENCUS AS CODCENCUS,
+855|  RAT.CODPROJ AS CODPROJ,
+856|  FIN.NUFIN,
+857|  FIN.DTNEG,
+858|  FIN.DTVENC AS DTVENC,
+859|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+860|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+861|  FIN.DTNEG AS DTREF
+862|FROM VGFFIN FIN
+863|  , TGFRAT RAT
+864|WHERE
+865|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+866|AND FIN.RECDESP <> 0
+867|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+868|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+869|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = 1 AND  FIN.INSSRETIDO = 'S'
+870|/*ANTECIPACAO*/ 
+871|UNION ALL
+872|
+873|SELECT
+874|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECIRRF' AND CODUSU = 0), 0) AS CODNAT,
+875|  RAT.CODCENCUS AS CODCENCUS,
+876|  RAT.CODPROJ AS CODPROJ,
+877|  FIN.NUFIN,
+878|  FIN.DTNEG,
+879|  FIN.DTVENC AS DTVENC,
+880|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+881|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+882|  FIN.DTNEG AS DTREF
+883|FROM VGFFIN FIN
+884|  , TGFRAT RAT
+885|WHERE
+886|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+887|AND FIN.RECDESP <> 0
+888|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+889|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+890|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = 1 AND  FIN.IRFRETIDO = 'N'
+891|/*ANTECIPACAO*/ 
+892|UNION ALL
+893|
+894|SELECT
+895|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECIRRFRET' AND CODUSU = 0), 0) AS CODNAT,
+896|  RAT.CODCENCUS AS CODCENCUS,
+897|  RAT.CODPROJ AS CODPROJ,
+898|  FIN.NUFIN,
+899|  FIN.DTNEG,
+900|  FIN.DTVENC AS DTVENC,
+901|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+902|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+903|  FIN.DTNEG AS DTREF
+904|FROM VGFFIN FIN
+905|  , TGFRAT RAT
+906|WHERE
+907|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+908|AND FIN.RECDESP <> 0
+909|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+910|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+911|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = 1 AND  FIN.IRFRETIDO = 'S'
+912|/*ANTECIPACAO*/ 
+913|UNION ALL
+914|
+915|SELECT
+916|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECISS' AND CODUSU = 0), 0) AS CODNAT,
+917|  RAT.CODCENCUS AS CODCENCUS,
+918|  RAT.CODPROJ AS CODPROJ,
+919|  FIN.NUFIN,
+920|  FIN.DTNEG,
+921|  FIN.DTVENC AS DTVENC,
+922|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+923|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+924|  FIN.DTNEG AS DTREF
+925|FROM VGFFIN FIN
+926|  , TGFRAT RAT
+927|WHERE
+928|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+929|AND FIN.RECDESP <> 0
+930|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+931|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+932|AND FIN.VLRISS <> 0 AND FIN.RECDESP = 1 AND  FIN.ISSRETIDO = 'N'
+933|/*ANTECIPACAO*/ 
+934|UNION ALL
+935|
+936|SELECT
+937|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECISSRET' AND CODUSU = 0), 0) AS CODNAT,
+938|  RAT.CODCENCUS AS CODCENCUS,
+939|  RAT.CODPROJ AS CODPROJ,
+940|  FIN.NUFIN,
+941|  FIN.DTNEG,
+942|  FIN.DTVENC AS DTVENC,
+943|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+944|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+945|  FIN.DTNEG AS DTREF
+946|FROM VGFFIN FIN
+947|  , TGFRAT RAT
+948|WHERE
+949|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+950|AND FIN.RECDESP <> 0
+951|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+952|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+953|AND FIN.VLRISS <> 0 AND FIN.RECDESP = 1 AND  FIN.ISSRETIDO = 'S'
+954|/*ANTECIPACAO*/ 
+955|UNION ALL
+956|
+957|SELECT
+958|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECVENDOR' AND CODUSU = 0), 0) AS CODNAT,
+959|  RAT.CODCENCUS AS CODCENCUS,
+960|  RAT.CODPROJ AS CODPROJ,
+961|  FIN.NUFIN,
+962|  FIN.DTNEG,
+963|  FIN.DTVENC AS DTVENC,
+964|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+965|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+966|  FIN.DTNEG AS DTREF
+967|FROM VGFFIN FIN
+968|  , TGFRAT RAT
+969|WHERE
+970|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+971|AND FIN.RECDESP <> 0
+972|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+973|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+974|AND FIN.VLRVENDOR <> 0 AND FIN.RECDESP = 1
+975|/*ANTECIPACAO*/ 
+976|UNION ALL
+977|
+978|SELECT
+979|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECTAXAADM' AND CODUSU = 0), 0) AS CODNAT,
+980|  RAT.CODCENCUS AS CODCENCUS,
+981|  RAT.CODPROJ AS CODPROJ,
+982|  FIN.NUFIN,
+983|  FIN.DTNEG,
+984|  FIN.DTVENC AS DTVENC,
+985|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+986|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+987|  FIN.DTNEG AS DTREF
+988|FROM VGFFIN FIN
+989|  , TGFRAT RAT
+990|WHERE
+991|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+992|AND FIN.RECDESP <> 0
+993|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+994|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+
+LINE||'|'||TEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+995|AND FIN.CARTAODESC <> 0 AND FIN.RECDESP = 1
+996|/*ANTECIPACAO*/ 
+997|UNION ALL
+998|
+999|SELECT
+1000|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECOUTIMP' AND CODUSU = 0), 0) AS CODNAT,
+1001|  RAT.CODCENCUS AS CODCENCUS,
+1002|  RAT.CODPROJ AS CODPROJ,
+1003|  FIN.NUFIN,
+1004|  FIN.DTNEG,
+1005|  FIN.DTVENC AS DTVENC,
+1006|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1007|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1008|  FIN.DTNEG AS DTREF
+1009|FROM VGFFIN FIN, TGFIMF IMF
+1010|  , TGFRAT RAT
+1011|WHERE
+1012|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1013|AND FIN.RECDESP <> 0
+1014|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1015|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1016|AND IMF.VALOR <> 0 AND FIN.RECDESP = 1 AND  FIN.NUFIN = IMF.NUFIN AND IMF.TIPIMP = -1
+1017|/*ANTECIPACAO*/ 
+1018|UNION ALL
+1019|
+1020|SELECT
+1021|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPJURO' AND CODUSU = 0), 0) AS CODNAT,
+1022|  RAT.CODCENCUS AS CODCENCUS,
+1023|  RAT.CODPROJ AS CODPROJ,
+1024|  FIN.NUFIN,
+1025|  FIN.DTNEG,
+1026|  FIN.DTVENC AS DTVENC,
+1027|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1028|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1029|  FIN.DTNEG AS DTREF
+1030|FROM VGFFIN FIN
+1031|  , TGFRAT RAT
+1032|WHERE
+1033|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1034|AND FIN.RECDESP <> 0
+1035|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1036|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1037|AND (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) <> 0 AND FIN.RECDESP = -1 AND  FIN.TIPJURO = '1'
+1038|/*ANTECIPACAO*/ 
+1039|UNION ALL
+1040|
+1041|SELECT
+1042|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPMULTA' AND CODUSU = 0), 0) AS CODNAT,
+1043|  RAT.CODCENCUS AS CODCENCUS,
+1044|  RAT.CODPROJ AS CODPROJ,
+1045|  FIN.NUFIN,
+1046|  FIN.DTNEG,
+1047|  FIN.DTVENC AS DTVENC,
+1048|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1049|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1050|  FIN.DTNEG AS DTREF
+1051|FROM VGFFIN FIN
+1052|  , TGFRAT RAT
+1053|WHERE
+1054|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1055|AND FIN.RECDESP <> 0
+1056|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1057|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1058|AND (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) <> 0 AND FIN.RECDESP = -1 AND  FIN.TIPMULTA = '1'
+1059|/*ANTECIPACAO*/ 
+1060|UNION ALL
+1061|
+1062|SELECT
+1063|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPDESC' AND CODUSU = 0), 0) AS CODNAT,
+1064|  RAT.CODCENCUS AS CODCENCUS,
+1065|  RAT.CODPROJ AS CODPROJ,
+1066|  FIN.NUFIN,
+1067|  FIN.DTNEG,
+1068|  FIN.DTVENC AS DTVENC,
+1069|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1070|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1071|  FIN.DTNEG AS DTREF
+1072|FROM VGFFIN FIN
+1073|  , TGFRAT RAT
+1074|WHERE
+1075|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1076|AND FIN.RECDESP <> 0
+1077|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1078|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1079|AND FIN.VLRDESC <> 0 AND FIN.RECDESP = -1
+1080|/*ANTECIPACAO*/ 
+1081|UNION ALL
+1082|
+1083|SELECT
+1084|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPDESPCART' AND CODUSU = 0), 0) AS CODNAT,
+1085|  RAT.CODCENCUS AS CODCENCUS,
+1086|  RAT.CODPROJ AS CODPROJ,
+1087|  FIN.NUFIN,
+1088|  FIN.DTNEG,
+1089|  FIN.DTVENC AS DTVENC,
+1090|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1091|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1092|  FIN.DTNEG AS DTREF
+1093|FROM VGFFIN FIN
+1094|  , TGFRAT RAT
+1095|WHERE
+1096|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1097|AND FIN.RECDESP <> 0
+1098|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1099|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1100|AND FIN.DESPCART <> 0 AND FIN.RECDESP = -1
+1101|/*ANTECIPACAO*/ 
+1102|UNION ALL
+1103|
+1104|SELECT
+1105|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPVARCAMB' AND CODUSU = 0), 0) AS CODNAT,
+1106|  RAT.CODCENCUS AS CODCENCUS,
+1107|  RAT.CODPROJ AS CODPROJ,
+1108|  FIN.NUFIN,
+1109|  FIN.DTNEG,
+1110|  FIN.DTVENC AS DTVENC,
+1111|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1112|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1113|  FIN.DTNEG AS DTREF
+1114|FROM VGFFIN FIN
+1115|  , TGFRAT RAT
+1116|WHERE
+1117|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1118|AND FIN.RECDESP <> 0
+1119|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1120|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1121|AND FIN.VLRVARCAMBIAL <> 0 AND FIN.RECDESP = -1
+1122|/*ANTECIPACAO*/ 
+1123|UNION ALL
+1124|
+1125|SELECT
+1126|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPINSS' AND CODUSU = 0), 0) AS CODNAT,
+1127|  RAT.CODCENCUS AS CODCENCUS,
+1128|  RAT.CODPROJ AS CODPROJ,
+1129|  FIN.NUFIN,
+1130|  FIN.DTNEG,
+1131|  FIN.DTVENC AS DTVENC,
+1132|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1133|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1134|  FIN.DTNEG AS DTREF
+1135|FROM VGFFIN FIN
+1136|  , TGFRAT RAT
+1137|WHERE
+1138|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1139|AND FIN.RECDESP <> 0
+1140|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1141|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1142|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = -1 AND  FIN.INSSRETIDO = 'N'
+1143|/*ANTECIPACAO*/ 
+1144|UNION ALL
+1145|
+1146|SELECT
+1147|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPINSSRET' AND CODUSU = 0), 0) AS CODNAT,
+1148|  RAT.CODCENCUS AS CODCENCUS,
+1149|  RAT.CODPROJ AS CODPROJ,
+1150|  FIN.NUFIN,
+1151|  FIN.DTNEG,
+1152|  FIN.DTVENC AS DTVENC,
+1153|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1154|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1155|  FIN.DTNEG AS DTREF
+1156|FROM VGFFIN FIN
+1157|  , TGFRAT RAT
+1158|WHERE
+1159|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1160|AND FIN.RECDESP <> 0
+1161|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1162|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1163|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = -1 AND  FIN.INSSRETIDO = 'S'
+1164|/*ANTECIPACAO*/ 
+1165|UNION ALL
+1166|
+1167|SELECT
+1168|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPIRRF' AND CODUSU = 0), 0) AS CODNAT,
+1169|  RAT.CODCENCUS AS CODCENCUS,
+1170|  RAT.CODPROJ AS CODPROJ,
+1171|  FIN.NUFIN,
+1172|  FIN.DTNEG,
+1173|  FIN.DTVENC AS DTVENC,
+1174|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1175|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1176|  FIN.DTNEG AS DTREF
+1177|FROM VGFFIN FIN
+1178|  , TGFRAT RAT
+1179|WHERE
+1180|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1181|AND FIN.RECDESP <> 0
+1182|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1183|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1184|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = -1 AND  FIN.IRFRETIDO = 'N'
+1185|/*ANTECIPACAO*/ 
+1186|UNION ALL
+1187|
+1188|SELECT
+1189|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPIRRFRET' AND CODUSU = 0), 0) AS CODNAT,
+1190|  RAT.CODCENCUS AS CODCENCUS,
+1191|  RAT.CODPROJ AS CODPROJ,
+1192|  FIN.NUFIN,
+1193|  FIN.DTNEG,
+1194|  FIN.DTVENC AS DTVENC,
+1195|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1196|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1197|  FIN.DTNEG AS DTREF
+1198|FROM VGFFIN FIN
+1199|  , TGFRAT RAT
+1200|WHERE
+1201|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1202|AND FIN.RECDESP <> 0
+1203|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1204|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1205|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = -1 AND  FIN.IRFRETIDO = 'S'
+1206|/*ANTECIPACAO*/ 
+1207|UNION ALL
+1208|
+1209|SELECT
+1210|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPISS' AND CODUSU = 0), 0) AS CODNAT,
+1211|  RAT.CODCENCUS AS CODCENCUS,
+1212|  RAT.CODPROJ AS CODPROJ,
+1213|  FIN.NUFIN,
+1214|  FIN.DTNEG,
+1215|  FIN.DTVENC AS DTVENC,
+1216|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1217|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1218|  FIN.DTNEG AS DTREF
+1219|FROM VGFFIN FIN
+1220|  , TGFRAT RAT
+1221|WHERE
+1222|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1223|AND FIN.RECDESP <> 0
+1224|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1225|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1226|AND FIN.VLRISS <> 0 AND FIN.RECDESP = -1 AND  FIN.ISSRETIDO = 'N'
+1227|/*ANTECIPACAO*/ 
+1228|UNION ALL
+1229|
+1230|SELECT
+1231|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPISSRET' AND CODUSU = 0), 0) AS CODNAT,
+1232|  RAT.CODCENCUS AS CODCENCUS,
+1233|  RAT.CODPROJ AS CODPROJ,
+1234|  FIN.NUFIN,
+1235|  FIN.DTNEG,
+1236|  FIN.DTVENC AS DTVENC,
+1237|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1238|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1239|  FIN.DTNEG AS DTREF
+1240|FROM VGFFIN FIN
+1241|  , TGFRAT RAT
+1242|WHERE
+1243|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1244|AND FIN.RECDESP <> 0
+1245|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1246|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1247|AND FIN.VLRISS <> 0 AND FIN.RECDESP = -1 AND  FIN.ISSRETIDO = 'S'
+1248|/*ANTECIPACAO*/ 
+1249|UNION ALL
+1250|
+1251|SELECT
+1252|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPVENDOR' AND CODUSU = 0), 0) AS CODNAT,
+1253|  RAT.CODCENCUS AS CODCENCUS,
+1254|  RAT.CODPROJ AS CODPROJ,
+1255|  FIN.NUFIN,
+1256|  FIN.DTNEG,
+1257|  FIN.DTVENC AS DTVENC,
+1258|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1259|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1260|  FIN.DTNEG AS DTREF
+1261|FROM VGFFIN FIN
+1262|  , TGFRAT RAT
+1263|WHERE
+1264|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1265|AND FIN.RECDESP <> 0
+1266|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1267|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1268|AND FIN.VLRVENDOR <> 0 AND FIN.RECDESP = -1
+1269|/*ANTECIPACAO*/ 
+1270|UNION ALL
+1271|
+1272|SELECT
+1273|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPTAXAADM' AND CODUSU = 0), 0) AS CODNAT,
+1274|  RAT.CODCENCUS AS CODCENCUS,
+1275|  RAT.CODPROJ AS CODPROJ,
+1276|  FIN.NUFIN,
+1277|  FIN.DTNEG,
+1278|  FIN.DTVENC AS DTVENC,
+1279|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1280|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1281|  FIN.DTNEG AS DTREF
+1282|FROM VGFFIN FIN
+1283|  , TGFRAT RAT
+1284|WHERE
+1285|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1286|AND FIN.RECDESP <> 0
+1287|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1288|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1289|AND FIN.CARTAODESC <> 0 AND FIN.RECDESP = -1
+1290|/*ANTECIPACAO*/ 
+1291|UNION ALL
+1292|
+1293|SELECT
+1294|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPOUTIMP' AND CODUSU = 0), 0) AS CODNAT,
+1295|  RAT.CODCENCUS AS CODCENCUS,
+1296|  RAT.CODPROJ AS CODPROJ,
+1297|  FIN.NUFIN,
+1298|  FIN.DTNEG,
+1299|  FIN.DTVENC AS DTVENC,
+1300|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1301|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1302|  FIN.DTNEG AS DTREF
+1303|FROM VGFFIN FIN, TGFIMF IMF
+1304|  , TGFRAT RAT
+1305|WHERE
+1306|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1307|AND FIN.RECDESP <> 0
+1308|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1309|AND (RAT.ORIGEM = 'F' AND FIN.NUFIN = RAT.NUFIN)
+1310|AND IMF.VALOR <> 0 AND FIN.RECDESP = -1 AND  FIN.NUFIN = IMF.NUFIN AND IMF.TIPIMP = -1
+1311|/*ANTECIPACAO*/ 
+1312|UNION ALL
+1313|
+1314|SELECT
+1315|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECJURO' AND CODUSU = 0), 0) AS CODNAT,
+1316|  RAT.CODCENCUS AS CODCENCUS,
+1317|  RAT.CODPROJ AS CODPROJ,
+1318|  FIN.NUFIN,
+1319|  FIN.DTNEG,
+1320|  FIN.DTVENC AS DTVENC,
+1321|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1322|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1323|  FIN.DTNEG AS DTREF
+1324|FROM VGFFIN FIN
+1325|  , TGFRAT RAT
+1326|WHERE
+1327|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1328|AND FIN.RECDESP <> 0
+1329|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1330|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1331|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1332|AND (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) <> 0 AND FIN.RECDESP = 1 AND  FIN.TIPJURO = '1'
+1333|/*ANTECIPACAO*/ 
+1334|UNION ALL
+1335|
+1336|SELECT
+1337|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECMULTA' AND CODUSU = 0), 0) AS CODNAT,
+1338|  RAT.CODCENCUS AS CODCENCUS,
+1339|  RAT.CODPROJ AS CODPROJ,
+1340|  FIN.NUFIN,
+1341|  FIN.DTNEG,
+1342|  FIN.DTVENC AS DTVENC,
+1343|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1344|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1345|  FIN.DTNEG AS DTREF
+1346|FROM VGFFIN FIN
+1347|  , TGFRAT RAT
+1348|WHERE
+1349|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1350|AND FIN.RECDESP <> 0
+1351|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1352|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1353|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1354|AND (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) <> 0 AND FIN.RECDESP = 1 AND  FIN.TIPMULTA = '1'
+1355|/*ANTECIPACAO*/ 
+1356|UNION ALL
+1357|
+1358|SELECT
+1359|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECDESC' AND CODUSU = 0), 0) AS CODNAT,
+1360|  RAT.CODCENCUS AS CODCENCUS,
+1361|  RAT.CODPROJ AS CODPROJ,
+1362|  FIN.NUFIN,
+1363|  FIN.DTNEG,
+1364|  FIN.DTVENC AS DTVENC,
+1365|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1366|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1367|  FIN.DTNEG AS DTREF
+1368|FROM VGFFIN FIN
+1369|  , TGFRAT RAT
+1370|WHERE
+1371|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1372|AND FIN.RECDESP <> 0
+1373|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1374|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1375|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1376|AND FIN.VLRDESC <> 0 AND FIN.RECDESP = 1
+1377|/*ANTECIPACAO*/ 
+1378|UNION ALL
+1379|
+1380|SELECT
+1381|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECDESPCART' AND CODUSU = 0), 0) AS CODNAT,
+1382|  RAT.CODCENCUS AS CODCENCUS,
+1383|  RAT.CODPROJ AS CODPROJ,
+1384|  FIN.NUFIN,
+1385|  FIN.DTNEG,
+1386|  FIN.DTVENC AS DTVENC,
+1387|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1388|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1389|  FIN.DTNEG AS DTREF
+1390|FROM VGFFIN FIN
+1391|  , TGFRAT RAT
+1392|WHERE
+1393|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1394|AND FIN.RECDESP <> 0
+1395|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1396|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1397|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1398|AND FIN.DESPCART <> 0 AND FIN.RECDESP = 1
+1399|/*ANTECIPACAO*/ 
+1400|UNION ALL
+1401|
+1402|SELECT
+1403|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECVARCAMB' AND CODUSU = 0), 0) AS CODNAT,
+1404|  RAT.CODCENCUS AS CODCENCUS,
+1405|  RAT.CODPROJ AS CODPROJ,
+1406|  FIN.NUFIN,
+1407|  FIN.DTNEG,
+1408|  FIN.DTVENC AS DTVENC,
+1409|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1410|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1411|  FIN.DTNEG AS DTREF
+1412|FROM VGFFIN FIN
+1413|  , TGFRAT RAT
+1414|WHERE
+1415|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1416|AND FIN.RECDESP <> 0
+1417|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1418|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1419|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1420|AND FIN.VLRVARCAMBIAL <> 0 AND FIN.RECDESP = 1
+1421|/*ANTECIPACAO*/ 
+1422|UNION ALL
+1423|
+1424|SELECT
+1425|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECINSS' AND CODUSU = 0), 0) AS CODNAT,
+1426|  RAT.CODCENCUS AS CODCENCUS,
+1427|  RAT.CODPROJ AS CODPROJ,
+1428|  FIN.NUFIN,
+1429|  FIN.DTNEG,
+1430|  FIN.DTVENC AS DTVENC,
+1431|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1432|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1433|  FIN.DTNEG AS DTREF
+1434|FROM VGFFIN FIN
+1435|  , TGFRAT RAT
+1436|WHERE
+1437|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1438|AND FIN.RECDESP <> 0
+1439|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1440|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1441|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1442|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = 1 AND  FIN.INSSRETIDO = 'N'
+1443|/*ANTECIPACAO*/ 
+1444|UNION ALL
+1445|
+1446|SELECT
+1447|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECINSSRET' AND CODUSU = 0), 0) AS CODNAT,
+1448|  RAT.CODCENCUS AS CODCENCUS,
+1449|  RAT.CODPROJ AS CODPROJ,
+1450|  FIN.NUFIN,
+1451|  FIN.DTNEG,
+1452|  FIN.DTVENC AS DTVENC,
+1453|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1454|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1455|  FIN.DTNEG AS DTREF
+1456|FROM VGFFIN FIN
+1457|  , TGFRAT RAT
+1458|WHERE
+1459|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1460|AND FIN.RECDESP <> 0
+1461|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1462|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1463|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1464|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = 1 AND  FIN.INSSRETIDO = 'S'
+1465|/*ANTECIPACAO*/ 
+1466|UNION ALL
+1467|
+1468|SELECT
+1469|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECIRRF' AND CODUSU = 0), 0) AS CODNAT,
+1470|  RAT.CODCENCUS AS CODCENCUS,
+1471|  RAT.CODPROJ AS CODPROJ,
+1472|  FIN.NUFIN,
+1473|  FIN.DTNEG,
+1474|  FIN.DTVENC AS DTVENC,
+1475|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1476|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1477|  FIN.DTNEG AS DTREF
+1478|FROM VGFFIN FIN
+1479|  , TGFRAT RAT
+1480|WHERE
+1481|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1482|AND FIN.RECDESP <> 0
+1483|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1484|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1485|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1486|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = 1 AND  FIN.IRFRETIDO = 'N'
+1487|/*ANTECIPACAO*/ 
+1488|UNION ALL
+1489|
+1490|SELECT
+1491|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECIRRFRET' AND CODUSU = 0), 0) AS CODNAT,
+
+LINE||'|'||TEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1492|  RAT.CODCENCUS AS CODCENCUS,
+1493|  RAT.CODPROJ AS CODPROJ,
+1494|  FIN.NUFIN,
+1495|  FIN.DTNEG,
+1496|  FIN.DTVENC AS DTVENC,
+1497|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1498|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1499|  FIN.DTNEG AS DTREF
+1500|FROM VGFFIN FIN
+1501|  , TGFRAT RAT
+1502|WHERE
+1503|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1504|AND FIN.RECDESP <> 0
+1505|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1506|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1507|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1508|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = 1 AND  FIN.IRFRETIDO = 'S'
+1509|/*ANTECIPACAO*/ 
+1510|UNION ALL
+1511|
+1512|SELECT
+1513|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECISS' AND CODUSU = 0), 0) AS CODNAT,
+1514|  RAT.CODCENCUS AS CODCENCUS,
+1515|  RAT.CODPROJ AS CODPROJ,
+1516|  FIN.NUFIN,
+1517|  FIN.DTNEG,
+1518|  FIN.DTVENC AS DTVENC,
+1519|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1520|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1521|  FIN.DTNEG AS DTREF
+1522|FROM VGFFIN FIN
+1523|  , TGFRAT RAT
+1524|WHERE
+1525|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1526|AND FIN.RECDESP <> 0
+1527|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1528|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1529|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1530|AND FIN.VLRISS <> 0 AND FIN.RECDESP = 1 AND  FIN.ISSRETIDO = 'N'
+1531|/*ANTECIPACAO*/ 
+1532|UNION ALL
+1533|
+1534|SELECT
+1535|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECISSRET' AND CODUSU = 0), 0) AS CODNAT,
+1536|  RAT.CODCENCUS AS CODCENCUS,
+1537|  RAT.CODPROJ AS CODPROJ,
+1538|  FIN.NUFIN,
+1539|  FIN.DTNEG,
+1540|  FIN.DTVENC AS DTVENC,
+1541|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1542|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1543|  FIN.DTNEG AS DTREF
+1544|FROM VGFFIN FIN
+1545|  , TGFRAT RAT
+1546|WHERE
+1547|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1548|AND FIN.RECDESP <> 0
+1549|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1550|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1551|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1552|AND FIN.VLRISS <> 0 AND FIN.RECDESP = 1 AND  FIN.ISSRETIDO = 'S'
+1553|/*ANTECIPACAO*/ 
+1554|UNION ALL
+1555|
+1556|SELECT
+1557|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECVENDOR' AND CODUSU = 0), 0) AS CODNAT,
+1558|  RAT.CODCENCUS AS CODCENCUS,
+1559|  RAT.CODPROJ AS CODPROJ,
+1560|  FIN.NUFIN,
+1561|  FIN.DTNEG,
+1562|  FIN.DTVENC AS DTVENC,
+1563|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1564|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1565|  FIN.DTNEG AS DTREF
+1566|FROM VGFFIN FIN
+1567|  , TGFRAT RAT
+1568|WHERE
+1569|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1570|AND FIN.RECDESP <> 0
+1571|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1572|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1573|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1574|AND FIN.VLRVENDOR <> 0 AND FIN.RECDESP = 1
+1575|/*ANTECIPACAO*/ 
+1576|UNION ALL
+1577|
+1578|SELECT
+1579|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECTAXAADM' AND CODUSU = 0), 0) AS CODNAT,
+1580|  RAT.CODCENCUS AS CODCENCUS,
+1581|  RAT.CODPROJ AS CODPROJ,
+1582|  FIN.NUFIN,
+1583|  FIN.DTNEG,
+1584|  FIN.DTVENC AS DTVENC,
+1585|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1586|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1587|  FIN.DTNEG AS DTREF
+1588|FROM VGFFIN FIN
+1589|  , TGFRAT RAT
+1590|WHERE
+1591|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1592|AND FIN.RECDESP <> 0
+1593|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1594|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1595|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1596|AND FIN.CARTAODESC <> 0 AND FIN.RECDESP = 1
+1597|/*ANTECIPACAO*/ 
+1598|UNION ALL
+1599|
+1600|SELECT
+1601|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATRECOUTIMP' AND CODUSU = 0), 0) AS CODNAT,
+1602|  RAT.CODCENCUS AS CODCENCUS,
+1603|  RAT.CODPROJ AS CODPROJ,
+1604|  FIN.NUFIN,
+1605|  FIN.DTNEG,
+1606|  FIN.DTVENC AS DTVENC,
+1607|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1608|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1609|  FIN.DTNEG AS DTREF
+1610|FROM VGFFIN FIN, TGFIMF IMF
+1611|  , TGFRAT RAT
+1612|WHERE
+1613|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1614|AND FIN.RECDESP <> 0
+1615|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1616|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1617|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1618|AND IMF.VALOR <> 0 AND FIN.RECDESP = 1 AND  FIN.NUFIN = IMF.NUFIN AND IMF.TIPIMP = -1
+1619|/*ANTECIPACAO*/ 
+1620|UNION ALL
+1621|
+1622|SELECT
+1623|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPJURO' AND CODUSU = 0), 0) AS CODNAT,
+1624|  RAT.CODCENCUS AS CODCENCUS,
+1625|  RAT.CODPROJ AS CODPROJ,
+1626|  FIN.NUFIN,
+1627|  FIN.DTNEG,
+1628|  FIN.DTVENC AS DTVENC,
+1629|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1630|  /* TEMRATADVALOR CASE WHEN (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1631|  FIN.DTNEG AS DTREF
+1632|FROM VGFFIN FIN
+1633|  , TGFRAT RAT
+1634|WHERE
+1635|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1636|AND FIN.RECDESP <> 0
+1637|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1638|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1639|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1640|AND (FIN.VLRJURO + FIN.VLRJURONEGOC - FIN.VLRJUROLIB) <> 0 AND FIN.RECDESP = -1 AND  FIN.TIPJURO = '1'
+1641|/*ANTECIPACAO*/ 
+1642|UNION ALL
+1643|
+1644|SELECT
+1645|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPMULTA' AND CODUSU = 0), 0) AS CODNAT,
+1646|  RAT.CODCENCUS AS CODCENCUS,
+1647|  RAT.CODPROJ AS CODPROJ,
+1648|  FIN.NUFIN,
+1649|  FIN.DTNEG,
+1650|  FIN.DTVENC AS DTVENC,
+1651|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1652|  /* TEMRATADVALOR CASE WHEN (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ ((FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1653|  FIN.DTNEG AS DTREF
+1654|FROM VGFFIN FIN
+1655|  , TGFRAT RAT
+1656|WHERE
+1657|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1658|AND FIN.RECDESP <> 0
+1659|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1660|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1661|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1662|AND (FIN.VLRMULTA + FIN.VLRMULTANEGOC - FIN.VLRMULTALIB) <> 0 AND FIN.RECDESP = -1 AND  FIN.TIPMULTA = '1'
+1663|/*ANTECIPACAO*/ 
+1664|UNION ALL
+1665|
+1666|SELECT
+1667|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPDESC' AND CODUSU = 0), 0) AS CODNAT,
+1668|  RAT.CODCENCUS AS CODCENCUS,
+1669|  RAT.CODPROJ AS CODPROJ,
+1670|  FIN.NUFIN,
+1671|  FIN.DTNEG,
+1672|  FIN.DTVENC AS DTVENC,
+1673|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1674|  /* TEMRATADVALOR CASE WHEN FIN.VLRDESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRDESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1675|  FIN.DTNEG AS DTREF
+1676|FROM VGFFIN FIN
+1677|  , TGFRAT RAT
+1678|WHERE
+1679|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1680|AND FIN.RECDESP <> 0
+1681|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1682|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1683|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1684|AND FIN.VLRDESC <> 0 AND FIN.RECDESP = -1
+1685|/*ANTECIPACAO*/ 
+1686|UNION ALL
+1687|
+1688|SELECT
+1689|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPDESPCART' AND CODUSU = 0), 0) AS CODNAT,
+1690|  RAT.CODCENCUS AS CODCENCUS,
+1691|  RAT.CODPROJ AS CODPROJ,
+1692|  FIN.NUFIN,
+1693|  FIN.DTNEG,
+1694|  FIN.DTVENC AS DTVENC,
+1695|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1696|  /* TEMRATADVALOR CASE WHEN FIN.DESPCART = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.DESPCART * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1697|  FIN.DTNEG AS DTREF
+1698|FROM VGFFIN FIN
+1699|  , TGFRAT RAT
+1700|WHERE
+1701|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1702|AND FIN.RECDESP <> 0
+1703|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1704|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1705|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1706|AND FIN.DESPCART <> 0 AND FIN.RECDESP = -1
+1707|/*ANTECIPACAO*/ 
+1708|UNION ALL
+1709|
+1710|SELECT
+1711|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPVARCAMB' AND CODUSU = 0), 0) AS CODNAT,
+1712|  RAT.CODCENCUS AS CODCENCUS,
+1713|  RAT.CODPROJ AS CODPROJ,
+1714|  FIN.NUFIN,
+1715|  FIN.DTNEG,
+1716|  FIN.DTVENC AS DTVENC,
+1717|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1718|  /* TEMRATADVALOR CASE WHEN FIN.VLRVARCAMBIAL = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVARCAMBIAL * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1719|  FIN.DTNEG AS DTREF
+1720|FROM VGFFIN FIN
+1721|  , TGFRAT RAT
+1722|WHERE
+1723|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1724|AND FIN.RECDESP <> 0
+1725|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1726|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1727|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1728|AND FIN.VLRVARCAMBIAL <> 0 AND FIN.RECDESP = -1
+1729|/*ANTECIPACAO*/ 
+1730|UNION ALL
+1731|
+1732|SELECT
+1733|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPINSS' AND CODUSU = 0), 0) AS CODNAT,
+1734|  RAT.CODCENCUS AS CODCENCUS,
+1735|  RAT.CODPROJ AS CODPROJ,
+1736|  FIN.NUFIN,
+1737|  FIN.DTNEG,
+1738|  FIN.DTVENC AS DTVENC,
+1739|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1740|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1741|  FIN.DTNEG AS DTREF
+1742|FROM VGFFIN FIN
+1743|  , TGFRAT RAT
+1744|WHERE
+1745|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1746|AND FIN.RECDESP <> 0
+1747|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1748|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1749|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1750|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = -1 AND  FIN.INSSRETIDO = 'N'
+1751|/*ANTECIPACAO*/ 
+1752|UNION ALL
+1753|
+1754|SELECT
+1755|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPINSSRET' AND CODUSU = 0), 0) AS CODNAT,
+1756|  RAT.CODCENCUS AS CODCENCUS,
+1757|  RAT.CODPROJ AS CODPROJ,
+1758|  FIN.NUFIN,
+1759|  FIN.DTNEG,
+1760|  FIN.DTVENC AS DTVENC,
+1761|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1762|  /* TEMRATADVALOR CASE WHEN FIN.VLRINSS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRINSS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1763|  FIN.DTNEG AS DTREF
+1764|FROM VGFFIN FIN
+1765|  , TGFRAT RAT
+1766|WHERE
+1767|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1768|AND FIN.RECDESP <> 0
+1769|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1770|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1771|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1772|AND FIN.VLRINSS <> 0 AND FIN.RECDESP = -1 AND  FIN.INSSRETIDO = 'S'
+1773|/*ANTECIPACAO*/ 
+1774|UNION ALL
+1775|
+1776|SELECT
+1777|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPIRRF' AND CODUSU = 0), 0) AS CODNAT,
+1778|  RAT.CODCENCUS AS CODCENCUS,
+1779|  RAT.CODPROJ AS CODPROJ,
+1780|  FIN.NUFIN,
+1781|  FIN.DTNEG,
+1782|  FIN.DTVENC AS DTVENC,
+1783|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1784|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1785|  FIN.DTNEG AS DTREF
+1786|FROM VGFFIN FIN
+1787|  , TGFRAT RAT
+1788|WHERE
+1789|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1790|AND FIN.RECDESP <> 0
+1791|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1792|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1793|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1794|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = -1 AND  FIN.IRFRETIDO = 'N'
+1795|/*ANTECIPACAO*/ 
+1796|UNION ALL
+1797|
+1798|SELECT
+1799|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPIRRFRET' AND CODUSU = 0), 0) AS CODNAT,
+1800|  RAT.CODCENCUS AS CODCENCUS,
+1801|  RAT.CODPROJ AS CODPROJ,
+1802|  FIN.NUFIN,
+1803|  FIN.DTNEG,
+1804|  FIN.DTVENC AS DTVENC,
+1805|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1806|  /* TEMRATADVALOR CASE WHEN FIN.VLRIRF * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRIRF * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1807|  FIN.DTNEG AS DTREF
+1808|FROM VGFFIN FIN
+1809|  , TGFRAT RAT
+1810|WHERE
+1811|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1812|AND FIN.RECDESP <> 0
+1813|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1814|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1815|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1816|AND FIN.VLRIRF <> 0 AND FIN.RECDESP = -1 AND  FIN.IRFRETIDO = 'S'
+1817|/*ANTECIPACAO*/ 
+1818|UNION ALL
+1819|
+1820|SELECT
+1821|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPISS' AND CODUSU = 0), 0) AS CODNAT,
+1822|  RAT.CODCENCUS AS CODCENCUS,
+1823|  RAT.CODPROJ AS CODPROJ,
+1824|  FIN.NUFIN,
+1825|  FIN.DTNEG,
+1826|  FIN.DTVENC AS DTVENC,
+1827|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1828|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1829|  FIN.DTNEG AS DTREF
+1830|FROM VGFFIN FIN
+1831|  , TGFRAT RAT
+1832|WHERE
+1833|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1834|AND FIN.RECDESP <> 0
+1835|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1836|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1837|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1838|AND FIN.VLRISS <> 0 AND FIN.RECDESP = -1 AND  FIN.ISSRETIDO = 'N'
+1839|/*ANTECIPACAO*/ 
+1840|UNION ALL
+1841|
+1842|SELECT
+1843|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPISSRET' AND CODUSU = 0), 0) AS CODNAT,
+1844|  RAT.CODCENCUS AS CODCENCUS,
+1845|  RAT.CODPROJ AS CODPROJ,
+1846|  FIN.NUFIN,
+1847|  FIN.DTNEG,
+1848|  FIN.DTVENC AS DTVENC,
+1849|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1850|  /* TEMRATADVALOR CASE WHEN FIN.VLRISS * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRISS * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1851|  FIN.DTNEG AS DTREF
+1852|FROM VGFFIN FIN
+1853|  , TGFRAT RAT
+1854|WHERE
+1855|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1856|AND FIN.RECDESP <> 0
+1857|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1858|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1859|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1860|AND FIN.VLRISS <> 0 AND FIN.RECDESP = -1 AND  FIN.ISSRETIDO = 'S'
+1861|/*ANTECIPACAO*/ 
+1862|UNION ALL
+1863|
+1864|SELECT
+1865|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPVENDOR' AND CODUSU = 0), 0) AS CODNAT,
+1866|  RAT.CODCENCUS AS CODCENCUS,
+1867|  RAT.CODPROJ AS CODPROJ,
+1868|  FIN.NUFIN,
+1869|  FIN.DTNEG,
+1870|  FIN.DTVENC AS DTVENC,
+1871|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1872|  /* TEMRATADVALOR CASE WHEN FIN.VLRVENDOR = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.VLRVENDOR * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1873|  FIN.DTNEG AS DTREF
+1874|FROM VGFFIN FIN
+1875|  , TGFRAT RAT
+1876|WHERE
+1877|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1878|AND FIN.RECDESP <> 0
+1879|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1880|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1881|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1882|AND FIN.VLRVENDOR <> 0 AND FIN.RECDESP = -1
+1883|/*ANTECIPACAO*/ 
+1884|UNION ALL
+1885|
+1886|SELECT
+1887|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPTAXAADM' AND CODUSU = 0), 0) AS CODNAT,
+1888|  RAT.CODCENCUS AS CODCENCUS,
+1889|  RAT.CODPROJ AS CODPROJ,
+1890|  FIN.NUFIN,
+1891|  FIN.DTNEG,
+1892|  FIN.DTVENC AS DTVENC,
+1893|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1894|  /* TEMRATADVALOR CASE WHEN FIN.CARTAODESC * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (FIN.CARTAODESC * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1895|  FIN.DTNEG AS DTREF
+1896|FROM VGFFIN FIN
+1897|  , TGFRAT RAT
+1898|WHERE
+1899|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1900|AND FIN.RECDESP <> 0
+1901|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1902|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1903|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1904|AND FIN.CARTAODESC <> 0 AND FIN.RECDESP = -1
+1905|/*ANTECIPACAO*/ 
+1906|UNION ALL
+1907|
+1908|SELECT
+1909|  NVL((SELECT INTEIRO FROM TSIPAR WHERE CHAVE = 'NATDESPOUTIMP' AND CODUSU = 0), 0) AS CODNAT,
+1910|  RAT.CODCENCUS AS CODCENCUS,
+1911|  RAT.CODPROJ AS CODPROJ,
+1912|  FIN.NUFIN,
+1913|  FIN.DTNEG,
+1914|  FIN.DTVENC AS DTVENC,
+1915|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRDESDOB,
+1916|  /* TEMRATADVALOR CASE WHEN IMF.VALOR * -1 = 0 THEN NVL(RAT.AD_VALOR,0) ELSE TEMRATADVALOR */ (IMF.VALOR * -1 * RAT.PERCRATEIO / 100) /* TEMRATADVALOR END TEMRATADVALOR */ * FIN.RECDESP AS VLRLIQUIDO,
+1917|  FIN.DTNEG AS DTREF
+1918|FROM VGFFIN FIN, TGFIMF IMF
+1919|  , TGFRAT RAT
+1920|WHERE
+1921|TRUNC(FIN.DTNEG) BETWEEN P_HOJE AND P_HOJE
+1922|AND FIN.RECDESP <> 0
+1923|AND NOT (FIN.PROVISAO = 'S' AND FIN.DHBAIXA IS NOT NULL AND FIN.ORIGEM='E')
+1924|AND (RAT.ORIGEM = 'E' AND FIN.NUNOTA = RAT.NUFIN)
+1925|AND NOT EXISTS (SELECT 1 FROM TGFRAT RF WHERE RF.ORIGEM = 'F' AND RF.NUFIN = FIN.NUFIN)
+1926|AND IMF.VALOR <> 0 AND FIN.RECDESP = -1 AND  FIN.NUFIN = IMF.NUFIN AND IMF.TIPIMP = -1
+1927|/*ANTECIPACAO*/ ;
+1928|		       
+1929|	     P_DIA := P_DIA + 1; 
+1930|	     P_HOJE := TRUNC(SYSDATE) - P_DIA; 
+1931|      END;
+1932|   END LOOP;
+1933|END;
+
+1,933 rows selected. 
+
+SQL> SPOOL OFF

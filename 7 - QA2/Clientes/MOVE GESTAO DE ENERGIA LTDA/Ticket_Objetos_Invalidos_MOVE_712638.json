@@ -1,0 +1,32 @@
+{
+  "status": "ABERTO",
+  "numero": 712638,
+  "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/712638",
+  "verificado_em_utc": "2026-09-23T11:57:11Z",
+  "base": "MOVE GESTAO DE ENERGIA LTDA",
+  "organizacao": "MOVE GESTAO DE ENERGIA LTDA-83992",
+  "id_execucao": "RMD_RUN_20260922163852951",
+  "schema": "SANKHYA",
+  "session_user": "FRANCISCO_JUNIOR",
+  "servico": "moveenergiaprd.sankhyacloud.com.br",
+  "versao_sistema": "4.36b151",
+  "quantidade_objetos_invalidos": 4,
+  "objetos": [
+    "FSP_DATA_DIA_UTIL",
+    "FSP_RETURN_DATAS_UTEIS",
+    "GET_PREVISAO_CREDITO_DEBITO",
+    "GET_PROXIMO_DIA_UTIL"
+  ],
+  "privilegio_ausente": "ALTER ANY PROCEDURE",
+  "prioridade": "Normal",
+  "categoria_produto": "Cloud/SaaS > Solicitação Cloud > Executar Script de Banco de Dados > Personalizar Objeto de Banco de Dados",
+  "ambiente": "Produção",
+  "ambiente_banco": "Oracle",
+  "assunto": "MOVE GESTAO DE ENERGIA LTDA — Objetos nativos Oracle inválidos — Revisão Master Deploy",
+  "anexos": [],
+  "evidencia_portal": "https://ajuda.sankhya.com.br/hc/pt-br/requests/712638",
+  "evidencia_tecnica": "Artefatos_Revisao/Preflight/31_Preflight_Objetos_Invalidos_READONLY_20260923.json",
+  "evidencia_versao": "Artefatos_Revisao/Preflight/00_Versao_Sistema_MOVE_READONLY_20260923.json",
+  "dml_executado": false,
+  "ddl_executado": false
+}

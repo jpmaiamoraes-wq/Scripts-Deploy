@@ -1,0 +1,135 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:57:58.849474+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P05_Estado_Execucoes_Anteriores.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 14,
+  "colunas": [
+    "OWNER",
+    "OBJECT_NAME",
+    "OBJECT_TYPE",
+    "STATUS",
+    "CREATED",
+    "LAST_DDL_TIME"
+  ],
+  "linhas": [
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFFIN_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:24",
+      "LAST_DDL_TIME": "2026-09-22 10:09:25"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFITE_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:24",
+      "LAST_DDL_TIME": "2026-09-22 10:09:24"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFCAB_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:25"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFEST_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFICM_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:25"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFPAR_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:25"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFPRO_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:25"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFVOA_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFVOL_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:25",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFCTE_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:26",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFCUSITE_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:26",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFCUS_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:26",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFESE_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:26",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "OBJECT_NAME": "BKP_TGFEXC_NOVO",
+      "OBJECT_TYPE": "TABLE",
+      "STATUS": "VALID",
+      "CREATED": "2026-09-22 10:09:26",
+      "LAST_DDL_TIME": "2026-09-22 10:09:26"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

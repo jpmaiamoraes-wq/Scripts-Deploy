@@ -1,0 +1,142 @@
+{
+  "base": "CASA DAS ESSENCIAS",
+  "escopo": "BASE_INTEIRA",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "casadasessenciasprd.sankhyacloud.com.br",
+    "db_name": "CASADASESSENCIASPRD",
+    "dml_ddl_executado": true
+  },
+  "id_master": "RMD_RUN_20260923100203833",
+  "autorizacao": "EXECUTAR CASA DAS ESSENCIAS",
+  "lotes": [
+    {
+      "id_execucao": "RMD_CASA_20260923100138",
+      "script": "Revisao_Master_Deploy.sql",
+      "sha256_suite": "7290fd66a7bfad273dfec6554f2cd5672e2a12738abf0472d3b7aebe3155abb9",
+      "status": "LOTE_COM_ERRO",
+      "ponto": "atividade 03, instrucao 7/1085",
+      "erro": "ORA-01031: insufficient privileges em DML estatico de TGFEMP",
+      "log": "Logs/Oracle_Direto_RMD_CASA_20260923100138.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923130903_ATV03",
+      "script": "Continuacao_Master_Deploy_CASA_DAS_ESSENCIAS_03.sql",
+      "sha256_suite": "bf92992f56858698af6ed8282995c842bd05cb6ba898edcf09ad29df295402f4",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "atividade 03 retomada com backup e 2 registros alterados",
+      "log": "Logs/Oracle_Direto_RMD_CASA_20260923130903_ATV03.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923131004_31",
+      "script": "Continuacao_Master_Deploy_CASA_DAS_ESSENCIAS_04_31.sql",
+      "status": "LOTE_COM_ERRO",
+      "ponto": "atividade 10, instrucao 15/1078",
+      "erro": "ORA-01031: insufficient privileges em DML estatico de TGFPRO; atividades 04-09 permaneceram materializadas",
+      "evidencia": "Preflight/12_Estado_Apos_Tentativa_04_31_READONLY.sql, 13_Estado_Backups_04_08_READONLY.sql e 16_Saldos_Atividades_04_09_READONLY.sql",
+      "log": "Logs/Oracle_Direto_RMD_CASA_20260923131004_31.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923101348_10_31",
+      "script": "Continuacao_Master_Deploy_CASA_DAS_ESSENCIAS_10_31.sql",
+      "sha256_suite": "04ac868f5c157b4d9daf3d4dcb8bc698d33f987ec02071398be61dbf37c9e6e9",
+      "status": "LOTE_COM_ERRO",
+      "ponto": "atividade 12, instrucao 6/1066",
+      "erro": "ORA-01031: insufficient privileges no UPDATE dinamico de TGFEMP; backup vazio e AD_SEGMENTACAOEMPRESAS=0",
+      "log": "Logs/Oracle_Direto_RMD_CASA_20260923101348_10_31.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923101547_13_31",
+      "script": "Continuacao_Master_Deploy_CASA_DAS_ESSENCIAS_13_31.sql",
+      "sha256_suite": "09b74d6513e2b6f140191a42f6818c309d57d565e52f72f3d263e88f32e36de3",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "atividades 13-31 concluídas; atividade 31 IGNORADO_SEM_PRIVILEGIO para 43 funções",
+      "log": "Logs/Oracle_Direto_RMD_CASA_20260923101547_13_31.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923104129_29_30_R01",
+      "script": "29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R01.sql",
+      "sha256_suite": "4192827bb7a5734644be875a68817c8ee281da4b60ab5d6ae218bb18631f1582",
+      "status": "LOTE_COM_ERRO",
+      "ponto": "fase de criacao/preparacao dos artefatos persistentes",
+      "erro": "ORA-01031: falha no bloco que misturava DDL de backup e DML; nenhum mapa, backup ou auditoria de linhas persistiu",
+      "log": "Logs/29_30_Merge_Antifragil_CASA_20260923104129_R01.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923105518_29_30_R03_FILL",
+      "script": "29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_MAPA_FILL.sql",
+      "sha256_suite": "8999b1c2a1787d2568b9f25a36a8c6468fe8fdb4935f7b2f6c555b4144970a90",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "mapa persistido: 430 bairros obsoletos, 7284 enderecos obsoletos; backups: 851 bairros e 14228 enderecos",
+      "log": "Logs/29_30_Merge_Antifragil_CASA_20260923105518_R03_FILL.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923105842_29_30_R03_AUD",
+      "script": "29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_AUDITORIA.sql",
+      "sha256_suite": "18fa6a36ad8a3fac2c46e40e884c5a0f777d587e1c9fca1d5f0c2a7dd950a787",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "auditoria persistente DEP/EXC criada",
+      "log": "Logs/29_30_Merge_Antifragil_CASA_20260923105842_R03_AUD.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923105709_29_30_R03_RED",
+      "script": "29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_REDIRECIONAR.sql",
+      "sha256_suite": "bf71de5770134ec97466da5682e8e623b277ca2cb406dfb12324fd75128c8318",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "61596 referencias auditadas, 0 excecoes e 0 referencias operacionais remanescentes; pais mantidos",
+      "log": "Logs/29_30_Merge_Antifragil_CASA_20260923105709_R03_RED.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923110311_29_30_R03_DEL_AUD",
+      "script": "29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_EXCLUSAO_AUDITORIA.sql",
+      "sha256_suite": "760f3df268e93f6c08b88b5d631786863f5fc354802ade910f59bbc06dd8bfa8",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "auditoria persistente da exclusao criada; nenhum pai removido",
+      "log": "Logs/29_30_Merge_Antifragil_CASA_20260923110311_R03_DEL_AUD.log"
+    },
+    {
+      "id_execucao": "RMD_CASA_20260923112536_29_30_R03_DEL",
+      "script": "29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_EXCLUIR_PAI.sql",
+      "sha256_suite": "25c6711d6526cddf46e95e4229d7f827c0d80273fa62e7f0e7d4c75f69daf3e4",
+      "status": "LOTE_CONCLUIDO",
+      "resultado": "430 pais TSIBAI e 7284 pais TSIEND excluidos; referencias operacionais revalidadas=0; excecoes=0",
+      "log": "Logs/29_30_Merge_Antifragil_CASA_20260923112536_R03_DEL.log"
+    }
+  ],
+  "pos_validacao": {
+    "controles_pendentes": 0,
+    "atividades_10_11_15_saldo": 0,
+    "atividade_12_segmentacao_total": 0,
+    "objetos_invalidos_function_sankhya": 43,
+    "alter_any_procedure": false,
+    "triggers_revisao_pendentes": 0,
+    "card09_base_total": 15,
+    "card09_aptos": 0,
+    "card09_sem_vdup_xml": 15,
+    "volumetria": {
+      "financeiros_sem_nota": 0,
+      "itens_sem_cabecalho": 0,
+      "cabeçalhos_sem_itens": 22,
+      "codigos_fiscais_cidades_duplicados": 0
+    },
+    "atividade_29_30": {
+      "preflight_json": "Preflight/29_30_Preflight_READONLY_20260923_R03_POS.json",
+      "mapa_bairros_obsoletos": 430,
+      "mapa_enderecos_obsoletos": 7284,
+      "backup_bairros": 851,
+      "backup_enderecos": 14228,
+      "referencias_auditadas": 61596,
+      "excecoes": 0,
+      "referencias_operacionais_remanescentes": 0,
+      "referencias_em_backup_preexistente": 297,
+      "pais_excluidos": true,
+      "pais_bairros_excluidos": 430,
+      "pais_enderecos_excluidos": 7284,
+      "exclusao_bloqueada_controle_risco": false,
+      "colisoes_contextuais_remanescentes": 0,
+      "pos_validacao": "Preflight/29_30_R03_PosValidacao_READONLY.sql; Preflight/29_30_R03_Colisoes_PosValidacao_READONLY.sql"
+    }
+  },
+  "estado_final": "ATIVIDADES_01_31_CONCLUIDAS; ATIVIDADES_29_30_TRATADAS_SEM_REFERENCIAS_OU_COLISOES_CONTEXTUAIS; CARD09_SEM_APTOS; PDF_BLOQUEADO_POR_CABECALHOS_SEM_ITENS; ONBOARDING_SITE_PENDENTE; TICKET_ORGANIZACAO_PENDENTE"
+}

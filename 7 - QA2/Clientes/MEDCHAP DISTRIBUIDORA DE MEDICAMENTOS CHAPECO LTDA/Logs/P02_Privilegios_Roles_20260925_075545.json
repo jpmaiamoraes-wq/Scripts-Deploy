@@ -1,0 +1,123 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:17.748882+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P02_Privilegios_Roles.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 26,
+  "colunas": [
+    "TIPO",
+    "NOME"
+  ],
+  "linhas": [
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "ALTER ANY TABLE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "ALTER ANY TRIGGER"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY INDEX"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY MATERIALIZED VIEW"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY PROCEDURE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY SEQUENCE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY TABLE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY TRIGGER"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY TYPE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE ANY VIEW"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "CREATE SESSION"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY INDEX"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY MATERIALIZED VIEW"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY PROCEDURE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY SEQUENCE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY TABLE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY TRIGGER"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY TYPE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "DROP ANY VIEW"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "EXECUTE ANY CLASS"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "EXECUTE ANY PROCEDURE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "EXECUTE ANY TYPE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "SELECT ANY SEQUENCE"
+    },
+    {
+      "TIPO": "PRIVILEGIO",
+      "NOME": "SET CONTAINER"
+    },
+    {
+      "TIPO": "ROLE",
+      "NOME": "CONNECT"
+    },
+    {
+      "TIPO": "ROLE",
+      "NOME": "RLCONSULTOR"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

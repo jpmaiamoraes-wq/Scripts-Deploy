@@ -1,0 +1,15 @@
+-- Garante que os artefatos do novo lote R01 ainda nao existem.
+SELECT OWNER,
+       TABLE_NAME,
+       NUM_ROWS,
+       LAST_ANALYZED
+  FROM ALL_TABLES
+ WHERE OWNER='SANKHYA'
+   AND TABLE_NAME IN (
+     'RMD_CASA_2930_R01_MAP',
+     'RMD_CASA_2930_R01_BAI_BKP',
+     'RMD_CASA_2930_R01_END_BKP',
+     'RMD_CASA_2930_R01_DEP',
+     'RMD_CASA_2930_R01_EXC'
+   )
+ ORDER BY TABLE_NAME;

@@ -1,0 +1,69 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T13:22:13.438552+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/Card09_Estado_ReadOnly_RIOSLTDAPRD.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "service_esperado": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 8,
+  "colunas": [
+    "GRUPO",
+    "NOME",
+    "ESTADO",
+    "NUM_ROWS_ESTATISTICO"
+  ],
+  "linhas": [
+    {
+      "GRUPO": "AUDITORIA_FINANCEIRA",
+      "NOME": "BKP_RMD_FDUP_RIO_20260923_INS",
+      "ESTADO": "NAO_LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 0
+    },
+    {
+      "GRUPO": "CABECALHOS",
+      "NOME": "TGFCAB",
+      "ESTADO": "LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 3360
+    },
+    {
+      "GRUPO": "CONDICOES",
+      "NOME": "TGFPPG",
+      "ESTADO": "LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 30
+    },
+    {
+      "GRUPO": "FINANCEIROS",
+      "NOME": "TGFFIN",
+      "ESTADO": "LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 3226
+    },
+    {
+      "GRUPO": "FONTE_XML",
+      "NOME": "TGFNFE",
+      "ESTADO": "LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 3338
+    },
+    {
+      "GRUPO": "MAPA_BASE",
+      "NOME": "BKP_RMD_FDUP_RIO_20260923_BASE",
+      "ESTADO": "NAO_LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 0
+    },
+    {
+      "GRUPO": "MAPA_CLASSIFICACAO",
+      "NOME": "BKP_RMD_FDUP_RIO_20260923_PPG",
+      "ESTADO": "NAO_LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 0
+    },
+    {
+      "GRUPO": "NUMERACAO",
+      "NOME": "TGFNUM",
+      "ESTADO": "LOCALIZADO",
+      "NUM_ROWS_ESTATISTICO": 167
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

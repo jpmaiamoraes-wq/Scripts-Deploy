@@ -1,0 +1,78 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:39:39.787501+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Inventario_Triggers_TSIPAR_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 8,
+  "colunas": [
+    "TRIGGER_NAME",
+    "STATUS",
+    "TRIGGERING_EVENT",
+    "TABLE_NAME",
+    "OWNER"
+  ],
+  "linhas": [
+    {
+      "TRIGGER_NAME": "TRG_INC_UPD_DLT_DHPARAMETROS",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "UPDATE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "INSERT OR UPDATE OR DELETE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_INC_UPT_TSIPAR",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "INSERT OR UPDATE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_TSIPAR_LOG",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "UPDATE OR DELETE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_TSIPAR_LOGTABOPER",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "INSERT OR UPDATE OR DELETE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_UPD_TSIPAR",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "UPDATE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_UPD_TSIPAR_FPTABELASTESTE",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "UPDATE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    },
+    {
+      "TRIGGER_NAME": "TRG_UPD_TSIPAR_WMS",
+      "STATUS": "ENABLED",
+      "TRIGGERING_EVENT": "UPDATE",
+      "TABLE_NAME": "TSIPAR",
+      "OWNER": "SANKHYA"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

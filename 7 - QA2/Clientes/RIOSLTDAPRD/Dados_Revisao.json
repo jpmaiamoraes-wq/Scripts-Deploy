@@ -1,0 +1,163 @@
+{
+  "cliente_informado": "RIOSLTDAPRD",
+  "pasta_cliente": "RIOSLTDAPRD",
+  "hostname": "10.110.106.5",
+  "port": 1521,
+  "servicename": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": null,
+  "gp_nome": "NAO_INFORMADO",
+  "analista_projetos": {
+    "nome": null,
+    "email": null,
+    "confirmada": false
+  },
+  "comunicacao_email": {
+    "status": "AGUARDANDO_PDF_FINAL_E_CONFIRMACAO_DOS_DESTINATARIOS",
+    "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
+    "corpo_modelo": "Olá,\\n\\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\\n\\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\\n\\nAtenciosamente,",
+    "anexo_permitido": "somente o PDF final validado"
+  },
+  "preparado_em": "2026-09-23T09:46:02-03:00",
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 11,
+    "saida": "NAO_CADASTRADO: 10.110.106.5 não está na lista de exceções e a porta 1521 está inacessível."
+  },
+  "roteamento_automatico": false,
+  "senha_armazenada": false,
+  "mecanismo_credencial": "KEYCHAIN",
+  "status_credencial": "CREDENCIAL_KEYCHAIN_PRESENTE_APOS_IDENTIDADE_READ_ONLY",
+  "execucao_oracle_realizada": true,
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "riosltdaprd.sankhyacloud.com.br",
+    "db_name": "RIOSLTDAPRD",
+    "service_compativel": true,
+    "dml_executado": false,
+    "ddl_executado": false,
+    "evidencia": "Logs/Identidade_ReadOnly_20260923.json"
+  },
+  "preflight_read_only": {
+    "status": "CONCLUIDO",
+    "evidencia": "Logs/Preflight_ReadOnly_20260923.json",
+    "objetos_invalidos": 46,
+    "alter_any_procedure": 0,
+    "objetos_requeridos_ausentes": 0,
+    "quota_linhas": 0
+  },
+  "volumetria": {
+    "status": "CONCLUIDA_READ_ONLY",
+    "evidencia": "Logs/Volumetria_20260923.json",
+    "indicadores_integridade_obrigatorios_zero": true
+  },
+  "pos_validacao_master": {
+    "status": "CONCLUIDA_READ_ONLY",
+    "evidencia": "Logs/PosValidacao_Master_20260923.json",
+    "objetos_controle_nao_retornados": 0,
+    "objetos_invalidos": 46,
+    "mapa_unidades_linhas": 93,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "atividade_29_30": {
+    "preflight": "MERGE_ANTIFRAGIL_OBRIGATORIO",
+    "redirecionamento": {
+      "status": "CONCLUIDO",
+      "id_execucao": "RMD_RIO_2930_20260923_01",
+      "mapa_linhas": 7711,
+      "referencias_auditadas": 61211,
+      "excecoes": 0,
+      "evidencia": "Logs/Oracle_2930_Redirecionar_20260923_132500.log"
+    },
+    "exclusao_pais": {
+      "status": "CONCLUIDA_COM_BACKUP",
+      "bairros": 428,
+      "enderecos": 7283,
+      "referencias_remanescentes": 0,
+      "evidencia": "Logs/Oracle_2930_Excluir_20260923_133500.log"
+    },
+    "pos_validacao": {
+      "status": "CONCLUIDA_READ_ONLY",
+      "evidencia": "Logs/PosValidacao_29_30_20260923.json",
+      "bairros_obsoletos_presentes": 0,
+      "enderecos_obsoletos_presentes": 0,
+      "bairros_duplicados_normalizados": 0,
+      "enderecos_duplicados_normalizados": 0
+    }
+  },
+  "card09": {
+    "preflight_executado": true,
+    "mapa_criado": true,
+    "mapa_validado": true,
+    "id_execucao_mapa": "RMD_FDUP_RIO_260923_01",
+    "base_total": 0,
+    "aptos_para_validacao_final": 0,
+    "sem_vdup_xml": 0,
+    "insert_autorizado": false,
+    "insert_motivo": "NAO_APLICAVEL_APTOS_ZERO",
+    "pos_validacao_concluida": true,
+    "evidencia_mapa": "Logs/Oracle_Card09_Mapa_20260923_134000.log",
+    "evidencia_pos_validacao": "Logs/PosValidacao_Card09_20260923.json"
+  },
+  "ticket_objetos_invalidos": {
+    "status": "ENVIADO_ABERTO",
+    "quantidade": 46,
+    "evidencia_lista": "Logs/Objetos_Invalidos_20260923.json",
+    "rascunho": "Artefatos_Revisao/Ticket_Objetos_Invalidos_RIOSLTDAPRD.md",
+    "organizacao_confirmada": true,
+    "organizacao": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LTDA-83657",
+    "numero": 712780,
+    "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/712780",
+    "categoria": "Cloud/SaaS > Solicitação Cloud > Personalizar Objeto de Banco de Dados",
+    "prioridade": "Normal",
+    "ambiente": "Produção",
+    "banco": "Oracle",
+    "duplicidade_verificada": true,
+    "evidencia_duplicidade": "Busca no portal por RIOSLTDAPRD com status Aberto: nenhuma solicitação encontrada em 2026-09-23."
+  },
+  "onboarding": {
+    "status": "CONCLUIDA_READ_ONLY_COM_DIVERGENCIAS",
+    "evidencia_json": "Logs/Onboarding_ReadOnly_20260923_1409.json",
+    "evidencia_resumo": "Artefatos_Revisao/Onboarding_ReadOnly_20260923.md",
+    "fonte_primaria": "Onboarding Deploy — Sankhya",
+    "registro": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LTDA",
+    "cnpj": "58.364.248/0001-11",
+    "arquivo_usuarios": "[MODELO SANKHYA] Usuarios (1).xlsx",
+    "arquivo_usuarios_enviado_em": "2026-08-26 12:19",
+    "empresas_onboarding": 1,
+    "empresas_oracle": 1,
+    "usuarios_onboarding": 7,
+    "usuarios_oracle_total": 18,
+    "usuarios_oracle_com_grupo": 7,
+    "usuarios_oracle_sem_grupo_modelo": 11,
+    "empresas_ausentes": 0,
+    "empresas_adicionais": 0,
+    "usuarios_ausentes": 0,
+    "usuarios_adicionais": 0,
+    "divergencias_grupo": 7,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "autorizacao_operacional": {
+    "marcador": "EXECUTAR RIOSLTDAPRD",
+    "recebida_em": "2026-09-23T09:50:38-03:00",
+    "escopo": "onda_aprovada_master_01_31; card09_permanece_fase_separada"
+  },
+  "medicao_execucao": {
+    "arquivo": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/Artefatos_Revisao/MEDICAO_EXECUCAO.csv",
+    "estado": "TECNICAMENTE_CONCLUIDA_COM_PENDENCIAS"
+  },
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/Logs/Revisao_Master_20260923_094601.log",
+  "rotas_execucao": {
+    "primaria": "ORACLE_DIRETO_LOTE",
+    "fallback": "VSCODE_SCRIPT_LEGADO",
+    "wrapper_legado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/Executar_Revisao_RIOSLTDAPRD.sql",
+    "roteiro_fallback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/ROTEIRO_FALLBACK_LEGADO_VSCODE.md",
+    "troca_automatica": false,
+    "catalogo_ips": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/ips-roteamento-vpn.txt",
+    "aplica_rota_cadastrada_automaticamente": false
+  }
+}

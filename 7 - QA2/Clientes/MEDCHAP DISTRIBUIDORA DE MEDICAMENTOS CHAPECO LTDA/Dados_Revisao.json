@@ -1,0 +1,250 @@
+{
+  "cliente_informado": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+  "pasta_cliente": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+  "hostname": "10.100.76.5",
+  "port": 1521,
+  "servicename": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": "guilherme.martins@sankhya.com.br",
+  "gp_nome": "Guilherme Santos Martins",
+  "analista_projetos": {
+    "nome": "Ana Paula Rodrigues",
+    "email": "ana.rodrigues@sankhya.com.br",
+    "confirmada": true
+  },
+  "comunicacao_email": {
+    "status": "ENVIADO_VERIFICADO",
+    "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
+    "corpo_modelo": "Olá,\\n\\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\\n\\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\\n\\nAtenciosamente,",
+    "anexo_permitido": "somente o PDF final validado",
+    "revisao_formal_pre_envio": "dispensada pelo usuario (comunicacao interna)",
+    "assunto": "Conclusão da revisão Master Deploy — MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+    "destinatarios_para": [
+      "ana.rodrigues@sankhya.com.br"
+    ],
+    "cc": [],
+    "anexo": "Relatorio_Entrega_Tecnica_MEDCHAP_FINAL.pdf",
+    "metodo_anexo": "Claude in Chrome file_upload no rascunho Gmail",
+    "enviado_em_utc": "2026-09-25T14:53:46Z",
+    "gmail_thread_id": "1a0d90c6a76df1cb",
+    "gmail_message_id": "1a0d90ee5c0bcce8",
+    "verificacao": "Enviados: destinatario unico ana.rodrigues@sankhya.com.br; anexo application/pdf com nome correto"
+  },
+  "preparado_em": "2026-09-25T07:58:58-03:00",
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 0,
+    "saida": "OK: 10.100.76.5:1521 já está acessível. Nenhuma alteração necessária."
+  },
+  "roteamento_automatico": false,
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": true,
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/Revisao_Master_20260925_075858.log",
+  "rotas_execucao": {
+    "primaria": "ORACLE_DIRETO_LOTE",
+    "fallback": "VSCODE_SCRIPT_LEGADO",
+    "wrapper_legado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Executar_Revisao_MEDCHAP_DISTRIBUIDORA_DE_MEDICAMENTOS_CHAPECO_LTDA.sql",
+    "roteiro_fallback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/ROTEIRO_FALLBACK_LEGADO_VSCODE.md",
+    "troca_automatica": false,
+    "catalogo_ips": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/ips-roteamento-vpn.txt",
+    "aplica_rota_cadastrada_automaticamente": true
+  },
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "medchapprd.sankhyacloud.com.br",
+    "db_name": "MEDCHAPPRD",
+    "versao": "Oracle AI Database 26ai EE 23.0.0.0.0",
+    "correspondencia_base": "TSIEMP CODEMP 1-3 = nome informado truncado em 40 caracteres; CODEMP 4 PROWIN COMPANY LTDA e 5 SALUTH ADMINISTRADORA E LOCADORA DE BENS no escopo BASE_INTEIRA",
+    "evidencia": "Logs/P00_identity_20260925_075545.json"
+  },
+  "credencial": {
+    "mecanismo": "KEYCHAIN",
+    "status_inicial": "CREDENCIAL_KEYCHAIN_AUSENTE",
+    "cadastro": "primeira autenticacao Oracle bem-sucedida em 25/09 07:59",
+    "senha_armazenada_em_arquivo": false
+  },
+  "medicao": {
+    "arquivo": "Artefatos_Revisao/MEDICAO_EXECUCAO.csv",
+    "estado": "INSTRUMENTADO"
+  },
+  "preflight_read_only": {
+    "pacote": "Executar_Pacote1_Preparacao_ReadOnly_MEDCHAP.sh",
+    "resumo": "Logs/Pacote1_ReadOnly_20260925_075545.resumo.txt",
+    "triggers_desabilitados_pre_existentes": 9,
+    "objetos_invalidos": 0,
+    "quota_users": "0 (diagnostico)",
+    "bkp_novo_pre_existentes": 14
+  },
+  "execucao_master": {
+    "id_execucao": "MEDCHAP_MAS_20260925_081306",
+    "id_master": "RMD_RUN_20260925081319961",
+    "sha256_suite": "7290fd66a7bfad273dfec6554f2cd5672e2a12738abf0472d3b7aebe3155abb9",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+    "instrucoes": "1085/1085",
+    "log": "Logs/MEDCHAP_MAS_20260925_081306.log",
+    "duracao_s": 1756,
+    "etapa_29": "CONCLUIDO_PARCIAL -> tratado pelo merge",
+    "etapa_30": "CONCLUIDO_PARCIAL -> tratado pelo merge",
+    "etapa_31": "CONCLUIDO (0 invalidos)"
+  },
+  "volumetria_pos_master": {
+    "evidencia": "Logs/V02_Volumetria_Pos_Master_20260925.json",
+    "indicadores_integridade": 0
+  },
+  "merge_29_30_fase1": {
+    "id_execucao": "MEDCHAP_MRG_20260925_01",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+    "mapa": "RMD_MDCH_MRG_20260925",
+    "backups": [
+      "BKP_RMD_MDCH_20260925_BAI",
+      "BKP_RMD_MDCH_20260925_END"
+    ],
+    "auditoria": "RMD_MDCH_MRG_20260925_DEP",
+    "excecoes": "RMD_MDCH_MRG_20260925_EXC",
+    "mapa_bai": 429,
+    "mapa_end": 7283,
+    "referencias_redirecionadas": 61339,
+    "rollback": "Artefatos_Revisao/Rollback/29_30_Rollback_MEDCHAP_MRG_20260925_01.sql"
+  },
+  "merge_29_30_fase2_exclusao": {
+    "id_execucao": "MEDCHAP_DEL_20260925_01",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+    "excluidos_bai": 429,
+    "excluidos_end": 7283,
+    "referencias_fisicas_remanescentes": 0,
+    "rollback": "Artefatos_Revisao/Rollback/29_30_Rollback_MEDCHAP_MRG_20260925_01.sql"
+  },
+  "normalizacao_remanescente_29_30": {
+    "id_execucao": "MEDCHAP_NORM2930_20260925_01",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+    "bairros": 414,
+    "enderecos": 6877,
+    "backups": [
+      "BKP_RMD_PAD_TSIBAI",
+      "BKP_RMD_PAD_TSIEND"
+    ],
+    "rollback": "Artefatos_Revisao/Rollback/Reverter_29_30_Normalizacao_Remanescente_MEDCHAP.sql",
+    "preflight_final": "SEM_CANDIDATOS_DE_ALTERACAO (Logs/P21_R05_Preflight_29_30_Final_20260925.preflight_29_30.json)"
+  },
+  "card09": {
+    "status": "SEM_CANDIDATOS_APTOS",
+    "gates": {
+      "PREFLIGHT_EXECUTADO": true,
+      "MAPA_CRIADO": true,
+      "MAPA_VALIDADO": true,
+      "INSERT_AUTORIZADO": "NAO_APLICAVEL",
+      "POS_VALIDACAO_CONCLUIDA": true
+    },
+    "id_execucao": "MEDCHAP_FDUP_20260925_01",
+    "lote": "MEDCHAP_FDUP_20260925_01_MAPA",
+    "mapa": "BKP_RMD_FDUP_MDC_20260925",
+    "classificacao": "BKP_RMD_FDUP_MDC_20260925_PPG",
+    "base_total": 0,
+    "apto_para_validacao_final": 0,
+    "sem_vdup_xml": 0,
+    "insercoes": 0,
+    "tgffin_total": 1329720,
+    "tgfnum_ultcod": 1354826
+  },
+  "volumetria_final": {
+    "evidencia": "Logs/V03_Volumetria_Final_20260925.json",
+    "fonte": "REL_ENTEGA_NOVO_05.jrxml queryString com indicadores excluidos",
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 0,
+    "codmunfis_duplicados": 0,
+    "notas_sem_financeiro": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "objetos_invalidos_final": {
+    "qtd": 0,
+    "evidencia": "Logs/F13_Objetos_Invalidos_Final_20260925.json"
+  },
+  "estado_final_master": {
+    "controle_pendente": 0,
+    "triggers_fora_linha_base": 0,
+    "evidencia": "Logs/F00_Master_Estado_Final_20260925.json"
+  },
+  "ticket_objetos_invalidos": {
+    "status": "NAO_APLICAVEL",
+    "motivo": "0 objetos invalidos"
+  },
+  "onboarding": {
+    "status": "CONCLUIDO",
+    "fonte": "Artefatos_Revisao/Onboarding - MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA.zip (Baixar Tudo 25/09 09:30)",
+    "api": "HTTP 403 - aguardando Adelcione",
+    "evidencia": [
+      "Onboarding_Comparacao_ReadOnly_MEDCHAP.json",
+      "Onboarding_Comparacao_ReadOnly_MEDCHAP.md"
+    ],
+    "empresas": "5/5 localizadas; PROWIN e SALUTH marcadas como Filial no onboarding (outra raiz)",
+    "usuarios": {
+      "planilha": 93,
+      "oracle_com_grupo": 93,
+      "correspondem": 80,
+      "divergentes": 13,
+      "ausentes": 0,
+      "extras": 0,
+      "principal": "12 usuarios FILIAL - CBS corrigidos de CODEMP 4 para 2 (atividade 34); divergencias de usuarios restantes: 0",
+      "divergente_nominal_resolvido": "logistica01.sjp: NOMEUSU corrigido para JOAO.GONCALVES na atividade 33"
+    },
+    "contas": {
+      "planilha": 4,
+      "correspondem": 4,
+      "divergentes": 0,
+      "detalhe": "Banco do Brasil: agencia confere quando o DV 'X' e gravado como '0' (padrao informado pelo usuario em 25/09/2026; confirmado por hash)"
+    },
+    "smtp": "conta principal MSDSMTPPROP = onboarding (smtp.office365.com:587, envio@medchap.com.br); TSISMTP continha so a conta interna de testes do Deploy Agent, removida na atividade 35",
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "relatorio": {
+    "status": "FINAL_ENVIADO",
+    "previa_txt": "Relatorio_Entrega_Tecnica_MEDCHAP_PREVIA_20260925.txt",
+    "texto_aprovado_por_usuario": "2026-09-25 (incluindo ajuste da parte SMTP)",
+    "md_final": "Relatorio_Entrega_Tecnica_MEDCHAP_FINAL.md",
+    "pdf_final": "Relatorio_Entrega_Tecnica_MEDCHAP_FINAL.pdf",
+    "paginas": 16,
+    "qa_visual": "OK (Artefatos_Revisao/QA_PDF/pag-01..16.png)",
+    "cards_criticos_08_13_14_15": "checados antes do PDF"
+  },
+  "status_revisao": "CONCLUIDA_RELATORIO_ENVIADO",
+  "atividade33_caracteres_cadastros": {
+    "status": "CONCLUIDO",
+    "id_execucao": "MEDCHAP_CAR_20260925_02",
+    "tentativa_anterior": "MEDCHAP_CAR_20260925_01 (PLS-00204 na compilacao; nenhum cadastro alterado; mapa vazio RMD_MDCH_CAR_20260925 preservado)",
+    "charset": "WE8MSWIN1252",
+    "escopo": "TGFPRO DESCRPROD/COMPLDESC/DESCRANP; TGFPAR NOMEPARC/RAZAOSOCIAL/COMPLEMENTO; TGFVEN APELIDO; TSIUSU NOMEUSU(protegido)/NOMEUSUCPLT",
+    "diagnostico": "1 registro atipico em toda a varredura (TSIUSU 102 NOMEUSU)",
+    "mapa": "RMD_MDCH_CAR_20260925_02",
+    "backup": "BKP_RMD_MDCH_CAR02_TSIUSU (1 registro)",
+    "alteracao": "TSIUSU 102 NOMEUSU JOAO.GON¿ALVES -> JOAO.GONCALVES (decisao do usuario 25/09/2026)",
+    "pos_validacao": "LOTE_CONCLUIDO_POS_VALIDADO; 0 caracteres corrompidos restantes",
+    "rollback": "Artefatos_Revisao/Rollback/Reverter_33_Caracteres_Cadastros_MEDCHAP.sql",
+    "log": "Logs/MEDCHAP_CAR_20260925_02.log"
+  },
+  "atividade34_usuarios_empresa": {
+    "status": "CONCLUIDO",
+    "id_execucao": "MEDCHAP_USUEMP_20260925_01",
+    "decisao": "usuario 25/09/2026, evidencia SPED CBS = CNPJ 00.577.604/0003-67 = CODEMP 2",
+    "alteracao": "TSIUSU.CODEMP 4 -> 2 para CODUSU 81..92 (12 usuarios *.cbs@medchap.com.br)",
+    "backup": "BKP_RMD_MDCH_USUEMP01 (12)",
+    "pos_validacao": "LOTE_CONCLUIDO_POS_VALIDADO; CBS fora do CODEMP 2 = 0; SJP no CODEMP 3 = 11",
+    "rollback": "Artefatos_Revisao/Rollback/Reverter_34_Ajuste_Usuarios_Empresa_MEDCHAP.sql",
+    "log": "Logs/MEDCHAP_USUEMP_20260925_01.log"
+  },
+  "atividade35_smtp": {
+    "status": "CONCLUIDO",
+    "id_execucao": "MEDCHAP_SMTP_20260925_01",
+    "msdsmtpprop": "conta do cliente, sem alteracao",
+    "tsismtp": "CODSMTP 1 (conta de testes Deploy Agent) removida; 0 referencias",
+    "backup": "BKP_RMD_MDCH_SMTP01 (1)",
+    "rollback": "Artefatos_Revisao/Rollback/Reverter_35_SMTP_Contas_MEDCHAP.sql",
+    "log": "Logs/MEDCHAP_SMTP_20260925_01.log",
+    "segredos": "nenhuma senha lida ou gravada; 2 logs de diagnostico redigidos (senha criptografada do MSDSMTPPROP e identificador de chave da conta de testes)",
+    "teste_envio": "TESTE_ENVIO_OK 25/09/2026 11:40 - tela Servidor SMTP; recebido na caixa de entrada as 11:40:22 (Logs/T35_Teste_Envio_SMTP_20260925.json)"
+  }
+}

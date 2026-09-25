@@ -1,0 +1,1103 @@
+SQL> PROMPT CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 18 A 30
+CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 18 A 30
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER:='RMD_RUN_CONT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [18-30] PREPARAR BACKUPS
+[18-30] PREPARAR BACKUPS
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Preparar_Backups_18_30.sql"
+SQL> -- Garante, antes da compilacao das etapas 18-30, todas as tabelas de backup.
+SQL> -- Nao altera tabelas funcionais.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE
+  2    PROCEDURE cria(p_nome VARCHAR2,p_sql CLOB) IS v NUMBER;
+  3    BEGIN
+  4      SELECT COUNT(*) INTO v FROM ALL_TABLES
+  5      WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME=p_nome;
+  6      IF v=0 THEN EXECUTE IMMEDIATE p_sql;DBMS_OUTPUT.PUT_LINE(p_nome||'=CRIADA');
+  7      ELSE DBMS_OUTPUT.PUT_LINE(p_nome||'=EXISTENTE');END IF;
+  8    END;
+  9  BEGIN
+ 10    cria('BKP_RMD_GOL_TSIPAR',q'[CREATE TABLE BKP_RMD_GOL_TSIPAR AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,P.CHAVE,P.CODUSU,P.INTEIRO INTEIRO_ANTES FROM TSIPAR P WHERE 1=0]');
+ 11    cria('BKP_RMD_GOL_TGFCGM',q'[CREATE TABLE BKP_RMD_GOL_TGFCGM AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,C.PERCCFFAB,C.PERCCFOUTROS,C.PERCCFSERVICO,C.PERCCOFINS,C.PERCCSL,C.PERCCUSVAR,C.PERCCVARSEMST,C.PERCMARGEM,C.PERCPIS,C.PERCIRPJ,C.PERCCPP FROM TGFCGM C WHERE 1=0]');
+ 12    cria('BKP_RMD_GOL_TGFCMV',q'[CREATE TABLE BKP_RMD_GOL_TGFCMV AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,C.DHALTER,C.FORMGASTOFIX,C.INTERVALOATUALIZACAO,C.PERCUSTOFIX,C.QTDMESESCONSOLIDAR,C.TEMCOMISSAO,C.TIPDTGASTOFIX,C.TIPFATPER,C.TIPOCUSTO FROM TGFCMV C WHERE 1=0]');
+ 13    cria('BKP_RMD_PAR_MATRIZ',q'[CREATE TABLE BKP_RMD_PAR_MATRIZ(ID_EXECUCAO VARCHAR2(30) NOT NULL,DH_EXECUCAO TIMESTAMP NOT NULL,USUARIO_EXECUCAO VARCHAR2(128) NOT NULL,CODPARC NUMBER NOT NULL,CODPARCMATRIZ_ANTES NUMBER,CODPARCMATRIZ_DEPOIS NUMBER)]');
+ 14    cria('BKP_RMD_CARD_TTKINDAGT',q'[CREATE TABLE BKP_RMD_CARD_TTKINDAGT AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,T.* FROM TTKINDAGT T WHERE 1=0]');
+ 15    cria('BKP_CLASSICMS_TGFPAR',q'[CREATE TABLE BKP_CLASSICMS_TGFPAR(ID_EXECUCAO VARCHAR2(30) NOT NULL,DH_EXECUCAO TIMESTAMP(6) NOT NULL,CODPARC NUMBER NOT NULL,CLASSIFICMS_ANTES VARCHAR2(1),CLASSIFICMS_DEPOIS VARCHAR2(1))]');
+ 16    cria('BKP_AJNP_TGFPAR',q'[CREATE TABLE BKP_AJNP_TGFPAR AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS DATE) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,P.CODPARC,P.NOMEPARC NOMEPARC_ANTES,P.RAZAOSOCIAL RAZAOSOCIAL_ANTES,P.NOMEPARC NOMEPARC_DEPOIS,P.RAZAOSOCIAL RAZAOSOCIAL_DEPOIS FROM TGFPAR P WHERE 1=0]');
+ 17    cria('BKP_RMD_PAD_TGFPAR',q'[CREATE TABLE BKP_RMD_PAD_TGFPAR AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFPAR T WHERE 1=0]');
+ 18    cria('BKP_RMD_PAD_TGFPRO',q'[CREATE TABLE BKP_RMD_PAD_TGFPRO AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFPRO T WHERE 1=0]');
+ 19    cria('BKP_RMD_PAD_TGFTIT',q'[CREATE TABLE BKP_RMD_PAD_TGFTIT AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFTIT T WHERE 1=0]');
+ 20    cria('BKP_RMD_PAD_TSICID',q'[CREATE TABLE BKP_RMD_PAD_TSICID AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TSICID T WHERE 1=0]');
+ 21    cria('BKP_RMD_PAD_TGFTPV',q'[CREATE TABLE BKP_RMD_PAD_TGFTPV AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFTPV T WHERE 1=0]');
+ 22    cria('BKP_RMD_PAD_TSIBAI',q'[CREATE TABLE BKP_RMD_PAD_TSIBAI AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TSIBAI T WHERE 1=0]');
+ 23    cria('BKP_RMD_PAD_TSIEND',q'[CREATE TABLE BKP_RMD_PAD_TSIEND AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TSIEND T WHERE 1=0]');
+ 24  END;
+ 25  /
+BKP_RMD_GOL_TSIPAR=EXISTENTE
+BKP_RMD_GOL_TGFCGM=EXISTENTE
+BKP_RMD_GOL_TGFCMV=EXISTENTE
+BKP_RMD_PAR_MATRIZ=EXISTENTE
+BKP_RMD_CARD_TTKINDAGT=EXISTENTE
+BKP_CLASSICMS_TGFPAR=EXISTENTE
+BKP_AJNP_TGFPAR=EXISTENTE
+BKP_RMD_PAD_TGFPAR=EXISTENTE
+BKP_RMD_PAD_TGFPRO=EXISTENTE
+BKP_RMD_PAD_TGFTIT=EXISTENTE
+BKP_RMD_PAD_TSICID=EXISTENTE
+BKP_RMD_PAD_TGFTPV=EXISTENTE
+BKP_RMD_PAD_TSIBAI=EXISTENTE
+BKP_RMD_PAD_TSIEND=EXISTENTE
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT === FIM PREPARACAO BACKUPS 18-30 ===
+=== FIM PREPARACAO BACKUPS 18-30 ===
+SQL> PROMPT [18/31] INICIO
+[18/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Ajustar_Preferencias_GOL.sql"
+SQL> -- Ajustes das preferencias e configuracoes do Gerente On-Line.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> DECLARE
+  2    PROCEDURE cria(p_nome VARCHAR2,p_sql CLOB) IS v NUMBER;
+  3    BEGIN
+  4      SELECT COUNT(*) INTO v FROM ALL_TABLES
+  5       WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME=p_nome;
+  6      IF v=0 THEN EXECUTE IMMEDIATE p_sql; END IF;
+  7    END;
+  8  BEGIN
+  9    cria('BKP_RMD_GOL_TSIPAR',q'[CREATE TABLE BKP_RMD_GOL_TSIPAR AS
+ 10      SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+ 11             CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+ 12             P.CHAVE,P.CODUSU,P.INTEIRO INTEIRO_ANTES
+ 13        FROM TSIPAR P WHERE 1=0]');
+ 14    cria('BKP_RMD_GOL_TGFCGM',q'[CREATE TABLE BKP_RMD_GOL_TGFCGM AS
+ 15      SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+ 16             CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+ 17             C.PERCCFFAB,C.PERCCFOUTROS,C.PERCCFSERVICO,C.PERCCOFINS,C.PERCCSL,
+ 18             C.PERCCUSVAR,C.PERCCVARSEMST,C.PERCMARGEM,C.PERCPIS,C.PERCIRPJ,C.PERCCPP
+ 19        FROM TGFCGM C WHERE 1=0]');
+ 20    cria('BKP_RMD_GOL_TGFCMV',q'[CREATE TABLE BKP_RMD_GOL_TGFCMV AS
+ 21      SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+ 22             CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+ 23             C.DHALTER,C.FORMGASTOFIX,C.INTERVALOATUALIZACAO,C.PERCUSTOFIX,
+ 24             C.QTDMESESCONSOLIDAR,C.TEMCOMISSAO,C.TIPDTGASTOFIX,C.TIPFATPER,C.TIPOCUSTO
+ 25        FROM TGFCMV C WHERE 1=0]');
+ 26  END;
+ 27  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> DECLARE
+  2    v_id VARCHAR2(30):='RMD_GOL_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3    v_origem NUMBER;
+  4    v_b1 PLS_INTEGER;v_u1 PLS_INTEGER;v_b2 PLS_INTEGER;v_u2 PLS_INTEGER;
+  5    v_b3 PLS_INTEGER;v_u3 PLS_INTEGER;
+  6  BEGIN
+  7    SELECT COUNT(*) INTO v_origem FROM TGFCGM WHERE CODEMP=1 AND ANO=1900 AND MES=1;
+  8    IF v_origem<>1 THEN
+  9      RAISE_APPLICATION_ERROR(-20301,'Esperada exatamente uma configuracao TGFCGM da empresa 1, ano 1900, mes 1.');
+ 10    END IF;
+ 11  
+ 12    INSERT INTO BKP_RMD_GOL_TSIPAR
+ 13    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),CHAVE,CODUSU,INTEIRO
+ 14      FROM TSIPAR
+ 15     WHERE CODUSU=0 AND CHAVE IN
+ 16      ('GOL-QTDEPARC','GOL-QTDEPROD','GOL-QTDEMARC','GOL-QTDEGRUPOS',
+ 17       'GOL-QTDEVENDS','GOL-QTDEPERFIS','GOL-PERESTMED','GOL-TIPOCUSTO','PERCCUSFIXO')
+ 18       AND NVL(INTEIRO,-999)<>CASE
+ 19         WHEN CHAVE IN ('GOL-QTDEPARC','GOL-QTDEPROD','GOL-QTDEMARC','GOL-QTDEGRUPOS','GOL-QTDEVENDS','GOL-QTDEPERFIS') THEN 0
+ 20         WHEN CHAVE='GOL-PERESTMED' THEN 6 WHEN CHAVE='GOL-TIPOCUSTO' THEN 3 ELSE 10 END;
+ 21    v_b1:=SQL%ROWCOUNT;
+ 22    UPDATE TSIPAR SET INTEIRO=CASE
+ 23         WHEN CHAVE IN ('GOL-QTDEPARC','GOL-QTDEPROD','GOL-QTDEMARC','GOL-QTDEGRUPOS','GOL-QTDEVENDS','GOL-QTDEPERFIS') THEN 0
+ 24         WHEN CHAVE='GOL-PERESTMED' THEN 6 WHEN CHAVE='GOL-TIPOCUSTO' THEN 3 ELSE 10 END
+ 25     WHERE CODUSU=0 AND CHAVE IN
+ 26      ('GOL-QTDEPARC','GOL-QTDEPROD','GOL-QTDEMARC','GOL-QTDEGRUPOS',
+ 27       'GOL-QTDEVENDS','GOL-QTDEPERFIS','GOL-PERESTMED','GOL-TIPOCUSTO','PERCCUSFIXO')
+ 28       AND NVL(INTEIRO,-999)<>CASE
+ 29         WHEN CHAVE IN ('GOL-QTDEPARC','GOL-QTDEPROD','GOL-QTDEMARC','GOL-QTDEGRUPOS','GOL-QTDEVENDS','GOL-QTDEPERFIS') THEN 0
+ 30         WHEN CHAVE='GOL-PERESTMED' THEN 6 WHEN CHAVE='GOL-TIPOCUSTO' THEN 3 ELSE 10 END;
+ 31    v_u1:=SQL%ROWCOUNT;
+ 32  
+ 33    INSERT INTO BKP_RMD_GOL_TGFCGM
+ 34    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),
+ 35           PERCCFFAB,PERCCFOUTROS,PERCCFSERVICO,PERCCOFINS,PERCCSL,PERCCUSVAR,
+ 36           PERCCVARSEMST,PERCMARGEM,PERCPIS,PERCIRPJ,PERCCPP
+ 37      FROM TGFCGM WHERE CODEMP<>1;
+ 38    v_b2:=SQL%ROWCOUNT;
+ 39    UPDATE TGFCGM D SET
+ 40     (PERCCFFAB,PERCCFOUTROS,PERCCFSERVICO,PERCCOFINS,PERCCSL,PERCCUSVAR,
+ 41      PERCCVARSEMST,PERCMARGEM,PERCPIS,PERCIRPJ,PERCCPP)=
+ 42     (SELECT PERCCFFAB,PERCCFOUTROS,PERCCFSERVICO,PERCCOFINS,PERCCSL,PERCCUSVAR,
+ 43             PERCCVARSEMST,PERCMARGEM,PERCPIS,PERCIRPJ,PERCCPP
+ 44        FROM TGFCGM WHERE CODEMP=1 AND ANO=1900 AND MES=1)
+ 45     WHERE D.CODEMP<>1;
+ 46    v_u2:=SQL%ROWCOUNT;
+ 47  
+ 48    INSERT INTO BKP_RMD_GOL_TGFCMV
+ 49    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),
+ 50           DHALTER,FORMGASTOFIX,INTERVALOATUALIZACAO,PERCUSTOFIX,QTDMESESCONSOLIDAR,
+ 51           TEMCOMISSAO,TIPDTGASTOFIX,TIPFATPER,TIPOCUSTO
+ 52      FROM TGFCMV WHERE CODCONFIG=1;
+ 53    v_b3:=SQL%ROWCOUNT;
+ 54    IF v_b3<>1 THEN RAISE_APPLICATION_ERROR(-20302,'Esperada exatamente uma TGFCMV CODCONFIG=1.'); END IF;
+ 55    UPDATE TGFCMV SET DHALTER=SYSDATE,FORMGASTOFIX=0,INTERVALOATUALIZACAO=24,
+ 56           PERCUSTOFIX=10,QTDMESESCONSOLIDAR=24,TEMCOMISSAO=0,TIPDTGASTOFIX=0,
+ 57           TIPFATPER=0,TIPOCUSTO=3 WHERE CODCONFIG=1;
+ 58    v_u3:=SQL%ROWCOUNT;
+ 59  
+ 60    IF v_b1<>v_u1 OR v_b2<>v_u2 OR v_b3<>v_u3 THEN
+ 61      RAISE_APPLICATION_ERROR(-20303,'Quantidade de backup e atualizacao divergente nas preferencias GOL.');
+ 62    END IF;
+ 63    COMMIT;
+ 64    DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 65    DBMS_OUTPUT.PUT_LINE('TSIPAR='||v_u1||'; TGFCGM='||v_u2||'; TGFCMV='||v_u3);
+ 66  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+ 67  /
+ID_EXECUCAO=RMD_GOL_20260910211513319
+TSIPAR=1; TGFCGM=0; TGFCMV=1
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [19/31] INICIO
+[19/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql"
+SQL> -- Define CODPARCMATRIZ pela raiz do CNPJ e o proprio parceiro para pessoa fisica.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> DECLARE
+>   v_existe NUMBER;
+> BEGIN
+>   SELECT COUNT(*) INTO v_existe
+>     FROM ALL_TABLES
+>    WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+>      AND TABLE_NAME = 'BKP_RMD_PAR_MATRIZ';
+>   IF v_existe = 0 THEN
+>     EXECUTE IMMEDIATE q'[
+>       CREATE TABLE BKP_RMD_PAR_MATRIZ (
+>         ID_EXECUCAO VARCHAR2(30) NOT NULL,
+>         DH_EXECUCAO TIMESTAMP NOT NULL,
+>         USUARIO_EXECUCAO VARCHAR2(128) NOT NULL,
+>         CODPARC NUMBER NOT NULL,
+>         CODPARCMATRIZ_ANTES NUMBER,
+>         CODPARCMATRIZ_DEPOIS NUMBER
+>       )]';
+>   END IF;
+> END;
+> /
+
+Error starting at line : 7 File @ /Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql
+In command -
+DECLARE
+  v_existe NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_existe
+    FROM ALL_TABLES
+   WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+     AND TABLE_NAME = 'BKP_RMD_PAR_MATRIZ';
+  IF v_existe = 0 THEN
+    EXECUTE IMMEDIATE q'[
+      CREATE TABLE BKP_RMD_PAR_MATRIZ (
+        ID_EXECUCAO VARCHAR2(30) NOT NULL,
+        DH_EXECUCAO TIMESTAMP NOT NULL,
+        USUARIO_EXECUCAO VARCHAR2(128) NOT NULL,
+        CODPARC NUMBER NOT NULL,
+        CODPARCMATRIZ_ANTES NUMBER,
+        CODPARCMATRIZ_DEPOIS NUMBER
+      )]';
+  END IF;
+END;
+Error report -
+WHENEVER
+--------
+
+ WHENEVER OSERROR  - Performs the specified action (exits by default) if an
+                     operating system error occurs
+ WHENEVER SQLERROR - Performs the specified action (exits by default) if a
+                     SQL command or PL/SQL block generates an error.
+
+
+ WHENEVER [ OSERROR | SQLERROR ]  {EXIT [SUCCESS|FAILURE|WARNING|n|variable|:BindVariable]
+ 			[COMMIT|ROLLBACK] | CONTINUE [COMMIT|ROLLBACK|NONE]} 
+
+
+SQL> DECLARE
+  2    v_id VARCHAR2(30) := 'RMD_MAT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3    v_backup PLS_INTEGER;
+  4    v_update PLS_INTEGER;
+  5  BEGIN
+  6    INSERT INTO BKP_RMD_PAR_MATRIZ
+  7      (ID_EXECUCAO,DH_EXECUCAO,USUARIO_EXECUCAO,CODPARC,
+  8       CODPARCMATRIZ_ANTES,CODPARCMATRIZ_DEPOIS)
+  9    WITH MATRIZ AS (
+ 10      SELECT SUBSTR(LPAD(CGC_CPF,14,'0'),1,8) RAIZ_CNPJ,
+ 11             MIN(CODPARC) KEEP
+ 12               (DENSE_RANK FIRST ORDER BY SUBSTR(LPAD(CGC_CPF,14,'0'),9,4),CODPARC)
+ 13               CODPARC_MATRIZ
+ 14        FROM TGFPAR
+ 15       WHERE TIPPESSOA='J' AND CGC_CPF IS NOT NULL
+ 16       GROUP BY SUBSTR(LPAD(CGC_CPF,14,'0'),1,8)
+ 17    ), PROPOSTA AS (
+ 18      SELECT P.CODPARC,P.CODPARCMATRIZ,
+ 19             CASE WHEN P.TIPPESSOA='F' THEN P.CODPARC ELSE M.CODPARC_MATRIZ END NOVA_MATRIZ
+ 20        FROM TGFPAR P
+ 21        LEFT JOIN MATRIZ M
+ 22          ON M.RAIZ_CNPJ=SUBSTR(LPAD(P.CGC_CPF,14,'0'),1,8)
+ 23       WHERE P.TIPPESSOA='F'
+ 24          OR (P.TIPPESSOA='J' AND P.CGC_CPF IS NOT NULL)
+ 25    )
+ 26    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),
+ 27           CODPARC,CODPARCMATRIZ,NOVA_MATRIZ
+ 28      FROM PROPOSTA
+ 29     WHERE DECODE(CODPARCMATRIZ,NOVA_MATRIZ,1,0)=0;
+ 30    v_backup := SQL%ROWCOUNT;
+ 31  
+ 32    MERGE INTO TGFPAR P
+ 33    USING (SELECT CODPARC,CODPARCMATRIZ_DEPOIS
+ 34             FROM BKP_RMD_PAR_MATRIZ WHERE ID_EXECUCAO=v_id) B
+ 35       ON (P.CODPARC=B.CODPARC)
+ 36     WHEN MATCHED THEN UPDATE SET P.CODPARCMATRIZ=B.CODPARCMATRIZ_DEPOIS;
+ 37    v_update := SQL%ROWCOUNT;
+ 38  
+ 39    IF v_update <> v_backup THEN
+ 40      RAISE_APPLICATION_ERROR(-20120,'Backup e ajuste de matriz divergiram.');
+ 41    END IF;
+ 42    COMMIT;
+ 43    DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 44    DBMS_OUTPUT.PUT_LINE('PARCEIROS_AJUSTADOS='||v_update);
+ 45  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 46  END;
+ 47  /
+ID_EXECUCAO=RMD_MAT_20260910211514132
+PARCEIROS_AJUSTADOS=19
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [20/31] INICIO
+[20/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/20_Atualizar_Cards_Deploy.sql"
+SQL> -- Atualiza a unica linha de indicadores do Deploy Agent com backup auditavel.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER;BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_CARD_TTKINDAGT';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_CARD_TTKINDAGT AS SELECT
+  4   CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,T.* FROM TTKINDAGT T WHERE 1=0]';END IF;
+  6   SELECT COUNT(*) INTO v FROM TTKINDAGT WHERE SEQUENCIA=1;
+  7   IF v<>1 THEN RAISE_APPLICATION_ERROR(-20310,'Esperada exatamente uma linha TTKINDAGT SEQUENCIA=1.');END IF;
+  8   FOR R IN (SELECT 'TTKNOT' N FROM DUAL UNION ALL SELECT 'TTKEVT' FROM DUAL) LOOP
+  9    SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME=R.N;
+ 10    IF v=0 THEN RAISE_APPLICATION_ERROR(-20311,'Tabela obrigatoria ausente: '||R.N);END IF;
+ 11   END LOOP;
+ 12  END;
+ 13  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2    v NUMBER;
+  3    v_id VARCHAR2(30):='RMD_CARD_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_CARD_TTKINDAGT SELECT v_id,SYSTIMESTAMP,
+  6     SYS_CONTEXT('USERENV','SESSION_USER'),T.* FROM TTKINDAGT T WHERE SEQUENCIA=1;
+  7  UPDATE TTKINDAGT T
+  8  SET (
+  9       T.QTDARQUIVOS,
+ 10      T.QTDERRO,
+ 11      T.QTDSUCESSO,
+ 12      T.QTDARQUIVOSNFE,
+ 13      T.QTDERRONFE,
+ 14      T.QTDSUCESSONFE,
+ 15      T.QTDBASICONFE,
+ 16      T.EMPRESAS,
+ 17      T.TIPOSOPERACAO,
+ 18      T.PARCEIROS,
+ 19      T.PRODUTOS,
+ 20      T.ENDERECOS,
+ 21      T.VOLUMES,
+ 22      T.NOTASDEVOLUCAOCOMPRAS,
+ 23      T.NOTASCOMPRAS,
+ 24      T.NOTASDEVOLUCAOVENDAS,
+ 25      T.NOTASVENDAS,
+ 26      T.FINANCEIROSPAGAR,
+ 27      T.FINANCEIROSRECEBER
+ 28  ) = (
+ 29  SELECT
+ 30   q_eventos.TOTAL as TOTAL,
+ 31   (q_eventos.ERRO + q_eventos.duplicada + q_eventos.cancelada) AS ERROS_TOTAL, 
+ 32   q_eventos.processado AS PROCESSANDO,
+ 33   q_eventos.totalNfe AS TOTAL_NFE,
+ 34   (q_eventos.erronfe + q_eventos.duplicada + q_eventos.cancelada) AS ERRO_NFE,
+ 35   q_eventos.processado AS FINALIZADO,
+ 36   (q_eventos.processado + q_eventos.erronfe + q_eventos.processando + q_eventos.duplicada + q_eventos.cancelada) AS BASICOS,
+ 37   q_config.EMPRESAS AS EMPRESAS,
+ 38   q_config.TIPOSDEOPERACAO,
+ 39   q_config.PARCEIROS,
+ 40   q_produtos.PRODUTOS,
+ 41   q_config.ENDERECOS,
+ 42   q_produtos.VOLUMES,
+ 43   q_notas.notasDevolucaoCompras,
+ 44   q_notas.notasDeCompras,
+ 45   q_notas.notasDevolucaoVendas,
+ 46   q_notas.notasDeVendas,
+ 47   q_financeiro.financeirosAPagar,
+ 48   q_financeiro.financeirosAReceber
+ 49  FROM
+ 50    (
+ 51      SELECT
+ 52        COUNT(CASE WHEN CAB.TIPMOV = 'C' THEN 1 END) AS notasDeCompras,
+ 53        COUNT(CASE WHEN CAB.TIPMOV = 'E' THEN 1 END) AS notasDevolucaoCompras,
+ 54        COUNT(CASE WHEN CAB.TIPMOV = 'V' THEN 1 END) AS notasDeVendas,
+ 55        COUNT(CASE WHEN CAB.TIPMOV = 'D' THEN 1 END) AS notasDevolucaoVendas
+ 56      FROM TGFCAB CAB
+ 57      INNER JOIN TTKNOT ON TTKNOT.NUNOTA = CAB.NUNOTA
+ 58    ) q_notas,
+ 59    (
+ 60      SELECT
+ 61        COUNT(CASE WHEN FIN.RECDESP = -1 THEN 1 END) AS financeirosAPagar,
+ 62        COUNT(CASE WHEN FIN.RECDESP = 1 THEN 1 END) AS financeirosAReceber
+ 63      FROM TGFFIN FIN
+ 64      INNER JOIN TTKNOT ON TTKNOT.NUNOTA = FIN.NUNOTA
+ 65    ) q_financeiro,
+ 66    (
+ 67      SELECT
+ 68        COUNT(DISTINCT P.CODPROD) AS produtos,
+ 69        COUNT(DISTINCT V.CODVOL) AS volumes
+ 70      FROM TGFPRO P
+ 71      INNER JOIN TGFVOL V ON P.CODVOL = V.CODVOL
+ 72    ) q_produtos,
+ 73    (
+ 74      SELECT
+ 75        (SELECT COUNT(1) FROM TSIEMP) AS empresas,
+ 76        (SELECT COUNT(1) FROM TGFPAR WHERE DTALTER >= sysdate-2) AS parceiros,
+ 77        (SELECT COUNT(1) FROM TSIEND WHERE DTALTER >= sysdate-2) AS enderecos,
+ 78        (SELECT COUNT(DISTINCT CODTIPOPER) FROM TGFTOP WHERE ATIVO = 'S' AND CODTIPOPER <> 0) AS tiposDeOperacao,
+ 79        (SELECT COUNT(1) FROM TGFTPV WHERE DHALTER >= sysdate-2) AS tiposDeNegociacao
+ 80      FROM DUAL
+ 81    ) q_config,
+ 82    (
+ 83      SELECT
+ 84        COUNT(*) AS total,
+ 85        count(CASE WHEN tipo <> 'OUTROS' THEN 1 END) AS totalNfe,
+ 86        count(CASE WHEN tipo <> 'OUTROS' and status = 'E'  THEN 1 END) AS erronfe,
+ 87        COUNT(CASE WHEN status = 'F' THEN 1 END) AS processado,
+ 88        COUNT(CASE WHEN status = 'N' THEN 1 END) AS processandoNota,
+ 89        COUNT(CASE WHEN status = 'X' THEN 1 END) AS processando,
+ 90        COUNT(CASE WHEN status = 'E' THEN 1 END) AS erro,
+ 91        COUNT(CASE WHEN status = 'D' THEN 1 END) AS duplicada,
+ 92        COUNT(CASE WHEN status = 'C' THEN 1 END) AS cancelada,
+ 93        COUNT(CASE WHEN status IS NULL THEN 1 END) AS pendente
+ 94      FROM TTKEVT EVT
+ 95    ) q_eventos
+ 96    ) WHERE T.SEQUENCIA = 1;
+ 97  
+ 98   v:=SQL%ROWCOUNT;
+ 99   IF v<>1 THEN RAISE_APPLICATION_ERROR(-20312,'Atualizacao dos cards nao alterou exatamente uma linha.');END IF;
+100   COMMIT;
+101   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+102   DBMS_OUTPUT.PUT_LINE('CARDS_ATUALIZADOS='||v);
+103  END;
+104  /
+ID_EXECUCAO=RMD_CARD_20260910211515080
+CARDS_ATUALIZADOS=1
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [21/31] INICIO
+[21/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/21_Classificar_ICMS_Parceiros.sql"
+SQL> -- Classifica parceiros para ICMS de forma idempotente e auditavel.
+SQL> -- O backup persistente armazena apenas os registros efetivamente alterados.
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE
+  2    v_existe NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*)
+  5      INTO v_existe
+  6      FROM ALL_OBJECTS
+  7     WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')
+  8       AND OBJECT_NAME = 'BKP_CLASSICMS_TGFPAR'
+  9       AND OBJECT_TYPE = 'TABLE';
+ 10    IF v_existe = 0 THEN
+ 11      EXECUTE IMMEDIATE 'CREATE TABLE BKP_CLASSICMS_TGFPAR (' ||
+ 12        'ID_EXECUCAO VARCHAR2(30) NOT NULL, ' ||
+ 13        'DH_EXECUCAO TIMESTAMP(6) NOT NULL, ' ||
+ 14        'CODPARC NUMBER NOT NULL, ' ||
+ 15        'CLASSIFICMS_ANTES VARCHAR2(1), ' ||
+ 16        'CLASSIFICMS_DEPOIS VARCHAR2(1))';
+ 17    END IF;
+ 18  END;
+ 19  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2    v_id_execucao VARCHAR2(30) := 'CLASSICMS_' || TO_CHAR(SYSTIMESTAMP, 'YYYYMMDDHH24MISSFF3');
+  3    v_backup       NUMBER;
+  4    v_atualizados  NUMBER;
+  5  BEGIN
+  6    INSERT INTO BKP_CLASSICMS_TGFPAR
+  7      (ID_EXECUCAO, DH_EXECUCAO, CODPARC, CLASSIFICMS_ANTES, CLASSIFICMS_DEPOIS)
+  8    SELECT v_id_execucao,
+  9           SYSTIMESTAMP,
+ 10           CODPARC,
+ 11           CLASSIFICMS,
+ 12           CASE
+ 13             WHEN TIPPESSOA = 'J'
+ 14              AND IDENTINSCESTAD IS NOT NULL
+ 15              AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'R'
+ 16             WHEN TIPPESSOA = 'F'
+ 17              AND IDENTINSCESTAD IS NOT NULL
+ 18              AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'P'
+ 19             WHEN NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO' THEN 'C'
+ 20           END
+ 21      FROM TGFPAR
+ 22     WHERE (TIPPESSOA = 'J'
+ 23            AND IDENTINSCESTAD IS NOT NULL
+ 24            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+ 25            AND NVL(CLASSIFICMS, 'Z') <> 'R')
+ 26        OR (TIPPESSOA = 'F'
+ 27            AND IDENTINSCESTAD IS NOT NULL
+ 28            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+ 29            AND NVL(CLASSIFICMS, 'Z') <> 'P')
+ 30        OR (NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO'
+ 31            AND NVL(CLASSIFICMS, 'Z') <> 'C');
+ 32    v_backup := SQL%ROWCOUNT;
+ 33    UPDATE TGFPAR
+ 34       SET CLASSIFICMS = CASE
+ 35             WHEN TIPPESSOA = 'J'
+ 36              AND IDENTINSCESTAD IS NOT NULL
+ 37              AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'R'
+ 38             WHEN TIPPESSOA = 'F'
+ 39              AND IDENTINSCESTAD IS NOT NULL
+ 40              AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'P'
+ 41             WHEN NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO' THEN 'C'
+ 42           END
+ 43     WHERE (TIPPESSOA = 'J'
+ 44            AND IDENTINSCESTAD IS NOT NULL
+ 45            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+ 46            AND NVL(CLASSIFICMS, 'Z') <> 'R')
+ 47        OR (TIPPESSOA = 'F'
+ 48            AND IDENTINSCESTAD IS NOT NULL
+ 49            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+ 50            AND NVL(CLASSIFICMS, 'Z') <> 'P')
+ 51        OR (NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO'
+ 52            AND NVL(CLASSIFICMS, 'Z') <> 'C');
+ 53    v_atualizados := SQL%ROWCOUNT;
+ 54    IF v_atualizados <> v_backup THEN
+ 55      RAISE_APPLICATION_ERROR(-20031,
+ 56        'Backup e atualizacao divergiram: backup=' || v_backup ||
+ 57        ', atualizados=' || v_atualizados);
+ 58    END IF;
+ 59    COMMIT;
+ 60    DBMS_OUTPUT.PUT_LINE('OK: Classificacao ICMS concluida. ID_EXECUCAO=' || v_id_execucao ||
+ 61                         ', parceiros=' || v_atualizados);
+ 62  EXCEPTION
+ 63    WHEN OTHERS THEN
+ 64      ROLLBACK;
+ 65      DBMS_OUTPUT.PUT_LINE('ERRO: Classificacao ICMS revertida. ' || SQLERRM);
+ 66      RAISE;
+ 67  END;
+ 68  /
+OK: Classificacao ICMS concluida. ID_EXECUCAO=CLASSICMS_20260910211516142, parceiros=31
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT === FIM CLASSIFICACAO ICMS ===
+=== FIM CLASSIFICACAO ICMS ===
+SQL> PROMPT [22/31] INICIO
+[22/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/22_Ajustar_Nomes_Parceiros.sql"
+SQL> -- ============================================================
+SQL> -- Ajuste_nomes_parceros_numeros.sql
+SQL> -- Remove do INICIO ou do FIM de NOMEPARC/RAZAOSOCIAL um trecho
+SQL> -- numerico que faca parte do CPF/CNPJ do proprio parceiro.
+SQL> --
+SQL> -- Seguranca:
+SQL> --   * exige ao menos 6 digitos coincidentes;
+SQL> --   * preserva numeros no meio do nome;
+SQL> --   * nao permite que o nome fique sem letras;
+SQL> --   * altera somente registros efetivamente divergentes;
+SQL> --   * cria backup persistente, auditavel por ID_EXECUCAO;
+SQL> --   * pode ser executado novamente sem repetir alteracoes.
+SQL> -- ============================================================
+SQL> 
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> -- A estrutura precisa existir antes da compilacao do bloco que faz o INSERT.
+SQL> DECLARE
+  2    v_tabela_existe NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*)
+  5      INTO v_tabela_existe
+  6      FROM ALL_TABLES
+  7     WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')
+  8       AND TABLE_NAME = 'BKP_AJNP_TGFPAR';
+  9  
+ 10    IF v_tabela_existe = 0 THEN
+ 11      EXECUTE IMMEDIATE q'[
+ 12        CREATE TABLE BKP_AJNP_TGFPAR AS
+ 13        SELECT CAST(NULL AS VARCHAR2(30))  AS ID_EXECUCAO,
+ 14               CAST(NULL AS DATE)          AS DH_EXECUCAO,
+ 15               CAST(NULL AS VARCHAR2(128)) AS USUARIO_EXECUCAO,
+ 16               P.CODPARC,
+ 17               P.NOMEPARC    AS NOMEPARC_ANTES,
+ 18               P.RAZAOSOCIAL AS RAZAOSOCIAL_ANTES,
+ 19               P.NOMEPARC    AS NOMEPARC_DEPOIS,
+ 20               P.RAZAOSOCIAL AS RAZAOSOCIAL_DEPOIS
+ 21          FROM TGFPAR P
+ 22         WHERE 1 = 0
+ 23      ]';
+ 24      DBMS_OUTPUT.PUT_LINE('BACKUP_CRIADO=BKP_AJNP_TGFPAR');
+ 25    ELSE
+ 26      DBMS_OUTPUT.PUT_LINE('BACKUP_EXISTENTE=BKP_AJNP_TGFPAR');
+ 27    END IF;
+ 28  END;
+ 29  /
+BACKUP_EXISTENTE=BKP_AJNP_TGFPAR
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> DECLARE
+  2    c_id_execucao CONSTANT VARCHAR2(30) :=
+  3      'AJNP_' || TO_CHAR(SYSTIMESTAMP, 'YYYYMMDDHH24MISSFF3');
+  4  
+  5    v_alterados     PLS_INTEGER := 0;
+  6    v_backups       PLS_INTEGER := 0;
+  7  
+  8    FUNCTION somente_digitos(p_texto VARCHAR2) RETURN VARCHAR2 IS
+  9    BEGIN
+ 10      RETURN REGEXP_REPLACE(p_texto, '[^0-9]', '');
+ 11    END;
+ 12  
+ 13    FUNCTION textos_diferentes(p_atual VARCHAR2, p_novo VARCHAR2) RETURN BOOLEAN IS
+ 14    BEGIN
+ 15      RETURN (p_atual <> p_novo)
+ 16          OR (p_atual IS NULL AND p_novo IS NOT NULL)
+ 17          OR (p_atual IS NOT NULL AND p_novo IS NULL);
+ 18    END;
+ 19  
+ 20    FUNCTION nome_ajustado(
+ 21      p_nome    VARCHAR2,
+ 22      p_cgc_cpf VARCHAR2
+ 23    ) RETURN VARCHAR2 IS
+ 24      v_nome          VARCHAR2(4000);
+ 25      v_documento     VARCHAR2(32);
+ 26      v_bloco_inicial VARCHAR2(4000);
+ 27      v_bloco_final   VARCHAR2(4000);
+ 28      v_digitos       VARCHAR2(64);
+ 29      v_resultado     VARCHAR2(4000);
+ 30      v_removeu       BOOLEAN := FALSE;
+ 31  
+ 32      FUNCTION corresponde_documento(p_digitos VARCHAR2) RETURN BOOLEAN IS
+ 33      BEGIN
+ 34        RETURN LENGTH(p_digitos) >= 6
+ 35           AND INSTR(v_documento, p_digitos) > 0;
+ 36      END;
+ 37    BEGIN
+ 38      IF p_nome IS NULL OR p_cgc_cpf IS NULL THEN
+ 39        RETURN p_nome;
+ 40      END IF;
+ 41  
+ 42      v_nome := REPLACE(REPLACE(REPLACE(p_nome, CHR(160), ' '), CHR(9), ' '), CHR(13), ' ');
+ 43      v_nome := REPLACE(v_nome, CHR(10), ' ');
+ 44      v_documento := somente_digitos(p_cgc_cpf);
+ 45  
+ 46      v_resultado := v_nome;
+ 47  
+ 48      -- Captura o bloco anterior a primeira letra.
+ 49      v_bloco_inicial := REGEXP_SUBSTR(v_nome, '^[0-9 .,/()-]*');
+ 50      v_digitos := somente_digitos(v_bloco_inicial);
+ 51  
+ 52      IF corresponde_documento(v_digitos) THEN
+ 53        v_resultado := SUBSTR(v_resultado, LENGTH(v_bloco_inicial) + 1);
+ 54        v_removeu := TRUE;
+ 55      END IF;
+ 56  
+ 57      -- Captura o bloco posterior a ultima letra, depois do ajuste inicial.
+ 58      v_bloco_final := REGEXP_SUBSTR(v_resultado, '[0-9 .,/()-]*$');
+ 59      v_digitos := somente_digitos(v_bloco_final);
+ 60  
+ 61      IF corresponde_documento(v_digitos) THEN
+ 62        v_resultado := SUBSTR(v_resultado, 1, LENGTH(v_resultado) - LENGTH(v_bloco_final));
+ 63        v_removeu := TRUE;
+ 64      END IF;
+ 65  
+ 66      IF NOT v_removeu THEN
+ 67        RETURN p_nome;
+ 68      END IF;
+ 69  
+ 70      v_resultado := REGEXP_REPLACE(TRIM(v_resultado), ' +', ' ');
+ 71  
+ 72      IF v_resultado IS NULL OR NOT REGEXP_LIKE(v_resultado, '[A-Za-z]') THEN
+ 73        RETURN p_nome;
+ 74      END IF;
+ 75  
+ 76      RETURN v_resultado;
+ 77    END;
+ 78  BEGIN
+ 79    SAVEPOINT AJUSTE_NOMES_INICIO;
+ 80  
+ 81    FOR r IN (
+ 82      SELECT CODPARC, NOMEPARC, RAZAOSOCIAL, CGC_CPF
+ 83        FROM TGFPAR
+ 84       WHERE CGC_CPF IS NOT NULL
+ 85         AND (NOMEPARC IS NOT NULL OR RAZAOSOCIAL IS NOT NULL)
+ 86       ORDER BY CODPARC
+ 87    ) LOOP
+ 88      DECLARE
+ 89        v_nome_novo  TGFPAR.NOMEPARC%TYPE;
+ 90        v_razao_nova TGFPAR.RAZAOSOCIAL%TYPE;
+ 91      BEGIN
+ 92        v_nome_novo  := nome_ajustado(r.NOMEPARC, r.CGC_CPF);
+ 93        v_razao_nova := nome_ajustado(r.RAZAOSOCIAL, r.CGC_CPF);
+ 94  
+ 95        IF textos_diferentes(r.NOMEPARC, v_nome_novo)
+ 96           OR textos_diferentes(r.RAZAOSOCIAL, v_razao_nova)
+ 97        THEN
+ 98          INSERT INTO BKP_AJNP_TGFPAR (
+ 99            ID_EXECUCAO, DH_EXECUCAO, USUARIO_EXECUCAO, CODPARC,
+100            NOMEPARC_ANTES, RAZAOSOCIAL_ANTES,
+101            NOMEPARC_DEPOIS, RAZAOSOCIAL_DEPOIS
+102          ) VALUES (
+103            c_id_execucao, SYSDATE, SYS_CONTEXT('USERENV', 'SESSION_USER'), r.CODPARC,
+104            r.NOMEPARC, r.RAZAOSOCIAL, v_nome_novo, v_razao_nova
+105          );
+106          v_backups := v_backups + 1;
+107  
+108          UPDATE TGFPAR
+109             SET NOMEPARC    = v_nome_novo,
+110                 RAZAOSOCIAL = v_razao_nova
+111           WHERE CODPARC = r.CODPARC;
+112          v_alterados := v_alterados + SQL%ROWCOUNT;
+113        END IF;
+114      END;
+115    END LOOP;
+116  
+117    IF v_alterados <> v_backups THEN
+118      RAISE_APPLICATION_ERROR(
+119        -20031,
+120        'Quantidade alterada (' || v_alterados ||
+121        ') difere dos backups (' || v_backups || ').'
+122      );
+123    END IF;
+124  
+125    COMMIT;
+126  
+127    DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO=' || c_id_execucao);
+128    DBMS_OUTPUT.PUT_LINE('BACKUPS=' || v_backups);
+129    DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS=' || v_alterados);
+130  EXCEPTION
+131    WHEN OTHERS THEN
+132      ROLLBACK TO AJUSTE_NOMES_INICIO;
+133      DBMS_OUTPUT.PUT_LINE('ERRO: ' || SQLERRM);
+134      RAISE;
+135  END;
+136  /
+ID_EXECUCAO=AJNP_20260910211518020
+BACKUPS=45
+REGISTROS_ALTERADOS=45
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [23/31] INICIO
+[23/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/23_Validar_Reabilitar_Objetos.sql"
+SQL> -- Ultima barreira: reabilita somente objetos que estavam ENABLED quando uma
+SQL> -- rotina desta revisao decidiu desabilita-los temporariamente.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE
+  2   v_status VARCHAR2(30);
+  3   v_pendentes PLS_INTEGER:=0;
+  4  BEGIN
+  5   FOR R IN (
+  6    SELECT DISTINCT ID_MASTER,ID_EXECUCAO,OBJECT_TYPE,OBJECT_NAME
+  7      FROM RMD_CONTROLE_OBJETOS
+  8     WHERE STATUS_ANTES='ENABLED'
+  9       AND NVL(STATUS_DEPOIS,'PENDENTE')<>'ENABLED'
+ 10   ) LOOP
+ 11    IF R.OBJECT_TYPE='TRIGGER' THEN
+ 12     SELECT STATUS INTO v_status FROM ALL_TRIGGERS
+ 13      WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ 14        AND TRIGGER_NAME=R.OBJECT_NAME;
+ 15     IF v_status<>'ENABLED' THEN
+ 16      EXECUTE IMMEDIATE 'ALTER TRIGGER '||DBMS_ASSERT.ENQUOTE_NAME(R.OBJECT_NAME,FALSE)||' ENABLE';
+ 17     END IF;
+ 18     SELECT STATUS INTO v_status FROM ALL_TRIGGERS
+ 19      WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ 20        AND TRIGGER_NAME=R.OBJECT_NAME;
+ 21     UPDATE RMD_CONTROLE_OBJETOS
+ 22        SET STATUS_DEPOIS=v_status,DH_REABILITACAO=SYSTIMESTAMP
+ 23      WHERE ID_MASTER=R.ID_MASTER
+ 24        AND ID_EXECUCAO=R.ID_EXECUCAO
+ 25        AND OBJECT_TYPE=R.OBJECT_TYPE AND OBJECT_NAME=R.OBJECT_NAME
+ 26        AND STATUS_ANTES='ENABLED';
+ 27     IF v_status<>'ENABLED' THEN
+ 28      v_pendentes:=v_pendentes+1;
+ 29      DBMS_OUTPUT.PUT_LINE('OBJETO_NAO_REABILITADO='||R.OBJECT_TYPE||':'||R.OBJECT_NAME);
+ 30     ELSE
+ 31      DBMS_OUTPUT.PUT_LINE('OBJETO_REABILITADO='||R.OBJECT_TYPE||':'||R.OBJECT_NAME);
+ 32     END IF;
+ 33    ELSE
+ 34     v_pendentes:=v_pendentes+1;
+ 35     DBMS_OUTPUT.PUT_LINE('TIPO_SEM_ROTINA_DE_REABILITACAO='||R.OBJECT_TYPE||':'||R.OBJECT_NAME);
+ 36    END IF;
+ 37   END LOOP;
+ 38   COMMIT;
+ 39   IF v_pendentes>0 THEN
+ 40    RAISE_APPLICATION_ERROR(-20500,'Existem objetos da revisao que nao foram reabilitados: '||v_pendentes);
+ 41   END IF;
+ 42   DBMS_OUTPUT.PUT_LINE('OBJETOS_DA_REVISAO_PENDENTES=0');
+ 43  END;
+ 44  /
+OBJETOS_DA_REVISAO_PENDENTES=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT Triggers desabilitadas preexistentes ou externas a revisao (informativo):
+Triggers desabilitadas preexistentes ou externas a revisao (informativo):
+SQL> SELECT TRIGGER_NAME,STATUS
+  2    FROM ALL_TRIGGERS
+  3   WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  4     AND STATUS<>'ENABLED'
+  5   ORDER BY TRIGGER_NAME;
+no rows selected
+SQL> PROMPT === FIM VALIDACAO DE REABILITACAO ===
+=== FIM VALIDACAO DE REABILITACAO ===
+SQL> PROMPT [24/31] INICIO
+[24/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/24_Padronizar_Parceiros.sql"
+SQL> -- Padroniza nomes e e-mails dos parceiros, com backup pontual por execucao.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE
+  2    v_existe NUMBER;
+  3    v_id VARCHAR2(30):='RMD_PAR_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  4    v_bkp NUMBER;
+  5    v_upd NUMBER;
+  6  BEGIN
+  7    SELECT COUNT(*) INTO v_existe FROM ALL_TABLES
+  8     WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_PAD_TGFPAR';
+  9    IF v_existe=0 THEN
+ 10      EXECUTE IMMEDIATE 'CREATE TABLE BKP_RMD_PAD_TGFPAR AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFPAR T WHERE 1=0';
+ 11    END IF;
+ 12    INSERT INTO BKP_RMD_PAD_TGFPAR
+ 13    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),P.* FROM TGFPAR P
+ 14     WHERE DECODE(RAZAOSOCIAL,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(RAZAOSOCIAL),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1
+ 15        OR DECODE(NOMEPARC,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEPARC),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1
+ 16        OR DECODE(EMAIL,LOWER(EMAIL),0,1)=1;
+ 17    v_bkp:=SQL%ROWCOUNT;
+ 18    UPDATE TGFPAR SET
+ 19      RAZAOSOCIAL=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(RAZAOSOCIAL),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),
+ 20      NOMEPARC=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEPARC),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),EMAIL=LOWER(EMAIL)
+ 21     WHERE DECODE(RAZAOSOCIAL,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(RAZAOSOCIAL),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1
+ 22        OR DECODE(NOMEPARC,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEPARC),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1
+ 23        OR DECODE(EMAIL,LOWER(EMAIL),0,1)=1;
+ 24    v_upd:=SQL%ROWCOUNT;
+ 25    IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20324,'Backup e atualizacao de TGFPAR divergiram.');END IF;
+ 26    COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd);
+ 27  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+ 28  /
+ID_EXECUCAO=RMD_PAR_20260910211519906; REGISTROS=1
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [25/31] INICIO
+[25/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/25_Padronizar_Produtos.sql"
+SQL> -- Padroniza descricoes de produtos, com backup pontual por execucao.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v_existe NUMBER;v_id VARCHAR2(30):='RMD_PRO_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');v_bkp NUMBER;v_upd NUMBER;
+  2  BEGIN
+  3   SELECT COUNT(*) INTO v_existe FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_PAD_TGFPRO';
+  4   IF v_existe=0 THEN EXECUTE IMMEDIATE 'CREATE TABLE BKP_RMD_PAD_TGFPRO AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFPRO T WHERE 1=0';END IF;
+  5   INSERT INTO BKP_RMD_PAD_TGFPRO SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),P.* FROM TGFPRO P WHERE DECODE(DESCRPROD,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRPROD),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1 OR DECODE(COMPLDESC,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(COMPLDESC),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_bkp:=SQL%ROWCOUNT;
+  6   UPDATE TGFPRO SET DESCRPROD=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRPROD),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),COMPLDESC=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(COMPLDESC),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') WHERE DECODE(DESCRPROD,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRPROD),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1 OR DECODE(COMPLDESC,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(COMPLDESC),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_upd:=SQL%ROWCOUNT;
+  7   IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20325,'Backup e atualizacao de TGFPRO divergiram.');END IF;COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd);EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+  8  /
+ID_EXECUCAO=RMD_PRO_20260910211520704; REGISTROS=18
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [26/31] INICIO
+[26/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/26_Padronizar_Tipos_Titulo.sql"
+SQL> -- Padroniza descricoes dos tipos de titulo, com backup pontual.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v_existe NUMBER;v_id VARCHAR2(30):='RMD_TIT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');v_bkp NUMBER;v_upd NUMBER;
+  2  BEGIN
+  3   SELECT COUNT(*) INTO v_existe FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_PAD_TGFTIT';
+  4   IF v_existe=0 THEN EXECUTE IMMEDIATE 'CREATE TABLE BKP_RMD_PAD_TGFTIT AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFTIT T WHERE 1=0';END IF;
+  5   INSERT INTO BKP_RMD_PAD_TGFTIT SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),T.* FROM TGFTIT T WHERE DECODE(DESCRTIPTIT,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRTIPTIT),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_bkp:=SQL%ROWCOUNT;
+  6   UPDATE TGFTIT SET DESCRTIPTIT=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRTIPTIT),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') WHERE DECODE(DESCRTIPTIT,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRTIPTIT),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_upd:=SQL%ROWCOUNT;
+  7   IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20326,'Backup e atualizacao de TGFTIT divergiram.');END IF;COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd);EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+  8  /
+ID_EXECUCAO=RMD_TIT_20260910211521517; REGISTROS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [27/31] INICIO
+[27/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/27_Padronizar_Cidades.sql"
+SQL> -- Padroniza nomes de cidades e descricoes dos Correios, com backup pontual.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v_existe NUMBER;v_id VARCHAR2(30):='RMD_CID_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');v_bkp NUMBER;v_upd NUMBER;
+  2  BEGIN
+  3   SELECT COUNT(*) INTO v_existe FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_PAD_TSICID';
+  4   IF v_existe=0 THEN EXECUTE IMMEDIATE 'CREATE TABLE BKP_RMD_PAD_TSICID AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TSICID T WHERE 1=0';END IF;
+  5   INSERT INTO BKP_RMD_PAD_TSICID SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),C.* FROM TSICID C WHERE DECODE(NOMECID,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMECID),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1 OR DECODE(DESCRICAOCORREIO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRICAOCORREIO),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_bkp:=SQL%ROWCOUNT;
+  6   UPDATE TSICID SET NOMECID=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMECID),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),DESCRICAOCORREIO=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRICAOCORREIO),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') WHERE DECODE(NOMECID,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMECID),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1 OR DECODE(DESCRICAOCORREIO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRICAOCORREIO),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_upd:=SQL%ROWCOUNT;
+  7   IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20327,'Backup e atualizacao de TSICID divergiram.');END IF;COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd);EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+  8  /
+ID_EXECUCAO=RMD_CID_20260910211522197; REGISTROS=438
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [28/31] INICIO
+[28/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/28_Padronizar_Tipos_Venda.sql"
+SQL> -- Padroniza descricoes dos tipos de venda, com backup pontual.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v_existe NUMBER;v_id VARCHAR2(30):='RMD_TPV_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');v_bkp NUMBER;v_upd NUMBER;
+  2  BEGIN
+  3   SELECT COUNT(*) INTO v_existe FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_PAD_TGFTPV';
+  4   IF v_existe=0 THEN EXECUTE IMMEDIATE 'CREATE TABLE BKP_RMD_PAD_TGFTPV AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,T.* FROM TGFTPV T WHERE 1=0';END IF;
+  5   INSERT INTO BKP_RMD_PAD_TGFTPV SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),T.* FROM TGFTPV T WHERE DECODE(DESCRTIPVENDA,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRTIPVENDA),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_bkp:=SQL%ROWCOUNT;
+  6   UPDATE TGFTPV SET DESCRTIPVENDA=REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRTIPVENDA),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') WHERE DECODE(DESCRTIPVENDA,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(DESCRTIPVENDA),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû','AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' '),0,1)=1;v_upd:=SQL%ROWCOUNT;
+  7   IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20328,'Backup e atualizacao de TGFTPV divergiram.');END IF;COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd);EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+  8  /
+ID_EXECUCAO=RMD_TPV_20260910211522902; REGISTROS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [29/31] INICIO
+[29/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/29_Padronizar_Bairros.sql"
+SQL> -- Regra historica Etapa de Revisao: manter o menor CODBAI por nome normalizado,
+SQL> -- redirecionar referencias e excluir os CODBAI obsoletos com mapa persistente.
+SQL> -- A tabela de backup define exatamente o conjunto que sera atualizado.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> DECLARE
+  2    v_id VARCHAR2(30):='RMD_BAI_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3    v_bkp NUMBER;v_upd NUMBER;v_col NUMBER;
+  4  BEGIN
+  5    INSERT INTO BKP_RMD_PAD_TSIBAI
+  6    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(B.ROWID),B.*
+  7    FROM TSIBAI B
+  8    JOIN (
+  9      SELECT RID FROM (
+ 10        SELECT RID,NOMEBAI,NORM,COUNT(*) OVER(PARTITION BY NORM) QTD_GRUPO FROM (
+ 11          SELECT ROWIDTOCHAR(ROWID) RID,NOMEBAI,
+ 12            REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+ 13              'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû',
+ 14              'AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') NORM
+ 15          FROM TSIBAI
+ 16        )
+ 17      ) WHERE QTD_GRUPO=1 AND DECODE(NOMEBAI,NORM,0,1)=1
+ 18    ) X ON X.RID=ROWIDTOCHAR(B.ROWID);
+ 19    v_bkp:=SQL%ROWCOUNT;
+ 20  
+ 21    MERGE INTO TSIBAI B USING (
+ 22      SELECT ROWID_ORIGINAL,
+ 23        REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+ 24          'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû',
+ 25          'AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') NORM
+ 26      FROM BKP_RMD_PAD_TSIBAI WHERE ID_EXECUCAO=v_id
+ 27    ) M ON (ROWIDTOCHAR(B.ROWID)=M.ROWID_ORIGINAL)
+ 28    WHEN MATCHED THEN UPDATE SET B.NOMEBAI=M.NORM;
+ 29    v_upd:=SQL%ROWCOUNT;
+ 30  
+ 31    IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20330,'Backup e atualizacao de TSIBAI divergiram.');END IF;
+ 32    SELECT COUNT(*) INTO v_col FROM (
+ 33      SELECT REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+ 34        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+ 35      FROM TSIBAI GROUP BY REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+ 36        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+ 37      HAVING COUNT(*)>1
+ 38    );
+ 39    COMMIT;
+ 40    DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDO_PARCIAL; ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd||'; GRUPOS_COLISAO_PRESERVADOS='||v_col);
+ 41  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;
+ 42  END;
+ 43  /
+STATUS=CONCLUIDO_PARCIAL; ID_EXECUCAO=RMD_BAI_20260910211523753; REGISTROS=40778; GRUPOS_COLISAO_PRESERVADOS=339
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [30/31] INICIO
+[30/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/30_Padronizar_Enderecos.sql"
+SQL> -- Regra historica Etapa de Revisao: manter o menor CODEND por TIPO e nome normalizado,
+SQL> -- redirecionar referencias e excluir os CODEND obsoletos com mapa persistente.
+SQL> -- A tabela de backup define exatamente o conjunto que sera atualizado.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> DECLARE
+  2    v_id VARCHAR2(30):='RMD_END_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3    v_bkp NUMBER;v_upd NUMBER;v_col NUMBER;
+  4  BEGIN
+  5    INSERT INTO BKP_RMD_PAD_TSIEND
+  6    SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(E.ROWID),E.*
+  7    FROM TSIEND E
+  8    JOIN (
+  9      SELECT RID FROM (
+ 10        SELECT RID,TIPO,NOMEEND,NORM,COUNT(*) OVER(PARTITION BY TIPO,NORM) QTD_GRUPO FROM (
+ 11          SELECT ROWIDTOCHAR(ROWID) RID,TIPO,NOMEEND,
+ 12            REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 13              'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû',
+ 14              'AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') NORM
+ 15          FROM TSIEND
+ 16        )
+ 17      ) WHERE QTD_GRUPO=1 AND DECODE(NOMEEND,NORM,0,1)=1
+ 18    ) X ON X.RID=ROWIDTOCHAR(E.ROWID);
+ 19    v_bkp:=SQL%ROWCOUNT;
+ 20  
+ 21    MERGE INTO TSIEND E USING (
+ 22      SELECT ROWID_ORIGINAL,
+ 23        REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 24          'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüçÃãÕõÂâÊêÎîÔôÛû',
+ 25          'AAAAAEEEEIIIIOOOOOUUUUCAAAAAEEEEIIIIOOOOOUUUUCAAAOOAAEIIOOUU')),' {2,}',' ') NORM
+ 26      FROM BKP_RMD_PAD_TSIEND WHERE ID_EXECUCAO=v_id
+ 27    ) M ON (ROWIDTOCHAR(E.ROWID)=M.ROWID_ORIGINAL)
+ 28    WHEN MATCHED THEN UPDATE SET E.NOMEEND=M.NORM;
+ 29    v_upd:=SQL%ROWCOUNT;
+ 30  
+ 31    IF v_bkp<>v_upd THEN RAISE_APPLICATION_ERROR(-20332,'Backup e atualizacao de TSIEND divergiram.');END IF;
+ 32    SELECT COUNT(*) INTO v_col FROM (
+ 33      SELECT TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 34        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+ 35      FROM TSIEND GROUP BY TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 36        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+ 37      HAVING COUNT(*)>1
+ 38    );
+ 39    COMMIT;
+ 40    DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDO_PARCIAL; ID_EXECUCAO='||v_id||'; REGISTROS='||v_upd||'; GRUPOS_COLISAO_PRESERVADOS='||v_col);
+ 41  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;
+ 42  END;
+ 43  /
+STATUS=CONCLUIDO_PARCIAL; ID_EXECUCAO=RMD_END_20260910211529101; REGISTROS=646110; GRUPOS_COLISAO_PRESERVADOS=6943
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [31/31] INICIO
+[31/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+SQL> -- Recompila objetos invalidos apenas quando a sessao possui o privilegio necessario.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> DECLARE
+  2    v_schema VARCHAR2(128):=SYS_CONTEXT('USERENV','CURRENT_SCHEMA');
+  3    v_usuario VARCHAR2(128):=SYS_CONTEXT('USERENV','SESSION_USER');
+  4    v_antes NUMBER;
+  5    v_depois NUMBER;
+  6    v_priv NUMBER;
+  7  BEGIN
+  8    SELECT COUNT(*) INTO v_antes FROM ALL_OBJECTS
+  9    WHERE OWNER=v_schema AND STATUS='INVALID';
+ 10  
+ 11    SELECT COUNT(*) INTO v_priv FROM SESSION_PRIVS
+ 12    WHERE PRIVILEGE='ALTER ANY PROCEDURE';
+ 13  
+ 14    IF v_antes=0 THEN
+ 15      DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDO; OBJETOS_INVALIDOS=0');
+ 16    ELSIF v_schema<>v_usuario AND v_priv=0 THEN
+ 17      DBMS_OUTPUT.PUT_LINE('STATUS=IGNORADO_SEM_PRIVILEGIO; OBJETOS_INVALIDOS='||v_antes
+ 18        ||'; USUARIO='||v_usuario||'; SCHEMA='||v_schema||'; PRIVILEGIO_NECESSARIO=ALTER ANY PROCEDURE');
+ 19    ELSE
+ 20      DBMS_UTILITY.COMPILE_SCHEMA(SCHEMA=>v_schema,COMPILE_ALL=>FALSE);
+ 21      SELECT COUNT(*) INTO v_depois FROM ALL_OBJECTS
+ 22      WHERE OWNER=v_schema AND STATUS='INVALID';
+ 23      DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDO; INVALIDOS_ANTES='||v_antes||'; INVALIDOS_DEPOIS='||v_depois);
+ 24    END IF;
+ 25  END;
+ 26  /
+STATUS=CONCLUIDO; OBJETOS_INVALIDOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> COLUMN OBJECT_TYPE FORMAT A24
+SQL> COLUMN OBJECT_NAME FORMAT A50
+SQL> SELECT OBJECT_TYPE,OBJECT_NAME
+  2  FROM ALL_OBJECTS
+  3  WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND STATUS='INVALID'
+  4  ORDER BY OBJECT_TYPE,OBJECT_NAME;
+no rows selected
+SQL> 
+SQL> PROMPT === FIM RECOMPILACAO OBJETOS INVALIDOS ===
+=== FIM RECOMPILACAO OBJETOS INVALIDOS ===
+SQL> PROMPT ONDA_18_30_FIM
+ONDA_18_30_FIM
+SQL> SPOOL OFF

@@ -1,0 +1,45 @@
+{
+  "executado_em": "2026-09-25T09:16:41-03:00",
+  "chave_origem": "KEYCHAIN",
+  "chave_exibida": false,
+  "operacao_somente_leitura": true,
+  "etapa": "PROBE",
+  "base_url": "https://analytics2.mitrasheet.com:4437",
+  "project_id": 51233,
+  "rede": {
+    "host": "analytics2.mitrasheet.com",
+    "porta": 4437,
+    "dns": "168.75.67.146",
+    "tls": "TLSv1.3",
+    "cert_cn": "mitrasheet.com",
+    "status": "REDE_OK",
+    "duracao_ms": 87
+  },
+  "execute_server_function": {
+    "url": "https://analytics2.mitrasheet.com:4437/interactions/executeServerFunction",
+    "http_status": 403,
+    "erro_transporte": null,
+    "duracao_ms": 64,
+    "corpo_enviado": {
+      "projectId": 51233,
+      "serverFunctionId": 10169,
+      "input": {
+        "limite": 5,
+        "somenteComEscopo": false
+      }
+    },
+    "chaves_resposta": "NoneType",
+    "resposta": null
+  },
+  "records_sondagem": {
+    "url": "https://analytics2.mitrasheet.com:4437/interactions/records",
+    "http_status": 403,
+    "erro_transporte": null,
+    "duracao_ms": 59,
+    "corpo_enviado": {
+      "projectId": 51233
+    },
+    "resposta": null
+  },
+  "status": "API_RESPONDEU_COM_RESTRICAO"
+}

@@ -1,0 +1,25 @@
+{
+  "base_rotulo_operacional": "CASA DAS ESSENCIAS",
+  "origem_rotulo": "derivado do service name CASADASESSENCIASPRD e confirmado por TSIEMP; nome informado no handoff estava ausente",
+  "escopo": "BASE_INTEIRA",
+  "conexao": {"hostname": "10.100.86.2", "port": 1521, "servicename": "CASADASESSENCIASPRD.SANKHYACLOUD.COM.BR", "username": "FRANCISCO_JUNIOR", "senha_em_arquivo": false},
+  "identidade": {"session_user": "FRANCISCO_JUNIOR", "current_schema": "SANKHYA", "service_name": "casadasessenciasprd.sankhyacloud.com.br", "db_name": "CASADASESSENCIASPRD", "service_compativel": true, "oracle_version": "Oracle Database 19c EE High Perf Release 19.0.0.0.0 - Production", "executado_em_utc": "2026-09-23T12:48:18.699007+00:00"},
+  "empresas_tsiemp": [
+    {"codemp": 1, "razao_social": "COMERCIO DE OLEOS E ESSENCIAS SILVEIRA M"},
+    {"codemp": 2, "razao_social": "POLYSTAR COMERCIO DE ESSENCIAS LTDA"},
+    {"codemp": 3, "razao_social": "COMERCIO DE OLEOS E ESSENCIAS SILVEIRA M"}
+  ],
+  "plano_local": {"status": "PLANO_LOTE_VALIDADO", "sha256_suite": "7290fd66a7bfad273dfec6554f2cd5672e2a12738abf0472d3b7aebe3155abb9", "qtd_instrucoes": 1085, "qtd_bloqueios": 0, "qtd_avisos": 1, "aviso": "COMMIT_INTERNO em Revisao Master Deploy/17_Normalizar_Unidades.sql linha 306", "dml_ddl_executado": false},
+  "privilegios_quota": {"qtd_privilegios_retornados": 24, "alter_any_procedure_presente": false, "quota_linhas_retornadas": 0, "observacao": "USER_TS_QUOTAS sem linhas nesta sessão; quota é diagnóstico e não gate universal."},
+  "objetos_invalidos": {"qtd": 43, "tipo": "FUNCTION", "owner": "SANKHYA", "erros_all_errors_por_objeto": 0, "recompilacao_executada": false},
+  "objetos_revisao_anteriores": {"qtd": 0, "dml_executado": false, "ddl_executado": false},
+  "card09": {"PREFLIGHT_EXECUTADO": true, "MAPA_CRIADO": false, "MAPA_VALIDADO": false, "INSERT_AUTORIZADO": false, "POS_VALIDACAO_CONCLUIDA": false, "BASE_TOTAL": 15, "REGISTROS_TGFNFE_DOS_CANDIDATOS": 0, "CANDIDATOS_COM_MULTIPLOS_XML": 0, "CANDIDATOS_SEM_XML": 15, "APTO_PARA_VALIDACAO_FINAL_NOTAS": 0, "APTO_PARA_VALIDACAO_FINAL_LINHAS_MAPA": 0, "STATUS_SEM_VDUP_XML": 15, "TGFNUM_TGFFIN_LINHAS": 1, "TGFNUM_TGFFIN_ULTCOD": 110648, "fonte": "TGFNFE.XML/XMLTABLE; função auxiliar não utilizada"},
+  "volumetria_integridade": {"FINANCEIROS_SEM_NOTA": 0, "ITENS_SEM_CABECALHO": 0, "CABECALHOS_SEM_ITENS": 22, "CODIGOS_FISCAIS_CIDADES_DUPLICADOS": 0, "dml_executado": false, "ddl_executado": false, "gate_pdf": "BLOQUEADO; CABECALHOS_SEM_ITENS=22"},
+  "onboarding": {"fonte_primaria": "NAO_DISPONIVEL_NA_SESSAO_ATUAL", "comparacao_empresas": "PENDENTE_FONTE_ONBOARDING", "comparacao_usuarios": "PENDENTE_FONTE_ONBOARDING", "snapshot_oracle": {"EMPRESAS_TSIEMP": 3, "USUARIOS_TSIUSU_TOTAL": 11, "USUARIOS_TSIUSU_COM_GRUPO": 0, "USUARIOS_MODELO_SEM_GRUPO": 11, "CONTAS_TSICTA": 5, "VENDEDORES_TGFVEN": 36, "GRUPOS_TGFGRU": 1, "CENTROS_TSICUS": 1, "NATUREZAS_TGFNAT": 210, "LOCAIS_TGFLOC": 1, "SMTP_GLOBAL_METADADO": 1, "SMTP_EMPRESAS_CONFIGURADO": 0}, "dml_executado": false, "ddl_executado": false},
+  "erros_diagnosticos_preservados": [
+    {"arquivo": "03_Objetos_Revisao_Anteriores_READONLY.sql", "erro": "ORA-01425: escape character must be character string of length 1", "corrigido": true},
+    {"arquivo": "04_Card09_Resumo_READONLY.sql", "erro": "ORA-00904: FNC_BUSCA_TAG_XML_GERAL: invalid identifier", "corrigido": true, "correcao": "diagnóstico direto em TGFNFE.XML/XMLTABLE"},
+    {"arquivo": "query inicial", "erro": "Driver ausente ao usar python3 do sistema", "corrigido": true, "correcao": "uso de .venv/bin/python"}
+  ],
+  "fontes": ["7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql", "7 - QA2/Revisao Master Deploy/Automacao/README_ORACLE_DIRETO.md", "7 - QA2/Revisao Master Deploy/GUIA_PADRONIZACAO_EXECUCAO_IA.md", "Preflight/00_Identidade_Versao_READONLY.sql", "Preflight/01_Privilegios_Quota_READONLY.sql", "Preflight/02_Objetos_Invalidos_READONLY.sql", "Preflight/03_Objetos_Revisao_Anteriores_READONLY.sql", "Preflight/04_Card09_Resumo_READONLY.sql", "Preflight/05_Volumetria_Integridade_READONLY.sql", "Preflight/06_Onboarding_Snapshot_READONLY.sql", "Preflight/07_Objetos_Invalidos_Erros_READONLY.sql"]
+}

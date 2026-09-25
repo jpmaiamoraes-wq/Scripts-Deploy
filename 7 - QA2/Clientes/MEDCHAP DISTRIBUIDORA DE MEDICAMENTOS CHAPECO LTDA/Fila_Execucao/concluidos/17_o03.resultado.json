@@ -1,0 +1,12 @@
+{
+  "pedido": "17_o03.json",
+  "inicio_local": "2026-09-25T09:33:18-03:00",
+  "id": "MEDCHAP_O03_20260925_01",
+  "tipo": "query",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/O03_Contas_Bancarias_Mascarado_20260925.json",
+  "log_lote": null,
+  "fim_local": "2026-09-25T09:33:19-03:00",
+  "duracao_s": 0.8
+}

@@ -1,0 +1,279 @@
+RELATÓRIO TÉCNICO - REVISÃO MASTER DEPLOY
+
+Base: D-COMMERCE LTDA
+Serviço: INFLOWSOFAPRD.SANKHYACLOUD.COM.BR
+Schema: SANKHYA
+Usuário da execução: FRANCISCO_JUNIOR
+Gerente de Projetos: Adirvanildo da Silva Pinto
+Execução principal: 11/09/2026
+Tratamento das atividades 29/30 e abertura do chamado: 14/09/2026
+Status do documento: PRÉVIA PARA CONFERÊNCIA - NÃO É O PDF FINAL
+
+==================== QUEBRA DE PÁGINA ====================
+
+RESUMO EXECUTIVO
+
+Esta prévia consolida os resultados comprovados da Revisão Master Deploy da base D-COMMERCE LTDA, incluindo as etapas 01 a 31, o tratamento regular do Card 09, o merge controlado das colisões de bairros e endereços, os objetos técnicos de auditoria e os roteiros de reversão.
+
+As etapas 01 a 30 possuem resultado comprovado no log ou em validações posteriores. As atividades 29 e 30 foram concluídas após o merge controlado, a correção complementar por FKs reais e a exclusão protegida dos pais obsoletos. A atividade 31 não foi recompilada por falta do privilégio ALTER ANY PROCEDURE; as 31 funções inválidas foram encaminhadas no chamado Sankhya Cloud #70801.
+
+O Card 09 foi tratado após a validação da função FNC_BUSCA_TAG_XML_GERAL. Foram identificadas 998 notas sem financeiro, 829 candidatas com duplicata e vencimento válidos, 169 sem duplicata para análise e nenhum XML inválido. Foram inseridos e validados 829 registros em TGFFIN.
+
+O relatório apresenta o resultado técnico da revisão, os tratamentos aplicados, as estruturas auxiliares utilizadas, os mecanismos de reversão e o ciclo de desmobilização dos objetos temporários.
+
+A conferência read-only do onboarding foi executada antes desta prévia. As divergências cadastrais comprovadas estão descritas na seção 9, sem alteração automática da base.
+
+1. RESULTADO EXECUTIVO DA REVISÃO
+
+- Etapas 01 a 28: concluídas conforme o último status comprovado no log.
+- Atividades 29 e 30: concluídas após merge controlado, correção complementar por FK e exclusão protegida dos códigos obsoletos.
+- Atividade 31: encaminhada por falta de privilégio; 31 funções inválidas relacionadas no chamado #70801.
+- Card 09 / atividade regular 32: concluído para os candidatos aptos; 829 financeiros inseridos e auditados.
+- Onboarding: conferência read-only concluída; divergências cadastrais comprovadas registradas na seção 9, sem alterações automáticas.
+- Backup e reversão: preservados para as rotinas mutáveis; o rollback de 29/30 e o rollback do Card 09 permanecem disponíveis.
+
+2. VOLUMETRIA E ESCOPO DOS CARDS DO DASHBOARD DEPLOY AGENT
+
+O dashboard Deploy Agent foi utilizado como estrutura de acompanhamento da revisão. A tabela consolida o escopo técnico de cada card e a orientação de leitura para a fase de refinamento. O Card 09 possui resultado quantitativo detalhado na seção seguinte.
+
+Card | Indicador | Escopo técnico e orientação para o refinamento
+01 | Financeiro | Títulos extraídos dos artefatos processados e conferência dos reflexos financeiros.
+02 | Entradas e Saídas | Visão por tipo de movimento e TOP para validação funcional.
+03 | Produtos por USOPROD | Classificação de produtos e serviços por tipo de uso.
+04 | Produtos por Grupo | Grupos recebidos no onboarding e associação dos produtos.
+05 | Referências Duplicadas | Investigação de reaproveitamento, obsolescência, equivalência e regra de negócio.
+06 | Descrições Duplicadas | Investigação de descrições repetidas pelos critérios complementares de identificação.
+07 | CNPJ/CPF Repetidos | Avaliação de parceiros com documento repetido e variações cadastrais.
+08 | Financeiros sem Nota | Conferência de títulos sem documento de origem e tratamento funcional dos casos encontrados.
+09 | Notas sem Financeiro | Separação de `<Dup>`/`<dVenc>` válidos, casos sem `<Dup>` e XML incompleto, conforme detalhamento da seção 3.
+10 | Produtos Vendidos | Avaliação de saídas sem entrada correspondente, equivalências e duplicidades.
+11 | Produtos com Custo Zero | Avaliação de linhas de custo com valor zerado.
+12 | Produtos sem Custo | Avaliação de produtos sem linha correspondente na TGFCUS.
+13 | Itens sem Cabeçalho | Conferência da integridade entre itens e documentos.
+14 | Cabeçalho sem Itens | Conferência da integridade entre documentos e itens.
+15 | Cidades Duplicadas | Avaliação de duplicidades cadastrais e reflexos nas referências de endereço.
+16 | Classificação Fiscal | Avaliação de divergências conforme os dados cadastrais.
+17 | Itens sem Tabela de Preço | Avaliação de itens sem saída elegível para preço.
+18 | Itens com Descrições Similares | Investigação de similaridade relevante para refinamento.
+19 | CNPJ Matrizes | Agrupamento de pessoas jurídicas pelo radical de CNPJ e definição da matriz.
+20 | Produtos Comprados | Interpretação de entradas sem saída conforme o uso do produto.
+21 | Regras Tributárias Inseridas | Conferência das regras tributárias cadastradas pelo Deploy Agent.
+
+3. CARD 09 - NOTAS SEM FINANCEIRO
+
+Situação comprovada no preflight:
+
+- Total de notas sem financeiro: 998.
+- Candidatas com `<Dup>` e `<dVenc>` válidos: 829.
+- Registros sem `<Dup>` para análise funcional: 169.
+- XML inválido: 0.
+- Função de leitura XML: `FNC_BUSCA_TAG_XML_GERAL`, validada sem erros em `ALL_ERRORS`.
+
+Tratamento executado:
+
+- ID_EXECUCAO: `DCOMMERCE_20260911_FDUP_01`.
+- Mapa de condições de pagamento: `BKP_RMD_FDUP_DCOM_20260911_PPG`.
+- Auditoria das inclusões: `BKP_RMD_FDUP_DCOM_20260911_INS`.
+- Financeiros inseridos: 829.
+- Registros criados em TGFFIN: 829.
+- TGFNUM: sequência aguardada e validada após a conclusão.
+- Reversão: `Reverter_32B_Insert_Direto_Financeiro_DUP.sql` e `Reverter_32_Notas_Sem_Financeiro_DUP.sql`.
+
+Interpretação: os 169 registros sem duplicata não foram incluídos automaticamente e permanecem para análise funcional. Não foi realizado INSERT avulso sem mapa e auditoria.
+
+4. TABELA TÉCNICA DAS ETAPAS 01 A 31
+
+Etapa | Propósito | Último status comprovado e resultado
+01 | Preparar o controle de objetos temporariamente desabilitados. | Concluída; `RMD_CONTROLE_OBJETOS` criado/utilizado e estado final validado.
+02 | Liberar filtros de portais. | Concluída; ID `RMD_PORT_20260911121644782`; 4 registros alterados.
+03 | Padronizar configurações DANFE das empresas. | Concluída; ID `RMD_DANF_20260911121645787`; 12 registros alterados.
+04 | Desativar custo nas TOPs de devolução elegíveis. | Concluída; ID `RMD_TOPC_20260911121646803`; 137 registros alterados.
+05 | Habilitar cálculo de giro dos produtos elegíveis. | Concluída; ID `RMD_GIRO_20260911121647815`; 25 registros alterados.
+06 | Zerar parcelas das condições de negociação selecionadas. | Concluída; ID `RMD_PARC_20260911121648869`; 17 registros alterados.
+07 | Preencher data de movimento ausente. | Concluída; ID `RMD_DTMV_20260911121649879`; 0 registros alterados.
+08 | Preencher protocolos de documentos legados. | Concluída; ID `RMD_PROT_20260911121651003`; 1.893 registros alterados.
+09 | Liberar itens de documentos legados preservando a trigger. | Concluída; ID `RMD_ITEM_20260911121652973`; 2.741 itens alterados.
+10 | Habilitar ICMS gerencial para produtos elegíveis. | Concluída; ID `RMD_ICMG_20260911121656716`; 34 registros alterados.
+11 | Habilitar ruptura de produtos. | Concluída; ID `RMD_RUPP_20260911121657685`; 35 registros alterados.
+12 | Habilitar ruptura por empresa quando houver segmentação. | Concluída; ID `RMD_RUPE_20260911121658338`; 0 empresas alteradas.
+13 | Configurar TOPs de giro e Gerente On-Line. | Concluída; ID `RMD_TOPG_20260911121659489`; 1.453 registros alterados.
+14 | Aplicar modelo da análise de giro 848. | Concluída; ID `RMD_G848_20260911121700735`; 1 configuração atualizada.
+15 | Desativar rastro de estoque sem controle aplicável. | Concluída; ID `RMD_RAST_20260911121701649`; 695 registros alterados.
+16 | Higienizar TSICFG com snapshot para reversão. | Concluída; ID `RMD_CFG_20260911121702807`; backup de 898 registros.
+17 | Normalizar unidades e relacionamentos. | Concluída; ID `RMD_UNID_20260911121927450`; backup de 15 registros e mapa `RMD_MAP_UNIDADES` preservado.
+18 | Ajustar preferências do Gerente On-Line. | Concluída; ID `RMD_GOL_20260911121932887`; backup persistente e configuração aplicada.
+19 | Definir parceiro matriz. | Concluída; ID `RMD_MAT_20260911121933698`; 7 parceiros ajustados.
+20 | Atualizar indicadores persistidos do dashboard. | Concluída; ID `RMD_CARD_20260911121934896`; 1 linha atualizada.
+21 | Classificar parceiros para ICMS. | Concluída; ID `CLASSICMS_20260911121936034`; 183 parceiros processados.
+22 | Ajustar números indevidos nos nomes de parceiros. | Concluída; ID `AJNP_20260911121938133`; 68 backups e 68 registros alterados.
+23 | Validar e reabilitar objetos da revisão. | Concluída; validação final executada.
+24 | Padronizar nomes e e-mails de parceiros. | Concluída; ID `RMD_PAR_20260911121940194`; 555 registros alterados.
+25 | Padronizar descrições e complementos de produtos. | Concluída; ID `RMD_PRO_20260911121941383`; 0 registros alterados.
+26 | Padronizar descrições dos tipos de título. | Concluída; ID `RMD_TIT_20260911121942710`; 0 registros alterados.
+27 | Padronizar nomes e descrições de cidades. | Concluída; ID `RMD_CID_20260911121943630`; 0 registros alterados.
+28 | Padronizar descrições dos tipos de venda. | Concluída; ID `RMD_TPV_20260911121944578`; 0 registros alterados.
+29 | Normalizar bairros, redirecionar referências e excluir obsoletos. | Concluída após merge; ID `DCOMMERCE_20260911_MERGE_01`; 419 bairros obsoletos excluídos, referências físicas remanescentes=0.
+30 | Normalizar endereços, redirecionar referências e excluir obsoletos. | Concluída após merge; mesmo ID; 7.095 endereços obsoletos excluídos, referências físicas remanescentes=0.
+31 | Diagnosticar e recompilar objetos inválidos. | Encaminhada por privilégio; 31 funções inválidas, usuário sem `ALTER ANY PROCEDURE`; chamado #70801.
+
+Etapa 32 | Identificar e tratar notas sem financeiro com `<Dup>` e `<dVenc>`. | Concluída para os candidatos aptos; 829 TGFFIN inseridos, 169 casos sem duplicata preservados para análise.
+
+5. ATIVIDADES 29/30 - MERGE, BACKUP E REVERSÃO
+
+- ID_EXECUCAO: `DCOMMERCE_20260911_MERGE_01`.
+- Mapa persistente: 419 códigos obsoletos de TSIBAI e 7.095 códigos obsoletos de TSIEND.
+- Dependências auditadas e atualizadas no merge: 59.708 registros.
+- Correção complementar por FKs reais: 0 registros adicionais, 0 exceções.
+- Backup de bairros: `BKP_RMD_MRG_DCOM_20260911_BAI`, 830 registros.
+- Backup de endereços: `BKP_RMD_MRG_DCOM_20260911_END`, 13.892 registros.
+- Dependências auditadas: `BKP_RMD_MRG_DCOM_20260911_DEP`.
+- Exceções: `BKP_RMD_MRG_DCOM_20260911_EXC`, 0 registros.
+- Exclusão controlada: 419 bairros e 7.095 endereços.
+- Pós-validação: referências físicas remanescentes=0 e pais obsoletos inexistentes.
+- Reversão: `29_30_Rollback_DCOMMERCE_20260911.sql`.
+
+6. OBJETOS CRIADOS OU PRESERVADOS E FINALIDADE
+
+Controle e mapas:
+
+- `RMD_CONTROLE_OBJETOS`: registra estado anterior e reabilitação dos objetos.
+- `RMD_MAP_UNIDADES`: mantém o mapa de conversão de unidades.
+- `RMD_REF_TSICFG_MODELO`: referência técnica da higienização de TSICFG.
+
+Backups das etapas iniciais:
+
+- `BKP_RMD_01_TSIPAR`, `BKP_RMD_02_TGFEMP`, `BKP_RMD_03_TGFTOP`, `BKP_RMD_04_TGFPRO`.
+- `BKP_RMD_05_TGFPRO`, `BKP_RMD_06_TGFTPV`, `BKP_RMD_07_TGFCAB`, `BKP_RMD_08_TGFITE`.
+- `BKP_RMD_09_TGFPRO`, `BKP_RMD_10_TGFPRO`, `BKP_RMD_11_TGFEMP`, `BKP_RMD_12_TGFTOP`.
+- `BKP_RMD_13_TSIIMP`, `BKP_RMD_14_TGFPRO`, `BKP_RMD_TSICFG`.
+
+Backups de unidades, preferências, parceiros, cards e padronizações:
+
+- `BKP_RMD_UNID_MAP`, `BKP_RMD_UNID_TGFPRO`, `BKP_RMD_UNID_TGFITE`, `BKP_RMD_UNID_TGFPAP`, `BKP_RMD_UNID_TGFCOI2`, `BKP_RMD_UNID_TGFGIR1`, `BKP_RMD_UNID_TGFVOL`.
+- `BKP_RMD_GOL_TSIPAR`, `BKP_RMD_GOL_TGFCGM`, `BKP_RMD_GOL_TGFCMV`.
+- `BKP_RMD_PAR_MATRIZ`, `BKP_RMD_CARD_TTKINDAGT`.
+- `BKP_CLASSICMS_TGFPAR`, `BKP_AJNP_TGFPAR`.
+- `BKP_RMD_PAD_TGFPAR`, `BKP_RMD_PAD_TGFPRO`, `BKP_RMD_PAD_TGFTIT`, `BKP_RMD_PAD_TSICID`, `BKP_RMD_PAD_TGFTPV`, `BKP_RMD_PAD_TSIBAI`, `BKP_RMD_PAD_TSIEND`.
+
+Merge 29/30:
+
+- `BKP_RMD_MRG_DCOM_20260911`: mapa obsoleto -> mantido.
+- `BKP_RMD_MRG_DCOM_20260911_BAI`: backup dos bairros.
+- `BKP_RMD_MRG_DCOM_20260911_END`: backup dos endereços.
+- `BKP_RMD_MRG_DCOM_20260911_DEP`: trilha das dependências alteradas.
+- `BKP_RMD_MRG_DCOM_20260911_EXC`: trilha de exceções.
+
+Card 09:
+
+- `BKP_RMD_FDUP_DCOM_20260911_PPG`: mapa das condições de pagamento.
+- `BKP_RMD_FDUP_DCOM_20260911_INS`: auditoria dos financeiros inseridos.
+- `FNC_BUSCA_TAG_XML_GERAL`: função validada para leitura das tags XML.
+
+O arquivo `Limpar_Objetos_Revisao.sql` compõe o ciclo de desmobilização final dos objetos temporários, a ser utilizado após o encerramento do refinamento e a preservação dos registros formais, relatórios, backups e comprovantes necessários à entrega.
+
+7. ÍNDICE DE REVERSÃO
+
+01: não aplicável; preparação e validação de controle.
+02: `Reverter_02_Liberar_Filtros_Portais.sql` - restaurar filtros dos portais.
+03: `Reverter_03_Padronizar_DANFE_Empresas.sql` - restaurar configurações DANFE.
+04: `Reverter_04_Desativar_Custo_TOP_Devolucao.sql` - restaurar custo das TOPs.
+05: `Reverter_05_Habilitar_Calculo_Giro_Produtos.sql` - restaurar cálculo de giro.
+06: `Reverter_06_Zerar_Parcelas_Tipos_Negociacao.sql` - restaurar parcelas.
+07: `Reverter_07_Preencher_Data_Movimento.sql` - restaurar datas de movimento.
+08: `Reverter_08_Preencher_Protocolos_Documentos_Legados.sql` - restaurar protocolos.
+09: `Reverter_09_Liberar_Itens_Documentos_Legados.sql` - restaurar situação dos itens.
+10: `Reverter_10_Habilitar_ICMS_Gerencial.sql` - restaurar parâmetros de ICMS.
+11: `Reverter_11_Habilitar_Ruptura_Produtos.sql` - restaurar ruptura de produtos.
+12: `Reverter_12_Habilitar_Ruptura_Empresas.sql` - restaurar ruptura empresarial.
+13: `Reverter_13_Configurar_TOPs_Giro_GOL.sql` - restaurar TOPs de giro.
+14: `Reverter_14_Configurar_Analise_Giro_848.sql` - restaurar análise 848.
+15: `Reverter_15_Desativar_Rastro_Sem_Controle.sql` - restaurar controle de rastro.
+16: `Reverter_16_Aplicar_Higienizacao_TSICFG.sql` - restaurar TSICFG.
+17: `Reverter_17_Normalizacao_Unidades.sql` - restaurar unidades e mapa.
+18: `Reverter_18_Preferencias_GOL.sql` - restaurar preferências GOL.
+19: `Reverter_19_Parceiro_Matriz.sql` - restaurar vínculos de matriz.
+20: `Reverter_20_Cards_Deploy.sql` - restaurar indicadores do dashboard.
+21: `Reverter_21_Classificacao_ICMS_Parceiros.sql` - restaurar classificação ICMS.
+22: `Reverter_22_Ajuste_Nomes_Parceiros.sql` - restaurar nomes dos parceiros.
+23: não aplicável; validação e reabilitação sem alteração de dados própria.
+24: `Reverter_24_Padronizacao_Parceiros.sql` - restaurar textos da TGFPAR.
+25: `Reverter_25_Padronizacao_Produtos.sql` - restaurar descrições de produtos.
+26: `Reverter_26_Padronizacao_Tipos_Titulo.sql` - restaurar descrições de títulos.
+27: `Reverter_27_Padronizacao_Cidades.sql` - restaurar nomes das cidades.
+28: `Reverter_28_Padronizacao_Tipos_Venda.sql` - restaurar descrições dos tipos de venda.
+29: `Reverter_29_Padronizacao_Bairros.sql` e `29_30_Rollback_DCOMMERCE_20260911.sql` - restaurar a atividade 29 conforme o ID correto.
+30: `Reverter_30_Padronizacao_Enderecos.sql` e `29_30_Rollback_DCOMMERCE_20260911.sql` - restaurar a atividade 30 conforme o ID correto.
+31: não aplicável; recompilação não realizada por falta de privilégio.
+32: `Reverter_32A_Mapear_Insert_Direto_Financeiro_DUP.sql`, `Reverter_32B_Insert_Direto_Financeiro_DUP.sql` e `Reverter_32_Notas_Sem_Financeiro_DUP.sql` - remover somente o conjunto auditado.
+
+8. OBJETOS INVÁLIDOS E CHAMADO #70801
+
+A atividade 31 identificou 31 funções inválidas no schema SANKHYA. A conexão FRANCISCO_JUNIOR não possui o privilégio ALTER ANY PROCEDURE. O chamado #70801 solicita análise de dependências, erros de compilação e recompilação/correção pelo time com privilégio adequado.
+
+ACL_GET_ALIQPART
+FSP_DATA_DIA_UTIL
+FSP_RETURN_DATAS_UTEIS
+F_OBTEMPRECO_DATA
+F_OBTEM_SALDO_INDENIZ
+GET_CODPROD_REF
+GET_INDICE_AJUSTE_NOTA
+GET_PREVISAO_CREDITO_DEBITO
+GET_PROXIMO_DIA_UTIL
+QTDEVOLPADRAO
+QTDEVOLPADRAO2
+SNK_GETCODPRODALT
+SNK_GETDTBAIXABEM
+SNK_GETMESESSEMPIS
+SNK_GETPRODUTOAGRUPADOGIRO
+SNK_GETVLRREA
+SNK_GET_CENTROCUSTO_EFD
+SNK_GET_CFO_NOTA
+SNK_GET_CODCFO
+SNK_GET_CODIGO_PRODUTO
+SNK_GET_CONTACONTABIL_EFD
+SNK_GET_CONTACONTABIL_IMOB_EFD
+SNK_GET_CTACTB_CADASTROS_EFD
+SNK_GET_ICMS_ESPECIAL_CAB
+SNK_GET_INDITENS
+SNK_GET_NUNOTA
+SNK_GET_SATUSCONFERENCIA
+SNK_GET_ST_RECUPERAR
+SNK_MATGIR_GET_MULTCPA
+SNK_MATGIR_GET_QTDTOTALMULTCPA
+SNK_PRECO
+
+9. CONFERÊNCIA READ-ONLY DO ONBOARDING
+
+Fonte da conferência: pasta do cliente em `8. Onboarding Deploy`, priorizando os arquivos mais recentes disponíveis nas pastas `01 - Dados da Empresa`, `07 - SMTP` e `08 - Planilhas`.
+
+Método: comparação dos identificadores normalizados do onboarding com `TSIEMP`/`TSICID`, metadados SMTP de `TSIPAR` e registros de `TSICTA` e `TSIUSU`, sem DML/DDL, sem criação de tabelas auxiliares e sem exposição de credenciais.
+
+Resultado técnico:
+
+- Dados da empresa: 14 empresas no onboarding; 13 localizadas em `TSIEMP` com CNPJ, razão social e inscrição estadual compatíveis. O CNPJ `16.660.804/0001-57` — `RENTABENS PARTICIPACOES S.A` — não foi localizado em `TSIEMP`.
+- SMTP: o onboarding informa Gmail/`smtp.gmail.com:587` e TLS; `TSIPAR.MSDSMTPPROP` aponta para `email-smtp.us-east-1.amazonaws.com:587`, com remetente `noreply@sankhya.com.br`. A credencial permaneceu mascarada.
+- Contas bancárias: 48 contas preenchidas na planilha; 17 registros em `TSICTA`. Uma conta coincide integralmente; a segunda conta da empresa principal diverge em banco e agência; as demais não possuem correspondência completa nos campos consultados. Nenhuma alteração foi executada.
+- Usuários: 55 registros mapeados e 55 correspondências por e-mail retornadas na base. Os 55 registros estão com `CODGRUPO=0` e `CODEMP=1`; os grupos 1 a 17 e a abrangência por empresas previstos no onboarding ainda não estão refletidos em `TSIUSU`.
+- Demais planilhas: não foram localizados arquivos aplicáveis de vendedores/compradores, grupos de produtos, centros de resultado, naturezas ou locais de estoque; não foi inferida divergência sem fonte de onboarding.
+
+Artefato da conferência: `Onboarding_Status_20260914.md`.
+
+10. ARTEFATOS DE RASTREABILIDADE
+
+- Log principal: `7 - QA2/Clientes/D-COMMERCE LTDA/Logs/Revisao_Master_20260911_121110.log`.
+- Resumo do Master: `7 - QA2/Clientes/D-COMMERCE LTDA/Logs/Revisao_Master_20260911_121110.resumo.md`.
+- Status Card 09: `7 - QA2/Clientes/D-COMMERCE LTDA/Card09_Status_20260911.md`.
+- Status das atividades 29/30: `7 - QA2/Clientes/D-COMMERCE LTDA/Colisoes_29_30_Status_20260911.md`.
+- Script de correção FK: `29_30_Corrigir_Referencias_FK_Antifragil.sql`.
+- Script de exclusão protegida: `29_30_Excluir_Pais_Obsoletos_DCOMMERCE.sql`.
+- Rollback 29/30: `29_30_Rollback_DCOMMERCE_20260911.sql`.
+- Roteiro genérico da conferência de onboarding: `7 - QA2/Revisao Master Deploy/Verificacao_Onboarding_ReadOnly.sql`.
+- Resultado da conferência de onboarding: `Onboarding_Status_20260914.md`.
+- Rollbacks das etapas: `7 - QA2/Clientes/D-COMMERCE LTDA/Artefatos_Revisao/Rollback/`.
+- Pasta de publicação no Google Drive: a informar após a aprovação e publicação.
+
+11. CONSIDERAÇÃO FINAL DA PRÉVIA
+
+A revisão da base D-COMMERCE LTDA foi concluída tecnicamente nas etapas executadas, com tratamento das colisões 29/30, backups persistentes, reversões disponíveis, regularização controlada de 829 registros financeiros e formalização do chamado #70801 para as 31 funções inválidas.
+
+Os artefatos auxiliares permanecem rastreáveis durante a fase de refinamento. Após o encerramento do projeto e a confirmação de que não há necessidade de auditoria ou reversão, a deleção final dos objetos temporários deverá ser realizada pelo roteiro `Limpar_Objetos_Revisao.sql`, preservando os registros formais de execução, os relatórios e os comprovantes necessários à entrega.

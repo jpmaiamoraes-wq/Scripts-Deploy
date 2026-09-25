@@ -1,0 +1,43 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T13:03:17.835640+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Caracteres/C04_Teste_Dicionario.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 6,
+  "colunas": [
+    "ITEM",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "ITEM": "TSIEND_GONCALVES",
+      "QTD": 4660
+    },
+    {
+      "ITEM": "TSIEND_GONCALVES_ACENTO",
+      "QTD": 0
+    },
+    {
+      "ITEM": "TGFPAR_GONCALVES",
+      "QTD": 22
+    },
+    {
+      "ITEM": "TGFPAR_GONCALVES_ACENTO",
+      "QTD": 0
+    },
+    {
+      "ITEM": "TGFPAR_COM_ACENTO",
+      "QTD": 0
+    },
+    {
+      "ITEM": "TGFPRO_COM_ACENTO",
+      "QTD": 0
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

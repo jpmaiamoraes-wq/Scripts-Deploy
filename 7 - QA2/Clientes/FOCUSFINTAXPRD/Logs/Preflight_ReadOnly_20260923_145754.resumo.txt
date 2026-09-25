@@ -1,0 +1,26 @@
+PREFLIGHT_READ_ONLY FOCUSFINTAXPRD TS=20260923_145754
+prepare;rc=0
+P00_credential_status;inicio=2026-09-23T14:57:55-0300;fim=2026-09-23T14:57:55-0300;dur_s=0;rc=0
+P01_Versao_Identidade;inicio=2026-09-23T14:57:55-0300;fim=2026-09-23T14:57:55-0300;dur_s=0;rc=0
+P02_Privilegios_Roles;inicio=2026-09-23T14:57:55-0300;fim=2026-09-23T14:57:56-0300;dur_s=1;rc=0
+P03_Quota_Tablespace;inicio=2026-09-23T14:57:56-0300;fim=2026-09-23T14:57:57-0300;dur_s=1;rc=0
+P04_Identidade_Empresa_Variacoes;inicio=2026-09-23T14:57:57-0300;fim=2026-09-23T14:57:58-0300;dur_s=1;rc=0
+P05_Estado_Execucoes_Anteriores;inicio=2026-09-23T14:57:58-0300;fim=2026-09-23T14:57:58-0300;dur_s=0;rc=0
+P06A_Unidades_TGFVOL;inicio=2026-09-23T14:57:58-0300;fim=2026-09-23T14:57:59-0300;dur_s=1;rc=0
+P06B_Unidades_Candidatos_Automaticos;inicio=2026-09-23T14:57:59-0300;fim=2026-09-23T14:58:00-0300;dur_s=1;rc=0
+P06C_Unidades_Descricao_Maiusculas;inicio=2026-09-23T14:58:00-0300;fim=2026-09-23T14:58:00-0300;dur_s=0;rc=0
+P07_Etapas_18_22_Volumes;inicio=2026-09-23T14:58:00-0300;fim=2026-09-23T14:58:01-0300;dur_s=1;rc=0
+P08_Objetos_Obrigatorios_18_31;inicio=2026-09-23T14:58:01-0300;fim=2026-09-23T14:58:02-0300;dur_s=1;rc=0
+P09_Volumes_24_28;inicio=2026-09-23T14:58:02-0300;fim=2026-09-23T14:58:03-0300;dur_s=1;rc=0
+P10_Etapa29_Bairros_Colisoes;inicio=2026-09-23T14:58:03-0300;fim=2026-09-23T14:58:04-0300;dur_s=1;rc=0
+P11_Etapa30_Enderecos_Colisoes;inicio=2026-09-23T14:58:04-0300;fim=2026-09-23T14:58:08-0300;dur_s=4;rc=0
+P12_Etapa31_Invalidos_Privilegio;inicio=2026-09-23T14:58:08-0300;fim=2026-09-23T14:58:09-0300;dur_s=1;rc=0
+P13_Etapa31_Lista_Objetos_Invalidos;inicio=2026-09-23T14:58:09-0300;fim=2026-09-23T14:58:10-0300;dur_s=1;rc=0
+P14_Triggers_Status;inicio=2026-09-23T14:58:10-0300;fim=2026-09-23T14:58:11-0300;dur_s=1;rc=0
+P15_Triggers_Desabilitados;inicio=2026-09-23T14:58:11-0300;fim=2026-09-23T14:58:12-0300;dur_s=1;rc=0
+P16_Card09_Objetos;inicio=2026-09-23T14:58:12-0300;fim=2026-09-23T14:58:13-0300;dur_s=1;rc=0
+P17_Card09_TGFNUM_TGFFIN;inicio=2026-09-23T14:58:13-0300;fim=2026-09-23T14:58:14-0300;dur_s=1;rc=0
+P18_Onboarding_Usuarios_TSIUSU;inicio=2026-09-23T14:58:14-0300;fim=2026-09-23T14:58:15-0300;dur_s=1;rc=0
+V01_Volumetria_Inicial_JRXML;inicio=2026-09-23T14:58:15-0300;fim=2026-09-23T14:58:16-0300;dur_s=1;rc=0
+P19_Preflight_29_30;inicio=2026-09-23T14:58:16-0300;fim=2026-09-23T14:59:21-0300;dur_s=65;rc=0
+FIM 2026-09-23T14:59:21-0300

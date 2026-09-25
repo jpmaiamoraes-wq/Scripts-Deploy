@@ -1,0 +1,27 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:58:08.547811+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P11_Etapa30_Enderecos_Colisoes.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 2,
+  "colunas": [
+    "ITEM",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "ITEM": "TSIEND_TOTAL",
+      "QTD": 681767
+    },
+    {
+      "ITEM": "TSIEND_GRUPOS_COLISAO",
+      "QTD": 6943
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

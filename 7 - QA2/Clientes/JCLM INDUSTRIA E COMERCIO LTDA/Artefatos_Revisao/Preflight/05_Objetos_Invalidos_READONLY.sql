@@ -1,0 +1,8 @@
+-- Lista completa, um objeto por linha, dos INVALID no schema corrente.
+SELECT OBJECT_TYPE,
+       OBJECT_NAME,
+       STATUS
+  FROM ALL_OBJECTS
+ WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+   AND STATUS = 'INVALID'
+ ORDER BY OBJECT_TYPE, OBJECT_NAME;

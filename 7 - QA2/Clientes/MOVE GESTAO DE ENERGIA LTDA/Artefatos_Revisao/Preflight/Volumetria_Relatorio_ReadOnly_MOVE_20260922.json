@@ -1,0 +1,54 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T23:29:57.130855+00:00",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "fonte_jrxml": "Revisao Master Deploy/Base Relatorio de Entrega/REL_ENTEGA_NOVO_05.jrxml",
+  "sha256_jrxml": "07fde35d74a2d1e74ca2ab9f8222afebff782aab1709b078a1c494b02a2f8971",
+  "sha256_dashboard": "625927985aade05575c8ac99d97e1f7ac0f5b9796234a4669883a7eabfaa6c71",
+  "arquivo_sql": "Artefatos_Revisao/Preflight/Volumetria_REL_ENTEGA_NOVO_05_MOVE_READONLY.sql",
+  "sha256_sql": "a3842a215a332fd2a84948aab526cb24e18effa61d0c671d797e3aeaa22be8ef",
+  "alteracao_para_gate": "A queryString foi extraida do JRXML e ajustada somente para incluir ORDEM 16, 21, 22 e 23; permaneceram excluidas ORDEM 3, 10, 12 e 14 conforme o modelo.",
+  "qtd_linhas": 19,
+  "indicadores": [
+    {"ordem":1,"secao":"GERAL","indicador":"Total de notas/cabecalhos processados","qtd":13975},
+    {"ordem":2,"secao":"GERAL","indicador":"Total de itens processados","qtd":13953},
+    {"ordem":4,"secao":"FINANCEIRO","indicador":"Total de registros financeiros","qtd":13768},
+    {"ordem":5,"secao":"FINANCEIRO","indicador":"Contas a receber","qtd":13768},
+    {"ordem":6,"secao":"FINANCEIRO","indicador":"Contas a pagar","qtd":0},
+    {"ordem":16,"secao":"FINANCEIRO","indicador":"Financeiros sem nota","qtd":0},
+    {"ordem":17,"secao":"FINANCEIRO","indicador":"Notas sem financeiro","qtd":185},
+    {"ordem":7,"secao":"CADASTROS","indicador":"Total de produtos cadastrados","qtd":21},
+    {"ordem":8,"secao":"CADASTROS","indicador":"Total de parceiros cadastrados","qtd":135},
+    {"ordem":23,"secao":"CADASTROS","indicador":"Codigos fiscais de cidades duplicados","qtd":0},
+    {"ordem":9,"secao":"PRODUTOS","indicador":"Referencias duplicadas","qtd":0},
+    {"ordem":11,"secao":"PRODUTOS","indicador":"Descricoes duplicadas","qtd":1},
+    {"ordem":18,"secao":"PRODUTOS","indicador":"Produtos vendidos sem registro de entrada","qtd":3},
+    {"ordem":13,"secao":"PARCEIROS","indicador":"CNPJ/CPF repetidos","qtd":0},
+    {"ordem":15,"secao":"FISCAL","indicador":"Classificacao fiscal divergente","qtd":0},
+    {"ordem":19,"secao":"CUSTOS","indicador":"Produtos com custo zero","qtd":0},
+    {"ordem":20,"secao":"CUSTOS","indicador":"Produtos sem registro de custo","qtd":1},
+    {"ordem":21,"secao":"INTEGRIDADE","indicador":"Itens sem cabecalho","qtd":0},
+    {"ordem":22,"secao":"INTEGRIDADE","indicador":"Cabecalhos sem itens","qtd":0}
+  ],
+  "dashboard_complementar": {
+    "consulta": "Artefatos_Revisao/Preflight/Volumetria_Dashboard_Financeiros_Sem_Nota_READONLY.sql",
+    "linhas_resultado": 0,
+    "financeiros_sem_nota": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "integridade_gate": {
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 0,
+    "codigos_fiscais_cidades_duplicados": 0,
+    "pdf_gate_zero_volume_aprovado": true
+  },
+  "dml_executado": false,
+  "ddl_executado": false
+}

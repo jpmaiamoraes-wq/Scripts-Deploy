@@ -1,0 +1,168 @@
+{
+  "status": "CONFERENCIA_ONBOARDING_READ_ONLY_CONCLUIDA",
+  "base": "HIGIEPAM",
+  "escopo": "BASE_INTEIRA",
+  "consultado_em": "2026-09-21",
+  "fonte_site": {
+    "site": "https://20069-51233.build.mitralab.io/",
+    "tela": "Onboarding Deploy > HIGIEPAM > Ver Registros",
+    "registro": "HIGIEPAM",
+    "cnpj_principal": "27492179000106",
+    "status_projeto": "Concluído",
+    "arquivo_usuarios": {
+      "nome": "(MODELO SANKHYA) Usuarios.xlsx",
+      "tipo": "XLSX",
+      "enviado_em": "2026-09-15 11:38",
+      "qtd_linhas_dados": 17,
+      "arquivo_baixado_para_leitura": "Downloads/(MODELO SANKHYA) Usuarios__51233-1789472279075-yesgs80q.xlsx"
+    },
+    "empresas": [
+      {
+        "ordem": 1,
+        "nome_apresentado": "HIGIEPAM",
+        "cnpj": "27492179000106"
+      },
+      {
+        "ordem": 2,
+        "nome_apresentado": "L. PORFIRIO DOS SANTOS",
+        "cnpj": "36646530000159"
+      },
+      {
+        "ordem": 3,
+        "nome_apresentado": "CELAYA PAPEIS LTDA",
+        "cnpj": "59138402000108"
+      }
+    ],
+    "gerente_projetos": "ronan machado junior",
+    "gerente_projetos_email": "ronan.junior@sankhya.com.br"
+  },
+  "oracle": {
+    "consulta": "Logs/Consulta_Onboarding_Oracle_ReadOnly_20260921.log",
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "higiepamprd.sankhyacloud.com.br",
+    "db_name": "HIGIEPAMPRD",
+    "qtd_linhas_retorno": 20,
+    "qtd_empresas": 3,
+    "qtd_usuarios": 17,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "comparacao_empresas": {
+    "qtd_onboarding": 3,
+    "qtd_oracle": 3,
+    "cnpjs_onboarding_ausentes_no_oracle": [],
+    "cnpjs_oracle_adicionais": [],
+    "correspondencias": [
+      {
+        "cnpj": "27492179000106",
+        "codemp_oracle": 1,
+        "nome_site": "HIGIEPAM",
+        "razao_social_oracle": "GPD SOLUCOES EM LIMPEZA E MANUTENCAO LTD",
+        "status": "CNPJ_CORRESPONDENTE_NOME_APRESENTADO_DIFERENTE"
+      },
+      {
+        "cnpj": "36646530000159",
+        "codemp_oracle": 2,
+        "nome_site": "L. PORFIRIO DOS SANTOS",
+        "razao_social_oracle": "L PORFIRIO DOS SANTOS  LTDA",
+        "status": "CNPJ_CORRESPONDENTE_NOME_COM_VARIACAO_DE_APRESENTACAO"
+      },
+      {
+        "cnpj": "59138402000108",
+        "codemp_oracle": 3,
+        "nome_site": "CELAYA PAPEIS LTDA",
+        "razao_social_oracle": "CELAYA PAPEIS LTDA",
+        "status": "CORRESPONDENTE"
+      }
+    ],
+    "conclusao": "Os três CNPJs do onboarding foram localizados na base Oracle. A contagem de empresas não foi usada como gate de escopo."
+  },
+  "comparacao_usuarios": {
+    "criterio_oracle": "Somente TSIUSU.CODGRUPO > 0 entra na comparação ativa.",
+    "qtd_linhas_onboarding": 17,
+    "qtd_emails_onboarding_unicos": 7,
+    "qtd_usuarios_oracle_total": 17,
+    "qtd_usuarios_oracle_com_grupo": 0,
+    "qtd_usuarios_oracle_modelo_codgrupo_zero": 17,
+    "qtd_emails_onboarding_correspondentes_apenas_a_modelo": 6,
+    "qtd_emails_onboarding_ausentes_no_oracle": 1,
+    "qtd_linhas_onboarding_sem_correspondencia_ativa": 17,
+    "qtd_usuarios_oracle_ativos_adicionais": 0,
+    "usuarios_por_email": [
+      {
+        "email": "gessicapduarte20@gmail.com",
+        "nome_onboarding": "GESSICA",
+        "grupos_onboarding": [1, 2, 3, 4, 16, 17],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [11],
+        "oracle_codgrupo_modelo": [0],
+        "oracle_codemp_modelo": [1],
+        "status": "PRESENTE_APENAS_EM_MODELO_CODGRUPO_0"
+      },
+      {
+        "email": "alana_porfirio@hotmail.com",
+        "nome_onboarding": "ALANA",
+        "grupos_onboarding": [5, 6, 7, 8, 14],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [12],
+        "oracle_codgrupo_modelo": [0],
+        "oracle_codemp_modelo": [1],
+        "status": "PRESENTE_APENAS_EM_MODELO_CODGRUPO_0"
+      },
+      {
+        "email": "higiepam.rh@gmail.com",
+        "nome_onboarding": "PAULA",
+        "grupos_onboarding": [9],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [13],
+        "oracle_codgrupo_modelo": [0],
+        "oracle_codemp_modelo": [1],
+        "status": "PRESENTE_APENAS_EM_MODELO_CODGRUPO_0"
+      },
+      {
+        "email": "simone.higiepam@gmail.com",
+        "nome_onboarding": "SIMONE",
+        "grupos_onboarding": [10, 15],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [14],
+        "oracle_codgrupo_modelo": [0],
+        "oracle_codemp_modelo": [1],
+        "status": "PRESENTE_APENAS_EM_MODELO_CODGRUPO_0"
+      },
+      {
+        "email": "compras.higiepam@gmail.com",
+        "nome_onboarding": "PAULA",
+        "grupos_onboarding": [11],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [],
+        "oracle_codgrupo_modelo": [],
+        "oracle_codemp_modelo": [],
+        "status": "EMAIL_AUSENTE_NO_ORACLE"
+      },
+      {
+        "email": "almoxarifado.higiepam@gmail.com",
+        "nome_onboarding": "ELIZANDRO",
+        "grupos_onboarding": [12],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [15],
+        "oracle_codgrupo_modelo": [0],
+        "oracle_codemp_modelo": [1],
+        "status": "PRESENTE_APENAS_EM_MODELO_CODGRUPO_0"
+      },
+      {
+        "email": "higiepamfinanceiro@gmail.com",
+        "nome_onboarding": "MIKAELA",
+        "grupos_onboarding": [13],
+        "empresas_onboarding": [1, 2, 3],
+        "oracle_codusu_modelo": [16],
+        "oracle_codgrupo_modelo": [0],
+        "oracle_codemp_modelo": [1],
+        "status": "PRESENTE_APENAS_EM_MODELO_CODGRUPO_0"
+      }
+    ],
+    "conclusao": "Nenhum usuário Oracle atende ao critério CODGRUPO > 0. Não houve DML/DDL e nenhuma inclusão, exclusão ou alteração de usuário foi realizada."
+  },
+  "dml_executado": false,
+  "ddl_executado": false
+}

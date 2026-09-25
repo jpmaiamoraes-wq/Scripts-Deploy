@@ -1,0 +1,61 @@
+{
+  "status": "ENVIADO_ABERTO",
+  "rascunho_tecnico": "ENVIADO",
+  "base": "MOVE GESTAO DE ENERGIA LTDA",
+  "id_execucao": "RMD_RUN_20260922163852951",
+  "schema": "SANKHYA",
+  "usuario": "FRANCISCO_JUNIOR",
+  "service_name": "moveenergiaprd.sankhyacloud.com.br",
+  "versao_sistema": "4.36b151",
+  "evidencia_versao": "Artefatos_Revisao/Preflight/00_Versao_Sistema_MOVE_READONLY_20260923.json",
+  "quantidade_objetos_invalidos": 4,
+  "objetos": [
+    "FUNCTION:FSP_DATA_DIA_UTIL",
+    "FUNCTION:FSP_RETURN_DATAS_UTEIS",
+    "FUNCTION:GET_PREVISAO_CREDITO_DEBITO",
+    "FUNCTION:GET_PROXIMO_DIA_UTIL"
+  ],
+  "privilegio_ausente": "ALTER ANY PROCEDURE",
+  "evidencia_privilegio": "Logs/MOVE_MAS_20260922_163600.log:1171; preflight read-only informa alter_any_procedure_presente=false.",
+  "assunto": "MOVE GESTAO DE ENERGIA LTDA — Objetos nativos Oracle inválidos — Revisão Master Deploy",
+  "arquivo_rascunho": "Artefatos_Revisao/Preflight/31_Ticket_Objetos_Invalidos_Rascunho_20260923.md",
+  "organizacao_esperada": "MOVE GESTAO DE ENERGIA LTDA",
+  "organizacao_confirmada_no_portal": true,
+  "organizacao_selecionada_no_formulario": "MOVE GESTAO DE ENERGIA LTDA-83992",
+  "campos_formulario_planejados": {
+    "prioridade": "Normal",
+    "produto": "Cloud/SaaS",
+    "categoria": "Solicitação Cloud",
+    "motivo": "Personalizar Objeto de Banco de Dados",
+    "ambiente": "Produção",
+    "banco": "Oracle",
+    "anexos": []
+  },
+  "tickets_portal_checados": {
+    "confirmados_como_outras_bases": [
+      {"numero": 709492, "base": "INSTITUTO MOREIRA SALLES"},
+      {"numero": 706365, "base": "PRODUTOS MACALE LTDA"},
+      {"numero": 705666, "base": "ANDORINHA COMERCIAL"},
+      {"numero": 711178, "base": "VITRINI DIRETA (ACM BRASIL)"},
+      {"numero": 711939, "base": "HIGIEPAM"},
+      {"numero": 711447, "base": "JCLM INDUSTRIA E COMERCIO LTDA"}
+    ],
+    "ambiguos": [
+      {"numero": 708737, "estado": "Resolvido", "conteudo": "Lista os mesmos quatro objetos entre outros; sem base/organizacao/ID de execucao visiveis"},
+      {"numero": 708010, "estado": "Fechado", "conteudo": "Solicitacao generica de objetos invalidos; sem base/organizacao/ID de execucao visiveis"}
+    ],
+    "verificacao_ausencia_de_duplicidade_concluida": false,
+    "duplicidade_resolvida_por_confirmacao_do_usuario": "O usuario confirmou que o ticket da MOVE ainda nao havia sido aberto."
+  },
+  "portal_acessivel": true,
+  "ticket_enviado": true,
+  "numero": 712638,
+  "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/712638",
+  "status_ticket": "Aberto",
+  "enviado_em_utc_aproximado": "2026-09-23T11:57:11Z",
+  "anexos": [],
+  "bloqueio": null,
+  "observacao": "Os tickets antigos #708737 e #708010 nao identificavam base/organizacao na tela; o usuario confirmou que o ticket da MOVE ainda nao havia sido aberto antes do envio.",
+  "dml_executado": false,
+  "ddl_executado": false
+}

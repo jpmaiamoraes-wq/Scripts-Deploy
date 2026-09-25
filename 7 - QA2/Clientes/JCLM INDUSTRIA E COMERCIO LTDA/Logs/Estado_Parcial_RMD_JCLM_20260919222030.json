@@ -1,0 +1,47 @@
+{
+  "status": "BLOQUEADA_ATIVIDADE_17_BACKUP_MAPA_ORA01031",
+  "id_execucao_lote": "RMD_JCLM_20260919222030",
+  "id_master": "RMD_RUN_20260919211829041",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "quotas": [],
+  "atividades_concluidas_ate_16": [
+    "01_controle_e_02_filtros",
+    "03_padronizacao_danfe",
+    "04_desativar_custo_top_devolucao",
+    "05_calculo_giro",
+    "06_parcelas_tipos_negociacao",
+    "07_data_movimento",
+    "08_protocolos_legados",
+    "09_itens_legados",
+    "10_icms_gerencial",
+    "11_ruptura_produtos",
+    "12_ruptura_empresas_sem_elegiveis",
+    "13_configuracao_tops_giro",
+    "15_rastro_sem_controle",
+    "16_higienizacao_tsicfg"
+  ],
+  "atividade_14": {
+    "status": "PENDENTE_DIVERGENCIA_COM_ROLLBACK",
+    "evidencia": [
+      "Logs/Oracle_Direto_RMD_JCLM_20260919220130_Atv14_15.log",
+      "Artefatos_Revisao/Preflight/34A_Atividade14_Backup_READONLY.sql",
+      "Artefatos_Revisao/Preflight/34B_Atividade14_Origem_READONLY.sql"
+    ],
+    "backup_pos_rollback": 0,
+    "origem_codrel_848": 1
+  },
+  "atividade_17": {
+    "status": "PARADA_ANTES_DML_OPERACIONAL",
+    "erro": "ORA-01031 no INSERT do backup persistente BKP_RMD_UNID_MAP",
+    "objetos_criados": ["RMD_MAP_UNIDADES", "BKP_RMD_UNID_MAP"],
+    "objetos_operacionais_alterados": [],
+    "evidencia": "Artefatos_Revisao/Preflight/38_Atividade17_Estado_READONLY.sql"
+  },
+  "dml_executado": true,
+  "ddl_executado": true,
+  "log_oracle": "Logs/Oracle_Direto_RMD_JCLM_20260919222030_Atv17.log",
+  "proximas_atividades": "18_31_e_Card09_pendentes",
+  "nao_executar": "Nao repetir o Master nem prosseguir sem backup/mapa gravavel na atividade 17"
+}

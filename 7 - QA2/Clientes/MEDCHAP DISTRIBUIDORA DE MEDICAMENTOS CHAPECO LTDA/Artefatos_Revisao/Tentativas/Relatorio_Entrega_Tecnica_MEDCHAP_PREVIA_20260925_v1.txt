@@ -1,0 +1,299 @@
+# RELATÓRIO TÉCNICO - REVISÃO MASTER DEPLOY
+
+**Base:** MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA
+
+**Data de conclusão:** 25/09/2026
+
+**Gerente de Projetos:** Guilherme Santos Martins
+
+Revisão executada sobre a base inteira, com cópias de segurança, verificação posterior e reversão disponíveis para as atividades que alteraram dados.
+
+## Resumo executivo
+
+A revisão Master Deploy da base MEDCHAP foi executada sobre a base inteira, que reúne cinco empresas: a matriz MEDCHAP em Chapecó/SC, as filiais de Curitibanos/SC e São José dos Pinhais/PR, a PROWIN COMPANY LTDA e a SALUTH ADMINISTRADORA E LOCADORA DE BENS. As 31 atividades do Master foram concluídas sem erros, com cópias de segurança, verificação posterior e scripts de reversão para cada atividade que alterou dados. A padronização de bairros e endereços exigiu a consolidação controlada de registros duplicados (429 bairros e 7.283 endereços), com redirecionamento de 61.339 referências e nenhuma duplicidade remanescente.
+
+A volumetria atual retornou 1.201.301 cabeçalhos de nota, 4.176.842 itens, 1.329.720 registros financeiros, 11.492 produtos e 9.180 parceiros. Os quatro indicadores obrigatórios de integridade (financeiros sem nota, itens sem cabeçalho, cabeçalhos sem itens e códigos fiscais de cidades duplicados) retornaram zero. Não há notas sem financeiro no escopo do card 09, portanto nenhuma inclusão financeira foi necessária. Não há objetos Oracle inválidos.
+
+A conferência do onboarding confirmou as cinco empresas, os 93 usuários e as quatro contas bancárias informadas. Com base nela, a revisão corrigiu a empresa padrão de 12 usuários da filial de Curitibanos e o login de um usuário gravado com caractere corrompido. Permanece para o refinamento a configuração do servidor de e-mail (SMTP) informado pelo cliente.
+
+## Resultado técnico das atividades
+
+| Atividade | Propósito | Situação e resultado comprovado |
+|---|---|---|
+| 01 | Preparar o controle dos objetos temporariamente alterados pela revisão | Concluída. Tabela de controle criada; 9 registros de gatilhos controlados, todos restaurados ao estado original (habilitados). |
+| 02 | Liberar os filtros dos portais | Concluída. 4 registros alterados; 3 gatilhos de registro da TSIPAR desabilitados e reabilitados. |
+| 03 | Padronizar os parâmetros de DANFE das empresas | Concluída. 4 registros alterados. |
+| 04 | Desativar o cálculo de custo nas TOPs de devolução | Concluída. 136 registros alterados. |
+| 05 | Habilitar o cálculo de giro dos produtos | Concluída. 1.252 produtos alterados. |
+| 06 | Zerar parcelas dos tipos de negociação elegíveis | Concluída. 17 registros alterados. |
+| 07 | Preencher a data de movimento ausente | Concluída sem candidatos. 0 registros elegíveis. |
+| 08 | Preencher protocolos de documentos legados | Concluída. 748.602 registros alterados. |
+| 09 | Liberar itens de documentos legados | Concluída. 838.097 itens alterados, com restauração do estado dos gatilhos. |
+| 10 | Habilitar ICMS gerencial | Concluída. 8.973 registros alterados. |
+| 11 | Habilitar ruptura de produtos | Concluída. 8.974 registros alterados. |
+| 12 | Habilitar ruptura de empresas | Concluída sem candidatos. 0 empresas elegíveis. |
+| 13 | Configurar TOPs para giro e Gerente On-Line | Concluída com limitação conhecida. 1.447 registros alterados; mapeamento de TOPs com cobertura parcial aprovada. |
+| 14 | Configurar a análise de giro do relatório 848 | Concluída. 1 registro preservado em cópia de segurança e atualizado. |
+| 15 | Desativar rastreamento de lote sem controle adicional | Concluída. 1.025 registros alterados. |
+| 16 | Higienizar as configurações de tela (TSICFG) | Concluída. Cópia integral de 900 registros; 77 excluídos, 116 atualizados e 171 incluídos; 994 registros ao final. |
+| 17 | Normalizar unidades de medida | Concluída. Mapa com 117 registros; a unidade KIT foi consolidada na unidade KT (37 unidades ao final); nenhuma descrição em minúsculas. |
+| 18 | Ajustar preferências do Gerente On-Line e preparar cópias de segurança das atividades 18 a 30 | Concluída. TSIPAR 1, TGFCGM 4 e TGFCMV 1 registros ajustados; cópias de segurança preparadas. |
+| 19 | Ajustar o parceiro matriz | Concluída. 2 parceiros ajustados. |
+| 20 | Atualizar a configuração dos cards do Deploy Agent | Concluída. 1 card atualizado. |
+| 21 | Classificar o ICMS dos parceiros (vinculada ao card 16) | Concluída. 234 parceiros classificados; o card 16 passou de 231 para 0. |
+| 22 | Ajustar nomes de parceiros | Concluída. 30 registros alterados com cópia de segurança. |
+| 23 | Validar e reabilitar objetos temporariamente desabilitados | Concluída. Nenhum objeto da revisão pendente de reabilitação. Nove gatilhos que já estavam desabilitados antes da revisão permaneceram como estavam. |
+| 24 | Padronizar parceiros | Concluída. 2 registros padronizados. |
+| 25 | Padronizar produtos | Concluída. 9.473 registros padronizados. |
+| 26 | Padronizar tipos de título | Concluída sem candidatos. 0 registros. |
+| 27 | Padronizar cidades | Concluída sem candidatos. 0 registros. |
+| 28 | Padronizar tipos de venda | Concluída sem candidatos. 0 registros. |
+| 29 | Padronizar bairros e consolidar duplicidades | Concluída. 45.044 bairros padronizados; 429 bairros duplicados consolidados no código mantido; 414 nomes remanescentes padronizados; 0 duplicidades ao final. |
+| 30 | Padronizar endereços e consolidar duplicidades | Concluída. 646.114 endereços padronizados; 7.283 endereços duplicados consolidados no código mantido; 6.877 nomes remanescentes padronizados; 0 duplicidades ao final. |
+| 31 | Verificar objetos Oracle inválidos | Concluída. Nenhum objeto inválido; nenhum chamado necessário. |
+| 32 | Tratar notas sem financeiro (card 09) | Concluída sem candidatos aptos. Nenhuma nota no escopo; mapa vazio; nenhuma inclusão financeira. |
+| 33 | Corrigir caracteres corrompidos em cadastros essenciais (produtos, parceiros, vendedores e usuários) | Concluída. Varredura completa encontrou um único caso: o login de um usuário gravado com caractere inválido, corrigido por decisão registrada do responsável pela revisão, com cópia de segurança do registro. |
+| 34 | Ajustar a empresa padrão de usuários conforme o onboarding | Concluída. 12 usuários da filial de Curitibanos passaram da empresa 4 (PROWIN) para a empresa 2 (Curitibanos), com cópia de segurança dos registros. |
+
+## Tratamento das notas sem financeiro (card 09)
+
+O card identifica notas cujo tipo de operação atualiza o financeiro, mas que não possuem título correspondente. A análise foi feita pela leitura direta do XML das notas, limitada ao escopo do painel de volumetria, sem inclusão avulsa de financeiro.
+
+| Estado técnico | Quantidade |
+|---|---|
+| Ocorrências identificadas (base total) | 0 |
+| Aptas para validação final (APTO_PARA_VALIDACAO_FINAL) | 0 |
+| Sem duplicata no XML (SEM_VDUP_XML) | 0 |
+| Inclusões efetivadas na TGFFIN | 0 |
+| Saldo após a verificação posterior | 0 |
+
+O mapa de classificação foi criado e ficou vazio; o total de registros financeiros (1.329.720) e o contador de títulos financeiros (TGFNUM) não foram alterados. A verificação posterior confirmou zero notas no escopo, zero aptas e nenhum financeiro incluído.
+
+## Bairros e endereços (atividades 29 e 30)
+
+A padronização inicial alterou 45.044 bairros e 646.114 endereços e preservou os grupos que passariam a ter nomes idênticos (421 grupos de bairros e 6.943 de endereços). Esses grupos foram tratados em três fases controladas:
+
+| Fase | Resultado |
+|---|---|
+| Consolidação | Mapa de 7.712 códigos obsoletos para o código mantido (429 bairros e 7.283 endereços); cópia de segurança de todos os registros obsoletos; 61.339 referências redirecionadas e auditadas (61.209 na tabela de CEPs e 130 no cadastro de parceiros); 0 exceções. |
+| Exclusão dos registros obsoletos | 429 bairros e 7.283 endereços excluídos somente após verificação de referências zero em todas as tabelas físicas e chaves estrangeiras. |
+| Padronização dos nomes remanescentes | 414 bairros e 6.877 endereços padronizados, com cópia de segurança. |
+
+Situação final: 46.709 bairros e 683.232 endereços, nenhuma duplicidade e nenhum candidato remanescente. As referências antigas existentes em uma tabela de cópia de segurança pré-existente da base (BKP_TGFPAR_NOVO) foram preservadas sem alteração.
+
+## Cadastros essenciais e usuários (atividades 33 e 34)
+
+Caracteres corrompidos: foram verificados os nomes e descrições de produtos, parceiros, vendedores e usuários. Produtos, parceiros e vendedores não apresentaram caracteres corrompidos. Um único usuário tinha o login gravado com caractere inválido no lugar da letra "Ç" (JOAO.GON¿ALVES); o login foi corrigido para JOAO.GONCALVES, sem acento, conforme o padrão dos demais cadastros da base e por decisão registrada do responsável pela revisão. O usuário deve ser avisado do login corrigido.
+
+Empresa padrão dos usuários: a planilha do onboarding indicava 12 usuários da "FILIAL - CBS" (e-mails com final .cbs), cadastrados na empresa 4 (PROWIN COMPANY LTDA). Os arquivos SPED enviados pelo cliente com a identificação CBS pertencem ao CNPJ 00.577.604/0003-67, filial de Curitibanos/SC, que é a empresa 2 da base. Os 12 usuários passaram para a empresa 2. Os 11 usuários da filial de São José dos Pinhais já estavam corretamente na empresa 3.
+
+## Volumetria atual
+
+| Indicador | Quantidade |
+|---|---|
+| Total de notas/cabecalhos processados | 1.201.301 |
+| Total de itens processados | 4.176.842 |
+| Total de registros financeiros | 1.329.720 |
+| Contas a receber | 558.508 |
+| Contas a pagar | 771.212 |
+| Total de produtos cadastrados | 11.492 |
+| Total de parceiros cadastrados | 9.180 |
+| Referencias duplicadas | 2 |
+| Produtos envolvidos em referencias duplicadas | 59 |
+| Descricoes duplicadas | 90 |
+| Produtos envolvidos em descricoes duplicadas | 189 |
+| CNPJ/CPF repetidos | 0 |
+| Parceiros envolvidos em CNPJ/CPF repetido | 0 |
+| Classificacao fiscal divergente | 0 |
+| Financeiros sem nota | 0 |
+| Notas sem financeiro | 0 |
+| Produtos vendidos sem registro de entrada | 323 |
+| Produtos com custo zero | 8.247 |
+| Produtos sem registro de custo | 1.095 |
+| Itens sem cabecalho | 0 |
+| Cabecalhos sem itens | 0 |
+| Codigos fiscais de cidades duplicados | 0 |
+| Período de movimentação | De 14/09/2022 até 31/08/2026 |
+
+## Indicadores obrigatórios de integridade
+
+| Indicador | Quantidade | Situação |
+|---|---|---|
+| Financeiros sem nota (card 08) | 0 | Conforme |
+| Itens sem cabeçalho (card 13) | 0 | Conforme |
+| Cabeçalhos sem itens (card 14) | 0 | Conforme |
+| Códigos fiscais de cidades duplicados (card 15) | 0 | Conforme |
+
+Observação: existem 32 cabeçalhos do tipo de movimento Z, de 14/09/2022, sem itens; esse tipo é excluído do indicador por definição e não representa inconsistência.
+
+## Objetos inválidos e chamado
+
+A verificação da base não encontrou objetos Oracle inválidos. Não foi necessário abrir chamado no Sankhya Cloud.
+
+## Onboarding
+
+A conferência foi feita em modo somente leitura com o pacote completo baixado do Onboarding Deploy em 25/09/2026 (projeto MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA, onboarding revisado e concluído pelo cliente).
+
+Empresas: os cinco CNPJs do onboarding correspondem às empresas 1 a 5 da base, com inscrição estadual e UF conferidas. O onboarding classifica PROWIN COMPANY LTDA e SALUTH ADMINISTRADORA E LOCADORA DE BENS LTDA como filiais; na base elas estão corretamente cadastradas como empresas próprias (CNPJs de raízes diferentes). Nenhuma empresa foi incluída ou removida.
+
+Usuários: a planilha informa 93 usuários com grupo de acesso. Os 93 existem na base, com grupo de acesso correspondente (a planilha usa nomes resumidos, como "Callcenter" para CALL CENTER OPERACIONAL) e a mesma empresa, após os ajustes das atividades 33 e 34. Os 11 usuários sem grupo na base são usuários de sistema e integração, fora da comparação.
+
+Contas bancárias: as quatro contas informadas (Banco do Brasil, Santander, Itaú e Sicoob, na matriz) conferem com o cadastro da base. No Banco do Brasil, o dígito "X" da agência está gravado como "0", conforme o padrão bancário. A base possui ainda três contas internas de caixa (PDV e tesouraria).
+
+Servidor de e-mail (SMTP): o onboarding informa smtp.office365.com, porta 587, com TLS e remetente envio@medchap.com.br. Nenhuma empresa da base possui servidor SMTP configurado. A configuração deve ser feita no refinamento, com a senha fornecida pelo cliente.
+
+## Cópias de segurança, mapas e auditoria
+
+Foram criadas 51 tabelas da revisão entre cópias de segurança (prefixos BKP_RMD_, BKP_CLASSICMS_ e BKP_AJNP_), mapas e controles, com destaque para:
+
+| Objeto | Propósito |
+|---|---|
+| RMD_CONTROLE_OBJETOS | Controle dos objetos temporariamente alterados durante a revisão |
+| RMD_MAP_UNIDADES | Mapa da normalização de unidades |
+| RMD_REF_TSICFG_MODELO e BKP_RMD_TSICFG | Referência e cópia integral usadas na higienização das configurações de tela |
+| BKP_CLASSICMS_TGFPAR e BKP_AJNP_TGFPAR | Cópias de segurança da classificação de ICMS e dos nomes de parceiros |
+| BKP_RMD_01_ a BKP_RMD_14_ e BKP_RMD_UNID_ | Cópias de segurança das atividades 01 a 17 |
+| BKP_RMD_GOL_, BKP_RMD_PAR_MATRIZ, BKP_RMD_CARD_TTKINDAGT e BKP_RMD_PAD_ | Cópias de segurança das atividades 18 a 30 |
+| RMD_MDCH_MRG_20260925 (com _DEP e _EXC) | Mapa, auditoria de referências e exceções da consolidação de bairros e endereços |
+| BKP_RMD_MDCH_20260925_BAI e _END | Registros de bairros e endereços obsoletos excluídos |
+| BKP_RMD_FDUP_MDC_20260925 (com _PPG) | Mapa e classificação do card 09 |
+| RMD_MDCH_CAR_20260925_02 e BKP_RMD_MDCH_CAR02_TSIUSU | Mapa e cópia de segurança da correção de caracteres (atividade 33) |
+| BKP_RMD_MDCH_USUEMP01 | Cópia de segurança dos 12 usuários ajustados (atividade 34) |
+
+## Índice de reversão
+
+| Atividade | Descrição | Script de reversão |
+|---|---|---|
+| 02 | Liberar filtros dos portais | Reverter_02_Liberar_Filtros_Portais.sql |
+| 03 | Padronizar DANFE das empresas | Reverter_03_Padronizar_DANFE_Empresas.sql |
+| 04 | Desativar custo nas TOPs de devolução | Reverter_04_Desativar_Custo_TOP_Devolucao.sql |
+| 05 | Habilitar cálculo de giro | Reverter_05_Habilitar_Calculo_Giro_Produtos.sql |
+| 06 | Zerar parcelas dos tipos de negociação | Reverter_06_Zerar_Parcelas_Tipos_Negociacao.sql |
+| 07 | Preencher data de movimento | Reverter_07_Preencher_Data_Movimento.sql |
+| 08 | Preencher protocolos legados | Reverter_08_Preencher_Protocolos_Documentos_Legados.sql |
+| 09 | Liberar itens legados | Reverter_09_Liberar_Itens_Documentos_Legados.sql |
+| 10 | Habilitar ICMS gerencial | Reverter_10_Habilitar_ICMS_Gerencial.sql |
+| 11 | Habilitar ruptura de produtos | Reverter_11_Habilitar_Ruptura_Produtos.sql |
+| 12 | Habilitar ruptura de empresas | Reverter_12_Habilitar_Ruptura_Empresas.sql |
+| 13 | Configurar TOPs de giro/GOL | Reverter_13_Configurar_TOPs_Giro_GOL.sql |
+| 14 | Configurar análise de giro 848 | Reverter_14_Configurar_Analise_Giro_848.sql |
+| 15 | Desativar rastreamento de lote | Reverter_15_Desativar_Rastro_Sem_Controle.sql |
+| 16 | Higienizar TSICFG | Reverter_16_Aplicar_Higienizacao_TSICFG.sql |
+| 17 | Normalizar unidades | Reverter_17_Normalizacao_Unidades.sql |
+| 18 | Preferências do Gerente On-Line | Reverter_18_Preferencias_GOL.sql |
+| 19 | Parceiro matriz | Reverter_19_Parceiro_Matriz.sql |
+| 20 | Cards do Deploy Agent | Reverter_20_Cards_Deploy.sql |
+| 21 | Classificação de ICMS dos parceiros | Reverter_21_Classificacao_ICMS_Parceiros.sql |
+| 22 | Nomes de parceiros | Reverter_22_Ajuste_Nomes_Parceiros.sql |
+| 24 | Padronização de parceiros | Reverter_24_Padronizacao_Parceiros.sql |
+| 25 | Padronização de produtos | Reverter_25_Padronizacao_Produtos.sql |
+| 26 | Padronização de tipos de título | Reverter_26_Padronizacao_Tipos_Titulo.sql |
+| 27 | Padronização de cidades | Reverter_27_Padronizacao_Cidades.sql |
+| 28 | Padronização de tipos de venda | Reverter_28_Padronizacao_Tipos_Venda.sql |
+| 29 | Padronização de bairros | Reverter_29_Padronizacao_Bairros.sql |
+| 30 | Padronização de endereços | Reverter_30_Padronizacao_Enderecos.sql |
+| 29/30 | Consolidação de bairros e endereços duplicados (inclui a exclusão dos registros obsoletos) | 29_30_Rollback_MEDCHAP_MRG_20260925_01.sql |
+| 29/30 | Padronização dos nomes remanescentes após a consolidação | Reverter_29_30_Normalizacao_Remanescente_MEDCHAP.sql |
+| 33 | Correção de caracteres corrompidos em cadastros | Reverter_33_Caracteres_Cadastros_MEDCHAP.sql |
+| 34 | Ajuste da empresa padrão de usuários | Reverter_34_Ajuste_Usuarios_Empresa_MEDCHAP.sql |
+
+## Pendências finais
+
+Servidor de e-mail (SMTP): configurar o envio de e-mails das empresas conforme informado no onboarding (smtp.office365.com, porta 587, TLS), com a senha fornecida pelo cliente.
+Usuário com login corrigido: informar o usuário do e-mail logistica01.sjp@medchap.com.br de que o login passou a ser JOAO.GONCALVES.
+
+## Orientações dos cards de volumetria
+
+### 01 — Financeiro
+
+Mostra a quantidade de títulos extraídos dos artefatos disponibilizados. Financeiros que não estejam vinculados a artefatos processados, como folha de pagamento e outras despesas sem XML ou EFD correspondente, não estarão presentes na base. O montante representa exclusivamente os artefatos disponibilizados. Para completar registros financeiros legados, pode ser utilizada a ferramenta Cadastro da Posição Financeira, em Assistente de Melhores práticas > Configurações Globais > Gerenciais.
+
+### 02 — Entradas e Saídas
+
+Apresenta uma visão panorâmica dos registros existentes, analítica por TOP (tipo de operação), para apoiar a validação com o cliente. A associação de TOPs durante o processamento dos artefatos pelo Deploy Agent pode ser imprecisa em determinados cenários.
+
+### 03 — Produtos por Usoprod
+
+Apresenta produtos e serviços agrupados pelo tipo de uso na empresa. A classificação deve ser validada com o cliente, pois a definição do tipo de uso pode ser imprecisa em determinados cenários.
+
+### 04 — Produtos por Grupo
+
+Apresenta os produtos conforme os grupos enviados na fase de onboarding. Esse cadastro não é feito automaticamente pela rotina regular do Deploy Agent: depende de importação manual, quando os dados são disponibilizados e estão elegíveis conforme a arquitetura do cadastro. Mesmo com o cadastro dos grupos, a associação dos produtos será realizada no refinamento do projeto.
+
+### 05 — Referências Duplicadas
+
+Separa itens com a mesma referência para tratamento posterior no refinamento. A duplicidade pode representar reaproveitamento de referência nas emissões, item obsoleto, controle adicional de estoque, produto equivalente ou outra regra de negócio.
+
+### 06 — Descrições Duplicadas
+
+Aplica o mesmo objetivo do card de referências duplicadas, considerando descrições e os critérios complementares de identificação. A duplicidade pode representar reaproveitamento, obsolescência, controle adicional, equivalência ou outra regra de negócio.
+
+### 07 — CNPJ/CPF Repetidos
+
+Relaciona parceiros que compartilham o mesmo CNPJ ou CPF, mas apresentam alguma variação cadastral, como inscrição estadual ou endereço.
+
+### 08 — Financeiros sem Nota
+
+Relaciona registros financeiros sem cabeçalho associado. O resultado esperado é zero; qualquer quantidade maior que zero deve ser tratada como alerta de possível incompletude da revisão.
+
+### 09 — Notas sem Financeiro
+
+É um diagnóstico de notas cujo TOP está configurado para atualizar o financeiro, mas não há linha correspondente na TGFFIN. O quantitativo do card não comprova, sozinho, que a ausência é legítima.
+
+Durante a revisão, separar os registros em três grupos: (a) candidatos com <Dup> e <dVenc> válidos no XML, que devem passar pelo preflight e mapa 32A; depois da validação, podem seguir pela rotina nativa ou pelo insert controlado 32B, com confirmação explícita e auditoria; (b) registros sem <Dup>, que permanecem pendentes para validação do negócio; e (c) registros com XML incompleto ou inválido, que devem ser analisados antes de qualquer ação.
+
+Não fazer inserts avulsos em TGFFIN e não trocar o TOP apenas para retirar o registro do card. Quando o procedimento 32B for usado, registrar seu ID_EXECUCAO, tabelas de auditoria, quantidade inserida, quantidade que já possuía financeiro, saldo elegível restante e casos sem <Dup>. A data de vencimento deve seguir a negociação e o XML; ela pode não representar a data operacional real.
+
+### 10 — Produtos Vendidos
+
+Mostra itens com movimentação de saída, mas sem movimentação de entrada. Pode indicar duplicidade cadastral quando não é possível associar compras e vendas por uma chave confiável, inclusive em situações de produtos equivalentes.
+
+### 11 — Produtos com Custo Zero
+
+Mostra itens com linha na TGFCUS, porém com valor zerado. Durante a revisão pode ser utilizada a rotina Gerente On Line (GOL) > Configurações > Margem de Contribuição > Atualizar Tabela de Custos para Produtos sem Custos.
+
+### 12 — Produtos sem Custo
+
+Mostra itens sem qualquer linha de custo na TGFCUS. Isso pode ocorrer em produtos importados por planilha, cadastros manuais ou itens inseridos via EFD sem movimentação correspondente no período. Como não possuem registros na TGFITE, esses itens não são tratados pela rotina nativa de atualização de custos.
+
+### 13 — Itens sem Cabeçalho
+
+Relaciona registros de movimentação na TGFITE sem cabeçalho correspondente. O resultado esperado é zero; qualquer quantidade maior que zero deve bloquear a conclusão do relatório até a análise.
+
+### 14 — Cabeçalho sem Itens
+
+Relaciona registros na TGFCAB sem item associado na TGFITE. O resultado esperado é zero; qualquer quantidade maior que zero deve bloquear a conclusão do relatório até a análise.
+
+### 15 — Cidades Duplicadas
+
+Relaciona eventuais duplicações de cidades. O resultado esperado é zero; qualquer quantidade maior que zero deve bloquear a conclusão do relatório até a análise.
+
+### 16 — Classificação Fiscal
+
+Relaciona parceiros cuja classificação fiscal atual pode estar divergente. O ajuste deve ser avaliado na revisão quando houver dúvida sobre a completude do cadastro, inclusive ausência de inscrição estadual que possa influenciar a classificação correta.
+
+### 17 — Itens sem Tabela de Preço
+
+Relaciona itens para os quais não foi possível gravar tabela de preços por não haver movimentação de saída elegível, como baixa de estoque, geração de receita a receber ou uso do tipo venda/revenda.
+
+### 18 — Itens com Descrições Similares
+
+Relaciona itens com grande possibilidade de duplicidade quando não é possível fazer o vínculo entre entrada e venda. São listadas descrições com similaridade de caracteres igual ou superior a 95% para tratamento no refinamento.
+
+### 19 — CNPJ Matrizes
+
+Relaciona parceiros pessoa jurídica que compartilham o mesmo radical de CNPJ, formado pelos oito primeiros dígitos. O menor código é definido como matriz e associado aos demais parceiros do agrupamento.
+
+### 20 — Produtos Comprados
+
+Apresenta o inverso do card de Produtos Vendidos: itens com movimentação de entrada, mas sem movimentação de saída. É um resultado coerente para matérias-primas, uso e consumo e outros itens sem venda.
+
+### 21 — Regras Tributárias Inseridas
+
+Apresenta uma compilação das regras tributárias cadastradas pelo Deploy Agent, incluindo ICMS, PIS, COFINS, IPI e ISS.
+
+## Fontes e conclusão
+
+Fontes: registros completos de execução do Master, das fases de consolidação de bairros e endereços e das atividades 33 e 34; verificações preliminares e posteriores somente leitura; volumetria consultada diretamente na base em 25/09/2026 às 10:57; e conferência do pacote de onboarding.
+
+Conclusão: as atividades técnicas da revisão foram concluídas com evidência de execução, cópias de segurança e reversões disponíveis. Os indicadores obrigatórios de integridade estão zerados e não há objetos inválidos. Resta, para o refinamento, a configuração do servidor de e-mail informado pelo cliente.

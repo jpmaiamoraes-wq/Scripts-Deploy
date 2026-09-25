@@ -1,0 +1,293 @@
+RELATÓRIO TÉCNICO - REVISÃO MASTER DEPLOY
+Base: FOCUSFINTAXPRD (FOCUS FINTAX LTDA)
+Data de conclusão: a confirmar na aprovação (execução técnica em 23/09/2026)
+Gerente de Projetos: Marcelo Borel
+[PRÉVIA TEXTUAL PARA APROVAÇÃO - NÃO ENVIAR AO CLIENTE]
+
+1. RESUMO EXECUTIVO
+
+A revisão Master Deploy da base FOCUSFINTAXPRD foi executada sobre a base inteira, com cópias de segurança, mapas de auditoria, verificação posterior e scripts de reversão para cada atividade que alterou dados. As 31 atividades do Master foram concluídas sem erros. A padronização de bairros e endereços exigiu a consolidação controlada de registros duplicados (428 bairros e 7.283 endereços), com redirecionamento de 61.210 referências e nenhuma duplicidade remanescente.
+
+A volumetria atual retornou 414 cabeçalhos de nota, 392 itens, 392 registros financeiros, 39 produtos e 111 parceiros. Os quatro indicadores obrigatórios de integridade (financeiros sem nota, itens sem cabeçalho, cabeçalhos sem itens e códigos fiscais de cidades duplicados) retornaram zero. Não há notas sem financeiro no escopo do card 09, portanto nenhuma inclusão financeira foi necessária.
+
+Permanecem 27 funções Oracle inválidas que dependem de recompilação pelo Sankhya Cloud, solicitada no chamado 713108.
+
+2. RESULTADO TÉCNICO DAS ATIVIDADES
+
+Atividade | Propósito | Situação | Resultado comprovado
+01 | Preparar o controle dos objetos temporariamente alterados pela revisão | Concluída | Tabela de controle criada; 9 objetos registrados e todos restaurados ao estado original.
+02 | Liberar os filtros dos portais | Concluída | 4 registros alterados; 3 gatilhos de registro da TSIPAR desabilitados e reabilitados.
+03 | Padronizar os parâmetros de DANFE das empresas | Concluída | 3 registros alterados.
+04 | Desativar o cálculo de custo nas TOPs de devolução | Concluída | 136 registros alterados.
+05 | Habilitar o cálculo de giro dos produtos | Concluída sem candidatos | 0 registros elegíveis.
+06 | Zerar parcelas dos tipos de negociação elegíveis | Concluída | 17 registros alterados.
+07 | Preencher a data de movimento ausente | Concluída sem candidatos | 0 registros elegíveis.
+08 | Preencher protocolos de documentos legados | Concluída sem candidatos | 0 registros elegíveis.
+09 | Liberar itens de documentos legados | Concluída | 392 itens alterados, com restauração do estado dos gatilhos.
+10 | Habilitar ICMS gerencial | Concluída sem candidatos | 0 registros elegíveis.
+11 | Habilitar ruptura de produtos | Concluída | 1 registro alterado.
+12 | Habilitar ruptura de empresas | Concluída sem candidatos | 0 empresas elegíveis.
+13 | Configurar TOPs para giro e Gerente On-Line | Concluída com limitação conhecida | 1.441 registros alterados; mapeamento de TOPs com cobertura parcial aprovada.
+14 | Configurar a análise de giro do relatório 848 | Concluída | 1 registro preservado em cópia de segurança e atualizado.
+15 | Desativar rastreamento de lote sem controle adicional | Concluída sem candidatos | 0 registros elegíveis.
+16 | Higienizar as configurações de tela (TSICFG) | Concluída | Cópia integral de 890 registros; 73 excluídos, 112 atualizados e 177 incluídos; 994 registros ao final.
+17 | Normalizar unidades de medida | Concluída | 93 unidades mapeadas; nenhum candidato automático de consolidação e nenhuma descrição em minúsculas.
+18 | Ajustar preferências do Gerente On-Line e preparar cópias de segurança das atividades 18 a 30 | Concluída | TSIPAR 1, TGFCGM 3 e TGFCMV 1 registros ajustados; 14 cópias de segurança preparadas.
+19 | Ajustar o parceiro matriz | Concluída sem candidatos | 0 parceiros ajustados.
+20 | Atualizar a configuração dos cards do Deploy Agent | Concluída | 1 card atualizado.
+21 | Classificar o ICMS dos parceiros (vinculada ao card 16) | Concluída | 81 parceiros classificados; card 16 passou a 0.
+22 | Ajustar nomes de parceiros | Concluída | 1 registro alterado com cópia de segurança.
+23 | Validar e reabilitar objetos temporariamente desabilitados | Concluída | Nenhum objeto pendente de reabilitação; nenhum gatilho desabilitado na base.
+24 | Padronizar parceiros | Concluída | 33 registros padronizados.
+25 | Padronizar produtos | Concluída sem candidatos | 0 registros.
+26 | Padronizar tipos de título | Concluída sem candidatos | 0 registros.
+27 | Padronizar cidades | Concluída sem candidatos | 0 registros.
+28 | Padronizar tipos de venda | Concluída sem candidatos | 0 registros.
+29 | Padronizar bairros e consolidar duplicidades | Concluída | 45.045 bairros padronizados; 428 bairros duplicados consolidados no código mantido; 413 nomes remanescentes padronizados; 0 duplicidades ao final.
+30 | Padronizar endereços e consolidar duplicidades | Concluída | 646.110 endereços padronizados; 7.283 endereços duplicados consolidados no código mantido; 6.877 nomes remanescentes padronizados; 0 duplicidades ao final.
+31 | Verificar objetos Oracle inválidos | Encaminhada ao Sankhya Cloud | 27 funções inválidas; a conexão não possui o privilégio de recompilação; chamado 713108 aberto no Sankhya Cloud.
+32 | Tratar notas sem financeiro (card 09) | Concluída sem candidatos aptos | Nenhuma nota no escopo; mapa vazio; nenhuma inclusão financeira.
+
+3. TRATAMENTO DAS NOTAS SEM FINANCEIRO (CARD 09)
+
+O card identifica notas cujo tipo de operação atualiza o financeiro, mas que não possuem título correspondente. A análise foi feita pela leitura direta do XML das notas, limitada ao escopo do painel de volumetria, sem inclusão avulsa de financeiro.
+
+Estado técnico | Quantidade
+Ocorrências identificadas (base total) | 0
+Aptas para validação final (APTO_PARA_VALIDACAO_FINAL) | 0
+Sem duplicata no XML (SEM_VDUP_XML) | 0
+Inclusões efetivadas na TGFFIN | 0
+Saldo após a verificação posterior | 0
+
+O mapa de classificação foi criado e ficou vazio; o contador de títulos financeiros (TGFNUM) não foi alterado. A verificação posterior confirmou zero notas no escopo, zero aptos e nenhum financeiro incluído.
+
+4. BAIRROS E ENDEREÇOS (ATIVIDADES 29 E 30)
+
+A padronização inicial alterou 45.045 bairros e 646.110 endereços e preservou os grupos que passariam a ter nomes idênticos. Esses grupos foram tratados em três fases controladas:
+
+Fase | Resultado
+Consolidação | Mapa de 7.711 códigos obsoletos para o código mantido (428 bairros e 7.283 endereços); cópia de segurança de todos os registros obsoletos; 61.210 referências redirecionadas e auditadas (principalmente na tabela de CEPs); 0 exceções.
+Exclusão dos registros obsoletos | 428 bairros e 7.283 endereços excluídos somente após verificação de referências zero em todas as tabelas físicas e chaves estrangeiras.
+Padronização dos nomes remanescentes | 413 bairros e 6.877 endereços padronizados, com cópia de segurança.
+
+Situação final: 45.561 bairros e 674.484 endereços, nenhuma duplicidade e nenhum candidato remanescente. Quatro referências antigas existentes em uma tabela de cópia de segurança pré-existente da base (BKP_TGFPAR_NOVO) foram preservadas sem alteração.
+
+5. VOLUMETRIA ATUAL
+
+Indicador | Quantidade
+Total de notas/cabecalhos processados | 414
+Total de itens processados | 392
+Total de registros financeiros | 392
+Contas a receber | 311
+Contas a pagar | 81
+Total de produtos cadastrados | 39
+Total de parceiros cadastrados | 111
+Referencias duplicadas | 0
+Produtos envolvidos em referencias duplicadas | 0
+Descricoes duplicadas | 0
+Produtos envolvidos em descricoes duplicadas | 0
+CNPJ/CPF repetidos | 0
+Parceiros envolvidos em CNPJ/CPF repetido | 0
+Classificacao fiscal divergente | 0
+Financeiros sem nota | 0
+Notas sem financeiro | 0
+Produtos vendidos sem registro de entrada | 2
+Produtos com custo zero | 0
+Produtos sem registro de custo | 0
+Itens sem cabecalho | 0
+Cabecalhos sem itens | 0
+Codigos fiscais de cidades duplicados | 0
+Período de movimentação | De 14/09/2022 ate 10/09/2026
+
+6. INDICADORES OBRIGATÓRIOS DE INTEGRIDADE
+
+Indicador | Quantidade | Situação
+Financeiros sem nota (card 08) | 0 | Conforme
+Itens sem cabeçalho (card 13) | 0 | Conforme
+Cabeçalhos sem itens (card 14) | 0 | Conforme
+Códigos fiscais de cidades duplicados (card 15) | 0 | Conforme
+
+Observação: existem 22 cabeçalhos do tipo de movimento Z sem itens; esse tipo é excluído do indicador por definição e não representa inconsistência.
+
+7. OBJETOS INVÁLIDOS E CHAMADO
+
+A conexão da revisão não possui o privilégio necessário para recompilar objetos (ALTER ANY PROCEDURE). Os objetos abaixo permanecem inválidos e serão encaminhados ao Sankhya Cloud:
+
+FUNCTION ACL_GET_ALIQPART
+FUNCTION F_OBTEMPRECO_DATA
+FUNCTION F_OBTEM_SALDO_INDENIZ
+FUNCTION GET_CODPROD_REF
+FUNCTION GET_INDICE_AJUSTE_NOTA
+FUNCTION QTDEVOLPADRAO
+FUNCTION QTDEVOLPADRAO2
+FUNCTION SNK_GETCODPRODALT
+FUNCTION SNK_GETDTBAIXABEM
+FUNCTION SNK_GETMESESSEMPIS
+FUNCTION SNK_GETPRODUTOAGRUPADOGIRO
+FUNCTION SNK_GETVLRREA
+FUNCTION SNK_GET_CENTROCUSTO_EFD
+FUNCTION SNK_GET_CFO_NOTA
+FUNCTION SNK_GET_CODCFO
+FUNCTION SNK_GET_CODIGO_PRODUTO
+FUNCTION SNK_GET_CONTACONTABIL_EFD
+FUNCTION SNK_GET_CONTACONTABIL_IMOB_EFD
+FUNCTION SNK_GET_CTACTB_CADASTROS_EFD
+FUNCTION SNK_GET_ICMS_ESPECIAL_CAB
+FUNCTION SNK_GET_INDITENS
+FUNCTION SNK_GET_NUNOTA
+FUNCTION SNK_GET_SATUSCONFERENCIA
+FUNCTION SNK_GET_ST_RECUPERAR
+FUNCTION SNK_MATGIR_GET_MULTCPA
+FUNCTION SNK_MATGIR_GET_QTDTOTALMULTCPA
+FUNCTION SNK_PRECO
+
+Chamado: 713108 (Sankhya Cloud - Personalizar Objeto de Banco de Dados; prioridade Normal; ambiente de produção).
+
+8. ONBOARDING
+
+A conferência foi feita em modo somente leitura com o registro mais recente do site Onboarding Deploy (projeto FOCUS FINTAX LTDA, Gestão Empresarial, concluído).
+
+Empresas: os três CNPJs do onboarding (FOCUS FINTAX LTDA, AGF NITEROI CONTABILIDADE LTDA e FINTAX CONSULTORIA E AUDITORIA LTDA) correspondem às empresas 1, 2 e 3 da base. A base possui também a empresa 4, AF SOLUCOES E GESTAO LTDA, que não consta no onboarding; o cadastro foi confirmado como correto pelo responsável da revisão, e nenhuma empresa foi incluída ou removida.
+
+Usuários: a planilha mais recente (21/09/2026) informa cinco usuários. Os cinco e-mails existem na base, porém sem grupo de acesso (grupo 0) e na empresa 1, enquanto a planilha indica acesso a todas as empresas e não informa grupo. O usuário paulo.marcos@grupoagfcontabil.com.br está cadastrado como PABLO.MARCOS. Recomenda-se definir grupos e empresas desses usuários no refinamento.
+
+Contas bancárias: a planilha de contas bancárias do onboarding não foi confrontada nesta conferência.
+
+9. CÓPIAS DE SEGURANÇA, MAPAS E AUDITORIA
+
+Foram criadas 39 tabelas de cópia de segurança da revisão (prefixo BKP_RMD_), além das tabelas de controle e auditoria: RMD_CONTROLE_OBJETOS (controle de objetos temporariamente alterados), RMD_MAP_UNIDADES (mapa de unidades), RMD_REF_TSICFG_MODELO (referência da higienização de telas), BKP_CLASSICMS_TGFPAR e BKP_AJNP_TGFPAR (parceiros), RMD_FOCUS_MRG_20260923 com as tabelas _DEP e _EXC (mapa, auditoria de referências e exceções da consolidação de bairros e endereços), BKP_RMD_FOCUS_20260923_BAI e _END (registros obsoletos excluídos) e BKP_RMD_FDUP_FCS_20260923 com _PPG (mapa do card 09).
+
+10. ÍNDICE DE REVERSÃO
+
+Atividade | Descrição | Script de reversão
+02 | Liberar filtros dos portais | Reverter_02_Liberar_Filtros_Portais.sql
+03 | Padronizar DANFE das empresas | Reverter_03_Padronizar_DANFE_Empresas.sql
+04 | Desativar custo nas TOPs de devolução | Reverter_04_Desativar_Custo_TOP_Devolucao.sql
+05 | Habilitar cálculo de giro | Reverter_05_Habilitar_Calculo_Giro_Produtos.sql
+06 | Zerar parcelas dos tipos de negociação | Reverter_06_Zerar_Parcelas_Tipos_Negociacao.sql
+07 | Preencher data de movimento | Reverter_07_Preencher_Data_Movimento.sql
+08 | Preencher protocolos legados | Reverter_08_Preencher_Protocolos_Documentos_Legados.sql
+09 | Liberar itens legados | Reverter_09_Liberar_Itens_Documentos_Legados.sql
+10 | Habilitar ICMS gerencial | Reverter_10_Habilitar_ICMS_Gerencial.sql
+11 | Habilitar ruptura de produtos | Reverter_11_Habilitar_Ruptura_Produtos.sql
+12 | Habilitar ruptura de empresas | Reverter_12_Habilitar_Ruptura_Empresas.sql
+13 | Configurar TOPs de giro/GOL | Reverter_13_Configurar_TOPs_Giro_GOL.sql
+14 | Configurar análise de giro 848 | Reverter_14_Configurar_Analise_Giro_848.sql
+15 | Desativar rastreamento de lote | Reverter_15_Desativar_Rastro_Sem_Controle.sql
+16 | Higienizar TSICFG | Reverter_16_Aplicar_Higienizacao_TSICFG.sql
+17 | Normalizar unidades | Reverter_17_Normalizacao_Unidades.sql
+18 | Preferências do Gerente On-Line | Reverter_18_Preferencias_GOL.sql
+19 | Parceiro matriz | Reverter_19_Parceiro_Matriz.sql
+20 | Cards do Deploy Agent | Reverter_20_Cards_Deploy.sql
+21 | Classificação de ICMS dos parceiros | Reverter_21_Classificacao_ICMS_Parceiros.sql
+22 | Nomes de parceiros | Reverter_22_Ajuste_Nomes_Parceiros.sql
+24 | Padronização de parceiros | Reverter_24_Padronizacao_Parceiros.sql
+25 | Padronização de produtos | Reverter_25_Padronizacao_Produtos.sql
+26 | Padronização de tipos de título | Reverter_26_Padronizacao_Tipos_Titulo.sql
+27 | Padronização de cidades | Reverter_27_Padronizacao_Cidades.sql
+28 | Padronização de tipos de venda | Reverter_28_Padronizacao_Tipos_Venda.sql
+29 | Padronização de bairros | Reverter_29_Padronizacao_Bairros.sql
+30 | Padronização de endereços | Reverter_30_Padronizacao_Enderecos.sql
+29/30 | Consolidação de bairros e endereços duplicados (inclui a exclusão dos registros obsoletos) | 29_30_Rollback_FOCUS_MRG_20260923_01.sql
+29/30 | Padronização dos nomes remanescentes após a consolidação | Reverter_29_30_Normalizacao_Remanescente_FOCUSFINTAXPRD.sql
+
+11. PENDÊNCIAS FINAIS
+
+Objetos inválidos: 27 funções dependem de recompilação pelo Sankhya Cloud (chamado 713108).
+Usuários do onboarding: definir grupo e empresas de acesso dos cinco usuários informados.
+
+12. ORIENTAÇÕES DOS CARDS DE VOLUMETRIA
+
+Card 01 — Financeiro
+
+Mostra a quantidade de títulos extraídos dos artefatos disponibilizados. Financeiros que não estejam vinculados a artefatos processados, como folha de pagamento e outras despesas sem XML ou EFD correspondente, não estarão presentes na base. O montante representa exclusivamente os artefatos disponibilizados. Para completar registros financeiros legados, pode ser utilizada a ferramenta Cadastro da Posição Financeira, em Assistente de Melhores práticas > Configurações Globais > Gerenciais.
+
+Card 02 — Entradas e Saídas
+
+Apresenta uma visão panorâmica dos registros existentes, analítica por TOP (tipo de operação), para apoiar a validação com o cliente. A associação de TOPs durante o processamento dos artefatos pelo Deploy Agent pode ser imprecisa em determinados cenários.
+
+Card 03 — Produtos por Usoprod
+
+Apresenta produtos e serviços agrupados pelo tipo de uso na empresa. A classificação deve ser validada com o cliente, pois a definição do tipo de uso pode ser imprecisa em determinados cenários.
+
+Card 04 — Produtos por Grupo
+
+Apresenta os produtos conforme os grupos enviados na fase de onboarding. Esse cadastro não é feito automaticamente pela rotina regular do Deploy Agent: depende de importação manual, quando os dados são disponibilizados e estão elegíveis conforme a arquitetura do cadastro. Mesmo com o cadastro dos grupos, a associação dos produtos será realizada no refinamento do projeto.
+
+Card 05 — Referências Duplicadas
+
+Separa itens com a mesma referência para tratamento posterior no refinamento. A duplicidade pode representar reaproveitamento de referência nas emissões, item obsoleto, controle adicional de estoque, produto equivalente ou outra regra de negócio.
+
+Card 06 — Descrições Duplicadas
+
+Aplica o mesmo objetivo do card de referências duplicadas, considerando descrições e os critérios complementares de identificação. A duplicidade pode representar reaproveitamento, obsolescência, controle adicional, equivalência ou outra regra de negócio.
+
+Card 07 — CNPJ/CPF Repetidos
+
+Relaciona parceiros que compartilham o mesmo CNPJ ou CPF, mas apresentam alguma variação cadastral, como inscrição estadual ou endereço.
+
+Card 08 — Financeiros sem Nota
+
+Relaciona registros financeiros sem cabeçalho associado. O resultado esperado é zero; qualquer quantidade maior que zero deve ser tratada como alerta de possível incompletude da revisão.
+
+Card 09 — Notas sem Financeiro
+
+É um diagnóstico de notas cujo TOP está configurado para atualizar o financeiro, mas não há linha correspondente na `TGFFIN`. O quantitativo do card não comprova, sozinho, que a ausência é legítima.
+
+Durante a revisão, separar os registros em três grupos: (a) candidatos com `<Dup>` e `<dVenc>` válidos no XML, que devem passar pelo preflight e mapa 32A; depois da validação, podem seguir pela rotina nativa ou pelo insert controlado 32B, com confirmação explícita e auditoria; (b) registros sem `<Dup>`, que permanecem pendentes para validação do negócio; e (c) registros com XML incompleto ou inválido, que devem ser analisados antes de qualquer ação.
+
+Não fazer inserts avulsos em `TGFFIN` e não trocar o TOP apenas para retirar o registro do card. Quando o procedimento 32B for usado, registrar seu `ID_EXECUCAO`, tabelas de auditoria, quantidade inserida, quantidade que já possuía financeiro, saldo elegível restante e casos sem `<Dup>`. A data de vencimento deve seguir a negociação e o XML; ela pode não representar a data operacional real.
+
+Card 10 — Produtos Vendidos
+
+Mostra itens com movimentação de saída, mas sem movimentação de entrada. Pode indicar duplicidade cadastral quando não é possível associar compras e vendas por uma chave confiável, inclusive em situações de produtos equivalentes.
+
+Card 11 — Produtos com Custo Zero
+
+Mostra itens com linha na TGFCUS, porém com valor zerado. Durante a revisão pode ser utilizada a rotina Gerente On Line (GOL) > Configurações > Margem de Contribuição > Atualizar Tabela de Custos para Produtos sem Custos.
+
+Card 12 — Produtos sem Custo
+
+Mostra itens sem qualquer linha de custo na TGFCUS. Isso pode ocorrer em produtos importados por planilha, cadastros manuais ou itens inseridos via EFD sem movimentação correspondente no período. Como não possuem registros na TGFITE, esses itens não são tratados pela rotina nativa de atualização de custos.
+
+Card 13 — Itens sem Cabeçalho
+
+Relaciona registros de movimentação na TGFITE sem cabeçalho correspondente. O resultado esperado é zero; qualquer quantidade maior que zero deve bloquear a conclusão do relatório até a análise.
+
+Card 14 — Cabeçalho sem Itens
+
+Relaciona registros na TGFCAB sem item associado na TGFITE. O resultado esperado é zero; qualquer quantidade maior que zero deve bloquear a conclusão do relatório até a análise.
+
+Card 15 — Cidades Duplicadas
+
+Relaciona eventuais duplicações de cidades. O resultado esperado é zero; qualquer quantidade maior que zero deve bloquear a conclusão do relatório até a análise.
+
+Card 16 — Classificação Fiscal
+
+Relaciona parceiros cuja classificação fiscal atual pode estar divergente. O ajuste deve ser avaliado na revisão quando houver dúvida sobre a completude do cadastro, inclusive ausência de inscrição estadual que possa influenciar a classificação correta.
+
+Card 17 — Itens sem Tabela de Preço
+
+Relaciona itens para os quais não foi possível gravar tabela de preços por não haver movimentação de saída elegível, como baixa de estoque, geração de receita a receber ou uso do tipo venda/revenda.
+
+Card 18 — Itens com Descrições Similares
+
+Relaciona itens com grande possibilidade de duplicidade quando não é possível fazer o vínculo entre entrada e venda. São listadas descrições com similaridade de caracteres igual ou superior a 95% para tratamento no refinamento.
+
+Card 19 — CNPJ Matrizes
+
+Relaciona parceiros pessoa jurídica que compartilham o mesmo radical de CNPJ, formado pelos oito primeiros dígitos. O menor código é definido como matriz e associado aos demais parceiros do agrupamento.
+
+Card 20 — Produtos Comprados
+
+Apresenta o inverso do card de Produtos Vendidos: itens com movimentação de entrada, mas sem movimentação de saída. É um resultado coerente para matérias-primas, uso e consumo e outros itens sem venda.
+
+Card 21 — Regras Tributárias Inseridas
+
+Apresenta uma compilação das regras tributárias cadastradas pelo Deploy Agent, incluindo ICMS, PIS, COFINS, IPI e ISS.
+
+13. FONTES E CONCLUSÃO
+
+Fontes: registros completos de execução do Master e das fases de consolidação, verificações preliminares e posteriores somente leitura, volumetria consultada diretamente na base em 23/09/2026 às 16:10 e conferência do onboarding.
+
+Conclusão: as atividades técnicas da revisão foram concluídas com evidência de execução, cópias de segurança e reversões disponíveis. Os indicadores obrigatórios de integridade estão zerados. Resta o encaminhamento externo dos objetos inválidos e os ajustes cadastrais de usuários indicados para o refinamento.

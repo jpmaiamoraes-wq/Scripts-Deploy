@@ -1,0 +1,9 @@
+{
+  "status": "PREFLIGHT_29_30_BLOQUEADO_REDE",
+  "host": "10.110.56.20",
+  "port": 1521,
+  "service_esperado": "MOVEENERGIAPRD.SANKHYACLOUD.COM.BR",
+  "mensagem": "A porta Oracle não está acessível; nenhum login foi tentado.",
+  "dml_executado": false,
+  "ddl_executado": false
+}

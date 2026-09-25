@@ -1,0 +1,209 @@
+SQL> 
+SQL> PROMPT === CARD 09 - POS-VALIDACAO INDEPENDENTE ===
+=== CARD 09 - POS-VALIDACAO INDEPENDENTE ===
+SQL> PROMPT ID_EXECUCAO=RMD_FDUP_ALH_2026091701
+ID_EXECUCAO=RMD_FDUP_ALH_2026091701
+SQL> 
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') AS SESSION_USER,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') AS SERVICE_NAME,
+  4         SYS_CONTEXT('USERENV','DB_NAME') AS DB_NAME
+  5    FROM DUAL;
+
+SESSION_USER                                                                                                                                                                                                                                                     CURRENT_SCHEMA                                                                                                                                                                                                                                                   SERVICE_NAME                                                                                                                                                                                                                                                     DB_NAME                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          alheiroprd.sankhyacloud.com.br                                                                                                                                                                                                                                   ALHEIROPRD                                                                                                                                                                                                                                                      
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === FUNCAO XML ===
+=== FUNCAO XML ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS
+  2    FROM ALL_OBJECTS
+  3   WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL'
+  4   ORDER BY OWNER, OBJECT_TYPE;
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                VALID  
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT OWNER, NAME, TYPE, LINE, POSITION, TEXT
+  2    FROM ALL_ERRORS
+  3   WHERE NAME='FNC_BUSCA_TAG_XML_GERAL'
+  4   ORDER BY OWNER, SEQUENCE;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === BACKUP E MAPA ===
+=== BACKUP E MAPA ===
+SQL> SELECT COUNT(*) AS BACKUP_LINHAS,
+  2         COUNT(DISTINCT NUNOTA) AS BACKUP_NOTAS,
+  3         SUM(CASE WHEN STATUS_PREFLIGHT='CANDIDATO_XML_VALIDO' THEN 1 ELSE 0 END) AS BACKUP_XML_VALIDOS,
+  4         SUM(CASE WHEN STATUS_PREFLIGHT='SEM_DUP_XML' THEN 1 ELSE 0 END) AS BACKUP_SEM_DUP
+  5    FROM BKP_RMD_ALH_DUP_20260917
+  6   WHERE ID_EXECUCAO='RMD_FDUP_ALH_2026091701';
+
+BACKUP_LINHAS BACKUP_NOTAS BACKUP_XML_VALIDOS BACKUP_SEM_DUP
+------------- ------------ ------------------ --------------
+            1            1                  0              1
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT STATUS_MAPA, COUNT(*) AS QTD
+  2    FROM BKP_RMD_ALH_DUP_PPG_20260917
+  3   WHERE ID_EXECUCAO_MAPA='RMD_FDUP_ALH_2026091701'
+  4   GROUP BY STATUS_MAPA
+  5   ORDER BY STATUS_MAPA;
+
+STATUS_MAPA                          QTD
+----------------------------- ----------
+SEM_DUP_XML                            1
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT COUNT(*) AS LINHAS_APTAS,
+  2         COUNT(DISTINCT NUNOTA) AS NOTAS_APTAS,
+  3         SUM(QTD_TGFFIN_ATUAL) AS TGFFIN_EXISTENTE_NO_MAPA,
+  4         MIN(QTD_TGFNUM_TGFFIN) AS TGFNUM_LINHAS_MAPA,
+  5         MIN(ULTCOD_TGFNUM_ATUAL) AS ULTCOD_TGFNUM_NO_MAPA
+  6    FROM BKP_RMD_ALH_DUP_PPG_20260917
+  7   WHERE ID_EXECUCAO_MAPA='RMD_FDUP_ALH_2026091701'
+  8     AND STATUS_MAPA='APTO_PARA_INSERCAO_CONTROLADA';
+
+LINHAS_APTAS NOTAS_APTAS TGFFIN_EXISTENTE_NO_MAPA TGFNUM_LINHAS_MAPA ULTCOD_TGFNUM_NO_MAPA
+------------ ----------- ------------------------ ------------------ ---------------------
+           0           0                                                                  
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === AUDITORIA E ESTADO ATUAL ===
+=== AUDITORIA E ESTADO ATUAL ===
+SQL> SELECT COUNT(*) AS AUDITORIA_INSERCOES
+  2    FROM BKP_RMD_ALH_DUP_INS_20260917
+  3   WHERE ID_EXECUCAO='RMD_FDUP_ALH_2026091701';
+
+AUDITORIA_INSERCOES
+-------------------
+                  0
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT COUNT(*) AS TGFFIN_ATUAL_NOTAS_ESCUPO
+  2    FROM TGFFIN F
+  3   WHERE EXISTS (
+  4         SELECT 1 FROM BKP_RMD_ALH_DUP_20260917 B
+  5          WHERE B.ID_EXECUCAO='RMD_FDUP_ALH_2026091701'
+  6            AND B.NUNOTA=F.NUNOTA);
+
+TGFFIN_ATUAL_NOTAS_ESCUPO
+-------------------------
+                        0
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT COUNT(*) AS TGFNUM_LINHAS_ATUAIS,
+  2         MIN(ULTCOD) AS ULTCOD_TGFNUM_ATUAL
+  3    FROM TGFNUM
+  4   WHERE ARQUIVO='TGFFIN';
+
+TGFNUM_LINHAS_ATUAIS ULTCOD_TGFNUM_ATUAL
+-------------------- -------------------
+                   1               38210
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === VALIDACAO AUTOMATIZADA ===
+=== VALIDACAO AUTOMATIZADA ===
+SQL> DECLARE
+  2    v_status VARCHAR2(30);
+  3    v_errors NUMBER;
+  4    v_backup NUMBER;
+  5    v_map NUMBER;
+  6    v_aptas NUMBER;
+  7    v_audit NUMBER;
+  8    v_fin NUMBER;
+  9    v_num NUMBER;
+ 10    v_ultcod NUMBER;
+ 11    v_map_num NUMBER;
+ 12    v_map_ultcod NUMBER;
+ 13  BEGIN
+ 14    SELECT MAX(STATUS) INTO v_status
+ 15      FROM ALL_OBJECTS
+ 16     WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ 17       AND OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL'
+ 18       AND OBJECT_TYPE='FUNCTION';
+ 19    SELECT COUNT(*) INTO v_errors
+ 20      FROM ALL_ERRORS
+ 21     WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ 22       AND NAME='FNC_BUSCA_TAG_XML_GERAL'
+ 23       AND TYPE='FUNCTION';
+ 24    SELECT COUNT(*) INTO v_backup
+ 25      FROM BKP_RMD_ALH_DUP_20260917
+ 26     WHERE ID_EXECUCAO='RMD_FDUP_ALH_2026091701';
+ 27    SELECT COUNT(*) INTO v_map
+ 28      FROM BKP_RMD_ALH_DUP_PPG_20260917
+ 29     WHERE ID_EXECUCAO_MAPA='RMD_FDUP_ALH_2026091701';
+ 30    SELECT COUNT(*) INTO v_aptas
+ 31      FROM BKP_RMD_ALH_DUP_PPG_20260917
+ 32     WHERE ID_EXECUCAO_MAPA='RMD_FDUP_ALH_2026091701'
+ 33       AND STATUS_MAPA='APTO_PARA_INSERCAO_CONTROLADA';
+ 34    SELECT COUNT(*) INTO v_audit
+ 35      FROM BKP_RMD_ALH_DUP_INS_20260917
+ 36     WHERE ID_EXECUCAO='RMD_FDUP_ALH_2026091701';
+ 37    SELECT COUNT(*) INTO v_fin
+ 38      FROM TGFFIN F
+ 39     WHERE EXISTS (SELECT 1 FROM BKP_RMD_ALH_DUP_PPG_20260917 M
+ 40                    WHERE M.ID_EXECUCAO_MAPA='RMD_FDUP_ALH_2026091701'
+ 41                      AND M.NUNOTA=F.NUNOTA);
+ 42    SELECT COUNT(*), NVL(MAX(ULTCOD),-1)
+ 43      INTO v_num, v_ultcod
+ 44      FROM TGFNUM WHERE ARQUIVO='TGFFIN';
+ 45    SELECT NVL(MIN(QTD_TGFNUM_TGFFIN),-1), NVL(MIN(ULTCOD_TGFNUM_ATUAL),-1)
+ 46      INTO v_map_num, v_map_ultcod
+ 47      FROM BKP_RMD_ALH_DUP_PPG_20260917
+ 48     WHERE ID_EXECUCAO_MAPA='RMD_FDUP_ALH_2026091701';
+ 49  
+ 50    DBMS_OUTPUT.PUT_LINE('FUNCAO_STATUS='||NVL(v_status,'AUSENTE'));
+ 51    DBMS_OUTPUT.PUT_LINE('FUNCAO_ERROS='||v_errors);
+ 52    DBMS_OUTPUT.PUT_LINE('BACKUP_LINHAS='||v_backup||'; MAPA_LINHAS='||v_map);
+ 53    DBMS_OUTPUT.PUT_LINE('LINHAS_APTAS='||v_aptas||'; AUDITORIA_INSERCOES='||v_audit);
+ 54    DBMS_OUTPUT.PUT_LINE('TGFFIN_ATUAL_NOTAS_ESCUPO='||v_fin);
+ 55    DBMS_OUTPUT.PUT_LINE('TGFNUM_ATUAL='||v_num||'; ULTCOD_ATUAL='||v_ultcod||
+ 56                         '; TGFNUM_MAPA='||v_map_num||'; ULTCOD_MAPA='||v_map_ultcod);
+ 57  
+ 58    IF v_status<>'VALID' OR v_errors<>0 OR v_backup<>1 OR v_map<>1 OR
+ 59       v_aptas<>0 OR v_audit<>0 OR v_fin<>0 OR v_num<>1 OR v_ultcod<>v_map_ultcod THEN
+ 60      RAISE_APPLICATION_ERROR(-20539,
+ 61        'Pos-validacao do Card 09 falhou; revisar log antes de concluir.');
+ 62    END IF;
+ 63    DBMS_OUTPUT.PUT_LINE('ERROS_VALIDACAO=0');
+ 64    DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDA_SEM_DML_TGFFIN');
+ 65  END;
+ 66  /
+FUNCAO_STATUS=VALID
+FUNCAO_ERROS=0
+BACKUP_LINHAS=1; MAPA_LINHAS=1
+LINHAS_APTAS=0; AUDITORIA_INSERCOES=0
+TGFFIN_ATUAL_NOTAS_ESCUPO=0
+TGFNUM_ATUAL=1; ULTCOD_ATUAL=38210; TGFNUM_MAPA=1; ULTCOD_MAPA=38210
+ERROS_VALIDACAO=0
+STATUS=CONCLUIDA_SEM_DML_TGFFIN
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === CARD 09 - POS-VALIDACAO CONCLUIDA ===
+=== CARD 09 - POS-VALIDACAO CONCLUIDA ===
+SQL> SPOOL OFF

@@ -1,0 +1,37 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T23:03:15.531288+00:00",
+  "host": "10.110.56.20",
+  "port": 1521,
+  "service_esperado": "MOVEENERGIAPRD.SANKHYACLOUD.COM.BR",
+  "credential_status": "CREDENCIAL_KEYCHAIN_PRESENTE",
+  "forticlient_status_scutil": "DISCONNECTED",
+  "tcp_1521_acessivel": true,
+  "rota_alterada": false,
+  "arquivo_sql": "32_Card09_Preflight_Direto_XML_MOVE_READONLY.sql",
+  "sessao_oracle_estabelecida": true,
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "qtd_linhas": 10,
+  "metricas": {
+    "BASE_TOTAL": 185,
+    "REGISTROS_TGFNFE_DOS_CANDIDATOS": 185,
+    "CANDIDATOS_COM_MULTIPLOS_XML": 0,
+    "CANDIDATOS_SEM_XML": 0,
+    "APTO_PARA_VALIDACAO_FINAL_NOTAS": 184,
+    "APTO_PARA_VALIDACAO_FINAL_LINHAS_MAPA": 184,
+    "STATUS:APTO_PARA_VALIDACAO_FINAL": 184,
+    "STATUS:SEM_VDUP_XML": 1,
+    "TGFNUM_TGFFIN_LINHAS": 1,
+    "TGFNUM_TGFFIN_ULTCOD": 13768
+  },
+  "colisao_nomes_mapa": false,
+  "interpretacao": "184 linhas foram classificadas como APTO_PARA_VALIDACAO_FINAL no preflight read-only; 1 permaneceu SEM_VDUP_XML. Isto nao representa insercao financeira nem autorizacao individual do mapa. Revisar e validar o mapa persistente antes de qualquer fase de INSERT.",
+  "dml_executado": false,
+  "ddl_executado": false,
+  "tgffin_alterada": false
+}

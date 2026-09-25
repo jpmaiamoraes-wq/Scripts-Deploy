@@ -1,0 +1,14 @@
+ID_EXECUCAO_LOTE=RMD_JCLM_20260919222349
+ENTRADA=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Continuacao_Master_Deploy_JCLM_14_RETRY.sql
+SHA256_SUITE=88ed34ac42f10b81525fcf3f9be8c5baa5b7016650dc38c71ac9dce66cf7103c
+POS_VALIDACAO=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Artefatos_Revisao/Preflight/34_Atividade14_Estado_READONLY.sql
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=jclmprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[OK 1/2] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql:5 ROWCOUNT=0
+[ERRO 2/2] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql:14 DatabaseError: ORA-20341: Backup ou atualizacao da Analise 848 divergente.
+ORA-06512: at line 12
+ORA-06512: at line 11
+STATUS=LOTE_COM_ERRO

@@ -1,0 +1,25 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/33_Caracteres_Cadastros_MEDCHAP.sql",
+  "arquivos": [
+    "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/33_Caracteres_Cadastros_MEDCHAP.sql"
+  ],
+  "qtd_instrucoes": 6,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 5,
+    "CREATE": 1
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [],
+  "sha256_suite": "94702d7a2a4cdfdb32479fe7636d3fddb66a4fca217924561eb824512ca3b9b6",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "preflight": {
+    "status": "PREFLIGHT_APROVADO",
+    "qtd_bloqueios": 0,
+    "qtd_avisos": 0,
+    "bloqueios": [],
+    "avisos": []
+  },
+  "dml_ddl_executado": false
+}

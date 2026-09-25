@@ -1,0 +1,12 @@
+{
+  "pedido": "08_card09_mapa.json",
+  "inicio_local": "2026-09-25T08:51:07-03:00",
+  "id": "MEDCHAP_FDUP_20260925_01_MAPA",
+  "tipo": "batch_apply",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_FDUP_20260925_01_MAPA_console.txt",
+  "log_lote": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_FDUP_20260925_01_MAPA.log",
+  "fim_local": "2026-09-25T08:51:53-03:00",
+  "duracao_s": 46.4
+}

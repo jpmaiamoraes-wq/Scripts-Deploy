@@ -1,0 +1,55 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:39:36.417679+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Estado_Etapa18_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 9,
+  "colunas": [
+    "CHAVE",
+    "INTEIRO"
+  ],
+  "linhas": [
+    {
+      "CHAVE": "GOL-PERESTMED",
+      "INTEIRO": 6
+    },
+    {
+      "CHAVE": "GOL-QTDEGRUPOS",
+      "INTEIRO": 0
+    },
+    {
+      "CHAVE": "GOL-QTDEMARC",
+      "INTEIRO": 0
+    },
+    {
+      "CHAVE": "GOL-QTDEPARC",
+      "INTEIRO": 0
+    },
+    {
+      "CHAVE": "GOL-QTDEPERFIS",
+      "INTEIRO": 0
+    },
+    {
+      "CHAVE": "GOL-QTDEPROD",
+      "INTEIRO": 0
+    },
+    {
+      "CHAVE": "GOL-QTDEVENDS",
+      "INTEIRO": 0
+    },
+    {
+      "CHAVE": "GOL-TIPOCUSTO",
+      "INTEIRO": 3
+    },
+    {
+      "CHAVE": "PERCCUSFIXO",
+      "INTEIRO": null
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

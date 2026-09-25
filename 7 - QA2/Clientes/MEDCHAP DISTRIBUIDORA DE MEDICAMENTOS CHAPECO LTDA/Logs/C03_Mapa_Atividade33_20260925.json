@@ -1,0 +1,37 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T13:02:38.381145+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Caracteres/C03_Mapa_Atividade33.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "TABELA",
+    "COLUNA",
+    "CHAVE",
+    "VALOR_ANTES",
+    "VALOR_DEPOIS",
+    "REGRA",
+    "STATUS",
+    "DETALHE",
+    "BACKUP_NOMEUSU"
+  ],
+  "linhas": [
+    {
+      "TABELA": "TSIUSU",
+      "COLUNA": "NOMEUSU",
+      "CHAVE": "102",
+      "VALOR_ANTES": "JOAO.GON\\00BFALVES",
+      "VALOR_DEPOIS": "JOAO.GONCALVES",
+      "REGRA": "DECISAO_USUARIO",
+      "STATUS": "APLICADO",
+      "DETALHE": "palavra GON\\00BFALVES com 0 candidatas no dicionario. Decisao do usuario em 25/09/2026: login sem acento.",
+      "BACKUP_NOMEUSU": "JOAO.GON\\00BFALVES"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

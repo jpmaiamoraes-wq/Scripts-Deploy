@@ -1,0 +1,175 @@
+SQL> PROMPT CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 10 A 31
+CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 10 A 31
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> PROMPT [10/31] INICIO
+[10/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/10_Habilitar_ICMS_Gerencial.sql"
+SQL> -- Bloco 09_Habilitar_ICMS_Gerencial; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_09_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_09_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.ICMSGERENCIA VALOR_ANTES, CAST('S' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_ICMG_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_09_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),ICMSGERENCIA,CAST('S' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET ICMSGERENCIA='S' WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 09_Habilitar_ICMS_Gerencial.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_ICMG_20260910153718774
+REGISTROS_ALTERADOS=1
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [10/31] FIM
+[10/31] FIM
+SQL> PROMPT [11/31] INICIO
+[11/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/11_Habilitar_Ruptura_Produtos.sql"
+SQL> -- Bloco 10_Habilitar_Ruptura_Produtos; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_10_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_10_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.CALRUPTURAESTOQUE VALOR_ANTES, CAST('S' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_RUPP_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_10_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),CALRUPTURAESTOQUE,CAST('S' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE USOPROD IN ('V','R') AND NVL(CALRUPTURAESTOQUE,'N')<>'S';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET CALRUPTURAESTOQUE='S' WHERE USOPROD IN ('V','R') AND NVL(CALRUPTURAESTOQUE,'N')<>'S';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 10_Habilitar_Ruptura_Produtos.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_RUPP_20260910153719651
+REGISTROS_ALTERADOS=2
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [11/31] FIM
+[11/31] FIM
+SQL> PROMPT [12/31] INICIO
+[12/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/12_Habilitar_Ruptura_Empresas.sql"
+SQL> -- Executa somente quando AD_SEGMENTACAOEMPRESAS existe no CURRENT_SCHEMA.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE
+  2   v_tab NUMBER;v_id VARCHAR2(30):='RMD_RUPE_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER;v_u PLS_INTEGER;
+  4  BEGIN
+  5   SELECT COUNT(*) INTO v_tab FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='AD_SEGMENTACAOEMPRESAS';
+  6   IF v_tab=0 THEN DBMS_OUTPUT.PUT_LINE('BLOCO_IGNORADO=AD_SEGMENTACAOEMPRESAS inexistente');RETURN;END IF;
+  7   BEGIN
+  8    EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_11_TGFEMP AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  9    CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+ 10    CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,E.RUPTURAEST RUPTURAEST_ANTES FROM TGFEMP E WHERE 1=0]';
+ 11   EXCEPTION WHEN OTHERS THEN
+ 12    IF SQLCODE <> -955 THEN RAISE; END IF;
+ 13   END;
+ 14   INSERT INTO BKP_RMD_11_TGFEMP
+ 15   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),
+ 16   ROWIDTOCHAR(E.ROWID),E.RUPTURAEST FROM TGFEMP E WHERE NVL(E.RUPTURAEST,'N')<>'S' AND EXISTS(
+ 17   SELECT 1 FROM AD_SEGMENTACAOEMPRESAS S JOIN TSIEMP T ON T.CGC=S.CGC WHERE S.SEGMENTACAO<>'S' AND T.CODEMP=E.CODEMP);
+ 18   v_b:=SQL%ROWCOUNT;
+ 19   UPDATE TGFEMP E SET E.RUPTURAEST='S' WHERE NVL(E.RUPTURAEST,'N')<>'S' AND EXISTS(
+ 20   SELECT 1 FROM AD_SEGMENTACAOEMPRESAS S JOIN TSIEMP T ON T.CGC=S.CGC WHERE S.SEGMENTACAO<>'S' AND T.CODEMP=E.CODEMP);
+ 21   v_u:=SQL%ROWCOUNT;
+ 22   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20230,'Backup e atualizacao de empresas divergiram.');END IF;
+ 23   COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);DBMS_OUTPUT.PUT_LINE('EMPRESAS_ALTERADAS='||v_u);
+ 24  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+ 25  /
+Rollback
+ INSERT INTO BKP_RMD_11_TGFEMP
+             *
+ERROR at line 14:
+ORA-06550: line 14, column 14:
+PL/SQL: ORA-00942: table or view does not exist
+ORA-06550: line 14, column 2:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+SQL> PROMPT [12/31] FIM
+SQL> PROMPT [13/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql"
+SQL> PROMPT [13/31] FIM
+SQL> PROMPT [14/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql"
+SQL> PROMPT [14/31] FIM
+SQL> PROMPT [15/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/15_Desativar_Rastro_Sem_Controle.sql"
+SQL> PROMPT [15/31] FIM
+SQL> PROMPT [16/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/16_Aplicar_Higienizacao_TSICFG.sql"
+SQL> PROMPT [16/31] FIM
+SQL> PROMPT [17/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/17_Normalizar_Unidades.sql"
+SQL> PROMPT [17/31] FIM
+SQL> PROMPT [18-30] PREPARAR BACKUPS
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Preparar_Backups_18_30.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Ajustar_Preferencias_GOL.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/20_Atualizar_Cards_Deploy.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/21_Classificar_ICMS_Parceiros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/22_Ajustar_Nomes_Parceiros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/23_Validar_Reabilitar_Objetos.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/24_Padronizar_Parceiros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/25_Padronizar_Produtos.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/26_Padronizar_Tipos_Titulo.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/27_Padronizar_Cidades.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/28_Padronizar_Tipos_Venda.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/29_Padronizar_Bairros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/30_Padronizar_Enderecos.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+SQL> PROMPT CONTINUIDADE_10_31_CONCLUIDA
+SQL> SPOOL OFF
+SQL> SPOOL OFF

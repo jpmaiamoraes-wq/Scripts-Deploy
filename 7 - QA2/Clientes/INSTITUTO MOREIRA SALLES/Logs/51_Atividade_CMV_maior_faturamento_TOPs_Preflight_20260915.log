@@ -1,0 +1,86 @@
+=== CONTEXTO DA SESSAO ===
+
+CURRENT_SCHEMA
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SESSION_USER
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE_NAME
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DH_PREFLIGHT                      
+----------------------------------
+SANKHYA                                                                                                                                                                                                                                                   
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                          
+imsprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+15/09/26 14:11:05,000729000 -03:00
+
+
+=== EXISTENCIA DO BACKUP RESERVADO PARA A EXECUCAO ===
+no rows selected
+=== QUANTIDADE DE VERSOES E VALORES ATUAIS ===
+
+CODTIPOPER    VERSOES PRECIFICA_N PRECIFICA_C PRECIFICA_OUTROS PRIMEIRA ULTIMA_V
+---------- ---------- ----------- ----------- ---------------- -------- --------
+      1451          8           0           8                0 01/01/98 10/04/26
+      1452         14           2          12                0 01/01/98 02/06/26
+      1458          9           0           9                0 01/01/98 25/06/26
+
+=== TODAS AS VERSOES QUE SERAO COBERTAS PELO BACKUP ===
+
+CODTIPOPER DHALTER  DESCROPER                                                                                            P A   ATUALFIN A A   GOLSINAL ROWID_ORIGINAL    
+---------- -------- ---------------------------------------------------------------------------------------------------- - - ---------- - - ---------- ------------------
+      1451 01/01/98 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAAABbHAAK
+      1451 16/09/25 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAAAq6BAAI
+      1451 16/09/25 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAAAq6QAAA
+      1451 16/09/25 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAAAq6RAAI
+      1451 16/09/25 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAAAq6XAAI
+      1451 03/11/25 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAAAq6cAAE
+      1451 10/04/26 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAABHo+AAD
+      1451 10/04/26 ENTRADA - REMESSA BONIFICAÇÃO                                                                        C E          0 N N          0 AAAzq7AARAABHpDAAB
+      1452 01/01/98 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAABbHAAM
+      1452 01/12/23 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq53AAK
+      1452 15/04/24 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq51AAA
+      1452 15/04/24 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq5aAAC
+      1452 15/04/24 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq58AAG
+      1452 16/09/25 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq6AAAI
+      1452 16/09/25 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq6RAAQ
+      1452 16/09/25 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAAAq6TAAE
+      1452 07/04/26 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAABHDxAAR
+      1452 10/04/26 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAABHo+AAF
+      1452 10/04/26 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAABHpDAAD
+      1452 24/04/26 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                N E          0 N N          0 AAAzq7AARAABHoXAAH
+      1452 24/04/26 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                N E          0 N N          0 AAAzq7AARAABHpdAAJ
+      1452 02/06/26 ENTRADA - TRANSFERENCIA ENTRE FILIAIS                                                                C E          0 N N          0 AAAzq7AARAABHokAAD
+      1458 01/01/98 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAAAq5QAAG
+      1458 16/09/25 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAAAq6FAAG
+      1458 16/09/25 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAAAq6PAAE
+      1458 16/09/25 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAAAq6TAAM
+      1458 16/09/25 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAAAq6UAAK
+      1458 03/11/25 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAAAq6eAAM
+      1458 10/04/26 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAABHpdAAB
+      1458 10/04/26 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAABHpDAAP
+      1458 25/06/26 ENTRADA - SIMPLES REMESSA (OUTRAS)                                                                   C E          0 N N          0 AAAzq7AARAABHplAAF
+
+31 rows selected. 
+
+=== TOP 1401 - REFERENCIA QUE DEVE PERMANECER INALTERADA ===
+
+CODTIPOPER    VERSOES PRECIFICA_N PRECIFICA_C PRIMEIRA ULTIMA_V
+---------- ---------- ----------- ----------- -------- --------
+      1401         16           0          16 01/01/98 02/06/26
+
+=== RESTRICOES DE CHAVE/HISTORICO DE TGFTOP ===
+
+CONSTRAINT_NAME                                                                                                                  C
+-------------------------------------------------------------------------------------------------------------------------------- -
+COLUNAS                                                                                                                                                                                                                                                   
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PK_TGFTOP                                                                                                                        P 
+CODTIPOPER,DHALTER                                                                                                                                                                                                                                        
+
+
+=== QUANTIDADE ESPERADA PARA O BACKUP E ALTERACAO ===
+
+VERSOES_ALVO VERSOES_QUE_MUDARAO VERSOES_JA_N
+------------ ------------------- ------------
+          31                  29            2
+

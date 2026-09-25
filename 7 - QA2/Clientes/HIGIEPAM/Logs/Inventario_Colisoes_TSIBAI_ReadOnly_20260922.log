@@ -1,0 +1,7674 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T11:26:00.969342+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Inventario_Colisoes_TSIBAI_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 850,
+  "colunas": [
+    "NORM",
+    "QTD_REGISTROS",
+    "MENOR_CODBAI",
+    "MAIOR_CODBAI",
+    "CODBAI",
+    "NOMEBAI",
+    "ORDEM_NO_GRUPO"
+  ],
+  "linhas": [
+    {
+      "NORM": "ACUDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 738,
+      "MAIOR_CODBAI": 15900,
+      "CODBAI": 738,
+      "NOMEBAI": "Açude",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ACUDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 738,
+      "MAIOR_CODBAI": 15900,
+      "CODBAI": 15900,
+      "NOMEBAI": "Açúde",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AGUA BRANCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1272,
+      "MAIOR_CODBAI": 19342,
+      "CODBAI": 1272,
+      "NOMEBAI": "Água Branca",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AGUA BRANCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1272,
+      "MAIOR_CODBAI": 19342,
+      "CODBAI": 19342,
+      "NOMEBAI": "Agua Branca",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AGUA CLARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15082,
+      "MAIOR_CODBAI": 19527,
+      "CODBAI": 15082,
+      "NOMEBAI": "Água Clara",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AGUA CLARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15082,
+      "MAIOR_CODBAI": 19527,
+      "CODBAI": 19527,
+      "NOMEBAI": "Agua Clara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AGUA SUJA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18609,
+      "MAIOR_CODBAI": 45192,
+      "CODBAI": 18609,
+      "NOMEBAI": "Agua Suja",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AGUA SUJA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18609,
+      "MAIOR_CODBAI": 45192,
+      "CODBAI": 45192,
+      "NOMEBAI": "Água Suja",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AGUA VERDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2782,
+      "MAIOR_CODBAI": 17180,
+      "CODBAI": 2782,
+      "NOMEBAI": "Água Verde",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AGUA VERDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2782,
+      "MAIOR_CODBAI": 17180,
+      "CODBAI": 17180,
+      "NOMEBAI": "Agua Verde",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ALBATROZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19999,
+      "MAIOR_CODBAI": 45321,
+      "CODBAI": 19999,
+      "NOMEBAI": "Albatroz",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ALBATROZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19999,
+      "MAIOR_CODBAI": 45321,
+      "CODBAI": 45321,
+      "NOMEBAI": "Albatróz",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ALTO PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 740,
+      "MAIOR_CODBAI": 12175,
+      "CODBAI": 740,
+      "NOMEBAI": "Alto Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ALTO PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 740,
+      "MAIOR_CODBAI": 12175,
+      "CODBAI": 12175,
+      "NOMEBAI": "Alto Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ANDRADE ARAUJO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21496,
+      "MAIOR_CODBAI": 21880,
+      "CODBAI": 21496,
+      "NOMEBAI": "Andrade Araújo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ANDRADE ARAUJO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21496,
+      "MAIOR_CODBAI": 21880,
+      "CODBAI": 21880,
+      "NOMEBAI": "Andrade Araujo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5394,
+      "MAIOR_CODBAI": 33918,
+      "CODBAI": 5394,
+      "NOMEBAI": "Anhanguera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5394,
+      "MAIOR_CODBAI": 33918,
+      "CODBAI": 33918,
+      "NOMEBAI": "Anhangüera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ANTARTICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18448,
+      "MAIOR_CODBAI": 30900,
+      "CODBAI": 18448,
+      "NOMEBAI": "Antartica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ANTARTICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18448,
+      "MAIOR_CODBAI": 30900,
+      "CODBAI": 30900,
+      "NOMEBAI": "Antártica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ANTONIO CONSELHEIRO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1110,
+      "MAIOR_CODBAI": 15142,
+      "CODBAI": 1110,
+      "NOMEBAI": "Antônio Conselheiro",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ANTONIO CONSELHEIRO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1110,
+      "MAIOR_CODBAI": 15142,
+      "CODBAI": 15142,
+      "NOMEBAI": "Antonio Conselheiro",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ANTONIO LOPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1058,
+      "MAIOR_CODBAI": 34241,
+      "CODBAI": 1058,
+      "NOMEBAI": "Antônio Lopes",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ANTONIO LOPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1058,
+      "MAIOR_CODBAI": 34241,
+      "CODBAI": 34241,
+      "NOMEBAI": "Antonio Lopes",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ARACAJI DE MINAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8530,
+      "MAIOR_CODBAI": 9302,
+      "CODBAI": 8530,
+      "NOMEBAI": "Araçaji de Minas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ARACAJI DE MINAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8530,
+      "MAIOR_CODBAI": 9302,
+      "CODBAI": 9302,
+      "NOMEBAI": "Aracaji de Minas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ARCO-IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16073,
+      "MAIOR_CODBAI": 21479,
+      "CODBAI": 16073,
+      "NOMEBAI": "Arco-íris",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ARCO-IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16073,
+      "MAIOR_CODBAI": 21479,
+      "CODBAI": 21479,
+      "NOMEBAI": "Arco-Iris",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AREA RURAL",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 487,
+      "MAIOR_CODBAI": 19396,
+      "CODBAI": 487,
+      "NOMEBAI": "Área Rural",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AREA RURAL",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 487,
+      "MAIOR_CODBAI": 19396,
+      "CODBAI": 19383,
+      "NOMEBAI": "Area Rural",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AREA RURAL",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 487,
+      "MAIOR_CODBAI": 19396,
+      "CODBAI": 19396,
+      "NOMEBAI": "Área rural",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "AREA RURAL DE CURUPA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7832,
+      "MAIOR_CODBAI": 31504,
+      "CODBAI": 7832,
+      "NOMEBAI": "Área Rural de Curupa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AREA RURAL DE CURUPA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7832,
+      "MAIOR_CODBAI": 31504,
+      "CODBAI": 31504,
+      "NOMEBAI": "Área Rural de Curupá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "AREA RURAL DE PIRAPORA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9368,
+      "MAIOR_CODBAI": 14038,
+      "CODBAI": 9368,
+      "NOMEBAI": "Área Rural de Pirapora",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "AREA RURAL DE PIRAPORA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9368,
+      "MAIOR_CODBAI": 14038,
+      "CODBAI": 14038,
+      "NOMEBAI": "Área Rural de Piraporã",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ARIPUANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15609,
+      "MAIOR_CODBAI": 22184,
+      "CODBAI": 15609,
+      "NOMEBAI": "Aripuana",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ARIPUANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15609,
+      "MAIOR_CODBAI": 22184,
+      "CODBAI": 22184,
+      "NOMEBAI": "Aripuanã",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BANGU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20936,
+      "MAIOR_CODBAI": 37720,
+      "CODBAI": 20936,
+      "NOMEBAI": "Bangu",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BANGU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20936,
+      "MAIOR_CODBAI": 37720,
+      "CODBAI": 37720,
+      "NOMEBAI": "Bangú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BARROLANDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1129,
+      "MAIOR_CODBAI": 1288,
+      "CODBAI": 1129,
+      "NOMEBAI": "Barrolandia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BARROLANDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1129,
+      "MAIOR_CODBAI": 1288,
+      "CODBAI": 1288,
+      "NOMEBAI": "Barrolândia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BASILIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 936,
+      "MAIOR_CODBAI": 35849,
+      "CODBAI": 936,
+      "NOMEBAI": "Basílio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BASILIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 936,
+      "MAIOR_CODBAI": 35849,
+      "CODBAI": 35849,
+      "NOMEBAI": "Basilio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BELA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11170,
+      "MAIOR_CODBAI": 16914,
+      "CODBAI": 11170,
+      "NOMEBAI": "Bela Suíça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BELA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11170,
+      "MAIOR_CODBAI": 16914,
+      "CODBAI": 16914,
+      "NOMEBAI": "Bela Suiça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BETANIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 534,
+      "MAIOR_CODBAI": 23995,
+      "CODBAI": 534,
+      "NOMEBAI": "Betânia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BETANIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 534,
+      "MAIOR_CODBAI": 23995,
+      "CODBAI": 23995,
+      "NOMEBAI": "Betania",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BNH",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 687,
+      "MAIOR_CODBAI": 14370,
+      "CODBAI": 687,
+      "NOMEBAI": "BNH",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BNH",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 687,
+      "MAIOR_CODBAI": 14370,
+      "CODBAI": 14370,
+      "NOMEBAI": "Bnh",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BORACEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24518,
+      "MAIOR_CODBAI": 45320,
+      "CODBAI": 24518,
+      "NOMEBAI": "Boracéia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BORACEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24518,
+      "MAIOR_CODBAI": 45320,
+      "CODBAI": 45320,
+      "NOMEBAI": "Boraceia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BOSQUE DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12717,
+      "MAIOR_CODBAI": 30835,
+      "CODBAI": 12717,
+      "NOMEBAI": "Bosque dos Eucaliptos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BOSQUE DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12717,
+      "MAIOR_CODBAI": 30835,
+      "CODBAI": 30835,
+      "NOMEBAI": "Bosque dos Eucalíptos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "BRASILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 186,
+      "MAIOR_CODBAI": 17573,
+      "CODBAI": 186,
+      "NOMEBAI": "Brasília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "BRASILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 186,
+      "MAIOR_CODBAI": 17573,
+      "CODBAI": 17573,
+      "NOMEBAI": "Brasilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CACARATIBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8822,
+      "MAIOR_CODBAI": 8983,
+      "CODBAI": 8822,
+      "NOMEBAI": "Caçaratiba",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CACARATIBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8822,
+      "MAIOR_CODBAI": 8983,
+      "CODBAI": 8983,
+      "NOMEBAI": "Cacaratiba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CACHOEIRA DO ARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8764,
+      "MAIOR_CODBAI": 10320,
+      "CODBAI": 8764,
+      "NOMEBAI": "Cachoeira do Arana",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CACHOEIRA DO ARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8764,
+      "MAIOR_CODBAI": 10320,
+      "CODBAI": 10320,
+      "NOMEBAI": "Cachoeira do Aranã",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CAIXA D'AGUA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 1136,
+      "MAIOR_CODBAI": 16826,
+      "CODBAI": 1136,
+      "NOMEBAI": "Caixa D'Água",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CAIXA D'AGUA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 1136,
+      "MAIOR_CODBAI": 16826,
+      "CODBAI": 15722,
+      "NOMEBAI": "Caixa D'água",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CAIXA D'AGUA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 1136,
+      "MAIOR_CODBAI": 16826,
+      "CODBAI": 16826,
+      "NOMEBAI": "Caixa D'Agua",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "CAJU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10727,
+      "MAIOR_CODBAI": 30683,
+      "CODBAI": 10727,
+      "NOMEBAI": "Caju",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CAJU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10727,
+      "MAIOR_CODBAI": 30683,
+      "CODBAI": 30683,
+      "NOMEBAI": "Cajú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CAMARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2748,
+      "MAIOR_CODBAI": 4056,
+      "CODBAI": 2748,
+      "NOMEBAI": "Camará",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CAMARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2748,
+      "MAIOR_CODBAI": 4056,
+      "CODBAI": 4056,
+      "NOMEBAI": "Câmara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CAMBURI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21241,
+      "MAIOR_CODBAI": 40400,
+      "CODBAI": 21241,
+      "NOMEBAI": "Camburi",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CAMBURI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21241,
+      "MAIOR_CODBAI": 40400,
+      "CODBAI": 40400,
+      "NOMEBAI": "Camburí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CAMPOS ELISEOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8542,
+      "MAIOR_CODBAI": 43409,
+      "CODBAI": 8542,
+      "NOMEBAI": "Campos Elíseos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CAMPOS ELISEOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8542,
+      "MAIOR_CODBAI": 43409,
+      "CODBAI": 43409,
+      "NOMEBAI": "Campos Eliseos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CANAFISTULA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 190,
+      "MAIOR_CODBAI": 2389,
+      "CODBAI": 190,
+      "NOMEBAI": "Canafístula",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CANAFISTULA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 190,
+      "MAIOR_CODBAI": 2389,
+      "CODBAI": 2389,
+      "NOMEBAI": "Canafistula",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CARAIBAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 678,
+      "MAIOR_CODBAI": 1406,
+      "CODBAI": 678,
+      "NOMEBAI": "Caraibas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CARAIBAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 678,
+      "MAIOR_CODBAI": 1406,
+      "CODBAI": 1406,
+      "NOMEBAI": "Caraíbas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CATUCABA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22891,
+      "MAIOR_CODBAI": 31055,
+      "CODBAI": 22891,
+      "NOMEBAI": "Catuçaba",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CATUCABA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22891,
+      "MAIOR_CODBAI": 31055,
+      "CODBAI": 31055,
+      "NOMEBAI": "Catucaba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CATUMBI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9139,
+      "MAIOR_CODBAI": 16828,
+      "CODBAI": 9139,
+      "NOMEBAI": "Catumbi",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CATUMBI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9139,
+      "MAIOR_CODBAI": 16828,
+      "CODBAI": 16828,
+      "NOMEBAI": "Catumbí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CAVALCANTI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20945,
+      "MAIOR_CODBAI": 44631,
+      "CODBAI": 20945,
+      "NOMEBAI": "Cavalcanti",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CAVALCANTI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20945,
+      "MAIOR_CODBAI": 44631,
+      "CODBAI": 44631,
+      "NOMEBAI": "Cavalcânti",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CDHU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32326,
+      "MAIOR_CODBAI": 42049,
+      "CODBAI": 32326,
+      "NOMEBAI": "CDHU",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CDHU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32326,
+      "MAIOR_CODBAI": 42049,
+      "CODBAI": 42049,
+      "NOMEBAI": "Cdhu",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CECAP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 28181,
+      "MAIOR_CODBAI": 28641,
+      "CODBAI": 28181,
+      "NOMEBAI": "CECAP",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CECAP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 28181,
+      "MAIOR_CODBAI": 28641,
+      "CODBAI": 28641,
+      "NOMEBAI": "Cecap",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CENTRO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6,
+      "MAIOR_CODBAI": 7944,
+      "CODBAI": 6,
+      "NOMEBAI": "Centro",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CENTRO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6,
+      "MAIOR_CODBAI": 7944,
+      "CODBAI": 7944,
+      "NOMEBAI": "centro",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CENTRO (ARACAIBA)",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30417,
+      "MAIOR_CODBAI": 38026,
+      "CODBAI": 30417,
+      "NOMEBAI": "Centro (Araçaiba)",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CENTRO (ARACAIBA)",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30417,
+      "MAIOR_CODBAI": 38026,
+      "CODBAI": 38026,
+      "NOMEBAI": "Centro (Araçaíba)",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CEU AZUL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6895,
+      "MAIOR_CODBAI": 45828,
+      "CODBAI": 6895,
+      "NOMEBAI": "Céu Azul",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CEU AZUL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6895,
+      "MAIOR_CODBAI": 45828,
+      "CODBAI": 45828,
+      "NOMEBAI": "Ceú Azul",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARA DAS PALMEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23130,
+      "MAIOR_CODBAI": 27761,
+      "CODBAI": 23130,
+      "NOMEBAI": "Chacará das Palmeiras",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARA DAS PALMEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23130,
+      "MAIOR_CODBAI": 27761,
+      "CODBAI": 27761,
+      "NOMEBAI": "Chácara das Palmeiras",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARA DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25353,
+      "MAIOR_CODBAI": 34545,
+      "CODBAI": 25353,
+      "NOMEBAI": "Chácara dos Eucalíptos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARA DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25353,
+      "MAIOR_CODBAI": 34545,
+      "CODBAI": 34545,
+      "NOMEBAI": "Chácara dos Eucaliptos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARA SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21884,
+      "MAIOR_CODBAI": 37601,
+      "CODBAI": 21884,
+      "NOMEBAI": "Chácara Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARA SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21884,
+      "MAIOR_CODBAI": 37601,
+      "CODBAI": 37601,
+      "NOMEBAI": "Chácara Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARA SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30142,
+      "MAIOR_CODBAI": 35570,
+      "CODBAI": 30142,
+      "NOMEBAI": "Chácara São Luis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARA SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30142,
+      "MAIOR_CODBAI": 35570,
+      "CODBAI": 35570,
+      "NOMEBAI": "Chácara São Luís",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARAS AEROPORTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17480,
+      "MAIOR_CODBAI": 18830,
+      "CODBAI": 17480,
+      "NOMEBAI": "Chácaras Aeroporto",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARAS AEROPORTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17480,
+      "MAIOR_CODBAI": 18830,
+      "CODBAI": 18830,
+      "NOMEBAI": "Chacaras Aeroporto",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARAS ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4786,
+      "MAIOR_CODBAI": 5654,
+      "CODBAI": 4786,
+      "NOMEBAI": "Chácaras Anhangüera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARAS ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4786,
+      "MAIOR_CODBAI": 5654,
+      "CODBAI": 5654,
+      "NOMEBAI": "Chácaras Anhanguera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARAS COIMBRA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5986,
+      "MAIOR_CODBAI": 5991,
+      "CODBAI": 5986,
+      "NOMEBAI": "Chacaras Coimbra",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARAS COIMBRA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5986,
+      "MAIOR_CODBAI": 5991,
+      "CODBAI": 5991,
+      "NOMEBAI": "Chácaras Coimbra",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CHACARAS SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26236,
+      "MAIOR_CODBAI": 33836,
+      "CODBAI": 26236,
+      "NOMEBAI": "Chácaras Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CHACARAS SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26236,
+      "MAIOR_CODBAI": 33836,
+      "CODBAI": 33836,
+      "NOMEBAI": "Chácaras Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CIDADE NAUTICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26114,
+      "MAIOR_CODBAI": 38809,
+      "CODBAI": 26114,
+      "NOMEBAI": "Cidade Naútica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CIDADE NAUTICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26114,
+      "MAIOR_CODBAI": 38809,
+      "CODBAI": 38809,
+      "NOMEBAI": "Cidade Nautica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CIDADE SATELITE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22335,
+      "MAIOR_CODBAI": 38819,
+      "CODBAI": 22335,
+      "NOMEBAI": "Cidade Satélite",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CIDADE SATELITE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22335,
+      "MAIOR_CODBAI": 38819,
+      "CODBAI": 38819,
+      "NOMEBAI": "Cidade Satelite",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CINQUENTENARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9370,
+      "MAIOR_CODBAI": 22554,
+      "CODBAI": 9370,
+      "NOMEBAI": "Cinquentenário",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CINQUENTENARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9370,
+      "MAIOR_CODBAI": 22554,
+      "CODBAI": 22554,
+      "NOMEBAI": "Cinqüentenário",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "COHAB",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2522,
+      "MAIOR_CODBAI": 3754,
+      "CODBAI": 2522,
+      "NOMEBAI": "Cohab",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "COHAB",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2522,
+      "MAIOR_CODBAI": 3754,
+      "CODBAI": 3754,
+      "NOMEBAI": "COHAB",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "COHAB I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2487,
+      "MAIOR_CODBAI": 16141,
+      "CODBAI": 2487,
+      "NOMEBAI": "Cohab I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "COHAB I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2487,
+      "MAIOR_CODBAI": 16141,
+      "CODBAI": 16141,
+      "NOMEBAI": "COHAB I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "COHAB II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2488,
+      "MAIOR_CODBAI": 14268,
+      "CODBAI": 2488,
+      "NOMEBAI": "Cohab II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "COHAB II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2488,
+      "MAIOR_CODBAI": 14268,
+      "CODBAI": 14268,
+      "NOMEBAI": "COHAB II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "COLONIA RODRIGO SILVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9466,
+      "MAIOR_CODBAI": 12410,
+      "CODBAI": 9466,
+      "NOMEBAI": "Colônia Rodrigo Silva",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "COLONIA RODRIGO SILVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9466,
+      "MAIOR_CODBAI": 12410,
+      "CODBAI": 12410,
+      "NOMEBAI": "Colonia Rodrigo Silva",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "COLUMBIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4208,
+      "MAIOR_CODBAI": 19904,
+      "CODBAI": 4208,
+      "NOMEBAI": "Columbia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "COLUMBIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4208,
+      "MAIOR_CODBAI": 19904,
+      "CODBAI": 19904,
+      "NOMEBAI": "Colúmbia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONDOMINIO AGUA VIVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6005,
+      "MAIOR_CODBAI": 36669,
+      "CODBAI": 6005,
+      "NOMEBAI": "Condomínio Àgua Viva",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONDOMINIO AGUA VIVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6005,
+      "MAIOR_CODBAI": 36669,
+      "CODBAI": 36669,
+      "NOMEBAI": "Condominio Água Viva",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONDOMINIO ESTANCIA DOS LAGOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10123,
+      "MAIOR_CODBAI": 33503,
+      "CODBAI": 10123,
+      "NOMEBAI": "Condomínio Estância dos Lagos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONDOMINIO ESTANCIA DOS LAGOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10123,
+      "MAIOR_CODBAI": 33503,
+      "CODBAI": 33503,
+      "NOMEBAI": "Condominio Estância dos Lagos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONDOMINIO VILLE DE FRANCE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32575,
+      "MAIOR_CODBAI": 33510,
+      "CODBAI": 32575,
+      "NOMEBAI": "Condomínio Ville de France",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONDOMINIO VILLE DE FRANCE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32575,
+      "MAIOR_CODBAI": 33510,
+      "CODBAI": 33510,
+      "NOMEBAI": "Condominio Ville de France",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL GOVERNADOR MARIO COVAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24824,
+      "MAIOR_CODBAI": 26191,
+      "CODBAI": 24824,
+      "NOMEBAI": "Conjunto Habitacional Governador Mário Covas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL GOVERNADOR MARIO COVAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24824,
+      "MAIOR_CODBAI": 26191,
+      "CODBAI": 26191,
+      "NOMEBAI": "Conjunto Habitacional Governador Mario Covas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL JARDIM VITORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 28429,
+      "MAIOR_CODBAI": 43239,
+      "CODBAI": 28429,
+      "NOMEBAI": "Conjunto Habitacional Jardim Vitória",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL JARDIM VITORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 28429,
+      "MAIOR_CODBAI": 43239,
+      "CODBAI": 43239,
+      "NOMEBAI": "Conjunto Habitacional Jardim Vitoria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL MARIO COVAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26596,
+      "MAIOR_CODBAI": 39336,
+      "CODBAI": 26596,
+      "NOMEBAI": "Conjunto Habitacional Mário Covas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL MARIO COVAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26596,
+      "MAIOR_CODBAI": 39336,
+      "CODBAI": 39336,
+      "NOMEBAI": "Conjunto Habitacional Mario Covas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL NOSSA SENHORA APARECIDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17575,
+      "MAIOR_CODBAI": 19403,
+      "CODBAI": 17575,
+      "NOMEBAI": "Conjunto habitacional Nossa Senhora Aparecida",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL NOSSA SENHORA APARECIDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17575,
+      "MAIOR_CODBAI": 19403,
+      "CODBAI": 19403,
+      "NOMEBAI": "Conjunto Habitacional Nossa Senhora Aparecida",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 41666,
+      "MAIOR_CODBAI": 43822,
+      "CODBAI": 41666,
+      "NOMEBAI": "Conjunto Habitacional Paraiso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 41666,
+      "MAIOR_CODBAI": 43822,
+      "CODBAI": 43822,
+      "NOMEBAI": "Conjunto Habitacional Paraíso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL ULISSES GUIMARAES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 35761,
+      "MAIOR_CODBAI": 40278,
+      "CODBAI": 35761,
+      "NOMEBAI": "Conjunto Habitacional Ulisses Guimaraes",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CONJUNTO HABITACIONAL ULISSES GUIMARAES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 35761,
+      "MAIOR_CODBAI": 40278,
+      "CODBAI": 40278,
+      "NOMEBAI": "Conjunto Habitacional Ulisses Guimarães",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CORREGO DO OURO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9195,
+      "MAIOR_CODBAI": 21140,
+      "CODBAI": 9195,
+      "NOMEBAI": "Córrego do Ouro",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CORREGO DO OURO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9195,
+      "MAIOR_CODBAI": 21140,
+      "CODBAI": 21140,
+      "NOMEBAI": "Côrrego do Ouro",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CORREGO DOS DESIDERIOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13034,
+      "MAIOR_CODBAI": 13035,
+      "CODBAI": 13034,
+      "NOMEBAI": "Córrego dos Desiderios",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CORREGO DOS DESIDERIOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13034,
+      "MAIOR_CODBAI": 13035,
+      "CODBAI": 13035,
+      "NOMEBAI": "Córrego dos Desidérios",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "CORUMBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20166,
+      "MAIOR_CODBAI": 43414,
+      "CODBAI": 20166,
+      "NOMEBAI": "Corumbá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "CORUMBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20166,
+      "MAIOR_CODBAI": 43414,
+      "CODBAI": 43414,
+      "NOMEBAI": "Corumba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DA LAGOA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26927,
+      "MAIOR_CODBAI": 45551,
+      "CODBAI": 26927,
+      "NOMEBAI": "Da Lagoa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DA LAGOA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26927,
+      "MAIOR_CODBAI": 45551,
+      "CODBAI": 45551,
+      "NOMEBAI": "da Lagoa",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DAS FLORES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2811,
+      "MAIOR_CODBAI": 13223,
+      "CODBAI": 2811,
+      "NOMEBAI": "das Flores",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DAS FLORES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2811,
+      "MAIOR_CODBAI": 13223,
+      "CODBAI": 13223,
+      "NOMEBAI": "Das Flores",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DAS LARANJEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3503,
+      "MAIOR_CODBAI": 5173,
+      "CODBAI": 3503,
+      "NOMEBAI": "das Laranjeiras",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DAS LARANJEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3503,
+      "MAIOR_CODBAI": 5173,
+      "CODBAI": 5173,
+      "NOMEBAI": "Das Laranjeiras",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DAS NACOES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6180,
+      "MAIOR_CODBAI": 23783,
+      "CODBAI": 6180,
+      "NOMEBAI": "Das Nações",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DAS NACOES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6180,
+      "MAIOR_CODBAI": 23783,
+      "CODBAI": 23783,
+      "NOMEBAI": "das Nações",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DAS OLIVEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11509,
+      "MAIOR_CODBAI": 12368,
+      "CODBAI": 11509,
+      "NOMEBAI": "das Oliveiras",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DAS OLIVEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11509,
+      "MAIOR_CODBAI": 12368,
+      "CODBAI": 12368,
+      "NOMEBAI": "Das Oliveiras",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DAS PITAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25971,
+      "MAIOR_CODBAI": 41484,
+      "CODBAI": 25971,
+      "NOMEBAI": "Das Pitas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DAS PITAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25971,
+      "MAIOR_CODBAI": 41484,
+      "CODBAI": 41484,
+      "NOMEBAI": "das Pitas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4083,
+      "MAIOR_CODBAI": 23554,
+      "CODBAI": 4083,
+      "NOMEBAI": "de Fátima",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4083,
+      "MAIOR_CODBAI": 23554,
+      "CODBAI": 23554,
+      "NOMEBAI": "De Fátima",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DE LOURDES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2410,
+      "MAIOR_CODBAI": 3620,
+      "CODBAI": 2410,
+      "NOMEBAI": "De Lourdes",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DE LOURDES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2410,
+      "MAIOR_CODBAI": 3620,
+      "CODBAI": 3620,
+      "NOMEBAI": "de Lourdes",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19241,
+      "MAIOR_CODBAI": 23926,
+      "CODBAI": 19241,
+      "NOMEBAI": "DER",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19241,
+      "MAIOR_CODBAI": 23926,
+      "CODBAI": 23926,
+      "NOMEBAI": "Der",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DISTRITO DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15963,
+      "MAIOR_CODBAI": 16187,
+      "CODBAI": 15963,
+      "NOMEBAI": "Distrito de Fátima",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DISTRITO DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15963,
+      "MAIOR_CODBAI": 16187,
+      "CODBAI": 16187,
+      "NOMEBAI": "Distrito de Fatíma",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DISTRITO DE MANICOBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16692,
+      "MAIOR_CODBAI": 16736,
+      "CODBAI": 16692,
+      "NOMEBAI": "Distrito de Manicoba",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DISTRITO DE MANICOBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16692,
+      "MAIOR_CODBAI": 16736,
+      "CODBAI": 16736,
+      "NOMEBAI": "Distrito de Maniçoba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DISTRITO INDUSTRIAL I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 392,
+      "MAIOR_CODBAI": 30671,
+      "CODBAI": 392,
+      "NOMEBAI": "Distrito Industrial I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DISTRITO INDUSTRIAL I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 392,
+      "MAIOR_CODBAI": 30671,
+      "CODBAI": 30671,
+      "NOMEBAI": "Distrito industrial I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DIVINEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8173,
+      "MAIOR_CODBAI": 24341,
+      "CODBAI": 8173,
+      "NOMEBAI": "Divinéia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DIVINEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8173,
+      "MAIOR_CODBAI": 24341,
+      "CODBAI": 24341,
+      "NOMEBAI": "Divineia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DIVINO ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2727,
+      "MAIOR_CODBAI": 3742,
+      "CODBAI": 2727,
+      "NOMEBAI": "Divino Espirito Santo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DIVINO ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2727,
+      "MAIOR_CODBAI": 3742,
+      "CODBAI": 3742,
+      "NOMEBAI": "Divino Espírito Santo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "DOS IMIGRANTES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23602,
+      "MAIOR_CODBAI": 40185,
+      "CODBAI": 23602,
+      "NOMEBAI": "dos Imigrantes",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "DOS IMIGRANTES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23602,
+      "MAIOR_CODBAI": 40185,
+      "CODBAI": 40185,
+      "NOMEBAI": "Dos Imigrantes",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "EPLATZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26991,
+      "MAIOR_CODBAI": 30506,
+      "CODBAI": 26991,
+      "NOMEBAI": "Eplatz",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "EPLATZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26991,
+      "MAIOR_CODBAI": 30506,
+      "CODBAI": 30506,
+      "NOMEBAI": "EPLATZ",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 491,
+      "MAIOR_CODBAI": 1126,
+      "CODBAI": 491,
+      "NOMEBAI": "Espirito Santo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 491,
+      "MAIOR_CODBAI": 1126,
+      "CODBAI": 1126,
+      "NOMEBAI": "Espírito Santo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ESTANCIA PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1983,
+      "MAIOR_CODBAI": 43387,
+      "CODBAI": 1983,
+      "NOMEBAI": "Estância Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ESTANCIA PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1983,
+      "MAIOR_CODBAI": 43387,
+      "CODBAI": 43387,
+      "NOMEBAI": "Estância Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1866,
+      "MAIOR_CODBAI": 24933,
+      "CODBAI": 1866,
+      "NOMEBAI": "Eucaliptos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1866,
+      "MAIOR_CODBAI": 24933,
+      "CODBAI": 24933,
+      "NOMEBAI": "Eucalíptos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "FLOR DA SERRA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15192,
+      "MAIOR_CODBAI": 17042,
+      "CODBAI": 15192,
+      "NOMEBAI": "Flôr da Serra",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "FLOR DA SERRA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15192,
+      "MAIOR_CODBAI": 17042,
+      "CODBAI": 17042,
+      "NOMEBAI": "Flor da Serra",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "FLORIDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12873,
+      "MAIOR_CODBAI": 22788,
+      "CODBAI": 12873,
+      "NOMEBAI": "Flórida",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "FLORIDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12873,
+      "MAIOR_CODBAI": 22788,
+      "CODBAI": 22788,
+      "NOMEBAI": "Florida",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "GLORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 74,
+      "MAIOR_CODBAI": 14613,
+      "CODBAI": 74,
+      "NOMEBAI": "Glória",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "GLORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 74,
+      "MAIOR_CODBAI": 14613,
+      "CODBAI": 14613,
+      "NOMEBAI": "Gloria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "GRAJAU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8744,
+      "MAIOR_CODBAI": 21848,
+      "CODBAI": 8744,
+      "NOMEBAI": "Grajaú",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "GRAJAU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8744,
+      "MAIOR_CODBAI": 21848,
+      "CODBAI": 21848,
+      "NOMEBAI": "Grajau",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "GUAIUBA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 23886,
+      "MAIOR_CODBAI": 43178,
+      "CODBAI": 23886,
+      "NOMEBAI": "Guaiuba",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "GUAIUBA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 23886,
+      "MAIOR_CODBAI": 43178,
+      "CODBAI": 23937,
+      "NOMEBAI": "GUAIÚBA",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "GUAIUBA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 23886,
+      "MAIOR_CODBAI": 43178,
+      "CODBAI": 43178,
+      "NOMEBAI": "Guaiúba",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "GUANDU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3557,
+      "MAIOR_CODBAI": 20284,
+      "CODBAI": 3557,
+      "NOMEBAI": "Guandú",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "GUANDU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3557,
+      "MAIOR_CODBAI": 20284,
+      "CODBAI": 20284,
+      "NOMEBAI": "Guandu",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "GUARARU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2423,
+      "MAIOR_CODBAI": 38631,
+      "CODBAI": 2423,
+      "NOMEBAI": "Guararu",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "GUARARU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2423,
+      "MAIOR_CODBAI": 38631,
+      "CODBAI": 38631,
+      "NOMEBAI": "Guararú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "GUEREM",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 624,
+      "MAIOR_CODBAI": 1616,
+      "CODBAI": 624,
+      "NOMEBAI": "Guerem",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "GUEREM",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 624,
+      "MAIOR_CODBAI": 1616,
+      "CODBAI": 1616,
+      "NOMEBAI": "Guerém",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "HAIDEE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9422,
+      "MAIOR_CODBAI": 23131,
+      "CODBAI": 9422,
+      "NOMEBAI": "Haidee",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "HAIDEE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9422,
+      "MAIOR_CODBAI": 23131,
+      "CODBAI": 23131,
+      "NOMEBAI": "Haideé",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "IAPI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1809,
+      "MAIOR_CODBAI": 2849,
+      "CODBAI": 1809,
+      "NOMEBAI": "IAPI",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "IAPI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1809,
+      "MAIOR_CODBAI": 2849,
+      "CODBAI": 2849,
+      "NOMEBAI": "Iapi",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "IGUACU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2498,
+      "MAIOR_CODBAI": 18378,
+      "CODBAI": 2498,
+      "NOMEBAI": "Iguaçu",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "IGUACU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2498,
+      "MAIOR_CODBAI": 18378,
+      "CODBAI": 18378,
+      "NOMEBAI": "Iguacu",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "IGUAPE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 683,
+      "MAIOR_CODBAI": 937,
+      "CODBAI": 683,
+      "NOMEBAI": "Iguapé",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "IGUAPE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 683,
+      "MAIOR_CODBAI": 937,
+      "CODBAI": 937,
+      "NOMEBAI": "Iguape",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "INGA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 282,
+      "MAIOR_CODBAI": 9671,
+      "CODBAI": 282,
+      "NOMEBAI": "Ingâ",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "INGA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 282,
+      "MAIOR_CODBAI": 9671,
+      "CODBAI": 9671,
+      "NOMEBAI": "Ingá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "IRAJAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16467,
+      "MAIOR_CODBAI": 16767,
+      "CODBAI": 16467,
+      "NOMEBAI": "Irajai",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "IRAJAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16467,
+      "MAIOR_CODBAI": 16767,
+      "CODBAI": 16767,
+      "NOMEBAI": "Irajaí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ITAICI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4017,
+      "MAIOR_CODBAI": 4069,
+      "CODBAI": 4017,
+      "NOMEBAI": "Itaici",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ITAICI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4017,
+      "MAIOR_CODBAI": 4069,
+      "CODBAI": 4069,
+      "NOMEBAI": "Itaicí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ITAOCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3041,
+      "MAIOR_CODBAI": 3588,
+      "CODBAI": 3041,
+      "NOMEBAI": "Itaoca",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ITAOCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3041,
+      "MAIOR_CODBAI": 3588,
+      "CODBAI": 3588,
+      "NOMEBAI": "Itaóca",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ITAPORA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1801,
+      "MAIOR_CODBAI": 13091,
+      "CODBAI": 1801,
+      "NOMEBAI": "Itapora",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ITAPORA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1801,
+      "MAIOR_CODBAI": 13091,
+      "CODBAI": 13091,
+      "NOMEBAI": "Itaporã",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ITAPUCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20757,
+      "MAIOR_CODBAI": 22691,
+      "CODBAI": 20757,
+      "NOMEBAI": "Itapuca",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ITAPUCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20757,
+      "MAIOR_CODBAI": 22691,
+      "CODBAI": 22691,
+      "NOMEBAI": "Itapucá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ITAUBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22856,
+      "MAIOR_CODBAI": 23039,
+      "CODBAI": 22856,
+      "NOMEBAI": "Itaúba",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ITAUBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22856,
+      "MAIOR_CODBAI": 23039,
+      "CODBAI": 23039,
+      "NOMEBAI": "itaúba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JACUBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 685,
+      "MAIOR_CODBAI": 9718,
+      "CODBAI": 685,
+      "NOMEBAI": "Jacubá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JACUBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 685,
+      "MAIOR_CODBAI": 9718,
+      "CODBAI": 9718,
+      "NOMEBAI": "Jacuba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARAGUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 218,
+      "MAIOR_CODBAI": 15137,
+      "CODBAI": 218,
+      "NOMEBAI": "Jaraguá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARAGUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 218,
+      "MAIOR_CODBAI": 15137,
+      "CODBAI": 15137,
+      "NOMEBAI": "Jaragua",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ALCANTARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17795,
+      "MAIOR_CODBAI": 21708,
+      "CODBAI": 17795,
+      "NOMEBAI": "Jardim Alcantara",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ALCANTARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17795,
+      "MAIOR_CODBAI": 21708,
+      "CODBAI": 21708,
+      "NOMEBAI": "Jardim Alcântara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM AMALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20437,
+      "MAIOR_CODBAI": 34967,
+      "CODBAI": 20437,
+      "NOMEBAI": "Jardim Amália",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM AMALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20437,
+      "MAIOR_CODBAI": 34967,
+      "CODBAI": 34967,
+      "NOMEBAI": "Jardim Amalia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM AMERICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24,
+      "MAIOR_CODBAI": 45726,
+      "CODBAI": 24,
+      "NOMEBAI": "Jardim América",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM AMERICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24,
+      "MAIOR_CODBAI": 45726,
+      "CODBAI": 45726,
+      "NOMEBAI": "Jardim America",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ANA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6262,
+      "MAIOR_CODBAI": 27103,
+      "CODBAI": 6262,
+      "NOMEBAI": "Jardim Ana Cláudia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ANA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6262,
+      "MAIOR_CODBAI": 27103,
+      "CODBAI": 27103,
+      "NOMEBAI": "Jardim Ana Claudia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25777,
+      "MAIOR_CODBAI": 35357,
+      "CODBAI": 25777,
+      "NOMEBAI": "Jardim Anhangüera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25777,
+      "MAIOR_CODBAI": 35357,
+      "CODBAI": 35357,
+      "NOMEBAI": "Jardim Anhanguera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ANTARES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14139,
+      "MAIOR_CODBAI": 43012,
+      "CODBAI": 14139,
+      "NOMEBAI": "Jardim Antáres",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ANTARES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14139,
+      "MAIOR_CODBAI": 43012,
+      "CODBAI": 43012,
+      "NOMEBAI": "Jardim Antares",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM AQUARIUS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8360,
+      "MAIOR_CODBAI": 37298,
+      "CODBAI": 8360,
+      "NOMEBAI": "Jardim Aquárius",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM AQUARIUS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8360,
+      "MAIOR_CODBAI": 37298,
+      "CODBAI": 37298,
+      "NOMEBAI": "Jardim Aquarius",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ARACA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19045,
+      "MAIOR_CODBAI": 19149,
+      "CODBAI": 19045,
+      "NOMEBAI": "Jardim Araçá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ARACA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19045,
+      "MAIOR_CODBAI": 19149,
+      "CODBAI": 19149,
+      "NOMEBAI": "Jardim Araça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ARCO IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6925,
+      "MAIOR_CODBAI": 35690,
+      "CODBAI": 6925,
+      "NOMEBAI": "Jardim Arco Íris",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ARCO IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6925,
+      "MAIOR_CODBAI": 35690,
+      "CODBAI": 35690,
+      "NOMEBAI": "Jardim Arco Iris",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ARCO-IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27742,
+      "MAIOR_CODBAI": 33626,
+      "CODBAI": 27742,
+      "NOMEBAI": "Jardim Arco-Íris",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ARCO-IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27742,
+      "MAIOR_CODBAI": 33626,
+      "CODBAI": 33626,
+      "NOMEBAI": "Jardim Arco-Iris",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ASTURIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18196,
+      "MAIOR_CODBAI": 44329,
+      "CODBAI": 18196,
+      "NOMEBAI": "Jardim Astúrias",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ASTURIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18196,
+      "MAIOR_CODBAI": 44329,
+      "CODBAI": 44329,
+      "NOMEBAI": "Jardim Asturias",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM AUREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7026,
+      "MAIOR_CODBAI": 25883,
+      "CODBAI": 7026,
+      "NOMEBAI": "Jardim Áurea",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM AUREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7026,
+      "MAIOR_CODBAI": 25883,
+      "CODBAI": 25883,
+      "NOMEBAI": "Jardim Aurea",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM BRASILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1282,
+      "MAIOR_CODBAI": 18651,
+      "CODBAI": 1282,
+      "NOMEBAI": "Jardim Brasília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM BRASILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1282,
+      "MAIOR_CODBAI": 18651,
+      "CODBAI": 18651,
+      "NOMEBAI": "Jardim Brasilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CALIFORNIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4432,
+      "MAIOR_CODBAI": 19244,
+      "CODBAI": 4432,
+      "NOMEBAI": "Jardim Califórnia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CALIFORNIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4432,
+      "MAIOR_CODBAI": 19244,
+      "CODBAI": 19244,
+      "NOMEBAI": "Jardim California",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CAMBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30077,
+      "MAIOR_CODBAI": 33104,
+      "CODBAI": 30077,
+      "NOMEBAI": "Jardim Cambara",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CAMBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30077,
+      "MAIOR_CODBAI": 33104,
+      "CODBAI": 33104,
+      "NOMEBAI": "Jardim Cambará",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CAMBUI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8648,
+      "MAIOR_CODBAI": 44989,
+      "CODBAI": 8648,
+      "NOMEBAI": "Jardim Cambuí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CAMBUI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8648,
+      "MAIOR_CODBAI": 44989,
+      "CODBAI": 44989,
+      "NOMEBAI": "Jardim Cambui",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CANADA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7032,
+      "MAIOR_CODBAI": 19671,
+      "CODBAI": 7032,
+      "NOMEBAI": "Jardim Canadá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CANADA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7032,
+      "MAIOR_CODBAI": 19671,
+      "CODBAI": 19671,
+      "NOMEBAI": "Jardim Canada",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CECAP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26353,
+      "MAIOR_CODBAI": 33853,
+      "CODBAI": 26353,
+      "NOMEBAI": "Jardim Cecap",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CECAP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26353,
+      "MAIOR_CODBAI": 33853,
+      "CODBAI": 33853,
+      "NOMEBAI": "Jardim CECAP",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CINQUENTENARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9447,
+      "MAIOR_CODBAI": 43807,
+      "CODBAI": 9447,
+      "NOMEBAI": "Jardim Cinquentenário",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CINQUENTENARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9447,
+      "MAIOR_CODBAI": 43807,
+      "CODBAI": 43807,
+      "NOMEBAI": "Jardim Cinqüentenário",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18733,
+      "MAIOR_CODBAI": 32350,
+      "CODBAI": 18733,
+      "NOMEBAI": "Jardim Cláudia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18733,
+      "MAIOR_CODBAI": 32350,
+      "CODBAI": 32350,
+      "NOMEBAI": "Jardim Claudia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM CLIMAX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14470,
+      "MAIOR_CODBAI": 18383,
+      "CODBAI": 14470,
+      "NOMEBAI": "Jardim Climax",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM CLIMAX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14470,
+      "MAIOR_CODBAI": 18383,
+      "CODBAI": 18383,
+      "NOMEBAI": "Jardim Clímax",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM COLIBRI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6314,
+      "MAIOR_CODBAI": 13930,
+      "CODBAI": 6314,
+      "NOMEBAI": "Jardim Colibri",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM COLIBRI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6314,
+      "MAIOR_CODBAI": 13930,
+      "CODBAI": 13930,
+      "NOMEBAI": "Jardim Colibrí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM COLUMBIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13956,
+      "MAIOR_CODBAI": 26325,
+      "CODBAI": 13956,
+      "NOMEBAI": "Jardim Colúmbia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM COLUMBIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13956,
+      "MAIOR_CODBAI": 26325,
+      "CODBAI": 26325,
+      "NOMEBAI": "Jardim Columbia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DAS ACACIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1838,
+      "MAIOR_CODBAI": 9235,
+      "CODBAI": 1838,
+      "NOMEBAI": "Jardim das Acácias",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DAS ACACIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1838,
+      "MAIOR_CODBAI": 9235,
+      "CODBAI": 9235,
+      "NOMEBAI": "Jardim Das Acácias",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DAS AZALEIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12359,
+      "MAIOR_CODBAI": 14768,
+      "CODBAI": 12359,
+      "NOMEBAI": "Jardim das Azaléias",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DAS AZALEIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12359,
+      "MAIOR_CODBAI": 14768,
+      "CODBAI": 14768,
+      "NOMEBAI": "Jardim das Azaleias",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DAS CAMELIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18384,
+      "MAIOR_CODBAI": 23711,
+      "CODBAI": 18384,
+      "NOMEBAI": "Jardim das Camelias",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DAS CAMELIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18384,
+      "MAIOR_CODBAI": 23711,
+      "CODBAI": 23711,
+      "NOMEBAI": "Jardim das Camélias",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DAS HORTENCIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5026,
+      "MAIOR_CODBAI": 11891,
+      "CODBAI": 5026,
+      "NOMEBAI": "Jardim das Hortências",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DAS HORTENCIAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5026,
+      "MAIOR_CODBAI": 11891,
+      "CODBAI": 11891,
+      "NOMEBAI": "Jardim Das Hortências",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DAS PAINEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7206,
+      "MAIOR_CODBAI": 11840,
+      "CODBAI": 7206,
+      "NOMEBAI": "Jardim das Paineiras",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DAS PAINEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7206,
+      "MAIOR_CODBAI": 11840,
+      "CODBAI": 11840,
+      "NOMEBAI": "Jardim Das Paineiras",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DAS ROSEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11401,
+      "MAIOR_CODBAI": 38627,
+      "CODBAI": 11401,
+      "NOMEBAI": "Jardim Das Roseiras",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DAS ROSEIRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11401,
+      "MAIOR_CODBAI": 38627,
+      "CODBAI": 38627,
+      "NOMEBAI": "Jardim das Roseiras",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DO BOSQUE II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10737,
+      "MAIOR_CODBAI": 45150,
+      "CODBAI": 10737,
+      "NOMEBAI": "Jardim do Bosque II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DO BOSQUE II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10737,
+      "MAIOR_CODBAI": 45150,
+      "CODBAI": 45150,
+      "NOMEBAI": "Jardim do Bosque  II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DO EDEM",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14041,
+      "MAIOR_CODBAI": 34880,
+      "CODBAI": 14041,
+      "NOMEBAI": "Jardim do Edem",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DO EDEM",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14041,
+      "MAIOR_CODBAI": 34880,
+      "CODBAI": 34880,
+      "NOMEBAI": "Jardim do Édem",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DO EDEN",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4456,
+      "MAIOR_CODBAI": 24828,
+      "CODBAI": 4456,
+      "NOMEBAI": "Jardim do Eden",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DO EDEN",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4456,
+      "MAIOR_CODBAI": 24828,
+      "CODBAI": 24828,
+      "NOMEBAI": "Jardim do Éden",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DONA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17900,
+      "MAIOR_CODBAI": 44945,
+      "CODBAI": 17900,
+      "NOMEBAI": "Jardim Dona Luiza",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DONA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17900,
+      "MAIOR_CODBAI": 44945,
+      "CODBAI": 44945,
+      "NOMEBAI": "Jardim Dona Luíza",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14652,
+      "MAIOR_CODBAI": 28028,
+      "CODBAI": 14652,
+      "NOMEBAI": "Jardim dos Eucaliptos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14652,
+      "MAIOR_CODBAI": 28028,
+      "CODBAI": 28028,
+      "NOMEBAI": "Jardim dos Eucalíptos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5470,
+      "MAIOR_CODBAI": 45114,
+      "CODBAI": 5470,
+      "NOMEBAI": "Jardim dos Ipês",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5470,
+      "MAIOR_CODBAI": 45114,
+      "CODBAI": 45114,
+      "NOMEBAI": "Jardim dos Ipes",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM EBENEZER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14935,
+      "MAIOR_CODBAI": 30397,
+      "CODBAI": 14935,
+      "NOMEBAI": "Jardim Ebenezer",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM EBENEZER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14935,
+      "MAIOR_CODBAI": 30397,
+      "CODBAI": 30397,
+      "NOMEBAI": "Jardim Ebenézer",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18386,
+      "MAIOR_CODBAI": 39519,
+      "CODBAI": 18386,
+      "NOMEBAI": "Jardim Emília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18386,
+      "MAIOR_CODBAI": 39519,
+      "CODBAI": 39519,
+      "NOMEBAI": "Jardim Emilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13544,
+      "MAIOR_CODBAI": 17016,
+      "CODBAI": 13544,
+      "NOMEBAI": "Jardim Espírito Santo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13544,
+      "MAIOR_CODBAI": 17016,
+      "CODBAI": 17016,
+      "NOMEBAI": "Jardim Espirito Santo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ESTRELA D'ALVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26365,
+      "MAIOR_CODBAI": 36881,
+      "CODBAI": 26365,
+      "NOMEBAI": "Jardim Estrela D'Alva",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ESTRELA D'ALVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26365,
+      "MAIOR_CODBAI": 36881,
+      "CODBAI": 36881,
+      "NOMEBAI": "Jardim Estrela D'alva",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM FELIX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13594,
+      "MAIOR_CODBAI": 21855,
+      "CODBAI": 13594,
+      "NOMEBAI": "Jardim Félix",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM FELIX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13594,
+      "MAIOR_CODBAI": 21855,
+      "CODBAI": 21855,
+      "NOMEBAI": "Jardim Felix",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM FILADELFIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8694,
+      "MAIOR_CODBAI": 17822,
+      "CODBAI": 8694,
+      "NOMEBAI": "Jardim Filadélfia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM FILADELFIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8694,
+      "MAIOR_CODBAI": 17822,
+      "CODBAI": 17822,
+      "NOMEBAI": "Jardim Filadelfia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM FLORIDO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15492,
+      "MAIOR_CODBAI": 40018,
+      "CODBAI": 15492,
+      "NOMEBAI": "Jardim Florido",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM FLORIDO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15492,
+      "MAIOR_CODBAI": 40018,
+      "CODBAI": 40018,
+      "NOMEBAI": "Jardim Flórido",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM FRANCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7176,
+      "MAIOR_CODBAI": 39451,
+      "CODBAI": 7176,
+      "NOMEBAI": "Jardim França",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM FRANCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7176,
+      "MAIOR_CODBAI": 39451,
+      "CODBAI": 39451,
+      "NOMEBAI": "Jardim Franca",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM GARCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17165,
+      "MAIOR_CODBAI": 36952,
+      "CODBAI": 17165,
+      "NOMEBAI": "Jardim Garcia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM GARCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17165,
+      "MAIOR_CODBAI": 36952,
+      "CODBAI": 36952,
+      "NOMEBAI": "Jardim García",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM GLORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10039,
+      "MAIOR_CODBAI": 14853,
+      "CODBAI": 10039,
+      "NOMEBAI": "Jardim Glória",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM GLORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10039,
+      "MAIOR_CODBAI": 14853,
+      "CODBAI": 14853,
+      "NOMEBAI": "Jardim Gloria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM GUAIRACA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18323,
+      "MAIOR_CODBAI": 24957,
+      "CODBAI": 18323,
+      "NOMEBAI": "Jardim Guairacá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM GUAIRACA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18323,
+      "MAIOR_CODBAI": 24957,
+      "CODBAI": 24957,
+      "NOMEBAI": "Jardim Guairaca",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM GUARAU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24962,
+      "MAIOR_CODBAI": 42889,
+      "CODBAI": 24962,
+      "NOMEBAI": "Jardim Guarau",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM GUARAU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24962,
+      "MAIOR_CODBAI": 42889,
+      "CODBAI": 42889,
+      "NOMEBAI": "Jardim Guaraú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM GURILANDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 37301,
+      "MAIOR_CODBAI": 42096,
+      "CODBAI": 37301,
+      "NOMEBAI": "Jardim Gurilandia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM GURILANDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 37301,
+      "MAIOR_CODBAI": 42096,
+      "CODBAI": 42096,
+      "NOMEBAI": "Jardim Gurilândia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM HELOISA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11025,
+      "MAIOR_CODBAI": 24872,
+      "CODBAI": 11025,
+      "NOMEBAI": "Jardim Heloísa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM HELOISA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11025,
+      "MAIOR_CODBAI": 24872,
+      "CODBAI": 24872,
+      "NOMEBAI": "Jardim Heloisa",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ICARAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2591,
+      "MAIOR_CODBAI": 44951,
+      "CODBAI": 2591,
+      "NOMEBAI": "Jardim Icaraí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ICARAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2591,
+      "MAIOR_CODBAI": 44951,
+      "CODBAI": 44951,
+      "NOMEBAI": "Jardim Icarai",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM IRAPUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29082,
+      "MAIOR_CODBAI": 29304,
+      "CODBAI": 29082,
+      "NOMEBAI": "Jardim Irapua",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM IRAPUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29082,
+      "MAIOR_CODBAI": 29304,
+      "CODBAI": 29304,
+      "NOMEBAI": "Jardim Irapuã",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ITAIPU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5035,
+      "MAIOR_CODBAI": 13961,
+      "CODBAI": 5035,
+      "NOMEBAI": "Jardim Itaipu",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ITAIPU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5035,
+      "MAIOR_CODBAI": 13961,
+      "CODBAI": 13961,
+      "NOMEBAI": "Jardim Itaipú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ITAJAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27149,
+      "MAIOR_CODBAI": 33577,
+      "CODBAI": 27149,
+      "NOMEBAI": "Jardim Itajaí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ITAJAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27149,
+      "MAIOR_CODBAI": 33577,
+      "CODBAI": 33577,
+      "NOMEBAI": "Jardim Itajai",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ITAPOA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17017,
+      "MAIOR_CODBAI": 18427,
+      "CODBAI": 17017,
+      "NOMEBAI": "Jardim Itapoã",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ITAPOA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17017,
+      "MAIOR_CODBAI": 18427,
+      "CODBAI": 18427,
+      "NOMEBAI": "Jardim Itapoá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM JACARANDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9812,
+      "MAIOR_CODBAI": 13583,
+      "CODBAI": 9812,
+      "NOMEBAI": "Jardim Jacarandá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM JACARANDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9812,
+      "MAIOR_CODBAI": 13583,
+      "CODBAI": 13583,
+      "NOMEBAI": "Jardim Jacaranda",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM JANDAIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29491,
+      "MAIOR_CODBAI": 38337,
+      "CODBAI": 29491,
+      "NOMEBAI": "Jardim Jandaia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM JANDAIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29491,
+      "MAIOR_CODBAI": 38337,
+      "CODBAI": 38337,
+      "NOMEBAI": "Jardim Jandáia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM JOIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27991,
+      "MAIOR_CODBAI": 45072,
+      "CODBAI": 27991,
+      "NOMEBAI": "Jardim Joia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM JOIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27991,
+      "MAIOR_CODBAI": 45072,
+      "CODBAI": 45072,
+      "NOMEBAI": "Jardim Jóia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM JULIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27348,
+      "MAIOR_CODBAI": 30846,
+      "CODBAI": 27348,
+      "NOMEBAI": "Jardim Julia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM JULIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27348,
+      "MAIOR_CODBAI": 30846,
+      "CODBAI": 30846,
+      "NOMEBAI": "Jardim Júlia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM LIBANO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32190,
+      "MAIOR_CODBAI": 37819,
+      "CODBAI": 32190,
+      "NOMEBAI": "Jardim Libano",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM LIBANO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32190,
+      "MAIOR_CODBAI": 37819,
+      "CODBAI": 37819,
+      "NOMEBAI": "Jardim Líbano",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM LIBERDADE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 844,
+      "MAIOR_CODBAI": 19496,
+      "CODBAI": 844,
+      "NOMEBAI": "Jardim Liberdade",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM LIBERDADE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 844,
+      "MAIOR_CODBAI": 19496,
+      "CODBAI": 19496,
+      "NOMEBAI": "Jardim liberdade",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM LIDER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20402,
+      "MAIOR_CODBAI": 33533,
+      "CODBAI": 20402,
+      "NOMEBAI": "Jardim Líder",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM LIDER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20402,
+      "MAIOR_CODBAI": 33533,
+      "CODBAI": 33533,
+      "NOMEBAI": "Jardim Lider",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25303,
+      "MAIOR_CODBAI": 35829,
+      "CODBAI": 25303,
+      "NOMEBAI": "Jardim Lúcia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25303,
+      "MAIOR_CODBAI": 35829,
+      "CODBAI": 35829,
+      "NOMEBAI": "Jardim Lucia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 39830,
+      "MAIOR_CODBAI": 44334,
+      "CODBAI": 39830,
+      "NOMEBAI": "Jardim Luiza",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 39830,
+      "MAIOR_CODBAI": 44334,
+      "CODBAI": 44334,
+      "NOMEBAI": "Jardim Luíza",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MAITE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 34159,
+      "MAIOR_CODBAI": 43693,
+      "CODBAI": 34159,
+      "NOMEBAI": "Jardim Maite",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MAITE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 34159,
+      "MAIOR_CODBAI": 43693,
+      "CODBAI": 43693,
+      "NOMEBAI": "Jardim Maitê",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARAMBAIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13644,
+      "MAIOR_CODBAI": 38401,
+      "CODBAI": 13644,
+      "NOMEBAI": "Jardim Marambaia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARAMBAIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13644,
+      "MAIOR_CODBAI": 38401,
+      "CODBAI": 38401,
+      "NOMEBAI": "Jardim Marambáia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARANATA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7133,
+      "MAIOR_CODBAI": 27199,
+      "CODBAI": 7133,
+      "NOMEBAI": "Jardim Maranata",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARANATA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7133,
+      "MAIOR_CODBAI": 27199,
+      "CODBAI": 27199,
+      "NOMEBAI": "Jardim Maranatá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13706,
+      "MAIOR_CODBAI": 41579,
+      "CODBAI": 13706,
+      "NOMEBAI": "Jardim Márcia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13706,
+      "MAIOR_CODBAI": 41579,
+      "CODBAI": 41579,
+      "NOMEBAI": "Jardim Marcia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARIA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24569,
+      "MAIOR_CODBAI": 29305,
+      "CODBAI": 24569,
+      "NOMEBAI": "Jardim Maria Cláudia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARIA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24569,
+      "MAIOR_CODBAI": 29305,
+      "CODBAI": 29305,
+      "NOMEBAI": "Jardim Maria Claudia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARIA EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26972,
+      "MAIOR_CODBAI": 34161,
+      "CODBAI": 26972,
+      "NOMEBAI": "Jardim Maria Emilia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARIA EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26972,
+      "MAIOR_CODBAI": 34161,
+      "CODBAI": 34161,
+      "NOMEBAI": "Jardim Maria Emília",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARIA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18342,
+      "MAIOR_CODBAI": 31612,
+      "CODBAI": 18342,
+      "NOMEBAI": "Jardim Maria Luiza",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARIA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18342,
+      "MAIOR_CODBAI": 31612,
+      "CODBAI": 31612,
+      "NOMEBAI": "Jardim Maria Luíza",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARIA LUIZA I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27350,
+      "MAIOR_CODBAI": 40755,
+      "CODBAI": 27350,
+      "NOMEBAI": "Jardim Maria Luiza I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARIA LUIZA I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27350,
+      "MAIOR_CODBAI": 40755,
+      "CODBAI": 40755,
+      "NOMEBAI": "Jardim Maria Luíza I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MARILU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21478,
+      "MAIOR_CODBAI": 34883,
+      "CODBAI": 21478,
+      "NOMEBAI": "Jardim Marilu",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MARILU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21478,
+      "MAIOR_CODBAI": 34883,
+      "CODBAI": 34883,
+      "NOMEBAI": "Jardim Marilú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MEDITERRANEO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17036,
+      "MAIOR_CODBAI": 40876,
+      "CODBAI": 17036,
+      "NOMEBAI": "Jardim Mediterrâneo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MEDITERRANEO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17036,
+      "MAIOR_CODBAI": 40876,
+      "CODBAI": 40876,
+      "NOMEBAI": "Jardim Mediterraneo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MIRIAM",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32406,
+      "MAIOR_CODBAI": 34163,
+      "CODBAI": 32406,
+      "NOMEBAI": "Jardim Miriam",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MIRIAM",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32406,
+      "MAIOR_CODBAI": 34163,
+      "CODBAI": 34163,
+      "NOMEBAI": "Jardim Míriam",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MONTE LIBANO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7045,
+      "MAIOR_CODBAI": 18871,
+      "CODBAI": 7045,
+      "NOMEBAI": "Jardim Monte Líbano",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MONTE LIBANO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7045,
+      "MAIOR_CODBAI": 18871,
+      "CODBAI": 18871,
+      "NOMEBAI": "Jardim Monte Libano",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM MORADA DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8184,
+      "MAIOR_CODBAI": 11877,
+      "CODBAI": 8184,
+      "NOMEBAI": "Jardim Morada do Sol",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM MORADA DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8184,
+      "MAIOR_CODBAI": 11877,
+      "CODBAI": 11877,
+      "NOMEBAI": "Jardim Morada Do Sol",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM NATALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10771,
+      "MAIOR_CODBAI": 44961,
+      "CODBAI": 10771,
+      "NOMEBAI": "Jardim Natália",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM NATALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10771,
+      "MAIOR_CODBAI": 44961,
+      "CODBAI": 44961,
+      "NOMEBAI": "Jardim Natalia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM NITEROI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17286,
+      "MAIOR_CODBAI": 39017,
+      "CODBAI": 17286,
+      "NOMEBAI": "Jardim Niterói",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM NITEROI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17286,
+      "MAIOR_CODBAI": 39017,
+      "CODBAI": 39017,
+      "NOMEBAI": "Jardim Niteroi",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM NOEMIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 36270,
+      "MAIOR_CODBAI": 39019,
+      "CODBAI": 36270,
+      "NOMEBAI": "Jardim Noêmia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM NOEMIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 36270,
+      "MAIOR_CODBAI": 39019,
+      "CODBAI": 39019,
+      "NOMEBAI": "Jardim Noemia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM NOVA AMERICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10625,
+      "MAIOR_CODBAI": 45744,
+      "CODBAI": 10625,
+      "NOMEBAI": "Jardim Nova América",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM NOVA AMERICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10625,
+      "MAIOR_CODBAI": 45744,
+      "CODBAI": 45744,
+      "NOMEBAI": "Jardim Nova America",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM NOVA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29252,
+      "MAIOR_CODBAI": 32352,
+      "CODBAI": 29252,
+      "NOMEBAI": "Jardim Nova Suíça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM NOVA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29252,
+      "MAIOR_CODBAI": 32352,
+      "CODBAI": 32352,
+      "NOMEBAI": "Jardim Nova Suiça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM OASIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2316,
+      "MAIOR_CODBAI": 29417,
+      "CODBAI": 2316,
+      "NOMEBAI": "Jardim Oásis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM OASIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2316,
+      "MAIOR_CODBAI": 29417,
+      "CODBAI": 29417,
+      "NOMEBAI": "Jardim Oasis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM OURO PRETO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13923,
+      "MAIOR_CODBAI": 18111,
+      "CODBAI": 13923,
+      "NOMEBAI": "Jardim Ouro Preto",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM OURO PRETO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13923,
+      "MAIOR_CODBAI": 18111,
+      "CODBAI": 18111,
+      "NOMEBAI": "Jardim Ouro preto",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PANAMBI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14592,
+      "MAIOR_CODBAI": 18543,
+      "CODBAI": 14592,
+      "NOMEBAI": "Jardim Panambí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PANAMBI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14592,
+      "MAIOR_CODBAI": 18543,
+      "CODBAI": 18543,
+      "NOMEBAI": "Jardim Panambi",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1837,
+      "MAIOR_CODBAI": 5424,
+      "CODBAI": 1837,
+      "NOMEBAI": "Jardim Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1837,
+      "MAIOR_CODBAI": 5424,
+      "CODBAI": 5424,
+      "NOMEBAI": "Jardim Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15287,
+      "MAIOR_CODBAI": 17019,
+      "CODBAI": 15287,
+      "NOMEBAI": "Jardim Paraná",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15287,
+      "MAIOR_CODBAI": 17019,
+      "CODBAI": 17019,
+      "NOMEBAI": "Jardim Parana",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PATRICIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10346,
+      "MAIOR_CODBAI": 20392,
+      "CODBAI": 10346,
+      "NOMEBAI": "Jardim Patrícia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PATRICIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10346,
+      "MAIOR_CODBAI": 20392,
+      "CODBAI": 20392,
+      "NOMEBAI": "Jardim Patricia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PAULICEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24878,
+      "MAIOR_CODBAI": 31358,
+      "CODBAI": 24878,
+      "NOMEBAI": "Jardim Pauliceia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PAULICEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24878,
+      "MAIOR_CODBAI": 31358,
+      "CODBAI": 31358,
+      "NOMEBAI": "Jardim Paulicéia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PETROPOLIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 234,
+      "MAIOR_CODBAI": 17292,
+      "CODBAI": 234,
+      "NOMEBAI": "Jardim Petrópolis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PETROPOLIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 234,
+      "MAIOR_CODBAI": 17292,
+      "CODBAI": 17292,
+      "NOMEBAI": "Jardim Petropólis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PIATA A",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26735,
+      "MAIOR_CODBAI": 35534,
+      "CODBAI": 26735,
+      "NOMEBAI": "Jardim Piata A",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PIATA A",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26735,
+      "MAIOR_CODBAI": 35534,
+      "CODBAI": 35534,
+      "NOMEBAI": "Jardim Piatã A",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM PIATA B",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32004,
+      "MAIOR_CODBAI": 36925,
+      "CODBAI": 32004,
+      "NOMEBAI": "Jardim Piata B",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM PIATA B",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32004,
+      "MAIOR_CODBAI": 36925,
+      "CODBAI": 36925,
+      "NOMEBAI": "Jardim Piatã B",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM POR DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7740,
+      "MAIOR_CODBAI": 30279,
+      "CODBAI": 7740,
+      "NOMEBAI": "Jardim Por do Sol",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM POR DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7740,
+      "MAIOR_CODBAI": 30279,
+      "CODBAI": 30279,
+      "NOMEBAI": "Jardim Pôr do Sol",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM RESIDENCIAL ETEMP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24552,
+      "MAIOR_CODBAI": 40163,
+      "CODBAI": 24552,
+      "NOMEBAI": "Jardim Residencial ETEMP",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM RESIDENCIAL ETEMP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24552,
+      "MAIOR_CODBAI": 40163,
+      "CODBAI": 40163,
+      "NOMEBAI": "Jardim Residencial Etemp",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM RESIDENCIAL VILLA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 42940,
+      "MAIOR_CODBAI": 43028,
+      "CODBAI": 42940,
+      "NOMEBAI": "Jardim Residencial Villa Suiça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM RESIDENCIAL VILLA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 42940,
+      "MAIOR_CODBAI": 43028,
+      "CODBAI": 43028,
+      "NOMEBAI": "Jardim Residencial Villa Suíça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SABARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17276,
+      "MAIOR_CODBAI": 18982,
+      "CODBAI": 17276,
+      "NOMEBAI": "Jardim sabará",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SABARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17276,
+      "MAIOR_CODBAI": 18982,
+      "CODBAI": 18982,
+      "NOMEBAI": "Jardim Sabará",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA ANGELA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18332,
+      "MAIOR_CODBAI": 34165,
+      "CODBAI": 18332,
+      "NOMEBAI": "Jardim Santa Angela",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA ANGELA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18332,
+      "MAIOR_CODBAI": 34165,
+      "CODBAI": 34165,
+      "NOMEBAI": "Jardim Santa Ângela",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA BARBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6840,
+      "MAIOR_CODBAI": 18113,
+      "CODBAI": 6840,
+      "NOMEBAI": "Jardim Santa Bárbara",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA BARBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6840,
+      "MAIOR_CODBAI": 18113,
+      "CODBAI": 18113,
+      "NOMEBAI": "Jardim Santa Barbara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 31537,
+      "MAIOR_CODBAI": 45465,
+      "CODBAI": 31537,
+      "NOMEBAI": "Jardim Santa Claudia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 31537,
+      "MAIOR_CODBAI": 45465,
+      "CODBAI": 45465,
+      "NOMEBAI": "Jardim Santa Cláudia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13795,
+      "MAIOR_CODBAI": 31839,
+      "CODBAI": 13795,
+      "NOMEBAI": "Jardim Santa Emília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13795,
+      "MAIOR_CODBAI": 31839,
+      "CODBAI": 31839,
+      "NOMEBAI": "Jardim Santa Emilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA HERMINIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13711,
+      "MAIOR_CODBAI": 44838,
+      "CODBAI": 13711,
+      "NOMEBAI": "Jardim Santa Herminia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA HERMINIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13711,
+      "MAIOR_CODBAI": 44838,
+      "CODBAI": 44838,
+      "NOMEBAI": "Jardim Santa Hermínia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA INES I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25305,
+      "MAIOR_CODBAI": 44839,
+      "CODBAI": 25305,
+      "NOMEBAI": "Jardim Santa Ines I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA INES I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25305,
+      "MAIOR_CODBAI": 44839,
+      "CODBAI": 44839,
+      "NOMEBAI": "Jardim Santa Inês I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA INES II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25306,
+      "MAIOR_CODBAI": 34155,
+      "CODBAI": 25306,
+      "NOMEBAI": "Jardim Santa Ines II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA INES II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25306,
+      "MAIOR_CODBAI": 34155,
+      "CODBAI": 34155,
+      "NOMEBAI": "Jardim Santa Inês II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA INES III",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25307,
+      "MAIOR_CODBAI": 34377,
+      "CODBAI": 25307,
+      "NOMEBAI": "Jardim Santa Ines III",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA INES III",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25307,
+      "MAIOR_CODBAI": 34377,
+      "CODBAI": 34377,
+      "NOMEBAI": "Jardim Santa Inês III",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA INEZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13550,
+      "MAIOR_CODBAI": 44992,
+      "CODBAI": 13550,
+      "NOMEBAI": "Jardim Santa Inez",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA INEZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13550,
+      "MAIOR_CODBAI": 44992,
+      "CODBAI": 44992,
+      "NOMEBAI": "Jardim Santa Inêz",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA JULIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13910,
+      "MAIOR_CODBAI": 27308,
+      "CODBAI": 13910,
+      "NOMEBAI": "Jardim Santa Júlia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA JULIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13910,
+      "MAIOR_CODBAI": 27308,
+      "CODBAI": 27308,
+      "NOMEBAI": "Jardim Santa Julia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4457,
+      "MAIOR_CODBAI": 27309,
+      "CODBAI": 4457,
+      "NOMEBAI": "Jardim Santa Lúcia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4457,
+      "MAIOR_CODBAI": 27309,
+      "CODBAI": 27309,
+      "NOMEBAI": "Jardim Santa Lucia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTA MONICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9317,
+      "MAIOR_CODBAI": 44744,
+      "CODBAI": 9317,
+      "NOMEBAI": "Jardim Santa Mônica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTA MONICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9317,
+      "MAIOR_CODBAI": 44744,
+      "CODBAI": 44744,
+      "NOMEBAI": "Jardim Santa Monica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4746,
+      "MAIOR_CODBAI": 26738,
+      "CODBAI": 4746,
+      "NOMEBAI": "Jardim Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4746,
+      "MAIOR_CODBAI": 26738,
+      "CODBAI": 26738,
+      "NOMEBAI": "Jardim Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8063,
+      "MAIOR_CODBAI": 38879,
+      "CODBAI": 8063,
+      "NOMEBAI": "Jardim São Cristóvão",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8063,
+      "MAIOR_CODBAI": 38879,
+      "CODBAI": 38879,
+      "NOMEBAI": "Jardim São Cristovão",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SAO CRISTOVAO II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7993,
+      "MAIOR_CODBAI": 16910,
+      "CODBAI": 7993,
+      "NOMEBAI": "Jardim São Cristóvão II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SAO CRISTOVAO II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7993,
+      "MAIOR_CODBAI": 16910,
+      "CODBAI": 16910,
+      "NOMEBAI": "Jardim São Cristovão II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SAO LUIS",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 8179,
+      "MAIOR_CODBAI": 39148,
+      "CODBAI": 8179,
+      "NOMEBAI": "Jardim São Luís",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SAO LUIS",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 8179,
+      "MAIOR_CODBAI": 39148,
+      "CODBAI": 16954,
+      "NOMEBAI": "Jardim São Luis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SAO LUIS",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 8179,
+      "MAIOR_CODBAI": 39148,
+      "CODBAI": 39148,
+      "NOMEBAI": "Jardim São  Luis",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "JARDIM SHANGRI-LA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 14898,
+      "MAIOR_CODBAI": 18961,
+      "CODBAI": 14898,
+      "NOMEBAI": "Jardim Shangri-Lá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SHANGRI-LA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 14898,
+      "MAIOR_CODBAI": 18961,
+      "CODBAI": 15342,
+      "NOMEBAI": "Jardim Shangri-lá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SHANGRI-LA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 14898,
+      "MAIOR_CODBAI": 18961,
+      "CODBAI": 18961,
+      "NOMEBAI": "Jardim Shangri-la",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "JARDIM SILVIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25726,
+      "MAIOR_CODBAI": 31211,
+      "CODBAI": 25726,
+      "NOMEBAI": "Jardim Sílvia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SILVIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 25726,
+      "MAIOR_CODBAI": 31211,
+      "CODBAI": 31211,
+      "NOMEBAI": "Jardim Silvia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SONIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27077,
+      "MAIOR_CODBAI": 31834,
+      "CODBAI": 27077,
+      "NOMEBAI": "Jardim Sônia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SONIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27077,
+      "MAIOR_CODBAI": 31834,
+      "CODBAI": 31834,
+      "NOMEBAI": "Jardim Sonia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SONIA MARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5813,
+      "MAIOR_CODBAI": 43091,
+      "CODBAI": 5813,
+      "NOMEBAI": "Jardim Sônia Maria",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SONIA MARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5813,
+      "MAIOR_CODBAI": 43091,
+      "CODBAI": 43091,
+      "NOMEBAI": "Jardim Sonia Maria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20440,
+      "MAIOR_CODBAI": 42704,
+      "CODBAI": 20440,
+      "NOMEBAI": "Jardim Suíça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20440,
+      "MAIOR_CODBAI": 42704,
+      "CODBAI": 42704,
+      "NOMEBAI": "Jardim Suiça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM SUICO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5475,
+      "MAIOR_CODBAI": 6049,
+      "CODBAI": 5475,
+      "NOMEBAI": "Jardim Suíço",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM SUICO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5475,
+      "MAIOR_CODBAI": 6049,
+      "CODBAI": 6049,
+      "NOMEBAI": "Jardim Suiço",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM TANGARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6183,
+      "MAIOR_CODBAI": 18598,
+      "CODBAI": 6183,
+      "NOMEBAI": "Jardim Tangará",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM TANGARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6183,
+      "MAIOR_CODBAI": 18598,
+      "CODBAI": 18598,
+      "NOMEBAI": "Jardim Tangara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM TENIS CLUBE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24396,
+      "MAIOR_CODBAI": 39834,
+      "CODBAI": 24396,
+      "NOMEBAI": "Jardim Tênis Clube",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM TENIS CLUBE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 24396,
+      "MAIOR_CODBAI": 39834,
+      "CODBAI": 39834,
+      "NOMEBAI": "Jardim Tenis Clube",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM TOKIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19784,
+      "MAIOR_CODBAI": 37005,
+      "CODBAI": 19784,
+      "NOMEBAI": "Jardim Tókio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM TOKIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19784,
+      "MAIOR_CODBAI": 37005,
+      "CODBAI": 37005,
+      "NOMEBAI": "Jardim Tokio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM TRIANGULO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7100,
+      "MAIOR_CODBAI": 18550,
+      "CODBAI": 7100,
+      "NOMEBAI": "Jardim Triângulo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM TRIANGULO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7100,
+      "MAIOR_CODBAI": 18550,
+      "CODBAI": 18550,
+      "NOMEBAI": "Jardim Triangulo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM VALENCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 36190,
+      "MAIOR_CODBAI": 41939,
+      "CODBAI": 36190,
+      "NOMEBAI": "Jardim Valencia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM VALENCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 36190,
+      "MAIOR_CODBAI": 41939,
+      "CODBAI": 41939,
+      "NOMEBAI": "Jardim Valência",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM VALPARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17011,
+      "MAIOR_CODBAI": 26650,
+      "CODBAI": 17011,
+      "NOMEBAI": "Jardim Valparaiso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM VALPARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17011,
+      "MAIOR_CODBAI": 26650,
+      "CODBAI": 26650,
+      "NOMEBAI": "Jardim Valparaíso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM VERA LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32496,
+      "MAIOR_CODBAI": 41588,
+      "CODBAI": 32496,
+      "NOMEBAI": "Jardim Vera Lúcia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM VERA LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32496,
+      "MAIOR_CODBAI": 41588,
+      "CODBAI": 41588,
+      "NOMEBAI": "Jardim Vera Lucia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM VICTORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17965,
+      "MAIOR_CODBAI": 31510,
+      "CODBAI": 17965,
+      "NOMEBAI": "Jardim Victória",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM VICTORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17965,
+      "MAIOR_CODBAI": 31510,
+      "CODBAI": 31510,
+      "NOMEBAI": "Jardim Victoria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM VIRGINIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16952,
+      "MAIOR_CODBAI": 29027,
+      "CODBAI": 16952,
+      "NOMEBAI": "Jardim Virginia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM VIRGINIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16952,
+      "MAIOR_CODBAI": 29027,
+      "CODBAI": 29027,
+      "NOMEBAI": "Jardim Virgínia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM VITORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 870,
+      "MAIOR_CODBAI": 13682,
+      "CODBAI": 870,
+      "NOMEBAI": "Jardim Vitória",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM VITORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 870,
+      "MAIOR_CODBAI": 13682,
+      "CODBAI": 13682,
+      "NOMEBAI": "Jardim Vitoria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARDIM ZELIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26652,
+      "MAIOR_CODBAI": 38554,
+      "CODBAI": 26652,
+      "NOMEBAI": "Jardim Zélia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARDIM ZELIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 26652,
+      "MAIOR_CODBAI": 38554,
+      "CODBAI": 38554,
+      "NOMEBAI": "Jardim Zelia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JARI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2590,
+      "MAIOR_CODBAI": 22811,
+      "CODBAI": 2590,
+      "NOMEBAI": "Jarí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JARI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2590,
+      "MAIOR_CODBAI": 22811,
+      "CODBAI": 22811,
+      "NOMEBAI": "Jari",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JOANA D'ARC",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3618,
+      "MAIOR_CODBAI": 19961,
+      "CODBAI": 3618,
+      "NOMEBAI": "Joana D'arc",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JOANA D'ARC",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3618,
+      "MAIOR_CODBAI": 19961,
+      "CODBAI": 19961,
+      "NOMEBAI": "Joana D'Arc",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "JUPARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4177,
+      "MAIOR_CODBAI": 12184,
+      "CODBAI": 4177,
+      "NOMEBAI": "Juparanã",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "JUPARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4177,
+      "MAIOR_CODBAI": 12184,
+      "CODBAI": 12184,
+      "NOMEBAI": "Juparana",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "KM 4",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17936,
+      "MAIOR_CODBAI": 30332,
+      "CODBAI": 17936,
+      "NOMEBAI": "KM 4",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "KM 4",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17936,
+      "MAIOR_CODBAI": 30332,
+      "CODBAI": 30332,
+      "NOMEBAI": "Km 4",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "LAMARAO DO PASSE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 625,
+      "MAIOR_CODBAI": 1495,
+      "CODBAI": 625,
+      "NOMEBAI": "Lamarão do Passé",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "LAMARAO DO PASSE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 625,
+      "MAIOR_CODBAI": 1495,
+      "CODBAI": 1495,
+      "NOMEBAI": "Lamarão do Passe",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "LIDER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17271,
+      "MAIOR_CODBAI": 24125,
+      "CODBAI": 17271,
+      "NOMEBAI": "Lider",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "LIDER",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17271,
+      "MAIOR_CODBAI": 24125,
+      "CODBAI": 24125,
+      "NOMEBAI": "Líder",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "LOTEAMENTO RESIDENCIAL FLAVIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 31494,
+      "MAIOR_CODBAI": 44756,
+      "CODBAI": 31494,
+      "NOMEBAI": "Loteamento Residencial Flávia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "LOTEAMENTO RESIDENCIAL FLAVIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 31494,
+      "MAIOR_CODBAI": 44756,
+      "CODBAI": 44756,
+      "NOMEBAI": "Loteamento Residencial Flavia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "LOTEAMENTO SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5821,
+      "MAIOR_CODBAI": 19771,
+      "CODBAI": 5821,
+      "NOMEBAI": "Loteamento Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "LOTEAMENTO SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5821,
+      "MAIOR_CODBAI": 19771,
+      "CODBAI": 19771,
+      "NOMEBAI": "Loteamento Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MANDACARU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1278,
+      "MAIOR_CODBAI": 1424,
+      "CODBAI": 1278,
+      "NOMEBAI": "Mandacaru",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MANDACARU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1278,
+      "MAIOR_CODBAI": 1424,
+      "CODBAI": 1424,
+      "NOMEBAI": "Mandacarú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MANDU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10845,
+      "MAIOR_CODBAI": 33289,
+      "CODBAI": 10845,
+      "NOMEBAI": "Mandu",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MANDU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10845,
+      "MAIOR_CODBAI": 33289,
+      "CODBAI": 33289,
+      "NOMEBAI": "Mandú",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MANOEL CORREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9664,
+      "MAIOR_CODBAI": 20023,
+      "CODBAI": 9664,
+      "NOMEBAI": "Manoel Corrêa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MANOEL CORREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9664,
+      "MAIOR_CODBAI": 20023,
+      "CODBAI": 20023,
+      "NOMEBAI": "Manoel Correa",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MARIA VITORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30200,
+      "MAIOR_CODBAI": 35863,
+      "CODBAI": 30200,
+      "NOMEBAI": "Maria Vitoria",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MARIA VITORIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30200,
+      "MAIOR_CODBAI": 35863,
+      "CODBAI": 35863,
+      "NOMEBAI": "Maria Vitória",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "METALURGICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20304,
+      "MAIOR_CODBAI": 20681,
+      "CODBAI": 20304,
+      "NOMEBAI": "Metalurgica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "METALURGICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20304,
+      "MAIOR_CODBAI": 20681,
+      "CODBAI": 20681,
+      "NOMEBAI": "Metalúrgica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MINA D'AGUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11380,
+      "MAIOR_CODBAI": 40323,
+      "CODBAI": 11380,
+      "NOMEBAI": "Mina D'água",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MINA D'AGUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 11380,
+      "MAIOR_CODBAI": 40323,
+      "CODBAI": 40323,
+      "NOMEBAI": "Mina D'Água",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MOMBACA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21569,
+      "MAIOR_CODBAI": 33644,
+      "CODBAI": 21569,
+      "NOMEBAI": "Mombaça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MOMBACA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21569,
+      "MAIOR_CODBAI": 33644,
+      "CODBAI": 33644,
+      "NOMEBAI": "Mombaca",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MONTE BERICO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22615,
+      "MAIOR_CODBAI": 23190,
+      "CODBAI": 22615,
+      "NOMEBAI": "Monte Berico",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MONTE BERICO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22615,
+      "MAIOR_CODBAI": 23190,
+      "CODBAI": 23190,
+      "NOMEBAI": "Monte Bérico",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "MONTE LIBANO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9028,
+      "MAIOR_CODBAI": 42181,
+      "CODBAI": 9028,
+      "NOMEBAI": "Monte Líbano",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "MONTE LIBANO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9028,
+      "MAIOR_CODBAI": 42181,
+      "CODBAI": 42181,
+      "NOMEBAI": "Monte Libano",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NAPOLI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8888,
+      "MAIOR_CODBAI": 18574,
+      "CODBAI": 8888,
+      "NOMEBAI": "Nápoli",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NAPOLI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8888,
+      "MAIOR_CODBAI": 18574,
+      "CODBAI": 18574,
+      "NOMEBAI": "Napoli",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NAZARE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 893,
+      "MAIOR_CODBAI": 21424,
+      "CODBAI": 893,
+      "NOMEBAI": "Nazaré",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NAZARE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 893,
+      "MAIOR_CODBAI": 21424,
+      "CODBAI": 21424,
+      "NOMEBAI": "Nazare",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NHU-PORA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23052,
+      "MAIOR_CODBAI": 23444,
+      "CODBAI": 23052,
+      "NOMEBAI": "Nhu-Pora",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NHU-PORA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23052,
+      "MAIOR_CODBAI": 23444,
+      "CODBAI": 23444,
+      "NOMEBAI": "Nhú-Porã",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NOSSA SENHORA DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 268,
+      "MAIOR_CODBAI": 10872,
+      "CODBAI": 268,
+      "NOMEBAI": "Nossa Senhora de Fátima",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NOSSA SENHORA DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 268,
+      "MAIOR_CODBAI": 10872,
+      "CODBAI": 10872,
+      "NOMEBAI": "Nossa Senhora De Fátima",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NOVA BRASILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 574,
+      "MAIOR_CODBAI": 17524,
+      "CODBAI": 574,
+      "NOMEBAI": "Nova Brasília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NOVA BRASILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 574,
+      "MAIOR_CODBAI": 17524,
+      "CODBAI": 17524,
+      "NOMEBAI": "Nova Brasilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NOVA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5059,
+      "MAIOR_CODBAI": 9472,
+      "CODBAI": 5059,
+      "NOMEBAI": "Nova Suiça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NOVA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5059,
+      "MAIOR_CODBAI": 9472,
+      "CODBAI": 9472,
+      "NOMEBAI": "Nova Suíça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NOVO PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7715,
+      "MAIOR_CODBAI": 15536,
+      "CODBAI": 7715,
+      "NOMEBAI": "Novo Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NOVO PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7715,
+      "MAIOR_CODBAI": 15536,
+      "CODBAI": 15536,
+      "NOMEBAI": "Novo Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NOVO SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9511,
+      "MAIOR_CODBAI": 34824,
+      "CODBAI": 9511,
+      "NOMEBAI": "Novo Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NOVO SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9511,
+      "MAIOR_CODBAI": 34824,
+      "CODBAI": 34824,
+      "NOMEBAI": "Novo Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "NUCLEO HABITACIONAL JUSCELINO KUBITSCHEK",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29592,
+      "MAIOR_CODBAI": 40001,
+      "CODBAI": 29592,
+      "NOMEBAI": "Núcleo Habitacional Juscelino Kubitschek",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "NUCLEO HABITACIONAL JUSCELINO KUBITSCHEK",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29592,
+      "MAIOR_CODBAI": 40001,
+      "CODBAI": 40001,
+      "NOMEBAI": "Nucleo Habitacional Juscelino Kubitschek",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "OASIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15537,
+      "MAIOR_CODBAI": 45653,
+      "CODBAI": 15537,
+      "NOMEBAI": "Oásis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "OASIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15537,
+      "MAIOR_CODBAI": 45653,
+      "CODBAI": 45653,
+      "NOMEBAI": "Oasis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "OLHO D'AGUA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 3106,
+      "MAIOR_CODBAI": 21960,
+      "CODBAI": 3106,
+      "NOMEBAI": "Olho D'Água",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "OLHO D'AGUA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 3106,
+      "MAIOR_CODBAI": 21960,
+      "CODBAI": 3138,
+      "NOMEBAI": "Olho D'água",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "OLHO D'AGUA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 3106,
+      "MAIOR_CODBAI": 21960,
+      "CODBAI": 21960,
+      "NOMEBAI": "Olho D'agua",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "OLHOS D'AGUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 965,
+      "MAIOR_CODBAI": 30520,
+      "CODBAI": 965,
+      "NOMEBAI": "Olhos D'Água",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "OLHOS D'AGUA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 965,
+      "MAIOR_CODBAI": 30520,
+      "CODBAI": 30520,
+      "NOMEBAI": "Olhos D'Aguá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PADRE JULIO MARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2354,
+      "MAIOR_CODBAI": 13332,
+      "CODBAI": 2354,
+      "NOMEBAI": "Padre Julio Maria",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PADRE JULIO MARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2354,
+      "MAIOR_CODBAI": 13332,
+      "CODBAI": 13332,
+      "NOMEBAI": "Padre Júlio Maria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PADRE REUS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23207,
+      "MAIOR_CODBAI": 23435,
+      "CODBAI": 23207,
+      "NOMEBAI": "Padre Reus",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PADRE REUS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 23207,
+      "MAIOR_CODBAI": 23435,
+      "CODBAI": 23435,
+      "NOMEBAI": "Padre Réus",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 164,
+      "MAIOR_CODBAI": 2687,
+      "CODBAI": 164,
+      "NOMEBAI": "Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 164,
+      "MAIOR_CODBAI": 2687,
+      "CODBAI": 2687,
+      "NOMEBAI": "Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARAISO DAS AGUAS",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 15469,
+      "MAIOR_CODBAI": 32268,
+      "CODBAI": 15469,
+      "NOMEBAI": "Paraiso das Águas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARAISO DAS AGUAS",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 15469,
+      "MAIOR_CODBAI": 32268,
+      "CODBAI": 28356,
+      "NOMEBAI": "Paraiso das Aguas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARAISO DAS AGUAS",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 15469,
+      "MAIOR_CODBAI": 32268,
+      "CODBAI": 32268,
+      "NOMEBAI": "Paraíso das Águas",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "PARQUE AMBAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19977,
+      "MAIOR_CODBAI": 21606,
+      "CODBAI": 19977,
+      "NOMEBAI": "Parque Ambaí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE AMBAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19977,
+      "MAIOR_CODBAI": 21606,
+      "CODBAI": 21606,
+      "NOMEBAI": "Parque Ambai",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4957,
+      "MAIOR_CODBAI": 8187,
+      "CODBAI": 4957,
+      "NOMEBAI": "Parque Anhanguera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4957,
+      "MAIOR_CODBAI": 8187,
+      "CODBAI": 8187,
+      "NOMEBAI": "Parque Anhangüera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE ARCO IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 36896,
+      "MAIOR_CODBAI": 37522,
+      "CODBAI": 36896,
+      "NOMEBAI": "Parque Arco Íris",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE ARCO IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 36896,
+      "MAIOR_CODBAI": 37522,
+      "CODBAI": 37522,
+      "NOMEBAI": "Parque Arco Iris",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE CEASA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20043,
+      "MAIOR_CODBAI": 39105,
+      "CODBAI": 20043,
+      "NOMEBAI": "Parque Ceasa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE CEASA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20043,
+      "MAIOR_CODBAI": 39105,
+      "CODBAI": 39105,
+      "NOMEBAI": "Parque CEASA",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE CECAP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29317,
+      "MAIOR_CODBAI": 30473,
+      "CODBAI": 29317,
+      "NOMEBAI": "Parque Cecap",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE CECAP",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29317,
+      "MAIOR_CODBAI": 30473,
+      "CODBAI": 30473,
+      "NOMEBAI": "Parque CECAP",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE DAS ANDORINHAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9241,
+      "MAIOR_CODBAI": 12161,
+      "CODBAI": 9241,
+      "NOMEBAI": "Parque Das Andorinhas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE DAS ANDORINHAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9241,
+      "MAIOR_CODBAI": 12161,
+      "CODBAI": 12161,
+      "NOMEBAI": "Parque das Andorinhas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16592,
+      "MAIOR_CODBAI": 22700,
+      "CODBAI": 16592,
+      "NOMEBAI": "Parque dos Eucaliptos",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE DOS EUCALIPTOS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 16592,
+      "MAIOR_CODBAI": 22700,
+      "CODBAI": 22700,
+      "NOMEBAI": "Parque dos Eucalíptos",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8586,
+      "MAIOR_CODBAI": 14317,
+      "CODBAI": 8586,
+      "NOMEBAI": "Parque dos Ipês",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8586,
+      "MAIOR_CODBAI": 14317,
+      "CODBAI": 14317,
+      "NOMEBAI": "Parque dos Ipes",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE DOS PASSAROS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12839,
+      "MAIOR_CODBAI": 18692,
+      "CODBAI": 12839,
+      "NOMEBAI": "Parque dos Pássaros",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE DOS PASSAROS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12839,
+      "MAIOR_CODBAI": 18692,
+      "CODBAI": 18692,
+      "NOMEBAI": "Parque dos Passaros",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE INDEPENDENCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7825,
+      "MAIOR_CODBAI": 44408,
+      "CODBAI": 7825,
+      "NOMEBAI": "Parque Independência",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE INDEPENDENCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7825,
+      "MAIOR_CODBAI": 44408,
+      "CODBAI": 44408,
+      "NOMEBAI": "Parque Independencia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE PRIMAVERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5164,
+      "MAIOR_CODBAI": 12014,
+      "CODBAI": 5164,
+      "NOMEBAI": "Parque Primavera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE PRIMAVERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5164,
+      "MAIOR_CODBAI": 12014,
+      "CODBAI": 12014,
+      "NOMEBAI": "Parque  Primavera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE PRIMAVERA II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12015,
+      "MAIOR_CODBAI": 41878,
+      "CODBAI": 12015,
+      "NOMEBAI": "Parque  Primavera II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE PRIMAVERA II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12015,
+      "MAIOR_CODBAI": 41878,
+      "CODBAI": 41878,
+      "NOMEBAI": "Parque Primavera II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE RENASCENCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19986,
+      "MAIOR_CODBAI": 21617,
+      "CODBAI": 19986,
+      "NOMEBAI": "Parque Renascença",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE RENASCENCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19986,
+      "MAIOR_CODBAI": 21617,
+      "CODBAI": 21617,
+      "NOMEBAI": "Parque Renascenca",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE RESIDENCIAL BELO HORIZONTE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18114,
+      "MAIOR_CODBAI": 19745,
+      "CODBAI": 18114,
+      "NOMEBAI": "Parque residencial Belo Horizonte",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE RESIDENCIAL BELO HORIZONTE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18114,
+      "MAIOR_CODBAI": 19745,
+      "CODBAI": 19745,
+      "NOMEBAI": "Parque Residencial Belo Horizonte",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE SABARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32823,
+      "MAIOR_CODBAI": 42129,
+      "CODBAI": 32823,
+      "NOMEBAI": "Parque Sabará",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE SABARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32823,
+      "MAIOR_CODBAI": 42129,
+      "CODBAI": 42129,
+      "NOMEBAI": "Parque Sabara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE SANTA EUGENIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20377,
+      "MAIOR_CODBAI": 21693,
+      "CODBAI": 20377,
+      "NOMEBAI": "Parque Santa Eugenia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE SANTA EUGENIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20377,
+      "MAIOR_CODBAI": 21693,
+      "CODBAI": 21693,
+      "NOMEBAI": "Parque Santa Eugênia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10974,
+      "MAIOR_CODBAI": 30938,
+      "CODBAI": 10974,
+      "NOMEBAI": "Parque São Cristóvão",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10974,
+      "MAIOR_CODBAI": 30938,
+      "CODBAI": 30938,
+      "NOMEBAI": "Parque São Cristovão",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PARQUE SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32803,
+      "MAIOR_CODBAI": 41206,
+      "CODBAI": 32803,
+      "NOMEBAI": "Parque São Luis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PARQUE SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32803,
+      "MAIOR_CODBAI": 41206,
+      "CODBAI": 41206,
+      "NOMEBAI": "Parque São Luís",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PASSAUNA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17665,
+      "MAIOR_CODBAI": 18350,
+      "CODBAI": 17665,
+      "NOMEBAI": "Passauna",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PASSAUNA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17665,
+      "MAIOR_CODBAI": 18350,
+      "CODBAI": 18350,
+      "NOMEBAI": "Passaúna",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PEROBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 264,
+      "MAIOR_CODBAI": 17273,
+      "CODBAI": 264,
+      "NOMEBAI": "Peroba",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PEROBA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 264,
+      "MAIOR_CODBAI": 17273,
+      "CODBAI": 17273,
+      "NOMEBAI": "Peróba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PIQUIRI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21949,
+      "MAIOR_CODBAI": 23580,
+      "CODBAI": 21949,
+      "NOMEBAI": "Piquirí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PIQUIRI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21949,
+      "MAIOR_CODBAI": 23580,
+      "CODBAI": 23580,
+      "NOMEBAI": "Piquiri",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "POLO INDUSTRIAL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 756,
+      "MAIOR_CODBAI": 3759,
+      "CODBAI": 756,
+      "NOMEBAI": "Pólo Industrial",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "POLO INDUSTRIAL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 756,
+      "MAIOR_CODBAI": 3759,
+      "CODBAI": 3759,
+      "NOMEBAI": "Polo Industrial",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "POR DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1531,
+      "MAIOR_CODBAI": 3703,
+      "CODBAI": 1531,
+      "NOMEBAI": "Pôr do Sol",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "POR DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1531,
+      "MAIOR_CODBAI": 3703,
+      "CODBAI": 3703,
+      "NOMEBAI": "Por do Sol",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "POR DO SOL I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1160,
+      "MAIOR_CODBAI": 14619,
+      "CODBAI": 1160,
+      "NOMEBAI": "Pôr do Sol I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "POR DO SOL I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1160,
+      "MAIOR_CODBAI": 14619,
+      "CODBAI": 14619,
+      "NOMEBAI": "Por do Sol I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "POR DO SOL II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1161,
+      "MAIOR_CODBAI": 10622,
+      "CODBAI": 1161,
+      "NOMEBAI": "Pôr do Sol II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "POR DO SOL II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1161,
+      "MAIOR_CODBAI": 10622,
+      "CODBAI": 10622,
+      "NOMEBAI": "Por do Sol II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PORANGA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 428,
+      "MAIOR_CODBAI": 3895,
+      "CODBAI": 428,
+      "NOMEBAI": "Poranga",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PORANGA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 428,
+      "MAIOR_CODBAI": 3895,
+      "CODBAI": 3895,
+      "NOMEBAI": "Porangá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PORTAL DOS PASSAROS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32874,
+      "MAIOR_CODBAI": 40003,
+      "CODBAI": 32874,
+      "NOMEBAI": "Portal dos Pássaros",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PORTAL DOS PASSAROS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32874,
+      "MAIOR_CODBAI": 40003,
+      "CODBAI": 40003,
+      "NOMEBAI": "Portal dos Passaros",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "PRIMAVERA II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6688,
+      "MAIOR_CODBAI": 38277,
+      "CODBAI": 6688,
+      "NOMEBAI": "Primavera II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "PRIMAVERA II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6688,
+      "MAIOR_CODBAI": 38277,
+      "CODBAI": 38277,
+      "NOMEBAI": "Primavera  II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "QUISSAMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20501,
+      "MAIOR_CODBAI": 21776,
+      "CODBAI": 20501,
+      "NOMEBAI": "Quissamã",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "QUISSAMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20501,
+      "MAIOR_CODBAI": 21776,
+      "CODBAI": 21776,
+      "NOMEBAI": "Quissama",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "QUIXABA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1484,
+      "MAIOR_CODBAI": 3081,
+      "CODBAI": 1484,
+      "NOMEBAI": "Quixabá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "QUIXABA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1484,
+      "MAIOR_CODBAI": 3081,
+      "CODBAI": 3081,
+      "NOMEBAI": "Quixaba",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL AQUARIUS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 39737,
+      "MAIOR_CODBAI": 45241,
+      "CODBAI": 39737,
+      "NOMEBAI": "Residencial Aquarius",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL AQUARIUS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 39737,
+      "MAIOR_CODBAI": 45241,
+      "CODBAI": 45241,
+      "NOMEBAI": "Residencial Aquárius",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL ARAUCARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19304,
+      "MAIOR_CODBAI": 32615,
+      "CODBAI": 19304,
+      "NOMEBAI": "Residencial Araucária",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL ARAUCARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19304,
+      "MAIOR_CODBAI": 32615,
+      "CODBAI": 32615,
+      "NOMEBAI": "Residencial Araucaria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL CALIFORNIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5768,
+      "MAIOR_CODBAI": 39436,
+      "CODBAI": 5768,
+      "NOMEBAI": "Residencial Califórnia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL CALIFORNIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5768,
+      "MAIOR_CODBAI": 39436,
+      "CODBAI": 39436,
+      "NOMEBAI": "Residencial California",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL CAMINHO DAS AGUAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4322,
+      "MAIOR_CODBAI": 26745,
+      "CODBAI": 4322,
+      "NOMEBAI": "Residencial Caminho das Águas",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL CAMINHO DAS AGUAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4322,
+      "MAIOR_CODBAI": 26745,
+      "CODBAI": 26745,
+      "NOMEBAI": "Residencial Caminho das Aguas",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL CENTENARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6800,
+      "MAIOR_CODBAI": 30522,
+      "CODBAI": 6800,
+      "NOMEBAI": "Residencial Centenário",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL CENTENARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6800,
+      "MAIOR_CODBAI": 30522,
+      "CODBAI": 30522,
+      "NOMEBAI": "Residencial Centenario",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL FLAMBOYANT",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4793,
+      "MAIOR_CODBAI": 25405,
+      "CODBAI": 4793,
+      "NOMEBAI": "Residencial Flamboyant",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL FLAMBOYANT",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4793,
+      "MAIOR_CODBAI": 25405,
+      "CODBAI": 25405,
+      "NOMEBAI": "residencial Flamboyant",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL ITALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5272,
+      "MAIOR_CODBAI": 30523,
+      "CODBAI": 5272,
+      "NOMEBAI": "Residencial Itália",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL ITALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5272,
+      "MAIOR_CODBAI": 30523,
+      "CODBAI": 30523,
+      "NOMEBAI": "Residencial Italia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL JARDIM PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4558,
+      "MAIOR_CODBAI": 6261,
+      "CODBAI": 4558,
+      "NOMEBAI": "Residencial Jardim Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL JARDIM PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4558,
+      "MAIOR_CODBAI": 6261,
+      "CODBAI": 6261,
+      "NOMEBAI": "Residencial Jardim Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL MICHELANGELO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7782,
+      "MAIOR_CODBAI": 32283,
+      "CODBAI": 7782,
+      "NOMEBAI": "Residencial Michelângelo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL MICHELANGELO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7782,
+      "MAIOR_CODBAI": 32283,
+      "CODBAI": 32283,
+      "NOMEBAI": "Residencial Michelangelo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL MORADA DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4335,
+      "MAIOR_CODBAI": 33478,
+      "CODBAI": 4335,
+      "NOMEBAI": "Residencial Morada do Sol",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL MORADA DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4335,
+      "MAIOR_CODBAI": 33478,
+      "CODBAI": 33478,
+      "NOMEBAI": "Residêncial Morada do Sol",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL MORADA DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9242,
+      "MAIOR_CODBAI": 35058,
+      "CODBAI": 9242,
+      "NOMEBAI": "Residencial Morada Dos Ipês",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL MORADA DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9242,
+      "MAIOR_CODBAI": 35058,
+      "CODBAI": 35058,
+      "NOMEBAI": "Residencial Morada dos Ipês",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL MORUMBI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5275,
+      "MAIOR_CODBAI": 13061,
+      "CODBAI": 5275,
+      "NOMEBAI": "Residencial Morumbi",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL MORUMBI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5275,
+      "MAIOR_CODBAI": 13061,
+      "CODBAI": 13061,
+      "NOMEBAI": "Residencial Morumbí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL PACAEMBU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30232,
+      "MAIOR_CODBAI": 32382,
+      "CODBAI": 30232,
+      "NOMEBAI": "Residencial Pacaembú",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL PACAEMBU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30232,
+      "MAIOR_CODBAI": 32382,
+      "CODBAI": 32382,
+      "NOMEBAI": "Residencial Pacaembu",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4283,
+      "MAIOR_CODBAI": 26767,
+      "CODBAI": 4283,
+      "NOMEBAI": "Residencial Paraíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL PARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4283,
+      "MAIOR_CODBAI": 26767,
+      "CODBAI": 26767,
+      "NOMEBAI": "Residencial Paraiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL POR DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5074,
+      "MAIOR_CODBAI": 7217,
+      "CODBAI": 5074,
+      "NOMEBAI": "Residencial Por do Sol",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL POR DO SOL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5074,
+      "MAIOR_CODBAI": 7217,
+      "CODBAI": 7217,
+      "NOMEBAI": "Residencial Pôr do Sol",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL PORTAL DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7746,
+      "MAIOR_CODBAI": 11882,
+      "CODBAI": 7746,
+      "NOMEBAI": "Residencial Portal dos Ipês",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL PORTAL DOS IPES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7746,
+      "MAIOR_CODBAI": 11882,
+      "CODBAI": 11882,
+      "NOMEBAI": "Residencial Portal Dos Ipês",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL SANT'ANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 33815,
+      "MAIOR_CODBAI": 44073,
+      "CODBAI": 33815,
+      "NOMEBAI": "Residencial Sant'ana",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL SANT'ANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 33815,
+      "MAIOR_CODBAI": 44073,
+      "CODBAI": 44073,
+      "NOMEBAI": "Residencial Sant'Ana",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL SANTA BARBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5839,
+      "MAIOR_CODBAI": 14308,
+      "CODBAI": 5839,
+      "NOMEBAI": "Residencial Santa Bárbara",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL SANTA BARBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5839,
+      "MAIOR_CODBAI": 14308,
+      "CODBAI": 14308,
+      "NOMEBAI": "Residencial Santa Barbara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 42332,
+      "MAIOR_CODBAI": 45363,
+      "CODBAI": 42332,
+      "NOMEBAI": "Residencial São Luis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 42332,
+      "MAIOR_CODBAI": 45363,
+      "CODBAI": 45363,
+      "NOMEBAI": "Residencial São Luís",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL VITORIA I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13322,
+      "MAIOR_CODBAI": 45484,
+      "CODBAI": 13322,
+      "NOMEBAI": "Residencial Vitória I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL VITORIA I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13322,
+      "MAIOR_CODBAI": 45484,
+      "CODBAI": 45484,
+      "NOMEBAI": "Residencial Vitoria I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RESIDENCIAL VITORIA II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10416,
+      "MAIOR_CODBAI": 13323,
+      "CODBAI": 10416,
+      "NOMEBAI": "Residencial Vitoria II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RESIDENCIAL VITORIA II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10416,
+      "MAIOR_CODBAI": 13323,
+      "CODBAI": 13323,
+      "NOMEBAI": "Residencial Vitória II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "RIO D'OURO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20113,
+      "MAIOR_CODBAI": 21287,
+      "CODBAI": 20113,
+      "NOMEBAI": "Rio D'Ouro",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "RIO D'OURO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20113,
+      "MAIOR_CODBAI": 21287,
+      "CODBAI": 21287,
+      "NOMEBAI": "Rio D'ouro",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ROCA GRANDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10242,
+      "MAIOR_CODBAI": 23885,
+      "CODBAI": 10242,
+      "NOMEBAI": "Roça Grande",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ROCA GRANDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10242,
+      "MAIOR_CODBAI": 23885,
+      "CODBAI": 23885,
+      "NOMEBAI": "Roca Grande",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ROCIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19000,
+      "MAIOR_CODBAI": 42809,
+      "CODBAI": 19000,
+      "NOMEBAI": "Rocio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ROCIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19000,
+      "MAIOR_CODBAI": 42809,
+      "CODBAI": 42809,
+      "NOMEBAI": "Rócio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA BARBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1929,
+      "MAIOR_CODBAI": 24206,
+      "CODBAI": 1929,
+      "NOMEBAI": "Santa Bárbara",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA BARBARA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1929,
+      "MAIOR_CODBAI": 24206,
+      "CODBAI": 24206,
+      "NOMEBAI": "Santa Barbara",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA CECILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 743,
+      "MAIOR_CODBAI": 36506,
+      "CODBAI": 743,
+      "NOMEBAI": "Santa Cecília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA CECILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 743,
+      "MAIOR_CODBAI": 36506,
+      "CODBAI": 36506,
+      "NOMEBAI": "Santa Cecilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA CRUZ DE IRUPI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3998,
+      "MAIOR_CODBAI": 4071,
+      "CODBAI": 3998,
+      "NOMEBAI": "Santa Cruz de Irupi",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA CRUZ DE IRUPI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3998,
+      "MAIOR_CODBAI": 4071,
+      "CODBAI": 4071,
+      "NOMEBAI": "Santa Cruz de Irupí",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9414,
+      "MAIOR_CODBAI": 21629,
+      "CODBAI": 9414,
+      "NOMEBAI": "Santa Emília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA EMILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9414,
+      "MAIOR_CODBAI": 21629,
+      "CODBAI": 21629,
+      "NOMEBAI": "Santa Emilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA INES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 90,
+      "MAIOR_CODBAI": 21869,
+      "CODBAI": 90,
+      "NOMEBAI": "Santa Inês",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA INES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 90,
+      "MAIOR_CODBAI": 21869,
+      "CODBAI": 21869,
+      "NOMEBAI": "Santa Ines",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA JULIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3856,
+      "MAIOR_CODBAI": 39855,
+      "CODBAI": 3856,
+      "NOMEBAI": "Santa Júlia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA JULIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3856,
+      "MAIOR_CODBAI": 39855,
+      "CODBAI": 39855,
+      "NOMEBAI": "Santa Julia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 359,
+      "MAIOR_CODBAI": 23647,
+      "CODBAI": 359,
+      "NOMEBAI": "Santa Lúcia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA LUCIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 359,
+      "MAIOR_CODBAI": 23647,
+      "CODBAI": 23647,
+      "NOMEBAI": "Santa Lucia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3791,
+      "MAIOR_CODBAI": 11152,
+      "CODBAI": 3791,
+      "NOMEBAI": "Santa Luíza",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3791,
+      "MAIOR_CODBAI": 11152,
+      "CODBAI": 11152,
+      "NOMEBAI": "Santa Luiza",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA MONICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 884,
+      "MAIOR_CODBAI": 14322,
+      "CODBAI": 884,
+      "NOMEBAI": "Santa Mônica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA MONICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 884,
+      "MAIOR_CODBAI": 14322,
+      "CODBAI": 14322,
+      "NOMEBAI": "Santa Monica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA RITA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 600,
+      "MAIOR_CODBAI": 19542,
+      "CODBAI": 600,
+      "NOMEBAI": "Santa Rita",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA RITA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 600,
+      "MAIOR_CODBAI": 19542,
+      "CODBAI": 19542,
+      "NOMEBAI": "SAnta Rita",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTA RITA DE CASSIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 511,
+      "MAIOR_CODBAI": 14432,
+      "CODBAI": 511,
+      "NOMEBAI": "Santa Rita de Cássia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTA RITA DE CASSIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 511,
+      "MAIOR_CODBAI": 14432,
+      "CODBAI": 14432,
+      "NOMEBAI": "Santa Rita de Cassia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 370,
+      "MAIOR_CODBAI": 516,
+      "CODBAI": 370,
+      "NOMEBAI": "Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 370,
+      "MAIOR_CODBAI": 516,
+      "CODBAI": 516,
+      "NOMEBAI": "Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAO BRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15553,
+      "MAIOR_CODBAI": 20115,
+      "CODBAI": 15553,
+      "NOMEBAI": "São Brás",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAO BRAS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15553,
+      "MAIOR_CODBAI": 20115,
+      "CODBAI": 20115,
+      "NOMEBAI": "São Bras",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 166,
+      "MAIOR_CODBAI": 3758,
+      "CODBAI": 166,
+      "NOMEBAI": "São Cristóvão",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 166,
+      "MAIOR_CODBAI": 3758,
+      "CODBAI": 3758,
+      "NOMEBAI": "São Cristovão",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAO FELIX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2156,
+      "MAIOR_CODBAI": 2574,
+      "CODBAI": 2156,
+      "NOMEBAI": "São Félix",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAO FELIX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2156,
+      "MAIOR_CODBAI": 2574,
+      "CODBAI": 2574,
+      "NOMEBAI": "São Felix",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAO FRANCISCO XAVIER DO GUANDU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3574,
+      "MAIOR_CODBAI": 3936,
+      "CODBAI": 3574,
+      "NOMEBAI": "São Francisco Xavier do Guandú",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAO FRANCISCO XAVIER DO GUANDU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3574,
+      "MAIOR_CODBAI": 3936,
+      "CODBAI": 3936,
+      "NOMEBAI": "São Francisco Xavier do Guandu",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAO LAZARO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 502,
+      "MAIOR_CODBAI": 16682,
+      "CODBAI": 502,
+      "NOMEBAI": "São Lázaro",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAO LAZARO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 502,
+      "MAIOR_CODBAI": 16682,
+      "CODBAI": 16682,
+      "NOMEBAI": "São Lazáro",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1179,
+      "MAIOR_CODBAI": 22550,
+      "CODBAI": 1179,
+      "NOMEBAI": "São Luís",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1179,
+      "MAIOR_CODBAI": 22550,
+      "CODBAI": 22550,
+      "NOMEBAI": "São Luis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SAPE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18901,
+      "MAIOR_CODBAI": 20509,
+      "CODBAI": 18901,
+      "NOMEBAI": "Sapé",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SAPE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18901,
+      "MAIOR_CODBAI": 20509,
+      "CODBAI": 20509,
+      "NOMEBAI": "Sapê",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SEMINARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2301,
+      "MAIOR_CODBAI": 17361,
+      "CODBAI": 2301,
+      "NOMEBAI": "Seminário",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SEMINARIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2301,
+      "MAIOR_CODBAI": 17361,
+      "CODBAI": 17361,
+      "NOMEBAI": "Seminario",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SENAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22873,
+      "MAIOR_CODBAI": 23480,
+      "CODBAI": 22873,
+      "NOMEBAI": "SENAI",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SENAI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22873,
+      "MAIOR_CODBAI": 23480,
+      "CODBAI": 23480,
+      "NOMEBAI": "Senai",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SESI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15833,
+      "MAIOR_CODBAI": 22637,
+      "CODBAI": 15833,
+      "NOMEBAI": "Sesi",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SESI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15833,
+      "MAIOR_CODBAI": 22637,
+      "CODBAI": 22637,
+      "NOMEBAI": "SESI",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SETOR ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7641,
+      "MAIOR_CODBAI": 45946,
+      "CODBAI": 7641,
+      "NOMEBAI": "Setor Anhanguera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SETOR ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7641,
+      "MAIOR_CODBAI": 45946,
+      "CODBAI": 45946,
+      "NOMEBAI": "Setor Anhangüera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SETOR SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4373,
+      "MAIOR_CODBAI": 5447,
+      "CODBAI": 4373,
+      "NOMEBAI": "Setor Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SETOR SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4373,
+      "MAIOR_CODBAI": 5447,
+      "CODBAI": 5447,
+      "NOMEBAI": "Setor Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SHANGRI-LA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 9800,
+      "MAIOR_CODBAI": 32859,
+      "CODBAI": 9800,
+      "NOMEBAI": "Shangri-lá",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SHANGRI-LA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 9800,
+      "MAIOR_CODBAI": 32859,
+      "CODBAI": 19380,
+      "NOMEBAI": "Shangri-la",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SHANGRI-LA",
+      "QTD_REGISTROS": 3,
+      "MENOR_CODBAI": 9800,
+      "MAIOR_CODBAI": 32859,
+      "CODBAI": 32859,
+      "NOMEBAI": "Shangri-Lá",
+      "ORDEM_NO_GRUPO": 3
+    },
+    {
+      "NORM": "SIDERLANDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21663,
+      "MAIOR_CODBAI": 21872,
+      "CODBAI": 21663,
+      "NOMEBAI": "Siderlândia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SIDERLANDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21663,
+      "MAIOR_CODBAI": 21872,
+      "CODBAI": 21872,
+      "NOMEBAI": "Siderlandia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SITIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15784,
+      "MAIOR_CODBAI": 15855,
+      "CODBAI": 15784,
+      "NOMEBAI": "Sítio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SITIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 15784,
+      "MAIOR_CODBAI": 15855,
+      "CODBAI": 15855,
+      "NOMEBAI": "Sitio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SITIO ALEGRE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3040,
+      "MAIOR_CODBAI": 35312,
+      "CODBAI": 3040,
+      "NOMEBAI": "Sítio Alegre",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SITIO ALEGRE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3040,
+      "MAIOR_CODBAI": 35312,
+      "CODBAI": 35312,
+      "NOMEBAI": "Sitio Alegre",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SITIO BOA VISTA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13347,
+      "MAIOR_CODBAI": 41740,
+      "CODBAI": 13347,
+      "NOMEBAI": "Sítio Boa Vista",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SITIO BOA VISTA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13347,
+      "MAIOR_CODBAI": 41740,
+      "CODBAI": 41740,
+      "NOMEBAI": "Sitio Boa Vista",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SITIO TAPERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13465,
+      "MAIOR_CODBAI": 41755,
+      "CODBAI": 13465,
+      "NOMEBAI": "Sítio Tapera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SITIO TAPERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13465,
+      "MAIOR_CODBAI": 41755,
+      "CODBAI": 41755,
+      "NOMEBAI": "Sitio Tapera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22638,
+      "MAIOR_CODBAI": 24302,
+      "CODBAI": 22638,
+      "NOMEBAI": "Suiça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22638,
+      "MAIOR_CODBAI": 24302,
+      "CODBAI": 24302,
+      "NOMEBAI": "Suíça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "TAQUARI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 95,
+      "MAIOR_CODBAI": 34186,
+      "CODBAI": 95,
+      "NOMEBAI": "Taquarí",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "TAQUARI",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 95,
+      "MAIOR_CODBAI": 34186,
+      "CODBAI": 34186,
+      "NOMEBAI": "Taquari",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "TAUAPE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2104,
+      "MAIOR_CODBAI": 2537,
+      "CODBAI": 2104,
+      "NOMEBAI": "Tauapé",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "TAUAPE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2104,
+      "MAIOR_CODBAI": 2537,
+      "CODBAI": 2537,
+      "NOMEBAI": "Tauape",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "TIARAJU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22574,
+      "MAIOR_CODBAI": 22865,
+      "CODBAI": 22574,
+      "NOMEBAI": "Tiarajú",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "TIARAJU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22574,
+      "MAIOR_CODBAI": 22865,
+      "CODBAI": 22865,
+      "NOMEBAI": "Tiaraju",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "TIBIRICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22529,
+      "MAIOR_CODBAI": 24534,
+      "CODBAI": 22529,
+      "NOMEBAI": "Tibiriça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "TIBIRICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22529,
+      "MAIOR_CODBAI": 24534,
+      "CODBAI": 24534,
+      "NOMEBAI": "Tibiriçá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "TIMBAUVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22875,
+      "MAIOR_CODBAI": 23266,
+      "CODBAI": 22875,
+      "NOMEBAI": "Timbauva",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "TIMBAUVA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 22875,
+      "MAIOR_CODBAI": 23266,
+      "CODBAI": 23266,
+      "NOMEBAI": "Timbaúva",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "TRIANGULO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1886,
+      "MAIOR_CODBAI": 21729,
+      "CODBAI": 1886,
+      "NOMEBAI": "Triângulo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "TRIANGULO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1886,
+      "MAIOR_CODBAI": 21729,
+      "CODBAI": 21729,
+      "NOMEBAI": "Triangulo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "UBAUNA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2243,
+      "MAIOR_CODBAI": 18209,
+      "CODBAI": 2243,
+      "NOMEBAI": "Ubaúna",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "UBAUNA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2243,
+      "MAIOR_CODBAI": 18209,
+      "CODBAI": 18209,
+      "NOMEBAI": "Ubauna",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "UNA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4171,
+      "MAIOR_CODBAI": 34180,
+      "CODBAI": 4171,
+      "NOMEBAI": "Una",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "UNA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4171,
+      "MAIOR_CODBAI": 34180,
+      "CODBAI": 34180,
+      "NOMEBAI": "UNA",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "URBIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 712,
+      "MAIOR_CODBAI": 745,
+      "CODBAI": 712,
+      "NOMEBAI": "Urbis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "URBIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 712,
+      "MAIOR_CODBAI": 745,
+      "CODBAI": 745,
+      "NOMEBAI": "URBIS",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "URBIS I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 852,
+      "MAIOR_CODBAI": 953,
+      "CODBAI": 852,
+      "NOMEBAI": "Urbis I",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "URBIS I",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 852,
+      "MAIOR_CODBAI": 953,
+      "CODBAI": 953,
+      "NOMEBAI": "URBIS I",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "URBIS II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 652,
+      "MAIOR_CODBAI": 2185,
+      "CODBAI": 652,
+      "NOMEBAI": "Urbis II",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "URBIS II",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 652,
+      "MAIOR_CODBAI": 2185,
+      "CODBAI": 2185,
+      "NOMEBAI": "URBIS II",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "URBIS III",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 653,
+      "MAIOR_CODBAI": 2187,
+      "CODBAI": 653,
+      "NOMEBAI": "Urbis III",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "URBIS III",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 653,
+      "MAIOR_CODBAI": 2187,
+      "CODBAI": 2187,
+      "NOMEBAI": "URBIS III",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VALPARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3882,
+      "MAIOR_CODBAI": 24067,
+      "CODBAI": 3882,
+      "NOMEBAI": "Valparaíso",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VALPARAISO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 3882,
+      "MAIOR_CODBAI": 24067,
+      "CODBAI": 24067,
+      "NOMEBAI": "Valparaiso",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VARZEA GRANDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 989,
+      "MAIOR_CODBAI": 1551,
+      "CODBAI": 989,
+      "NOMEBAI": "Varzea Grande",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VARZEA GRANDE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 989,
+      "MAIOR_CODBAI": 1551,
+      "CODBAI": 1551,
+      "NOMEBAI": "Várzea Grande",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VAU ACU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8506,
+      "MAIOR_CODBAI": 12504,
+      "CODBAI": 8506,
+      "NOMEBAI": "Vau Açú",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VAU ACU",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8506,
+      "MAIOR_CODBAI": 12504,
+      "CODBAI": 12504,
+      "NOMEBAI": "Vau Açu",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA ANALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1267,
+      "MAIOR_CODBAI": 41708,
+      "CODBAI": 1267,
+      "NOMEBAI": "Vila Anália",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA ANALIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1267,
+      "MAIOR_CODBAI": 41708,
+      "CODBAI": 41708,
+      "NOMEBAI": "Vila Analia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA ANDREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9523,
+      "MAIOR_CODBAI": 19710,
+      "CODBAI": 9523,
+      "NOMEBAI": "Vila Andréa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA ANDREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9523,
+      "MAIOR_CODBAI": 19710,
+      "CODBAI": 19710,
+      "NOMEBAI": "Vila Andrea",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29329,
+      "MAIOR_CODBAI": 32064,
+      "CODBAI": 29329,
+      "NOMEBAI": "Vila Anhangüera",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA ANHANGUERA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 29329,
+      "MAIOR_CODBAI": 32064,
+      "CODBAI": 32064,
+      "NOMEBAI": "Vila Anhanguera",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA ANTARTICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 33731,
+      "MAIOR_CODBAI": 39005,
+      "CODBAI": 33731,
+      "NOMEBAI": "Vila Antartica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA ANTARTICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 33731,
+      "MAIOR_CODBAI": 39005,
+      "CODBAI": 39005,
+      "NOMEBAI": "Vila Antártica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA ARCO IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6487,
+      "MAIOR_CODBAI": 25175,
+      "CODBAI": 6487,
+      "NOMEBAI": "Vila Arco Iris",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA ARCO IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6487,
+      "MAIOR_CODBAI": 25175,
+      "CODBAI": 25175,
+      "NOMEBAI": "Vila Arco Íris",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA AUREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10637,
+      "MAIOR_CODBAI": 41955,
+      "CODBAI": 10637,
+      "NOMEBAI": "Vila Áurea",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA AUREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 10637,
+      "MAIOR_CODBAI": 41955,
+      "CODBAI": 41955,
+      "NOMEBAI": "Vila Aurea",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA BRAZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6089,
+      "MAIOR_CODBAI": 17952,
+      "CODBAI": 6089,
+      "NOMEBAI": "Vila Bráz",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA BRAZ",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6089,
+      "MAIOR_CODBAI": 17952,
+      "CODBAI": 17952,
+      "NOMEBAI": "Vila Braz",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA CARAGUATA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32732,
+      "MAIOR_CODBAI": 41092,
+      "CODBAI": 32732,
+      "NOMEBAI": "Vila Caraguata",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA CARAGUATA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32732,
+      "MAIOR_CODBAI": 41092,
+      "CODBAI": 41092,
+      "NOMEBAI": "Vila Caraguatá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14172,
+      "MAIOR_CODBAI": 24746,
+      "CODBAI": 14172,
+      "NOMEBAI": "Vila Claudia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA CLAUDIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14172,
+      "MAIOR_CODBAI": 24746,
+      "CODBAI": 24746,
+      "NOMEBAI": "Vila Cláudia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA CORREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14547,
+      "MAIOR_CODBAI": 31762,
+      "CODBAI": 14547,
+      "NOMEBAI": "Vila Correa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA CORREA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14547,
+      "MAIOR_CODBAI": 31762,
+      "CODBAI": 31762,
+      "NOMEBAI": "Vila Corrêa",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA DAMASIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30528,
+      "MAIOR_CODBAI": 42507,
+      "CODBAI": 30528,
+      "NOMEBAI": "Vila Damasio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA DAMASIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30528,
+      "MAIOR_CODBAI": 42507,
+      "CODBAI": 42507,
+      "NOMEBAI": "Vila Damásio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA DANUBIO AZUL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13860,
+      "MAIOR_CODBAI": 32917,
+      "CODBAI": 13860,
+      "NOMEBAI": "Vila Danúbio Azul",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA DANUBIO AZUL",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 13860,
+      "MAIOR_CODBAI": 32917,
+      "CODBAI": 32917,
+      "NOMEBAI": "Vila Danubio Azul",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA DIVINEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6690,
+      "MAIOR_CODBAI": 32317,
+      "CODBAI": 6690,
+      "NOMEBAI": "Vila Divineia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA DIVINEIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 6690,
+      "MAIOR_CODBAI": 32317,
+      "CODBAI": 32317,
+      "NOMEBAI": "Vila Divinéia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12338,
+      "MAIOR_CODBAI": 14337,
+      "CODBAI": 12338,
+      "NOMEBAI": "Vila Espírito Santo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA ESPIRITO SANTO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12338,
+      "MAIOR_CODBAI": 14337,
+      "CODBAI": 14337,
+      "NOMEBAI": "Vila Espirito Santo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA FENIX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12396,
+      "MAIOR_CODBAI": 44948,
+      "CODBAI": 12396,
+      "NOMEBAI": "Vila Fenix",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA FENIX",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12396,
+      "MAIOR_CODBAI": 44948,
+      "CODBAI": 44948,
+      "NOMEBAI": "Vila Fênix",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA FLORIDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21509,
+      "MAIOR_CODBAI": 34185,
+      "CODBAI": 21509,
+      "NOMEBAI": "Vila Flórida",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA FLORIDA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21509,
+      "MAIOR_CODBAI": 34185,
+      "CODBAI": 34185,
+      "NOMEBAI": "Vila Florida",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA FRANCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19102,
+      "MAIOR_CODBAI": 37663,
+      "CODBAI": 19102,
+      "NOMEBAI": "Vila Franca",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA FRANCA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19102,
+      "MAIOR_CODBAI": 37663,
+      "CODBAI": 37663,
+      "NOMEBAI": "Vila França",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA GARDENIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19104,
+      "MAIOR_CODBAI": 37524,
+      "CODBAI": 19104,
+      "NOMEBAI": "Vila Gardenia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA GARDENIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 19104,
+      "MAIOR_CODBAI": 37524,
+      "CODBAI": 37524,
+      "NOMEBAI": "Vila Gardênia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA HELIOPOLIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21483,
+      "MAIOR_CODBAI": 28237,
+      "CODBAI": 21483,
+      "NOMEBAI": "Vila Heliopolis",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA HELIOPOLIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21483,
+      "MAIOR_CODBAI": 28237,
+      "CODBAI": 28237,
+      "NOMEBAI": "Vila Heliópolis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA INDAIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27092,
+      "MAIOR_CODBAI": 32008,
+      "CODBAI": 27092,
+      "NOMEBAI": "Vila Indaia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA INDAIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27092,
+      "MAIOR_CODBAI": 32008,
+      "CODBAI": 32008,
+      "NOMEBAI": "Vila Indaiá",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9872,
+      "MAIOR_CODBAI": 40460,
+      "CODBAI": 9872,
+      "NOMEBAI": "Vila Íris",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA IRIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 9872,
+      "MAIOR_CODBAI": 40460,
+      "CODBAI": 40460,
+      "NOMEBAI": "Vila Iris",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7199,
+      "MAIOR_CODBAI": 10312,
+      "CODBAI": 7199,
+      "NOMEBAI": "Vila Luíza",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA LUIZA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7199,
+      "MAIOR_CODBAI": 10312,
+      "CODBAI": 10312,
+      "NOMEBAI": "Vila Luiza",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA MARIA EUGENIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27850,
+      "MAIOR_CODBAI": 41325,
+      "CODBAI": 27850,
+      "NOMEBAI": "Vila Maria Eugenia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA MARIA EUGENIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27850,
+      "MAIOR_CODBAI": 41325,
+      "CODBAI": 41325,
+      "NOMEBAI": "Vila Maria Eugênia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA MARIA LUISA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27851,
+      "MAIOR_CODBAI": 42476,
+      "CODBAI": 27851,
+      "NOMEBAI": "Vila Maria Luisa",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA MARIA LUISA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27851,
+      "MAIOR_CODBAI": 42476,
+      "CODBAI": 42476,
+      "NOMEBAI": "Vila Maria Luísa",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA MARIA ZELIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27853,
+      "MAIOR_CODBAI": 37909,
+      "CODBAI": 27853,
+      "NOMEBAI": "Vila Maria Zélia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA MARIA ZELIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 27853,
+      "MAIOR_CODBAI": 37909,
+      "CODBAI": 37909,
+      "NOMEBAI": "Vila Maria Zelia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA MARIAH",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12287,
+      "MAIOR_CODBAI": 32935,
+      "CODBAI": 12287,
+      "NOMEBAI": "Vila Mariah",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA MARIAH",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 12287,
+      "MAIOR_CODBAI": 32935,
+      "CODBAI": 32935,
+      "NOMEBAI": "Vila Mariáh",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA MARILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5600,
+      "MAIOR_CODBAI": 21744,
+      "CODBAI": 5600,
+      "NOMEBAI": "Vila Marília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA MARILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5600,
+      "MAIOR_CODBAI": 21744,
+      "CODBAI": 21744,
+      "NOMEBAI": "Vila Marilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA NOEMIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30904,
+      "MAIOR_CODBAI": 44975,
+      "CODBAI": 30904,
+      "NOMEBAI": "Vila Noemia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA NOEMIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30904,
+      "MAIOR_CODBAI": 44975,
+      "CODBAI": 44975,
+      "NOMEBAI": "Vila Noêmia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA NOSSA SENHORA DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8806,
+      "MAIOR_CODBAI": 10083,
+      "CODBAI": 8806,
+      "NOMEBAI": "Vila Nossa Senhora De Fátima",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA NOSSA SENHORA DE FATIMA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 8806,
+      "MAIOR_CODBAI": 10083,
+      "CODBAI": 10083,
+      "NOMEBAI": "Vila Nossa Senhora de Fátima",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA OLIMPICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2191,
+      "MAIOR_CODBAI": 36373,
+      "CODBAI": 2191,
+      "NOMEBAI": "Vila Olímpica",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA OLIMPICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2191,
+      "MAIOR_CODBAI": 36373,
+      "CODBAI": 36373,
+      "NOMEBAI": "Vila Olimpica",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA OPERARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1930,
+      "MAIOR_CODBAI": 9292,
+      "CODBAI": 1930,
+      "NOMEBAI": "Vila Operária",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA OPERARIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1930,
+      "MAIOR_CODBAI": 9292,
+      "CODBAI": 9292,
+      "NOMEBAI": "Vila Operaria",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA OTILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17428,
+      "MAIOR_CODBAI": 40480,
+      "CODBAI": 17428,
+      "NOMEBAI": "Vila Otília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA OTILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17428,
+      "MAIOR_CODBAI": 40480,
+      "CODBAI": 40480,
+      "NOMEBAI": "Vila Otilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA PARAIZO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32536,
+      "MAIOR_CODBAI": 45249,
+      "CODBAI": 32536,
+      "NOMEBAI": "Vila Paraizo",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA PARAIZO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 32536,
+      "MAIOR_CODBAI": 45249,
+      "CODBAI": 45249,
+      "NOMEBAI": "Vila Paraízo",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA PARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17363,
+      "MAIOR_CODBAI": 18674,
+      "CODBAI": 17363,
+      "NOMEBAI": "VIla Paraná",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA PARANA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 17363,
+      "MAIOR_CODBAI": 18674,
+      "CODBAI": 18674,
+      "NOMEBAI": "Vila Paraná",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA RESIDENCIAL A",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 46048,
+      "MAIOR_CODBAI": 46055,
+      "CODBAI": 46048,
+      "NOMEBAI": "VILA RESIDENCIAL A",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA RESIDENCIAL A",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 46048,
+      "MAIOR_CODBAI": 46055,
+      "CODBAI": 46055,
+      "NOMEBAI": "VILA RESIDENCIAL  A",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SANTA ADELIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 38470,
+      "MAIOR_CODBAI": 44878,
+      "CODBAI": 38470,
+      "NOMEBAI": "Vila Santa Adelia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SANTA ADELIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 38470,
+      "MAIOR_CODBAI": 44878,
+      "CODBAI": 44878,
+      "NOMEBAI": "Vila Santa Adélia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SANTA CECILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14,
+      "MAIOR_CODBAI": 45720,
+      "CODBAI": 14,
+      "NOMEBAI": "Vila Santa Cecília",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SANTA CECILIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 14,
+      "MAIOR_CODBAI": 45720,
+      "CODBAI": 45720,
+      "NOMEBAI": "Vila Santa Cecilia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SANTA LUZIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4485,
+      "MAIOR_CODBAI": 17280,
+      "CODBAI": 4485,
+      "NOMEBAI": "Vila Santa Luzia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SANTA LUZIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 4485,
+      "MAIOR_CODBAI": 17280,
+      "CODBAI": 17280,
+      "NOMEBAI": "Vila santa Luzia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5205,
+      "MAIOR_CODBAI": 14647,
+      "CODBAI": 5205,
+      "NOMEBAI": "Vila Santo Antônio",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SANTO ANTONIO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 5205,
+      "MAIOR_CODBAI": 14647,
+      "CODBAI": 14647,
+      "NOMEBAI": "Vila Santo Antonio",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2714,
+      "MAIOR_CODBAI": 10332,
+      "CODBAI": 2714,
+      "NOMEBAI": "Vila São Cristovão",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SAO CRISTOVAO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 2714,
+      "MAIOR_CODBAI": 10332,
+      "CODBAI": 10332,
+      "NOMEBAI": "Vila São Cristóvão",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SAO JOSE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1396,
+      "MAIOR_CODBAI": 17281,
+      "CODBAI": 1396,
+      "NOMEBAI": "Vila São José",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SAO JOSE",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 1396,
+      "MAIOR_CODBAI": 17281,
+      "CODBAI": 17281,
+      "NOMEBAI": "Vila são José",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SAO LAZARO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18398,
+      "MAIOR_CODBAI": 32869,
+      "CODBAI": 18398,
+      "NOMEBAI": "Vila São Lazaro",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SAO LAZARO",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 18398,
+      "MAIOR_CODBAI": 32869,
+      "CODBAI": 32869,
+      "NOMEBAI": "Vila São Lázaro",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7887,
+      "MAIOR_CODBAI": 21757,
+      "CODBAI": 7887,
+      "NOMEBAI": "Vila São Luís",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SAO LUIS",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 7887,
+      "MAIOR_CODBAI": 21757,
+      "CODBAI": 21757,
+      "NOMEBAI": "Vila São Luis",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SONIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21430,
+      "MAIOR_CODBAI": 26608,
+      "CODBAI": 21430,
+      "NOMEBAI": "Vila Sonia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SONIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 21430,
+      "MAIOR_CODBAI": 26608,
+      "CODBAI": 26608,
+      "NOMEBAI": "Vila Sônia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20772,
+      "MAIOR_CODBAI": 26611,
+      "CODBAI": 20772,
+      "NOMEBAI": "Vila Suíça",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA SUICA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 20772,
+      "MAIOR_CODBAI": 26611,
+      "CODBAI": 26611,
+      "NOMEBAI": "Vila Suiça",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VILA VIRGINIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30536,
+      "MAIOR_CODBAI": 37912,
+      "CODBAI": 30536,
+      "NOMEBAI": "Vila Virgínia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VILA VIRGINIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 30536,
+      "MAIOR_CODBAI": 37912,
+      "CODBAI": 37912,
+      "NOMEBAI": "Vila Virginia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "VITORIA REGIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 444,
+      "MAIOR_CODBAI": 7066,
+      "CODBAI": 444,
+      "NOMEBAI": "Vitória Régia",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "VITORIA REGIA",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 444,
+      "MAIOR_CODBAI": 7066,
+      "CODBAI": 7066,
+      "NOMEBAI": "Vitória Regia",
+      "ORDEM_NO_GRUPO": 2
+    },
+    {
+      "NORM": "ZUMBI DOS PALMARES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 506,
+      "MAIOR_CODBAI": 3982,
+      "CODBAI": 506,
+      "NOMEBAI": "Zumbi dos Palmares",
+      "ORDEM_NO_GRUPO": 1
+    },
+    {
+      "NORM": "ZUMBI DOS PALMARES",
+      "QTD_REGISTROS": 2,
+      "MENOR_CODBAI": 506,
+      "MAIOR_CODBAI": 3982,
+      "CODBAI": 3982,
+      "NOMEBAI": "Zumbí dos Palmares",
+      "ORDEM_NO_GRUPO": 2
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

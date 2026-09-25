@@ -1,0 +1,27 @@
+{
+  "status": "PENDENTE_LOGIN_NO_PORTAL",
+  "fonte_primaria": "Onboarding Deploy — Sankhya",
+  "url": "https://20069-51233.build.mitralab.io/login",
+  "consultado_em_utc": "2026-09-22T23:31:17Z",
+  "resultado_portal": {
+    "titulo_visivel": "Onboarding Deploy — Sankhya",
+    "tela": "Entrar",
+    "opcoes": ["Continue com Google", "Continue com Microsoft", "E-mail e senha"],
+    "registro_da_base_visivel": false,
+    "arquivo_visivel": false,
+    "nome_arquivo": null,
+    "data_hora_envio": null,
+    "quantidade_registros": null,
+    "credenciais_inseridas": false
+  },
+  "identidade_oracle_validada": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "comparacao_empresas": "NAO_EXECUTADA_SEM_FONTE_ONBOARDING",
+  "comparacao_usuarios": "NAO_EXECUTADA_SEM_FONTE_ONBOARDING",
+  "dml_executado": false,
+  "ddl_executado": false
+}

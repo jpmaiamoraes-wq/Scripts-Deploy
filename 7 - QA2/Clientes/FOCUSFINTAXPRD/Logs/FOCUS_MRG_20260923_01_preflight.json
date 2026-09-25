@@ -1,0 +1,24 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/FOCUSFINTAXPRD/29_30_Merge_Antifragil_FOCUSFINTAXPRD.sql",
+  "arquivos": [
+    "Clientes/FOCUSFINTAXPRD/29_30_Merge_Antifragil_FOCUSFINTAXPRD.sql"
+  ],
+  "qtd_instrucoes": 3,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 3
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [],
+  "sha256_suite": "dcf8df34bf78e4eacc7c2797a37ac4ddde42da172fd421a8b0e19569a03db713",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "preflight": {
+    "status": "PREFLIGHT_APROVADO",
+    "qtd_bloqueios": 0,
+    "qtd_avisos": 0,
+    "bloqueios": [],
+    "avisos": []
+  },
+  "dml_ddl_executado": false
+}

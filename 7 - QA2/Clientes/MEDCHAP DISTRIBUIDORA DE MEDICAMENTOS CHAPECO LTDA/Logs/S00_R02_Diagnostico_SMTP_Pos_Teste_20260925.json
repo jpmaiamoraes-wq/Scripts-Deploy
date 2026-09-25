@@ -1,0 +1,327 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T14:40:58.401866+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/SMTP/S00_Diagnostico_SMTP_Sem_Segredos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 38,
+  "colunas": [
+    "ORIGEM",
+    "ITEM",
+    "TAMANHO",
+    "SERVIDOR_TESTE_DEPLOY",
+    "REMETENTE_TESTE_DEPLOY",
+    "ESTRUTURA_SEM_VALORES"
+  ],
+  "linhas": [
+    {
+      "ORIGEM": "TSIPAR_MSDSMTPPROP",
+      "ITEM": "MSDSMTPPROP",
+      "TAMANHO": "170",
+      "SERVIDOR_TESTE_DEPLOY": "NAO",
+      "REMETENTE_TESTE_DEPLOY": "NAO",
+      "ESTRUTURA_SEM_VALORES": "smtp.office365.com:587 | seg=T | usuario=envio@medchap.com.br | remetente=envio@medchap.com.br | campo5=<omitido> | campo6=false"
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "CODSMTP",
+      "TAMANHO": "NUMBER(22)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "SERVIDOR",
+      "TAMANHO": "VARCHAR2(80)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "TIPO",
+      "TAMANHO": "CHAR(1)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "USUARIO",
+      "TAMANHO": "VARCHAR2(255)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "SENHA",
+      "TAMANHO": "VARCHAR2(250)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "REMETENTE",
+      "TAMANHO": "VARCHAR2(255)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "PORTA",
+      "TAMANHO": "NUMBER(22)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "IGNORACERTIFICADO",
+      "TAMANHO": "CHAR(1)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "PADRAO",
+      "TAMANHO": "CHAR(1)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "SERVIDORPOP",
+      "TAMANHO": "VARCHAR2(80)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "UTILDOWNXML",
+      "TAMANHO": "VARCHAR2(1)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "PORTAPOP",
+      "TAMANHO": "NUMBER(22)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "ACCESSTOKEN",
+      "TAMANHO": "CLOB(4000)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "REFRESHTOKEN",
+      "TAMANHO": "VARCHAR2(4000)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "EXPIRESIN",
+      "TAMANHO": "VARCHAR2(50)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "CODATH",
+      "TAMANHO": "NUMBER(22)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "USEOAUTH",
+      "TAMANHO": "CHAR(1)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "REFRESHTOKENV2",
+      "TAMANHO": "CLOB(4000)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSISMTP",
+      "ITEM": "ACCESSTOKENV2",
+      "TAMANHO": "CLOB(4000)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "CHAVE",
+      "TAMANHO": "VARCHAR2(15)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "DESCRICAO",
+      "TAMANHO": "VARCHAR2(55)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "CODUSU",
+      "TAMANHO": "NUMBER(22)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "TIPO",
+      "TAMANHO": "VARCHAR2(1)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "MODULO",
+      "TAMANHO": "VARCHAR2(1)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "CLASSE",
+      "TAMANHO": "VARCHAR2(20)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "ABA",
+      "TAMANHO": "VARCHAR2(20)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "LOGICO",
+      "TAMANHO": "VARCHAR2(1)",
+      "SERVIDOR_TESTE_DEPLOY": "N",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "INTEIRO",
+      "TAMANHO": "NUMBER(22)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "NUMDEC",
+      "TAMANHO": "FLOAT(22)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "DATA",
+      "TAMANHO": "DATE(7)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "COLUNA_TSIPAR",
+      "ITEM": "TEXTO",
+      "TAMANHO": "VARCHAR2(4000)",
+      "SERVIDOR_TESTE_DEPLOY": "Y",
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "FK_PARA_TSISMTP",
+      "ITEM": "TPQPLA",
+      "TAMANHO": "FK_TPQPLA_CODSMTP_TSISMTP",
+      "SERVIDOR_TESTE_DEPLOY": null,
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "FK_PARA_TSISMTP",
+      "ITEM": "TMDMSG",
+      "TAMANHO": "FK_TMDMSG_CODSMTP_TSISMTP",
+      "SERVIDOR_TESTE_DEPLOY": null,
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "FK_PARA_TSISMTP",
+      "ITEM": "TSIARF",
+      "TAMANHO": "FK_TSIARF_CODSMTP_TSISMTP",
+      "SERVIDOR_TESTE_DEPLOY": null,
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "FK_PARA_TSISMTP",
+      "ITEM": "TSIMEM",
+      "TAMANHO": "FK_TSIMEM_TSISMTP",
+      "SERVIDOR_TESTE_DEPLOY": null,
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "FK_PARA_TSISMTP",
+      "ITEM": "TMDFMG",
+      "TAMANHO": "FK_TMDFMG_CODSMTP_TSISMTP",
+      "SERVIDOR_TESTE_DEPLOY": null,
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    },
+    {
+      "ORIGEM": "FK_PARA_TSISMTP",
+      "ITEM": "TGFEMP",
+      "TAMANHO": "FK_TGFEMP_CODSMTP_TSISMTP",
+      "SERVIDOR_TESTE_DEPLOY": null,
+      "REMETENTE_TESTE_DEPLOY": null,
+      "ESTRUTURA_SEM_VALORES": null
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

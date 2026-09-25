@@ -1,0 +1,151 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T12:45:42.818210+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Caracteres/C01_Contagem_Corrompidos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 16,
+  "colunas": [
+    "TABELA",
+    "COLUNA",
+    "TOTAL_PREENCHIDO",
+    "QTD_INTERROGACAO_INVERTIDA",
+    "QTD_MOJIBAKE_UTF8",
+    "QTD_INTERROGACAO_ENTRE_LETRAS"
+  ],
+  "linhas": [
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "DESCRPROD",
+      "TOTAL_PREENCHIDO": 11493,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "COMPLDESC",
+      "TOTAL_PREENCHIDO": 11493,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "DESCRPRODNFE",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "CARACTERISTICAS",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "MARCA",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "FABRICANTE",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "CIENTIFICO",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "DESCRANP",
+      "TOTAL_PREENCHIDO": 17,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TGFPRO",
+      "COLUNA": "OBSETIQUETA",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFPAR",
+      "COLUNA": "NOMEPARC",
+      "TOTAL_PREENCHIDO": 9180,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TGFPAR",
+      "COLUNA": "RAZAOSOCIAL",
+      "TOTAL_PREENCHIDO": 9180,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TGFPAR",
+      "COLUNA": "COMPLEMENTO",
+      "TOTAL_PREENCHIDO": 54,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TGFPAR",
+      "COLUNA": "OBSERVACOES",
+      "TOTAL_PREENCHIDO": 0,
+      "QTD_INTERROGACAO_INVERTIDA": null,
+      "QTD_MOJIBAKE_UTF8": null,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": null
+    },
+    {
+      "TABELA": "TGFVEN",
+      "COLUNA": "APELIDO",
+      "TOTAL_PREENCHIDO": 3,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TSIUSU",
+      "COLUNA": "NOMEUSU",
+      "TOTAL_PREENCHIDO": 104,
+      "QTD_INTERROGACAO_INVERTIDA": 1,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    },
+    {
+      "TABELA": "TSIUSU",
+      "COLUNA": "NOMEUSUCPLT",
+      "TOTAL_PREENCHIDO": 1,
+      "QTD_INTERROGACAO_INVERTIDA": 0,
+      "QTD_MOJIBAKE_UTF8": 0,
+      "QTD_INTERROGACAO_ENTRE_LETRAS": 0
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

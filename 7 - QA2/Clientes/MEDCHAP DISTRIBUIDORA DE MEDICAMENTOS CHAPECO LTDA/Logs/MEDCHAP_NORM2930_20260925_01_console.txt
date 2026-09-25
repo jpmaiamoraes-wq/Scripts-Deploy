@@ -1,0 +1,32 @@
+{
+  "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+  "entrypoint": "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/29_30_Merge_Antifragil_MEDCHAP_Normalizar_Remanentes.sql",
+  "arquivos": [
+    "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/29_30_Merge_Antifragil_MEDCHAP_Normalizar_Remanentes.sql"
+  ],
+  "qtd_instrucoes": 1,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 1
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [],
+  "sha256_suite": "81181ae622b1d0f397383b4cd2a1a9d1b4a86f81b70d186c75d4067af94d27f7",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "execution_id": "MEDCHAP_NORM2930_20260925_01",
+  "dml_ddl_executado": true,
+  "log": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_NORM2930_20260925_01.log",
+  "capabilities": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "medchapprd.sankhyacloud.com.br",
+    "db_name": "MEDCHAPPRD",
+    "privilegios_relevantes": [
+      "ALTER ANY TABLE",
+      "CREATE ANY TABLE",
+      "DROP ANY TABLE"
+    ],
+    "quotas": [],
+    "dml_ddl_executado": false
+  }
+}

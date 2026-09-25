@@ -1,0 +1,16 @@
+-- Quantidade de erros de compilacao associada a cada objeto INVALID.
+SELECT E.TYPE AS OBJECT_TYPE,
+       E.NAME AS OBJECT_NAME,
+       COUNT(*) AS QTD_ERROS
+  FROM ALL_ERRORS E
+ WHERE E.OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+   AND EXISTS (
+       SELECT 1
+         FROM ALL_OBJECTS O
+        WHERE O.OWNER = E.OWNER
+          AND O.OBJECT_TYPE = E.TYPE
+          AND O.OBJECT_NAME = E.NAME
+          AND O.STATUS = 'INVALID'
+   )
+ GROUP BY E.TYPE, E.NAME
+ ORDER BY E.TYPE, E.NAME;

@@ -1,0 +1,229 @@
+-- CASA DAS ESSENCIAS - fase 29/30 R03: redirecionamento auditado.
+-- Nao cria objetos, nao exclui TSIBAI/TSIEND e usa somente DML dinamico.
+SET DEFINE OFF
+SET SERVEROUTPUT ON SIZE UNLIMITED
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+DECLARE
+  v_owner VARCHAR2(128) := SYS_CONTEXT('USERENV','CURRENT_SCHEMA');
+  v_id VARCHAR2(50) := 'RMD_CASA_2930_MRG_20260923_R03';
+  v_sql VARCHAR2(32767);
+  v_map VARCHAR2(128) := 'RMD_CASA_2930_R03_MAP';
+  v_bkp_bai VARCHAR2(128) := 'RMD_CASA_2930_R03_BAI_BKP';
+  v_bkp_end VARCHAR2(128) := 'RMD_CASA_2930_R03_END_BKP';
+  v_dep VARCHAR2(128) := 'RMD_CASA_2930_R03_DEP';
+  v_exc VARCHAR2(128) := 'RMD_CASA_2930_R03_EXC';
+  v_map_count NUMBER;
+  v_map_bai NUMBER;
+  v_map_end NUMBER;
+  v_bkp_bai_count NUMBER;
+  v_bkp_end_count NUMBER;
+  v_dep_count NUMBER;
+  v_exc_count NUMBER;
+  v_dup_map NUMBER;
+  v_ref NUMBER := 0;
+  v_n NUMBER;
+
+  PROCEDURE log_exc(p_tab VARCHAR2,p_col VARCHAR2,p_msg VARCHAR2) IS
+  BEGIN
+    EXECUTE IMMEDIATE 'INSERT INTO '||v_exc||
+      '(ID_EXECUCAO,TABLE_NAME,COLUMN_NAME,MENSAGEM,DTLOG) VALUES (:1,:2,:3,:4,SYSTIMESTAMP)'
+      USING v_id,p_tab,p_col,SUBSTR(p_msg,1,1000);
+  END;
+
+  PROCEDURE count_refs_numeric(p_tab VARCHAR2,p_col VARCHAR2,p_tipo VARCHAR2) IS
+  BEGIN
+    v_sql := 'SELECT COUNT(*) FROM '||p_tab||' t WHERE EXISTS ('||
+      'SELECT 1 FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 AND m.TIPO=:2 '||
+      'AND m.COD_OBSOLETO=t.'||p_col||')';
+    EXECUTE IMMEDIATE v_sql INTO v_n USING v_id,p_tipo;
+    v_ref := v_ref + v_n;
+  EXCEPTION WHEN OTHERS THEN
+    log_exc(p_tab,p_col,'VALIDACAO_REFERENCIA: '||SQLERRM);
+  END;
+
+  PROCEDURE count_refs_fk(p_tab VARCHAR2,p_col VARCHAR2,p_tipo VARCHAR2) IS
+  BEGIN
+    v_sql := 'SELECT COUNT(*) FROM '||p_tab||' t WHERE EXISTS ('||
+      'SELECT 1 FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 AND m.TIPO=:2 '||
+      'AND m.COD_OBSOLETO=t.'||p_col||')';
+    EXECUTE IMMEDIATE v_sql INTO v_n USING v_id,p_tipo;
+    v_ref := v_ref + v_n;
+  EXCEPTION WHEN OTHERS THEN
+    log_exc(p_tab,p_col,'VALIDACAO_FK: '||SQLERRM);
+  END;
+BEGIN
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_map||' WHERE ID_EXECUCAO=:1' INTO v_map_count USING v_id;
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_map||' WHERE ID_EXECUCAO=:1 AND TIPO=''BAI''' INTO v_map_bai USING v_id;
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_map||' WHERE ID_EXECUCAO=:1 AND TIPO=''END''' INTO v_map_end USING v_id;
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_bkp_bai||' WHERE ID_EXECUCAO=:1' INTO v_bkp_bai_count USING v_id;
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_bkp_end||' WHERE ID_EXECUCAO=:1' INTO v_bkp_end_count USING v_id;
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM ('||
+    'SELECT TIPO,COD_OBSOLETO,COUNT(*) QTD FROM '||v_map||
+    ' WHERE ID_EXECUCAO=:1 GROUP BY TIPO,COD_OBSOLETO HAVING COUNT(*)>1)'
+    INTO v_dup_map USING v_id;
+  IF v_map_count=0 OR v_map_bai=0 OR v_map_end=0 THEN
+    RAISE_APPLICATION_ERROR(-20383,'Mapa R03 vazio ou incompleto.');
+  END IF;
+  IF v_bkp_bai_count<v_map_bai OR v_bkp_end_count<v_map_end THEN
+    RAISE_APPLICATION_ERROR(-20384,'Backup R03 menor que mapa.');
+  END IF;
+  IF v_dup_map<>0 THEN
+    RAISE_APPLICATION_ERROR(-20385,'Mapa R03 possui COD_OBSOLETO duplicado.');
+  END IF;
+
+  EXECUTE IMMEDIATE 'DELETE FROM '||v_dep||' WHERE ID_EXECUCAO=:1' USING v_id;
+  EXECUTE IMMEDIATE 'DELETE FROM '||v_exc||' WHERE ID_EXECUCAO=:1' USING v_id;
+
+  FOR r IN (
+    SELECT DISTINCT c.TABLE_NAME,c.COLUMN_NAME
+      FROM ALL_TAB_COLUMNS c
+      JOIN ALL_TABLES t ON t.OWNER=c.OWNER AND t.TABLE_NAME=c.TABLE_NAME
+     WHERE c.OWNER=v_owner AND t.TEMPORARY='N'
+       AND c.COLUMN_NAME IN ('CODBAI','CODEND')
+       AND c.DATA_TYPE IN ('NUMBER','FLOAT','BINARY_FLOAT','BINARY_DOUBLE')
+       AND c.TABLE_NAME NOT IN ('TSIBAI','TSIEND',v_map,v_bkp_bai,v_bkp_end,v_dep,v_exc)
+       AND c.TABLE_NAME NOT LIKE 'BKP\_%' ESCAPE '\'
+       AND c.TABLE_NAME NOT LIKE 'RMD\_%' ESCAPE '\'
+     ORDER BY c.TABLE_NAME,c.COLUMN_NAME
+  ) LOOP
+    SAVEPOINT RMD_CASA_2930_BAIEND;
+    BEGIN
+      IF r.COLUMN_NAME='CODBAI' THEN
+        v_sql := 'INSERT INTO '||v_dep||
+          '(ID_EXECUCAO,TABLE_NAME,COLUMN_NAME,RID,OLD_VALUE,NEW_VALUE,DTLOG) '||
+          'SELECT :1,:2,:3,ROWIDTOCHAR(t.ROWID),t.CODBAI,m.COD_MANTIDO,SYSTIMESTAMP '||
+          'FROM '||r.TABLE_NAME||' t JOIN '||v_map||' m ON m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''BAI'' AND m.COD_OBSOLETO=t.CODBAI';
+        EXECUTE IMMEDIATE v_sql USING v_id,r.TABLE_NAME,r.COLUMN_NAME,v_id;
+        v_sql := 'UPDATE '||r.TABLE_NAME||' t SET CODBAI=('||
+          'SELECT m.COD_MANTIDO FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''BAI'' AND m.COD_OBSOLETO=t.CODBAI) WHERE EXISTS ('||
+          'SELECT 1 FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 AND m.TIPO=''BAI'' '||
+          'AND m.COD_OBSOLETO=t.CODBAI)';
+      ELSE
+        v_sql := 'INSERT INTO '||v_dep||
+          '(ID_EXECUCAO,TABLE_NAME,COLUMN_NAME,RID,OLD_VALUE,NEW_VALUE,DTLOG) '||
+          'SELECT :1,:2,:3,ROWIDTOCHAR(t.ROWID),t.CODEND,m.COD_MANTIDO,SYSTIMESTAMP '||
+          'FROM '||r.TABLE_NAME||' t JOIN '||v_map||' m ON m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''END'' AND m.COD_OBSOLETO=t.CODEND';
+        EXECUTE IMMEDIATE v_sql USING v_id,r.TABLE_NAME,r.COLUMN_NAME,v_id;
+        v_sql := 'UPDATE '||r.TABLE_NAME||' t SET CODEND=('||
+          'SELECT m.COD_MANTIDO FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''END'' AND m.COD_OBSOLETO=t.CODEND) WHERE EXISTS ('||
+          'SELECT 1 FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 AND m.TIPO=''END'' '||
+          'AND m.COD_OBSOLETO=t.CODEND)';
+      END IF;
+      EXECUTE IMMEDIATE v_sql USING v_id,v_id;
+      DBMS_OUTPUT.PUT_LINE('RAMO_OK|'||r.TABLE_NAME||'|'||r.COLUMN_NAME||'|'||SQL%ROWCOUNT);
+    EXCEPTION WHEN OTHERS THEN
+      ROLLBACK TO RMD_CASA_2930_BAIEND;
+      log_exc(r.TABLE_NAME,r.COLUMN_NAME,SQLERRM);
+      DBMS_OUTPUT.PUT_LINE('RAMO_EXCECAO|'||r.TABLE_NAME||'|'||r.COLUMN_NAME||'|'||SQLERRM);
+    END;
+  END LOOP;
+
+  FOR r IN (
+    SELECT DISTINCT c.TABLE_NAME,cc.COLUMN_NAME,p.TABLE_NAME REFERENCED_TABLE
+      FROM ALL_CONSTRAINTS c
+      JOIN ALL_CONS_COLUMNS cc ON cc.OWNER=c.OWNER AND cc.CONSTRAINT_NAME=c.CONSTRAINT_NAME
+      JOIN ALL_CONSTRAINTS p ON p.OWNER=c.R_OWNER AND p.CONSTRAINT_NAME=c.R_CONSTRAINT_NAME
+      JOIN ALL_TABLES t ON t.OWNER=c.OWNER AND t.TABLE_NAME=c.TABLE_NAME
+     WHERE c.OWNER=v_owner AND c.CONSTRAINT_TYPE='R'
+       AND p.OWNER=v_owner AND p.TABLE_NAME IN ('TSIBAI','TSIEND')
+       AND t.TEMPORARY='N' AND cc.COLUMN_NAME NOT IN ('CODBAI','CODEND')
+       AND c.TABLE_NAME NOT IN ('TSIBAI','TSIEND',v_map,v_bkp_bai,v_bkp_end,v_dep,v_exc)
+       AND c.TABLE_NAME NOT LIKE 'BKP\_%' ESCAPE '\'
+       AND c.TABLE_NAME NOT LIKE 'RMD\_%' ESCAPE '\'
+     ORDER BY c.TABLE_NAME,cc.COLUMN_NAME
+  ) LOOP
+    SAVEPOINT RMD_CASA_2930_FK;
+    BEGIN
+      IF r.REFERENCED_TABLE='TSIBAI' THEN
+        v_sql := 'INSERT INTO '||v_dep||
+          '(ID_EXECUCAO,TABLE_NAME,COLUMN_NAME,RID,OLD_VALUE,NEW_VALUE,DTLOG) '||
+          'SELECT :1,:2,:3,ROWIDTOCHAR(t.ROWID),t.'||r.COLUMN_NAME||',m.COD_MANTIDO,SYSTIMESTAMP '||
+          'FROM '||r.TABLE_NAME||' t JOIN '||v_map||' m ON m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''BAI'' AND m.COD_OBSOLETO=t.'||r.COLUMN_NAME;
+        EXECUTE IMMEDIATE v_sql USING v_id,r.TABLE_NAME,r.COLUMN_NAME,v_id;
+        v_sql := 'UPDATE '||r.TABLE_NAME||' t SET '||r.COLUMN_NAME||'=('||
+          'SELECT m.COD_MANTIDO FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''BAI'' AND m.COD_OBSOLETO=t.'||r.COLUMN_NAME||') WHERE EXISTS ('||
+          'SELECT 1 FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 AND m.TIPO=''BAI'' '||
+          'AND m.COD_OBSOLETO=t.'||r.COLUMN_NAME||')';
+      ELSE
+        v_sql := 'INSERT INTO '||v_dep||
+          '(ID_EXECUCAO,TABLE_NAME,COLUMN_NAME,RID,OLD_VALUE,NEW_VALUE,DTLOG) '||
+          'SELECT :1,:2,:3,ROWIDTOCHAR(t.ROWID),t.'||r.COLUMN_NAME||',m.COD_MANTIDO,SYSTIMESTAMP '||
+          'FROM '||r.TABLE_NAME||' t JOIN '||v_map||' m ON m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''END'' AND m.COD_OBSOLETO=t.'||r.COLUMN_NAME;
+        EXECUTE IMMEDIATE v_sql USING v_id,r.TABLE_NAME,r.COLUMN_NAME,v_id;
+        v_sql := 'UPDATE '||r.TABLE_NAME||' t SET '||r.COLUMN_NAME||'=('||
+          'SELECT m.COD_MANTIDO FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 '||
+          'AND m.TIPO=''END'' AND m.COD_OBSOLETO=t.'||r.COLUMN_NAME||') WHERE EXISTS ('||
+          'SELECT 1 FROM '||v_map||' m WHERE m.ID_EXECUCAO=:1 AND m.TIPO=''END'' '||
+          'AND m.COD_OBSOLETO=t.'||r.COLUMN_NAME||')';
+      END IF;
+      EXECUTE IMMEDIATE v_sql USING v_id,v_id;
+      DBMS_OUTPUT.PUT_LINE('FK_RAMO_OK|'||r.TABLE_NAME||'|'||r.COLUMN_NAME||'|'||SQL%ROWCOUNT);
+    EXCEPTION WHEN OTHERS THEN
+      ROLLBACK TO RMD_CASA_2930_FK;
+      log_exc(r.TABLE_NAME,r.COLUMN_NAME,SQLERRM);
+      DBMS_OUTPUT.PUT_LINE('FK_RAMO_EXCECAO|'||r.TABLE_NAME||'|'||r.COLUMN_NAME||'|'||SQLERRM);
+    END;
+  END LOOP;
+
+  FOR r IN (
+    SELECT DISTINCT c.TABLE_NAME,c.COLUMN_NAME
+      FROM ALL_TAB_COLUMNS c
+      JOIN ALL_TABLES t ON t.OWNER=c.OWNER AND t.TABLE_NAME=c.TABLE_NAME
+     WHERE c.OWNER=v_owner AND t.TEMPORARY='N'
+       AND c.COLUMN_NAME IN ('CODBAI','CODEND')
+       AND c.DATA_TYPE IN ('NUMBER','FLOAT','BINARY_FLOAT','BINARY_DOUBLE')
+       AND c.TABLE_NAME NOT IN ('TSIBAI','TSIEND',v_map,v_bkp_bai,v_bkp_end,v_dep,v_exc)
+       AND c.TABLE_NAME NOT LIKE 'BKP\_%' ESCAPE '\'
+       AND c.TABLE_NAME NOT LIKE 'RMD\_%' ESCAPE '\'
+  ) LOOP
+    IF r.COLUMN_NAME='CODBAI' THEN
+      count_refs_numeric(r.TABLE_NAME,r.COLUMN_NAME,'BAI');
+    ELSE
+      count_refs_numeric(r.TABLE_NAME,r.COLUMN_NAME,'END');
+    END IF;
+  END LOOP;
+
+  FOR r IN (
+    SELECT DISTINCT c.TABLE_NAME,cc.COLUMN_NAME,p.TABLE_NAME REFERENCED_TABLE
+      FROM ALL_CONSTRAINTS c
+      JOIN ALL_CONS_COLUMNS cc ON cc.OWNER=c.OWNER AND cc.CONSTRAINT_NAME=c.CONSTRAINT_NAME
+      JOIN ALL_CONSTRAINTS p ON p.OWNER=c.R_OWNER AND p.CONSTRAINT_NAME=c.R_CONSTRAINT_NAME
+      JOIN ALL_TABLES t ON t.OWNER=c.OWNER AND t.TABLE_NAME=c.TABLE_NAME
+     WHERE c.OWNER=v_owner AND c.CONSTRAINT_TYPE='R'
+       AND p.OWNER=v_owner AND p.TABLE_NAME IN ('TSIBAI','TSIEND')
+       AND t.TEMPORARY='N' AND cc.COLUMN_NAME NOT IN ('CODBAI','CODEND')
+       AND c.TABLE_NAME NOT IN ('TSIBAI','TSIEND',v_map,v_bkp_bai,v_bkp_end,v_dep,v_exc)
+       AND c.TABLE_NAME NOT LIKE 'BKP\_%' ESCAPE '\'
+       AND c.TABLE_NAME NOT LIKE 'RMD\_%' ESCAPE '\'
+  ) LOOP
+    IF r.REFERENCED_TABLE='TSIBAI' THEN
+      count_refs_fk(r.TABLE_NAME,r.COLUMN_NAME,'BAI');
+    ELSE
+      count_refs_fk(r.TABLE_NAME,r.COLUMN_NAME,'END');
+    END IF;
+  END LOOP;
+
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_dep||' WHERE ID_EXECUCAO=:1' INTO v_dep_count USING v_id;
+  EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_exc||' WHERE ID_EXECUCAO=:1' INTO v_exc_count USING v_id;
+  DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+  DBMS_OUTPUT.PUT_LINE('MAPA_BAI='||v_map_bai||'; MAPA_END='||v_map_end||'; BACKUP_BAI='||v_bkp_bai_count||'; BACKUP_END='||v_bkp_end_count);
+  DBMS_OUTPUT.PUT_LINE('REFERENCIAS_AUDITADAS='||v_dep_count||'; EXCECOES='||v_exc_count||'; REFERENCIAS_REMANESCENTES='||v_ref);
+  COMMIT;
+  IF v_ref=0 AND v_exc_count=0 THEN
+    DBMS_OUTPUT.PUT_LINE('STATUS=REDIRECIONAMENTO_COMPLETO_REFERENCIAS_ZERO_SEM_EXCLUSAO');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('STATUS=REDIRECIONAMENTO_PARCIAL_SEM_EXCLUSAO');
+  END IF;
+EXCEPTION WHEN OTHERS THEN
+  ROLLBACK;
+  RAISE;
+END;
+/

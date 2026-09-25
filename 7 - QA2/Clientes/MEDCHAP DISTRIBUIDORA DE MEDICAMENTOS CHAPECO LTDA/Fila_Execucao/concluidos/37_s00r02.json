@@ -1,0 +1,1 @@
+{"id": "MEDCHAP_S00R02_20260925_01", "tipo": "query", "sql_file": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/SMTP/S00_Diagnostico_SMTP_Sem_Segredos.sql", "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/S00_R02_Diagnostico_SMTP_Pos_Teste_20260925.json", "descricao": "smtp apos teste de envio (sem segredos)"}

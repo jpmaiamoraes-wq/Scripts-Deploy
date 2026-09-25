@@ -1,0 +1,25 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T18:55:37.189711+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Estado_Trigger_PosFalha_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "TRIGGER_NAME",
+    "STATUS",
+    "OWNER"
+  ],
+  "linhas": [
+    {
+      "TRIGGER_NAME": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "STATUS": "ENABLED",
+      "OWNER": "SANKHYA"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,39 @@
+{
+  "status": "CONFERENCIA_READ_ONLY_CONCLUIDA_COM_DIVERGENCIAS_REGISTRADAS",
+  "fonte_primaria": "Onboarding Deploy — Sankhya",
+  "url": "https://20069-51233.build.mitralab.io/",
+  "projeto": "MOVE GESTAO DE ENERGIA LTDA",
+  "consultado_em_utc": "2026-09-23T11:31:37Z",
+  "registro_portal": {
+    "empresas_no_projeto": 5,
+    "usuarios_no_arquivo": 18,
+    "arquivo_usuarios_mais_recente": "Usuarios.xlsx",
+    "arquivo_usuarios_enviado_em": "2026-09-14 20:00 (fuso nao exibido)",
+    "campos_arquivo": ["CODIGO USUARIO", "EMAIL", "NOMEUSU", "EMPRESA", "CODGRUPO"],
+    "empresa_e_codgrupo_vazios_em_todas_as_linhas": true,
+    "cinco_valores_atendimento_interrogacao_em_codigo_usuario": true
+  },
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "consultas": {
+    "empresas": "Artefatos_Revisao/Preflight/00_Onboarding_Empresas_MOVE_READONLY.sql",
+    "usuarios": "Artefatos_Revisao/Preflight/00_Onboarding_Usuarios_MOVE_READONLY.sql"
+  },
+  "resultados": {
+    "empresas": {
+      "status": "2_CNPJ_CORRESPONDEM; 3_AUSENTES_NA_TSIEMP; 0_ADICIONAIS",
+      "evidencia": "Artefatos_Revisao/Preflight/00_Onboarding_Empresas_MOVE_Comparacao_20260923.json"
+    },
+    "usuarios": {
+      "status": "18_EMAILS_CORRESPONDEM; 18_NOMES_DIVERGEM; CAMPOS_EMPRESA_E_CODGRUPO_AUSENTES_NA_FONTE",
+      "evidencia": "Artefatos_Revisao/Preflight/00_Onboarding_Usuarios_MOVE_Comparacao_20260923.json"
+    }
+  },
+  "impacto": "Nenhuma empresa ou usuario foi incluido, removido ou alterado; divergencias ficam registradas para avaliacao do cliente.",
+  "dml_executado": false,
+  "ddl_executado": false
+}

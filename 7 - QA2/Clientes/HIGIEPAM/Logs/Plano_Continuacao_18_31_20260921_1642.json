@@ -1,0 +1,32 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/HIGIEPAM/Continuacao_Master_Deploy_HIGIEPAM_18_31.sql",
+  "arquivos": [
+    "Clientes/HIGIEPAM/Continuacao_Master_Deploy_HIGIEPAM_18_31.sql",
+    "Revisao Master Deploy/18_Ajustar_Preferencias_GOL.sql",
+    "Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql",
+    "Revisao Master Deploy/20_Atualizar_Cards_Deploy.sql",
+    "Revisao Master Deploy/21_Classificar_ICMS_Parceiros.sql",
+    "Revisao Master Deploy/22_Ajustar_Nomes_Parceiros.sql",
+    "Revisao Master Deploy/23_Validar_Reabilitar_Objetos.sql",
+    "Revisao Master Deploy/24_Padronizar_Parceiros.sql",
+    "Revisao Master Deploy/25_Padronizar_Produtos.sql",
+    "Revisao Master Deploy/26_Padronizar_Tipos_Titulo.sql",
+    "Revisao Master Deploy/27_Padronizar_Cidades.sql",
+    "Revisao Master Deploy/28_Padronizar_Tipos_Venda.sql",
+    "Revisao Master Deploy/29_Padronizar_Bairros.sql",
+    "Revisao Master Deploy/30_Padronizar_Enderecos.sql",
+    "Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+  ],
+  "qtd_instrucoes": 22,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 20,
+    "SELECT": 2
+  },
+  "binds_sqlplus": [
+    "RMD_ID_MASTER"
+  ],
+  "sha256_suite": "9d6372942eaf8c661ea034f921eda0f25b549d06efd5f708e5f8f7248ef2af93",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false
+}

@@ -1,0 +1,183 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T11:44:52.534406+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Base Relatório de Entrega/REL_ENTEGA_NOVO_05.jrxml :: queryString :: indicadores excluídos incluídos",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 23,
+  "colunas": [
+    "ORDEM",
+    "SECAO",
+    "INDICADOR",
+    "QTD",
+    "OBSERVACAO"
+  ],
+  "linhas": [
+    {
+      "ORDEM": 1,
+      "SECAO": "GERAL",
+      "INDICADOR": "Total de notas/cabecalhos processados",
+      "QTD": 1201301,
+      "OBSERVACAO": "Registros existentes na TGFCAB"
+    },
+    {
+      "ORDEM": 2,
+      "SECAO": "GERAL",
+      "INDICADOR": "Total de itens processados",
+      "QTD": 4176842,
+      "OBSERVACAO": "Registros existentes na TGFITE"
+    },
+    {
+      "ORDEM": 3,
+      "SECAO": "GERAL",
+      "INDICADOR": "Periodo de movimentacao",
+      "QTD": 1201301,
+      "OBSERVACAO": "De 14/09/2022 ate 31/08/2026"
+    },
+    {
+      "ORDEM": 4,
+      "SECAO": "FINANCEIRO",
+      "INDICADOR": "Total de registros financeiros",
+      "QTD": 1329720,
+      "OBSERVACAO": "Registros existentes na TGFFIN"
+    },
+    {
+      "ORDEM": 5,
+      "SECAO": "FINANCEIRO",
+      "INDICADOR": "Contas a receber",
+      "QTD": 558508,
+      "OBSERVACAO": "TGFFIN.RECDESP = 1"
+    },
+    {
+      "ORDEM": 6,
+      "SECAO": "FINANCEIRO",
+      "INDICADOR": "Contas a pagar",
+      "QTD": 771212,
+      "OBSERVACAO": "TGFFIN.RECDESP = -1"
+    },
+    {
+      "ORDEM": 16,
+      "SECAO": "FINANCEIRO",
+      "INDICADOR": "Financeiros sem nota",
+      "QTD": 0,
+      "OBSERVACAO": "Financeiros cujo NUNOTA nao existe na TGFCAB"
+    },
+    {
+      "ORDEM": 17,
+      "SECAO": "FINANCEIRO",
+      "INDICADOR": "Notas sem financeiro",
+      "QTD": 0,
+      "OBSERVACAO": "Notas com TOP que atualiza financeiro, mas sem registro na TGFFIN"
+    },
+    {
+      "ORDEM": 7,
+      "SECAO": "CADASTROS",
+      "INDICADOR": "Total de produtos cadastrados",
+      "QTD": 11492,
+      "OBSERVACAO": "Produtos cadastrados, desconsiderando CODPROD 0"
+    },
+    {
+      "ORDEM": 8,
+      "SECAO": "CADASTROS",
+      "INDICADOR": "Total de parceiros cadastrados",
+      "QTD": 9180,
+      "OBSERVACAO": "Registros existentes na TGFPAR"
+    },
+    {
+      "ORDEM": 23,
+      "SECAO": "CADASTROS",
+      "INDICADOR": "Codigos fiscais de cidades duplicados",
+      "QTD": 0,
+      "OBSERVACAO": "Codigos CODMUNFIS com mais de uma cidade vinculada"
+    },
+    {
+      "ORDEM": 9,
+      "SECAO": "PRODUTOS",
+      "INDICADOR": "Referencias duplicadas",
+      "QTD": 2,
+      "OBSERVACAO": "Referencias com mais de um produto vinculado"
+    },
+    {
+      "ORDEM": 10,
+      "SECAO": "PRODUTOS",
+      "INDICADOR": "Produtos envolvidos em referencias duplicadas",
+      "QTD": 59,
+      "OBSERVACAO": "Produtos que compartilham a mesma referencia/codigo de barras"
+    },
+    {
+      "ORDEM": 11,
+      "SECAO": "PRODUTOS",
+      "INDICADOR": "Descricoes duplicadas",
+      "QTD": 90,
+      "OBSERVACAO": "Descricoes/NCM/origem com mais de um produto"
+    },
+    {
+      "ORDEM": 12,
+      "SECAO": "PRODUTOS",
+      "INDICADOR": "Produtos envolvidos em descricoes duplicadas",
+      "QTD": 189,
+      "OBSERVACAO": "Produtos que possuem mesma descricao, NCM e origem"
+    },
+    {
+      "ORDEM": 18,
+      "SECAO": "PRODUTOS",
+      "INDICADOR": "Produtos vendidos sem registro de entrada",
+      "QTD": 323,
+      "OBSERVACAO": "Produtos com venda identificada, mas sem entrada correspondente"
+    },
+    {
+      "ORDEM": 13,
+      "SECAO": "PARCEIROS",
+      "INDICADOR": "CNPJ/CPF repetidos",
+      "QTD": 0,
+      "OBSERVACAO": "Grupos de CNPJ/CPF repetidos"
+    },
+    {
+      "ORDEM": 14,
+      "SECAO": "PARCEIROS",
+      "INDICADOR": "Parceiros envolvidos em CNPJ/CPF repetido",
+      "QTD": 0,
+      "OBSERVACAO": "Cadastros envolvidos em duplicidade"
+    },
+    {
+      "ORDEM": 15,
+      "SECAO": "FISCAL",
+      "INDICADOR": "Classificacao fiscal divergente",
+      "QTD": 0,
+      "OBSERVACAO": "Parceiros cuja classificacao ICMS difere da classificacao esperada"
+    },
+    {
+      "ORDEM": 19,
+      "SECAO": "CUSTOS",
+      "INDICADOR": "Produtos com custo zero",
+      "QTD": 8247,
+      "OBSERVACAO": "Produtos de revenda/venda com custo medio sem ICMS igual a zero"
+    },
+    {
+      "ORDEM": 20,
+      "SECAO": "CUSTOS",
+      "INDICADOR": "Produtos sem registro de custo",
+      "QTD": 1095,
+      "OBSERVACAO": "Produtos de revenda/venda sem registro na TGFCUS"
+    },
+    {
+      "ORDEM": 21,
+      "SECAO": "INTEGRIDADE",
+      "INDICADOR": "Itens sem cabecalho",
+      "QTD": 0,
+      "OBSERVACAO": "Itens existentes na TGFITE sem correspondente na TGFCAB"
+    },
+    {
+      "ORDEM": 22,
+      "SECAO": "INTEGRIDADE",
+      "INDICADOR": "Cabecalhos sem itens",
+      "QTD": 0,
+      "OBSERVACAO": "Notas existentes na TGFCAB sem itens na TGFITE"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,39 @@
+{
+  "status": "PENDENTE_AMBIGUIDADE",
+  "base": "MOVE GESTAO DE ENERGIA LTDA",
+  "id_execucao": "RMD_RUN_20260922163852951",
+  "schema": "SANKHYA",
+  "usuario": "FRANCISCO_JUNIOR",
+  "service_name": "moveenergiaprd.sankhyacloud.com.br",
+  "quantidade_objetos_invalidos": 4,
+  "objetos": [
+    "FUNCTION:FSP_DATA_DIA_UTIL",
+    "FUNCTION:FSP_RETURN_DATAS_UTEIS",
+    "FUNCTION:GET_PREVISAO_CREDITO_DEBITO",
+    "FUNCTION:GET_PROXIMO_DIA_UTIL"
+  ],
+  "privilegio_ausente": "ALTER ANY PROCEDURE",
+  "evidencia_privilegio": "Logs/MOVE_MAS_20260922_163600.log:1171; preflight 31 registra privilegio_alter_any_procedure_presente=false.",
+  "assunto": "MOVE GESTAO DE ENERGIA LTDA — Objetos nativos Oracle inválidos — Revisão Master Deploy",
+  "descricao_pronta_no_rascunho": "Artefatos_Revisao/Preflight/31_Ticket_Objetos_Invalidos_Rascunho_20260922.md",
+  "organizacao_esperada": "MOVE GESTAO DE ENERGIA LTDA",
+  "organizacao_confirmada_no_portal": false,
+  "campos_formulario": {
+    "prioridade": "Normal",
+    "produto": "Cloud/SaaS",
+    "categoria": "Solicitação Cloud",
+    "motivo": "Personalizar Objeto de Banco de Dados",
+    "ambiente": "Produção",
+    "banco": "Oracle",
+    "anexos": []
+  },
+  "portal_acessivel": false,
+  "duplicidade_verificada": false,
+  "ticket_enviado": false,
+  "numero": null,
+  "url": null,
+  "status_ticket": null,
+  "bloqueio": "Sem sessão autenticada no portal; organização e duplicidade não verificadas. Nenhum envio ou anexo realizado.",
+  "dml_executado": false,
+  "ddl_executado": false
+}

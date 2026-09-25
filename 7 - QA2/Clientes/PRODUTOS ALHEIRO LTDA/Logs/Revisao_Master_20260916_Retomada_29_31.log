@@ -1,0 +1,138 @@
+SQL> 
+SQL> PROMPT ============================================================
+============================================================
+SQL> PROMPT RETOMADA MASTER DEPLOY - PRODUTOS ALHEIRO LTDA - INICIO
+RETOMADA MASTER DEPLOY - PRODUTOS ALHEIRO LTDA - INICIO
+SQL> PROMPT ATIVIDADES 01-28 NAO SERAO REPETIDAS
+ATIVIDADES 01-28 NAO SERAO REPETIDAS
+SQL> SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY HH24:MI:SS') DATA_HORA_INICIO FROM DUAL;
+
+DATA_HORA_INICIO
+-------------------
+16/09/2026 16:13:28
+
+SQL> PROMPT ============================================================
+============================================================
+SQL> 
+SQL> PROMPT === PREFLIGHT SOMENTE LEITURA ===
+=== PREFLIGHT SOMENTE LEITURA ===
+SQL> @@00_Preflight_Gate_ALHEIRO.sql
+SQL> -- Preflight da Revisao Master Deploy - somente leitura.
+SQL> -- A quota e informada, mas o bloqueio preventivo foi dispensado por aprovacao formal.
+SQL> SET DEFINE OFF
+SQL> SET ECHO OFF
+=== PREFLIGHT GATE - IDENTIDADE DA SESSAO ===
+
+USUARIO_SESSAO                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR
+
+1 row selected. 
+
+
+SCHEMA_ATUAL                                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+
+1 row selected. 
+
+
+SERVICE_NAME                                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+alheiroprd.sankhyacloud.com.br
+
+1 row selected. 
+
+
+DB_NAME                                                                                                                         
+--------------------------------------------------------------------------------------------------------------------------------
+ALHEIROPRD
+
+1 row selected. 
+
+
+INSTANCE_NAME                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------
+dbs3pc13
+
+1 row selected. 
+
+
+USUARIO_ESPERADO SERVICE_ESPERADO     
+---------------- ---------------------
+OK               OK                   
+
+1 row selected. 
+
+=== PREFLIGHT GATE - EMPRESA E VERSAO ===
+
+QTD_EMPRESA_EXATA STATUS_EMPRESA             
+----------------- ---------------------------
+                1 OK                         
+
+1 row selected. 
+
+
+VERSAO_SISTEMA_CURTA          
+------------------------------
+4.36b146
+
+1 row selected. 
+
+
+VERSAO_ORACLE                                                                                                           
+------------------------------------------------------------------------------------------------------------------------
+Oracle AI Database 26ai EE High Perf Release 23.26.2.0.0 - Production
+
+1 row selected. 
+
+=== PREFLIGHT GATE - QUOTA E INVALIDOS ===
+
+QTD_LINHAS_USER_TS_QUOTAS
+-------------------------
+                        0
+
+1 row selected. 
+
+
+QTD_OBJETOS_INVALIDOS
+---------------------
+                    0
+
+1 row selected. 
+
+PREFLIGHT_GATE_STATUS=APROVADO_IDENTIDADE_EMPRESA; QUOTA=INFORMADA_SEM_BLOQUEIO_PREVENTIVO
+OWNER_OPERACIONAL=SANKHYA
+
+
+PL/SQL procedure successfully completed.
+
+=== FIM PREFLIGHT GATE - SOMENTE LEITURA ===
+=== CONFIRMACAO FORMAL DA BASE ===
+
+PL/SQL procedure successfully completed.
+
+=== VALIDACAO DOS BACKUPS PERSISTENTES ANTES DAS ATIVIDADES 29-30 ===
+BACKUPS_PERSISTENTES_29_30=VALIDADOS
+
+
+PL/SQL procedure successfully completed.
+
+
+OBJETO                    QTD
+------------------ ----------
+BKP_RMD_PAD_TSIBAI      45047
+BKP_RMD_PAD_TSIEND     646115
+
+2 rows selected. 
+
+=== [29/31] INICIO - 29_Padronizar_Bairros.sql ===
+
+Error starting at line : 58 in command -
+@../../Revisao.sql
+Error report -
+SP2-0310: Unable to open file: "../../Revisao.sql"
+Rollback
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS ALHEIRO LTDA/Logs/Revisao_Master_20260916_Retomada_29_31_retry.log"

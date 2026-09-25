@@ -1,0 +1,225 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T12:32:46.035926+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Onboarding/O00_Colunas_Onboarding.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 41,
+  "colunas": [
+    "TABLE_NAME",
+    "COLUMN_NAME",
+    "DATA_TYPE"
+  ],
+  "linhas": [
+    {
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "CODAGE",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "CODBCO",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "CODCID",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "NOMEAGE",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIBCO",
+      "COLUMN_NAME": "CODBCO",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIBCO",
+      "COLUMN_NAME": "NOMEBCO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSICID",
+      "COLUMN_NAME": "CODCID",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSICID",
+      "COLUMN_NAME": "NOMECID",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSICID",
+      "COLUMN_NAME": "UF",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "ATIVA",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CLASSE",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CODAGE",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CODBCO",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CODCTABCO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CODCTABCOINT",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CODEMP",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "CODUSU",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSICTA",
+      "COLUMN_NAME": "DESCRICAO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "CGC",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "CODCID",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "CODEMP",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "CODUSU",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "INSCESTAD",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "NOMEFANTASIA",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "RAZAOSOCIAL",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIGRU",
+      "COLUMN_NAME": "ATIVO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIGRU",
+      "COLUMN_NAME": "CODGRUPO",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIGRU",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIGRU",
+      "COLUMN_NAME": "NOMEGRUPO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIUFS",
+      "COLUMN_NAME": "CODUF",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIUFS",
+      "COLUMN_NAME": "DESCRICAO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIUFS",
+      "COLUMN_NAME": "UF",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CODCTABCOINT",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CODEMP",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CODGRUPO",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "CODUSU",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "DTLIMACESSO",
+      "DATA_TYPE": "DATE"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIUSU",
+      "COLUMN_NAME": "NOMEUSU",
+      "DATA_TYPE": "VARCHAR2"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

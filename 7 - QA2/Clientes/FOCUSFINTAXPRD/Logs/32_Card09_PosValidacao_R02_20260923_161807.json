@@ -1,0 +1,55 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T19:18:08.003487+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Artefatos_Revisao/PostValidacao/32_Card09_Mapa_PosValidacao_FOCUS_READONLY_R02.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 9,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "BASE_TOTAL_MAPA",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "LINHAS_CLASSIFICACAO",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "APTO_PARA_VALIDACAO_FINAL",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "SEM_VDUP_XML",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "TABELAS_MAPA_EXISTENTES",
+      "VALOR": "2"
+    },
+    {
+      "METRICA": "ESCOPO_DASHBOARD_NOTAS_SEM_FIN",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "LINHAS_TGFNUM_TGFFIN",
+      "VALOR": "1"
+    },
+    {
+      "METRICA": "ULTCOD_TGFNUM_TGFFIN",
+      "VALOR": "392"
+    },
+    {
+      "METRICA": "TOTAL_TGFFIN",
+      "VALOR": "392"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,13 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T16:55:40.759600+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "quantidade_objetos_invalidos": 0,
+  "objetos_invalidos": [],
+  "dml_executado": false,
+  "ddl_executado": false,
+  "conclusao": "Nenhum objeto INVALID foi encontrado no schema SANKHYA."
+}

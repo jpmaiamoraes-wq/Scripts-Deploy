@@ -1,0 +1,17 @@
+{
+  "status": "BLOQUEADO_REDE",
+  "registrado_em_utc": "2026-09-22T22:53:46Z",
+  "host": "10.110.56.20",
+  "port": 1521,
+  "service_esperado": "MOVEENERGIAPRD.SANKHYACLOUD.COM.BR",
+  "credential_status": "CREDENCIAL_KEYCHAIN_PRESENTE",
+  "forticlient": "DISCONNECTED",
+  "ip_cadastrado_no_catalogo": true,
+  "arquivo_sql": "32_Card09_Preflight_Direto_XML_MOVE_READONLY.sql",
+  "mensagem_executor": "A porta não está acessível neste ambiente; não houve tentativa de login.",
+  "sessao_oracle_estabelecida": false,
+  "login_tentado": false,
+  "dml_executado": false,
+  "ddl_executado": false,
+  "tgffin_alterada": false
+}

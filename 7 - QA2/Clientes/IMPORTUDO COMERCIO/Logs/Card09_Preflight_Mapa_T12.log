@@ -1,0 +1,100 @@
+SQL> PROMPT CARD 09 - PREFLIGHT E MAPA
+CARD 09 - PREFLIGHT E MAPA
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER:='RMD_RUN_CONT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/32_Card09_Preflight_Notas_Sem_Financeiro_DUP.sql"
+SQL> -- Etapa 32 - Preflight do card 09 - Notas sem Financeiro.
+SQL> --
+SQL> -- Este script faz o preflight e cria um mapa persistente dos candidatos.
+SQL> -- Este arquivo apenas cria o preflight; a inclusao controlada ocorre no 32B
+SQL> -- apos a revisao do mapa e a confirmacao explicita do operador.
+SQL> 
+SQL> SET DEFINE ON
+SQL> 
+SQL> -- Parametros obrigatorios: altere os dois valores antes de executar.
+SQL> DEFINE ID_EXECUCAO = 'IMPORTUDO_20260910_FDUP_01'
+SQL> DEFINE TBL_BASE = 'BKP_RMD_FDUP_IMPORTUDO_01'
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === CARD 09 - PREFLIGHT NOTAS SEM FINANCEIRO COM DUP ===
+=== CARD 09 - PREFLIGHT NOTAS SEM FINANCEIRO COM DUP ===
+SQL> 
+SQL> DECLARE
+  2    v_qtd NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*) INTO v_qtd
+  5      FROM ALL_TABLES
+  6     WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  7       AND TABLE_NAME = '&TBL_BASE';
+  8    IF v_qtd > 0 THEN
+  9      RAISE_APPLICATION_ERROR(-20320,
+ 10        'Mapa &TBL_BASE já existe. Gere novo ID antes de repetir.');
+ 11    END IF;
+ 12  
+ 13    EXECUTE IMMEDIATE q'[
+ 14      CREATE TABLE &TBL_BASE AS
+ 15      SELECT
+ 16        CAST('&ID_EXECUCAO' AS VARCHAR2(40)) AS ID_EXECUCAO,
+ 17        SYSTIMESTAMP AS DH_EXECUCAO,
+ 18        SYS_CONTEXT('USERENV','SESSION_USER') AS USUARIO_EXECUCAO,
+ 19        C.NUNOTA, C.CODEMP, C.NUMNOTA, C.SERIENOTA, C.DTNEG, C.DTMOV,
+ 20        C.CODPARC, C.CODTIPOPER, T.DESCROPER, C.VLRNOTA,
+ 21        FNC_BUSCA_TAG_XML_GERAL(C.NUNOTA,'vDup','dup') AS VDUP_XML,
+ 22        FNC_BUSCA_TAG_XML_GERAL(C.NUNOTA,'dVenc','dup') AS DVENC_XML,
+ 23        FNC_BUSCA_TAG_XML_GERAL(C.NUNOTA,'nDup','dup') AS NDUP_XML
+ 24      FROM TGFCAB C
+ 25      JOIN TGFTOP T
+ 26        ON T.CODTIPOPER = C.CODTIPOPER
+ 27       AND T.DHALTER = (
+ 28         SELECT MAX(T2.DHALTER)
+ 29           FROM TGFTOP T2
+ 30          WHERE T2.CODTIPOPER = C.CODTIPOPER
+ 31            AND T2.DHALTER <= C.DHTIPOPER
+ 32       )
+ 33      WHERE T.ATUALFIN <> 0
+ 34        AND C.TIPMOV <> 'Z'
+ 35        AND NOT EXISTS (SELECT 1 FROM TGFFIN F WHERE F.NUNOTA = C.NUNOTA)
+ 36        AND FNC_BUSCA_TAG_XML_GERAL(C.NUNOTA,'vDup','dup') IS NOT NULL
+ 37        AND REGEXP_LIKE(
+ 38              FNC_BUSCA_TAG_XML_GERAL(C.NUNOTA,'dVenc','dup'),
+ 39              '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+ 40            )
+ 41    ]';
+ 42  END;
+ 43  /
+Rollback
+DECLARE
+*
+ERROR at line 1:
+ORA-00904: "FNC_BUSCA_TAG_XML_GERAL": invalid identifier
+ORA-06512: at line 13
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/32A_Card09_Mapear_Notas_Sem_Financeiro_DUP.sql"
+SQL> PROMPT CARD09_PREFLIGHT_MAPA_FIM
+SQL> SPOOL OFF
+SQL> SPOOL OFF

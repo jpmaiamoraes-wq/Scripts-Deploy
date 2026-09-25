@@ -1,0 +1,35 @@
+{
+  "status": "PARCIAL_RETOMADA_PARADA_NA_ATIVIDADE_12",
+  "id_execucao_lote": "RMD_JCLM_20260919213330",
+  "id_master": "RMD_RUN_20260919211829041",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "quotas": [],
+  "atividades_04_11_confirmadas": [
+    {"atividade": "04", "id_execucao": "RMD_TOPC_20260919213341557", "registros_alterados": 136},
+    {"atividade": "05", "id_execucao": "RMD_GIRO_20260919213342110", "registros_alterados": 161},
+    {"atividade": "06", "id_execucao": "RMD_PARC_20260919213342749", "registros_alterados": 17},
+    {"atividade": "07", "id_execucao": "RMD_DTMV_20260919213343278", "registros_alterados": 0},
+    {"atividade": "08", "id_execucao": "RMD_PROT_20260919213344014", "registros_alterados": 0},
+    {"atividade": "09", "id_execucao": "RMD_ITEM_20260919213344943", "registros_alterados": 0},
+    {"atividade": "10", "id_execucao": "RMD_ICMG_20260919213346128", "registros_alterados": 3},
+    {"atividade": "11", "id_execucao": "RMD_RUPP_20260919213346629", "registros_alterados": 4}
+  ],
+  "atividade_12_original": {
+    "erro": "ORA-01031: insufficient privileges na atualizacao da TGFEMP",
+    "backup": "BKP_RMD_11_TGFEMP",
+    "backup_registros_apos_rollback": 0
+  },
+  "atividade_12_retomada": {
+    "id_execucao": "RMD_RUPE_20260919213718826",
+    "backup": "BKP_RMD_11_TGFEMP",
+    "registros_backup": 0,
+    "registros_alterados": 0,
+    "pos_validacao": "Artefatos_Revisao/Preflight/31_PosValidacao_Atividade12_READONLY.sql"
+  },
+  "dml_executado": true,
+  "ddl_executado": true,
+  "log_oracle": "Logs/Oracle_Direto_RMD_JCLM_20260919213330_04_31.log",
+  "estado_para_retomada": "ATIVIDADES_13_31_INDEPENDENTES_PENDENTES"
+}

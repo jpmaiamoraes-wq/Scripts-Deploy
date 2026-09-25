@@ -1,0 +1,83 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T11:55:19.982442+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Artefatos_Revisao/PostValidacao/00_Master_PosExecucao_MEDCHAP_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 16,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "BACKUPS_RMD",
+      "VALOR": "39"
+    },
+    {
+      "METRICA": "CONTROLE_PENDENTE",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "CONTROLE_TOTAL",
+      "VALOR": "9"
+    },
+    {
+      "METRICA": "CURRENT_SCHEMA",
+      "VALOR": "SANKHYA"
+    },
+    {
+      "METRICA": "DB_NAME",
+      "VALOR": "MEDCHAPPRD"
+    },
+    {
+      "METRICA": "INTEG_CAB_SEM_ITENS",
+      "VALOR": "32"
+    },
+    {
+      "METRICA": "INTEG_FIN_SEM_NOTA",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "INTEG_ITENS_SEM_CAB",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "OBJETOS_INVALIDOS",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "SERVICE_NAME",
+      "VALOR": "medchapprd.sankhyacloud.com.br"
+    },
+    {
+      "METRICA": "SESSION_USER",
+      "VALOR": "FRANCISCO_JUNIOR"
+    },
+    {
+      "METRICA": "TRIGGERS_NAO_ENABLED",
+      "VALOR": "9"
+    },
+    {
+      "METRICA": "TRIGGERS_NAO_ENABLED_FORA_LINHA_BASE",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "TSIBAI_TOTAL",
+      "VALOR": "46709"
+    },
+    {
+      "METRICA": "TSIEND_TOTAL",
+      "VALOR": "683232"
+    },
+    {
+      "METRICA": "UNIDADES_MAPEADAS",
+      "VALOR": "117"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

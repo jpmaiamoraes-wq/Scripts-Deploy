@@ -1,0 +1,7 @@
+{
+  "status": "EXECUTOR_BLOQUEADO",
+  "mensagem": "Entrada de senha cancelada.",
+  "senha_em_arquivo": false,
+  "dml_executado": false,
+  "ddl_executado": false
+}

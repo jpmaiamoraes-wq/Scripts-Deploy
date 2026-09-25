@@ -1,0 +1,5 @@
+-- Estado dos objetos usados pela atividade 12; somente leitura.
+SELECT *
+  FROM ALL_TAB_PRIVS
+ WHERE TABLE_NAME IN ('AD_SEGMENTACAOEMPRESAS','TGFEMP','BKP_RMD_11_TGFEMP')
+   AND GRANTEE IN ('FRANCISCO_JUNIOR','RLCONSULTOR');

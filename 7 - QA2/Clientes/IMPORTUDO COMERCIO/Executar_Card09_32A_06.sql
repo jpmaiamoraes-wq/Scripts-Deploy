@@ -1,0 +1,10 @@
+SET DEFINE OFF
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET ECHO ON
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/IMPORTUDO COMERCIO/Logs/Card09_32A_Mapa_06.log"
+PROMPT CARD09_32A_MAPA_06
+@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/IMPORTUDO COMERCIO/Artefatos_Revisao/Scripts/32A_Card09_Mapear_IMPORTUDO_06.sql"
+PROMPT CARD09_32A_MAPA_06_FIM
+SPOOL OFF

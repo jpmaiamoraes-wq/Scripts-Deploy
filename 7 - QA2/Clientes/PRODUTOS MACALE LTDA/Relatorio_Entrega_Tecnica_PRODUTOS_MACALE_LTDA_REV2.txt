@@ -1,0 +1,308 @@
+Gerente de Projetos: Marcelo Renato Fialho Thaisen
+Usuário da execução: FRANCISCO_JUNIOR
+Data da revisão: 10/09/2026
+
+==================== QUEBRA DE PÁGINA ====================
+
+RESUMO EXECUTIVO
+
+Este relatório documenta todas as ações executadas na etapa de revisão da base Produtos Macalé LTDA, incluindo os resultados efetivamente comprovados nos logs, o tratamento regular do Card 09 (Notas sem Financeiro), as estruturas técnicas criadas para controle, auditoria e reversão, e as pendências encaminhadas para atendimento posterior.
+
+A revisão foi realizada no schema SANKHYA da base MACALEPRD.SANKHYACLOUD.COM.BR. As etapas 01 a 31 foram executadas ou tratadas de forma isolada conforme os registros disponíveis. A Etapa 32 integra o fluxo regular pós-Master para tratar notas cujo XML contém a tag <Dup> e que não possuíam financeiro.
+
+Contato do Gerente de Projetos: marcelo.thaisen@sankhya.com.br
+
+O relatório deve ser lido junto do inventário de objetos, do índice de rollbacks, dos logs de execução e dos arquivos SQL mantidos na pasta de entrega.
+
+1. RESULTADO EXECUTIVO DA REVISÃO
+
+- Etapas 01 a 30: concluídas, considerando o último status validado de cada etapa.
+- Etapa 31: ignorada por ausência do privilégio ALTER ANY PROCEDURE; 31 funções permaneceram inválidas e foram encaminhadas no ticket #70636.
+- Etapa 32 - Card 09: concluída para os candidatos aptos; 155 linhas de TGFFIN inseridas por procedimento controlado, uma nota já possuía TGFFIN e 3 notas permaneceram no card para análise por não se enquadrarem na regra de inclusão.
+- Cards críticos 08, 13, 14 e 15: todos zerados na coleta do dashboard realizada após a Etapa 32.
+- As colisões inicialmente identificadas nas Etapas 29 e 30 foram tratadas pelo merge controlado. O último status validado não mantém a situação anterior de colisão como pendência de execução.
+
+2. VOLUMETRIA ATUAL DO DASHBOARD DEPLOY AGENT
+
+Coleta realizada na base após a execução da Etapa 32.
+
+Card | Indicador | Resultado atual | Orientação resumida
+01 | Financeiro | 45.195 registros | Títulos extraídos dos artefatos disponibilizados.
+02 | Entradas e Saídas | 30.648 registros | Visão por tipo de movimento/TOP para validação com o cliente.
+03 | Produtos por USOPROD | 1.948 registros | Produtos e serviços agrupados pelo tipo de uso.
+04 | Produtos por Grupo | 1 registro | Grupos recebidos no onboarding; associação será refinada.
+05 | Referências Duplicadas | 2 registros | Referências repetidas para tratamento no refinamento.
+06 | Descrições Duplicadas | 19 registros | Descrições repetidas com mesmo NCM e origem.
+07 | CNPJ/CPF Repetidos | 12 registros | Parceiros com documento repetido e variação cadastral.
+08 | Financeiros sem Nota | 0 registros | Resultado esperado: zero.
+09 | Notas sem Financeiro | 3 registros | Saldo sem <Dup> elegível ou pendente de análise funcional.
+10 | Produtos Vendidos | 555 registros | Saídas sem entrada correspondente.
+11 | Produtos com Custo Zero | 1 registro | Linha de custo existente com valor zerado.
+12 | Produtos sem Custo | 0 registros | Produtos sem linha na TGFCUS.
+13 | Itens sem Cabeçalho | 0 registros | Resultado esperado: zero.
+14 | Cabeçalho sem Itens | 0 registros | Resultado esperado: zero.
+15 | Cidades Duplicadas | 0 registros | Resultado esperado: zero.
+16 | Classificação Fiscal | 32 registros | Parceiros para validação da classificação fiscal.
+17 | Itens sem Tabela de Preço | 150 registros | Itens sem movimentação de saída elegível para preço.
+18 | Itens com Descrições Similares | 0 registros | Nenhum item acima do critério de similaridade informado.
+19 | CNPJ Matrizes | 28 registros | Parceiros agrupados pelo radical de CNPJ.
+20 | Produtos Comprados | 1.215 registros | Entradas sem movimentação de saída.
+21 | Regras Tributárias Inseridas | 25 registros | Regras tributárias cadastradas pelo Deploy Agent.
+
+Os quantitativos representam os registros atualmente encontrados na base pelos critérios do dashboard. Eles devem ser usados como apoio à validação funcional com o cliente.
+
+3. CARD 09 - NOTAS SEM FINANCEIRO
+
+Situação antes da tratativa:
+- Card 09 identificado com 159 notas sem financeiro.
+- 156 candidatos apresentavam <Dup> e <dVenc> válidos no XML.
+- 3 registros não apresentavam <Dup> e permaneceram fora da inclusão automática.
+- A NUNOTA 2082 já possuía TGFFIN após a execução da ação nativa de refazer financeiro e foi preservada sem duplicação.
+
+Tratamento executado:
+- Mapa e auditoria: MACALE_20260910_FIN_DUP_01.
+- Tabela de preflight: BKP_RMD_FDUP_MCL_20260910.
+- Mapa de condições de pagamento: BKP_RMD_FDUP_MCL_20260910_PPG.
+- Auditoria das inclusões: BKP_RMD_FDUP_MCL_20260910_INS.
+- Registros inseridos em TGFFIN: 155.
+- Critério de duplicidade: notas que já possuíam TGFFIN foram excluídas do conjunto de inserção.
+- VLRDESDOB e DTVENC: obtidos do XML, com conversão explícita de vDup e dVenc.
+- CODTIPTIT: obtido de TGFPPG.CODTIPTITPAD.
+- NUFIN: alocado por TGFNUM.ULTCOD para ARQUIVO = TGFFIN, com bloqueio FOR UPDATE e atualização do contador.
+- TIPRECDESP: convertido para RECDESP numérico; I/R/1 = 1 e D/P/-1 = -1, com fallback pelo TIPMOV.
+- CODBCO nulo: tratado como 0. TIPJURO textual da TGFTPV: tratado como valor numérico 1 quando retornado como I. TIPMARCCHEQ mantido no padrão nativo I.
+
+Validação posterior:
+- O dashboard passou a indicar 3 notas sem financeiro.
+- O dashboard passou a indicar 45.195 registros financeiros.
+- O saldo de 3 notas deve ser tratado funcionalmente, pois não foi incluído sem a evidência necessária de <Dup> e vencimento XML válido.
+- O procedimento foi executado com guarda de confirmação e auditoria persistente; não foi realizado insert avulso sem rastreabilidade.
+
+4. TABELA TÉCNICA DAS ETAPAS 01 A 31
+
+Etapa | Propósito | Último status comprovado e resultado
+01 | Preparar o controle dos objetos temporariamente desabilitados. | Concluída; controle de estado criado e utilizado na revisão.
+02 | Liberar filtros de portais conforme a regra funcional. | Concluída; 0 registros alterados nesta base.
+03 | Padronizar configurações DANFE das empresas. | Concluída; 0 registros alterados nesta base.
+04 | Desativar o uso de custo nas TOPs de devolução elegíveis. | Concluída; 0 registros alterados nesta base.
+05 | Habilitar cálculo de giro dos produtos elegíveis. | Concluída; 0 registros alterados nesta base.
+06 | Zerar parcelas das condições de negociação selecionadas. | Concluída; 0 registros alterados nesta base.
+07 | Preencher data de movimento ausente em documentos elegíveis. | Concluída; nenhum candidato efetivo informado no precheck.
+08 | Preencher protocolos de documentos legados. | Concluída; candidatos processados conforme log e backups.
+09 | Liberar itens de documentos legados, preservando a trigger. | Concluída; candidatos processados conforme log e backups.
+10 | Habilitar ICMS gerencial para produtos elegíveis. | Concluída; candidatos processados conforme log.
+11 | Habilitar ruptura de produtos. | Concluída; candidatos processados conforme log.
+12 | Habilitar ruptura por empresa quando houver segmentação. | Concluída; ID RMD_RUPE_20260909090955021; 0 empresas alteradas.
+13 | Configurar TOPs usados no giro e no Gerente On-Line. | Concluída; ID RMD_TOPG_20260909084353011; 1.448 registros alterados.
+14 | Aplicar o modelo da análise de giro 848. | Concluída; ID RMD_G848_20260909084354212; configuração atualizada.
+15 | Desativar rastro de estoque sem controle aplicável. | Concluída; ID RMD_RAST_20260909084355073; 443 registros alterados.
+16 | Higienizar a configuração TSICFG com snapshot para reversão. | Concluída; ID RMD_CFG_20260909084356010; backup de 889 registros preservado.
+17 | Normalizar unidades e seus relacionamentos. | Concluída; ID RMD_UNID_20260909091500000; 122 mapeamentos atualizados, 11 inválidos removidos e 1 descrição ajustada.
+18 | Ajustar preferências e configurações do Gerente On-Line. | Concluída; ID RMD_GOL_20260909084625163; configuração aplicada com backup persistente.
+19 | Definir parceiro matriz pela raiz do CNPJ e tratar pessoa física. | Concluída com observação; ID RMD_MAT_20260909084625785; ajuste principal concluído para 1 parceiro, com erro registrado na criação preventiva do backup.
+20 | Atualizar os indicadores persistidos do dashboard Deploy Agent. | Concluída; ID RMD_CARD_20260909084626799; CARDS_ATUALIZADOS = 1.
+21 | Classificar parceiros para ICMS segundo os dados cadastrais. | Concluída; ID CLASSICMS_20260909084627942; 52 parceiros avaliados.
+22 | Ajustar números indevidos no início ou fim dos nomes de parceiros. | Concluída; ID AJNP_20260909084629866; 27 alterações com 27 backups.
+23 | Validar e reabilitar somente objetos que foram desabilitados pela revisão. | Concluída; validação final executada sem deixar objetos da revisão indevidamente desabilitados.
+24 | Padronizar nomes e e-mails de parceiros. | Concluída; ID RMD_PAR_20260909084631629; 86 registros alterados.
+25 | Padronizar descrições e complementos de produtos. | Concluída; ID RMD_PRO_20260909084632509; 0 registros alterados.
+26 | Padronizar descrições dos tipos de título. | Concluída; ID RMD_TIT_20260909084633499; 0 registros alterados.
+27 | Padronizar nomes e descrições de cidades. | Concluída; ID RMD_CID_20260909084634195; 0 registros alterados.
+28 | Padronizar descrições dos tipos de venda. | Concluída; ID RMD_TPV_20260909084635189; 0 registros alterados.
+29 | Normalizar bairros, redirecionar referências e remover obsoletos após análise. | Concluída; merge final MACALE_20260909_153000; 437 bairros obsoletos tratados, com validação final sem referências remanescentes.
+30 | Normalizar endereços, redirecionar referências e remover obsoletos após análise. | Concluída; merge final MACALE_20260909_153000; 7.302 endereços obsoletos tratados e 18 dependências em TGFCPL atualizadas.
+31 | Diagnosticar e recompilar objetos inválidos. | Ignorada por privilégio; 31 funções inválidas, sem ALTER ANY PROCEDURE para FRANCISCO_JUNIOR. Ticket #70636 aberto.
+
+Etapa 32 | Identificar e tratar notas sem financeiro quando o XML contém <Dup>. | Concluída para os candidatos aptos; 155 TGFFIN inseridos, 1 já existente e 3 restantes no card para análise.
+
+5. EXECUÇÕES E RASTREABILIDADE
+
+ID | Rotina | Resultado
+RMD_PORT_20260909082929173 | Filtros de portais | 0 alterações.
+RMD_DANF_20260909082930029 | DANFE empresas | 0 alterações.
+RMD_TOPC_20260909082930797 | Custo TOP devolução | 0 alterações.
+RMD_GIRO_20260909082931589 | Giro produtos | 0 alterações.
+RMD_PARC_20260909082932365 | Parcelas tipos de negociação | 0 alterações.
+RMD_TOPG_20260909084353011 | TOPs de giro/GOL | 1.448 alterações.
+RMD_G848_20260909084354212 | Análise de giro 848 | 1 configuração atualizada.
+RMD_RAST_20260909084355073 | Rastro sem controle | 443 alterações.
+RMD_CFG_20260909084356010 | Higienização TSICFG | Backup de 889 registros.
+RMD_UNID_20260909091500000 | Normalização de unidades | 122 mapeamentos, 11 inválidos removidos, 1 descrição ajustada.
+RMD_GOL_20260909084625163 | Preferências GOL | Configuração aplicada.
+RMD_MAT_20260909084625785 | Parceiro matriz | Ajuste principal concluído para 1 parceiro; observação de backup.
+RMD_CARD_20260909084626799 | Cards Deploy Agent | 1 linha de indicadores atualizada.
+CLASSICMS_20260909084627942 | Classificação ICMS | 52 parceiros avaliados.
+AJNP_20260909084629866 | Nomes de parceiros | 27 alterações.
+RMD_PAR_20260909084631629 | Padronização de parceiros | 86 alterações.
+RMD_PRO_20260909084632509 | Padronização de produtos | 0 alterações.
+RMD_TIT_20260909084633499 | Padronização de tipos de título | 0 alterações.
+RMD_CID_20260909084634195 | Padronização de cidades | 0 alterações.
+RMD_TPV_20260909084635189 | Padronização de tipos de venda | 0 alterações.
+RMD_BAI_20260909084635985 | Normalização inicial de bairros | 45.046 registros; status anterior superado pelo merge final.
+RMD_END_20260909084643412 | Normalização inicial de endereços | 646.157 registros; status anterior superado pelo merge final.
+MACALE_20260909_153000 | Merge controlado bairros/endereços | Concluído; validação sem referências remanescentes.
+MACALE_20260910_FIN_DUP_01 | Card 09 - TGFFIN | 155 financeiros inseridos; auditoria persistente.
+
+6. OBJETOS CRIADOS E FINALIDADE
+
+Controle e unidades:
+- RMD_CONTROLE_OBJETOS: registra estado anterior e reabilitação de objetos.
+- RMD_MAP_UNIDADES: mantém o mapa de conversão de unidades.
+- BKP_RMD_UNID_MAP, BKP_RMD_UNID_TGFPRO, BKP_RMD_UNID_TGFITE, BKP_RMD_UNID_TGFPAP, BKP_RMD_UNID_TGFCOI2, BKP_RMD_UNID_TGFGIR1, BKP_RMD_UNID_TGFVOL: backups da normalização de unidades.
+
+Backups das etapas 01 a 16:
+- BKP_RMD_01_TSIPAR, BKP_RMD_02_TGFEMP, BKP_RMD_03_TGFTOP, BKP_RMD_04_TGFPRO, BKP_RMD_05_TGFTPV, BKP_RMD_06_TGFCAB, BKP_RMD_07_TGFCAB, BKP_RMD_08_TGFITE, BKP_RMD_09_TGFPRO, BKP_RMD_10_TGFPRO, BKP_RMD_11_TGFEMP, BKP_RMD_12_TGFTOP, BKP_RMD_13_TSIIMP: preservam os registros das tabelas atingidas pelas etapas iniciais.
+- BKP_RMD_TSICFG: snapshot da configuração original.
+- RMD_REF_TSICFG_MODELO: referência técnica usada na higienização controlada de TSICFG.
+
+Preferências, parceiros, cards e padronizações:
+- BKP_RMD_GOL_TSIPAR, BKP_RMD_GOL_TGFCGM, BKP_RMD_GOL_TGFCMV: backups das preferências do GOL.
+- BKP_RMD_PAR_MATRIZ: backup dos vínculos de parceiro matriz.
+- BKP_RMD_CARD_TTKINDAGT: backup dos indicadores do Deploy Agent.
+- BKP_CLASSICMS_TGFPAR e BKP_AJNP_TGFPAR: backups de classificação ICMS e ajuste de nomes.
+- BKP_RMD_PAD_TGFPAR, BKP_RMD_PAD_TGFPRO, BKP_RMD_PAD_TGFTIT, BKP_RMD_PAD_TSICID, BKP_RMD_PAD_TGFTPV, BKP_RMD_PAD_TSIBAI, BKP_RMD_PAD_TSIEND: backups das padronizações cadastrais.
+
+Merge de bairros e endereços:
+- BKP_MBE_MAP_BAI e BKP_MBE_MAP_END: mapas de códigos obsoletos e mantidos.
+- BKP_MBE_TSIBAI e BKP_MBE_TSIEND: backups dos registros substituídos.
+- BKP_MBE_TGFPAR e BKP_MBE_TSICEP: backups das dependências cadastrais.
+- BKP_MBE_TGFCPL: backup das dependências de complemento, incluindo referências de entrega.
+
+Card 09:
+- BKP_RMD_FDUP_MCL_20260910: auditoria das notas sem financeiro encontradas no preflight.
+- BKP_RMD_FDUP_MCL_20260910_PPG: mapa das condições TGFPPG e dos campos usados na TGFFIN.
+- BKP_RMD_FDUP_MCL_20260910_INS: auditoria de cada NUFIN inserido, com NUNOTA, valor e vencimento.
+
+O arquivo Limpar_Objetos_Revisao.sql é um utilitário opcional. Sua execução remove objetos técnicos e backups e torna indisponíveis os rollbacks; ele não deve ser executado automaticamente.
+
+7. ÍNDICE DE REVERSÃO
+
+Os scripts abaixo estão na pasta Artefatos_Revisao/Rollback e devem ser executados somente com o ID_EXECUCAO correto:
+
+01: não aplicável; etapa de preparação e validação.
+02: Reverter_02_Liberar_Filtros_Portais.sql — restaurar filtros dos portais.
+03: Reverter_03_Padronizar_DANFE_Empresas.sql — restaurar configurações DANFE.
+04: Reverter_04_Desativar_Custo_TOP_Devolucao.sql — restaurar custo das TOPs de devolução.
+05: Reverter_05_Habilitar_Calculo_Giro_Produtos.sql — restaurar cálculo de giro.
+06: Reverter_06_Zerar_Parcelas_Tipos_Negociacao.sql — restaurar parcelas.
+07: Reverter_07_Preencher_Data_Movimento.sql — restaurar datas de movimento.
+08: Reverter_08_Preencher_Protocolos_Documentos_Legados.sql — restaurar protocolos.
+09: Reverter_09_Liberar_Itens_Documentos_Legados.sql — restaurar situação dos itens.
+10: Reverter_10_Habilitar_ICMS_Gerencial.sql — restaurar parâmetros de ICMS.
+11: Reverter_11_Habilitar_Ruptura_Produtos.sql — restaurar parâmetros de ruptura.
+12: Reverter_12_Habilitar_Ruptura_Empresas.sql — restaurar parâmetros de ruptura empresarial.
+13: Reverter_13_Configurar_TOPs_Giro_GOL.sql — restaurar TOPs de giro.
+14: Reverter_14_Configurar_Analise_Giro_848.sql — restaurar análise de giro 848.
+15: Reverter_15_Desativar_Rastro_Sem_Controle.sql — restaurar controle de rastro.
+16: Reverter_16_Aplicar_Higienizacao_TSICFG.sql — restaurar TSICFG.
+17: Reverter_17_Normalizacao_Unidades.sql — restaurar unidades e mapeamentos.
+18: Reverter_18_Preferencias_GOL.sql — restaurar preferências GOL.
+19: Reverter_19_Parceiro_Matriz.sql — restaurar vínculos de matriz.
+20: Reverter_20_Cards_Deploy.sql — restaurar indicadores do Deploy Agent.
+21: Reverter_21_Classificacao_ICMS_Parceiros.sql — restaurar classificação ICMS.
+22: Reverter_22_Ajuste_Nomes_Parceiros.sql — restaurar nomes dos parceiros.
+23: não aplicável; validação/reabilitação sem alteração de dados própria.
+24: Reverter_24_Padronizacao_Parceiros.sql — restaurar textos da TGFPAR.
+25: Reverter_25_Padronizacao_Produtos.sql — restaurar descrições dos produtos.
+26: Reverter_26_Padronizacao_Tipos_Titulo.sql — restaurar descrições dos títulos.
+27: Reverter_27_Padronizacao_Cidades.sql — restaurar nomes das cidades.
+28: Reverter_28_Padronizacao_Tipos_Venda.sql — restaurar descrições dos tipos de venda.
+29: Reverter_29_Padronizacao_Bairros.sql — restaurar bairros pelo ID da execução.
+30: Reverter_30_Padronizacao_Enderecos.sql — restaurar endereços pelo ID da execução.
+31: não aplicável; recompilação não realizada por falta de privilégio.
+32: 32C_Card09_Rollback_Notas_Sem_Financeiro_DUP.sql — remover somente os TGFFIN auditados no ID da etapa 32, com validação do TGFNUM.
+
+8. OBJETOS INVÁLIDOS E PENDÊNCIA #70636
+
+A Etapa 31 identificou 31 funções inválidas no schema SANKHYA. A sessão FRANCISCO_JUNIOR não possui ALTER ANY PROCEDURE, portanto a recompilação não foi executada.
+
+Objetos inválidos:
+ACL_GET_ALIQPART
+FSP_DATA_DIA_UTIL
+FSP_RETURN_DATAS_UTEIS
+F_OBTEMPRECO_DATA
+F_OBTEM_SALDO_INDEN
+GET_CODPROD_REF
+GET_INDICE_AJUSTE_NOTA
+GET_PREVISAO_CREDITO_DEBITO
+GET_PROXIMO_DIA_UTIL
+QTDEVOLPADRAO
+QTDEVOLPADRAO2
+SNK_GETCODPRODALT
+SNK_GETDTBAIXABEM
+SNK_GETMESESSEMPIS
+SNK_GETPRODUTOAGRUPADOGIRO
+SNK_GETVLRREA
+SNK_GET_CENTROCUSTO_EFD
+SNK_GET_CFO_NOTA
+SNK_GET_CODCFO
+SNK_GET_CODIGO_PRODUTO
+SNK_GET_CONTACONTABIL_EFD
+SNK_GET_CONTACONTABIL_IMOB_EFD
+SNK_GET_CTACTB_CADASTROS_EFD
+SNK_GET_ICMS_ESPECIAL_CAB
+SNK_GET_INDITENS
+SNK_GET_NUNOTA
+SNK_GET_SATUSCONFERENCIA
+SNK_GET_ST_RECUPERAR
+SNK_MATGIR_GET_MULTCPA
+SNK_MATGIR_GET_QTDTOTALMULTCPA
+SNK_PRECO
+
+Ticket aberto: #70636. Solicita-se análise das dependências, correção dos erros de compilação e recompilação pelo time com privilégio adequado.
+
+9. ORIENTAÇÕES AOS CONSULTORES SOBRE OS 21 CARDS
+
+01 - Financeiro: mostra títulos extraídos dos artefatos disponibilizados. Despesas sem XML/EFD, como folha de pagamento, não aparecem. Para completar legados, usar Cadastro da Posição Financeira no Assistente de Melhores Práticas.
+
+02 - Entradas e Saídas: mostra os registros por TOP para validação com o cliente, pois a associação de TOP pode ser imprecisa em alguns artefatos.
+
+03 - Produtos por USOPROD: agrupa produtos e serviços por tipo de uso; validar a classificação com o cliente.
+
+04 - Produtos por Grupo: mostra grupos enviados no onboarding. O cadastro depende de importação manual e a associação dos produtos será refinada no projeto.
+
+05 - Referências Duplicadas: separa referências repetidas para tratar reaproveitamento, obsolescência, controle de estoque ou equivalência.
+
+06 - Descrições Duplicadas: separa descrições repetidas, com os mesmos possíveis significados de duplicidade e equivalência.
+
+07 - CNPJ/CPF Repetidos: lista parceiros com o mesmo documento e variações cadastrais, como inscrição estadual ou endereço.
+
+08 - Financeiros sem Nota: lista financeiros sem cabeçalho. Deve permanecer zerado; qualquer ocorrência exige análise.
+
+09 - Notas sem Financeiro: lista notas com TOP financeiro sem TGFFIN. Separar candidatos com <Dup> e <dVenc> válidos, registros sem <Dup> e XML incompleto. Usar preflight, mapa e procedimento controlado 32A/32B, ou rotina nativa quando aplicável, sempre com confirmação e auditoria.
+
+10 - Produtos Vendidos: itens com saída sem entrada; pode indicar duplicidade ou produtos equivalentes.
+
+11 - Produtos com Custo Zero: itens com linha na TGFCUS e custo zerado. A rotina de atualizar tabela de custos pode ser usada durante a revisão.
+
+12 - Produtos sem Custo: itens sem linha na TGFCUS, comuns em planilhas, cadastros manuais ou EFD sem movimentação na TGFITE.
+
+13 - Itens sem Cabeçalho: movimentações na TGFITE sem TGFCAB. Deve permanecer zerado; qualquer ocorrência exige análise.
+
+14 - Cabeçalho sem Itens: registros na TGFCAB sem TGFITE. Deve permanecer zerado; qualquer ocorrência exige análise.
+
+15 - Cidades Duplicadas: códigos fiscais associados a mais de uma cidade. Deve permanecer zerado; qualquer ocorrência exige análise.
+
+16 - Classificação Fiscal: parceiros cuja classificação pode divergir por dados cadastrais incompletos, inclusive inscrição estadual.
+
+17 - Itens sem Tabela de Preço: itens sem saída elegível para gravação de preço.
+
+18 - Itens com Descrições Similares: descrições com similaridade igual ou superior a 95%, para investigação de possíveis duplicidades.
+
+19 - CNPJ Matrizes: agrupa pessoas jurídicas pelo radical de oito dígitos e define o menor código como matriz.
+
+20 - Produtos Comprados: itens com entrada sem saída, situação coerente para matéria-prima, uso e consumo e itens sem venda.
+
+21 - Regras Tributárias Inseridas: compila regras cadastradas para ICMS, PIS, COFINS, IPI e ISS.
+
+10. ARTEFATOS E PUBLICAÇÃO
+
+Pasta de entrega no Google Drive: https://drive.google.com/drive/folders/1xqDdSegbJ9wW73H7j6hhhAwLDtxlk0-D
+
+A pasta deve permanecer compartilhada somente como leitura com o domínio sankhya.com.br, sem publicação aberta ou pesquisa pública por domínio. Devem ser mantidos nela o relatório, este texto de conferência, os logs, o precheck, o inventário de objetos, o índice de rollbacks, os scripts de execução, os scripts de reversão e o arquivo Limpar_Objetos_Revisao.sql.
+
+11. CONSIDERAÇÃO FINAL
+
+A revisão da base Produtos Macalé LTDA foi concluída com rastreabilidade por IDs, backups persistentes e tratamento final das colisões de bairros e endereços. O tratamento regular do Card 09 inseriu os financeiros comprovadamente elegíveis e reduziu o indicador para 3 notas, que permanecem para validação funcional. Os cards críticos de integridade estão zerados.
+
+A única pendência técnica de infraestrutura é a recompilação das 31 funções inválidas, encaminhada no ticket #70636. Após o atendimento do ticket, recomenda-se executar nova validação dos objetos inválidos e registrar o resultado no relatório final.

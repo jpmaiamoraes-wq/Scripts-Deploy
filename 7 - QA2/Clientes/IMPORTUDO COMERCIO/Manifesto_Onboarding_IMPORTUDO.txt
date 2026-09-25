@@ -1,0 +1,24 @@
+VERIFICACAO FINAL DE ONBOARDING - IMPORTUDO COMERCIO
+Data de descoberta: 2026-09-11
+
+Pasta identificada no Drive:
+IMPORTUDO COMERCIO, IMPORTACAO E EXPORTACAO LTDA [p_mrnifpd35tgl]
+Folder ID: 1CBpd-hp8ze0k2gqp10EBU2f1JlxaFzKy
+
+01 - Dados da Empresa
+Arquivo: Resumo - 01 - Dados da Empresa.pdf
+File ID: 1EAKPgP2WJZqbhz97ye-cNlJeXrPLExSw
+Conteudo extraido preservado no registro de verificacao.
+
+07 - SMTP
+Arquivo: Resumo - 07 - SMTP.pdf
+File ID: 1DpGq5YwzXKODM2BV3qzy-2Cnb_JiiPgJ
+Conteudo extraido: provedor custom; remetente Sistema; email Sistema@importudo.com.br; servidor mail.importudo.com.br; porta 465; criptografia ssl. Senha nao armazenada.
+
+08 - Planilhas
+Arquivo localizado: [MODELO SANKHYA] Contas Bancarias.xls
+File ID: 1A6QoiZmdcbe9PfKzFH5Ypt0Lg0zQZQrR
+Tabela alvo: TSICTA. Arquivo e modelo; registros adicionais existentes na base serao classificados como modelo quando nao houver correspondencia no arquivo.
+Nenhum outro arquivo de planilha foi encontrado nessa pasta na data da verificacao.
+
+Procedimento: executar o SQL read-only associado, confrontar os resultados com os artefatos e registrar divergencias. Esta camada nao altera a base.

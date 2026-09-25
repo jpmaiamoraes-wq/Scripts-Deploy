@@ -1,0 +1,12 @@
+-- Inventario read-only apos a tentativa sem log da continuacao 04-31.
+SELECT OWNER,
+       OBJECT_NAME,
+       OBJECT_TYPE,
+       STATUS,
+       CREATED,
+       LAST_DDL_TIME
+  FROM ALL_OBJECTS
+ WHERE OWNER='SANKHYA'
+   AND (OBJECT_NAME LIKE 'BKP_RMD_%'
+        OR OBJECT_NAME IN ('RMD_CONTROLE_OBJETOS','RMD_AUDITORIA'))
+ ORDER BY OBJECT_NAME, OBJECT_TYPE;

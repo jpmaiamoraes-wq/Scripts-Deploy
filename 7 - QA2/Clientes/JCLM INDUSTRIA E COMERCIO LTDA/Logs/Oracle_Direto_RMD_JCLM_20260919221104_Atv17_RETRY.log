@@ -1,0 +1,32 @@
+ID_EXECUCAO_LOTE=RMD_JCLM_20260919221104
+ENTRADA=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Continuacao_Master_Deploy_JCLM_17.sql
+SHA256_SUITE=d3260b9b323b9ab86b68f903fb960a9390db14cf5b97a85daf11106266973a4b
+POS_VALIDACAO=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Artefatos_Revisao/Preflight/37_PosValidacao_Atividade17_READONLY.sql
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=jclmprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[OK 1/33] PLSQL_OR_DDL_BLOCK Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Continuacao_Master_Deploy_JCLM_17.sql:7 ROWCOUNT=0
+[OK 2/33] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/17_Normalizar_Unidades.sql:10 ROWCOUNT=0
+DBMS_OUTPUT=ID_MASTER=RMD_RUN_20260919211829041
+[OK 3/33] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/17_Normalizar_Unidades.sql:18 ROWCOUNT=0
+[OK 4/33] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/17_Normalizar_Unidades.sql:24 ROWCOUNT=0
+DBMS_OUTPUT=OK: Tabela RMD_MAP_UNIDADES ja existe.
+[OK 5/33] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/17_Normalizar_Unidades.sql:48 ROWCOUNT=0
+[OK 6/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:55 ROWCOUNT=0
+[OK 7/33] MERGE Revisao Master Deploy/17_Normalizar_Unidades.sql:58 ROWCOUNT=0
+[OK 8/33] MERGE Revisao Master Deploy/17_Normalizar_Unidades.sql:195 ROWCOUNT=0
+[OK 9/33] DELETE Revisao Master Deploy/17_Normalizar_Unidades.sql:237 ROWCOUNT=0
+[OK 10/33] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/17_Normalizar_Unidades.sql:244 ROWCOUNT=0
+[OK 11/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:253 ROWCOUNT=0
+[OK 12/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:257 ROWCOUNT=0
+[OK 13/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:261 ROWCOUNT=0
+[OK 14/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:265 ROWCOUNT=0
+[OK 15/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:269 ROWCOUNT=0
+[OK 16/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:273 ROWCOUNT=0
+[OK 17/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:277 ROWCOUNT=0
+[OK 18/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:281 ROWCOUNT=0
+[ERRO 19/33] INSERT Revisao Master Deploy/17_Normalizar_Unidades.sql:287 IntegrityError: ORA-01400: cannot insert NULL into ("SANKHYA"."RMD_CONTROLE_OBJETOS"."ID_MASTER")
+Help: https://docs.oracle.com/error-help/db/ora-01400/
+STATUS=LOTE_COM_ERRO

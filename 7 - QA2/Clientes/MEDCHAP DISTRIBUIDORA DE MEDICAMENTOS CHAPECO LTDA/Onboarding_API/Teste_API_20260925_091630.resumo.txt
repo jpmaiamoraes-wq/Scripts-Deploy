@@ -1,0 +1,7 @@
+TESTE_API_ONBOARDING MEDCHAP TS=20260925_091630
+{"status": "CHAVE_KEYCHAIN_AUSENTE", "item": "Sankhya Onboarding Deploy API", "chave_em_arquivo": false}
+{"status": "CHAVE_GRAVADA_NO_KEYCHAIN", "item": "Sankhya Onboarding Deploy API"}
+A01_probe;inicio=2026-09-25T09:16:41-0300;fim=2026-09-25T09:16:41-0300;dur_s=0;rc=1
+A02_buscar;inicio=2026-09-25T09:16:41-0300;fim=2026-09-25T09:16:41-0300;dur_s=0;rc=1
+A03_detalhe;ignorado=codigo nao encontrado no modo lista (so traz onboardings CONCLUIDOS)
+FIM 2026-09-25T09:16:41-0300

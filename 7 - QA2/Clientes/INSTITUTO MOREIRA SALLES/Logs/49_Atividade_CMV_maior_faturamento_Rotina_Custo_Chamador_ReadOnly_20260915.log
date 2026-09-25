@@ -1,0 +1,402 @@
+SQL> SELECT LISTAGG(ARGUMENT_NAME||'|'||POSITION||'|'||IN_OUT||'|'||DATA_TYPE||'|'||DEFAULTED,'; ') WITHIN GROUP(ORDER BY POSITION) AS ASSINATURA FROM ALL_ARGUMENTS WHERE OWNER='SANKHYA' AND OBJECT_NAME='STP_CALCULARCUSTOPRODUCAO';
+
+ASSINATURA
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+P_DTBASE|1|IN|DATE|N; P_CODEMP|2|IN|NUMBER|N; P_FILTRO|3|IN|VARCHAR2|N; P_TIPO|4|IN|CHAR|N
+
+1 row selected. 
+
+SQL> SELECT LINE||'|'||TEXT FROM ALL_SOURCE WHERE OWNER='SANKHYA' AND NAME='STP_CALCULARCUSTOPRODUCAO' ORDER BY LINE;
+
+LINE||'|'||TEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1|PROCEDURE STP_CALCULARCUSTOPRODUCAO( P_DTBASE DATE, P_CODEMP INT, P_FILTRO VARCHAR, P_TIPO CHAR ) AS
+2|   queProducoes       VARCHAR2( 4000 );
+3|   recCusto           Variaveis_Pkg.TypeRecCusto;
+4|   antDTBASE          DATE;
+5|   antNIVEL           INTEGER;
+6|   antCODEMP          INTEGER;
+7|   antCODPROD         INTEGER;
+8|   antCODLOCAL        INTEGER;
+9|   antCONTROLE        VARCHAR( 50 );
+10|   varCUSTOEMPRESA    VARCHAR2( 1 );
+11|   varCUSTOLOCAL      VARCHAR2( 1 );
+12|   varCUSTOCONTROLE   VARCHAR2( 1 );
+13|   varFiltro          VARCHAR2( 4000 );
+14|   varDESMONTE        VARCHAR2( 1 );
+15|   varIGNORADESMONTE  VARCHAR2( 1 );
+16|   P_NIVEL INT;
+17|   P_COUNT INT;
+18| -- P_SEQ INT;
+19|BEGIN
+20|
+21|    varCUSTOEMPRESA     := VARIAVEIS_PKG.V_CUSTOPOREMPRESA;
+22|    varCUSTOLOCAL       := VARIAVEIS_PKG.V_CUSTOPORLOCAL;
+23|    varCUSTOCONTROLE    := VARIAVEIS_PKG.V_CUSTOPORCONTROLE;
+24|    
+25|    -- P_SEQ := 0;
+26|
+27|    -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'T_PRODUCOES', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+28|    DELETE FROM T_PRODUCOES;
+29|
+30|    -- INSERINDO PRODUÇÕES PARA SEREM CALCULADAS
+31|    queProducoes        :=
+32|            'INSERT INTO T_PRODUCOES '
+33|        || '  SELECT   DISTINCT C.NUNOTA '
+34|        || '          ,I.SEQUENCIA '
+35|        || '          ,C.DTNEG AS DTBASE '
+36|        || '          ,I.CODPROD '
+37|        || '          ,CASE WHEN '''  || varCUSTOEMPRESA  || ''' = ''N'' THEN 1 ELSE C.CODEMP END AS CODEMP '
+38|        || '          ,CASE WHEN '''  || varCUSTOLOCAL      || ''' = ''N'' THEN 0 ELSE I.CODLOCALORIG END AS CODLOCAL '
+39|        || '          ,CASE WHEN '''  || varCUSTOCONTROLE || ''' = ''N'' THEN '' '' ELSE I.CONTROLE END AS CONTROLE '
+40|        || '          ,I.QTDNEG '
+41|        || '          ,0 AS NIVEL '
+42|        || '		      ,CASE WHEN T.ATUALEST = ''B'' AND T.ATUALESTMP = 1 THEN ''S'' ELSE ''N'' END AS DESMONTE'  
+43|        || '  FROM TGFCAB C '
+44|        || '          ,TGFTOP T '
+45|        || '          ,TGFITE I '
+46|        || '  WHERE C.DTNEG = :DTBASE '
+47|        || '       AND C.TIPMOV = ''F'' '
+48|        || '       AND C.STATUSNOTA = ''L'' '
+49|        || '       AND C.CODTIPOPER = T.CODTIPOPER '
+50|        || '       AND C.DHTIPOPER = T.DHALTER '
+51|        || '       AND T.PRECIFICA <> ''N'' '
+52|        || '       AND ( :CODEMP = 0 OR C.CODEMP = :CODEMP ) '
+53|        || '       AND C.NUNOTA = I.NUNOTA '
+54|        || '       AND EXISTS (SELECT 1 FROM TGFVAR V WHERE V.NUNOTA = C.NUNOTA AND V.NUNOTAORIG = C.NUNOTA AND V.SEQUENCIAORIG = I.SEQUENCIA) '
+55|        || '       AND I.QTDNEG <> 0 ';
+56|
+57|    -- APLICANDO FILTRO CASO EXISTA
+58|    if P_FILTRO = '0 = 0' then
+59|      varFiltro := ' ';
+60|    else
+61|      varFiltro := NVL( TRIM( P_FILTRO ), ' ' );
+62|    end if;
+63|    IF varFiltro <> ' ' THEN
+64|      queProducoes    := queProducoes || ' AND ' || varFiltro;
+65|    END IF;
+66|
+67|    EXECUTE IMMEDIATE queProducoes
+68|               USING P_DTBASE, P_CODEMP, P_CODEMP;
+69|
+70|    -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'NIVEL', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+71|    DELETE FROM T_PRODUCOES_NIVEL;
+72|
+73|    INSERT INTO T_PRODUCOES_NIVEL -- usada também na STP_CALCULARCUSTOMEDIODIA
+74|        SELECT
+75|          CASE WHEN varCUSTOEMPRESA = 'N' THEN 1 ELSE CAB.CODEMP END AS CODEMP
+76|        , PA.CODPROD AS CODPA
+77|        , CASE WHEN varCUSTOLOCAL = 'N' THEN 0 ELSE PA.CODLOCALORIG END AS LOCPA
+78|        , CASE WHEN varCUSTOCONTROLE = 'N' THEN ' ' ELSE PA.CONTROLE END AS CONTPA
+79|        , MP.CODPROD AS CODMP
+80|        , CASE WHEN varCUSTOLOCAL = 'N' THEN 0 ELSE MP.CODLOCALORIG END AS LOCMP
+81|        , CASE WHEN varCUSTOCONTROLE = 'N' THEN ' ' ELSE MP.CONTROLE END AS CONTMP
+82|        , 0 AS NIVEL
+83|        , SUM(CASE WHEN MP.ATUALESTOQUE = -1 AND MP.USOPROD = 'M' AND MP.CODPROD = PA.CODPROD THEN MP.QTDNEG ELSE 0 END) AS QTDREPROCESSO
+84|        FROM TGFCAB CAB
+85|        , TGFTOP TPO
+86|        , TGFITE PA
+87|        , TGFVAR VAR
+88|        , TGFITE MP
+89|        WHERE CAB.DTNEG = P_DTBASE
+90|        AND CAB.TIPMOV = 'F'
+91|        AND CAB.STATUSNOTA = 'L'
+92|        AND CAB.CODTIPOPER = TPO.CODTIPOPER
+93|        AND CAB.DHTIPOPER = TPO.DHALTER
+94|        AND TPO.PRECIFICA <> 'N'
+95|        AND ( P_CODEMP = 0 OR CAB.CODEMP = P_CODEMP )
+96|        AND CAB.NUNOTA = PA.NUNOTA
+97|        AND CAB.NUNOTA = VAR.NUNOTA
+98|        AND CAB.NUNOTA = VAR.NUNOTAORIG
+99|        AND CAB.NUNOTA = MP.NUNOTA
+100|        AND PA.NUNOTA = VAR.NUNOTAORIG
+101|        AND PA.SEQUENCIA = VAR.SEQUENCIAORIG
+102|        AND MP.NUNOTA = VAR.NUNOTA
+103|        AND MP.SEQUENCIA = VAR.SEQUENCIA
+104|        AND PA.QTDNEG <> 0
+105|        AND MP.QTDNEG <> 0
+106|        -- nao pode testar tgffcp ou tgficp por que tem gente que produz sem formula
+107|        GROUP BY CASE WHEN varCUSTOEMPRESA = 'N' THEN 1 ELSE CAB.CODEMP END
+108|        , PA.CODPROD
+109|        , CASE WHEN varCUSTOLOCAL = 'N' THEN 0 ELSE PA.CODLOCALORIG END
+110|        , CASE WHEN varCUSTOCONTROLE = 'N' THEN ' ' ELSE PA.CONTROLE END
+111|        , MP.CODPROD
+112|        , CASE WHEN varCUSTOLOCAL = 'N' THEN 0 ELSE MP.CODLOCALORIG END
+113|        , CASE WHEN varCUSTOCONTROLE = 'N' THEN ' ' ELSE MP.CONTROLE END
+114|        ORDER BY 1, 2, 3, 4, 5, 6, 7;
+115|
+116|    P_NIVEL := 0;
+117|    LOOP
+118|        -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'NIVEL COUNT', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+119|        SELECT COUNT(*)
+120|        INTO P_COUNT
+121|        FROM T_PRODUCOES_NIVEL
+122|        WHERE (CODEMP, CODPA, LOCPA, CONTPA) IN (SELECT DISTINCT CODEMP, CODMP, LOCMP, CONTMP FROM T_PRODUCOES_NIVEL WHERE NIVEL = P_NIVEL);
+123|
+124|        EXIT WHEN P_COUNT = 0;
+125|
+126|        -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'NIVEL UPDATE ' || P_NIVEL, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+127|        UPDATE T_PRODUCOES_NIVEL SET NIVEL = P_NIVEL + 1
+128|        WHERE (CODEMP, CODPA, LOCPA, CONTPA) IN (SELECT DISTINCT CODEMP, CODMP, LOCMP, CONTMP FROM T_PRODUCOES_NIVEL WHERE NIVEL = P_NIVEL);
+129|
+130|        P_NIVEL := P_NIVEL + 1;
+131|        EXIT WHEN P_NIVEL >= 16;
+132|    END LOOP;
+133|
+134|    IF P_NIVEL > 0 AND varFiltro <> ' ' THEN
+135|        -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'T_PRODUCOES_TUDO', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+136|        DELETE FROM T_PRODUCOES_TUDO;
+137|
+138|        INSERT INTO T_PRODUCOES_TUDO
+139|          SELECT   DISTINCT C.NUNOTA
+140|                  ,I.SEQUENCIA
+141|                  ,C.DTNEG AS DTBASE
+142|                  ,I.CODPROD
+143|                  ,CASE WHEN varCUSTOEMPRESA= 'N' THEN 1 ELSE C.CODEMP END AS CODEMP
+144|                  ,CASE WHEN varCUSTOLOCAL    = 'N' THEN 0 ELSE I.CODLOCALORIG END AS CODLOCAL
+145|                  ,CASE WHEN varCUSTOCONTROLE = 'N' THEN ' ' ELSE I.CONTROLE END AS CONTROLE
+146|                  ,I.QTDNEG
+147|                  ,0 AS NIVEL
+148|                  ,CASE WHEN T.ATUALEST = 'B' AND T.ATUALESTMP = 1 THEN 'S' ELSE 'N' END AS DESMONTE
+149|          FROM TGFCAB C
+150|          , TGFTOP T
+151|          , TGFITE I
+152|          WHERE C.DTNEG = P_DTBASE
+153|           AND C.TIPMOV = 'F'
+154|           AND C.STATUSNOTA = 'L'
+155|           AND C.CODTIPOPER = T.CODTIPOPER
+156|           AND C.DHTIPOPER = T.DHALTER
+157|           AND T.PRECIFICA <> 'N'
+158|           AND ( P_CODEMP = 0 OR C.CODEMP = P_CODEMP )
+159|           AND C.NUNOTA = I.NUNOTA
+160|           AND EXISTS (SELECT 1 FROM TGFVAR V WHERE V.NUNOTA = C.NUNOTA AND V.NUNOTAORIG = C.NUNOTA AND V.SEQUENCIAORIG = I.SEQUENCIA)
+161|           AND I.QTDNEG <> 0
+162|           AND NOT EXISTS (SELECT 1 FROM T_PRODUCOES P1 WHERE P1.NUNOTA = C.NUNOTA AND P1.SEQUENCIA = I.SEQUENCIA);
+163|
+164|        WHILE P_NIVEL >= 0
+165|            LOOP
+166|                 P_NIVEL := P_NIVEL - 1;
+167|
+168|               -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'T_PRODUCOES_TUDO DELETE', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+169|                 DELETE FROM T_PRODUCOES_TUDO TU
+170|                 WHERE EXISTS (SELECT 1 FROM T_PRODUCOES P1 WHERE P1.NUNOTA = TU.NUNOTA AND P1.SEQUENCIA = TU.SEQUENCIA);
+171|
+172|               -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'T_PRODUCOES_TUDO INSERT', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+173|                 INSERT INTO T_PRODUCOES
+174|                    SELECT *
+175|                    FROM T_PRODUCOES_TUDO TU
+176|                    WHERE EXISTS (SELECT 1
+177|                                  FROM T_PRODUCOES_NIVEL N
+178|                                     JOIN  T_PRODUCOES T1 ON N.CODEMP = T1.CODEMP AND N.CODPA = T1.CODPROD AND N.LOCPA = T1.CODLOCAL AND N.CONTPA = T1.CONTROLE
+179|                                  WHERE N.CODEMP = TU.CODEMP AND N.CODMP = TU.CODPROD AND N.LOCMP = TU.CODLOCAL AND N.CONTMP = TU.CONTROLE
+180|                                            );
+181|            END LOOP;
+182|    END IF;
+183|
+184|   -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'UPDATE NIVEL', 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+185|   UPDATE T_PRODUCOES T1
+186|      SET NIVEL = (SELECT MAX(NIVEL)
+187|                           FROM T_PRODUCOES_NIVEL N
+188|                           WHERE N.CODEMP = T1.CODEMP
+189|                           AND N.CODPA = T1.CODPROD
+190|                           AND N.LOCPA = T1.CODLOCAL
+191|                           AND N.CONTPA = T1.CONTROLE);
+192|
+193|   --INICIO DO LAÇO
+194|   antCODPROD          := -1;
+195|
+196|   --PERCORRENDO AS PRODUÇÕES PARA O CALCULO DE CUSTO ORDENADO POR NIVEL, PRODUTO, EMPRESA....
+197|   FOR PAS IN ( SELECT DISTINCT NUNOTA
+198|                               ,SEQUENCIA
+199|                               ,DTBASE
+200|                               ,CODPROD
+201|                               ,CODEMP
+202|                               ,CODLOCAL
+203|                               ,CONTROLE
+204|                               ,QTDNEG
+205|                               ,NIVEL
+206|                               ,DESMONTE
+207|                          FROM T_PRODUCOES
+208|                      ORDER BY NIVEL DESC
+209|                              ,CODPROD
+210|                              ,CODEMP
+211|                              ,CODLOCAL
+212|                              ,CONTROLE ) LOOP
+213|
+214|      varDESMONTE := PAS.DESMONTE;
+215|      BEGIN
+216|        SELECT LOGICO INTO varIGNORADESMONTE
+217|        FROM TSIPAR
+218|        WHERE CHAVE = 'PRDIGNORADESM';
+219|      EXCEPTION WHEN NO_DATA_FOUND THEN
+220|          varIGNORADESMONTE := 'N';
+221|      END;
+222|
+223|      --SE MUDOU O PRODUTO OU NIVEL FAZ O CALCULO DE CUSTO MEDIO
+224|      --POIS PODE SER NECESSARIO NO CALCULO DE CUSTO DO PRODUTO SEGUINTE
+225|      IF     antCODPROD <> -1
+226|         AND (    antNIVEL <> PAS.NIVEL
+227|               OR antCODEMP <> PAS.CODEMP
+228|               OR antCODPROD <> PAS.CODPROD
+229|               OR antCODLOCAL <> PAS.CODLOCAL
+230|               OR antCONTROLE <> PAS.CONTROLE ) THEN
+231|         recCusto.DTBASE      := PAS.DTBASE;
+232|         recCusto.CODEMP      := antCODEMP;
+233|         recCusto.CODPROD     := antCODPROD;
+234|         recCusto.CODLOCAL    := antCODLOCAL;
+235|         recCusto.CONTROLE    := antCONTROLE;
+236|       -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'STP_CALCULARCUSTOPRODUCAOMEDIO ' || ANTCODPROD, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+237|         STP_CALCULARCUSTOPRODUCAOMEDIO( recCusto );
+238|      END IF;
+239|
+240|      IF (    antCODEMP <> PAS.CODEMP
+241|           OR antCODPROD <> PAS.CODPROD
+242|           OR antCODLOCAL <> PAS.CODLOCAL
+243|           OR antCONTROLE <> PAS.CONTROLE ) THEN
+244|         -- APAGA O CUSTO EXISTENTE PARA GRAVAR O NOVO CALCULO DEPOIS
+245|       -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'DELETE TGFCUS ' || PAS.CODPROD, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+246|         DELETE FROM TGFCUS
+247|               WHERE DTATUAL = PAS.DTBASE
+248|                 AND CODPROD = PAS.CODPROD
+249|                 AND CODEMP = PAS.CODEMP
+250|                 AND CODLOCAL = PAS.CODLOCAL
+251|                 AND CONTROLE = PAS.CONTROLE
+252|                 AND AUTOMATICO <> 'N';
+253|      END IF;
+254|
+255|      -- APAGANDO O CUSTO DA PRODUCAO PARA O NOVO CALCULO
+256|      -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'DELETE TGFCUSITE' || PAS.CODPROD, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+257|      DELETE FROM TGFCUSITE
+258|            WHERE NUNOTA = PAS.NUNOTA
+259|              AND SEQUENCIA = PAS.SEQUENCIA
+260|              AND CODPROD = PAS.CODPROD;
+261|
+262|      -- VERIFICAR SE É PRODUÇÃO DE DESMONTE
+263|      IF (varDESMONTE = 'S' AND varIGNORADESMONTE = 'N') THEN
+264|         -- ***** LÓGICA DE CUSTO DE DESMONTE *****
+265|         -- Chamada à procedure modular de cálculo de custo de desmonte
+266|         -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (0, SYSDATE, 'CUSTO DESMONTE ' || PAS.CODPROD, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+267|         
+268|         STP_CALCULAR_CUSTO_DESMONTE(
+269|            P_NUNOTA         => PAS.NUNOTA,
+270|            P_CODPROD        => PAS.CODPROD,
+271|            P_CONTROLE       => PAS.CONTROLE,
+272|            P_DTBASE         => PAS.DTBASE,
+273|            P_CODEMP         => PAS.CODEMP,
+274|            P_CODLOCAL       => PAS.CODLOCAL,
+275|            P_CUSTOEMPRESA   => varCUSTOEMPRESA,
+276|            P_CUSTOLOCAL     => varCUSTOLOCAL,
+277|            P_CUSTOCONTROLE  => varCUSTOCONTROLE
+278|         );
+279|
+280|      ELSE
+281|        --INSERINDO O CUSTO DA PRODUÇÃO NA TGFCUSITE
+282|        -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'INSERT TGFCUSITE' || PAS.CODPROD, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+283|        INSERT INTO TGFCUSITE
+284|                    ( NUNOTA, SEQUENCIA, CODPROD, CODEMP, CODLOCAL, CONTROLE, DTATUAL, CUSGER, CUSVARIAVEL, CUSREP, ENTRADACOMICMS
+285|                    ,ENTRADASEMICMS, QTDNEG, FAMILIA, ALTPRECO, TIPONOTA )
+286|          SELECT PAS.NUNOTA AS NUNOTA
+287|                ,PAS.SEQUENCIA AS SEQUENCIA
+288|                ,PAS.CODPROD AS CODPROD
+289|                ,CASE WHEN varCUSTOEMPRESA = 'N' THEN 1 ELSE PAS.CODEMP END AS CODEMP
+290|                ,CASE WHEN varCUSTOLOCAL = 'N' THEN 0 ELSE PAS.CODLOCAL END AS CODLOCAL
+291|                ,CASE WHEN varCUSTOCONTROLE = 'N' THEN ' ' ELSE PAS.CONTROLE END AS CONTROLE
+292|                ,PAS.DTBASE AS DTATUAL
+293|                ,CASE
+294|                    WHEN USACUSTOMEDIOMPS IN ('G','A') THEN CUSMED
+295|                    ELSE CUSGER
+296|                  END AS CUSGER
+297|                ,CUSVARIAVEL
+298|                ,CASE
+299|                    WHEN USACUSTOMEDIOMPS IN ('S','A') THEN CUSMED
+300|                    ELSE CUSREP
+301|                  END AS CUSREP
+302|                ,ENTRADACOMICMS
+303|                ,ENTRADASEMICMS
+304|                ,QTDNEG
+305|                ,'N' AS FAMILIA
+306|                ,'N' AS ALTPRECO
+307|                ,'P' AS TIPONOTA
+308|            FROM (
+309|                  --CALCULANDO O CUSTO DO PA
+310|                  SELECT (select EMP.USACUSTOMEDIOMPS from tgfemp emp where codemp = T2.codemp) as  USACUSTOMEDIOMPS
+311|                        ,QTDNEG
+312|                        ,ROUND( ENTRADASEMICMS / QTDNEG, VARIAVEIS_PKG.V_DECIMAISPARACUSTO ) AS ENTRADASEMICMS
+313|                        ,ROUND( ENTRADACOMICMS / QTDNEG, VARIAVEIS_PKG.V_DECIMAISPARACUSTO ) AS ENTRADACOMICMS
+314|                        ,ROUND( CUSREP / QTDNEG, VARIAVEIS_PKG.V_DECIMAISPARACUSTO ) AS CUSREP
+315|                        ,ROUND( CUSGER / QTDNEG, VARIAVEIS_PKG.V_DECIMAISPARACUSTO ) AS CUSGER
+316|                        ,ROUND( CUSMED / QTDNEG, VARIAVEIS_PKG.V_DECIMAISPARACUSTO ) AS CUSMED
+317|                        ,ROUND( CUSVARIAVEL / QTDNEG, VARIAVEIS_PKG.V_DECIMAISPARACUSTO ) AS CUSVARIAVEL
+318|                    FROM (
+319|                          /* BUSCA AS MPS COM SEUS CUSTOS */
+320|                          SELECT   PA.CODEMP
+321|                                  ,NVL( SUM( CUS.CUSGER * MP.QTDNEG ), 0 ) AS CUSGER
+322|                                  ,NVL( SUM( CUS.CUSVARIAVEL * MP.QTDNEG ), 0 ) AS CUSVARIAVEL
+323|                                  ,NVL( SUM( CUS.CUSREP * MP.QTDNEG ), 0 ) AS CUSREP
+324|                                  ,NVL( SUM( CASE WHEN (select EMP.USACUSMEDICMPRO from tgfemp emp where codemp = PA.CODEMP) = 'S' THEN CUS.CUSMEDICM ELSE ENTRADACOMICMS END * MP.QTDNEG ), 0 ) AS ENTRADACOMICMS
+325|                                  ,NVL( SUM( CASE WHEN (select EMP.USACUSMEDICMPRO from tgfemp emp where codemp = PA.CODEMP) = 'S' THEN CUS.CUSSEMICM ELSE ENTRADASEMICMS END * MP.QTDNEG ), 0 ) AS ENTRADASEMICMS
+326|                                  ,NVL( SUM( CUS.CUSMED * MP.QTDNEG ), 0 ) AS CUSMED
+327|                                  ,PA.QTDNEG AS QTDNEG
+328|                              FROM TGFITE PA
+329|                                  ,TGFVAR VAR
+330|                                  ,TGFITE MP
+331|                                  ,TGFCUS CUS
+332|                              WHERE PA.NUNOTA = PAS.NUNOTA
+333|                                AND PA.SEQUENCIA = PAS.SEQUENCIA
+334|                                AND VAR.NUNOTA = PAS.NUNOTA
+335|                                AND VAR.NUNOTAORIG = PAS.NUNOTA
+336|                                AND VAR.SEQUENCIAORIG = PAS.SEQUENCIA
+337|                                AND MP.NUNOTA = PAS.NUNOTA
+338|                                AND MP.SEQUENCIA = VAR.SEQUENCIA
+339|                                AND NVL( MP.TERCEIROS, 'N' ) = 'N'
+340|                                AND MP.CODPROD = CUS.CODPROD
+341|                                AND CUS.CODEMP = CASE WHEN varCUSTOEMPRESA = 'N' THEN CUS.CODEMP ELSE MP.CODEMP END
+342|                                AND CUS.CODLOCAL = CASE WHEN varCUSTOLOCAL = 'N' THEN CUS.CODLOCAL ELSE MP.CODLOCALORIG END
+343|                                AND CUS.CONTROLE = CASE WHEN varCUSTOCONTROLE = 'N' THEN CUS.CONTROLE ELSE MP.CONTROLE END
+344|                                AND CUS.DTATUAL =
+345|                                      ( SELECT MAX( C.DTATUAL )
+346|                                          FROM TGFCUS C
+347|                                        WHERE C.CODPROD = CUS.CODPROD
+348|                                          AND C.DTATUAL <= CASE WHEN MP.CODPROD = PA.CODPROD THEN (PAS.DTBASE - 1) ELSE PAS.DTBASE END
+349|                                          AND C.CODEMP = CASE  WHEN varCUSTOEMPRESA = 'N' THEN C.CODEMP ELSE CUS.CODEMP END
+350|                                          AND C.CODLOCAL = CASE WHEN varCUSTOLOCAL = 'N' THEN C.CODLOCAL ELSE CUS.CODLOCAL END
+351|                                          AND C.CONTROLE = CASE WHEN varCUSTOCONTROLE = 'N' THEN C.CONTROLE ELSE CUS.CONTROLE END
+352|                                          )
+353|                                AND (    VARIAVEIS_PKG.V_TEMOTICAS = 'N'
+354|                                      OR NOT EXISTS( SELECT 1
+355|                                                      FROM TGFPRO PRO
+356|                                                    WHERE PRO.CODPROD = CUS.CODPROD
+357|                                                      AND PRO.TEMISS = 'S' ) )
+358|                          GROUP BY PA.CODEMP
+359|                                  ,PA.QTDNEG ) T2
+360|                    WHERE T2.QTDNEG <> 0 );
+361|      END IF;
+362|
+363|      --SALVANDO O PRODUTO CALCULADO
+364|      antDTBASE      := PAS.DTBASE;
+365|      antNIVEL       := PAS.NIVEL;
+366|      antCODEMP      := PAS.CODEMP;
+367|      antCODPROD     := PAS.CODPROD;
+368|      antCODLOCAL    := PAS.CODLOCAL;
+369|      antCONTROLE    := PAS.CONTROLE;
+370|   END LOOP;
+371|
+372|   --SE HOUVE CALCULO DE ALGUM PRODUTO
+373|   IF antCODPROD <> -1 THEN
+374|      -- CALCULO DO CUSTO MÉDIO DO ÚLTIMO PRODUTO
+375|      recCusto.DTBASE      := antDTBASE;
+376|      recCusto.CODEMP      := antCODEMP;
+377|      recCusto.CODPROD     := antCODPROD;
+378|      recCusto.CODLOCAL    := antCODLOCAL;
+379|      recCusto.CONTROLE    := antCONTROLE;
+380|    -- P_SEQ := P_SEQ + 1; INSERT INTO TSILOG values (-1, SYSDATE, 'STP_CALCULARCUSTOPRODUCAOMEDIO ULTIMO ' || ANTCODPROD, 'STP_CALCULARCUSTOPRODUCAO', P_SEQ);
+381|      STP_CALCULARCUSTOPRODUCAOMEDIO( recCusto );
+382|   END IF;
+383|
+384|   DELETE FROM T_PRODUCOES_NIVEL;
+385|
+386|END;
+
+386 rows selected. 
+
+SQL> SPOOL OFF

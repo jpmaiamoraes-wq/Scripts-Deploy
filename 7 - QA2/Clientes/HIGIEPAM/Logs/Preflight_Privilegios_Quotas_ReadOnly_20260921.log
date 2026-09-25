@@ -1,0 +1,145 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T18:46:24.819899+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Preflight_Privilegios_Quotas_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 25,
+  "colunas": [
+    "ITEM",
+    "VALOR",
+    "DETALHE"
+  ],
+  "linhas": [
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "ALTER ANY TABLE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "ALTER ANY TRIGGER",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY INDEX",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY MATERIALIZED VIEW",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY PROCEDURE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY SEQUENCE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY TABLE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY TRIGGER",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY TYPE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE ANY VIEW",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "CREATE SESSION",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY INDEX",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY MATERIALIZED VIEW",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY PROCEDURE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY SEQUENCE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY TABLE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY TRIGGER",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY TYPE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "DROP ANY VIEW",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "EXECUTE ANY CLASS",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "EXECUTE ANY PROCEDURE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "EXECUTE ANY TYPE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "SELECT ANY SEQUENCE",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "SESSION_PRIVILEGE",
+      "VALOR": "SET CONTAINER",
+      "DETALHE": null
+    },
+    {
+      "ITEM": "USER_TABLESPACE",
+      "VALOR": "USERS",
+      "DETALHE": "TEMP"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

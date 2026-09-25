@@ -1,0 +1,183 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T19:10:27.244166+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P13_Etapa31_Lista_Objetos_Invalidos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 27,
+  "colunas": [
+    "OBJECT_TYPE",
+    "OBJECT_NAME",
+    "STATUS",
+    "LAST_DDL_TIME"
+  ],
+  "linhas": [
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "ACL_GET_ALIQPART",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:27"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "F_OBTEMPRECO_DATA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "F_OBTEM_SALDO_INDENIZ",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "GET_CODPROD_REF",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "GET_INDICE_AJUSTE_NOTA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "QTDEVOLPADRAO",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "QTDEVOLPADRAO2",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GETCODPRODALT",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GETDTBAIXABEM",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GETMESESSEMPIS",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:28"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GETPRODUTOAGRUPADOGIRO",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GETVLRREA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CENTROCUSTO_EFD",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CFO_NOTA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CODCFO",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CODIGO_PRODUTO",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CONTACONTABIL_EFD",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CONTACONTABIL_IMOB_EFD",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_CTACTB_CADASTROS_EFD",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_ICMS_ESPECIAL_CAB",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_INDITENS",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_NUNOTA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_SATUSCONFERENCIA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_GET_ST_RECUPERAR",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_MATGIR_GET_MULTCPA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_MATGIR_GET_QTDTOTALMULTCPA",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:30"
+    },
+    {
+      "OBJECT_TYPE": "FUNCTION",
+      "OBJECT_NAME": "SNK_PRECO",
+      "STATUS": "INVALID",
+      "LAST_DDL_TIME": "2026-07-10 10:17:29"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

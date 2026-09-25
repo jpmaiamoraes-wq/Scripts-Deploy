@@ -1,0 +1,15 @@
+ID_EXECUCAO_LOTE=RMD_JCLM_20260919215630
+ENTRADA=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Continuacao_Master_Deploy_JCLM_14_15.sql
+SHA256_SUITE=c89873804426380e3fe0eb3090e39edc65b7d75c214b5bb5d0fe9d877d07cae1
+POS_VALIDACAO=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Artefatos_Revisao/Preflight/33_PosValidacao_Atividades14_15_READONLY.sql
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=jclmprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[OK 1/4] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql:5 ROWCOUNT=0
+[ERRO 2/4] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql:14 DatabaseError: ORA-01031: insufficient privileges
+ORA-06512: at line 11
+ORA-06512: at line 2
+Help: https://docs.oracle.com/error-help/db/ora-01031/
+STATUS=LOTE_COM_ERRO

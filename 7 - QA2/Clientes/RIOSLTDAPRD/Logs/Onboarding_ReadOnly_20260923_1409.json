@@ -1,0 +1,88 @@
+{
+  "status": "CONCLUIDA_READ_ONLY_COM_DIVERGENCIAS",
+  "executado_em_utc": "2026-09-23T14:09:49.521355+00:00",
+  "fonte_primaria": {
+    "titulo_aba": "Onboarding Deploy — Sankhya",
+    "url_exibida": "https://20069-51233.build.mitralab.io/",
+    "registro": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LTDA",
+    "cnpj_registro": "58.364.248/0001-11",
+    "situacao": "Concluído",
+    "data_criacao": "2026-08-14T17:05:14",
+    "arquivo_usuarios": "[MODELO SANKHYA] Usuarios (1).xlsx",
+    "arquivo_usuarios_url": "https://mitra-multitenant-prod.s3.amazonaws.com/tenant_51233/ai-files/public/%5BMODELO%20SANKHYA%5D%20Usuarios%20(1)__51233-1787746761693-l1i2vetb.xlsx",
+    "arquivo_usuarios_enviado_em": "2026-08-26 12:19",
+    "quantidade_usuarios_arquivo": 7,
+    "arquivo_contas_bancarias_ignorado": "[MODELO SANKHYA] Contas Bancarias (1).xlsx",
+    "criterio_arquivo": "Usado o arquivo de usuários mais recente exibido no portal; a planilha de contas bancárias não participa desta comparação."
+  },
+  "oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "riosltdaprd.sankhyacloud.com.br",
+    "db_name": "RIOSLTDAPRD",
+    "service_compatibilidade": true,
+    "credencial_persistida": "CREDENCIAL_KEYCHAIN_PRESENTE_NO_CONTEXTO_DA_CONEXAO"
+  },
+  "consultas": [
+    {
+      "arquivo": "Clientes/RIOSLTDAPRD/Onboarding_Empresas_ReadOnly.sql",
+      "tipo": "SELECT",
+      "executado_em_utc": "2026-09-23T14:09:38.199863+00:00",
+      "qtd_linhas": 1,
+      "colunas": ["CODEMP", "RAZAOSOCIAL", "CGC"]
+    },
+    {
+      "arquivo": "Clientes/RIOSLTDAPRD/Onboarding_Usuarios_ReadOnly.sql",
+      "tipo": "SELECT",
+      "executado_em_utc": "2026-09-23T14:09:49.521355+00:00",
+      "qtd_linhas": 18,
+      "colunas": ["CODUSU", "EMAIL", "NOMEUSU", "CODEMP", "RAZAOSOCIAL_EMPRESA", "CODGRUPO"]
+    }
+  ],
+  "comparacao_empresas": {
+    "onboarding_quantidade": 1,
+    "oracle_quantidade": 1,
+    "cnpjs_localizados": [
+      {
+        "cnpj": "58364248000111",
+        "razao_social_onboarding": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LTDA",
+        "codemp_oracle": 1,
+        "razao_social_oracle": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LT",
+        "cgc_oracle": "58364248000111"
+      }
+    ],
+    "cnpjs_ausentes_no_oracle": [],
+    "cnpjs_adicionais_no_oracle": [],
+    "divergencias": [
+      "Variação nominal: o Oracle apresenta a razão social abreviada/truncada com 'LT', enquanto o onboarding apresenta 'LTDA'; o CNPJ coincide."
+    ]
+  },
+  "comparacao_usuarios": {
+    "arquivo_mais_recente": "[MODELO SANKHYA] Usuarios (1).xlsx",
+    "data_envio": "2026-08-26 12:19",
+    "total_onboarding": 7,
+    "total_oracle": 18,
+    "total_oracle_com_grupo": 7,
+    "total_oracle_sem_grupo_modelo": 11,
+    "criterio_oracle_comparado": "TSIUSU.CODGRUPO > 0",
+    "emails_ausentes_no_oracle": [],
+    "emails_adicionais_no_oracle": [],
+    "correspondencias": [
+      {"email": "julia.riosltda@gmail.com", "codusu": 11, "nome_onboarding": "Júlia Soares", "nome_oracle": "JULIA.SOARES", "codemp_oracle": 1, "grupos_onboarding": "1/2/4/8/10/15", "codgrupo_oracle": 1, "divergencias": ["GRUPO"]},
+      {"email": "marcelo.riosltda@gmail.com", "codusu": 12, "nome_onboarding": "Marcelo Pereira", "nome_oracle": "MARCELO.PEREIRA", "codemp_oracle": 1, "grupos_onboarding": "1/2/3/4/5/6/10/15/17", "codgrupo_oracle": 1, "divergencias": ["GRUPO"]},
+      {"email": "distribuicao@riosltda.com.br", "codusu": 13, "nome_onboarding": "Carlos Henrique", "nome_oracle": "CARLOS.HENRIQUE", "codemp_oracle": 1, "grupos_onboarding": "1/2/3/4/5/6/8/10/15/18", "codgrupo_oracle": 1, "divergencias": ["GRUPO"]},
+      {"email": "joaomarcelo.riosltda@gmail.com", "codusu": 14, "nome_onboarding": "João Marcelo", "nome_oracle": "JOAO.MARCELO", "codemp_oracle": 1, "grupos_onboarding": "5/6/8/13", "codgrupo_oracle": 5, "divergencias": ["GRUPO"]},
+      {"email": "vania.riosltda@gmail.com", "codusu": 15, "nome_onboarding": "Vânia Soares", "nome_oracle": "VANIA.SOARES", "codemp_oracle": 1, "grupos_onboarding": "15", "codgrupo_oracle": 1, "divergencias": ["GRUPO"]},
+      {"email": "leticia.riosltda@gmail.com", "codusu": 16, "nome_onboarding": "Letícia Morais", "nome_oracle": "LETICIA.MORAIS", "codemp_oracle": 1, "grupos_onboarding": "15", "codgrupo_oracle": 1, "divergencias": ["GRUPO"]},
+      {"email": "edna.riosltda@gmail.com", "codusu": 17, "nome_onboarding": "Edna Rodrigues", "nome_oracle": "EDNA.RODRIGUES", "codemp_oracle": 1, "grupos_onboarding": "8/13/14", "codgrupo_oracle": 8, "divergencias": ["GRUPO"]}
+    ],
+    "divergencias": [
+      "Os 7 e-mails do onboarding foram localizados no Oracle, com CODEMP=1; não há usuário ativo ausente ou adicional.",
+      "Os 7 registros possuem divergência de grupo: o onboarding informa conjuntos de grupos separados por '/', enquanto TSIUSU registra um único CODGRUPO por usuário.",
+      "Os nomes correspondem após normalização de caixa, pontuação e acentuação; não foi registrada divergência nominal efetiva.",
+      "Os 11 usuários Oracle com CODGRUPO=0 foram classificados como usuários de modelo e excluídos da comparação ativa."
+    ]
+  },
+  "dml_executado": false,
+  "ddl_executado": false
+}

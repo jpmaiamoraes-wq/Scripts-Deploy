@@ -1,0 +1,6 @@
+-- Estado persistido do backup da atividade 12; somente leitura.
+SELECT 'BKP_RMD_11_TGFEMP' AS OBJETO,
+       COUNT(*) AS QTD_REGISTROS,
+       MIN(ID_EXECUCAO) AS PRIMEIRO_ID_EXECUCAO,
+       MAX(ID_EXECUCAO) AS ULTIMO_ID_EXECUCAO
+  FROM BKP_RMD_11_TGFEMP;

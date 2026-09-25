@@ -1,0 +1,17 @@
+CODTIPPARC_PROPOSTO;CODTIPPARCPAI;DESCRTIPPARC;ANALITICO;ATIVO;ORIGEM;JUSTIFICATIVA
+10101024;10101000;Brinquedos e artigos recreativos;S;S;NOVO;Segmento recorrente na amostra e CNAE varejista especifico
+10101025;10101000;Cosmeticos e perfumaria;S;S;NOVO;Segmento varejista sem correspondencia direta atual
+10101026;10101000;Eletronicos e eletrodomesticos;S;S;NOVO;Evita classificar eletronicos como informatica ou material eletrico
+10103012;10103000;Consultoria empresarial;S;S;NOVO;Distingue consultoria de servicos diversos
+10103013;10103000;Logistica e armazenagem;S;S;NOVO;Abrange armazenagem, deposito e apoio logistico
+10104000;10100000;Atacado e distribuicao;N;S;NOVO;Nova natureza de atuacao paralela a varejo, industria e servicos
+10104001;10104000;Alimentos e bebidas;S;S;NOVO;Atacado especializado em alimentos e bebidas
+10104002;10104000;Cosmeticos e perfumaria;S;S;NOVO;Atacado de cosmeticos, perfumaria e higiene
+10104003;10104000;Brinquedos e papelaria;S;S;NOVO;Atacado de brinquedos, recreacao, escritorio e papelaria
+10104004;10104000;Material eletrico e eletronicos;S;S;NOVO;Atacado de equipamentos eletricos e eletronicos
+10104005;10104000;Ferragens e materiais de construcao;S;S;NOVO;Atacado ligado a construcao, ferragens e ferramentas
+10104006;10104000;Autopecas, pneus e acessorios;S;S;NOVO;Atacado automotivo
+10104007;10104000;Moveis e utilidades domesticas;S;S;NOVO;Atacado de moveis e artigos de uso domestico
+10104008;10104000;Maquinas e equipamentos;S;S;NOVO;Atacado de maquinas e equipamentos
+10104009;10104000;Produtos agropecuarios;S;S;NOVO;Atacado de produtos agropecuarios
+10104010;10104000;Outros produtos atacadistas;S;S;NOVO;Fallback controlado para CNAEs atacadistas sem classe especifica

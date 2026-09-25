@@ -1,0 +1,30 @@
+{
+  "status": "CONSULTAS_READ_ONLY_CONCLUIDAS",
+  "consultas": [
+    {
+      "arquivo": "Artefatos_Revisao/Preflight/01_Identidade_Empresa_JCLM_READONLY.sql",
+      "executado_em_utc": "2026-09-19T23:59:38.442710+00:00",
+      "session_user": "FRANCISCO_JUNIOR",
+      "current_schema": "SANKHYA",
+      "service_name": "jclmprd.sankhyacloud.com.br",
+      "db_name": "JCLMPRD",
+      "qtd_linhas": 2,
+      "linhas": [
+        {"CODEMP": 1, "NOMEFANTASIA": "JCLM INDUSTRIA E COMERCIO LTDA", "RAZAOSOCIAL": "JCLM INDUSTRIA E COMERCIO LTDA", "CLASSIFICACAO": "RAZAO_SOCIAL_EXATA"},
+        {"CODEMP": 4, "NOMEFANTASIA": "JCLM", "RAZAOSOCIAL": "JCLM INDUSTRIA E COMERCIO LTDA", "CLASSIFICACAO": "RAZAO_SOCIAL_EXATA"}
+      ]
+    },
+    {
+      "arquivo": "Artefatos_Revisao/Preflight/02_Contagem_Razao_Exata_JCLM_READONLY.sql",
+      "executado_em_utc": "2026-09-19T23:59:34.897401+00:00",
+      "session_user": "FRANCISCO_JUNIOR",
+      "current_schema": "SANKHYA",
+      "service_name": "jclmprd.sankhyacloud.com.br",
+      "db_name": "JCLMPRD",
+      "qtd_razao_exata": 2
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false,
+  "conclusao": "A razao social exata ocorre em CODEMP 1 e CODEMP 4; o escopo deve ser confirmado antes de qualquer alteracao."
+}

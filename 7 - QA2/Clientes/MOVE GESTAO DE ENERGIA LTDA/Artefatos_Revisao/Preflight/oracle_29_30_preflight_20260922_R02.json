@@ -1,0 +1,2147 @@
+{
+  "status": "PREFLIGHT_29_30_CONCLUIDO",
+  "executado_em_utc": "2026-09-22T18:56:08.512375+00:00",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "regra_normalizacao": "PADRAO_ATIVIDADES_29_30_V1",
+  "decisao": "MERGE_ANTIFRAGIL_OBRIGATORIO",
+  "bairros": {
+    "tabela": "TSIBAI",
+    "coluna_codigo": "CODBAI",
+    "coluna_descricao": "NOMEBAI",
+    "coluna_particao": null,
+    "total_registros": 45996,
+    "alteracoes_unicas": 45045,
+    "registros_em_colisao": 848,
+    "grupos_colisao": 420,
+    "colisoes_com_alteracao": 831,
+    "amostra_grupos": [
+      {
+        "norm": "AREA RURAL",
+        "qtd": 3,
+        "codigo_menor": 487,
+        "codigo_maior": 19396
+      },
+      {
+        "norm": "CAIXA D'AGUA",
+        "qtd": 3,
+        "codigo_menor": 1136,
+        "codigo_maior": 16826
+      },
+      {
+        "norm": "GUAIUBA",
+        "qtd": 3,
+        "codigo_menor": 23886,
+        "codigo_maior": 43178
+      },
+      {
+        "norm": "JARDIM SAO LUIS",
+        "qtd": 3,
+        "codigo_menor": 8179,
+        "codigo_maior": 39148
+      },
+      {
+        "norm": "JARDIM SHANGRI-LA",
+        "qtd": 3,
+        "codigo_menor": 14898,
+        "codigo_maior": 18961
+      },
+      {
+        "norm": "OLHO D'AGUA",
+        "qtd": 3,
+        "codigo_menor": 3106,
+        "codigo_maior": 21960
+      },
+      {
+        "norm": "PARAISO DAS AGUAS",
+        "qtd": 3,
+        "codigo_menor": 15469,
+        "codigo_maior": 32268
+      },
+      {
+        "norm": "SHANGRI-LA",
+        "qtd": 3,
+        "codigo_menor": 9800,
+        "codigo_maior": 32859
+      },
+      {
+        "norm": "ACUDE",
+        "qtd": 2,
+        "codigo_menor": 738,
+        "codigo_maior": 15900
+      },
+      {
+        "norm": "AGUA BRANCA",
+        "qtd": 2,
+        "codigo_menor": 1272,
+        "codigo_maior": 19342
+      },
+      {
+        "norm": "AGUA CLARA",
+        "qtd": 2,
+        "codigo_menor": 15082,
+        "codigo_maior": 19527
+      },
+      {
+        "norm": "AGUA SUJA",
+        "qtd": 2,
+        "codigo_menor": 18609,
+        "codigo_maior": 45192
+      },
+      {
+        "norm": "AGUA VERDE",
+        "qtd": 2,
+        "codigo_menor": 2782,
+        "codigo_maior": 17180
+      },
+      {
+        "norm": "ALBATROZ",
+        "qtd": 2,
+        "codigo_menor": 19999,
+        "codigo_maior": 45321
+      },
+      {
+        "norm": "ALTO PARAISO",
+        "qtd": 2,
+        "codigo_menor": 740,
+        "codigo_maior": 12175
+      },
+      {
+        "norm": "ANDRADE ARAUJO",
+        "qtd": 2,
+        "codigo_menor": 21496,
+        "codigo_maior": 21880
+      },
+      {
+        "norm": "ANHANGUERA",
+        "qtd": 2,
+        "codigo_menor": 5394,
+        "codigo_maior": 33918
+      },
+      {
+        "norm": "ANTARTICA",
+        "qtd": 2,
+        "codigo_menor": 18448,
+        "codigo_maior": 30900
+      },
+      {
+        "norm": "ANTONIO CONSELHEIRO",
+        "qtd": 2,
+        "codigo_menor": 1110,
+        "codigo_maior": 15142
+      },
+      {
+        "norm": "ANTONIO LOPES",
+        "qtd": 2,
+        "codigo_menor": 1058,
+        "codigo_maior": 34241
+      },
+      {
+        "norm": "ARACAJI DE MINAS",
+        "qtd": 2,
+        "codigo_menor": 8530,
+        "codigo_maior": 9302
+      },
+      {
+        "norm": "ARCO-IRIS",
+        "qtd": 2,
+        "codigo_menor": 16073,
+        "codigo_maior": 21479
+      },
+      {
+        "norm": "AREA RURAL DE CURUPA",
+        "qtd": 2,
+        "codigo_menor": 7832,
+        "codigo_maior": 31504
+      },
+      {
+        "norm": "AREA RURAL DE PIRAPORA",
+        "qtd": 2,
+        "codigo_menor": 9368,
+        "codigo_maior": 14038
+      },
+      {
+        "norm": "ARIPUANA",
+        "qtd": 2,
+        "codigo_menor": 15609,
+        "codigo_maior": 22184
+      },
+      {
+        "norm": "BANGU",
+        "qtd": 2,
+        "codigo_menor": 20936,
+        "codigo_maior": 37720
+      },
+      {
+        "norm": "BARROLANDIA",
+        "qtd": 2,
+        "codigo_menor": 1129,
+        "codigo_maior": 1288
+      },
+      {
+        "norm": "BASILIO",
+        "qtd": 2,
+        "codigo_menor": 936,
+        "codigo_maior": 35849
+      },
+      {
+        "norm": "BELA SUICA",
+        "qtd": 2,
+        "codigo_menor": 11170,
+        "codigo_maior": 16914
+      },
+      {
+        "norm": "BETANIA",
+        "qtd": 2,
+        "codigo_menor": 534,
+        "codigo_maior": 23995
+      },
+      {
+        "norm": "BNH",
+        "qtd": 2,
+        "codigo_menor": 687,
+        "codigo_maior": 14370
+      },
+      {
+        "norm": "BORACEIA",
+        "qtd": 2,
+        "codigo_menor": 24518,
+        "codigo_maior": 45320
+      },
+      {
+        "norm": "BOSQUE DOS EUCALIPTOS",
+        "qtd": 2,
+        "codigo_menor": 12717,
+        "codigo_maior": 30835
+      },
+      {
+        "norm": "BRASILIA",
+        "qtd": 2,
+        "codigo_menor": 186,
+        "codigo_maior": 17573
+      },
+      {
+        "norm": "CACARATIBA",
+        "qtd": 2,
+        "codigo_menor": 8822,
+        "codigo_maior": 8983
+      },
+      {
+        "norm": "CACHOEIRA DO ARANA",
+        "qtd": 2,
+        "codigo_menor": 8764,
+        "codigo_maior": 10320
+      },
+      {
+        "norm": "CAJU",
+        "qtd": 2,
+        "codigo_menor": 10727,
+        "codigo_maior": 30683
+      },
+      {
+        "norm": "CAMARA",
+        "qtd": 2,
+        "codigo_menor": 2748,
+        "codigo_maior": 4056
+      },
+      {
+        "norm": "CAMBURI",
+        "qtd": 2,
+        "codigo_menor": 21241,
+        "codigo_maior": 40400
+      },
+      {
+        "norm": "CAMPOS ELISEOS",
+        "qtd": 2,
+        "codigo_menor": 8542,
+        "codigo_maior": 43409
+      },
+      {
+        "norm": "CANAFISTULA",
+        "qtd": 2,
+        "codigo_menor": 190,
+        "codigo_maior": 2389
+      },
+      {
+        "norm": "CARAIBAS",
+        "qtd": 2,
+        "codigo_menor": 678,
+        "codigo_maior": 1406
+      },
+      {
+        "norm": "CATUCABA",
+        "qtd": 2,
+        "codigo_menor": 22891,
+        "codigo_maior": 31055
+      },
+      {
+        "norm": "CATUMBI",
+        "qtd": 2,
+        "codigo_menor": 9139,
+        "codigo_maior": 16828
+      },
+      {
+        "norm": "CAVALCANTI",
+        "qtd": 2,
+        "codigo_menor": 20945,
+        "codigo_maior": 44631
+      },
+      {
+        "norm": "CDHU",
+        "qtd": 2,
+        "codigo_menor": 32326,
+        "codigo_maior": 42049
+      },
+      {
+        "norm": "CECAP",
+        "qtd": 2,
+        "codigo_menor": 28181,
+        "codigo_maior": 28641
+      },
+      {
+        "norm": "CENTRO",
+        "qtd": 2,
+        "codigo_menor": 6,
+        "codigo_maior": 7944
+      },
+      {
+        "norm": "CENTRO (ARACAIBA)",
+        "qtd": 2,
+        "codigo_menor": 30417,
+        "codigo_maior": 38026
+      },
+      {
+        "norm": "CEU AZUL",
+        "qtd": 2,
+        "codigo_menor": 6895,
+        "codigo_maior": 45828
+      },
+      {
+        "norm": "CHACARA DAS PALMEIRAS",
+        "qtd": 2,
+        "codigo_menor": 23130,
+        "codigo_maior": 27761
+      },
+      {
+        "norm": "CHACARA DOS EUCALIPTOS",
+        "qtd": 2,
+        "codigo_menor": 25353,
+        "codigo_maior": 34545
+      },
+      {
+        "norm": "CHACARA SANTO ANTONIO",
+        "qtd": 2,
+        "codigo_menor": 21884,
+        "codigo_maior": 37601
+      },
+      {
+        "norm": "CHACARA SAO LUIS",
+        "qtd": 2,
+        "codigo_menor": 30142,
+        "codigo_maior": 35570
+      },
+      {
+        "norm": "CHACARAS AEROPORTO",
+        "qtd": 2,
+        "codigo_menor": 17480,
+        "codigo_maior": 18830
+      },
+      {
+        "norm": "CHACARAS ANHANGUERA",
+        "qtd": 2,
+        "codigo_menor": 4786,
+        "codigo_maior": 5654
+      },
+      {
+        "norm": "CHACARAS COIMBRA",
+        "qtd": 2,
+        "codigo_menor": 5986,
+        "codigo_maior": 5991
+      },
+      {
+        "norm": "CHACARAS SANTO ANTONIO",
+        "qtd": 2,
+        "codigo_menor": 26236,
+        "codigo_maior": 33836
+      },
+      {
+        "norm": "CIDADE NAUTICA",
+        "qtd": 2,
+        "codigo_menor": 26114,
+        "codigo_maior": 38809
+      },
+      {
+        "norm": "CIDADE SATELITE",
+        "qtd": 2,
+        "codigo_menor": 22335,
+        "codigo_maior": 38819
+      },
+      {
+        "norm": "CINQUENTENARIO",
+        "qtd": 2,
+        "codigo_menor": 9370,
+        "codigo_maior": 22554
+      },
+      {
+        "norm": "COHAB",
+        "qtd": 2,
+        "codigo_menor": 2522,
+        "codigo_maior": 3754
+      },
+      {
+        "norm": "COHAB I",
+        "qtd": 2,
+        "codigo_menor": 2487,
+        "codigo_maior": 16141
+      },
+      {
+        "norm": "COHAB II",
+        "qtd": 2,
+        "codigo_menor": 2488,
+        "codigo_maior": 14268
+      },
+      {
+        "norm": "COLONIA RODRIGO SILVA",
+        "qtd": 2,
+        "codigo_menor": 9466,
+        "codigo_maior": 12410
+      },
+      {
+        "norm": "COLUMBIA",
+        "qtd": 2,
+        "codigo_menor": 4208,
+        "codigo_maior": 19904
+      },
+      {
+        "norm": "CONDOMINIO AGUA VIVA",
+        "qtd": 2,
+        "codigo_menor": 6005,
+        "codigo_maior": 36669
+      },
+      {
+        "norm": "CONDOMINIO ESTANCIA DOS LAGOS",
+        "qtd": 2,
+        "codigo_menor": 10123,
+        "codigo_maior": 33503
+      },
+      {
+        "norm": "CONDOMINIO VILLE DE FRANCE",
+        "qtd": 2,
+        "codigo_menor": 32575,
+        "codigo_maior": 33510
+      },
+      {
+        "norm": "CONJUNTO HABITACIONAL GOVERNADOR MARIO COVAS",
+        "qtd": 2,
+        "codigo_menor": 24824,
+        "codigo_maior": 26191
+      },
+      {
+        "norm": "CONJUNTO HABITACIONAL JARDIM VITORIA",
+        "qtd": 2,
+        "codigo_menor": 28429,
+        "codigo_maior": 43239
+      },
+      {
+        "norm": "CONJUNTO HABITACIONAL MARIO COVAS",
+        "qtd": 2,
+        "codigo_menor": 26596,
+        "codigo_maior": 39336
+      },
+      {
+        "norm": "CONJUNTO HABITACIONAL NOSSA SENHORA APARECIDA",
+        "qtd": 2,
+        "codigo_menor": 17575,
+        "codigo_maior": 19403
+      },
+      {
+        "norm": "CONJUNTO HABITACIONAL PARAISO",
+        "qtd": 2,
+        "codigo_menor": 41666,
+        "codigo_maior": 43822
+      },
+      {
+        "norm": "CONJUNTO HABITACIONAL ULISSES GUIMARAES",
+        "qtd": 2,
+        "codigo_menor": 35761,
+        "codigo_maior": 40278
+      },
+      {
+        "norm": "CORREGO DO OURO",
+        "qtd": 2,
+        "codigo_menor": 9195,
+        "codigo_maior": 21140
+      },
+      {
+        "norm": "CORREGO DOS DESIDERIOS",
+        "qtd": 2,
+        "codigo_menor": 13034,
+        "codigo_maior": 13035
+      },
+      {
+        "norm": "CORUMBA",
+        "qtd": 2,
+        "codigo_menor": 20166,
+        "codigo_maior": 43414
+      },
+      {
+        "norm": "DA LAGOA",
+        "qtd": 2,
+        "codigo_menor": 26927,
+        "codigo_maior": 45551
+      },
+      {
+        "norm": "DAS FLORES",
+        "qtd": 2,
+        "codigo_menor": 2811,
+        "codigo_maior": 13223
+      },
+      {
+        "norm": "DAS LARANJEIRAS",
+        "qtd": 2,
+        "codigo_menor": 3503,
+        "codigo_maior": 5173
+      },
+      {
+        "norm": "DAS NACOES",
+        "qtd": 2,
+        "codigo_menor": 6180,
+        "codigo_maior": 23783
+      },
+      {
+        "norm": "DAS OLIVEIRAS",
+        "qtd": 2,
+        "codigo_menor": 11509,
+        "codigo_maior": 12368
+      },
+      {
+        "norm": "DAS PITAS",
+        "qtd": 2,
+        "codigo_menor": 25971,
+        "codigo_maior": 41484
+      },
+      {
+        "norm": "DE FATIMA",
+        "qtd": 2,
+        "codigo_menor": 4083,
+        "codigo_maior": 23554
+      },
+      {
+        "norm": "DE LOURDES",
+        "qtd": 2,
+        "codigo_menor": 2410,
+        "codigo_maior": 3620
+      },
+      {
+        "norm": "DER",
+        "qtd": 2,
+        "codigo_menor": 19241,
+        "codigo_maior": 23926
+      },
+      {
+        "norm": "DISTRITO DE FATIMA",
+        "qtd": 2,
+        "codigo_menor": 15963,
+        "codigo_maior": 16187
+      },
+      {
+        "norm": "DISTRITO DE MANICOBA",
+        "qtd": 2,
+        "codigo_menor": 16692,
+        "codigo_maior": 16736
+      },
+      {
+        "norm": "DISTRITO INDUSTRIAL I",
+        "qtd": 2,
+        "codigo_menor": 392,
+        "codigo_maior": 30671
+      },
+      {
+        "norm": "DIVINEIA",
+        "qtd": 2,
+        "codigo_menor": 8173,
+        "codigo_maior": 24341
+      },
+      {
+        "norm": "DIVINO ESPIRITO SANTO",
+        "qtd": 2,
+        "codigo_menor": 2727,
+        "codigo_maior": 3742
+      },
+      {
+        "norm": "DOS IMIGRANTES",
+        "qtd": 2,
+        "codigo_menor": 23602,
+        "codigo_maior": 40185
+      },
+      {
+        "norm": "EPLATZ",
+        "qtd": 2,
+        "codigo_menor": 26991,
+        "codigo_maior": 30506
+      },
+      {
+        "norm": "ESPIRITO SANTO",
+        "qtd": 2,
+        "codigo_menor": 491,
+        "codigo_maior": 1126
+      },
+      {
+        "norm": "ESTANCIA PARAISO",
+        "qtd": 2,
+        "codigo_menor": 1983,
+        "codigo_maior": 43387
+      },
+      {
+        "norm": "EUCALIPTOS",
+        "qtd": 2,
+        "codigo_menor": 1866,
+        "codigo_maior": 24933
+      },
+      {
+        "norm": "FLOR DA SERRA",
+        "qtd": 2,
+        "codigo_menor": 15192,
+        "codigo_maior": 17042
+      },
+      {
+        "norm": "FLORIDA",
+        "qtd": 2,
+        "codigo_menor": 12873,
+        "codigo_maior": 22788
+      },
+      {
+        "norm": "GLORIA",
+        "qtd": 2,
+        "codigo_menor": 74,
+        "codigo_maior": 14613
+      }
+    ],
+    "amostra_limitada": true
+  },
+  "enderecos": {
+    "tabela": "TSIEND",
+    "coluna_codigo": "CODEND",
+    "coluna_descricao": "NOMEEND",
+    "coluna_particao": "TIPO",
+    "total_registros": 681781,
+    "alteracoes_unicas": 646110,
+    "registros_em_colisao": 14226,
+    "grupos_colisao": 6939,
+    "colisoes_com_alteracao": 14115,
+    "amostra_grupos": [
+      {
+        "tipo": "R",
+        "norm": "AGUA MARINHA",
+        "qtd": 5,
+        "codigo_menor": 304492,
+        "codigo_maior": 1681146
+      },
+      {
+        "tipo": "R",
+        "norm": "BEM-TE-VI",
+        "qtd": 5,
+        "codigo_menor": 465772,
+        "codigo_maior": 1584930
+      },
+      {
+        "tipo": "R",
+        "norm": "FLOR DE LOTUS",
+        "qtd": 5,
+        "codigo_menor": 940503,
+        "codigo_maior": 1691968
+      },
+      {
+        "tipo": "R",
+        "norm": "JACANA",
+        "qtd": 5,
+        "codigo_menor": 1043251,
+        "codigo_maior": 1656049
+      },
+      {
+        "tipo": "R",
+        "norm": "TIE-SANGUE",
+        "qtd": 5,
+        "codigo_menor": 153953,
+        "codigo_maior": 1405031
+      },
+      {
+        "tipo": "R",
+        "norm": "ANACA",
+        "qtd": 4,
+        "codigo_menor": 201328,
+        "codigo_maior": 849936
+      },
+      {
+        "tipo": "R",
+        "norm": "ANAMA",
+        "qtd": 4,
+        "codigo_menor": 343464,
+        "codigo_maior": 1674247
+      },
+      {
+        "tipo": "R",
+        "norm": "APA",
+        "qtd": 4,
+        "codigo_menor": 114385,
+        "codigo_maior": 1220251
+      },
+      {
+        "tipo": "R",
+        "norm": "ARACARI",
+        "qtd": 4,
+        "codigo_menor": 279246,
+        "codigo_maior": 1136534
+      },
+      {
+        "tipo": "R",
+        "norm": "ARAMACA",
+        "qtd": 4,
+        "codigo_menor": 40273,
+        "codigo_maior": 845044
+      },
+      {
+        "tipo": "R",
+        "norm": "CINQUENTA E TRES",
+        "qtd": 4,
+        "codigo_menor": 883846,
+        "codigo_maior": 1544075
+      },
+      {
+        "tipo": "R",
+        "norm": "ERICO VERISSIMO",
+        "qtd": 4,
+        "codigo_menor": 892440,
+        "codigo_maior": 1445697
+      },
+      {
+        "tipo": "R",
+        "norm": "FOZ DO IGUACU",
+        "qtd": 4,
+        "codigo_menor": 706237,
+        "codigo_maior": 1506951
+      },
+      {
+        "tipo": "R",
+        "norm": "GABRIEL GARCIA MARQUEZ",
+        "qtd": 4,
+        "codigo_menor": 1014823,
+        "codigo_maior": 1414988
+      },
+      {
+        "tipo": "R",
+        "norm": "GUACUI",
+        "qtd": 4,
+        "codigo_menor": 17428,
+        "codigo_maior": 995163
+      },
+      {
+        "tipo": "R",
+        "norm": "IMBUIA",
+        "qtd": 4,
+        "codigo_menor": 3104,
+        "codigo_maior": 950732
+      },
+      {
+        "tipo": "R",
+        "norm": "JOSE DE ALENCAR",
+        "qtd": 4,
+        "codigo_menor": 171348,
+        "codigo_maior": 1577005
+      },
+      {
+        "tipo": "R",
+        "norm": "LIBERO BADARO",
+        "qtd": 4,
+        "codigo_menor": 910339,
+        "codigo_maior": 1675726
+      },
+      {
+        "tipo": "R",
+        "norm": "MACEIO",
+        "qtd": 4,
+        "codigo_menor": 948646,
+        "codigo_maior": 1445676
+      },
+      {
+        "tipo": "R",
+        "norm": "OLHO D'AGUA",
+        "qtd": 4,
+        "codigo_menor": 277883,
+        "codigo_maior": 1555958
+      },
+      {
+        "tipo": "R",
+        "norm": "POR-DO-SOL",
+        "qtd": 4,
+        "codigo_menor": 162453,
+        "codigo_maior": 1433830
+      },
+      {
+        "tipo": "R",
+        "norm": "QUINTINO BOCAIUVA",
+        "qtd": 4,
+        "codigo_menor": 814,
+        "codigo_maior": 1208227
+      },
+      {
+        "tipo": "R",
+        "norm": "RIO JAPURA",
+        "qtd": 4,
+        "codigo_menor": 291981,
+        "codigo_maior": 1383725
+      },
+      {
+        "tipo": "R",
+        "norm": "SUINA",
+        "qtd": 4,
+        "codigo_menor": 8851,
+        "codigo_maior": 1413294
+      },
+      {
+        "tipo": "R",
+        "norm": "TOMAS ANTONIO GONZAGA",
+        "qtd": 4,
+        "codigo_menor": 859104,
+        "codigo_maior": 1427527
+      },
+      {
+        "tipo": "R",
+        "norm": "VITORIA REGIA",
+        "qtd": 4,
+        "codigo_menor": 661045,
+        "codigo_maior": 1698098
+      },
+      {
+        "tipo": "R",
+        "norm": "15 DE NOVEMBRO",
+        "qtd": 3,
+        "codigo_menor": 950765,
+        "codigo_maior": 1656196
+      },
+      {
+        "tipo": "R",
+        "norm": "8 DE DEZEMBRO",
+        "qtd": 3,
+        "codigo_menor": 1315484,
+        "codigo_maior": 1577587
+      },
+      {
+        "tipo": "R",
+        "norm": "9 DE MARCO",
+        "qtd": 3,
+        "codigo_menor": 27431,
+        "codigo_maior": 1577588
+      },
+      {
+        "tipo": "R",
+        "norm": "ACAIA",
+        "qtd": 3,
+        "codigo_menor": 621623,
+        "codigo_maior": 1687655
+      },
+      {
+        "tipo": "R",
+        "norm": "ACARI",
+        "qtd": 3,
+        "codigo_menor": 846623,
+        "codigo_maior": 1606209
+      },
+      {
+        "tipo": "R",
+        "norm": "ACAUA",
+        "qtd": 3,
+        "codigo_menor": 114055,
+        "codigo_maior": 967695
+      },
+      {
+        "tipo": "R",
+        "norm": "ACUCENA",
+        "qtd": 3,
+        "codigo_menor": 744183,
+        "codigo_maior": 1473816
+      },
+      {
+        "tipo": "R",
+        "norm": "ADONIS",
+        "qtd": 3,
+        "codigo_menor": 143182,
+        "codigo_maior": 1474942
+      },
+      {
+        "tipo": "R",
+        "norm": "AGISSE",
+        "qtd": 3,
+        "codigo_menor": 261212,
+        "codigo_maior": 1208886
+      },
+      {
+        "tipo": "R",
+        "norm": "AGOSTINHO T. MONACO",
+        "qtd": 3,
+        "codigo_menor": 207990,
+        "codigo_maior": 900122
+      },
+      {
+        "tipo": "R",
+        "norm": "AGUA-MARINHA",
+        "qtd": 3,
+        "codigo_menor": 97739,
+        "codigo_maior": 1332734
+      },
+      {
+        "tipo": "R",
+        "norm": "ALOES",
+        "qtd": 3,
+        "codigo_menor": 155688,
+        "codigo_maior": 343166
+      },
+      {
+        "tipo": "R",
+        "norm": "ALVARES DE AZEVEDO",
+        "qtd": 3,
+        "codigo_menor": 10524,
+        "codigo_maior": 1162842
+      },
+      {
+        "tipo": "R",
+        "norm": "ALVARO MACEDO",
+        "qtd": 3,
+        "codigo_menor": 261544,
+        "codigo_maior": 1229104
+      },
+      {
+        "tipo": "R",
+        "norm": "AMA",
+        "qtd": 3,
+        "codigo_menor": 11848,
+        "codigo_maior": 1502610
+      },
+      {
+        "tipo": "R",
+        "norm": "AMARILIS",
+        "qtd": 3,
+        "codigo_menor": 1025564,
+        "codigo_maior": 1674170
+      },
+      {
+        "tipo": "R",
+        "norm": "ANDIROBA",
+        "qtd": 3,
+        "codigo_menor": 158980,
+        "codigo_maior": 1392984
+      },
+      {
+        "tipo": "R",
+        "norm": "ANGELO MORO",
+        "qtd": 3,
+        "codigo_menor": 286437,
+        "codigo_maior": 1699366
+      },
+      {
+        "tipo": "R",
+        "norm": "ANHANGUERA",
+        "qtd": 3,
+        "codigo_menor": 671495,
+        "codigo_maior": 1666858
+      },
+      {
+        "tipo": "R",
+        "norm": "ANITAPOLIS",
+        "qtd": 3,
+        "codigo_menor": 248699,
+        "codigo_maior": 1104252
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO BERGAMO",
+        "qtd": 3,
+        "codigo_menor": 540710,
+        "codigo_maior": 1211079
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO CANDIDO",
+        "qtd": 3,
+        "codigo_menor": 1113983,
+        "codigo_maior": 1585622
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO CANDIDO DE OLIVEIRA",
+        "qtd": 3,
+        "codigo_menor": 627676,
+        "codigo_maior": 1497898
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO CARLOS DOS SANTOS",
+        "qtd": 3,
+        "codigo_menor": 1308428,
+        "codigo_maior": 1382306
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO CORREA DE ALMEIDA",
+        "qtd": 3,
+        "codigo_menor": 521676,
+        "codigo_maior": 1423844
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO CORREIA",
+        "qtd": 3,
+        "codigo_menor": 4694,
+        "codigo_maior": 1114204
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO DAMASIO",
+        "qtd": 3,
+        "codigo_menor": 343662,
+        "codigo_maior": 1317547
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO DE FELICIO",
+        "qtd": 3,
+        "codigo_menor": 680884,
+        "codigo_maior": 1608930
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO DE SOUZA",
+        "qtd": 3,
+        "codigo_menor": 34382,
+        "codigo_maior": 1515688
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO DOMINGOS DA SILVA",
+        "qtd": 3,
+        "codigo_menor": 62868,
+        "codigo_maior": 1307353
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO FAVERO",
+        "qtd": 3,
+        "codigo_menor": 173752,
+        "codigo_maior": 1632638
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO FELIX DA SILVA",
+        "qtd": 3,
+        "codigo_menor": 1047912,
+        "codigo_maior": 1428836
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO FRANCISCO DA SILVA",
+        "qtd": 3,
+        "codigo_menor": 970501,
+        "codigo_maior": 1660204
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO GOES",
+        "qtd": 3,
+        "codigo_menor": 51257,
+        "codigo_maior": 1539046
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO JOSE DE OLIVEIRA",
+        "qtd": 3,
+        "codigo_menor": 192499,
+        "codigo_maior": 1633314
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO JOSE DE SOUZA",
+        "qtd": 3,
+        "codigo_menor": 1146686,
+        "codigo_maior": 1465390
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO JOSE MACHADO",
+        "qtd": 3,
+        "codigo_menor": 1139330,
+        "codigo_maior": 1490503
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO LOPES",
+        "qtd": 3,
+        "codigo_menor": 321308,
+        "codigo_maior": 1519724
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO MARCON",
+        "qtd": 3,
+        "codigo_menor": 562749,
+        "codigo_maior": 1488917
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO NERI",
+        "qtd": 3,
+        "codigo_menor": 697332,
+        "codigo_maior": 1552040
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO PADULA",
+        "qtd": 3,
+        "codigo_menor": 465409,
+        "codigo_maior": 1302764
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO RICCI",
+        "qtd": 3,
+        "codigo_menor": 1287327,
+        "codigo_maior": 1632194
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO RODRIGUES JUNIOR",
+        "qtd": 3,
+        "codigo_menor": 220387,
+        "codigo_maior": 1688669
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO TEIXEIRA DE CARVALHO",
+        "qtd": 3,
+        "codigo_menor": 22721,
+        "codigo_maior": 840594
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO TOME",
+        "qtd": 3,
+        "codigo_menor": 1080231,
+        "codigo_maior": 1490252
+      },
+      {
+        "tipo": "R",
+        "norm": "ANTONIO ZECA",
+        "qtd": 3,
+        "codigo_menor": 898549,
+        "codigo_maior": 1688435
+      },
+      {
+        "tipo": "R",
+        "norm": "APIACAS",
+        "qtd": 3,
+        "codigo_menor": 107261,
+        "codigo_maior": 1246347
+      },
+      {
+        "tipo": "R",
+        "norm": "APUA",
+        "qtd": 3,
+        "codigo_menor": 261827,
+        "codigo_maior": 1297849
+      },
+      {
+        "tipo": "R",
+        "norm": "AQUARIUS",
+        "qtd": 3,
+        "codigo_menor": 49431,
+        "codigo_maior": 1192940
+      },
+      {
+        "tipo": "R",
+        "norm": "ARABUTA",
+        "qtd": 3,
+        "codigo_menor": 321326,
+        "codigo_maior": 1036105
+      },
+      {
+        "tipo": "R",
+        "norm": "ARACAIBA",
+        "qtd": 3,
+        "codigo_menor": 261849,
+        "codigo_maior": 558050
+      },
+      {
+        "tipo": "R",
+        "norm": "ARACE",
+        "qtd": 3,
+        "codigo_menor": 11733,
+        "codigo_maior": 1006441
+      },
+      {
+        "tipo": "R",
+        "norm": "ARACUA",
+        "qtd": 3,
+        "codigo_menor": 307802,
+        "codigo_maior": 1136532
+      },
+      {
+        "tipo": "R",
+        "norm": "ARACUAI",
+        "qtd": 3,
+        "codigo_menor": 321331,
+        "codigo_maior": 1558456
+      },
+      {
+        "tipo": "R",
+        "norm": "ARAGUA",
+        "qtd": 3,
+        "codigo_menor": 143909,
+        "codigo_maior": 1639829
+      },
+      {
+        "tipo": "R",
+        "norm": "ARAGUAIA",
+        "qtd": 3,
+        "codigo_menor": 2023,
+        "codigo_maior": 1423137
+      },
+      {
+        "tipo": "R",
+        "norm": "ARCO IRIS",
+        "qtd": 3,
+        "codigo_menor": 1125178,
+        "codigo_maior": 1497201
+      },
+      {
+        "tipo": "R",
+        "norm": "ARERE",
+        "qtd": 3,
+        "codigo_menor": 618187,
+        "codigo_maior": 990532
+      },
+      {
+        "tipo": "R",
+        "norm": "ARTEMIS",
+        "qtd": 3,
+        "codigo_menor": 832124,
+        "codigo_maior": 1163640
+      },
+      {
+        "tipo": "R",
+        "norm": "ARUA",
+        "qtd": 3,
+        "codigo_menor": 201642,
+        "codigo_maior": 829121
+      },
+      {
+        "tipo": "R",
+        "norm": "ARUANA",
+        "qtd": 3,
+        "codigo_menor": 49548,
+        "codigo_maior": 1621817
+      },
+      {
+        "tipo": "R",
+        "norm": "AVILA",
+        "qtd": 3,
+        "codigo_menor": 566144,
+        "codigo_maior": 1246073
+      },
+      {
+        "tipo": "R",
+        "norm": "BATURITE",
+        "qtd": 3,
+        "codigo_menor": 11161,
+        "codigo_maior": 1222819
+      },
+      {
+        "tipo": "R",
+        "norm": "BELA VISTA",
+        "qtd": 3,
+        "codigo_menor": 348,
+        "codigo_maior": 1240451
+      },
+      {
+        "tipo": "R",
+        "norm": "BEM-ME-QUER",
+        "qtd": 3,
+        "codigo_menor": 899282,
+        "codigo_maior": 1333464
+      },
+      {
+        "tipo": "R",
+        "norm": "BURITI",
+        "qtd": 3,
+        "codigo_menor": 1106573,
+        "codigo_maior": 1538720
+      },
+      {
+        "tipo": "R",
+        "norm": "CACU",
+        "qtd": 3,
+        "codigo_menor": 213667,
+        "codigo_maior": 1079613
+      },
+      {
+        "tipo": "R",
+        "norm": "CACULE",
+        "qtd": 3,
+        "codigo_menor": 262685,
+        "codigo_maior": 1147392
+      },
+      {
+        "tipo": "R",
+        "norm": "CAETE",
+        "qtd": 3,
+        "codigo_menor": 287083,
+        "codigo_maior": 948104
+      },
+      {
+        "tipo": "R",
+        "norm": "CAIXA D'AGUA",
+        "qtd": 3,
+        "codigo_menor": 935466,
+        "codigo_maior": 1641616
+      },
+      {
+        "tipo": "R",
+        "norm": "CAJA-MANGA",
+        "qtd": 3,
+        "codigo_menor": 287089,
+        "codigo_maior": 1010430
+      },
+      {
+        "tipo": "R",
+        "norm": "CAJAPIO",
+        "qtd": 3,
+        "codigo_menor": 262716,
+        "codigo_maior": 1012843
+      },
+      {
+        "tipo": "R",
+        "norm": "CAMACA",
+        "qtd": 3,
+        "codigo_menor": 585763,
+        "codigo_maior": 1251870
+      },
+      {
+        "tipo": "R",
+        "norm": "CAMARA",
+        "qtd": 3,
+        "codigo_menor": 227845,
+        "codigo_maior": 1662943
+      }
+    ],
+    "amostra_limitada": true
+  },
+  "dependencias": [
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "BKP_TGFITE_NOVO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "BKP_TGFPAR_NOVO",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 2
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "BKP_TGFPAR_NOVO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCCEMP",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCCEMP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCOMEVTNFSE",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCOMEVTNFSE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPAEN",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPAEN",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPALTERFUN",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPALTERFUN",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPCATR",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPCTI",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPCTI",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPDEP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPFUN",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPFUN",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPPCA",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPPONRAIO",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPPONRAIO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPREQADM",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPREQADM",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPTAT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPTAT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGAENT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGAENT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFCTT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFCTT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFITE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0030",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0030",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0040",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0040",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLOCOPER",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLOCOPER",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFPAR",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 2
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFPAR",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFSIT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFSIT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFVOR",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWCTE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWDCA",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEND",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWENDVAZ",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWENP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEPL",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEST",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWESTVAL",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEST_UPD",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXC",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXG",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXL",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXU",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWHAJ",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWINV",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWIVR",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWMOC",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWRAG",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWTROCADEPO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIAGE",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIAGE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSICEP",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 11456
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSICEP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 49746
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIEMP",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 2
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIEMP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPCATR",
+      "coluna": "CODENDLOCALCAT",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TFPCATR_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODBAIINSTENS",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TFPEST_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODBAIAGTINTEG",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TFPEST_TSIBAI2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODENDINSTENS",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TFPEST_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODENDAGTINTEG",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TFPEST_TSIEND2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODBAIRECEB",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TGFCPL_TSIBAI1",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODBAIENTREGA",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TGFCPL_TSIBAI2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODBAITRAB",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TGFCPL_TSIBAI3",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODENDENTREGA",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TGFCPL_TSIEND1",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODENDTRAB",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TGFCPL_TSIEND2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODENDRECEB",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TGFCPL_TSIEND3",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMCAR",
+      "coluna": "CARBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMCAR_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEDG",
+      "coluna": "EDGBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMEDG_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEDG",
+      "coluna": "EDGCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMEDG_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEPR",
+      "coluna": "EPRBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMEPR_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEPR",
+      "coluna": "EPRCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMEPR_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMFAC",
+      "coluna": "FACBAIRROIMOVEL",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMFAC_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMIMV",
+      "coluna": "IMVBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMIMV_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMIMV",
+      "coluna": "IMVCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMIMV_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMLOT",
+      "coluna": "LOTBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMLOT_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMPPR",
+      "coluna": "PPRBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMPPR_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMPPR",
+      "coluna": "PPRCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMPPR_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    }
+  ],
+  "avisos": [
+    {
+      "codigo": "MERGE_ANTIFRAGIL_NECESSARIO",
+      "mensagem": "Há colisões após a normalização; não executar exclusão genérica. Revisar mapa e usar a fase antifrágil."
+    },
+    {
+      "codigo": "REFERENCIAS_A_CODIGOS_OBSOLETOS",
+      "mensagem": "Foram encontradas 61208 referências a identificadores candidatos à substituição."
+    }
+  ],
+  "erros_diagnostico": [],
+  "dml_executado": false,
+  "ddl_executado": false
+}

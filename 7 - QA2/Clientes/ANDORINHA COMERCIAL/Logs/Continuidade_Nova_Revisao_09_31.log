@@ -1,0 +1,659 @@
+SQL> 
+SQL> PROMPT === RETOMADA NOVA REVISAO: ETAPAS 09 A 31 ===
+=== RETOMADA NOVA REVISAO: ETAPAS 09 A 31 ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> 
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER := 'RMD_RUN_20260908102607051'; END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT [09/31] INICIO
+[09/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/09_Liberar_Itens_Documentos_Legados.sql"
+SQL> -- Corrige STATUSNOTA preservando o estado inicial da trigger.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_08_TGFITE';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_08_TGFITE AS SELECT
+  4   CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   I.STATUSNOTA STATUSNOTA_ANTES FROM TGFITE I WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_ITEM_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_status VARCHAR2(8); v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4   PROCEDURE restaura_trigger IS BEGIN
+  5     IF v_status='ENABLED' THEN EXECUTE IMMEDIATE 'ALTER TRIGGER TRG_UPT_TGFITE ENABLE'; END IF;
+  6   EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('ERRO_AO_RESTAURAR_TRIGGER='||SQLERRM); RAISE; END;
+  7  BEGIN
+  8   SELECT STATUS INTO v_status FROM ALL_TRIGGERS
+  9    WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TRIGGER_NAME='TRG_UPT_TGFITE';
+ 10   INSERT INTO BKP_RMD_08_TGFITE SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),
+ 11          ROWIDTOCHAR(ROWID),STATUSNOTA FROM TGFITE I
+ 12    WHERE NVL(STATUSNOTA,'?')<>'L' AND EXISTS(SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=I.NUNOTA);
+ 13   v_b:=SQL%ROWCOUNT;
+ 14   IF v_status='ENABLED' THEN
+ 15    INSERT INTO RMD_CONTROLE_OBJETOS
+ 16     (ID_MASTER,ID_EXECUCAO,DH_REGISTRO,USUARIO_EXECUCAO,OBJECT_TYPE,OBJECT_NAME,STATUS_ANTES)
+ 17    VALUES(:RMD_ID_MASTER,v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),
+ 18           'TRIGGER','TRG_UPT_TGFITE',v_status);
+ 19    EXECUTE IMMEDIATE 'ALTER TRIGGER TRG_UPT_TGFITE DISABLE';
+ 20   END IF;
+ 21   UPDATE TGFITE I SET STATUSNOTA='L'
+ 22    WHERE NVL(STATUSNOTA,'?')<>'L' AND EXISTS(SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=I.NUNOTA);
+ 23   v_u:=SQL%ROWCOUNT;
+ 24   restaura_trigger;
+ 25   UPDATE RMD_CONTROLE_OBJETOS SET STATUS_DEPOIS='ENABLED',DH_REABILITACAO=SYSTIMESTAMP
+ 26    WHERE ID_MASTER=:RMD_ID_MASTER AND ID_EXECUCAO=v_id
+ 27      AND OBJECT_TYPE='TRIGGER' AND OBJECT_NAME='TRG_UPT_TGFITE';
+ 28   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20220,'Backup e atualizacao de itens divergiram.'); END IF;
+ 29   COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id); DBMS_OUTPUT.PUT_LINE('ITENS_ALTERADOS='||v_u);
+ 30  EXCEPTION WHEN OTHERS THEN
+ 31   BEGIN restaura_trigger; EXCEPTION WHEN OTHERS THEN NULL; END;
+ 32   ROLLBACK; RAISE;
+ 33  END;
+ 34  /
+ID_EXECUCAO=RMD_ITEM_20260908104056004
+ITENS_ALTERADOS=8361
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [09/31] FIM
+[09/31] FIM
+SQL> PROMPT [10/31] INICIO
+[10/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/10_Habilitar_ICMS_Gerencial.sql"
+SQL> -- Bloco 09_Habilitar_ICMS_Gerencial; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_09_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_09_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.ICMSGERENCIA VALOR_ANTES, CAST('S' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_ICMG_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_09_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),ICMSGERENCIA,CAST('S' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET ICMSGERENCIA='S' WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 09_Habilitar_ICMS_Gerencial.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+Rollback
+ INSERT INTO BKP_RMD_09_TGFPRO
+             *
+ERROR at line 5:
+ORA-06550: line 5, column 14:
+PL/SQL: ORA-01031: insufficient privileges
+ORA-06550: line 5, column 2:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+SQL> PROMPT [10/31] FIM
+SQL> PROMPT [11/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/11_Habilitar_Ruptura_Produtos.sql"
+SQL> PROMPT [11/31] FIM
+SQL> PROMPT [12/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/12_Habilitar_Ruptura_Empresas.sql"
+SQL> PROMPT [12/31] FIM
+SQL> PROMPT [13/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql"
+SQL> PROMPT [13/31] FIM
+SQL> PROMPT [14/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql"
+SQL> PROMPT [14/31] FIM
+SQL> PROMPT [15/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/15_Desativar_Rastro_Sem_Controle.sql"
+SQL> PROMPT [15/31] FIM
+SQL> PROMPT [16/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/16_Aplicar_Higienizacao_TSICFG.sql"
+SQL> PROMPT [16/31] FIM
+SQL> PROMPT [17/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/17_Normalizar_Unidades.sql"
+SQL> PROMPT [17/31] FIM
+SQL> PROMPT [18/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Ajustar_Preferencias_GOL.sql"
+SQL> PROMPT [18/31] FIM
+SQL> PROMPT [19/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql"
+SQL> PROMPT [19/31] FIM
+SQL> PROMPT [20/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/20_Atualizar_Cards_Deploy.sql"
+SQL> PROMPT [20/31] FIM
+SQL> PROMPT [21/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/21_Classificar_ICMS_Parceiros.sql"
+SQL> PROMPT [21/31] FIM
+SQL> PROMPT [22/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/22_Ajustar_Nomes_Parceiros.sql"
+SQL> PROMPT [22/31] FIM
+SQL> PROMPT [23/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/23_Validar_Reabilitar_Objetos.sql"
+SQL> PROMPT [23/31] FIM
+SQL> PROMPT [24/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/24_Padronizar_Parceiros.sql"
+SQL> PROMPT [24/31] FIM
+SQL> PROMPT [25/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/25_Padronizar_Produtos.sql"
+SQL> PROMPT [25/31] FIM
+SQL> PROMPT [26/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/26_Padronizar_Tipos_Titulo.sql"
+SQL> PROMPT [26/31] FIM
+SQL> PROMPT [27/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/27_Padronizar_Cidades.sql"
+SQL> PROMPT [27/31] FIM
+SQL> PROMPT [28/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/28_Padronizar_Tipos_Venda.sql"
+SQL> PROMPT [28/31] FIM
+SQL> PROMPT [29/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/29_Padronizar_Bairros.sql"
+SQL> PROMPT [29/31] FIM
+SQL> PROMPT [30/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/30_Padronizar_Enderecos.sql"
+SQL> PROMPT [30/31] FIM
+SQL> PROMPT [31/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+SQL> PROMPT [31/31] FIM
+SQL> PROMPT === RETOMADA NOVA REVISAO 09 A 31 CONCLUIDA ===
+SQL> SPOOL OFF
+SQL> -- Diagnóstico somente leitura da falha na etapa 10.
+SQL> -- Execute conectado à ANDORINHA COMERCIAL como SCRIPT (F5).
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET ECHO ON
+SQL> 
+SQL> PROMPT === IDENTIDADE ===
+=== IDENTIDADE ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO
+  4  FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> 
+SQL> PROMPT === OBJETO BKP_RMD_09_TGFPRO ===
+=== OBJETO BKP_RMD_09_TGFPRO ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS
+  2  FROM ALL_OBJECTS
+  3  WHERE OBJECT_NAME='BKP_RMD_09_TGFPRO';
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                TABLE                   VALID  
+
+SQL> 
+SQL> SELECT OWNER, TABLE_NAME, TABLESPACE_NAME, NUM_ROWS
+  2  FROM ALL_TABLES
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO';
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                       TABLESPACE_NAME                  NUM_ROWS
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ------------------------------ ----------
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                  
+
+SQL> 
+SQL> PROMPT === COLUNAS ===
+=== COLUNAS ===
+SQL> SELECT OWNER, TABLE_NAME, COLUMN_ID, COLUMN_NAME, DATA_TYPE, DATA_LENGTH, DATA_PRECISION, DATA_SCALE
+  2  FROM ALL_TAB_COLUMNS
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO'
+  4  ORDER BY OWNER, COLUMN_ID;
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                        COLUMN_ID COLUMN_NAME                                                                                                                      DATA_TYPE                                                                                                                        DATA_LENGTH DATA_PRECISION DATA_SCALE
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------- -------------- ----------
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         1 ID_EXECUCAO                                                                                                                      VARCHAR2                                                                                                                                  30                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         2 DH_EXECUCAO                                                                                                                      TIMESTAMP(6)                                                                                                                              11                         6
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         3 USUARIO_EXECUCAO                                                                                                                 VARCHAR2                                                                                                                                 128                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         4 ROWID_ORIGINAL                                                                                                                   VARCHAR2                                                                                                                                  30                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         5 VALOR_ANTES                                                                                                                      VARCHAR2                                                                                                                                   1                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         6 VALOR_DEPOIS                                                                                                                     VARCHAR2                                                                                                                                   1                          
+
+6 rows selected. 
+
+SQL> 
+SQL> PROMPT === PRIVILEGIOS EXPLICITOS ===
+=== PRIVILEGIOS EXPLICITOS ===
+SQL> SELECT GRANTEE, OWNER, TABLE_NAME, GRANTOR, PRIVILEGE, GRANTABLE
+  2  FROM ALL_TAB_PRIVS
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO';
+
+Error starting at line : 29 in command -
+SELECT GRANTEE, OWNER, TABLE_NAME, GRANTOR, PRIVILEGE, GRANTABLE
+FROM ALL_TAB_PRIVS
+WHERE TABLE_NAME='BKP_RMD_09_TGFPRO'
+Error at Command Line : 29 Column : 17
+Error report -
+SQL Error: ORA-00904: "OWNER": invalid identifier
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+Rollback
+SQL> 
+SQL> PROMPT === TRIGGERS ===
+SQL> SELECT OWNER, TRIGGER_NAME, STATUS, TRIGGERING_EVENT
+  2  FROM ALL_TRIGGERS
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO';
+SQL> 
+SQL> PROMPT === CONTAGEM ===
+SQL> DECLARE
+  2    v_n NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*) INTO v_n FROM SANKHYA.BKP_RMD_09_TGFPRO;
+  5    DBMS_OUTPUT.PUT_LINE('REGISTROS='||v_n);
+  6  END;
+  7  /
+SQL> 
+SQL> PROMPT === FIM DIAGNOSTICO ===
+SQL> -- Diagnóstico somente leitura da falha na etapa 10.
+SQL> -- Execute conectado à ANDORINHA COMERCIAL como SCRIPT (F5).
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET ECHO ON
+SQL> 
+SQL> PROMPT === IDENTIDADE ===
+=== IDENTIDADE ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO
+  4  FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> 
+SQL> PROMPT === OBJETO BKP_RMD_09_TGFPRO ===
+=== OBJETO BKP_RMD_09_TGFPRO ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS
+  2  FROM ALL_OBJECTS
+  3  WHERE OBJECT_NAME='BKP_RMD_09_TGFPRO';
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                TABLE                   VALID  
+
+SQL> 
+SQL> SELECT OWNER, TABLE_NAME, TABLESPACE_NAME, NUM_ROWS
+  2  FROM ALL_TABLES
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO';
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                       TABLESPACE_NAME                  NUM_ROWS
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ------------------------------ ----------
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                  
+
+SQL> 
+SQL> PROMPT === COLUNAS ===
+=== COLUNAS ===
+SQL> SELECT OWNER, TABLE_NAME, COLUMN_ID, COLUMN_NAME, DATA_TYPE, DATA_LENGTH, DATA_PRECISION, DATA_SCALE
+  2  FROM ALL_TAB_COLUMNS
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO'
+  4  ORDER BY OWNER, COLUMN_ID;
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                        COLUMN_ID COLUMN_NAME                                                                                                                      DATA_TYPE                                                                                                                        DATA_LENGTH DATA_PRECISION DATA_SCALE
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------- -------------- ----------
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         1 ID_EXECUCAO                                                                                                                      VARCHAR2                                                                                                                                  30                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         2 DH_EXECUCAO                                                                                                                      TIMESTAMP(6)                                                                                                                              11                         6
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         3 USUARIO_EXECUCAO                                                                                                                 VARCHAR2                                                                                                                                 128                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         4 ROWID_ORIGINAL                                                                                                                   VARCHAR2                                                                                                                                  30                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         5 VALOR_ANTES                                                                                                                      VARCHAR2                                                                                                                                   1                          
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                         6 VALOR_DEPOIS                                                                                                                     VARCHAR2                                                                                                                                   1                          
+
+6 rows selected. 
+
+SQL> 
+SQL> PROMPT === PRIVILEGIOS EXPLICITOS ===
+=== PRIVILEGIOS EXPLICITOS ===
+SQL> SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, GRANTOR, PRIVILEGE, GRANTABLE
+  2  FROM ALL_TAB_PRIVS
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO';
+
+GRANTEE                                                                                                                          TABLE_SCHEMA                                                                                                                     TABLE_NAME                                                                                                                       GRANTOR                                                                                                                          PRIVILEGE                                GRA
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------- ---
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                                                                                                          ALTER                                    NO 
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                                                                                                          DELETE                                   NO 
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                                                                                                          INSERT                                   NO 
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                                                                                                          SELECT                                   NO 
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SANKHYA                                                                                                                          UPDATE                                   NO 
+
+SQL> 
+SQL> PROMPT === TRIGGERS ===
+=== TRIGGERS ===
+SQL> SELECT OWNER, TRIGGER_NAME, STATUS, TRIGGERING_EVENT
+  2  FROM ALL_TRIGGERS
+  3  WHERE TABLE_NAME='BKP_RMD_09_TGFPRO';
+no rows selected
+SQL> 
+SQL> PROMPT === POLITICAS DE SEGURANCA ===
+=== POLITICAS DE SEGURANCA ===
+SQL> SELECT OBJECT_OWNER, OBJECT_NAME, POLICY_NAME, ENABLED, SEL, INS, UPD, DEL
+  2  FROM ALL_POLICIES
+  3  WHERE OBJECT_NAME='BKP_RMD_09_TGFPRO';
+
+Error starting at line : 39 in command -
+SELECT OBJECT_OWNER, OBJECT_NAME, POLICY_NAME, ENABLED, SEL, INS, UPD, DEL
+FROM ALL_POLICIES
+WHERE OBJECT_NAME='BKP_RMD_09_TGFPRO'
+Error at Command Line : 39 Column : 48
+Error report -
+SQL Error: ORA-00904: "ENABLED": invalid identifier
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+Rollback
+SQL> 
+SQL> PROMPT === CONTAGEM ===
+SQL> DECLARE
+  2    v_n NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*) INTO v_n FROM SANKHYA.BKP_RMD_09_TGFPRO;
+  5    DBMS_OUTPUT.PUT_LINE('REGISTROS='||v_n);
+  6  END;
+  7  /
+SQL> 
+SQL> PROMPT === FIM DIAGNOSTICO ===
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> PROMPT === PRIVILEGIOS DOS BACKUPS ===
+=== PRIVILEGIOS DOS BACKUPS ===
+SQL> SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, PRIVILEGE
+  2  FROM ALL_TAB_PRIVS
+  3  WHERE TABLE_NAME IN ('BKP_RMD_07_TGFCAB','BKP_RMD_08_TGFITE','BKP_RMD_09_TGFPRO')
+  4  ORDER BY TABLE_NAME, GRANTEE, PRIVILEGE;
+
+GRANTEE                                                                                                                          TABLE_SCHEMA                                                                                                                     TABLE_NAME                                                                                                                       PRIVILEGE                               
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                                ALTER                                   
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                                DELETE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                                INSERT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                                SELECT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                                UPDATE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_08_TGFITE                                                                                                                ALTER                                   
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_08_TGFITE                                                                                                                DELETE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_08_TGFITE                                                                                                                INSERT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_08_TGFITE                                                                                                                SELECT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_08_TGFITE                                                                                                                UPDATE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                ALTER                                   
+
+GRANTEE                                                                                                                          TABLE_SCHEMA                                                                                                                     TABLE_NAME                                                                                                                       PRIVILEGE                               
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                DELETE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                INSERT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                SELECT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                UPDATE                                  
+
+15 rows selected. 
+
+SQL> 
+SQL> PROMPT === OBJETOS E PROPRIETARIOS ===
+=== OBJETOS E PROPRIETARIOS ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS
+  2  FROM ALL_OBJECTS
+  3  WHERE OBJECT_NAME IN ('BKP_RMD_07_TGFCAB','BKP_RMD_08_TGFITE','BKP_RMD_09_TGFPRO')
+  4  ORDER BY OBJECT_NAME;
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                                TABLE                   VALID  
+SANKHYA                                                                                                                          BKP_RMD_08_TGFITE                                                                                                                TABLE                   VALID  
+SANKHYA                                                                                                                          BKP_RMD_09_TGFPRO                                                                                                                TABLE                   VALID  
+
+SQL> S
+
+Error starting at line : 1 in command -
+S
+Error report -
+Unknown Command
+
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> PROMPT === PRIVILEGIOS TGFPRO ===
+=== PRIVILEGIOS TGFPRO ===
+SQL> SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, PRIVILEGE
+  2  FROM ALL_TAB_PRIVS
+  3  WHERE TABLE_NAME='TGFPRO'
+  4  ORDER BY GRANTEE, PRIVILEGE;
+
+GRANTEE                                                                                                                          TABLE_SCHEMA                                                                                                                     TABLE_NAME                                                                                                                       PRIVILEGE                               
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           DELETE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           INSERT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           SELECT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           UPDATE                                  
+
+SQL> 
+SQL> PROMPT === PRIVILEGIOS DE COLUNA ===
+=== PRIVILEGIOS DE COLUNA ===
+SQL> SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, PRIVILEGE
+  2  FROM ALL_COL_PRIVS
+  3  WHERE TABLE_NAME='TGFPRO'
+  4    AND COLUMN_NAME='ICMSGERENCIA'
+  5  ORDER BY GRANTEE, PRIVILEGE;
+no rows selected
+SQL> 
+SQL> PROMPT === POLITICAS TGFPRO ===
+=== POLITICAS TGFPRO ===
+SQL> SELECT OBJECT_OWNER, OBJECT_NAME, POLICY_NAME, PF_OWNER, PACKAGE, FUNCTION
+  2  FROM ALL_POLICIES
+  3  WHERE OBJECT_NAME='TGFPRO';
+no rows selected
+SQL> 
+SQL> PROMPT === COLUNA ICMSGERENCIA ===
+=== COLUNA ICMSGERENCIA ===
+SQL> SELECT OWNER, TABLE_NAME, COLUMN_NAME, DATA_TYPE, DATA_LENGTH
+  2  FROM ALL_TAB_COLUMNS
+  3  WHERE TABLE_NAME='TGFPRO'
+  4    AND COLUMN_NAME='ICMSGERENCIA';
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                       COLUMN_NAME                                                                                                                      DATA_TYPE                                                                                                                        DATA_LENGTH
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -----------
+SANKHYA                                                                                                                          TGFPRO                                                                                                                           ICMSGERENCIA                                                                                                                     VARCHAR2                                                                                                                                   1
+
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> PROMPT === PRIVILEGIOS TGFPRO ===
+=== PRIVILEGIOS TGFPRO ===
+SQL> SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, PRIVILEGE
+  2  FROM ALL_TAB_PRIVS
+  3  WHERE TABLE_NAME='TGFPRO'
+  4  ORDER BY GRANTEE, PRIVILEGE;
+
+GRANTEE                                                                                                                          TABLE_SCHEMA                                                                                                                     TABLE_NAME                                                                                                                       PRIVILEGE                               
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           DELETE                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           INSERT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           SELECT                                  
+RLCONSULTOR                                                                                                                      SANKHYA                                                                                                                          TGFPRO                                                                                                                           UPDATE                                  
+
+SQL> 
+SQL> PROMPT === PRIVILEGIOS DE COLUNA ===
+=== PRIVILEGIOS DE COLUNA ===
+SQL> SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, PRIVILEGE
+  2  FROM ALL_COL_PRIVS
+  3  WHERE TABLE_NAME='TGFPRO'
+  4    AND COLUMN_NAME='ICMSGERENCIA'
+  5  ORDER BY GRANTEE, PRIVILEGE;
+no rows selected
+SQL> 
+SQL> PROMPT === POLITICAS TGFPRO ===
+=== POLITICAS TGFPRO ===
+SQL> SELECT OBJECT_OWNER, OBJECT_NAME, POLICY_NAME, PF_OWNER, PACKAGE, FUNCTION
+  2  FROM ALL_POLICIES
+  3  WHERE OBJECT_NAME='TGFPRO';
+no rows selected
+SQL> 
+SQL> PROMPT === COLUNA ICMSGERENCIA ===
+=== COLUNA ICMSGERENCIA ===
+SQL> SELECT OWNER, TABLE_NAME, COLUMN_NAME, DATA_TYPE, DATA_LENGTH
+  2  FROM ALL_TAB_COLUMNS
+  3  WHERE TABLE_NAME='TGFPRO'
+  4    AND COLUMN_NAME='ICMSGERENCIA';
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                       COLUMN_NAME                                                                                                                      DATA_TYPE                                                                                                                        DATA_LENGTH
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -----------
+SANKHYA                                                                                                                          TGFPRO                                                                                                                           ICMSGERENCIA                                                                                                                     VARCHAR2                                                                                                                                   1
+
+SQL> -- Teste mínimo, somente diagnóstico; termina com ROLLBACK.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET ECHO ON
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === TESTE LEITURA TGFPRO ===
+=== TESTE LEITURA TGFPRO ===
+SQL> DECLARE v_n NUMBER;
+  2  BEGIN
+  3    SELECT COUNT(*) INTO v_n
+  4    FROM TGFPRO
+  5    WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+  6    DBMS_OUTPUT.PUT_LINE('TGFPRO_DIVERGENTES='||v_n);
+  7  END;
+  8  /
+TGFPRO_DIVERGENTES=899
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === TESTE INSERT BACKUP SEM REGISTROS ===
+=== TESTE INSERT BACKUP SEM REGISTROS ===
+SQL> INSERT INTO BKP_RMD_09_TGFPRO
+  2    (ID_EXECUCAO,DH_EXECUCAO,USUARIO_EXECUCAO,ROWID_ORIGINAL,VALOR_ANTES,VALOR_DEPOIS)
+  3  SELECT 'RMD_TESTE',SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),ICMSGERENCIA,'S'
+  4  FROM TGFPRO
+  5  WHERE 1=0;
+
+0 rows inserted.
+
+SQL> 
+SQL> PROMPT === TESTE INSERT BACKUP COM UMA LINHA ===
+=== TESTE INSERT BACKUP COM UMA LINHA ===
+SQL> INSERT INTO BKP_RMD_09_TGFPRO
+  2    (ID_EXECUCAO,DH_EXECUCAO,USUARIO_EXECUCAO,ROWID_ORIGINAL,VALOR_ANTES,VALOR_DEPOIS)
+  3  SELECT 'RMD_TESTE',SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),ICMSGERENCIA,'S'
+  4  FROM TGFPRO
+  5  WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S'
+  6    AND ROWNUM=1;
+
+1 row inserted.
+
+SQL> 
+SQL> DBMS_OUTPUT.PUT_LINE('TESTE_INSERT_OK');
+
+Error starting at line : 32 in command -
+DBMS_OUTPUT.PUT_LINE('TESTE_INSERT_OK')
+Error report -
+Unknown Command
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> PROMPT === FIM TESTE ===
+=== FIM TESTE ===
+SQL> -- Execução isolada da etapa 10 após teste de privilégio bem-sucedido.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> SET ECHO ON
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === ETAPA 10 ISOLADA ===
+=== ETAPA 10 ISOLADA ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO
+  4  FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> 
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER := 'RMD_RUN_20260908102607051'; END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/10_Habilitar_ICMS_Gerencial.sql"
+SQL> -- Bloco 09_Habilitar_ICMS_Gerencial; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_09_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_09_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.ICMSGERENCIA VALOR_ANTES, CAST('S' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_ICMG_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_09_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),ICMSGERENCIA,CAST('S' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET ICMSGERENCIA='S' WHERE USOPROD IN ('V','R') AND NVL(ICMSGERENCIA,'?')<>'S';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 09_Habilitar_ICMS_Gerencial.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_ICMG_20260908104714791
+REGISTROS_ALTERADOS=899
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === FIM ETAPA 10 ISOLADA ===
+=== FIM ETAPA 10 ISOLADA ===
+SQL> -- Execucao estrita das etapas 11 a 31 da nova revisao.
+SQL> -- Etapas 01-10 ja validadas; nao repetir.
+SQL> -- Execute conectado a ANDORINHA COMERCIAL como SCRIPT (F5).
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> SET ECHO ON
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/ANDORINHA COMERCIAL/Logs/Etapas_11_31_Estrito.log"

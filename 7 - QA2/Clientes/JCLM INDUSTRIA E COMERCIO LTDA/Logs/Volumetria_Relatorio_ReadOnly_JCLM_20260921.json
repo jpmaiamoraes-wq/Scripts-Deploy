@@ -1,0 +1,52 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "base": "JCLM INDUSTRIA E COMERCIO LTDA",
+  "executado_em_utc": "2026-09-21T12:00:30.485658+00:00",
+  "fonte_principal": "7 - QA2/Revisao Master Deploy/Base Relatório de Entrega/REL_ENTEGA_NOVO_05.jrxml :: queryString :: indicadores excluídos incluídos",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "db_name": "JCLMPRD",
+  "service_esperado": "JCLMPRD.SANKHYACLOUD.COM.BR",
+  "dml_executado": false,
+  "ddl_executado": false,
+  "indicadores": [
+    {"ordem": 1, "secao": "GERAL", "indicador": "Total de notas/cabecalhos processados", "qtd": 68403, "observacao": "Registros existentes na TGFCAB"},
+    {"ordem": 2, "secao": "GERAL", "indicador": "Total de itens processados", "qtd": 318639, "observacao": "Registros existentes na TGFITE"},
+    {"ordem": 3, "secao": "GERAL", "indicador": "Periodo de movimentacao", "qtd": 68403, "observacao": "De 14/09/2022 ate 21/09/2026"},
+    {"ordem": 4, "secao": "FINANCEIRO", "indicador": "Total de registros financeiros", "qtd": 54645, "observacao": "Registros existentes na TGFFIN"},
+    {"ordem": 5, "secao": "FINANCEIRO", "indicador": "Contas a receber", "qtd": 50084, "observacao": "TGFFIN.RECDESP = 1"},
+    {"ordem": 6, "secao": "FINANCEIRO", "indicador": "Contas a pagar", "qtd": 4561, "observacao": "TGFFIN.RECDESP = -1"},
+    {"ordem": 16, "secao": "FINANCEIRO", "indicador": "Financeiros sem nota", "qtd": 0, "observacao": "Financeiros cujo NUNOTA nao existe na TGFCAB"},
+    {"ordem": 17, "secao": "FINANCEIRO", "indicador": "Notas sem financeiro", "qtd": 2, "observacao": "Notas com TOP que atualiza financeiro, mas sem registro na TGFFIN"},
+    {"ordem": 7, "secao": "CADASTROS", "indicador": "Total de produtos cadastrados", "qtd": 5564, "observacao": "Produtos cadastrados, desconsiderando CODPROD 0"},
+    {"ordem": 8, "secao": "CADASTROS", "indicador": "Total de parceiros cadastrados", "qtd": 2205, "observacao": "Registros existentes na TGFPAR"},
+    {"ordem": 23, "secao": "CADASTROS", "indicador": "Codigos fiscais de cidades duplicados", "qtd": 0, "observacao": "Codigos CODMUNFIS com mais de uma cidade vinculada"},
+    {"ordem": 9, "secao": "PRODUTOS", "indicador": "Referencias duplicadas", "qtd": 5, "observacao": "Referencias com mais de um produto vinculado"},
+    {"ordem": 10, "secao": "PRODUTOS", "indicador": "Produtos envolvidos em referencias duplicadas", "qtd": 10, "observacao": "Produtos que compartilham a mesma referencia/codigo de barras"},
+    {"ordem": 11, "secao": "PRODUTOS", "indicador": "Descricoes duplicadas", "qtd": 135, "observacao": "Descricoes/NCM/origem com mais de um produto"},
+    {"ordem": 12, "secao": "PRODUTOS", "indicador": "Produtos envolvidos em descricoes duplicadas", "qtd": 278, "observacao": "Produtos que possuem mesma descricao, NCM e origem"},
+    {"ordem": 18, "secao": "PRODUTOS", "indicador": "Produtos vendidos sem registro de entrada", "qtd": 659, "observacao": "Produtos com venda identificada, mas sem entrada correspondente"},
+    {"ordem": 13, "secao": "PARCEIROS", "indicador": "CNPJ/CPF repetidos", "qtd": 1, "observacao": "Grupos de CNPJ/CPF repetidos"},
+    {"ordem": 14, "secao": "PARCEIROS", "indicador": "Parceiros envolvidos em CNPJ/CPF repetido", "qtd": 2, "observacao": "Cadastros envolvidos em duplicidade"},
+    {"ordem": 15, "secao": "FISCAL", "indicador": "Classificacao fiscal divergente", "qtd": 0, "observacao": "Parceiros cuja classificacao ICMS difere da classificacao esperada"},
+    {"ordem": 19, "secao": "CUSTOS", "indicador": "Produtos com custo zero", "qtd": 1604, "observacao": "Produtos de revenda/venda com custo medio sem ICMS igual a zero"},
+    {"ordem": 20, "secao": "CUSTOS", "indicador": "Produtos sem registro de custo", "qtd": 0, "observacao": "Produtos de revenda/venda sem registro na TGFCUS"},
+    {"ordem": 21, "secao": "INTEGRIDADE", "indicador": "Itens sem cabecalho", "qtd": 0, "observacao": "Itens existentes na TGFITE sem correspondente na TGFCAB"},
+    {"ordem": 22, "secao": "INTEGRIDADE", "indicador": "Cabecalhos sem itens", "qtd": 0, "observacao": "Notas existentes na TGFCAB sem itens na TGFITE"}
+  ],
+  "cards_criticos": [
+    {"card": "08 - Financeiros sem Nota", "executado_em_utc": "2026-09-21T12:00:11.215288+00:00", "qtd_linhas": 0, "resultado": "OK"},
+    {"card": "09 - Notas sem Financeiro", "executado_em_utc": "2026-09-21T12:00:15.090876+00:00", "qtd_linhas": 1, "detalhamento": [{"tipmov": "V", "descricao": "V-Venda", "qtd_registros": 2}], "resultado": "ALERTA_PENDENTE_ANALISE"},
+    {"card": "13 - Itens sem Cabeçalho", "executado_em_utc": "2026-09-21T12:00:14.129447+00:00", "qtd_linhas": 0, "resultado": "OK"},
+    {"card": "14 - Cabeçalho sem Itens", "executado_em_utc": "2026-09-21T12:00:12.974488+00:00", "qtd_linhas": 0, "resultado": "OK"},
+    {"card": "15 - Cidades Duplicadas", "executado_em_utc": "2026-09-21T12:00:11.324628+00:00", "qtd_linhas": 0, "resultado": "OK"}
+  ],
+  "cards_complementares": [
+    {"card": "17 - Itens sem Tabela de Preço", "executado_em_utc": "2026-09-21T12:59:18.529413+00:00", "qtd_registros": 291, "fonte": "Artefatos_Revisao/Preflight/65_Relatorio_Card17_Itens_Sem_Tabela_READONLY.sql"},
+    {"card": "18 - Itens com Descrição Similar", "executado_em_utc": "2026-09-21T12:59:16.681733+00:00", "qtd_registros": 198, "fonte": "Artefatos_Revisao/Preflight/66_Relatorio_Card18_Descricoes_Similares_READONLY.sql"},
+    {"card": "19 - CNPJ Matrizes", "executado_em_utc": "2026-09-21T12:59:15.935213+00:00", "qtd_registros": 42, "fonte": "Artefatos_Revisao/Preflight/67_Relatorio_Card19_CNPJ_Matrizes_READONLY.sql"},
+    {"card": "20 - Produtos Comprados sem Saída", "executado_em_utc": "2026-09-21T12:59:16.725440+00:00", "qtd_registros": 4204, "fonte": "Artefatos_Revisao/Preflight/68_Relatorio_Card20_Produtos_Comprados_Sem_Saida_READONLY.sql"},
+    {"card": "21 - Regras Tributárias", "executado_em_utc": "2026-09-21T12:59:17.968978+00:00", "qtd_registros": 48623, "fonte": "Artefatos_Revisao/Preflight/69_Relatorio_Card21_Regras_Tributarias_READONLY.sql"}
+  ]
+}

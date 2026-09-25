@@ -1,0 +1,65 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:33.918936+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P15_Triggers_Desabilitados.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 9,
+  "colunas": [
+    "TABLE_NAME",
+    "TRIGGER_NAME",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "TABLE_NAME": "TFPBSU",
+      "TRIGGER_NAME": "TRG_UPD_TFPBSU",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFCAB",
+      "TRIGGER_NAME": "TRG_UPD_TGFCAB_EST",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFFIN",
+      "TRIGGER_NAME": "TRG_UPT_TGFFIN_NUBCO",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFIPI",
+      "TRIGGER_NAME": "TRG_INC_UPD_TGFIPI",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFITE",
+      "TRIGGER_NAME": "TRG_INC_TGFITE",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFITE",
+      "TRIGGER_NAME": "TRG_INC_UPD_DLT_TGFITE_ESE",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFPAR",
+      "TRIGGER_NAME": "TRG_INC_UPD_TGFPAR_AFTER",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFPRO",
+      "TRIGGER_NAME": "TRG_INC_UPD_TGFPRO",
+      "STATUS": "DISABLED"
+    },
+    {
+      "TABLE_NAME": "TGFVOL",
+      "TRIGGER_NAME": "TRG_INC_TGFVOL",
+      "STATUS": "DISABLED"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

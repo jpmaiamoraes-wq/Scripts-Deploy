@@ -1,0 +1,393 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T13:56:22.390136+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Relatorio/R01_Inventario_Final.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 62,
+  "colunas": [
+    "TIPO",
+    "NOME",
+    "DETALHE",
+    "CRIADO"
+  ],
+  "linhas": [
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_AJNP_TGFPAR",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_CLASSICMS_TGFPAR",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_01_TSIPAR",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_02_TGFEMP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_03_TGFTOP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_04_TGFPRO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_05_TGFTPV",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_06_TGFCAB",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_07_TGFCAB",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_08_TGFITE",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:21"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_09_TGFPRO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_10_TGFPRO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_11_TGFEMP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_12_TGFTOP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_13_TSIIMP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_14_TGFPRO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_CARD_TTKINDAGT",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_FDUP_MDC_20260925",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:51"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_FDUP_MDC_20260925_PPG",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:51"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_GOL_TGFCGM",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_GOL_TGFCMV",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_GOL_TSIPAR",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_MDCH_20260925_BAI",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:47"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_MDCH_20260925_END",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:47"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_MDCH_CAR02_TSIUSU",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 10:00"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_MDCH_USUEMP01",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 10:25"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TGFPAR",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TGFPRO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TGFTIT",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TGFTPV",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TSIBAI",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TSICID",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAD_TSIEND",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_PAR_MATRIZ",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_TSICFG",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_MAP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:38"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFCOI2",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFGIR1",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFITE",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFPAP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFPRO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:38"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFVOA",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "BKP_RMD_UNID_TGFVOL",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:39"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_CONTROLE_OBJETOS",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:13"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_MAP_UNIDADES",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:38"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_MDCH_CAR_20260925",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 09:57"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_MDCH_CAR_20260925_02",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 09:59"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_MDCH_MRG_20260925",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:47"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_MDCH_MRG_20260925_DEP",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:47"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_MDCH_MRG_20260925_EXC",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:47"
+    },
+    {
+      "TIPO": "OBJETO",
+      "NOME": "RMD_REF_TSICFG_MODELO",
+      "DETALHE": "TABLE",
+      "CRIADO": "2026-09-25 08:36"
+    },
+    {
+      "TIPO": "TGFVOL",
+      "NOME": "KT",
+      "DETALHE": "KIT",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "TGFVOL_TOTAL",
+      "NOME": "37",
+      "DETALHE": null,
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_TSIPAR_LOG",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_TSIPAR_LOGTABOPER",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_UPT_TGFITE",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_INC_UPD_TGFITE",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_UPT_TGFITE",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_TSIPAR_LOG",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    },
+    {
+      "TIPO": "CONTROLE",
+      "NOME": "TRG_TSIPAR_LOGTABOPER",
+      "DETALHE": "TRIGGER ENABLED->ENABLED",
+      "CRIADO": null
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

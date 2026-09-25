@@ -1,0 +1,44 @@
+{
+  "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+  "executado_em": "2026-09-19T23:03:46-03:00",
+  "id_execucao_lote": "RMD_JCLM_20260919230139",
+  "id_execucao_merge": "JCLM_MRG_20260919_01",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "sha256_suite": "64b6bbefc7baa2b419b5ca5b1106c0a240c1334dab346fbe1d7978c7d841dec1",
+  "script": "29_30_Merge_Antifragil_JCLM_Delete_02.sql",
+  "rollback": "29_30_Merge_Antifragil_JCLM_Rollback.sql",
+  "log_lote": "Logs/Oracle_Direto_RMD_JCLM_20260919230139_Atv29_30_Delete.log",
+  "prevalidacao": {
+    "mapa_total": 7518,
+    "mapa_bairros": 422,
+    "mapa_enderecos": 7096,
+    "backup_bairros": 835,
+    "backup_enderecos": 13894,
+    "dependencias_auditadas": 59340,
+    "excecoes": 0
+  },
+  "resultado_lote": {
+    "delete_tsibai_rowcount": 0,
+    "delete_tsiend_rowcount": 0,
+    "commit": true,
+    "observacao": "Na aplicacao, os pais obsoletos ja nao estavam presentes; nenhum novo registro foi afetado."
+  },
+  "pos_validacao": {
+    "evidencia": "Artefatos_Revisao/Preflight/50_Atividades29_30_PosValidacao_Delete_READONLY.sql",
+    "bairros_obsoletos_remanescentes": 0,
+    "enderecos_obsoletos_remanescentes": 0,
+    "backups_preservados_bairros": 835,
+    "backups_preservados_enderecos": 13894,
+    "dependencias_auditadas": 59340,
+    "excecoes": 0
+  },
+  "confirmacao_estado_final": {
+    "evidencia": "Artefatos_Revisao/Preflight/51_Atividades29_30_Resultado_Delete_READONLY.sql",
+    "mapa_bai_com_pai_atual": 0,
+    "mapa_end_com_pai_atual": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  }
+}

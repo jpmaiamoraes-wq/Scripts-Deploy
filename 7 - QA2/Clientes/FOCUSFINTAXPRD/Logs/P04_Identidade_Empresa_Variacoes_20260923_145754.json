@@ -1,0 +1,50 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:57:58.099404+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P04_Identidade_Empresa_Variacoes.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 4,
+  "colunas": [
+    "CODEMP",
+    "NOMEFANTASIA",
+    "RAZAOSOCIAL",
+    "CNPJ",
+    "CLASSIFICACAO"
+  ],
+  "linhas": [
+    {
+      "CODEMP": 1,
+      "NOMEFANTASIA": "FOCUS FINTAX LTDA",
+      "RAZAOSOCIAL": "FOCUS FINTAX LTDA",
+      "CNPJ": "50654800000102",
+      "CLASSIFICACAO": "VARIACAO_FOCUS_FINTAX"
+    },
+    {
+      "CODEMP": 2,
+      "NOMEFANTASIA": "AGF NITEROI CONTABILIDADE LTDA",
+      "RAZAOSOCIAL": "AGF NITEROI CONTABILIDADE LTDA",
+      "CNPJ": "68306961000162",
+      "CLASSIFICACAO": "SEM_TOKEN"
+    },
+    {
+      "CODEMP": 3,
+      "NOMEFANTASIA": "FINTAX CONSULTORIA E AUDITORIA LTDA",
+      "RAZAOSOCIAL": "FINTAX CONSULTORIA E AUDITORIA LTDA",
+      "CNPJ": "68338126000104",
+      "CLASSIFICACAO": "VARIACAO_TOKEN"
+    },
+    {
+      "CODEMP": 4,
+      "NOMEFANTASIA": "AF SOLUCOES E GESTAO LTDA",
+      "RAZAOSOCIAL": "AF SOLUCOES E GESTAO LTDA",
+      "CNPJ": "63378050000127",
+      "CLASSIFICACAO": "SEM_TOKEN"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,84 @@
+SQL> 
+SQL> PROMPT === IDENTIDADE ===
+=== IDENTIDADE ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO
+  4  FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> 
+SQL> PROMPT === CONTAGENS ===
+=== CONTAGENS ===
+SQL> SELECT 'ANDORINHA_ORIGINAL' FONTE, COUNT(*) QTD FROM BKP_RMD_TSICFG_ATUAL
+  2  UNION ALL
+  3  SELECT 'ELETRIKA_ATUAL', COUNT(*) FROM TSICFG;
+
+FONTE                     QTD
+------------------ ----------
+ANDORINHA_ORIGINAL        994
+ELETRIKA_ATUAL            994
+
+SQL> 
+SQL> PROMPT === DUPLICIDADES DE CHAVE ===
+=== DUPLICIDADES DE CHAVE ===
+SQL> SELECT CHAVE, CODUSU, TIPO, NVL(CHAVEPAI,'<NULL>') CHAVEPAI, COUNT(*) QTD
+  2  FROM BKP_RMD_TSICFG_ATUAL
+  3  GROUP BY CHAVE, CODUSU, TIPO, NVL(CHAVEPAI,'<NULL>')
+  4  HAVING COUNT(*) > 1
+  5  ORDER BY QTD DESC, CHAVE;
+no rows selected
+SQL> 
+SQL> SELECT CHAVE, CODUSU, TIPO, NVL(CHAVEPAI,'<NULL>') CHAVEPAI, COUNT(*) QTD
+  2  FROM TSICFG
+  3  GROUP BY CHAVE, CODUSU, TIPO, NVL(CHAVEPAI,'<NULL>')
+  4  HAVING COUNT(*) > 1
+  5  ORDER BY QTD DESC, CHAVE;
+no rows selected
+SQL> 
+SQL> PROMPT === SOMENTE NA ANDORINHA ORIGINAL ===
+=== SOMENTE NA ANDORINHA ORIGINAL ===
+SQL> SELECT B.CHAVE, B.CODUSU, B.TIPO, B.CHAVEPAI
+  2  FROM BKP_RMD_TSICFG_ATUAL B
+  3  WHERE NOT EXISTS (
+  4    SELECT 1 FROM TSICFG E
+  5    WHERE E.CHAVE=B.CHAVE AND E.CODUSU=B.CODUSU AND E.TIPO=B.TIPO
+  6      AND NVL(E.CHAVEPAI,CHR(0))=NVL(B.CHAVEPAI,CHR(0))
+  7  )
+  8  ORDER BY B.CHAVE;
+no rows selected
+SQL> 
+SQL> PROMPT === SOMENTE NA ELETRIKA ===
+=== SOMENTE NA ELETRIKA ===
+SQL> SELECT E.CHAVE, E.CODUSU, E.TIPO, E.CHAVEPAI
+  2  FROM TSICFG E
+  3  WHERE NOT EXISTS (
+  4    SELECT 1 FROM BKP_RMD_TSICFG_ATUAL B
+  5    WHERE B.CHAVE=E.CHAVE AND B.CODUSU=E.CODUSU AND B.TIPO=E.TIPO
+  6      AND NVL(B.CHAVEPAI,CHR(0))=NVL(E.CHAVEPAI,CHR(0))
+  7  )
+  8  ORDER BY E.CHAVE;
+no rows selected
+SQL> 
+SQL> PROMPT === MESMA CHAVE, CONFIGURACAO DIFERENTE ===
+=== MESMA CHAVE, CONFIGURACAO DIFERENTE ===
+SQL> SELECT B.CHAVE, B.CODUSU, B.TIPO, B.CHAVEPAI,
+  2         DBMS_LOB.GETLENGTH(B.CONFIG) CONFIG_ORIGINAL,
+  3         DBMS_LOB.GETLENGTH(E.CONFIG) CONFIG_ELETRIKA
+  4  FROM BKP_RMD_TSICFG_ATUAL B
+  5  JOIN TSICFG E
+  6    ON E.CHAVE=B.CHAVE AND E.CODUSU=B.CODUSU AND E.TIPO=B.TIPO
+  7   AND NVL(E.CHAVEPAI,CHR(0))=NVL(B.CHAVEPAI,CHR(0))
+  8  WHERE (B.CONFIG IS NULL AND E.CONFIG IS NOT NULL)
+  9     OR (B.CONFIG IS NOT NULL AND E.CONFIG IS NULL)
+ 10     OR (B.CONFIG IS NOT NULL AND E.CONFIG IS NOT NULL
+ 11         AND DBMS_LOB.COMPARE(B.CONFIG,E.CONFIG)<>0)
+ 12  ORDER BY B.CHAVE;
+no rows selected
+SQL> 
+SQL> PROMPT === FIM COMPARACAO ===
+=== FIM COMPARACAO ===
+SQL> SPOOL OFF

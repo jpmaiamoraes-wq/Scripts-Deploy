@@ -1,0 +1,57 @@
+{
+  "status": "COMPARACAO_READ_ONLY_CONCLUIDA_COM_DIVERGENCIAS",
+  "base_oracle": "MOVE GESTAO DE ENERGIA LTDA",
+  "fonte_portal": "Onboarding Deploy — Sankhya",
+  "projeto_selecionado": "MOVE GESTAO DE ENERGIA LTDA",
+  "arquivo_fonte": "Usuarios.xlsx",
+  "arquivo_enviado_em_portal": "2026-09-14 20:00 (fuso nao exibido)",
+  "consultado_em_utc": "2026-09-23T11:31:37Z",
+  "criterio": "Comparacao por email normalizado; na Oracle, considerar usuarios com CODGRUPO > 0. Separar usuarios sem grupo como usuarios de modelo; nao comparar empresas/grupos quando os campos da fonte estao vazios.",
+  "totais": {
+    "linhas_onboarding": 18,
+    "usuarios_oracle_total": 29,
+    "usuarios_oracle_com_grupo": 18,
+    "usuarios_oracle_sem_grupo": 11,
+    "emails_correspondentes": 18,
+    "emails_onboarding_ausentes_na_oracle": 0,
+    "usuarios_com_grupo_sem_correspondencia_no_onboarding": 0,
+    "divergencias_de_nome": 18,
+    "linhas_com_empresa_preenchida_no_onboarding": 0,
+    "linhas_com_codgrupo_preenchido_no_onboarding": 0
+  },
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "correspondencias_por_email": [
+    {"email": "vitor.junklaus@moveenergia.com", "nome_onboarding": "Vitor Vechi Junklaus", "codigo_usuario_fonte": "1", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "gabriel.nogueira@moveenergia.com", "nome_onboarding": "Gabriel Nogueira", "codigo_usuario_fonte": "1", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "cristina.engelke@moveenergia.com", "nome_onboarding": "Cristina Rabelo Engelke", "codigo_usuario_fonte": "4", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "klara.holleben@moveenergia.com", "nome_onboarding": "Klara Holleben", "codigo_usuario_fonte": "4", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "tatiane.batista@moveenergia.com", "nome_onboarding": "Tatiane Batista", "codigo_usuario_fonte": "4", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "viviane.kriger@moveenergia.com", "nome_onboarding": "Viviane Kriger", "codigo_usuario_fonte": "4", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "camila.fragas@moveenergia.com", "nome_onboarding": "Camila Cristina de Fragas", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "daniel.midoes@moveenergia.com", "nome_onboarding": "daniel midões", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "elaine.martins@moveenergia.com", "nome_onboarding": "elaine elisa martins", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "rafael.porte@moveenergia.com", "nome_onboarding": "Rafael Porte", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "rodrigo.pes@moveenergia.com", "nome_onboarding": "Rodrigo de Souza Pes", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "stefane.bernardi@moveenergia.com", "nome_onboarding": "Stefane Bernardi", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "vitor.martins@moveenergia.com", "nome_onboarding": "Vitor Martins", "codigo_usuario_fonte": "13", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "gabriella.santos@moveenergia.com", "nome_onboarding": "gabriella santos", "codigo_usuario_fonte": "Atendimento?", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "hideaki.mateus@moveenergia.com", "nome_onboarding": "Hideaki Hisamatsu", "codigo_usuario_fonte": "Atendimento?", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "kamila.amorim@moveenergia.com", "nome_onboarding": "Kamila Amorim", "codigo_usuario_fonte": "Atendimento?", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "kathlyn.santos@moveenergia.com", "nome_onboarding": "Kathlyn Santos", "codigo_usuario_fonte": "Atendimento?", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"},
+    {"email": "priscila.souza@moveenergia.com", "nome_onboarding": "Priscila Souza", "codigo_usuario_fonte": "Atendimento?", "codemp_oracle": 1, "codgrupo_oracle": 1, "resultado": "EMAIL_CORRESPONDE; NOME_DIVERGE_PARA_LOGIN_ORACLE"}
+  ],
+  "observacoes_fonte": [
+    "As 18 linhas deixam EMPRESA e CODGRUPO vazios; essas dimensoes nao podem ser comparadas a partir do arquivo.",
+    "Cinco linhas contem 'Atendimento?' na coluna CODIGO USUARIO; manter como valor ambíguo da fonte, sem inferir codigo ou grupo.",
+    "Os nomes diferem porque NOMEUSU na Oracle aparece como identificador/login; os emails correspondem. Nenhum nome foi alterado nem escolhido como canonico.",
+    "Os 11 usuarios Oracle sem grupo foram contabilizados separadamente e nao incluidos como usuarios finais elegiveis para comparacao."
+  ],
+  "consulta_sql": "Artefatos_Revisao/Preflight/00_Onboarding_Usuarios_MOVE_READONLY.sql",
+  "dml_executado": false,
+  "ddl_executado": false
+}

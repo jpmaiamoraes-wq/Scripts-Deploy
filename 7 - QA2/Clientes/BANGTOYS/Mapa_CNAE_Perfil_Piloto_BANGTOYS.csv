@@ -1,0 +1,9 @@
+CNAE;DESCRICAO_RESUMIDA;CODTIPPARC_DESTINO;PERFIL_DESTINO;STATUS_REGISTRO;CONFIANCA;CRITERIO
+5211799;Depositos de mercadorias para terceiros;10103013;Logistica e armazenagem;PROPOSTO;ALTA;CNAE especifico de armazenagem
+4763601;Varejo de brinquedos e artigos recreativos;10101024;Brinquedos e artigos recreativos;PROPOSTO;ALTA;Correspondencia direta
+7020400;Consultoria em gestao empresarial;10103012;Consultoria empresarial;PROPOSTO;ALTA;Correspondencia direta
+4751201;Varejo de equipamentos e suprimentos de informatica;10101016;Computadores e perifericos;EXISTENTE;ALTA;Correspondencia direta
+4757100;Varejo de pecas e acessorios eletroeletronicos;10101026;Eletronicos e eletrodomesticos;PROPOSTO;ALTA;Correspondencia setorial
+4649499;Atacado de outros equipamentos e artigos de uso pessoal e domestico;10104010;Outros produtos atacadistas;PROPOSTO;MEDIA;CNAE residual exige avaliar CNAEs secundarios
+4754701;Varejo de moveis;10101014;Moveis e utensilios;EXISTENTE;ALTA;Correspondencia direta
+4772500;Varejo de cosmeticos, perfumaria e higiene pessoal;10101025;Cosmeticos e perfumaria;PROPOSTO;ALTA;Correspondencia direta

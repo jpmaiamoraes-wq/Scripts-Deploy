@@ -1,0 +1,107 @@
+SQL>
+SQL> PROMPT === COLUNAS DE IDENTIDADE DISPONIVEIS EM TSIEMP ===
+=== COLUNAS DE IDENTIDADE DISPONIVEIS EM TSIEMP ===
+SQL> SELECT OWNER, TABLE_NAME, COLUMN_ID, COLUMN_NAME, DATA_TYPE
+  2    FROM ALL_TAB_COLUMNS
+  3   WHERE TABLE_NAME='TSIEMP'
+  4     AND UPPER(COLUMN_NAME) LIKE '%NOME%'
+  5   ORDER BY OWNER, COLUMN_ID;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME                                                                                                                        COLUMN_ID
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+COLUMN_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+DATA_TYPE
+--------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+TSIEMP                                                                                                                                    2
+NOMEFANTASIA
+VARCHAR2
+
+
+1 row selected.
+
+SQL>
+SQL> SELECT OWNER, TABLE_NAME, COLUMN_ID, COLUMN_NAME, DATA_TYPE
+  2    FROM ALL_TAB_COLUMNS
+  3   WHERE TABLE_NAME='TSIEMP'
+  4     AND UPPER(COLUMN_NAME) LIKE '%RAZAO%'
+  5   ORDER BY OWNER, COLUMN_ID;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME                                                                                                                        COLUMN_ID
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+COLUMN_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+DATA_TYPE
+--------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+TSIEMP                                                                                                                                    3
+RAZAOSOCIAL
+VARCHAR2
+
+SANKHYA
+TSIEMP                                                                                                                                    4
+RAZAOABREV
+VARCHAR2
+
+SANKHYA
+TSIEMP                                                                                                                                   55
+RAZAOSOCIALCOMPLETA
+VARCHAR2
+
+SANKHYA
+TSIEMP                                                                                                                                   94
+USARAZAOSOCIAL
+CHAR
+
+
+4 rows selected.
+
+SQL>
+SQL> PROMPT === EMPRESAS CADASTRADAS - CAMPOS DE IDENTIDADE ===
+=== EMPRESAS CADASTRADAS - CAMPOS DE IDENTIDADE ===
+SQL> SELECT CODEMP, NOMEFANTASIA, RAZAOSOCIAL
+  2    FROM TSIEMP
+  3   ORDER BY CODEMP;
+
+    CODEMP NOMEFANTASIA                             RAZAOSOCIAL
+---------- ---------------------------------------- ----------------------------------------
+         1 ACM BRASIL                               ACM BRASIL LTDA
+         2 ACMINAS SUPRIMENTOS PARA COMUNICACAO VIS ACMINAS SUPRIMENTOS PARA COMUNICACAO VIS
+         3 VITRINE DIRETA                           VITRINE DIRETA S.A.
+         4 ACM BRASIL                               ACM BRASIL LTDA
+         5 VITRINE DIRETA                           VITRINE DIRETA S.A.
+         7 VITRINE DIRETA S.A.                      VITRINE DIRETA S.A.
+
+6 rows selected.
+
+SQL>
+SQL> PROMPT === EMPRESAS RELACIONADAS A VITRIN/ACM ===
+=== EMPRESAS RELACIONADAS A VITRIN/ACM ===
+SQL> SELECT CODEMP, NOMEFANTASIA, RAZAOSOCIAL
+  2    FROM TSIEMP
+  3   WHERE UPPER(NVL(NOMEFANTASIA,' ')) LIKE '%VITRIN%'
+  4      OR UPPER(NVL(NOMEFANTASIA,' ')) LIKE '%ACM%'
+  5      OR UPPER(NVL(RAZAOSOCIAL,' ')) LIKE '%VITRIN%'
+  6      OR UPPER(NVL(RAZAOSOCIAL,' ')) LIKE '%ACM%'
+  7   ORDER BY CODEMP;
+
+    CODEMP NOMEFANTASIA                             RAZAOSOCIAL
+---------- ---------------------------------------- ----------------------------------------
+         1 ACM BRASIL                               ACM BRASIL LTDA
+         2 ACMINAS SUPRIMENTOS PARA COMUNICACAO VIS ACMINAS SUPRIMENTOS PARA COMUNICACAO VIS
+         3 VITRINE DIRETA                           VITRINE DIRETA S.A.
+         4 ACM BRASIL                               ACM BRASIL LTDA
+         5 VITRINE DIRETA                           VITRINE DIRETA S.A.
+         7 VITRINE DIRETA S.A.                      VITRINE DIRETA S.A.
+
+6 rows selected.
+
+SQL>
+SQL> PROMPT === FIM DO DIAGNOSTICO READ-ONLY ===
+=== FIM DO DIAGNOSTICO READ-ONLY ===
+SQL> SPOOL OFF

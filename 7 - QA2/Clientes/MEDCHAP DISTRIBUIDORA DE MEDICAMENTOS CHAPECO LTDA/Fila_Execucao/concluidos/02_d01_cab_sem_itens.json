@@ -1,0 +1,1 @@
+{"id": "MEDCHAP_D01_20260925_01", "tipo": "query", "sql_file": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/D01_CabSemItens_TIPMOV.sql", "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/D01_CabSemItens_TIPMOV_20260925_pos_master.json", "descricao": "cab sem itens por TIPMOV pos-Master"}

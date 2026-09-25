@@ -1,0 +1,47 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T19:10:23.136909+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/32_Card09_Preflight_Estado_FOCUS_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 7,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "ESCOPO_DASHBOARD_NOTAS_SEM_FIN",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "TABELAS_MAPA_EXISTENTES",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "TABELAS_FDUP_ANTERIORES",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "LINHAS_TGFNUM_TGFFIN",
+      "VALOR": "1"
+    },
+    {
+      "METRICA": "ULTCOD_TGFNUM_TGFFIN",
+      "VALOR": "392"
+    },
+    {
+      "METRICA": "TOTAL_TGFFIN",
+      "VALOR": "392"
+    },
+    {
+      "METRICA": "TGFNFE_COM_XML",
+      "VALOR": "2"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,16 @@
+-- Confirmacao somente leitura apos falha do executor antes do primeiro bloco.
+SELECT OWNER,
+       OBJECT_NAME,
+       OBJECT_TYPE,
+       STATUS,
+       CREATED,
+       LAST_DDL_TIME
+  FROM ALL_OBJECTS
+ WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+   AND (
+       OBJECT_NAME = 'RMD_CONTROLE_OBJETOS'
+       OR OBJECT_NAME LIKE 'BKP_RMD_JCLM%'
+       OR OBJECT_NAME LIKE 'MAP_RMD_JCLM%'
+       OR OBJECT_NAME LIKE 'AUD_RMD_JCLM%'
+   )
+ ORDER BY OBJECT_TYPE, OBJECT_NAME;

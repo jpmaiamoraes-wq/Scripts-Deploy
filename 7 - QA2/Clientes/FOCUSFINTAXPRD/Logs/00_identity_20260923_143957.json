@@ -1,0 +1,30 @@
+{
+  "status": "IDENTIDADE_VALIDADA_READ_ONLY",
+  "executado_em_utc": "2026-09-23T17:40:12.084549+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "service_compativel": true,
+  "empresas": [
+    {
+      "codemp": 1,
+      "razao_social": "FOCUS FINTAX LTDA"
+    },
+    {
+      "codemp": 2,
+      "razao_social": "AGF NITEROI CONTABILIDADE LTDA"
+    },
+    {
+      "codemp": 3,
+      "razao_social": "FINTAX CONSULTORIA E AUDITORIA LTDA"
+    },
+    {
+      "codemp": 4,
+      "razao_social": "AF SOLUCOES E GESTAO LTDA"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

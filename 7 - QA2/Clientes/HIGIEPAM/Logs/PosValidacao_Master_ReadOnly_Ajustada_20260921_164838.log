@@ -1,0 +1,69 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:45:31.045153+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/PosValidacao_Master_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 8,
+  "colunas": [
+    "ITEM",
+    "VALOR",
+    "DETALHE",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "ITEM": "BACKUPS_RMD",
+      "VALOR": "38",
+      "DETALHE": "ALL_TABLES",
+      "STATUS": "PERSISTENCIA"
+    },
+    {
+      "ITEM": "CABECALHOS_SEM_ITENS",
+      "VALOR": "0",
+      "DETALHE": "TGFCAB/TGFITE",
+      "STATUS": "INTEGRIDADE"
+    },
+    {
+      "ITEM": "CODIGOS_FISCAIS_CIDADES_DUPLICADOS",
+      "VALOR": "0",
+      "DETALHE": "TSICID",
+      "STATUS": "INTEGRIDADE"
+    },
+    {
+      "ITEM": "CONTROLE_OBJETOS_REVISAO",
+      "VALOR": "10",
+      "DETALHE": "RMD_CONTROLE_OBJETOS",
+      "STATUS": "PERSISTENCIA"
+    },
+    {
+      "ITEM": "FINANCEIROS_SEM_NOTA",
+      "VALOR": "0",
+      "DETALHE": "TGFFIN/TGFCAB",
+      "STATUS": "INTEGRIDADE"
+    },
+    {
+      "ITEM": "IDENTIDADE",
+      "VALOR": "FRANCISCO_JUNIOR",
+      "DETALHE": "SANKHYA",
+      "STATUS": "higiepamprd.sankhyacloud.com.br"
+    },
+    {
+      "ITEM": "ITENS_SEM_CABECALHO",
+      "VALOR": "0",
+      "DETALHE": "TGFITE/TGFCAB",
+      "STATUS": "INTEGRIDADE"
+    },
+    {
+      "ITEM": "OBJETOS_INVALIDOS",
+      "VALOR": "35",
+      "DETALHE": "ALL_OBJECTS",
+      "STATUS": "READ_ONLY"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

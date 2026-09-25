@@ -1,0 +1,42 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T14:23:07.267130+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/SMTP/S01_TSISMTP_Sem_Segredos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "ORIGEM",
+    "CODSMTP",
+    "SERVIDOR",
+    "PORTA",
+    "TIPO",
+    "USUARIO",
+    "REMETENTE",
+    "PADRAO",
+    "IGNORACERTIFICADO",
+    "USEOAUTH",
+    "CLASSIFICACAO"
+  ],
+  "linhas": [
+    {
+      "ORIGEM": "TSISMTP",
+      "CODSMTP": "1",
+      "SERVIDOR": "email-smtp.us-east-1.amazonaws.com",
+      "PORTA": "587",
+      "TIPO": "T",
+      "USUARIO": "<REDIGIDO_CHAVE_DE_ACESSO>",
+      "REMETENTE": "noreply@sankhya.com.br",
+      "PADRAO": "N",
+      "IGNORACERTIFICADO": "N",
+      "USEOAUTH": null,
+      "CLASSIFICACAO": "CONTA_TESTE_DEPLOY"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false,
+  "redacao": "25/09/2026: USUARIO da conta de testes (identificador de chave de acesso) redigido pelo agente."
+}

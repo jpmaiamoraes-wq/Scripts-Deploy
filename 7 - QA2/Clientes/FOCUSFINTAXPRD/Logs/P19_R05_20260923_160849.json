@@ -1,0 +1,836 @@
+{
+  "status": "PREFLIGHT_29_30_CONCLUIDO",
+  "executado_em_utc": "2026-09-23T19:10:22.202598+00:00",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "focusfintaxprd.sankhyacloud.com.br",
+    "db_name": "FOCUSFINTAXPRD"
+  },
+  "regra_normalizacao": "PADRAO_ATIVIDADES_29_30_V1",
+  "decisao": "SEM_CANDIDATOS_DE_ALTERACAO",
+  "bairros": {
+    "tabela": "TSIBAI",
+    "coluna_codigo": "CODBAI",
+    "coluna_descricao": "NOMEBAI",
+    "coluna_particao": null,
+    "total_registros": 45561,
+    "alteracoes_unicas": 0,
+    "registros_em_colisao": 0,
+    "grupos_colisao": 0,
+    "colisoes_com_alteracao": 0,
+    "amostra_grupos": [],
+    "amostra_limitada": false
+  },
+  "enderecos": {
+    "tabela": "TSIEND",
+    "coluna_codigo": "CODEND",
+    "coluna_descricao": "NOMEEND",
+    "coluna_particao": "TIPO",
+    "total_registros": 674484,
+    "alteracoes_unicas": 0,
+    "registros_em_colisao": 0,
+    "grupos_colisao": 0,
+    "colisoes_com_alteracao": 0,
+    "amostra_grupos": [],
+    "amostra_limitada": false
+  },
+  "dependencias": [
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "BKP_TGFITE_NOVO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "BKP_TGFPAR_NOVO",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "BKP_TGFPAR_NOVO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCCEMP",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCCEMP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCOMEVTNFSE",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TCOMEVTNFSE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPAEN",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPAEN",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPALTERFUN",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPALTERFUN",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPCATR",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPCTI",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPCTI",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPDEP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPFUN",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPFUN",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPPCA",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPPONRAIO",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPPONRAIO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPREQADM",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPREQADM",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPTAT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TFPTAT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGAENT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGAENT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFCTT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFCTT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFITE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0030",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0030",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0040",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLCDPRR0040",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLOCOPER",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFLOCOPER",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFPAR",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFPAR",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFSIT",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFSIT",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGFVOR",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWCTE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWDCA",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEND",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWENDVAZ",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWENP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEPL",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEST",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWESTVAL",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEST_UPD",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXC",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXG",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXL",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWEXU",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWHAJ",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWINV",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWIVR",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWMOC",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWRAG",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TGWTROCADEPO",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIAGE",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIAGE",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSICEP",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSICEP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIEMP",
+      "coluna": "CODBAI",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "COLUNA_CONVENCIONAL",
+      "tabela": "TSIEMP",
+      "coluna": "CODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": null,
+      "colunas_na_constraint": null,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPCATR",
+      "coluna": "CODENDLOCALCAT",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TFPCATR_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODBAIINSTENS",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TFPEST_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODBAIAGTINTEG",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TFPEST_TSIBAI2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODENDINSTENS",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TFPEST_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TFPEST",
+      "coluna": "CODENDAGTINTEG",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TFPEST_TSIEND2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODBAIRECEB",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TGFCPL_TSIBAI1",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODBAIENTREGA",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TGFCPL_TSIBAI2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODBAITRAB",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TGFCPL_TSIBAI3",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODENDENTREGA",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TGFCPL_TSIEND1",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODENDTRAB",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TGFCPL_TSIEND2",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TGFCPL",
+      "coluna": "CODENDRECEB",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TGFCPL_TSIEND3",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMCAR",
+      "coluna": "CARBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMCAR_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEDG",
+      "coluna": "EDGBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMEDG_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEDG",
+      "coluna": "EDGCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMEDG_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEPR",
+      "coluna": "EPRBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMEPR_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMEPR",
+      "coluna": "EPRCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMEPR_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMFAC",
+      "coluna": "FACBAIRROIMOVEL",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMFAC_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMIMV",
+      "coluna": "IMVBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMIMV_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMIMV",
+      "coluna": "IMVCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMIMV_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMLOT",
+      "coluna": "LOTBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMLOT_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMPPR",
+      "coluna": "PPRBAIRRO",
+      "tabela_referenciada": "TSIBAI",
+      "constraint_name": "FK_TIMPPR_TSIBAI",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    },
+    {
+      "origem": "CHAVE_ESTRANGEIRA",
+      "tabela": "TIMPPR",
+      "coluna": "PPRCODEND",
+      "tabela_referenciada": "TSIEND",
+      "constraint_name": "FK_TIMPPR_TSIEND",
+      "colunas_na_constraint": 1,
+      "linhas_referenciando_obsoletos": 0
+    }
+  ],
+  "avisos": [],
+  "erros_diagnostico": [],
+  "dml_executado": false,
+  "ddl_executado": false
+}

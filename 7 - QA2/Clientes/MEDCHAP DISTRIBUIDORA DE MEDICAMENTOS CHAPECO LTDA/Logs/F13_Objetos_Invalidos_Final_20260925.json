@@ -1,0 +1,20 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T11:55:20.735306+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P13_Etapa31_Lista_Objetos_Invalidos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 0,
+  "colunas": [
+    "OBJECT_TYPE",
+    "OBJECT_NAME",
+    "STATUS",
+    "LAST_DDL_TIME"
+  ],
+  "linhas": [],
+  "dml_executado": false,
+  "ddl_executado": false
+}

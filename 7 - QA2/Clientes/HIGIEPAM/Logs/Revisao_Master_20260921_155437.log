@@ -1,0 +1,26 @@
+ID_EXECUCAO_LOTE=RMD_HIGIEPAM_20260921155437
+ENTRADA=Revisao Master Deploy/Revisao_Master_Deploy.sql
+SHA256_SUITE=e5ca03f0133903f383aaa782fa2c30e465dd7212a7382e2843f7c6e1f82062bc
+POS_VALIDACAO=Clientes/HIGIEPAM/PosValidacao_Master_ReadOnly.sql
+AUTORIZACAO=PRE_AUTORIZADA
+CONFIRMACAO_NATIVA=DISPENSADA_POR_EXECUTAR_BASE
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=higiepamprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[OK 1/1085] SELECT Revisao Master Deploy/Revisao_Master_Deploy.sql:12 ROWCOUNT=0
+[OK 2/1085] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/01_Preparar_Controle_Objetos.sql:6 ROWCOUNT=0
+DBMS_OUTPUT=ID_MASTER=RMD_RUN_20260921155603190
+[OK 3/1085] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/01_Preparar_Controle_Objetos.sql:11 ROWCOUNT=0
+DBMS_OUTPUT=CONTROLE_EXISTENTE=RMD_CONTROLE_OBJETOS
+[OK 4/1085] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/02_Liberar_Filtros_Portais.sql:5 ROWCOUNT=0
+[ERRO 5/1085] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/02_Liberar_Filtros_Portais.sql:13 DatabaseError: ORA-06502: PL/SQL: value or conversion error: character string buffer too small
+ORA-06512: at line 52
+ORA-06512: at line 40
+ORA-06512: at "SANKHYA.STP_GRAVA_TSIPARLOG", line 35
+ORA-06512: at "SANKHYA.TRG_TSIPAR_LOG", line 65
+ORA-04088: error during execution of trigger 'SANKHYA.TRG_TSIPAR_LOG'
+ORA-06512: at line 27
+Help: https://docs.oracle.com/error-help/db/ora-06502/
+STATUS=LOTE_COM_ERRO

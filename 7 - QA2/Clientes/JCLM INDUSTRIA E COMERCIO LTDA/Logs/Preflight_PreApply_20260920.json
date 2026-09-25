@@ -1,0 +1,16 @@
+{
+  "status": "LOTE_NAO_ABERTO_QUOTA_AUSENTE",
+  "executado_em_utc": "2026-09-20T00:09:27.344017+00:00",
+  "id_execucao_planejado": "RMD_JCLM_20260920000927",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "db_name": "JCLMPRD",
+  "qtd_quotas": 0,
+  "qtd_privilegio_recompilacao": 0,
+  "qtd_invalidos": 50,
+  "qtd_controle_revisao": 0,
+  "dml_executado": false,
+  "ddl_executado": false,
+  "observacao": "A confirmacao EXECUTAR foi recebida, mas o lote foi impedido antes da abertura porque nao ha quota persistente registrada para os artefatos de auditoria."
+}

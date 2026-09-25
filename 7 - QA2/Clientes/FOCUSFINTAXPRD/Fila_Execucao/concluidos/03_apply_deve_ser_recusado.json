@@ -1,0 +1,1 @@
+{"id":"HOMOLOG_FILA_03_apply_recusado","tipo":"batch_apply","script":"7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql","execution_id":"HOMOLOG_NAO_EXECUTAR_01","descricao":"deve ser RECUSADO: fila iniciada sem --autorizar"}

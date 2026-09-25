@@ -1,0 +1,47 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T19:11:27.779362+00:00",
+  "consulta": "31_Preflight_Objetos_Invalidos_READONLY.sql",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "objetos_invalidos": [
+    {"tipo": "FUNCTION", "nome": "FSP_DATA_DIA_UTIL"},
+    {"tipo": "FUNCTION", "nome": "FSP_RETURN_DATAS_UTEIS"},
+    {"tipo": "FUNCTION", "nome": "GET_PREVISAO_CREDITO_DEBITO"},
+    {"tipo": "FUNCTION", "nome": "GET_PROXIMO_DIA_UTIL"}
+  ],
+  "qtd_objetos_invalidos": 4,
+  "erros_compilacao_em_all_errors": [],
+  "privilegios_ativos": [
+    "ALTER ANY TABLE", "ALTER ANY TRIGGER", "CREATE ANY INDEX",
+    "CREATE ANY MATERIALIZED VIEW", "CREATE ANY PROCEDURE", "CREATE ANY SEQUENCE",
+    "CREATE ANY TABLE", "CREATE ANY TRIGGER", "CREATE ANY TYPE", "CREATE ANY VIEW",
+    "CREATE SESSION", "DROP ANY INDEX", "DROP ANY MATERIALIZED VIEW",
+    "DROP ANY PROCEDURE", "DROP ANY SEQUENCE", "DROP ANY TABLE", "DROP ANY TRIGGER",
+    "DROP ANY TYPE", "DROP ANY VIEW", "EXECUTE ANY CLASS", "EXECUTE ANY PROCEDURE",
+    "EXECUTE ANY TYPE", "SELECT ANY SEQUENCE", "SET CONTAINER"
+  ],
+  "privilegio_alter_any_procedure_presente": false,
+  "roles_ativos": ["CONNECT", "RLCONSULTOR"],
+  "user_ts_quotas_session_user": [],
+  "objetos_relevantes": [
+    {"nome": "BKP_TGFPAR_NOVO", "tipo": "TABLE", "status": "VALID"}
+  ],
+  "triggers_ativos_tsibai_tsiend": [
+    {"nome": "TRG_DLT_TSIBAI", "tabela": "TSIBAI", "status": "ENABLED", "evento": "DELETE"},
+    {"nome": "TRG_DLT_TSIEND", "tabela": "TSIEND", "status": "ENABLED", "evento": "DELETE"},
+    {"nome": "TRG_FX_TSIBAI", "tabela": "TSIBAI", "status": "ENABLED", "evento": "INSERT OR UPDATE"},
+    {"nome": "TRG_FX_TSIEND", "tabela": "TSIEND", "status": "ENABLED", "evento": "INSERT OR UPDATE"},
+    {"nome": "TRG_TSIBAI_LOGTABOPER", "tabela": "TSIBAI", "status": "ENABLED", "evento": "INSERT OR UPDATE OR DELETE"},
+    {"nome": "TRG_TSIEND_LOGTABOPER", "tabela": "TSIEND", "status": "ENABLED", "evento": "INSERT OR UPDATE OR DELETE"},
+    {"nome": "TRG_UPD_TSIBAI_HIS_S2205", "tabela": "TSIBAI", "status": "ENABLED", "evento": "UPDATE"},
+    {"nome": "TRG_UPD_TSIEND_HIS_S2205", "tabela": "TSIEND", "status": "ENABLED", "evento": "UPDATE"}
+  ],
+  "versao_oracle": null,
+  "dml_executado": false,
+  "ddl_executado": false
+}

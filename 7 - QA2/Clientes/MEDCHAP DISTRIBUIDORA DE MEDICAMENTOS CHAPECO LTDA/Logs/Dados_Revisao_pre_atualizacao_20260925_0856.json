@@ -1,0 +1,41 @@
+{
+  "cliente_informado": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+  "pasta_cliente": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+  "hostname": "10.100.76.5",
+  "port": 1521,
+  "servicename": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": "guilherme.martins@sankhya.com.br",
+  "gp_nome": "Guilherme Santos Martins",
+  "analista_projetos": {
+    "nome": "Ana Paula Rodrigues",
+    "email": "ana.rodrigues@sankhya.com.br",
+    "confirmada": true
+  },
+  "comunicacao_email": {
+    "status": "AGUARDANDO_PDF_FINAL_E_CONFIRMACAO_DOS_DESTINATARIOS",
+    "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
+    "corpo_modelo": "Olá,\\n\\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\\n\\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\\n\\nAtenciosamente,",
+    "anexo_permitido": "somente o PDF final validado"
+  },
+  "preparado_em": "2026-09-25T07:58:58-03:00",
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 0,
+    "saida": "OK: 10.100.76.5:1521 já está acessível. Nenhuma alteração necessária."
+  },
+  "roteamento_automatico": false,
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": false,
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/Revisao_Master_20260925_075858.log",
+  "rotas_execucao": {
+    "primaria": "ORACLE_DIRETO_LOTE",
+    "fallback": "VSCODE_SCRIPT_LEGADO",
+    "wrapper_legado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Executar_Revisao_MEDCHAP_DISTRIBUIDORA_DE_MEDICAMENTOS_CHAPECO_LTDA.sql",
+    "roteiro_fallback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/ROTEIRO_FALLBACK_LEGADO_VSCODE.md",
+    "troca_automatica": false,
+    "catalogo_ips": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/ips-roteamento-vpn.txt",
+    "aplica_rota_cadastrada_automaticamente": true
+  }
+}

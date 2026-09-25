@@ -1,0 +1,35 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:57:55.835938+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P01_Versao_Identidade.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "SESSION_USER",
+    "CURRENT_SCHEMA",
+    "SERVICE_NAME",
+    "DB_NAME",
+    "INSTANCE_NAME",
+    "PRODUCT",
+    "VERSION",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "SESSION_USER": "FRANCISCO_JUNIOR",
+      "CURRENT_SCHEMA": "SANKHYA",
+      "SERVICE_NAME": "focusfintaxprd.sankhyacloud.com.br",
+      "DB_NAME": "FOCUSFINTAXPRD",
+      "INSTANCE_NAME": "dbs7pc13",
+      "PRODUCT": "Oracle AI Database 26ai EE High Perf ",
+      "VERSION": "23.0.0.0.0",
+      "STATUS": "Production"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

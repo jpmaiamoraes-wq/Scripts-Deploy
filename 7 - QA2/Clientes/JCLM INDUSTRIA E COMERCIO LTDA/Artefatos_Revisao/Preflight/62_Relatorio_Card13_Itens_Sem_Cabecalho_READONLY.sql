@@ -1,0 +1,14 @@
+SELECT I.NUNOTA,
+       I.CODEMP,
+       I.CODPROD,
+       P.DESCRPROD,
+       P.AD_ORIGDEPLOY
+  FROM TGFITE i
+  INNER JOIN TGFPRO P
+    ON I.CODPROD = P.CODPROD
+ WHERE NOT EXISTS (
+           SELECT 1
+             FROM TGFCAB c
+            WHERE c.NUNOTA = i.NUNOTA
+       )
+ ORDER BY i.NUNOTA;

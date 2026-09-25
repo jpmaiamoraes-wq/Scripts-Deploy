@@ -1,0 +1,32 @@
+{
+  "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+  "entrypoint": "Clientes/FOCUSFINTAXPRD/29_30_Merge_Antifragil_FOCUSFINTAXPRD_Excluir_Pais_Obsoletos.sql",
+  "arquivos": [
+    "Clientes/FOCUSFINTAXPRD/29_30_Merge_Antifragil_FOCUSFINTAXPRD_Excluir_Pais_Obsoletos.sql"
+  ],
+  "qtd_instrucoes": 1,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 1
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [],
+  "sha256_suite": "d0d4c84ba1182f201ea262e37d4a7c342fe89ccceca095d06aedf089687c12c7",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "execution_id": "FOCUS_DEL_20260923_01",
+  "dml_ddl_executado": true,
+  "log": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Logs/FOCUS_DEL_20260923_01.log",
+  "capabilities": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "focusfintaxprd.sankhyacloud.com.br",
+    "db_name": "FOCUSFINTAXPRD",
+    "privilegios_relevantes": [
+      "ALTER ANY TABLE",
+      "CREATE ANY TABLE",
+      "DROP ANY TABLE"
+    ],
+    "quotas": [],
+    "dml_ddl_executado": false
+  }
+}

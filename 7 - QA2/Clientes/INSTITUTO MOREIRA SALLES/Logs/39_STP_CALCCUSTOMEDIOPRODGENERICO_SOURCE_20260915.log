@@ -1,0 +1,373 @@
+SQL> SELECT LINE||'|'||TEXT FROM ALL_SOURCE WHERE OWNER='SANKHYA' AND NAME='STP_CALCCUSTOMEDIOPRODGENERICO' ORDER BY LINE;
+
+LINE||'|'||TEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1|PROCEDURE STP_CALCCUSTOMEDIOPRODGENERICO (
+2|   P_DTBASE      DATE,
+3|   P_CODEMP      INT,
+4|   P_CODPROD     INT, -- PRODUTO GENERICO
+5|   P_CODLOCAL    INT,
+6|   P_CONTROLE    VARCHAR2)
+7|AS
+8|   P_PEGARCUSREP   CHAR (1);
+9|   P_COUNT         INT;
+10|BEGIN
+11|
+12|    STP_INSERECUSFILHOPRODGENERICO(P_DTBASE, P_CODEMP, P_CODPROD, P_CODLOCAL, P_CONTROLE);    
+13|
+14|    P_PEGARCUSREP := 'N';
+15|
+16|    IF VARIAVEIS_PKG.V_SOMACUSTOMEDIODASMPSNOPA = 'S'
+17|    THEN
+18|      SELECT COUNT (1)
+19|        INTO P_COUNT
+20|        FROM TGFFCP
+21|       WHERE CODPROD = P_CODPROD AND FORMPRINCIPAL = 'S';
+22|
+23|      IF P_COUNT > 0
+24|      THEN
+25|         P_PEGARCUSREP := 'S';
+26|      END IF;
+27|    END IF;
+28|   
+29|   
+30|    MERGE INTO TGFCUS
+31|    USING (
+32|            SELECT
+33|               DTATUAL,
+34|               CODEMP,
+35|               P_CODPROD AS CODPROD,
+36|               CODLOCAL,
+37|               ' ' AS CONTROLE,
+38|               ROUND (SUM(CUSMEDICM) / (CASE WHEN SUM(ESTOQUE) = 0 THEN 1 ELSE SUM(ESTOQUE) END), VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS CUSMEDICM,
+39|               ROUND (SUM(CUSSEMICM) / (CASE WHEN SUM(ESTOQUE) = 0 THEN 1 ELSE SUM(ESTOQUE) END), VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS CUSSEMICM,
+40|               ROUND (SUM(CUSMED) / (CASE WHEN SUM(ESTOQUE) = 0 THEN 1 ELSE SUM(ESTOQUE) END), VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS CUSMED,
+41|               SUM(QTDNEG) AS QTDNEG,
+42|               SUM(QTDNEGGER) AS QTDNEGGER,
+43|               SUM(CUSGERANT) AS CUSGERANT,
+44|               SUM(CUSVARIAVELANT) AS CUSVARIAVELANT,
+45|               SUM(CUSREPANT) AS CUSREPANT,
+46|               SUM(ENTRADACOMICMSANT) AS ENTRADACOMICMSANT,
+47|               SUM(ENTRADASEMICMSANT) AS ENTRADASEMICMSANT
+48|            FROM (
+49|                SELECT
+50|                   DTATUAL,
+51|                   CODEMP,
+52|                   CODPROD,
+53|                   CODLOCAL,
+54|                   CONTROLE,
+55|                   (ESTOQUE * CUSMEDICM) AS CUSMEDICM,
+56|                   (ESTOQUE * CUSSEMICM) AS CUSSEMICM,
+57|                   (ESTOQUE * CUSMED) AS CUSMED,
+58|                   QTDNEG,
+59|                   QTDNEGGER,
+60|                   CUSGERANT,
+61|                   CUSVARIAVELANT,
+62|                   CUSREPANT,
+63|                   ENTRADACOMICMSANT,
+64|                   ENTRADASEMICMSANT,
+65|                   ESTOQUE
+66|                FROM(
+67|                    SELECT
+68|                       DTATUAL,
+69|                       CODEMP,
+70|                       CODPROD,
+71|                       CODLOCAL,
+72|                       CONTROLE,
+73|                       (CASE
+74|                          WHEN ESTOQUE + ENTRADAS = 0 THEN VLRENTRADACOMICMS
+75|                          ELSE ROUND ((CUSTOESTOQUECOMICMS + CUSTOENTRADACOMICMS) / (ESTOQUE + ENTRADAS), VARIAVEIS_PKG.V_DECIMAISPARACUSTO)
+76|                        END) AS CUSMEDICM,
+77|                       (CASE
+78|                          WHEN ESTOQUE + ENTRADAS = 0 THEN VLRENTRADASEMICMS
+79|                          ELSE ROUND ((CUSTOESTOQUESEMICMS + CUSTOENTRADASEMICMS) / (ESTOQUE + ENTRADAS), VARIAVEIS_PKG.V_DECIMAISPARACUSTO)
+80|                        END) AS CUSSEMICM,
+81|                       (CASE
+82|                          WHEN ESTOQUEGERENCIAL + ENTRADASGERENCIAL = 0 THEN VLRCUSGER
+83|                          ELSE ROUND ((CUSTOESTOQUEGERENCIAL + CUSTOENTRADAGERENCIAL) / (ESTOQUEGERENCIAL + ENTRADASGERENCIAL), VARIAVEIS_PKG.V_DECIMAISPARACUSTO)
+84|                        END) AS CUSMED,
+85|                        (CASE 
+86|                           WHEN ESTOQUE < 0 THEN 0 
+87|                           ELSE ESTOQUE 
+88|                         END + ENTRADAS) AS QTDNEG,
+89|                        (CASE
+90|                           WHEN ESTOQUEGERENCIAL < 0 THEN 0
+91|                           ELSE ESTOQUEGERENCIAL
+92|                         END + ENTRADASGERENCIAL) AS QTDNEGGER,
+93|                        ROUND (CUSGERANT, VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS CUSGERANT,
+94|                        ROUND (CUSVARIAVELANT, VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS CUSVARIAVELANT,
+95|                        ROUND (CUSREPANT, VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS CUSREPANT,
+96|                        ROUND (ENTRADACOMICMSANT, VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS ENTRADACOMICMSANT,
+97|                        ROUND (ENTRADASEMICMSANT, VARIAVEIS_PKG.V_DECIMAISPARACUSTO) AS ENTRADASEMICMSANT,
+98|                        (ESTOQUE + ENTRADAS) AS ESTOQUE
+99|                    FROM (
+100|                        SELECT
+101|                           DTATUAL,
+102|                           CODEMP,
+103|                           CODPROD,
+104|                           CODLOCAL,
+105|                           CONTROLE,
+106|                           (VLRCUSMEDICMSANT 
+107|                            * CASE
+108|                               WHEN ESTOQUEATUAL - MOVIMENTO < 0 THEN 0
+109|                               ELSE ESTOQUEATUAL - MOVIMENTO
+110|                              END) AS CUSTOESTOQUECOMICMS,
+111|                           (VLRENTRADACOMICMS
+112|                            * CASE
+113|                               WHEN ENTRADAS = 0 AND RECARGA = 'S' THEN 1
+114|                               ELSE ENTRADAS
+115|                              END) AS CUSTOENTRADACOMICMS,
+116|                           (VLRCUSSEMICMSANT
+117|                            * CASE
+118|                               WHEN ESTOQUEATUAL - MOVIMENTO < 0 THEN 0
+119|                               ELSE ESTOQUEATUAL - MOVIMENTO
+120|                            END) AS CUSTOESTOQUESEMICMS,
+121|                           (VLRENTRADASEMICMS
+122|                            * CASE
+123|                                WHEN ENTRADAS = 0 AND RECARGA = 'S' THEN 1
+124|                                ELSE ENTRADAS
+125|                              END) AS CUSTOENTRADASEMICMS,
+126|                           (CASE
+127|                              WHEN ESTOQUEATUAL - MOVIMENTO < 0 THEN 0
+128|                              ELSE ESTOQUEATUAL - MOVIMENTO
+129|                            END) AS ESTOQUEGERENCIAL,
+130|                           (CASE
+131|                              WHEN ENTRADAS < 0 THEN 0
+132|                              ELSE ENTRADAS
+133|                            END) AS ENTRADASGERENCIAL,
+134|                           (VLRCUSMEDANT
+135|                            * CASE
+136|                                WHEN ESTOQUEATUAL - MOVIMENTO < 0 THEN 0
+137|                                ELSE ESTOQUEATUAL - MOVIMENTO
+138|                              END) AS CUSTOESTOQUEGERENCIAL,
+139|                           (VLRCUSGER
+140|                            * CASE
+141|                                WHEN ENTRADAS = 0 AND RECARGA = 'S' THEN 1
+142|                                ELSE ENTRADAS
+143|                            END) AS CUSTOENTRADAGERENCIAL,
+144|                           (CASE
+145|                             WHEN ESTOQUEATUAL - MOVIMENTO < 0 THEN 0
+146|                             ELSE ESTOQUEATUAL - MOVIMENTO
+147|                             END) AS ESTOQUE,
+148|                           VLRENTRADACOMICMS,
+149|                           VLRENTRADASEMICMS,
+150|                           VLRCUSGER,
+151|                           ENTRADAS,
+152|                           /* CUSTOS ANTERIORES */
+153|                           CUSGERANT,
+154|                           CUSVARIAVELANT,
+155|                           CUSREPANT,
+156|                           ENTRADACOMICMSANT,
+157|                           ENTRADASEMICMSANT
+158|                        FROM (
+159|                            SELECT 
+160|                               CUS.DTATUAL,
+161|                               CUS.CODEMP,
+162|                               CUS.CODPROD,
+163|                               CUS.CODLOCAL,
+164|                               CUS.CONTROLE,
+165|                               /* CUSTOS DO DIA */
+166|                               NVL (CUS.ENTRADACOMICMS, 0)     AS VLRENTRADACOMICMS,
+167|                               NVL (CUS.ENTRADASEMICMS, 0)     AS VLRENTRADASEMICMS,
+168|                               NVL (CUS.CUSGER, 0)             AS CUSGER,
+169|                               NVL (CUS.CUSREP, 0)             AS CUSREP,
+170|                               NVL (CUS.CUSVARIAVEL, 0)        AS CUSVARIAVEL,
+171|                               NVL (CUS.CUSMEDICM, 0)          AS CUSMEDICM,
+172|                               NVL (CUS.CUSSEMICM, 0)          AS CUSSEMICM,
+173|                               NVL (CUS.CUSMED, 0)             AS CUSMED,
+174|                               CASE
+175|                                  WHEN P_PEGARCUSREP = 'S' THEN NVL (CUS.CUSREP, 0)
+176|                                  ELSE NVL (CUS.CUSGER, 0)
+177|                               END AS VLRCUSGER,
+178|                               NVL (CUS.QTDNEG, 0)             AS QTDNEG,
+179|                               NVL (CUS.QTDNEGGER, 0)          AS QTDNEGGER,
+180|                               CUS.RECARGA                     AS RECARGA,
+181|                               /* CUSTOS ANTERIORES */
+182|                               NVL (CUSANT.ENTRADACOMICMS, 0)  AS ENTRADACOMICMSANT,
+183|                               NVL (CUSANT.ENTRADASEMICMS, 0)  AS ENTRADASEMICMSANT,
+184|                               NVL (CUSANT.CUSGER, 0)          AS CUSGERANT,
+185|                               NVL (CUSANT.CUSREP, 0)          AS CUSREPANT, 
+186|                               NVL (CUSANT.CUSVARIAVEL, 0)     AS CUSVARIAVELANT,
+187|                               NVL (CUSANT.CUSMEDICM, 0)       AS VLRCUSMEDICMSANT,
+188|                               NVL (CUSANT.CUSSEMICM, 0)       AS VLRCUSSEMICMSANT,
+189|                               NVL (CUSANT.CUSMED, 0)          AS VLRCUSMEDANT,
+190|                               NVL (CUSANT.QTDNEG, 0)          AS QTDNEGANT,
+191|                               NVL (CUSANT.QTDNEGGER, 0)       AS QTDNEGGERANT,
+192|                               /* ESTOQUE ATUAL */
+193|                               (SELECT NVL (SUM (ESTOQUE), 0)
+194|                                 FROM TGFEST EST
+195|                                 WHERE     
+196|                                    EST.CODPROD = CUS.CODPROD
+197|                                    AND EST.CODEMP = CASE WHEN VARIAVEIS_PKG.V_CUSTOPOREMPRESA = 'N' THEN EST.CODEMP ELSE P_CODEMP END
+198|                                    AND EST.CODLOCAL   = CASE WHEN VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'N' THEN EST.CODLOCAL ELSE P_CODLOCAL END
+199|                                    -- AND EST.CONTROLE = ?
+200|                                    AND TIPO = 'P'
+201|                               ) AS ESTOQUEATUAL,
+202|                               /* MOVIMENTO */
+203|                               (SELECT 
+204|                                  NVL (SUM (ESE.QTDNEG
+205|                                            * (CASE
+206|                                                  WHEN (ESE.ATUALESTOQUE <> 0
+207|                                                        AND NVL (ESE.ATUALESTTERC,'N') IN('N','T','D'))
+208|                                                  THEN
+209|                                                     ESE.ATUALESTOQUE
+210|                                                  WHEN (ESE.ATUALESTOQUE = 0
+211|                                                        AND NVL (ESE.ATUALESTTERC,'N') IN('P','R'))
+212|                                                  THEN
+213|                                                     CASE
+214|                                                        WHEN (NVL (ESE.ATUALESTTERC,'N') = 'P')
+215|                                                        THEN
+216|                                                           1
+217|                                                        ELSE
+218|                                                           -1
+219|                                                     END
+220|                                               END)),
+221|                                         0)
+222|                                 FROM TGFESE ESE
+223|                                 WHERE     
+224|                                      ESE.CODPROD = CUS.CODPROD
+225|                                      AND ESE.CODEMP = CASE WHEN VARIAVEIS_PKG.V_CUSTOPOREMPRESA = 'N' THEN ESE.CODEMP ELSE P_CODEMP END
+226|                                      AND ((VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'N' AND NOT (ESE.TIPMOV = 'T' AND ESE.CODEMP = ESE.CODEMPCONTPART)) OR (VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'S' AND ESE.CODLOCALORIG = P_CODLOCAL))
+227|                                      -- AND ESE.CONTROLE = ?
+228|                                      AND (ESE.ATUALESTOQUE <> 0 AND NVL (ESE.ATUALESTTERC,'N') IN('N', 'T', 'D') OR (ESE.ATUALESTOQUE = 0 AND NVL (ESE.ATUALESTTERC, 'N') IN('P', 'R')))
+229|                                      AND ESE.DTREFERENCIA >= P_DTBASE
+230|                                      AND ESE.DTREFERENCIA >= VARIAVEIS_PKG.V_DTINICIOCONTEST
+231|                               ) AS MOVIMENTO,
+232|                               /* ENTRADAS */
+233|                               (/* ENTRADAS NORMAIS */
+234|                                 SELECT NVL (SUM (E.QTDNEG), 0) QTD
+235|                                   FROM TGFESE E
+236|                                  WHERE     
+237|                                     E.CODPROD = CUS.CODPROD
+238|                                     AND E.CODEMP = CASE WHEN VARIAVEIS_PKG.V_CUSTOPOREMPRESA = 'N' THEN E.CODEMP ELSE P_CODEMP END
+239|                                     AND ((VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'N' AND NOT (E.TIPMOV = 'T' AND E.CODEMP = E.CODEMPCONTPART)) OR (VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'S' AND E.CODLOCALORIG = P_CODLOCAL))
+240|                                     -- AND ITE.CONTROLE = ?
+241|                                     AND E.ATUALESTOQUE = 1
+242|                                     AND NVL (E.ATUALESTTERC, 'N') IN ('N', 'T', 'D')
+243|                                     AND E.DTREFERENCIA = P_DTBASE)
+244|                               - /* DEVOLUC?ES DE COMPRA QUE CALCULARAM CUSTO */
+245|                                (SELECT NVL (SUM (ITE.QTDNEG), 0)
+246|                                   FROM TGFCAB CAB, TGFITE ITE
+247|                                  WHERE     
+248|                                     CAB.STATUSNOTA = 'L'
+249|                                     AND CAB.TIPMOV = 'E'
+250|                                     AND CAB.DTNEG = P_DTBASE
+251|                                     AND CAB.NUNOTA = ITE.NUNOTA
+252|                                     AND NVL (ITE.ATUALESTTERC,'N') IN ('N', 'T', 'D')
+253|                                        AND ITE.CODPROD = CUS.CODPROD
+254|                                        AND ITE.CODEMP = CASE WHEN VARIAVEIS_PKG.V_CUSTOPOREMPRESA = 'N' THEN ITE.CODEMP ELSE P_CODEMP END
+255|                                        AND ITE.CODLOCALORIG = CASE WHEN VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'N' THEN ITE.CODLOCALORIG ELSE P_CODLOCAL END
+256|                                        -- AND ITE.CONTROLE = ?
+257|                                        AND ITE.ATUALESTOQUE = -1
+258|                                        AND EXISTS
+259|                                               (SELECT 1
+260|                                                  FROM TGFCUSITE CI
+261|                                                 WHERE     CI.NUNOTA =
+262|                                                              CAB.NUNOTA
+263|                                                       AND CI.SEQUENCIA =
+264|                                                              ITE.SEQUENCIA))
+265|                               - /* DEVOLUC?ES DE VENDA DO MESMO DIA ! OU DE DIAS ANTERIORES ?*/
+266|                                (SELECT NVL (SUM (ITE.QTDNEG), 0)
+267|                                   FROM TGFCAB CAB, TGFITE ITE
+268|                                  WHERE     
+269|                                     CAB.STATUSNOTA = 'L'
+270|                                     AND CAB.TIPMOV = 'D'
+271|                                     AND TRUNC (CAB.DTENTSAI) = P_DTBASE
+272|                                     AND CAB.NUNOTA = ITE.NUNOTA
+273|                                     AND ITE.ATUALESTOQUE = 1
+274|                                     AND NVL (ITE.ATUALESTTERC, 'N') IN ('N', 'T', 'D')
+275|                                     AND ITE.CODPROD = CUS.CODPROD
+276|                                     AND ITE.CODEMP = CASE WHEN VARIAVEIS_PKG.V_CUSTOPOREMPRESA = 'N' THEN ITE.CODEMP ELSE P_CODEMP END
+277|                                     AND ITE.CODLOCALORIG = CASE WHEN VARIAVEIS_PKG.V_CUSTOPORLOCAL = 'N' THEN ITE.CODLOCALORIG ELSE P_CODLOCAL END
+278|                                     --AND ITE.CONTROLE =
+279|                                 AND ( ( EXISTS
+280|                                             (SELECT 1
+281|                                                FROM TGFVAR V,
+282|                                                     TGFCAB VEN
+283|                                               WHERE     
+284|                                                  V.NUNOTA = CAB.NUNOTA
+285|                                                  AND V.SEQUENCIA = ITE.SEQUENCIA
+286|                                                  AND V.NUNOTA <> V.NUNOTAORIG
+287|                                                  AND V.NUNOTAORIG = VEN.NUNOTA
+288|                                                  AND TRUNC (VEN.DTENTSAI) = P_DTBASE
+289|                                                  AND VEN.TIPMOV = 'V'
+290|                                                  AND VEN.STATUSNOTA = 'L')
+291|                                             OR NOT EXISTS
+292|                                                     (SELECT 1
+293|                                                        FROM TGFCUSITE CI
+294|                                                       WHERE     
+295|                                                          CI.NUNOTA = CAB.NUNOTA
+296|                                                          AND CI.SEQUENCIA = ITE.SEQUENCIA)))) AS ENTRADAS
+297|                            FROM 
+298|                               TGFCUS CUS
+299|                                  LEFT JOIN TGFCUS CUSANT 
+300|                                         ON (
+301|                                             CUSANT.CODPROD = CUS.CODPROD
+302|                                             AND CUSANT.CODEMP = CUS.CODEMP
+303|                                             AND CUSANT.CODLOCAL = CUS.CODLOCAL
+304|                                             AND CUSANT.CONTROLE = CUS.CONTROLE
+305|                                             AND CUSANT.DTATUAL = SNK_GET_DTULTCUSPRODGENTEMP(CUSANT.CODEMP,CUSANT.CODPROD,CUSANT.CODLOCAL,CUSANT.CONTROLE,P_DTBASE - 1)) 
+306|                            WHERE
+307|                               CUS.CODPROD IN (SELECT CODPRODESP FROM TGFGXE WHERE CODPROD = P_CODPROD)
+308|                               AND CUS.CODEMP = P_CODEMP
+309|                               AND CUS.CODLOCAL = P_CODLOCAL
+310|                               -- AND CUS.CONTROLE = ?
+311|                               AND CUS.DTATUAL  = P_DTBASE
+312|                        )
+313|                    )
+314|                )
+315|            )
+316|            GROUP BY
+317|               DTATUAL,
+318|               CODEMP,
+319|               P_CODPROD,
+320|               CODLOCAL,
+321|               CONTROLE
+322|    ) CUS_MED
+323|    ON (
+324|        TGFCUS.DTATUAL = CUS_MED.DTATUAL
+325|        AND TGFCUS.CODPROD = CUS_MED.CODPROD
+326|        AND TGFCUS.CODEMP = CUS_MED.CODEMP
+327|        AND TGFCUS.CODLOCAL = CUS_MED.CODLOCAL
+328|        AND TGFCUS.CONTROLE = CUS_MED.CONTROLE
+329|    )
+330|    WHEN MATCHED   
+331|    THEN
+332|       UPDATE SET
+333|          TGFCUS.CUSMEDCALC      = 'S',
+334|          TGFCUS.CUSMEDICM       = CASE WHEN CUS_MED.CUSMEDICM < 0 THEN 0 ELSE CUS_MED.CUSMEDICM END,
+335|          TGFCUS.CUSSEMICM       = CASE WHEN CUS_MED.CUSSEMICM < 0 THEN 0 ELSE CUS_MED.CUSSEMICM END,
+336|          TGFCUS.CUSMED          = CASE WHEN CUS_MED.CUSMED < 0 THEN 0 ELSE CUS_MED.CUSMED END,
+337|          TGFCUS.QTDNEG          = CASE WHEN CUS_MED.QTDNEG < 0 THEN 0 ELSE CUS_MED.QTDNEG END,
+338|          TGFCUS.QTDNEGGER       = CASE WHEN CUS_MED.QTDNEGGER < 0 THEN 0 ELSE CUS_MED.QTDNEGGER END,
+339|          TGFCUS.CUSGER          = CASE WHEN TGFCUS.RECARGA = 'S' THEN CUS_MED.CUSGERANT ELSE TGFCUS.CUSGER END,
+340|          TGFCUS.CUSVARIAVEL     = CASE WHEN TGFCUS.RECARGA = 'S' THEN CUS_MED.CUSVARIAVELANT ELSE TGFCUS.CUSVARIAVEL END,
+341|          TGFCUS.CUSREP          = CASE WHEN TGFCUS.RECARGA = 'S' THEN CUS_MED.CUSREPANT ELSE TGFCUS.CUSREP END,
+342|          TGFCUS.ENTRADACOMICMS  = CASE WHEN TGFCUS.RECARGA = 'S' THEN CUS_MED.ENTRADACOMICMSANT ELSE TGFCUS.ENTRADACOMICMS END,
+343|          TGFCUS.ENTRADASEMICMS  = CASE WHEN TGFCUS.RECARGA = 'S' THEN CUS_MED.ENTRADASEMICMSANT ELSE TGFCUS.ENTRADASEMICMS END
+344|    WHEN NOT MATCHED
+345|    THEN
+346|       INSERT    (CODPROD,
+347|                  CODEMP,
+348|                  DTATUAL,
+349|                  CODLOCAL,
+350|                  CONTROLE,
+351|                  CUSMEDICM,
+352|                  CUSSEMICM,
+353|                  CUSMED,
+354|                  QTDNEG)
+355|          VALUES (CUS_MED.CODPROD,
+356|                  CUS_MED.CODEMP,
+357|                  CUS_MED.DTATUAL,
+358|                  CUS_MED.CODLOCAL,
+359|                  CUS_MED.CONTROLE,
+360|                  CUS_MED.CUSMEDICM,
+361|                  CUS_MED.CUSSEMICM,
+362|                  CUS_MED.CUSMED,
+363|                  CUS_MED.QTDNEG);
+364|    
+365|END;
+
+365 rows selected. 
+
+SQL> SPOOL OFF

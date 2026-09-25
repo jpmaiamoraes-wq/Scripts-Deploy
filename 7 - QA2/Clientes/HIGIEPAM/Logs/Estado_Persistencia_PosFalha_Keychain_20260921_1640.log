@@ -1,0 +1,30 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:39:39.638020+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Estado_Persistencia_PosFalha_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 2,
+  "colunas": [
+    "ITEM",
+    "QTD",
+    "DETALHE"
+  ],
+  "linhas": [
+    {
+      "ITEM": "BKP_RMD_01_TSIPAR",
+      "QTD": 4,
+      "DETALHE": "LINHAS_PERSISTIDAS"
+    },
+    {
+      "ITEM": "RMD_CONTROLE_OBJETOS",
+      "QTD": 7,
+      "DETALHE": "LINHAS_DE_CONTROLE"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

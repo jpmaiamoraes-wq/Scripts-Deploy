@@ -1,0 +1,12 @@
+{
+  "pedido": "02_identity.json",
+  "inicio_local": "2026-09-25T07:46:19-03:00",
+  "id": "HOMOLOG_FILA_02_identity",
+  "tipo": "identity",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/FOCUSFINTAXPRD/Logs/FILA_HOMOLOG_FILA_02_identity.json",
+  "log_lote": null,
+  "fim_local": "2026-09-25T07:46:20-03:00",
+  "duracao_s": 1.0
+}

@@ -1,0 +1,210 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:20.628710+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P06A_Unidades_TGFVOL.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 38,
+  "colunas": [
+    "CODVOL",
+    "DESCRVOL",
+    "SITUACAO"
+  ],
+  "linhas": [
+    {
+      "CODVOL": "0",
+      "DESCRVOL": "<SEM VOLUME>",
+      "SITUACAO": "IGNORAR_NUMERAL"
+    },
+    {
+      "CODVOL": "AMPOLA",
+      "DESCRVOL": "AMPOLA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "BG",
+      "DESCRVOL": "BAG",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "BR",
+      "DESCRVOL": "BARRA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "CA",
+      "DESCRVOL": "CARTUCHO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "CD",
+      "DESCRVOL": "CD",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "CJ",
+      "DESCRVOL": "CONJUNTO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "CM",
+      "DESCRVOL": "CENTIMETRO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "CT",
+      "DESCRVOL": "CARTELA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "CX",
+      "DESCRVOL": "CAIXA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "DZ",
+      "DESCRVOL": "DÚZIA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "FD",
+      "DESCRVOL": "FARDO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "FR",
+      "DESCRVOL": "FRASCO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "GF",
+      "DESCRVOL": "GARRAFA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "GL",
+      "DESCRVOL": "GALÃO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "GR",
+      "DESCRVOL": "GRAMA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "HR",
+      "DESCRVOL": "HORAS",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "JG",
+      "DESCRVOL": "JG",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "K",
+      "DESCRVOL": "QUILATE",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "KG",
+      "DESCRVOL": "QUILOGRAMA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "KIT",
+      "DESCRVOL": "KIT",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "KT",
+      "DESCRVOL": "KIT",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "KW",
+      "DESCRVOL": "KILOWATT HORA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "LT",
+      "DESCRVOL": "LITRO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "M2",
+      "DESCRVOL": "METRO QUADRADO",
+      "SITUACAO": "IGNORAR_NUMERAL"
+    },
+    {
+      "CODVOL": "M3",
+      "DESCRVOL": "METRO CÚBICO",
+      "SITUACAO": "IGNORAR_NUMERAL"
+    },
+    {
+      "CODVOL": "MI",
+      "DESCRVOL": "MILHEIRO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "ML",
+      "DESCRVOL": "MILILITRO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "MT",
+      "DESCRVOL": "METRO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "PC",
+      "DESCRVOL": "PEÇA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "PR",
+      "DESCRVOL": "PAR",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "PT",
+      "DESCRVOL": "PACOTE",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "RL",
+      "DESCRVOL": "ROLO",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "SC",
+      "DESCRVOL": "SC",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "T 200L",
+      "DESCRVOL": "T 200L",
+      "SITUACAO": "IGNORAR_NUMERAL"
+    },
+    {
+      "CODVOL": "TB",
+      "DESCRVOL": "TB",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "TN",
+      "DESCRVOL": "TONELADA",
+      "SITUACAO": "AVALIAR"
+    },
+    {
+      "CODVOL": "UN",
+      "DESCRVOL": "UNIDADE",
+      "SITUACAO": "AVALIAR"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,14 @@
+=== CARD 09 - COMPILACAO AUTORIZADA DA FUNCAO XML ===
+FONTE: 7 - QA2/Scripts Originais/FNC_BUSCA_TAG_XML_GERAL.sql
+
+Function FNC_BUSCA_TAG_XML_GERAL compiled
+
+=== STATUS DO OBJETO ===
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                VALID  
+
+=== ERROS DE COMPILACAO ===
+no rows selected
+=== CARD 09 - COMPILACAO DA FUNCAO XML CONCLUIDA ===

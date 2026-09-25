@@ -1,0 +1,2 @@
+-- Preflight read-only FOCUSFINTAXPRD. Somente SELECT/WITH via oracle_direct.py query. Sem DML/DDL.
+SELECT COUNT(*) AS QTD_LINHAS_TGFNUM_TGFFIN FROM TGFNUM WHERE ARQUIVO = 'TGFFIN'

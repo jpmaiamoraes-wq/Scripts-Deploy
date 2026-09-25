@@ -1,0 +1,153 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T18:45:22.939546+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Preflight_Oracle_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 22,
+  "colunas": [
+    "ITEM",
+    "VALOR",
+    "DETALHE",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "ITEM": "BACKUPS_RMD_EXISTENTES",
+      "VALOR": "0",
+      "DETALHE": "ALL_TABLES",
+      "STATUS": "PERSISTENCIA"
+    },
+    {
+      "ITEM": "BASE_EMPRESAS",
+      "VALOR": "3",
+      "DETALHE": null,
+      "STATUS": "BASE_INTEIRA"
+    },
+    {
+      "ITEM": "ETAPA_18_TGFCGM",
+      "VALOR": "3",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_18_TGFCMV",
+      "VALOR": "2",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_19_TGFPAR",
+      "VALOR": "844",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_20_TTKEVT",
+      "VALOR": "12229",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_20_TTKINDAGT",
+      "VALOR": "1",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_20_TTKNOT",
+      "VALOR": "10744",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_21_ICMS_DIVERGENTES",
+      "VALOR": "151",
+      "DETALHE": "CANDIDATOS",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_22_TGFPAR_CGC_CPF",
+      "VALOR": "843",
+      "DETALHE": "COM_IDENTIFICADOR",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_23_CONTROLE_OBJETOS",
+      "VALOR": "A_SER_CRIADA",
+      "DETALHE": "CONTROLE_DA_REVISAO",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_24_TGFPAR",
+      "VALOR": "844",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_25_TGFPRO",
+      "VALOR": "2506",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_26_TGFTIT",
+      "VALOR": "65",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_27_TSICID",
+      "VALOR": "5572",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_28_TGFTPV",
+      "VALOR": "20",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_29_TSIBAI",
+      "VALOR": "46145",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "ETAPA_30_TSIEND",
+      "VALOR": "682295",
+      "DETALHE": "TOTAL",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "IDENTIDADE",
+      "VALOR": "FRANCISCO_JUNIOR",
+      "DETALHE": "SANKHYA",
+      "STATUS": "higiepamprd.sankhyacloud.com.br"
+    },
+    {
+      "ITEM": "OBJETOS_INVALIDOS",
+      "VALOR": "35",
+      "DETALHE": "ALL_OBJECTS",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "PRIV_RECOMPILACAO",
+      "VALOR": "3",
+      "DETALHE": "SESSION_PRIVS",
+      "STATUS": "READ_ONLY"
+    },
+    {
+      "ITEM": "QUOTAS_TABLESPACES",
+      "VALOR": "0",
+      "DETALHE": "USER_TS_QUOTAS",
+      "STATUS": "DIAGNOSTICO"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,204 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T18:38:29.159214+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Consulta_Onboarding_Oracle_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 20,
+  "colunas": [
+    "TIPO_REGISTRO",
+    "CODIGO",
+    "NOME",
+    "IDENTIFICADOR",
+    "EMAIL",
+    "CODGRUPO",
+    "CODEMP_USUARIO"
+  ],
+  "linhas": [
+    {
+      "TIPO_REGISTRO": "EMPRESA",
+      "CODIGO": "1",
+      "NOME": "GPD SOLUCOES EM LIMPEZA E MANUTENCAO LTD",
+      "IDENTIFICADOR": "27492179000106",
+      "EMAIL": null,
+      "CODGRUPO": null,
+      "CODEMP_USUARIO": null
+    },
+    {
+      "TIPO_REGISTRO": "EMPRESA",
+      "CODIGO": "2",
+      "NOME": "L PORFIRIO DOS SANTOS  LTDA",
+      "IDENTIFICADOR": "36646530000159",
+      "EMAIL": null,
+      "CODGRUPO": null,
+      "CODEMP_USUARIO": null
+    },
+    {
+      "TIPO_REGISTRO": "EMPRESA",
+      "CODIGO": "3",
+      "NOME": "CELAYA PAPEIS LTDA",
+      "IDENTIFICADOR": "59138402000108",
+      "EMAIL": null,
+      "CODGRUPO": null,
+      "CODEMP_USUARIO": null
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "0",
+      "NOME": "SUP",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "1",
+      "NOME": "COTACAOB2B",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "10",
+      "NOME": "SKWCLOUDAPI",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": null
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "11",
+      "NOME": "GESSICA",
+      "IDENTIFICADOR": null,
+      "EMAIL": "gessicapduarte20@gmail.com",
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "12",
+      "NOME": "ALANA",
+      "IDENTIFICADOR": null,
+      "EMAIL": "alana_porfirio@hotmail.com",
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "13",
+      "NOME": "PAULA",
+      "IDENTIFICADOR": null,
+      "EMAIL": "higiepam.rh@gmail.com",
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "14",
+      "NOME": "SIMONE",
+      "IDENTIFICADOR": null,
+      "EMAIL": "simone.higiepam@gmail.com",
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "15",
+      "NOME": "ELIZANDRO",
+      "IDENTIFICADOR": null,
+      "EMAIL": "almoxarifado.higiepam@gmail.com",
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "16",
+      "NOME": "MIKAELA",
+      "IDENTIFICADOR": null,
+      "EMAIL": "higiepamfinanceiro@gmail.com",
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "2",
+      "NOME": "SKWCLOUD",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": null
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "3",
+      "NOME": "VENDEDOR",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "4",
+      "NOME": "GERENTE",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "5",
+      "NOME": "SANKHYA",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "6",
+      "NOME": "LIBERADOR",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "7",
+      "NOME": "INTEGRAÇÃO.PONTOTEL",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "8",
+      "NOME": "INTEGRAÇÃO.MINDSIGHT",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    },
+    {
+      "TIPO_REGISTRO": "USUARIO",
+      "CODIGO": "9",
+      "NOME": "INTEGRAÇÃO.VIXTING",
+      "IDENTIFICADOR": null,
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "CODEMP_USUARIO": "1"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,85 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T13:20:09.231806+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/PosValidacao_Master_ReadOnly_RIOSLTDAPRD.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "service_esperado": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 13,
+  "colunas": [
+    "ITEM",
+    "QTD",
+    "DETALHE"
+  ],
+  "linhas": [
+    {
+      "ITEM": "BACKUP_BAIRROS_LINHAS",
+      "QTD": 45045,
+      "DETALHE": "BKP_RMD_PAD_TSIBAI"
+    },
+    {
+      "ITEM": "BACKUP_CIDADES_LINHAS",
+      "QTD": 0,
+      "DETALHE": "BKP_RMD_PAD_TSICID"
+    },
+    {
+      "ITEM": "BACKUP_ENDERECOS_LINHAS",
+      "QTD": 646110,
+      "DETALHE": "BKP_RMD_PAD_TSIEND"
+    },
+    {
+      "ITEM": "BACKUP_PARCEIROS_LINHAS",
+      "QTD": 0,
+      "DETALHE": "BKP_RMD_PAD_TGFPAR"
+    },
+    {
+      "ITEM": "BACKUP_PRODUTOS_LINHAS",
+      "QTD": 0,
+      "DETALHE": "BKP_RMD_PAD_TGFPRO"
+    },
+    {
+      "ITEM": "BACKUP_TIPOS_VENDA_LINHAS",
+      "QTD": 0,
+      "DETALHE": "BKP_RMD_PAD_TGFTPV"
+    },
+    {
+      "ITEM": "BACKUP_TITULOS_LINHAS",
+      "QTD": 0,
+      "DETALHE": "BKP_RMD_PAD_TGFTIT"
+    },
+    {
+      "ITEM": "BAIRROS_ATUAIS",
+      "QTD": 45995,
+      "DETALHE": "TSIBAI"
+    },
+    {
+      "ITEM": "ENDERECOS_ATUAIS",
+      "QTD": 681891,
+      "DETALHE": "TSIEND"
+    },
+    {
+      "ITEM": "IDENTIDADE",
+      "QTD": 1,
+      "DETALHE": "FRANCISCO_JUNIOR|SANKHYA|riosltdaprd.sankhyacloud.com.br|RIOSLTDAPRD"
+    },
+    {
+      "ITEM": "MAPA_UNIDADES_LINHAS",
+      "QTD": 93,
+      "DETALHE": "RMD_MAP_UNIDADES"
+    },
+    {
+      "ITEM": "OBJETOS_CONTROLE_NAO_RETORNADOS",
+      "QTD": 0,
+      "DETALHE": "RMD_CONTROLE_OBJETOS"
+    },
+    {
+      "ITEM": "OBJETOS_INVALIDOS",
+      "QTD": 46,
+      "DETALHE": "ALL_OBJECTS_CURRENT_SCHEMA"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

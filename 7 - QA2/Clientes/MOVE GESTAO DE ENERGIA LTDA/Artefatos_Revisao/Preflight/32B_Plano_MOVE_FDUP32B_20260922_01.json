@@ -1,0 +1,25 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "base": "MOVE GESTAO DE ENERGIA LTDA",
+  "execution_id_lote": "MOVE_FDUP32B_20260922_01",
+  "execution_id_mapa_auditoria": "MOVE_FDUP_20260922_01",
+  "entrypoint": "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Executor_MOVE_20260922.sql",
+  "arquivos_lote": [
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Executor_MOVE_20260922.sql",
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Inserir_Notas_Sem_Financeiro_DUP.sql"
+  ],
+  "qtd_instrucoes": 3,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 2,
+    "SELECT": 1
+  },
+  "sha256_lote": "242201616f3bbeca739c7b799d7f20832ebaaa21ec924efeb98c7e5c2d4a44d6",
+  "pos_validacao": "Clientes/MOVE GESTAO DE ENERGIA LTDA/Artefatos_Revisao/PostValidacao/32B_Card09_PosValidacao_MOVE_READONLY.sql",
+  "sha256_pos_validacao": "841cea36c7befc81a434420069718647cf308b531e1bbd35b35dd2db78485dd3",
+  "preflight": {
+    "status": "PREFLIGHT_APROVADO",
+    "bloqueios": 0,
+    "avisos": 0
+  },
+  "dml_ddl_executado": false
+}

@@ -1,0 +1,129 @@
+SQL> 
+SQL> PROMPT === ETAPA 31 ISOLADA ===
+=== ETAPA 31 ISOLADA ===
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+SQL> -- Recompila objetos invalidos apenas quando a sessao possui o privilegio necessario.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> DECLARE
+  2    v_schema VARCHAR2(128):=SYS_CONTEXT('USERENV','CURRENT_SCHEMA');
+  3    v_usuario VARCHAR2(128):=SYS_CONTEXT('USERENV','SESSION_USER');
+  4    v_antes NUMBER;
+  5    v_depois NUMBER;
+  6    v_priv NUMBER;
+  7  BEGIN
+  8    SELECT COUNT(*) INTO v_antes FROM ALL_OBJECTS
+  9    WHERE OWNER=v_schema AND STATUS='INVALID';
+ 10  
+ 11    SELECT COUNT(*) INTO v_priv FROM SESSION_PRIVS
+ 12    WHERE PRIVILEGE='ALTER ANY PROCEDURE';
+ 13  
+ 14    IF v_antes=0 THEN
+ 15      DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDO; OBJETOS_INVALIDOS=0');
+ 16    ELSIF v_schema<>v_usuario AND v_priv=0 THEN
+ 17      DBMS_OUTPUT.PUT_LINE('STATUS=IGNORADO_SEM_PRIVILEGIO; OBJETOS_INVALIDOS='||v_antes
+ 18        ||'; USUARIO='||v_usuario||'; SCHEMA='||v_schema||'; PRIVILEGIO_NECESSARIO=ALTER ANY PROCEDURE');
+ 19    ELSE
+ 20      DBMS_UTILITY.COMPILE_SCHEMA(SCHEMA=>v_schema,COMPILE_ALL=>FALSE);
+ 21      SELECT COUNT(*) INTO v_depois FROM ALL_OBJECTS
+ 22      WHERE OWNER=v_schema AND STATUS='INVALID';
+ 23      DBMS_OUTPUT.PUT_LINE('STATUS=CONCLUIDO; INVALIDOS_ANTES='||v_antes||'; INVALIDOS_DEPOIS='||v_depois);
+ 24    END IF;
+ 25  END;
+ 26  /
+STATUS=IGNORADO_SEM_PRIVILEGIO; OBJETOS_INVALIDOS=49; USUARIO=FRANCISCO_JUNIOR; SCHEMA=SANKHYA; PRIVILEGIO_NECESSARIO=ALTER ANY PROCEDURE
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> COLUMN OBJECT_TYPE FORMAT A24
+SQL> COLUMN OBJECT_NAME FORMAT A50
+SQL> SELECT OBJECT_TYPE,OBJECT_NAME
+  2  FROM ALL_OBJECTS
+  3  WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND STATUS='INVALID'
+  4  ORDER BY OBJECT_TYPE,OBJECT_NAME;
+
+OBJECT_TYPE              OBJECT_NAME                                       
+------------------------ --------------------------------------------------
+FUNCTION                 ACL_GET_ALIQPART                                  
+FUNCTION                 FSP_DATA_DIA_UTIL                                 
+FUNCTION                 FSP_RETURN_DATAS_UTEIS                            
+FUNCTION                 FTIM_EXECUTAR                                     
+FUNCTION                 F_OBTEMPRECO_DATA                                 
+FUNCTION                 F_OBTEM_SALDO_INDENIZ                             
+FUNCTION                 F_WMS_GETESTOQUEDOCA_PARC                         
+FUNCTION                 GET_CODPROD_REF                                   
+FUNCTION                 GET_INDICE_AJUSTE_NOTA                            
+FUNCTION                 GET_PREVISAO_CREDITO_DEBITO                       
+FUNCTION                 GET_PROXIMO_DIA_UTIL                              
+FUNCTION                 QTDEVOLPADRAO                                     
+FUNCTION                 QTDEVOLPADRAO2                                    
+FUNCTION                 RECEBIMENTO_M3_TOTAL                              
+FUNCTION                 RECEBIMENTO_PESO_TOTAL                            
+FUNCTION                 SNK_GETCODPRODALT                                 
+FUNCTION                 SNK_GETDTBAIXABEM                                 
+FUNCTION                 SNK_GETMESESSEMPIS                                
+FUNCTION                 SNK_GETPRODUTOAGRUPADOGIRO                        
+FUNCTION                 SNK_GETSOMAPARTILHA2                              
+FUNCTION                 SNK_GETSOMAVLRTGFDIN                              
+FUNCTION                 SNK_GETVLRREA                                     
+FUNCTION                 SNK_GETVLRTGFDIN                                  
+FUNCTION                 SNK_GET_CENTROCUSTO_EFD                           
+FUNCTION                 SNK_GET_CFO_NOTA                                  
+FUNCTION                 SNK_GET_CODCFO                                    
+FUNCTION                 SNK_GET_CODIGO_PRODUTO                            
+FUNCTION                 SNK_GET_COD_LEGAL                                 
+FUNCTION                 SNK_GET_CONTACONTABIL_EFD                         
+FUNCTION                 SNK_GET_CONTACONTABIL_IMOB_EFD                    
+FUNCTION                 SNK_GET_CTACTB_CADASTROS_EFD                      
+FUNCTION                 SNK_GET_DENTRO_FORA_ESTADO                        
+FUNCTION                 SNK_GET_ICMS_ESPECIAL_CAB                         
+FUNCTION                 SNK_GET_INDITENS                                  
+FUNCTION                 SNK_GET_NAT_FILHA_REC_DESP                        
+FUNCTION                 SNK_GET_NUNOTA                                    
+FUNCTION                 SNK_GET_SATUSCONFERENCIA                          
+FUNCTION                 SNK_GET_ST_RECUPERAR                              
+FUNCTION                 SNK_GET_VLRITENS                                  
+FUNCTION                 SNK_GET_VLRTOT_SERVICO                            
+FUNCTION                 SNK_PRECO                                         
+FUNCTION                 TIM_ASSINAFIADOR                                  
+FUNCTION                 TIM_ASSINAINQUILINO                               
+FUNCTION                 TIM_ASSINALOCADOR                                 
+FUNCTION                 TIM_DNORM_ENDERECO                                
+FUNCTION                 TIM_MONTAFIADOR                                   
+FUNCTION                 TIM_MONTAFORMAREPASSE                             
+FUNCTION                 TIM_MONTAINQUILINO                                
+FUNCTION                 TIM_MONTAPROPRIETARIOS                            
+
+49 rows selected. 
+
+SQL> 
+SQL> PROMPT === FIM RECOMPILACAO OBJETOS INVALIDOS ===
+=== FIM RECOMPILACAO OBJETOS INVALIDOS ===
+SQL> 
+SQL> PROMPT === VALIDACAO ETAPA 31 ===
+=== VALIDACAO ETAPA 31 ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         (SELECT COUNT(*) FROM SESSION_PRIVS WHERE PRIVILEGE='ALTER ANY PROCEDURE') ALTER_ANY_PROCEDURE,
+  4         (SELECT COUNT(*) FROM ALL_OBJECTS
+  5           WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND STATUS='INVALID') OBJETOS_INVALIDOS
+  6  FROM DUAL;
+
+USUARIO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SCHEMA_ATUAL
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ALTER_ANY_PROCEDURE OBJETOS_INVALIDOS
+------------------- -----------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+SANKHYA                                                                                                                                                                                                                                         
+                  0                49
+
+
+SQL> 
+SQL> PROMPT === FIM ETAPA 31 ISOLADA ===
+=== FIM ETAPA 31 ISOLADA ===
+SQL> SPOOL OFF

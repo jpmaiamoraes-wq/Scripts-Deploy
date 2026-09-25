@@ -1,0 +1,12 @@
+{
+  "pedido": "16_o02.json",
+  "inicio_local": "2026-09-25T09:33:17-03:00",
+  "id": "MEDCHAP_O02_20260925_01",
+  "tipo": "query",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/O02_Usuarios_Grupos_20260925.json",
+  "log_lote": null,
+  "fim_local": "2026-09-25T09:33:18-03:00",
+  "duracao_s": 0.9
+}

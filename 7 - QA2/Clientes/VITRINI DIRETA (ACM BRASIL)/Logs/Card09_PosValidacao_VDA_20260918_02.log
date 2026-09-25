@@ -1,0 +1,47 @@
+=== CARD 09 - POS-VALIDACAO ===
+
+MAPA_TOTAL MAPA_NOTAS
+---------- ----------
+        21         21
+
+
+STATUS_MAPA                       QTD
+-------------------------- ----------
+APTO_PARA_VALIDACAO_FINAL           6
+SEM_VDUP_XML                       15
+
+
+AUDITORIA_TOTAL  NUFIN_MIN  NUFIN_MAX
+--------------- ---------- ----------
+              6      35861      35866
+
+
+TGFFIN_AUDITADOS
+----------------
+               6
+
+
+APTOS_SEM_FINANCEIRO
+--------------------
+                   0
+
+
+TGFNUM_ROWS ULTCOD_TGFFIN
+----------- -------------
+          1         35866
+
+
+Error starting at line : 11 in command -
+select nufin,nunota,vlrdesdob,dtvenc,codtiptit,codparc,codemp from tgffin f join bkp_rmd_vda_fdup_20260918_02_ins i on i.nufin=f.nufin and i.nunota=f.nunota where i.id_execucao='VDA_ACM_FDUP_20260918_02'.  order bnufin
+Error at Command Line : 11 Column : 204
+Error report -
+SQL Error: ORA-03048: SQL reserved word '.' is not syntactically valid following '...='VDA_ACM_FDUP_20260918_02''
+Help: https://docs.oracle.com/error-help/db/ora-03048/
+TGFFIN validada; nenhuma alteracao nesta pos-validacao.
+
+Error starting at line : 2 in command -
+select nufin,nunota,vlrdesdob,dtvenc,codtiptit,codparc,codemp from tgffin f join bkp_rmd_vda_fdup_20260918_02_ins i on i.nufin=f.nufin and i.nunota=f.nunota where i.id_execucao='VDA_ACM_FDUP_20260918_02' order by nufin
+Error at Command Line : 2 Column : 31
+Error report -
+SQL Error: ORA-00918: DTVENC: column ambiguously specified - appears in  and
+Help: https://docs.oracle.com/error-help/db/ora-00918/

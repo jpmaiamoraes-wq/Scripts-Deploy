@@ -1,0 +1,191 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T11:25:59.806015+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Inventario_TSIBAI_TSIEND_Colunas_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 15,
+  "colunas": [
+    "OWNER",
+    "TABLE_NAME",
+    "COLUMN_ID",
+    "COLUMN_NAME",
+    "DATA_TYPE",
+    "DATA_LENGTH",
+    "DATA_PRECISION",
+    "DATA_SCALE",
+    "NULLABLE"
+  ],
+  "linhas": [
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 1,
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "DATA_LENGTH": 22,
+      "DATA_PRECISION": 10,
+      "DATA_SCALE": 0,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 2,
+      "COLUMN_NAME": "NOMEBAI",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 60,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 3,
+      "COLUMN_NAME": "CODREG",
+      "DATA_TYPE": "NUMBER",
+      "DATA_LENGTH": 22,
+      "DATA_PRECISION": 10,
+      "DATA_SCALE": 0,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 4,
+      "COLUMN_NAME": "DTALTER",
+      "DATA_TYPE": "DATE",
+      "DATA_LENGTH": 7,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 5,
+      "COLUMN_NAME": "DESCRICAOCORREIO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 60,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 6,
+      "COLUMN_NAME": "NUVERSAO",
+      "DATA_TYPE": "NUMBER",
+      "DATA_LENGTH": 22,
+      "DATA_PRECISION": 19,
+      "DATA_SCALE": 0,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIBAI",
+      "COLUMN_ID": 7,
+      "COLUMN_NAME": "ATUNUVERSAO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 1,
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "DATA_LENGTH": 22,
+      "DATA_PRECISION": 10,
+      "DATA_SCALE": 0,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 2,
+      "COLUMN_NAME": "NOMEEND",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 60,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 3,
+      "COLUMN_NAME": "TIPO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 8,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 4,
+      "COLUMN_NAME": "DTALTER",
+      "DATA_TYPE": "DATE",
+      "DATA_LENGTH": 7,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "N"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 5,
+      "COLUMN_NAME": "DESCRICAOCORREIO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 60,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 6,
+      "COLUMN_NAME": "CODLOGRADOURO",
+      "DATA_TYPE": "VARCHAR2",
+      "DATA_LENGTH": 4,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 7,
+      "COLUMN_NAME": "NUVERSAO",
+      "DATA_TYPE": "NUMBER",
+      "DATA_LENGTH": 22,
+      "DATA_PRECISION": 19,
+      "DATA_SCALE": 0,
+      "NULLABLE": "Y"
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEND",
+      "COLUMN_ID": 8,
+      "COLUMN_NAME": "ATUNUVERSAO",
+      "DATA_TYPE": "CHAR",
+      "DATA_LENGTH": 1,
+      "DATA_PRECISION": null,
+      "DATA_SCALE": null,
+      "NULLABLE": "Y"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

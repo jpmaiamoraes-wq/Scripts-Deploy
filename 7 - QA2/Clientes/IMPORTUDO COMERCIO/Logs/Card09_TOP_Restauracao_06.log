@@ -1,0 +1,5 @@
+CARD09_RESTAURACAO_TOP
+SQL Developer execution: UPDATE TGFTOP ... FROM BKP_RMD_TOP_IMPORTUDO_06
+9 rows updated.
+COMMIT concluido.
+Validacao final: TOPS_ATIVOS=0 para CODTIPOPER 1164/1166; estado original restaurado.

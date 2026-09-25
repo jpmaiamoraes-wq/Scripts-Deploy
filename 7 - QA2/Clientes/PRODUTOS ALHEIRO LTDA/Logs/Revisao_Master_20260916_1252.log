@@ -1,0 +1,569 @@
+SQL> 
+SQL> PROMPT === PREFLIGHT SOMENTE LEITURA ===
+=== PREFLIGHT SOMENTE LEITURA ===
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS ALHEIRO LTDA/00_Preflight_ALHEIRO.sql"
+SQL> -- Preflight somente leitura da Revisao Master Deploy - PRODUTOS ALHEIRO LTDA.
+SQL> -- Nao contem senha, credenciais ou comandos de alteracao.
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET HEADING ON
+SQL> SET LINESIZE 240
+SQL> SET LONG 200000
+SQL> SET PAGESIZE 500
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === PRECHECK RMD / IDENTIDADE DA SESSAO ===
+=== PRECHECK RMD / IDENTIDADE DA SESSAO ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO_SESSAO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICE_NAME,
+  4         SYS_CONTEXT('USERENV','DB_NAME') DB_NAME,
+  5         SYS_CONTEXT('USERENV','INSTANCE_NAME') INSTANCE_NAME,
+  6         SYS_CONTEXT('USERENV','IP_ADDRESS') IP_ORIGEM
+  7    FROM DUAL;
+
+USUARIO_SESSAO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SCHEMA_ATUAL
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DB_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSTANCE_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+IP_ORIGEM                                                                                                                                                                                                                                       
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+SANKHYA                                                                                                                                                                                                                                         
+alheiroprd.sankhyacloud.com.br                                                                                                                                                                                                                  
+ALHEIROPRD                                                                                                                                                                                                                                      
+dbs3pc13                                                                                                                                                                                                                                        
+10.200.21.6                                                                                                                                                                                                                                     
+
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT CASE WHEN UPPER(SYS_CONTEXT('USERENV','SESSION_USER'))='FRANCISCO_JUNIOR'
+  2              THEN 'OK' ELSE 'BLOQUEAR' END USUARIO_ESPERADO,
+  3         CASE WHEN UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME'))='ALHEIROPRD.SANKHYACLOUD.COM.BR'
+  4              THEN 'OK' ELSE 'BLOQUEAR' END SERVICE_ESPERADO,
+  5         CASE WHEN UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA'))='FRANCISCO_JUNIOR'
+  6              THEN 'OK' ELSE 'INFORMAR_OWNER_OPERACIONAL' END SCHEMA_ESPERADO
+  7    FROM DUAL;
+
+USUARIO_ SERVICE_ SCHEMA_ESPERADO           
+-------- -------- --------------------------
+OK       OK       INFORMAR_OWNER_OPERACIONAL
+
+1 row selected. 
+
+SQL> SELECT BANNER VERSAO_ORACLE
+  2    FROM V$VERSION
+  3   WHERE BANNER LIKE 'Oracle%';
+
+VERSAO_ORACLE                                                                                                                    
+---------------------------------------------------------------------------------------------------------------------------------
+Oracle AI Database 26ai EE High Perf Release 23.26.2.0.0 - Production
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === EMPRESA ESPERADA ===
+=== EMPRESA ESPERADA ===
+SQL> SELECT CODEMP, RAZAOSOCIAL
+  2    FROM TSIEMP
+  3   WHERE UPPER(TRIM(RAZAOSOCIAL))='PRODUTOS ALHEIRO LTDA'
+  4   ORDER BY CODEMP;
+
+    CODEMP RAZAOSOCIAL                             
+---------- ----------------------------------------
+         1 PRODUTOS ALHEIRO LTDA                   
+
+1 row selected. 
+
+SQL> SELECT COUNT(*) QTD_EMPRESA_EXATA,
+  2         CASE WHEN COUNT(*)=1 THEN 'OK' ELSE 'BLOQUEAR_IDENTIDADE_EMPRESA' END STATUS_EMPRESA
+  3    FROM TSIEMP
+  4   WHERE UPPER(TRIM(RAZAOSOCIAL))='PRODUTOS ALHEIRO LTDA';
+
+QTD_EMPRESA_EXATA STATUS_EMPRESA             
+----------------- ---------------------------
+                1 OK                         
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === VERSAO_SISTEMA_CURTA ===
+=== VERSAO_SISTEMA_CURTA ===
+SQL> SELECT REGEXP_SUBSTR(TEXTO,'[0-9]+\.[0-9]+[[:alpha:]][0-9]+') VERSAO_SISTEMA_CURTA
+  2    FROM TSIPAR
+  3   WHERE CHAVE='VERSAOSKWBIN';
+
+VERSAO_SISTEMA_CURTA                                                                                                                                                                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.36b146
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === TABELAS_CORE_NO_OWNER_OPERACIONAL ===
+=== TABELAS_CORE_NO_OWNER_OPERACIONAL ===
+SQL> SELECT TABLE_NAME, OWNER, NUM_ROWS
+  2    FROM ALL_TABLES
+  3   WHERE OWNER=UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA'))
+  4     AND TABLE_NAME IN (
+  5       'TSIEMP','TSIPAR','TTKINDAGT','TTKNOT','TTKEVT','TGFCAB','TGFTOP','TGFPAR',
+  6       'TGFPRO','TGFITE','TGFVOL','TGFVOA','TGFPAP','TGFCOI2','TGFGIR1','TSIIMP',
+  7       'TGFCGM','TGFCMV','TGFTPV','TGFTIT','TSICID','TSIBAI','TSIEND','TGFPPG',
+  8       'TGFFIN','TGFNUM','TSICTA','TSICFG'
+  9     )
+ 10   ORDER BY TABLE_NAME;
+
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+OWNER                                                                                                                              NUM_ROWS
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+TGFCAB                                                                                                                           
+SANKHYA                                                                                                                               32146
+
+TGFCGM                                                                                                                           
+SANKHYA                                                                                                                                   1
+
+TGFCMV                                                                                                                           
+SANKHYA                                                                                                                                   2
+
+TGFCOI2                                                                                                                          
+SANKHYA                                                                                                                                   0
+
+TGFFIN                                                                                                                           
+SANKHYA                                                                                                                               38209
+
+TGFGIR1                                                                                                                          
+SANKHYA                                                                                                                               18087
+
+TGFITE                                                                                                                           
+SANKHYA                                                                                                                              629013
+
+TGFNUM                                                                                                                           
+SANKHYA                                                                                                                                 194
+
+TGFPAP                                                                                                                           
+SANKHYA                                                                                                                                8102
+
+TGFPAR                                                                                                                           
+SANKHYA                                                                                                                                1006
+
+TGFPPG                                                                                                                           
+SANKHYA                                                                                                                                  31
+
+TGFPRO                                                                                                                           
+SANKHYA                                                                                                                                3718
+
+TGFTIT                                                                                                                           
+SANKHYA                                                                                                                                  65
+
+TGFTOP                                                                                                                           
+SANKHYA                                                                                                                                1444
+
+TGFTPV                                                                                                                           
+SANKHYA                                                                                                                                  20
+
+TGFVOA                                                                                                                           
+SANKHYA                                                                                                                                2784
+
+TGFVOL                                                                                                                           
+SANKHYA                                                                                                                                  35
+
+TSIBAI                                                                                                                           
+SANKHYA                                                                                                                               46106
+
+TSICFG                                                                                                                           
+SANKHYA                                                                                                                                 893
+
+TSICID                                                                                                                           
+SANKHYA                                                                                                                                5572
+
+TSICTA                                                                                                                           
+SANKHYA                                                                                                                                   6
+
+TSIEMP                                                                                                                           
+SANKHYA                                                                                                                                   1
+
+TSIEND                                                                                                                           
+SANKHYA                                                                                                                              682557
+
+TSIIMP                                                                                                                           
+SANKHYA                                                                                                                                 496
+
+TSIPAR                                                                                                                           
+SANKHYA                                                                                                                                2350
+
+TTKEVT                                                                                                                           
+SANKHYA                                                                                                                               33207
+
+TTKINDAGT                                                                                                                        
+SANKHYA                                                                                                                                   1
+
+TTKNOT                                                                                                                           
+SANKHYA                                                                                                                               32124
+
+
+28 rows selected. 
+
+SQL> 
+SQL> PROMPT === PRIVILEGIOS E QUOTA ===
+=== PRIVILEGIOS E QUOTA ===
+SQL> SELECT PRIVILEGE
+  2    FROM SESSION_PRIVS
+  3   WHERE PRIVILEGE IN (
+  4     'CREATE TABLE','CREATE PROCEDURE','ALTER ANY PROCEDURE','ALTER ANY TRIGGER',
+  5     'CREATE ANY TABLE','DROP ANY TABLE'
+  6   )
+  7   ORDER BY PRIVILEGE;
+
+PRIVILEGE                               
+----------------------------------------
+ALTER ANY TRIGGER
+CREATE ANY TABLE
+DROP ANY TABLE
+
+3 rows selected. 
+
+SQL> SELECT TABLESPACE_NAME, BYTES, MAX_BYTES, BLOCKS, MAX_BLOCKS
+  2    FROM USER_TS_QUOTAS
+  3   ORDER BY TABLESPACE_NAME;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === TRIGGERS RELEVANTES E ESTADO ATUAL ===
+=== TRIGGERS RELEVANTES E ESTADO ATUAL ===
+SQL> SELECT TABLE_NAME,
+  2         STATUS,
+  3         TRIGGERING_EVENT,
+  4         COUNT(*) QTD_TRIGGERS
+  5    FROM ALL_TRIGGERS
+  6   WHERE OWNER=UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA'))
+  7     AND (TRIGGER_NAME IN ('TRG_INC_UPD_TGFITE','TRG_UPT_TGFITE')
+  8          OR TABLE_NAME IN ('TGFPRO','TGFITE','TGFCUS'))
+  9   GROUP BY TABLE_NAME, STATUS, TRIGGERING_EVENT
+ 10   ORDER BY TABLE_NAME, STATUS, TRIGGERING_EVENT;
+
+TABLE_NAME                                                                                                                       STATUS
+-------------------------------------------------------------------------------------------------------------------------------- --------
+TRIGGERING_EVENT
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+QTD_TRIGGERS
+------------
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+           2
+
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+           1
+
+TGFCUS                                                                                                                           ENABLED  
+UPDATE OR DELETE                                                                                                                                                                                                                                
+           1
+
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+           8
+
+TGFITE                                                                                                                           ENABLED  
+INSERT                                                                                                                                                                                                                                          
+           3
+
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+           9
+
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+           7
+
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+           5
+
+TGFPRO                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+           1
+
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+           5
+
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+           2
+
+TGFPRO                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+           1
+
+
+12 rows selected. 
+
+SQL> 
+SQL> PROMPT === CANDIDATOS DOS CARDS BLOQUEANTES ===
+=== CANDIDATOS DOS CARDS BLOQUEANTES ===
+SQL> SELECT COUNT(*) CANDIDATOS_CARD08_PROTOCOLAMENTO
+  2    FROM TGFCAB C
+  3   WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=C.NUNOTA)
+  4     AND ((C.NUMPROTOC IS NULL AND EXISTS (
+  5            SELECT 1 FROM TGFTOP T
+  6             WHERE T.CODTIPOPER=C.CODTIPOPER
+  7               AND T.DHALTER=C.DHTIPOPER
+  8               AND T.CODMODDOC=55))
+  9       OR (C.NUMPROTOCCTE IS NULL AND EXISTS (
+ 10            SELECT 1 FROM TGFTOP T
+ 11             WHERE T.CODTIPOPER=C.CODTIPOPER
+ 12               AND T.DHALTER=C.DHTIPOPER
+ 13               AND T.CODMODDOC=57)));
+
+CANDIDATOS_CARD08_PROTOCOLAMENTO
+--------------------------------
+                               0
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT COUNT(*) CANDIDATOS_CARD13_TOPS_GOL
+  2    FROM TGFTOP T
+  3   WHERE DECODE(NVL(T.GOLSINAL,99999),
+  4                NVL(CASE WHEN T.ATUALEST='B' AND T.TIPMOV='V' AND T.ATUALFIN=1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN -1
+  5                         WHEN T.ATUALEST='E' AND T.TIPMOV='D' AND T.ATUALFIN=-1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN -1
+  6                         WHEN T.ATUALEST='E' AND T.TIPMOV='C' AND T.ATUALFIN=-1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 1
+  7                         WHEN T.ATUALEST='B' AND T.TIPMOV='E' AND T.ATUALFIN=1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 1
+  8                         ELSE 0 END,99999),0,1)
+  9         + DECODE(NVL(T.GOLMPSINAL,99999),
+ 10                NVL(CASE WHEN T.ATUALEST='B' AND T.TIPMOV='V' AND T.ATUALFIN=1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN -1
+ 11                         WHEN T.ATUALEST='E' AND T.TIPMOV='D' AND T.ATUALFIN=-1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN -1
+ 12                         WHEN T.ATUALEST='E' AND T.TIPMOV='C' AND T.ATUALFIN=-1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 1
+ 13                         WHEN T.ATUALEST='B' AND T.TIPMOV='E' AND T.ATUALFIN=1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 1
+ 14                         ELSE 0 END,99999),0,1)
+ 15         + DECODE(NVL(T.GOLDEV,99999),
+ 16                NVL(CASE WHEN T.TIPMOV IN ('D','E') AND T.ATUALEST IN ('E','B') AND T.CODMODDOC IN (55,59,65) AND (T.ATUALFIN<>0 OR T.TIPATUALFIN<>'P') THEN -1 ELSE 1 END,99999),0,1)
+ 17         + DECODE(NVL(T.ANALISEGIRO,99999),
+ 18                NVL(CASE WHEN T.TIPMOV='V' AND T.ATUALEST='B' AND T.ATUALFIN=1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN -1
+ 19                         WHEN T.TIPMOV='D' AND T.ATUALEST='E' AND T.ATUALFIN=-1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 1
+ 20                         ELSE 0 END,99999),0,1)
+ 21         + DECODE(NVL(T.ATUALULTIMAVEND,'#'),
+ 22                NVL(CASE WHEN T.TIPMOV='V' AND T.ATUALEST='B' AND T.ATUALFIN=1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 'G' ELSE 'N' END,'#'),0,1)
+ 23         + DECODE(NVL(T.ATUALULTIMACOMP,'#'),
+ 24                NVL(CASE WHEN T.TIPMOV='C' AND T.ATUALEST='E' AND T.ATUALFIN=-1 AND T.TIPATUALFIN='I' AND T.CODMODDOC IN (55,59,65) THEN 'E' ELSE 'N' END,'#'),0,1) > 0;
+
+CANDIDATOS_CARD13_TOPS_GOL
+--------------------------
+                         0
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT COUNT(*) CANDIDATOS_CARD14_ANALISE_848 FROM TSIIMP WHERE CODREL=848;
+
+CANDIDATOS_CARD14_ANALISE_848
+-----------------------------
+                            1
+
+1 row selected. 
+
+SQL> SELECT COUNT(*) CANDIDATOS_CARD15_RASTRO
+  2    FROM TGFPRO WHERE TEMRASTROLOTE='S' AND TIPCONTEST='N';
+
+CANDIDATOS_CARD15_RASTRO
+------------------------
+                      24
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === COLISOES NORMALIZADAS DOS CARDS 29 E 30 ===
+=== COLISOES NORMALIZADAS DOS CARDS 29 E 30 ===
+SQL> SELECT COUNT(*) GRUPOS_COLISAO_BAIRROS
+  2    FROM (
+  3      SELECT REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+  4        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),'[[:space:]]+',' ') NORM
+  5        FROM TSIBAI
+  6       GROUP BY REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+  7        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),'[[:space:]]+',' ')
+  8      HAVING COUNT(*)>1
+  9    );
+
+GRUPOS_COLISAO_BAIRROS
+----------------------
+                   420
+
+1 row selected. 
+
+SQL> SELECT COUNT(*) GRUPOS_COLISAO_ENDERECOS
+  2    FROM (
+  3      SELECT TIPO, REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+  4        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),'[[:space:]]+',' ') NORM
+  5        FROM TSIEND
+  6       GROUP BY TIPO, REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+  7        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),'[[:space:]]+',' ')
+  8      HAVING COUNT(*)>1
+  9    );
+
+GRUPOS_COLISAO_ENDERECOS
+------------------------
+                    6943
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === FUNCAO XML DO CARD 09 ===
+=== FUNCAO XML DO CARD 09 ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS
+  2    FROM ALL_OBJECTS
+  3   WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL'
+  4   ORDER BY OWNER, OBJECT_TYPE;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === OBJETOS DE RECALCULO DE CUSTOS E CONSOLIDACAO GOL ===
+=== OBJETOS DE RECALCULO DE CUSTOS E CONSOLIDACAO GOL ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS, CREATED, LAST_DDL_TIME
+  2    FROM ALL_OBJECTS
+  3   WHERE OBJECT_NAME IN (
+  4     'STP_CALCCUSTOMEDIOPRODGENERICO','STP_CALCULARCUSTOMEDIODIA',
+  5     'STP_CALCULARCUSTOMEDIOFAMILIA','STP_CALCULARCUSTOPRODGENERICO',
+  6     'STP_PROCESSOATUALCUSTO','STP_EFETIVA_CONSOLIDACAO_GOL',
+  7     'PFCM_CONSOLIDACAO','SNK_MATGIRCALCTOTAIS'
+  8   )
+  9   ORDER BY OWNER, OBJECT_NAME, OBJECT_TYPE;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS  CREATED  LAST_DDL
+-------------------------------------------------------------------------------------------------------------------------------- ----------------------- ------- -------- --------
+SANKHYA                                                                                                                          
+PFCM_CONSOLIDACAO                                                                                                                PROCEDURE               VALID   05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+SNK_MATGIRCALCTOTAIS                                                                                                             PROCEDURE               VALID   05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_CALCCUSTOMEDIOPRODGENERICO                                                                                                   PROCEDURE               VALID   05/02/26 10/09/26
+
+SANKHYA                                                                                                                          
+STP_CALCULARCUSTOMEDIODIA                                                                                                        PROCEDURE               VALID   05/02/26 10/09/26
+
+SANKHYA                                                                                                                          
+STP_CALCULARCUSTOMEDIOFAMILIA                                                                                                    PROCEDURE               VALID   05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_CALCULARCUSTOPRODGENERICO                                                                                                    PROCEDURE               VALID   05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_EFETIVA_CONSOLIDACAO_GOL                                                                                                     PROCEDURE               VALID   05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_PROCESSOATUALCUSTO                                                                                                           PROCEDURE               VALID   05/02/26 10/07/26
+
+
+8 rows selected. 
+
+SQL> SELECT COUNT(*) QTD_OBJETOS_CUSTO_GOL_VALIDOS
+  2    FROM ALL_OBJECTS
+  3   WHERE STATUS='VALID'
+  4     AND OBJECT_NAME IN (
+  5     'STP_CALCCUSTOMEDIOPRODGENERICO','STP_CALCULARCUSTOMEDIODIA',
+  6     'STP_CALCULARCUSTOMEDIOFAMILIA','STP_CALCULARCUSTOPRODGENERICO',
+  7     'STP_PROCESSOATUALCUSTO','STP_EFETIVA_CONSOLIDACAO_GOL',
+  8     'PFCM_CONSOLIDACAO','SNK_MATGIRCALCTOTAIS'
+  9   );
+
+QTD_OBJETOS_CUSTO_GOL_VALIDOS
+-----------------------------
+                            8
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === OBJETOS INVALIDOS - UM POR LINHA ===
+=== OBJETOS INVALIDOS - UM POR LINHA ===
+SQL> SELECT OWNER, OBJECT_TYPE, OBJECT_NAME, STATUS
+  2    FROM ALL_OBJECTS
+  3   WHERE STATUS='INVALID'
+  4   ORDER BY OWNER, OBJECT_TYPE, OBJECT_NAME;
+
+0 rows selected. 
+
+SQL> SELECT COUNT(*) QTD_OBJETOS_INVALIDOS FROM ALL_OBJECTS WHERE STATUS='INVALID';
+
+QTD_OBJETOS_INVALIDOS
+---------------------
+                    0
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === VALIDACAO FINAL DO PREFLIGHT ===
+=== VALIDACAO FINAL DO PREFLIGHT ===
+SQL> DECLARE
+  2    v_user VARCHAR2(128) := UPPER(SYS_CONTEXT('USERENV','SESSION_USER'));
+  3    v_service VARCHAR2(128) := UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME'));
+  4    v_emp NUMBER;
+  5  BEGIN
+  6    SELECT COUNT(*) INTO v_emp FROM TSIEMP
+  7     WHERE UPPER(TRIM(RAZAOSOCIAL))='PRODUTOS ALHEIRO LTDA';
+  8    IF v_user<>'FRANCISCO_JUNIOR' THEN
+  9      RAISE_APPLICATION_ERROR(-20400,'PREFLIGHT_BLOQUEADO_USUARIO_SESSAO='||v_user);
+ 10    END IF;
+ 11    IF v_service<>'ALHEIROPRD.SANKHYACLOUD.COM.BR' THEN
+ 12      RAISE_APPLICATION_ERROR(-20401,'PREFLIGHT_BLOQUEADO_SERVICE_NAME='||v_service);
+ 13    END IF;
+ 14    IF v_emp<>1 THEN
+ 15      RAISE_APPLICATION_ERROR(-20402,'PREFLIGHT_BLOQUEADO_EMPRESA_QTD='||v_emp);
+ 16    END IF;
+ 17    DBMS_OUTPUT.PUT_LINE('PREFLIGHT_STATUS=APROVADO_PARA_ANALISE_COM_BACKUP');
+ 18    DBMS_OUTPUT.PUT_LINE('OWNER_OPERACIONAL='||SYS_CONTEXT('USERENV','CURRENT_SCHEMA'));
+ 19    DBMS_OUTPUT.PUT_LINE('USUARIO_AUDITORIA='||SYS_CONTEXT('USERENV','SESSION_USER'));
+ 20  END;
+ 21  /
+PREFLIGHT_STATUS=APROVADO_PARA_ANALISE_COM_BACKUP
+OWNER_OPERACIONAL=SANKHYA
+USUARIO_AUDITORIA=FRANCISCO_JUNIOR
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> DECLARE
+  2    v_quota_linhas NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*)
+  5      INTO v_quota_linhas
+  6      FROM USER_TS_QUOTAS;
+  7    IF v_quota_linhas = 0 THEN
+  8      RAISE_APPLICATION_ERROR(-20502,
+  9        'Execucao bloqueada: USER_TS_QUOTAS sem quota para backups persistentes.');
+ 10    END IF;
+ 11  END;
+ 12  /
+Rollback
+DECLARE
+*
+ERROR at line 1:
+ORA-20502: Execucao bloqueada: USER_TS_QUOTAS sem quota para backups persistentes.
+ORA-06512: at line 8
+Help: https://docs.oracle.com/error-help/db/ora-20502/
+
+SQL> @"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS ALHEIRO LTDA/Executar_Revisao_PRODUTOS_ALHEIRO_LTDA.sql"
+SQL> -- Gerado automaticamente. Nao contem senha.
+SQL> -- Abra este arquivo conectado a base correta e execute como SCRIPT (F5).
+SQL> SET DEFINE ON
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS ALHEIRO LTDA/Logs/Revisao_Master_20260916_1253.log"

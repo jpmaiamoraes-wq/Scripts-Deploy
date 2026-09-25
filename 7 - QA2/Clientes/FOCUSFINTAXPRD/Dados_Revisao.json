@@ -1,0 +1,239 @@
+{
+  "cliente_informado": "FOCUSFINTAXPRD",
+  "pasta_cliente": "FOCUSFINTAXPRD",
+  "hostname": "10.100.106.5",
+  "port": 1521,
+  "servicename": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": "marcelo.borel@sankhya.com.br",
+  "gp_nome": null,
+  "analista_projetos": {
+    "nome": "ANA RODRIGUES",
+    "email": "ana.rodrigues@sankhya.com.br",
+    "confirmada": true
+  },
+  "comunicacao_email": {
+    "status": "ENVIADO",
+    "draft_id": "r8630981673335528138",
+    "para": [
+      "ana.rodrigues@sankhya.com.br"
+    ],
+    "cc": [],
+    "assunto": "Conclusão da revisão Master Deploy — FOCUSFINTAXPRD",
+    "anexo_previsto": "Relatorio_Entrega_Tecnica_FOCUSFINTAXPRD_FINAL.pdf",
+    "pendente": null,
+    "enviado_em_utc": "2026-09-23T20:08:12Z",
+    "message_id": "1a0cfe20a22e51de",
+    "thread_id": "1a0cfdfe89209b0a",
+    "anexo_confirmado": "Relatorio_Entrega_Tecnica_FOCUSFINTAXPRD_FINAL.pdf (application/pdf)",
+    "enviado_por": "usuario (rascunho do agente, anexo e envio no Gmail)"
+  },
+  "preparado_em": "2026-09-23T14:57:55-03:00",
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 0,
+    "saida": "OK: 10.100.106.5:1521 já está acessível. Nenhuma alteração necessária."
+  },
+  "roteamento_automatico": false,
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": false,
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Logs/Revisao_Master_20260923_145754.log",
+  "rotas_execucao": {
+    "primaria": "ORACLE_DIRETO_LOTE",
+    "fallback": "VSCODE_SCRIPT_LEGADO",
+    "wrapper_legado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Executar_Revisao_FOCUSFINTAXPRD.sql",
+    "roteiro_fallback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/ROTEIRO_FALLBACK_LEGADO_VSCODE.md",
+    "troca_automatica": false,
+    "catalogo_ips": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/ips-roteamento-vpn.txt",
+    "aplica_rota_cadastrada_automaticamente": true
+  },
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "focusfintaxprd.sankhyacloud.com.br",
+    "db_name": "FOCUSFINTAXPRD",
+    "versao": "Oracle AI Database 26ai EE High Perf 23.0.0.0.0",
+    "correspondencia_base": "DB_NAME/SERVICE_NAME = FOCUSFINTAXPRD; TSIEMP CODEMP 1 = FOCUS FINTAX LTDA",
+    "evidencia": "Logs/P01_Versao_Identidade_20260923_145754.json"
+  },
+  "credencial": {
+    "mecanismo": "KEYCHAIN",
+    "status": "CREDENCIAL_KEYCHAIN_PRESENTE",
+    "senha_armazenada": false
+  },
+  "preflight_read_only": {
+    "resumo": "Logs/Preflight_ReadOnly_20260923_145754.resumo.txt",
+    "objetos_invalidos": 27,
+    "alter_any_procedure": false,
+    "triggers_enabled": 916,
+    "quota_usuario": "SEM_QUOTA (diagnostico)",
+    "execucoes_rmd_previas": 0,
+    "preflight_29_30": "Artefatos_Revisao/Preflight_29_30_20260923_145754.json",
+    "decisao_29_30": "MERGE_ANTIFRAGIL_OBRIGATORIO",
+    "volumetria_inicial": "Logs/V01_Volumetria_Inicial_JRXML_20260923_145754.json",
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "execucao_master": {
+    "id_execucao_lote": "FOCUS_MAS_20260923_150347",
+    "id_master": "RMD_RUN_20260923150349432",
+    "sha256_suite": "7290fd66a7bfad273dfec6554f2cd5672e2a12738abf0472d3b7aebe3155abb9",
+    "autorizacao": "EXECUTAR FOCUSFINTAXPRD (PRE_AUTORIZADA)",
+    "log": "Logs/FOCUS_MAS_20260923_150347.log",
+    "instrucoes_ok": "1085/1085",
+    "erros_ora_pls_sp2": 0,
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+    "etapa_29": "CONCLUIDO_PARCIAL (RMD_BAI_20260923150635093; 420 grupos de colisao preservados)",
+    "etapa_30": "CONCLUIDO_PARCIAL (RMD_END_20260923150644534; 6943 grupos de colisao preservados)",
+    "etapa_31": "IGNORADO_SEM_PRIVILEGIO (27 objetos)",
+    "pos_validacao": {
+      "controle_pendente": 0,
+      "triggers_nao_enabled": 0,
+      "backups_rmd": 35,
+      "unidades_mapeadas": 93,
+      "integ_itens_sem_cab": 0,
+      "integ_cab_sem_itens_sem_filtro_tipmov": 22,
+      "observacao": "criterio da pos-validacao inclui TIPMOV='Z'; indicador oficial exclui 'Z' e retornou 0 antes do Master; diagnostico D01 pendente",
+      "diagnostico_cab_sem_itens": "Logs/D01_CabSemItens_TIPMOV_20260923_151546.json: 22 = TIPMOV 'Z'; indicador oficial (exclui Z) = 0"
+    }
+  },
+  "volumetria_pos_master": {
+    "arquivo": "Logs/V02_Volumetria_Pos_Master_20260923_151546.json",
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 0,
+    "cidades_codmunfis_duplicados": 0,
+    "notas_sem_financeiro": 0,
+    "classificacao_fiscal_divergente": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "merge_29_30_fase1": {
+    "id_execucao": "FOCUS_MRG_20260923_01",
+    "entrada": "29_30_Merge_Antifragil_FOCUSFINTAXPRD.sql",
+    "sha256_suite": "dcf8df34bf78e4eacc7c2797a37ac4ddde42da172fd421a8b0e19569a03db713",
+    "log": "Logs/FOCUS_MRG_20260923_01.log",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO / MERGE_REDIRECIONADO_REFERENCIAS_ZERO",
+    "mapa": "RMD_FOCUS_MRG_20260923 (7711: BAI 428, END 7283)",
+    "backups": {
+      "BKP_RMD_FOCUS_20260923_BAI": 428,
+      "BKP_RMD_FOCUS_20260923_END": 7283
+    },
+    "auditoria": "RMD_FOCUS_MRG_20260923_DEP (61210)",
+    "excecoes": 0,
+    "referencias_funcionais_remanescentes": 0,
+    "referencias_backup_terceiro_preservadas": "BKP_TGFPAR_NOVO CODBAI 4",
+    "rollback": "Artefatos_Revisao/Rollback/29_30_Rollback_FOCUS_MRG_20260923_01.sql",
+    "preflight_pos_master": "Artefatos_Revisao/Preflight_29_30_R02_pos_master_20260923_151546.json",
+    "preflight_pos_merge": "Artefatos_Revisao/Preflight_29_30_R03_pos_merge_20260923_151546.json"
+  },
+  "onboarding": {
+    "arquivo": "Onboarding_Comparacao_ReadOnly_FOCUSFINTAXPRD.json",
+    "status": "CONCLUIDO_COM_LIMITACAO",
+    "empresas": "3/3 CNPJs do onboarding correspondentes; CODEMP 4 AF SOLUCOES E GESTAO LTDA adicional na base",
+    "usuarios": "5 e-mails do onboarding existem somente em registros CODGRUPO=0; 0 correspondencias ativas; divergencia nominal paulo.marcos (Oracle PABLO.MARCOS)",
+    "limitacao": "Planilha de contas bancarias nao lida (visualizacao negada pela politica de dados do agente)"
+  },
+  "merge_29_30_fase2_exclusao": {
+    "id_execucao_lote": "FOCUS_DEL_20260923_01",
+    "entrada": "29_30_Merge_Antifragil_FOCUSFINTAXPRD_Excluir_Pais_Obsoletos.sql",
+    "sha256_suite": "d0d4c84ba1182f201ea262e37d4a7c342fe89ccceca095d06aedf089687c12c7",
+    "log": "Logs/FOCUS_DEL_20260923_01.log",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO / PAIS_OBSOLETOS_EXCLUIDOS_COM_BACKUP",
+    "pais_bairros_excluidos": 428,
+    "pais_enderecos_excluidos": 7283,
+    "referencias_fisicas_antes": 0,
+    "remanescentes_pos": 0,
+    "preflight_pos_exclusao": "Artefatos_Revisao/Preflight_29_30_R04_pos_exclusao_20260923_154648.json",
+    "decisao_pos_exclusao": "PADRONIZACAO_UNICA_SEM_COLISOES (413 bairros / 6877 enderecos a padronizar; 0 grupos)",
+    "rollback": "Artefatos_Revisao/Rollback/29_30_Rollback_FOCUS_MRG_20260923_01.sql"
+  },
+  "normalizacao_remanescente_29_30": {
+    "id_execucao_lote": "FOCUS_NORM2930_20260923_01",
+    "sha256_suite": "2b2cff10205616f5c462f1c4d19435690de12a709efcdff3814ded6f490ddbd0",
+    "log": "Logs/FOCUS_NORM2930_20260923_01.log",
+    "status": "LOTE_CONCLUIDO_POS_VALIDADO / NORMALIZACAO_REMANESCENTE_CONCLUIDA",
+    "bairros_atualizados": 413,
+    "enderecos_atualizados": 6877,
+    "backups": "BKP_RMD_PAD_TSIBAI/BKP_RMD_PAD_TSIEND (ID FOCUS_NORM2930_20260923_01)",
+    "candidatos_remanescentes": 0,
+    "grupos_colisao_remanescentes": 0,
+    "preflight_final": "Artefatos_Revisao/Preflight_29_30_R05_pos_normalizacao_20260923_160849.json",
+    "decisao_final": "SEM_CANDIDATOS_DE_ALTERACAO",
+    "rollback": "Artefatos_Revisao/Rollback/Reverter_29_30_Normalizacao_Remanescente_FOCUSFINTAXPRD.sql",
+    "status_atividades_29_30": "CONCLUIDO"
+  },
+  "card09": {
+    "id_execucao": "FOCUS_FDUP_20260923_01",
+    "gates": {
+      "PREFLIGHT_EXECUTADO": "SIM (Logs/32_Card09_Preflight_Estado_20260923_160849.json: escopo 0; TGFNUM TGFFIN 1 linha ULTCOD 392; TGFFIN 392)",
+      "MAPA_CRIADO": "SIM (BKP_RMD_FDUP_FCS_20260923 / _PPG; COMMIT_LOTE=OK)",
+      "MAPA_VALIDADO": "SIM (R02: BASE_TOTAL_MAPA=0; classificacao 0; APTO=0; SEM_VDUP_XML=0)",
+      "INSERT_AUTORIZADO": "NAO_APLICAVEL (0 aptos)",
+      "POS_VALIDACAO_CONCLUIDA": "SIM (Logs/32_Card09_PosValidacao_R02_*.json: escopo 0; TGFNUM 1 linha ULTCOD 392 inalterado; TGFFIN 392 inalterado)"
+    },
+    "base_total": 0,
+    "apto_para_validacao_final": 0,
+    "sem_vdup_xml": 0,
+    "insercoes": 0,
+    "log": "Logs/FOCUS_FDUP_20260923_01_MAPA.log",
+    "status_executor": "LOTE_COM_ERRO (erro somente na pos-validacao, apos COMMIT_LOTE=OK)",
+    "status_previsto": "SEM_CANDIDATOS_APTOS apos R02",
+    "status_final": "SEM_CANDIDATOS_APTOS",
+    "pos_validacao_r02": "Artefatos_Revisao/PostValidacao/32_Card09_Mapa_PosValidacao_FOCUS_READONLY_R02.sql"
+  },
+  "volumetria_final": {
+    "arquivo": "Logs/V03_Volumetria_Final_20260923_160849.json",
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 0,
+    "cidades_codmunfis_duplicados": 0,
+    "notas_sem_financeiro": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "objetos_invalidos_final": {
+    "arquivo": "Logs/F13_Objetos_Invalidos_Final_20260923_160849.json",
+    "qtd": 27,
+    "alter_any_procedure": false,
+    "ticket": "713108 (aberto)"
+  },
+  "estado_final_master": {
+    "arquivo": "Logs/F00_Master_Estado_Final_20260923_160849.json",
+    "controle_pendente": 0,
+    "triggers_nao_enabled": 0,
+    "backups_rmd": 39
+  },
+  "ticket_objetos_invalidos": {
+    "status": "ABERTO",
+    "portal_url_padrao": "https://ajuda.sankhya.com.br/hc/pt-br/requests/new",
+    "duplicidade_verificada": "SIM - API /api/v2/requests: nenhum chamado para FOCUSFINTAXPRD (ultimos: 712840 CASA DAS ESSENCIAS, 712780 RIOSLTDAPRD, 712638 MOVE)",
+    "organizacao_confirmada": "FOCUS FINTAX LTDA-83951 (id 43561755416471; unica correspondencia na lista do portal)",
+    "rascunho": "Artefatos_Revisao/Preflight/31_Ticket_Objetos_Invalidos_Rascunho_20260923.md",
+    "pendente": null,
+    "numero": 713108,
+    "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/713108",
+    "registro": "Ticket_Objetos_Invalidos_FOCUSFINTAXPRD_713108.json",
+    "versao_sistema": "4.36b153"
+  },
+  "relatorio": {
+    "previa_txt": "Relatorio_Entrega_Tecnica_FOCUSFINTAXPRD_PREVIA_20260923.txt",
+    "fonte_md": "Relatorio_Entrega_Tecnica_FOCUSFINTAXPRD_FINAL.md",
+    "pdf_final": "Relatorio_Entrega_Tecnica_FOCUSFINTAXPRD_FINAL.pdf",
+    "pdf_sha256": "9b5db15ea75f933b6f0ce5e395078c88d861656b3e892a1ab4edbc8165429707",
+    "paginas": 16,
+    "gerador": "Revisao Master Deploy/Relatorio Sankhya/gerar_pdf_sankhya.py (fonte Liberation Sans)",
+    "aprovacao": "usuario aprovou visual e texto no chat",
+    "qa_visual": "Artefatos_Revisao/QA_PDF/"
+  },
+  "status_revisao": {
+    "status": "ENCERRADA_COM_PENDENCIA_EXTERNA",
+    "pendencia_externa": "Chamado Sankhya Cloud 713108 (27 funcoes invalidas) - ultimo status verificado: aberto em 2026-09-23T19:32:04Z",
+    "pendencias_refinamento": [
+      "Definir grupo e empresas de acesso dos 5 usuarios do onboarding",
+      "Comparar planilha de contas bancarias do onboarding com TSICTA (nao realizada)"
+    ],
+    "registrado_em": "2026-09-24"
+  }
+}

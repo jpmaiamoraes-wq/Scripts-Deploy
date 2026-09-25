@@ -1,0 +1,18 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "fonte": "TSIPAR.CHAVE=VERSAOSKWBIN",
+  "consulta_sql": "Artefatos_Revisao/Preflight/00_Versao_Sistema_MOVE_READONLY.sql",
+  "executado_em_utc": "2026-09-23T11:53:48.088162+00:00",
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "versao_sistema": "4.36b151",
+  "numero_revisao": 0,
+  "id_compilacao": 151,
+  "compilado_em": "2026-09-15 09:31",
+  "dml_executado": false,
+  "ddl_executado": false
+}

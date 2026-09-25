@@ -1,0 +1,56 @@
+ID_EXECUCAO_LOTE=RMD_CASA_20260923112324_29_30_R03_DEL
+ENTRADA=Clientes/CASA DAS ESSENCIAS/29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_EXCLUIR_PAI.sql
+SHA256_SUITE=af1bfc2ee4fa0eb72025ea9c8221c2f3bd04ed3198b51abf33cac676cb2f82c7
+POS_VALIDACAO=NAO_INFORMADA
+AUTORIZACAO=PRE_AUTORIZADA
+PREFLIGHT_STATUS=PREFLIGHT_APROVADO
+PREFLIGHT_BLOQUEIOS=0
+PREFLIGHT_AVISOS=0
+CONFIRMACAO_NATIVA=DISPENSADA_POR_EXECUTAR_BASE
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=casadasessenciasprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[ERRO 1/1] PLSQL_OR_DDL_BLOCK Clientes/CASA DAS ESSENCIAS/29_30_Merge_Antifragil_CASA_DAS_ESSENCIAS_R03_EXCLUIR_PAI.sql:8 DatabaseError: ORA-06550: line 36, column 46:
+PLS-00371: at most one declaration for 'V_BKP_BAI' is permitted
+ORA-06550: line 36, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 37, column 46:
+PLS-00371: at most one declaration for 'V_BKP_END' is permitted
+ORA-06550: line 37, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 38, column 46:
+PLS-00371: at most one declaration for 'V_DEP' is permitted
+ORA-06550: line 38, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 39, column 46:
+PLS-00371: at most one declaration for 'V_EXC' is permitted
+ORA-06550: line 39, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 48, column 6:
+PLS-00371: at most one declaration for 'V_BKP_BAI' is permitted
+ORA-06550: line 48, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 51, column 6:
+PLS-00371: at most one declaration for 'V_DEP' is permitted
+ORA-06550: line 51, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 54, column 6:
+PLS-00371: at most one declaration for 'V_EXC' is permitted
+ORA-06550: line 54, column 3:
+PL/SQL: Statement ignored
+ORA-06550: line 68, column 83:
+PLS-00371: at most one declaration for 'V_EXC' is permitted
+ORA-06550: line 68, column 83:
+PL/SQL: ORA-00904: "V_EXC": invalid identifier
+ORA-06550: line 62, column 5:
+PL/SQL: SQL Statement ignored
+ORA-06550: line 73, column 8:
+PLS-00364: loop index variable 'R' use is invalid
+ORA-06550: line 73, column 5:
+PL/SQL: Statement ignored
+ORA-06550: line 89, column 83:
+PLS-00371: at most one declaration for 'V_EXC' is permitted
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+STATUS=LOTE_COM_ERRO

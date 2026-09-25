@@ -1,0 +1,715 @@
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT RMD_VDA_20260918080832 - PREFLIGHT / IDENTIDADE DA SESSAO
+RMD_VDA_20260918080832 - PREFLIGHT / IDENTIDADE DA SESSAO
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') AS SESSION_USER,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') AS SERVICE_NAME,
+  4         SYS_CONTEXT('USERENV','DB_NAME') AS DB_NAME,
+  5         SYS_CONTEXT('USERENV','INSTANCE_NAME') AS INSTANCE_NAME,
+  6         SYS_CONTEXT('USERENV','IP_ADDRESS') AS IP_ADDRESS
+  7    FROM DUAL;
+
+SESSION_USER
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CURRENT_SCHEMA
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DB_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSTANCE_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+IP_ADDRESS                                                                                                                                                                                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+SANKHYA                                                                                                                                                                                                                                         
+vitrinediretaprd.sankhyacloud.com.br                                                                                                                                                                                                            
+VITRINEDIRETAPRD                                                                                                                                                                                                                                
+dbs8pc13                                                                                                                                                                                                                                        
+10.200.21.6                                                                                                                                                                                                                                     
+
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT CASE WHEN UPPER(SYS_CONTEXT('USERENV','SESSION_USER'))='FRANCISCO_JUNIOR'
+  2              THEN 'OK' ELSE 'BLOQUEAR_USUARIO' END AS STATUS_USUARIO,
+  3         CASE WHEN UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME'))='VITRINEDIRETAPRD.SANKHYACLOUD.COM.BR'
+  4              THEN 'OK' ELSE 'BLOQUEAR_SERVICE_NAME' END AS STATUS_SERVICE,
+  5         CASE WHEN UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA'))='FRANCISCO_JUNIOR'
+  6              THEN 'OK' ELSE 'INFORMAR_SCHEMA_OPERACIONAL' END AS STATUS_SCHEMA
+  7    FROM DUAL;
+
+STATUS_USUARIO   STATUS_SERVICE        STATUS_SCHEMA              
+---------------- --------------------- ---------------------------
+OK               OK                    INFORMAR_SCHEMA_OPERACIONAL
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT EMPRESA ESPERADA - TSIEMP
+EMPRESA ESPERADA - TSIEMP
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT CODEMP, RAZAOSOCIAL
+  2    FROM TSIEMP
+  3   WHERE UPPER(TRIM(RAZAOSOCIAL))='VITRINI DIRETA (ACM BRASIL)'
+  4   ORDER BY CODEMP;
+
+0 rows selected. 
+
+SQL> 
+SQL> SELECT COUNT(*) AS QTD_EMPRESA_EXATA,
+  2         CASE WHEN COUNT(*)=1 THEN 'OK' ELSE 'BLOQUEAR_IDENTIDADE_EMPRESA' END AS STATUS_EMPRESA
+  3    FROM TSIEMP
+  4   WHERE UPPER(TRIM(RAZAOSOCIAL))='VITRINI DIRETA (ACM BRASIL)';
+
+QTD_EMPRESA_EXATA STATUS_EMPRESA             
+----------------- ---------------------------
+                0 BLOQUEAR_IDENTIDADE_EMPRESA
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT VERSAO DO SISTEMA - CONSULTA EXCLUSIVA TSIPAR
+VERSAO DO SISTEMA - CONSULTA EXCLUSIVA TSIPAR
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT TEXTO
+  2    FROM TSIPAR
+  3   WHERE CHAVE='VERSAOSKWBIN';
+
+TEXTO                                                                                                                                                                                                                                           
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Versão sistema: 4.36b126
+Nro de Revisão: 0
+ID da Compilação: 126
+Data da Compilação: 11/08/2026 11:20
+
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT TABELAS E OBJETOS DE CONTROLE
+TABELAS E OBJETOS DE CONTROLE
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT OWNER, TABLE_NAME, NUM_ROWS
+  2    FROM ALL_TABLES
+  3   WHERE OWNER IN (UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA')),'SANKHYA')
+  4     AND TABLE_NAME IN (
+  5         'TSIEMP','TSIPAR','TTKINDAGT','TTKNOT','TTKEVT','TGFCAB','TGFTOP',
+  6         'TGFPAR','TGFPRO','TGFITE','TGFVOL','TGFVOA','TGFPAP','TGFCOI2',
+  7         'TGFGIR1','TSIIMP','TGFCGM','TGFCMV','TGFTPV','TGFTIT','TSICID',
+  8         'TSIBAI','TSIEND','TGFPPG','TGFFIN','TGFNUM','TSICTA','TSICFG'
+  9     )
+ 10   ORDER BY OWNER, TABLE_NAME;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME                                                                                                                         NUM_ROWS
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+SANKHYA                                                                                                                          
+TGFCAB                                                                                                                                18553
+
+SANKHYA                                                                                                                          
+TGFCGM                                                                                                                                    6
+
+SANKHYA                                                                                                                          
+TGFCMV                                                                                                                                    2
+
+SANKHYA                                                                                                                          
+TGFCOI2                                                                                                                                   0
+
+SANKHYA                                                                                                                          
+TGFFIN                                                                                                                                35860
+
+SANKHYA                                                                                                                          
+TGFGIR1                                                                                                                               18150
+
+SANKHYA                                                                                                                          
+TGFITE                                                                                                                                63632
+
+SANKHYA                                                                                                                          
+TGFNUM                                                                                                                                  332
+
+SANKHYA                                                                                                                          
+TGFPAP                                                                                                                                 2200
+
+SANKHYA                                                                                                                          
+TGFPAR                                                                                                                                 2353
+
+SANKHYA                                                                                                                          
+TGFPPG                                                                                                                                   31
+
+SANKHYA                                                                                                                          
+TGFPRO                                                                                                                                 2347
+
+SANKHYA                                                                                                                          
+TGFTIT                                                                                                                                   65
+
+SANKHYA                                                                                                                          
+TGFTOP                                                                                                                                 1402
+
+SANKHYA                                                                                                                          
+TGFTPV                                                                                                                                   20
+
+SANKHYA                                                                                                                          
+TGFVOA                                                                                                                                 2392
+
+SANKHYA                                                                                                                          
+TGFVOL                                                                                                                                   23
+
+SANKHYA                                                                                                                          
+TSIBAI                                                                                                                                46221
+
+SANKHYA                                                                                                                          
+TSICFG                                                                                                                                  854
+
+SANKHYA                                                                                                                          
+TSICID                                                                                                                                 5573
+
+SANKHYA                                                                                                                          
+TSICTA                                                                                                                                    5
+
+SANKHYA                                                                                                                          
+TSIEMP                                                                                                                                    6
+
+SANKHYA                                                                                                                          
+TSIEND                                                                                                                               683801
+
+SANKHYA                                                                                                                          
+TSIIMP                                                                                                                                  496
+
+SANKHYA                                                                                                                          
+TSIPAR                                                                                                                                 2345
+
+SANKHYA                                                                                                                          
+TTKEVT                                                                                                                                19333
+
+SANKHYA                                                                                                                          
+TTKINDAGT                                                                                                                                 1
+
+SANKHYA                                                                                                                          
+TTKNOT                                                                                                                                18516
+
+
+28 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT PRIVILEGIOS E QUOTA - SOMENTE LEITURA
+PRIVILEGIOS E QUOTA - SOMENTE LEITURA
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT PRIVILEGE
+  2    FROM SESSION_PRIVS
+  3   WHERE PRIVILEGE IN (
+  4         'CREATE TABLE','CREATE PROCEDURE','ALTER ANY PROCEDURE',
+  5         'ALTER ANY TRIGGER','CREATE ANY TABLE','DROP ANY TABLE'
+  6     )
+  7   ORDER BY PRIVILEGE;
+
+PRIVILEGE                               
+----------------------------------------
+ALTER ANY TRIGGER
+CREATE ANY TABLE
+DROP ANY TABLE
+
+3 rows selected. 
+
+SQL> 
+SQL> SELECT TABLESPACE_NAME, BYTES, MAX_BYTES, BLOCKS, MAX_BLOCKS
+  2    FROM USER_TS_QUOTAS
+  3   ORDER BY TABLESPACE_NAME;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT TRIGGERS E OBJETOS TEMPORARIOS - ESTADO ATUAL
+TRIGGERS E OBJETOS TEMPORARIOS - ESTADO ATUAL
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT OWNER, TRIGGER_NAME, TABLE_NAME, STATUS, TRIGGERING_EVENT
+  2    FROM ALL_TRIGGERS
+  3   WHERE OWNER IN (UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA')),'SANKHYA')
+  4     AND (TABLE_NAME IN ('TGFPRO','TGFITE','TGFCUS','TGFFIN','TSIBAI','TSIEND')
+  5          OR TRIGGER_NAME LIKE 'TRG_RMD%')
+  6   ORDER BY OWNER, TABLE_NAME, TRIGGER_NAME;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TRIGGER_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME                                                                                                                       STATUS
+-------------------------------------------------------------------------------------------------------------------------------- --------
+TRIGGERING_EVENT                                                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SANKHYA                                                                                                                          
+TRG_DLT_UPD_TGFCUS                                                                                                               
+TGFCUS                                                                                                                           ENABLED  
+UPDATE OR DELETE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFCUS                                                                                                               
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFCUS_DATA_LAKE                                                                                                     
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPT_DLT_TGFCUS_FEC_CTB                                                                                                   
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFFIN                                                                                                                   
+TGFFIN                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFFIN_EXCLUSAO                                                                                                          
+TGFFIN                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_INC_TGFFIN                                                                                                                   
+TGFFIN                                                                                                                           ENABLED  
+INSERT                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFFIN_SSPMB                                                                                                     
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_CERTIFIC                                                                                                      
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_DTNEG                                                                                                         
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_DTPRAZO                                                                                                       
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_DTVENC                                                                                                        
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_MONIOCOREM                                                                                                    
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_TGFORD                                                                                                        
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFFIN_VINCNT                                                                                                        
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFNNH_TGFFIN                                                                                                        
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPT_DLT_TGFFIN_FEC_CTB                                                                                                   
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPT_TGFFIN_STATUSNFE                                                                                                     
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_ATL_IPTU                                                                                                              
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_DLT_AFT_TIMFK                                                                                                         
+TGFFIN                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_DLT_TIMFK                                                                                                             
+TGFFIN                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_INC_UPD_AFT_TIMFK                                                                                                     
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_INC_UPD_DIFVLRLDT                                                                                                     
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_INC_UPD_TIMFK                                                                                                         
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_TIMVALDTL                                                                                                             
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_TIMVALDTL_AFT                                                                                                         
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_TIM_BAIXA_CJMD                                                                                                        
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_TIM_BAIXA_CJMDB                                                                                                       
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_TGFFIN_TIM_BAIXA_CJMD_AFT                                                                                                    
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFFIN_GRAVAR                                                                                                            
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFFIN_GRAVAR_AFT                                                                                                        
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFFIN_TIMDTREPASSE                                                                                                      
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFFIN                                                                                                                   
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFFIN_AFTER                                                                                                             
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFFIN_M2                                                                                                                
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFFIN_METAS                                                                                                             
+TGFFIN                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFFIN_NUBCO                                                                                                             
+TGFFIN                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE                                                                                                                   
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_AFTER                                                                                                             
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_FLEX                                                                                                              
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_HCRUZADAS                                                                                                         
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_METAS                                                                                                             
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_TGFCUSITE                                                                                                         
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_TGFICO                                                                                                            
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFITE_TRANSG                                                                                                            
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_INC_TGFITE                                                                                                                   
+TGFITE                                                                                                                           ENABLED  
+INSERT                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_INC_TGFITE_AFTER                                                                                                             
+TGFITE                                                                                                                           ENABLED  
+INSERT                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_INC_TGFITE_FLEX                                                                                                              
+TGFITE                                                                                                                           ENABLED  
+INSERT                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFITE_DAV                                                                                                       
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFITE_ESE                                                                                                       
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFITE_ESTTERC                                                                                                   
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFITE_LIB41                                                                                                     
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFITE_RASTEST                                                                                                   
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFITE_RASTST                                                                                                    
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE                                                                                                               
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_ATIVO                                                                                                         
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_CERTIFIC                                                                                                      
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_PRODNFE                                                                                                       
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_RASTEST                                                                                                       
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_TGAMOV                                                                                                        
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_TGFGXE                                                                                                        
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_TRANSG                                                                                                        
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFITE_VERIFCORTE                                                                                                    
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPT_DLT_TGFITE_FEC_CTB                                                                                                   
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFITE_FLEX                                                                                                              
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFITE_TCIBEM                                                                                                            
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFITE                                                                                                                   
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFITE_AFTER                                                                                                             
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_UPT_TGFITE_METAS                                                                                                             
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TGFPRO                                                                                                                   
+TGFPRO                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_FX_TGFPRO                                                                                                                    
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_DLT_TGFPRO_SUBST                                                                                                     
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                                                                                                      
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFPRO                                                                                                               
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPD_TGFPRO_TGFREA                                                                                                        
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPT_TGFPRO_MARCA                                                                                                         
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_INC_UPT_TGFPRO_REFERENCIA                                                                                                    
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFPRO_LOG                                                                                                               
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_UPD_TGFPRO_TGFVOA                                                                                                            
+TGFPRO                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TSIBAI                                                                                                                   
+TSIBAI                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_FX_TSIBAI                                                                                                                    
+TSIBAI                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_UPD_TSIBAI_HIS_S2205                                                                                                         
+TSIBAI                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_DLT_TSIEND                                                                                                                   
+TSIEND                                                                                                                           ENABLED  
+DELETE                                                                                                                                                                                                                                          
+
+SANKHYA                                                                                                                          
+TRG_FX_TSIEND                                                                                                                    
+TSIEND                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                                                                                                
+
+SANKHYA                                                                                                                          
+TRG_UPD_TSIEND_HIS_S2205                                                                                                         
+TSIEND                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                                                                                                          
+
+
+84 rows selected. 
+
+SQL> 
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS, CREATED, LAST_DDL_TIME
+  2    FROM ALL_OBJECTS
+  3   WHERE (OWNER IN (UPPER(SYS_CONTEXT('USERENV','CURRENT_SCHEMA')),'SANKHYA')
+  4          AND (OBJECT_NAME LIKE 'BKP_RMD%'
+  5               OR OBJECT_NAME LIKE 'MAP_RMD%'
+  6               OR OBJECT_NAME LIKE 'AUD_RMD%'
+  7               OR OBJECT_NAME LIKE 'RMD_%'))
+  8   ORDER BY OWNER, OBJECT_TYPE, OBJECT_NAME;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT CARD 09 - FUNCAO XML, ASSINATURA, ERROS E DEPENDENCIAS
+CARD 09 - FUNCAO XML, ASSINATURA, ERROS E DEPENDENCIAS
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS
+  2    FROM ALL_OBJECTS
+  3   WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL'
+  4   ORDER BY OWNER, OBJECT_TYPE;
+
+0 rows selected. 
+
+SQL> 
+SQL> SELECT OWNER, OBJECT_NAME, PACKAGE_NAME, OBJECT_TYPE, POSITION,
+  2         ARGUMENT_NAME, IN_OUT, DATA_TYPE, DATA_LENGTH
+  3    FROM ALL_ARGUMENTS
+  4   WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL'
+  5   ORDER BY OWNER, OBJECT_NAME,

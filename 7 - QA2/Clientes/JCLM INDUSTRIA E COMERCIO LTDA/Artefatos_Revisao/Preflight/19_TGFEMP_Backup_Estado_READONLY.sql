@@ -1,0 +1,6 @@
+-- Estado persistido do backup da TGFEMP criado antes da falha; somente leitura.
+SELECT 'BKP_RMD_02_TGFEMP' AS OBJETO,
+       COUNT(*) AS QTD_REGISTROS_BACKUP,
+       MIN(ID_EXECUCAO) AS PRIMEIRO_ID_EXECUCAO,
+       MAX(ID_EXECUCAO) AS ULTIMO_ID_EXECUCAO
+  FROM BKP_RMD_02_TGFEMP;

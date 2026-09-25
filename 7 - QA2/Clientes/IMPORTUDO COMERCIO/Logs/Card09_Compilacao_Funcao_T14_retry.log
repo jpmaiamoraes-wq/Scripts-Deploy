@@ -1,0 +1,62 @@
+SQL> PROMPT CARD09_T14_RETRY
+CARD09_T14_RETRY
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> @"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Scripts Originais/FNC_BUSCA_TAG_XML_GERAL.sql"
+SQL> CREATE OR REPLACE FUNCTION FNC_BUSCA_TAG_XML_GERAL (
+  2    p_nunota      IN NUMBER,   -- NUNOTA na TGFNFE
+  3    p_tag         IN VARCHAR2, -- nome da tag (ex.: 'xNome', 'CNPJ', 'UF', 'vNF')
+  4    p_parent_tag  IN VARCHAR2 DEFAULT NULL -- nome da tag pai (ex.: 'emit', 'dest', 'ide')
+  5  ) RETURN VARCHAR2
+  6  IS
+  7    v_val VARCHAR2(4000);
+  8  BEGIN
+  9    /*
+ 10      Se p_parent_tag for informado, procura:
+ 11        qualquer nó cujo local-name() = p_tag
+ 12        E cujo pai imediato tenha local-name() = p_parent_tag.
+ 13  
+ 14      Se p_parent_tag for NULL, procura apenas qualquer nó com local-name() = p_tag,
+ 15      como na função geral anterior.
+ 16  
+ 17      Comparação é case-insensitive usando upper-case(local-name()).
+ 18    */
+ 19    SELECT valor
+ 20      INTO v_val
+ 21      FROM (
+ 22        SELECT xt.valor
+ 23          FROM TGFNFE n,
+ 24               XMLTABLE(
+ 25                 '//*[ upper-case(local-name()) = upper-case($tag)
+ 26                      and ( string-length($parent) = 0
+ 27                            or upper-case(local-name(parent::*)) = upper-case($parent)
+ 28                          )
+ 29                   ][1]'
+ 30                 PASSING XMLTYPE(n.XML),
+ 31                         p_tag                 AS "tag",
+ 32                         NVL(p_parent_tag, '') AS "parent"
+ 33                 COLUMNS valor VARCHAR2(4000) PATH 'string(.)'
+ 34               ) xt
+ 35         WHERE n.nunota = p_nunota
+ 36      )
+ 37     WHERE ROWNUM = 1;
+ 38  
+ 39    RETURN v_val;
+ 40  
+ 41  EXCEPTION
+ 42    WHEN NO_DATA_FOUND THEN
+ 43      RETURN NULL;
+ 44  END;
+ 45  /
+
+Function FNC_BUSCA_TAG_XML_GERAL compiled
+
+SQL> SELECT OWNER,OBJECT_NAME,OBJECT_TYPE,STATUS FROM ALL_OBJECTS WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL';
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                VALID  
+
+SQL> SPOOL OFF

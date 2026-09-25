@@ -1,0 +1,21 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T19:28:04.521773+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/00_Versao_Sistema_FOCUS_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "VERSAO_SISTEMA"
+  ],
+  "linhas": [
+    {
+      "VERSAO_SISTEMA": "Versão sistema: 4.36b153\nNro de Revisão: 0\nID da Compilação: 153\nData da Compilação: 18/09/2026 11:24"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

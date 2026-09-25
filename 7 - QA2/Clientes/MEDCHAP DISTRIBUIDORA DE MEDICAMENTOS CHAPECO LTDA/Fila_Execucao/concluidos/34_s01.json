@@ -1,0 +1,1 @@
+{"id": "MEDCHAP_S01_20260925_01", "tipo": "query", "sql_file": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/SMTP/S01_TSISMTP_Sem_Segredos.sql", "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/S01_TSISMTP_Sem_Segredos_20260925.json", "descricao": "smtp read-only sem segredos"}

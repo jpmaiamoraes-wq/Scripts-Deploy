@@ -1,0 +1,17 @@
+{
+  "status": "IDENTIDADE_VALIDADA_READ_ONLY",
+  "executado_em_utc": "2026-09-21T18:30:40.617111+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "service_compativel": true,
+  "db_name": "HIGIEPAMPRD",
+  "empresas": [
+    {"codemp": 1, "razao_social": "GPD SOLUCOES EM LIMPEZA E MANUTENCAO LTD"},
+    {"codemp": 2, "razao_social": "L PORFIRIO DOS SANTOS  LTDA"},
+    {"codemp": 3, "razao_social": "CELAYA PAPEIS LTDA"}
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

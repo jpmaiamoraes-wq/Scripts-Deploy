@@ -1,0 +1,71 @@
+SQL> PROMPT CARD 09 - COMPILACAO AUTORIZADA DA FUNCAO DE LEITURA XML
+CARD 09 - COMPILACAO AUTORIZADA DA FUNCAO DE LEITURA XML
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2       IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3        RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4        END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL>       VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL>       BEGIN :RMD_ID_MASTER:='RMD_RUN_CONT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL>       CREATE OR REPLACE FUNCTION FNC_BUSCA_TAG_XML_GERAL (
+  2            p_nunota IN NUMBER,
+  3              p_tag IN VARCHAR2,
+  4                p_parent_tag IN VARCHAR2 DEFAULT NULL
+  5                ) RETURN VARCHAR2
+  6                IS
+  7                  v_val VARCHAR2(4000);
+  8                  BEGIN
+  9                        SELECT valor INTO v_val FROM (
+ 10                              SELECT xt.valor
+ 11                                rolav.tx TCEL.     FROM TGFNFE n,
+ 12                                           XMLTABLE(
+ 13                                                (EL.            '//*[ upper-case(local-name()) = upper-case($tag)
+ 14                                                 ]'''''''''''''''''''')]'''''''''''''''''''''''''''''            .                 and ( string-length($parent) = 0
+ 15                                                                         or upper-case(local-name(parent::*)) = upper-case($parent) )
+ 16                                                                                         ][1]'
+ 17                                                                                          '))].            PASSING XMLTYPE(n.XML), p_tag AS "tag", NVL(p_parent_tag,'') AS "parent"
+ 18                                                                                            """""""" SA ')))))))))))))))(LVN ,""""" SA gat_p ,))))))(EPYTLMX GNISSAP           )]. .            COLUMNS valor VARCHAR2(4000) PATH 'string(.)'
+ 19                                                                                                       ) xt
+ 20                                                                                                        '''.    WHERE n.nunota = p_nunota
+ 21                                                                                                          atonun_p = atonun.n EREHW   ''.. ) WHERE ROWNUM = 1;
+ 22                                                                                                            RETURN v_val;
+ 23                                                                                                            EXCEPTION WHEN NO_DATA_FOUND THEN RETURN NULL;
+ 24                                                                                                            END;
+ 25  /
+
+Function FNC_BUSCA_TAG_XML_GERAL compiled
+
+
+Errors for FUNCTION FNC_BUSCA_TAG_XML_GERAL:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+14/150   PLS-00181: unsupported preprocessor directive '$PARENT'
+SQL>                                                                                                           SELECT OWNER,OBJECT_NAME,OBJECT_TYPE,STATUS FROM ALL_OBJECTS WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL';
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                INVALID
+
+SQL>                                                                                                           SELECT OWNER,OBJECT_NAME,ARGUMENT_NAME,POSITION,DATA_TYPE FROM ALL_ARGUMENTS WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL' ORDER BY OWNER,POSITION;
+no rows selected
+SQL>                                                                                                           PROMPT CARD09_FUNCAO_COMPILADA_AUTORIZADA
+CARD09_FUNCAO_COMPILADA_AUTORIZADA
+SQL>                                                                                                           SPOOL OFF

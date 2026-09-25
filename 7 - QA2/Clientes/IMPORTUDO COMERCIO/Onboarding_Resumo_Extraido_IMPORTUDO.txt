@@ -1,0 +1,17 @@
+01 - Dados da Empresa
+Cliente: IMPORTUDO COMERCIO, IMPORTACAO E EXPORTACAO LTDA
+Matriz: 32.662.020/0001-14, UF SC, Distribuidor, Matriz
+Empresa 2: TOYMASTER INDUSTRIA E COMERCIO DE PLASTICOS LTDA, 28.348.156/0001-87, UF SP, Distribuidor, Matriz
+Empresa 3: IMPORTUDO COMERCIO, IMPORTACAO E EXPORTACAO LTDA, 32.662.020/0003-86, UF SP, Distribuidor, Filial
+Empresa 4: MASTERTOY INDUSTRIA E COMERCIO DE PLASTICOS LTDA., 29.080.641/0001-85, IE 206570751111, UF SP, Distribuidor, Matriz
+Unidade de negocio: BP SANTA CATARINA
+Gerente: GUSTAVO.ARTMANN (gustavo.artmann@sankhya.com.br)
+Contato: paulo.rabelo@sankhya.com.br
+
+07 - SMTP
+Provedor: custom; Nome remetente: Sistema; E-mail: Sistema@importudo.com.br
+Servidor: mail.importudo.com.br; Porta: 465; Criptografia: ssl
+Senha: informada no painel do Gerente (nao armazenada)
+
+08 - Planilhas
+Resumo informa que os arquivos enviados estao na pasta. Arquivo localizado: [MODELO SANKHYA] Contas Bancarias.xls.

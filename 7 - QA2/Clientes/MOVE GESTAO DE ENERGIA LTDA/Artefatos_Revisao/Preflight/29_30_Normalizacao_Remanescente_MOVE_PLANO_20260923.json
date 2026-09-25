@@ -1,0 +1,39 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "preparado_em_utc": "2026-09-23T10:48:59Z",
+  "id_execucao_lote": "MOVE_NORM2930_20260923_01",
+  "base": "MOVE GESTAO DE ENERGIA LTDA",
+  "identidade_esperada": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "MOVEENERGIAPRD.SANKHYACLOUD.COM.BR"
+  },
+  "preflight_fonte": "Artefatos_Revisao/Preflight/oracle_29_30_preflight_20260923_R07_apos_exclusao.json",
+  "escopo": {
+    "bairros_a_normalizar": 413,
+    "enderecos_a_normalizar": 6877,
+    "grupos_colisao_antes": 0,
+    "referencias_a_codigos_obsoletos_antes": 0,
+    "backup_persistente": ["BKP_RMD_PAD_TSIBAI", "BKP_RMD_PAD_TSIEND"],
+    "somente_atualiza_nomes": true,
+    "exclusoes": false,
+    "ddl": false
+  },
+  "entrypoint": "29_30_Merge_Antifragil_MOVE_Normalizar_Remanentes.sql",
+  "sha256_suite": "f2ca9041e62bc618413f077d86165c2901bfe9221f983a4faf4d3f9dc316b2c6",
+  "sha256_arquivo_entrypoint": "0b9809e6bc906de637f5eea8801adf0b8babe6da14e3a242dec312f76b2bc5b2",
+  "pos_validacao": "Artefatos_Revisao/PostValidacao/29_30_Normalizacao_Remanescente_MOVE_READONLY.sql",
+  "sha256_arquivo_pos_validacao": "02e5292c976ba8a10e4021d8a82c2faa1bcd3e877955d33ff2b4a22a16c97611",
+  "rollback": "Artefatos_Revisao/Rollback/Reverter_29_30_Normalizacao_Remanescente_MOVE.sql",
+  "sha256_arquivo_rollback": "a46f07edb73f82b86b8e0f7c85670aaabe7216657201b583c5512b69fbf46c4b",
+  "preflight_executor": {
+    "status": "PREFLIGHT_APROVADO",
+    "qtd_instrucoes": 1,
+    "qtd_bloqueios": 0,
+    "qtd_avisos": 0,
+    "binds": [],
+    "defines": []
+  },
+  "dml_ddl_executado": false,
+  "confirmacao": "EXECUTAR MOVE GESTAO DE ENERGIA LTDA previamente autorizada"
+}

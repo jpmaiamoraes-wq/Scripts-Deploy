@@ -1,0 +1,26 @@
+{
+  "cliente_informado": "INSTITUTO MOREIRA SALLES",
+  "pasta_cliente": "INSTITUTO MOREIRA SALLES",
+  "hostname": "10.100.106.5",
+  "port": 1521,
+  "servicename": "IMSPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": null,
+  "gp_nome": "Monyque Duarte de Carli",
+  "preparado_em": "2026-09-14T12:10:48-03:00",
+  "porta_oracle_acessivel": false,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 11,
+    "saida": "NAO_CADASTRADO: 10.100.106.5 não está na lista de exceções e a porta 1521 está inacessível."
+  },
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": false,
+  "ticket_objetos_invalidos": {
+    "numero": "709492",
+    "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/709492",
+    "assunto": "Objetos inválidos banco de dados",
+    "prioridade": "Normal"
+  },
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/INSTITUTO MOREIRA SALLES/Logs/Revisao_Master_20260914_121048.log"
+}

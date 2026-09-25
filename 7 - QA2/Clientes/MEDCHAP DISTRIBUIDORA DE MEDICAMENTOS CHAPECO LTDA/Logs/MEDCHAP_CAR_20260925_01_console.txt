@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_batch.py", line 1006, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_batch.py", line 995, in main
+    return args.func(args)
+           ~~~~~~~~~^^^^^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_batch.py", line 987, in run_apply
+    return execute_plan(args, plan, post_plan)
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_batch.py", line 899, in execute_plan
+    cursor.execute(statement.sql)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/.venv/lib/python3.14/site-packages/oracledb/cursor.py", line 898, in wrapped_f
+    return self._connection._impl.process_sync_operation(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, f.__name__, args, kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "src/oracledb/impl/base/connection.pyx", line 452, in oracledb.base_impl.BaseConnImpl.process_sync_operation
+  File "src/oracledb/impl/base/connection.pyx", line 448, in oracledb.base_impl.BaseConnImpl.process_sync_operation
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/.venv/lib/python3.14/site-packages/oracledb/cursor.py", line 211, in _execute
+    yield from impl.execute(self)
+  File "src/oracledb/impl/thin/cursor.pyx", line 295, in execute
+  File "src/oracledb/impl/base/connection.pyx", line 443, in oracledb.base_impl.BaseConnImpl.process_sync_operation
+  File "src/oracledb/impl/thin/connection.pyx", line 653, in oracledb.thin_impl.ThinConnImpl._process_sync_operation_sub_op
+  File "src/oracledb/impl/thin/protocol.pyx", line 259, in oracledb.thin_impl.Protocol._process_single_message
+  File "src/oracledb/impl/thin/protocol.pyx", line 260, in oracledb.thin_impl.Protocol._process_single_message
+  File "src/oracledb/impl/thin/protocol.pyx", line 250, in oracledb.thin_impl.Protocol._process_round_trip
+  File "src/oracledb/impl/thin/protocol.pyx", line 246, in oracledb.thin_impl.Protocol._process_round_trip
+  File "src/oracledb/impl/thin/protocol.pyx", line 234, in oracledb.thin_impl.Protocol._process_message
+  File "src/oracledb/impl/thin/messages/base.pyx", line 104, in oracledb.thin_impl.Message._check_and_raise_exception
+oracledb.exceptions.DatabaseError: ORA-06550: line 124, column 17:
+PLS-00204: function or pseudo-column 'DECODE' may be used inside a SQL statement only
+ORA-06550: line 122, column 11:
+PL/SQL: Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/

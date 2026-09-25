@@ -1,0 +1,757 @@
+SQL>
+SQL> PROMPT === RESUMO DOS GRUPOS DE COLISAO ===
+=== RESUMO DOS GRUPOS DE COLISAO ===
+SQL> SELECT 'TSIBAI_GRUPOS_COLISAO' ITEM,COUNT(*) QTD
+  2    FROM (
+  3      SELECT REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+  4        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+  5        FROM TSIBAI
+  6       WHERE NOMEBAI IS NOT NULL
+  7       GROUP BY REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),
+  8        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+  9      HAVING COUNT(*)>1
+ 10    )
+ 11  UNION ALL
+ 12  SELECT 'TSIEND_GRUPOS_COLISAO' ITEM,COUNT(*) QTD
+ 13    FROM (
+ 14      SELECT TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 15        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+ 16        FROM TSIEND
+ 17       WHERE NOMEEND IS NOT NULL
+ 18       GROUP BY TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),
+ 19        'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+ 20      HAVING COUNT(*)>1
+ 21    );
+
+ITEM                         QTD
+--------------------- ----------
+TSIBAI_GRUPOS_COLISAO        420
+TSIEND_GRUPOS_COLISAO       6943
+
+2 rows selected.
+
+SQL>
+SQL> PROMPT === TABELAS FISICAS COM CODBAI/CODEND ===
+=== TABELAS FISICAS COM CODBAI/CODEND ===
+SQL> SELECT C.OWNER,C.TABLE_NAME,C.COLUMN_NAME
+  2    FROM ALL_TAB_COLUMNS C
+  3    JOIN ALL_TABLES T ON T.OWNER=C.OWNER AND T.TABLE_NAME=C.TABLE_NAME
+  4   WHERE C.OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  5     AND C.COLUMN_NAME IN ('CODBAI','CODEND')
+  6   ORDER BY C.TABLE_NAME,C.COLUMN_NAME;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+COLUMN_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+BKP_RMD_PAD_TGFPAR
+CODBAI
+
+SANKHYA
+BKP_RMD_PAD_TGFPAR
+CODEND
+
+SANKHYA
+BKP_RMD_PAD_TSIBAI
+CODBAI
+
+SANKHYA
+BKP_RMD_PAD_TSIEND
+CODEND
+
+SANKHYA
+BKP_RMD_UNID_TGFITE
+CODEND
+
+SANKHYA
+BKP_TGFITE_NOVO
+CODEND
+
+SANKHYA
+BKP_TGFPAR_NOVO
+CODBAI
+
+SANKHYA
+BKP_TGFPAR_NOVO
+CODEND
+
+SANKHYA
+TCCEMP
+CODBAI
+
+SANKHYA
+TCCEMP
+CODEND
+
+SANKHYA
+TCOMEVTNFSE
+CODBAI
+
+SANKHYA
+TCOMEVTNFSE
+CODEND
+
+SANKHYA
+TFPAEN
+CODBAI
+
+SANKHYA
+TFPAEN
+CODEND
+
+SANKHYA
+TFPALTERFUN
+CODBAI
+
+SANKHYA
+TFPALTERFUN
+CODEND
+
+SANKHYA
+TFPCATR
+CODBAI
+
+SANKHYA
+TFPCTI
+CODBAI
+
+SANKHYA
+TFPCTI
+CODEND
+
+SANKHYA
+TFPDEP
+CODEND
+
+SANKHYA
+TFPFUN
+CODBAI
+
+SANKHYA
+TFPFUN
+CODEND
+
+SANKHYA
+TFPPCA
+CODBAI
+
+SANKHYA
+TFPPONRAIO
+CODBAI
+
+SANKHYA
+TFPPONRAIO
+CODEND
+
+SANKHYA
+TFPREQADM
+CODBAI
+
+SANKHYA
+TFPREQADM
+CODEND
+
+SANKHYA
+TFPTAT
+CODBAI
+
+SANKHYA
+TFPTAT
+CODEND
+
+SANKHYA
+TGAENT
+CODBAI
+
+SANKHYA
+TGAENT
+CODEND
+
+SANKHYA
+TGFCTT
+CODBAI
+
+SANKHYA
+TGFCTT
+CODEND
+
+SANKHYA
+TGFITE
+CODEND
+
+SANKHYA
+TGFLCDPRR0030
+CODBAI
+
+SANKHYA
+TGFLCDPRR0030
+CODEND
+
+SANKHYA
+TGFLCDPRR0040
+CODBAI
+
+SANKHYA
+TGFLCDPRR0040
+CODEND
+
+SANKHYA
+TGFLOCOPER
+CODBAI
+
+SANKHYA
+TGFLOCOPER
+CODEND
+
+SANKHYA
+TGFPAR
+CODBAI
+
+SANKHYA
+TGFPAR
+CODEND
+
+SANKHYA
+TGFSIT
+CODBAI
+
+SANKHYA
+TGFSIT
+CODEND
+
+SANKHYA
+TGFVOR
+CODEND
+
+SANKHYA
+TGWCTE
+CODEND
+
+SANKHYA
+TGWDCA
+CODEND
+
+SANKHYA
+TGWEND
+CODEND
+
+SANKHYA
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+COLUMN_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+TGWENDVAZ
+CODEND
+
+SANKHYA
+TGWENP
+CODEND
+
+SANKHYA
+TGWEPL
+CODEND
+
+SANKHYA
+TGWEST
+CODEND
+
+SANKHYA
+TGWESTVAL
+CODEND
+
+SANKHYA
+TGWEST_UPD
+CODEND
+
+SANKHYA
+TGWEXC
+CODEND
+
+SANKHYA
+TGWEXG
+CODEND
+
+SANKHYA
+TGWEXL
+CODEND
+
+SANKHYA
+TGWEXP
+CODEND
+
+SANKHYA
+TGWEXU
+CODEND
+
+SANKHYA
+TGWHAJ
+CODEND
+
+SANKHYA
+TGWINV
+CODEND
+
+SANKHYA
+TGWIVR
+CODEND
+
+SANKHYA
+TGWMOC
+CODEND
+
+SANKHYA
+TGWRAG
+CODEND
+
+SANKHYA
+TGWTROCADEPO
+CODEND
+
+SANKHYA
+TSIAGE
+CODBAI
+
+SANKHYA
+TSIAGE
+CODEND
+
+SANKHYA
+TSIBAI
+CODBAI
+
+SANKHYA
+TSICEP
+CODBAI
+
+SANKHYA
+TSICEP
+CODEND
+
+SANKHYA
+TSIEMP
+CODBAI
+
+SANKHYA
+TSIEMP
+CODEND
+
+SANKHYA
+TSIEND
+CODEND
+
+
+73 rows selected.
+
+SQL>
+SQL> PROMPT === FKS PARA TSIBAI/TSIEND, INCLUSIVE COMPOSTAS ===
+=== FKS PARA TSIBAI/TSIEND, INCLUSIVE COMPOSTAS ===
+SQL> SELECT C.OWNER,C.TABLE_NAME,C.CONSTRAINT_NAME,CC.POSITION,CC.COLUMN_NAME,
+  2         P.TABLE_NAME REFERENCED_TABLE,PC.COLUMN_NAME REFERENCED_COLUMN
+  3    FROM ALL_CONSTRAINTS C
+  4    JOIN ALL_CONS_COLUMNS CC
+  5      ON CC.OWNER=C.OWNER AND CC.CONSTRAINT_NAME=C.CONSTRAINT_NAME
+  6    JOIN ALL_CONSTRAINTS P
+  7      ON P.OWNER=C.R_OWNER AND P.CONSTRAINT_NAME=C.R_CONSTRAINT_NAME
+  8    LEFT JOIN ALL_CONS_COLUMNS PC
+  9      ON PC.OWNER=P.OWNER AND PC.CONSTRAINT_NAME=P.CONSTRAINT_NAME
+ 10     AND PC.POSITION=CC.POSITION
+ 11   WHERE C.OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ 12     AND C.CONSTRAINT_TYPE='R'
+ 13     AND P.OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+ 14     AND P.TABLE_NAME IN ('TSIBAI','TSIEND')
+ 15   ORDER BY C.TABLE_NAME,C.CONSTRAINT_NAME,CC.POSITION;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                                                                    POSITION
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+COLUMN_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REFERENCED_TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+REFERENCED_COLUMN
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+TCCEMP
+FK_TCCEMP_CODBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TCCEMP
+FK_TCCEMP_CODEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TFPCATR
+FK_TFPCATR_TSIEND                                                                                                                         1
+CODENDLOCALCAT
+TSIEND
+CODEND
+
+SANKHYA
+TFPDEP
+FK_TFPDEP_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TFPEST
+FK_TFPEST_TSIBAI                                                                                                                          1
+CODBAIINSTENS
+TSIBAI
+CODBAI
+
+SANKHYA
+TFPEST
+FK_TFPEST_TSIBAI2                                                                                                                         1
+CODBAIAGTINTEG
+TSIBAI
+CODBAI
+
+SANKHYA
+TFPEST
+FK_TFPEST_TSIEND                                                                                                                          1
+CODENDINSTENS
+TSIEND
+CODEND
+
+SANKHYA
+TFPEST
+FK_TFPEST_TSIEND2                                                                                                                         1
+CODENDAGTINTEG
+TSIEND
+CODEND
+
+SANKHYA
+TFPFUN
+FK_TFPFUN_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TFPFUN
+FK_TFPFUN_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TFPPCA
+FK_TFPPCA_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TFPREQADM
+FK_TSIBAI_CODBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TFPREQADM
+FK_TSIEND_CODEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TFPTAT
+FK_TFPTAT_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TGAENT
+FK_TGAENT_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TGAENT
+FK_TGAENT_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TGFCPL
+FK_TGFCPL_TSIBAI1                                                                                                                         1
+CODBAIRECEB
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFCPL
+FK_TGFCPL_TSIBAI2                                                                                                                         1
+CODBAIENTREGA
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFCPL
+FK_TGFCPL_TSIBAI3                                                                                                                         1
+CODBAITRAB
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFCPL
+FK_TGFCPL_TSIEND1                                                                                                                         1
+CODENDENTREGA
+TSIEND
+CODEND
+
+SANKHYA
+TGFCPL
+FK_TGFCPL_TSIEND2                                                                                                                         1
+CODENDTRAB
+TSIEND
+CODEND
+
+SANKHYA
+TGFCPL
+FK_TGFCPL_TSIEND3                                                                                                                         1
+CODENDRECEB
+TSIEND
+CODEND
+
+SANKHYA
+TGFCTT
+FK_TGFCTT_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFCTT
+FK_TGFCTT_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TGFLCDPRR0030
+FK_CODBAI_TGFLCDPRR0030                                                                                                                   1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFLCDPRR0030
+FK_CODEND_TGFLCDPRR0030                                                                                                                   1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TGFLCDPRR0040
+FK_CODBAI_TGFLCDPRR0040                                                                                                                   1
+CODBAI
+TSIBAI
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+CONSTRAINT_NAME                                                                                                                    POSITION
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+COLUMN_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REFERENCED_TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+REFERENCED_COLUMN
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CODBAI
+
+SANKHYA
+TGFLCDPRR0040
+FK_CODEND_TGFLCDPRR0040                                                                                                                   1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TGFPAR
+FK_TGFPAR_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFPAR
+FK_TGFPAR_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TGFSIT
+FK_TGFSIT_CODBAI_TSIBAI                                                                                                                   1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TGFSIT
+FK_TGFSIT_CODEND_TSIEND                                                                                                                   1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TIMCAR
+FK_TIMCAR_TSIBAI                                                                                                                          1
+CARBAIRRO
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMEDG
+FK_TIMEDG_TSIBAI                                                                                                                          1
+EDGBAIRRO
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMEDG
+FK_TIMEDG_TSIEND                                                                                                                          1
+EDGCODEND
+TSIEND
+CODEND
+
+SANKHYA
+TIMEPR
+FK_TIMEPR_TSIBAI                                                                                                                          1
+EPRBAIRRO
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMEPR
+FK_TIMEPR_TSIEND                                                                                                                          1
+EPRCODEND
+TSIEND
+CODEND
+
+SANKHYA
+TIMFAC
+FK_TIMFAC_TSIBAI                                                                                                                          1
+FACBAIRROIMOVEL
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMIMV
+FK_TIMIMV_TSIBAI                                                                                                                          1
+IMVBAIRRO
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMIMV
+FK_TIMIMV_TSIEND                                                                                                                          1
+IMVCODEND
+TSIEND
+CODEND
+
+SANKHYA
+TIMLOT
+FK_TIMLOT_TSIBAI                                                                                                                          1
+LOTBAIRRO
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMPPR
+FK_TIMPPR_TSIBAI                                                                                                                          1
+PPRBAIRRO
+TSIBAI
+CODBAI
+
+SANKHYA
+TIMPPR
+FK_TIMPPR_TSIEND                                                                                                                          1
+PPRCODEND
+TSIEND
+CODEND
+
+SANKHYA
+TSIAGE
+FK_TSIAGE_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TSIAGE
+FK_TSIAGE_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TSICEP
+FK_TSICEP_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TSICEP
+FK_TSICEP_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+SANKHYA
+TSIEMP
+FK_TSIEMP_TSIBAI                                                                                                                          1
+CODBAI
+TSIBAI
+CODBAI
+
+SANKHYA
+TSIEMP
+FK_TSIEMP_TSIEND                                                                                                                          1
+CODEND
+TSIEND
+CODEND
+
+
+49 rows selected.
+
+SQL>
+SQL> PROMPT === QUOTA E OBJETOS DE AUDITORIA EXISTENTES ===
+=== QUOTA E OBJETOS DE AUDITORIA EXISTENTES ===
+SQL> SELECT TABLESPACE_NAME,MAX_BYTES, BYTES FROM USER_TS_QUOTAS ORDER BY TABLESPACE_NAME;
+
+0 rows selected.
+
+SQL> SELECT TABLE_NAME FROM USER_TABLES
+  2   WHERE TABLE_NAME IN ('RMD_VDA_2930_MAP','RMD_VDA_2930_BAI_BKP','RMD_VDA_2930_END_BKP','RMD_VDA_2930_DEP','RMD_VDA_2930_EXC')
+  3   ORDER BY TABLE_NAME;
+
+0 rows selected.
+
+SQL>
+SQL> PROMPT === FIM PREFLIGHT 29/30 ===
+=== FIM PREFLIGHT 29/30 ===
+SQL> SPOOL OFF

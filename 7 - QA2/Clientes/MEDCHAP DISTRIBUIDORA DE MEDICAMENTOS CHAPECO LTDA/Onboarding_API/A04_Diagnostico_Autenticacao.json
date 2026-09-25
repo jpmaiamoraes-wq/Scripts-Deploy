@@ -1,0 +1,214 @@
+{
+  "executado_em": "2026-09-25T09:19:03-03:00",
+  "chave_origem": "KEYCHAIN",
+  "chave_exibida": false,
+  "operacao_somente_leitura": true,
+  "etapa": "DIAGNOSTICO_AUTENTICACAO",
+  "resumo": [
+    {
+      "caso": "D1_sem_chave",
+      "http": 403,
+      "ms": 77,
+      "server": null
+    },
+    {
+      "caso": "D2_bearer_ua_padrao",
+      "http": 403,
+      "ms": 71,
+      "server": null
+    },
+    {
+      "caso": "D3_bearer_ua_navegador",
+      "http": 403,
+      "ms": 72,
+      "server": null
+    },
+    {
+      "caso": "D4_chave_sem_bearer",
+      "http": 403,
+      "ms": 85,
+      "server": null
+    },
+    {
+      "caso": "D5_x_api_key",
+      "http": 403,
+      "ms": 62,
+      "server": null
+    },
+    {
+      "caso": "D6_records_get_bearer",
+      "http": 403,
+      "ms": 69,
+      "server": null
+    },
+    {
+      "caso": "D7_raiz_get_sem_chave",
+      "http": 403,
+      "ms": 65,
+      "server": null
+    }
+  ],
+  "casos": [
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/interactions/executeServerFunction",
+      "metodo": "POST",
+      "auth_modo": "sem_chave",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 77,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:18:59 GMT"
+      },
+      "corpo_enviado": {
+        "projectId": 51233,
+        "serverFunctionId": 10169,
+        "input": {
+          "limite": 1,
+          "somenteComEscopo": false
+        }
+      },
+      "resposta": null,
+      "caso": "D1_sem_chave"
+    },
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/interactions/executeServerFunction",
+      "metodo": "POST",
+      "auth_modo": "bearer",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 71,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:19:00 GMT"
+      },
+      "corpo_enviado": {
+        "projectId": 51233,
+        "serverFunctionId": 10169,
+        "input": {
+          "limite": 1,
+          "somenteComEscopo": false
+        }
+      },
+      "resposta": null,
+      "caso": "D2_bearer_ua_padrao"
+    },
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/interactions/executeServerFunction",
+      "metodo": "POST",
+      "auth_modo": "bearer",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 72,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:19:00 GMT"
+      },
+      "corpo_enviado": {
+        "projectId": 51233,
+        "serverFunctionId": 10169,
+        "input": {
+          "limite": 1,
+          "somenteComEscopo": false
+        }
+      },
+      "resposta": null,
+      "caso": "D3_bearer_ua_navegador"
+    },
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/interactions/executeServerFunction",
+      "metodo": "POST",
+      "auth_modo": "raw",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 85,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:19:01 GMT"
+      },
+      "corpo_enviado": {
+        "projectId": 51233,
+        "serverFunctionId": 10169,
+        "input": {
+          "limite": 1,
+          "somenteComEscopo": false
+        }
+      },
+      "resposta": null,
+      "caso": "D4_chave_sem_bearer"
+    },
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/interactions/executeServerFunction",
+      "metodo": "POST",
+      "auth_modo": "x-api-key",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 62,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:19:02 GMT"
+      },
+      "corpo_enviado": {
+        "projectId": 51233,
+        "serverFunctionId": 10169,
+        "input": {
+          "limite": 1,
+          "somenteComEscopo": false
+        }
+      },
+      "resposta": null,
+      "caso": "D5_x_api_key"
+    },
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/interactions/records?projectId=51233",
+      "metodo": "GET",
+      "auth_modo": "bearer",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 69,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:19:02 GMT"
+      },
+      "corpo_enviado": null,
+      "resposta": null,
+      "caso": "D6_records_get_bearer"
+    },
+    {
+      "url": "https://analytics2.mitrasheet.com:4437/",
+      "metodo": "GET",
+      "auth_modo": "sem_chave",
+      "http_status": 403,
+      "erro_transporte": null,
+      "duracao_ms": 65,
+      "cabecalhos_resposta": {
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "X-Frame-Options": "DENY",
+        "Content-Length": "0",
+        "Date": "Fri, 25 Sep 2026 12:19:03 GMT"
+      },
+      "corpo_enviado": null,
+      "resposta": null,
+      "caso": "D7_raiz_get_sem_chave"
+    }
+  ]
+}

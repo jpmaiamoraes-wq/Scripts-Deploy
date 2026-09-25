@@ -1,0 +1,15 @@
+=== CONSULTA MAPA CARD 09 ===
+no rows selected
+
+  QTD_BASE
+----------
+        21
+
+
+Error starting at line : 7 in command -
+SELECT STATUS_MAPA, COUNT(*) AS QTD FROM BKP_RMD_VDA_FDUP_20260918_02_PPG WHERE ID_EXECUCAO='VDA_ACM_FDUP_20260918_02' GROUP BY STATUS_MAPA ORDER BY STATUS_MAPA
+Error at Command Line : 7 Column : 42
+Error report -
+SQL Error: ORA-00942: table or view "SANKHYA"."BKP_RMD_VDA_FDUP_20260918_02_PPG" does not exist
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+Rollback

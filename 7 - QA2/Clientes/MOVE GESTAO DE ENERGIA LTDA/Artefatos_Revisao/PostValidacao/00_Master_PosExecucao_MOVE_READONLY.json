@@ -1,0 +1,23 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T19:49:42.181707+00:00",
+  "source_sql": "00_Master_PosExecucao_MOVE_READONLY.sql",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "metricas": {
+    "backups_rmd": 35,
+    "controle_total": 9,
+    "controle_pendente": 0,
+    "objetos_invalidos": 4,
+    "fila_log_eventos": 673675,
+    "tsibai_total": 45996,
+    "tsiend_total": 681781,
+    "unidades_mapeadas": 93
+  },
+  "dml_executado": false,
+  "ddl_executado": false
+}

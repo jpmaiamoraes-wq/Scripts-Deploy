@@ -1,0 +1,11 @@
+CODPARC;CNPJ;PARCEIRO;CNAE_REFERENCIA;DESCRICAO_CNAE;CODTIPPARC_SUGERIDO;PERFIL_SUGERIDO;CONFIANCA;DECISAO
+136;03007331022382;EBAZAR COM BR LTDA;5211799;Depositos de mercadorias para terceiros, exceto armazens gerais e guarda-moveis;;Logistica e armazenagem;ALTA;CRIAR_PERFIL
+2;27848192000147;WINNER SALES DISTRIBUIDORA ARMAZENAGEM E COMERCIO LTDA;4763601;Comercio varejista de brinquedos e artigos recreativos;;Brinquedos e artigos recreativos;ALTA;CRIAR_PERFIL
+4787;31325831000167;AMAZONAS CONSULTORIA EDUCACIONAL E EMPRESARIAL LTDA;7020400;Atividades de consultoria em gestao empresarial, exceto consultoria tecnica especifica;;Consultoria empresarial;ALTA;CRIAR_PERFIL
+220;15436940000871;AMAZON SERVICOS DE VAREJO DO BRASIL LTDA;4751201;Comercio varejista especializado de equipamentos e suprimentos de informatica;10101016;Computadores e perifericos;ALTA;USAR_EXISTENTE
+41755;38435710000117;RAFAEL CUCATO JUSTINIANO RIBEIRO;4757100;Comercio varejista especializado de pecas e acessorios para aparelhos eletroeletronicos;;Eletronicos e eletrodomesticos;ALTA;CRIAR_PERFIL
+41330;61727285000909;SUNNY BRINQUEDOS IMPORTACAO E EXPORTACAO LTDA;4649499;Comercio atacadista de outros equipamentos e artigos de uso pessoal e domestico;;Atacado e distribuicao;MEDIA;REVISAR_ESTRUTURA
+9683;28945887000100;BRINQUEI COMERCIO DIGITAL EIRELI;4763601;Comercio varejista de brinquedos e artigos recreativos;;Brinquedos e artigos recreativos;ALTA;CRIAR_PERFIL
+300;12284109000187;MURILO BARBOSA TEODOZIO LTDA;4754701;Comercio varejista de moveis;10101014;Moveis e utensilios;ALTA;USAR_EXISTENTE
+1257;07446919000152;MAIS BELA DISTRIBUIDORA DE COSMETICOS E BRINQUEDOS LTDA;4772500;Comercio varejista de cosmeticos, produtos de perfumaria e higiene pessoal;;Cosmeticos e perfumaria;ALTA;CRIAR_PERFIL
+201;35372560000151;DANIELA DE OLIVEIRA LIMA COSMETICOS;4763601;Comercio varejista de brinquedos e artigos recreativos;;Brinquedos e artigos recreativos;ALTA;CRIAR_PERFIL

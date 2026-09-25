@@ -1,0 +1,7 @@
+SQL> @@/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Verificacao_Onboarding_ReadOnly.sql
+
+Error starting at line : 15 in command -
+@/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy.sql
+Error report -
+SP2-0310: Unable to open file: "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy.sql"
+SQL> SPOOL OFF

@@ -1,0 +1,22 @@
+{
+  "cliente_informado": "IMPORTUDO COMERCIO",
+  "pasta_cliente": "IMPORTUDO COMERCIO",
+  "hostname": "10.100.56.39",
+  "port": 1521,
+  "servicename": "IMPORTUDOPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": "gustavo.artmann@sankhya.com.br",
+  "gp_nome": null,
+  "preparado_em": "2026-09-10T15:22:11-03:00",
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 11,
+    "saida": "NAO_CADASTRADO: 10.100.56.39 não está na lista de exceções e a porta 1521 está inacessível."
+  },
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": false,
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/IMPORTUDO COMERCIO/Logs/Revisao_Master_20260910_152211.log",
+  "schema": "SANKHYA",
+  "verificacao_rede_adicional": "TCP confirmado fora do sandbox; SQL Developer conectado"
+}

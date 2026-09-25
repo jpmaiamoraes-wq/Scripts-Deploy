@@ -1,0 +1,12 @@
+PASTA_CLIENTE=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD
+SCRIPT_MASTER_LEGADO=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Executar_Revisao_FOCUSFINTAXPRD.sql
+ROTEIRO_FALLBACK_LEGADO=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/ROTEIRO_FALLBACK_LEGADO_VSCODE.md
+EXECUTOR_ORACLE_DIRETO=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_direct.py
+PRECHECK_UNIDADES=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/00_Precheck_Unidades.sql
+PRECHECK_ETAPAS_18_31=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/00_Precheck_Etapas_18_31.sql
+LOG_ESPERADO=/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Logs/Revisao_Master_20260923_145754.log
+PORTA_ORACLE_ACESSIVEL=SIM
+ROTA_STATUS=0: OK: 10.100.106.5:1521 já está acessível. Nenhuma alteração necessária.
+ROTA_APLICADA_AUTOMATICAMENTE=NAO
+BANCO_ALTERADO=NAO
+ANALISTA_PROJETOS=CONFIRMADA

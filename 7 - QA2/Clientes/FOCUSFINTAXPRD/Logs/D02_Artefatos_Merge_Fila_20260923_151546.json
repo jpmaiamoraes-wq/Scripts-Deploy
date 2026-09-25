@@ -1,0 +1,25 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T18:15:48.331193+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/D02_Artefatos_Merge_Fila.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "OWNER",
+    "TABLE_NAME",
+    "NUM_ROWS"
+  ],
+  "linhas": [
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TEMP_TGLATS_V2",
+      "NUM_ROWS": 0
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,42 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T11:27:44.147547+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Resumo_Classificacao_Colisoes_29_30_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 2,
+  "colunas": [
+    "ENTIDADE",
+    "QTD_GRUPOS",
+    "GRUPOS_MESMO_CODREG",
+    "GRUPOS_CODREG_DIVERGENTE",
+    "QTD_REGISTROS_COLISAO",
+    "GRUPOS_MESMO_CODLOGRADOURO",
+    "GRUPOS_CODLOGRADOURO_DIVERGENTE"
+  ],
+  "linhas": [
+    {
+      "ENTIDADE": "TSIBAI",
+      "QTD_GRUPOS": 421,
+      "GRUPOS_MESMO_CODREG": 421,
+      "GRUPOS_CODREG_DIVERGENTE": 0,
+      "QTD_REGISTROS_COLISAO": 850,
+      "GRUPOS_MESMO_CODLOGRADOURO": null,
+      "GRUPOS_CODLOGRADOURO_DIVERGENTE": null
+    },
+    {
+      "ENTIDADE": "TSIEND",
+      "QTD_GRUPOS": 6945,
+      "GRUPOS_MESMO_CODREG": null,
+      "GRUPOS_CODREG_DIVERGENTE": null,
+      "QTD_REGISTROS_COLISAO": 14230,
+      "GRUPOS_MESMO_CODLOGRADOURO": 6945,
+      "GRUPOS_CODLOGRADOURO_DIVERGENTE": 0
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

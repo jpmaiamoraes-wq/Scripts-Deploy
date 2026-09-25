@@ -1,0 +1,35 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:31:13.867995+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Estado_PosFalha_TSIPAR_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 4,
+  "colunas": [
+    "CHAVE",
+    "INTEIRO"
+  ],
+  "linhas": [
+    {
+      "CHAVE": "MAXDIASMOVFIN",
+      "INTEIRO": 60
+    },
+    {
+      "CHAVE": "MAXDIASPORTAIS",
+      "INTEIRO": 5000
+    },
+    {
+      "CHAVE": "MAXDIASPORTCOMP",
+      "INTEIRO": 5000
+    },
+    {
+      "CHAVE": "MAXDIASPORTVEND",
+      "INTEIRO": 5000
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

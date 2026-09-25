@@ -1,0 +1,16 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-20T01:37:52.929927+00:00",
+  "source": "Artefatos_Revisao/Preflight/45_Card09_Resumo_Mapa_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "db_name": "JCLMPRD",
+  "indicadores": {
+    "BASE_TOTAL": 2,
+    "CLASSIFICACAO_SEM_VDUP_XML": 2,
+    "TGFFIN_NUNOTA_MAPA": 0
+  },
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,39 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:58:03.152019+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P09_Volumes_24_28.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 5,
+  "colunas": [
+    "ITEM",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "ITEM": "24_TGFPAR_TOTAL",
+      "QTD": 111
+    },
+    {
+      "ITEM": "25_TGFPRO_TOTAL",
+      "QTD": 40
+    },
+    {
+      "ITEM": "26_TGFTIT_TOTAL",
+      "QTD": 60
+    },
+    {
+      "ITEM": "27_TSICID_TOTAL",
+      "QTD": 5572
+    },
+    {
+      "ITEM": "28_TGFTPV_TOTAL",
+      "QTD": 17
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,80 @@
+-- Reverte uma execucao de Merge_Bairros_Enderecos.sql.
+-- Informe exatamente o ID_EXECUCAO exibido pelo merge.
+-- Cliente/base: LIT TRANSPORTES / LITTRANSPORTESPRD.SANKHYACLOUD.COM.BR
+
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET DEFINE ON
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+-- ID fixo da execucao LITTRANSPORTES_20260901_080644
+
+DECLARE
+  v_qtd  NUMBER;
+  v_cols VARCHAR2(32767);
+  v_sql  VARCHAR2(32767);
+
+  PROCEDURE reinsere_excluidos(
+    p_origem VARCHAR2,
+    p_backup VARCHAR2,
+    p_chave  VARCHAR2
+  ) IS
+  BEGIN
+    SELECT LISTAGG(column_name, ',') WITHIN GROUP (ORDER BY column_id)
+      INTO v_cols
+      FROM user_tab_columns
+     WHERE table_name = UPPER(p_origem);
+
+    v_sql := 'INSERT INTO ' || DBMS_ASSERT.SIMPLE_SQL_NAME(p_origem) || '(' || v_cols || ') ' ||
+             'SELECT ' || v_cols || ' FROM ' || DBMS_ASSERT.SIMPLE_SQL_NAME(p_backup) || ' b ' ||
+             'WHERE b.ID_EXECUCAO=:id AND NOT EXISTS (SELECT 1 FROM ' ||
+             DBMS_ASSERT.SIMPLE_SQL_NAME(p_origem) || ' o WHERE o.' ||
+             DBMS_ASSERT.SIMPLE_SQL_NAME(p_chave) || '=b.' || DBMS_ASSERT.SIMPLE_SQL_NAME(p_chave) || ')';
+    EXECUTE IMMEDIATE v_sql USING 'LITTRANSPORTES_20260901_080644';
+  END;
+BEGIN
+  SELECT COUNT(*) INTO v_qtd FROM BKP_MBE_MAP_BAI WHERE ID_EXECUCAO='LITTRANSPORTES_20260901_080644';
+  IF v_qtd = 0 THEN
+    SELECT COUNT(*) INTO v_qtd FROM BKP_MBE_MAP_END WHERE ID_EXECUCAO='LITTRANSPORTES_20260901_080644';
+  END IF;
+  IF v_qtd = 0 THEN
+    RAISE_APPLICATION_ERROR(-20010, 'ID_EXECUCAO nao encontrado nos backups');
+  END IF;
+
+  -- Primeiro recria os pais excluidos.
+  reinsere_excluidos('TSIBAI', 'BKP_MBE_TSIBAI', 'CODBAI');
+  reinsere_excluidos('TSIEND', 'BKP_MBE_TSIEND', 'CODEND');
+
+  -- Restaura o texto original dos registros canonicos.
+  UPDATE TSIBAI b
+     SET NOMEBAI = (SELECT x.NOMEBAI FROM BKP_MBE_TSIBAI x
+                     WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644' AND x.CODBAI=b.CODBAI)
+   WHERE EXISTS (SELECT 1 FROM BKP_MBE_TSIBAI x
+                  WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644' AND x.CODBAI=b.CODBAI);
+  UPDATE TSIEND e
+     SET NOMEEND = (SELECT x.NOMEEND FROM BKP_MBE_TSIEND x
+                     WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644' AND x.CODEND=e.CODEND)
+   WHERE EXISTS (SELECT 1 FROM BKP_MBE_TSIEND x
+                  WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644' AND x.CODEND=e.CODEND);
+
+  -- ROWID permanece estavel durante os updates do merge e identifica cada filha.
+  UPDATE TGFPAR p
+     SET (CODBAI, CODEND) = (SELECT x.CODBAI, x.CODEND FROM BKP_MBE_TGFPAR x
+                              WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644'
+                                AND CHARTOROWID(x.ROWID_ORIGINAL)=p.ROWID)
+   WHERE EXISTS (SELECT 1 FROM BKP_MBE_TGFPAR x
+                  WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644' AND CHARTOROWID(x.ROWID_ORIGINAL)=p.ROWID);
+  UPDATE TSICEP c
+     SET (CODBAI, CODEND) = (SELECT x.CODBAI, x.CODEND FROM BKP_MBE_TSICEP x
+                              WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644'
+                                AND CHARTOROWID(x.ROWID_ORIGINAL)=c.ROWID)
+   WHERE EXISTS (SELECT 1 FROM BKP_MBE_TSICEP x
+                  WHERE x.ID_EXECUCAO='LITTRANSPORTES_20260901_080644' AND CHARTOROWID(x.ROWID_ORIGINAL)=c.ROWID);
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('OK: execucao LITTRANSPORTES_20260901_080644 revertida. Backups foram mantidos.');
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+    DBMS_OUTPUT.PUT_LINE('ERRO: reversao cancelada. ' || SQLERRM);
+    RAISE;
+END;
+/

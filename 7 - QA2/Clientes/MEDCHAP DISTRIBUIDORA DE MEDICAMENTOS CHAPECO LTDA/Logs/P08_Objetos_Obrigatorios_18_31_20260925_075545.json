@@ -1,0 +1,93 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:23.913325+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P08_Objetos_Obrigatorios_18_31.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 12,
+  "colunas": [
+    "OBJETO",
+    "TIPO_ESPERADO",
+    "TIPO_ENCONTRADO",
+    "STATUS"
+  ],
+  "linhas": [
+    {
+      "OBJETO": "TGFCGM",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFCMV",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFPAR",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFPRO",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFTIT",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TGFTPV",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TSIBAI",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TSICID",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TSIEND",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TTKEVT",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TTKINDAGT",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    },
+    {
+      "OBJETO": "TTKNOT",
+      "TIPO_ESPERADO": "TABLE",
+      "TIPO_ENCONTRADO": "TABLE",
+      "STATUS": "VALID"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

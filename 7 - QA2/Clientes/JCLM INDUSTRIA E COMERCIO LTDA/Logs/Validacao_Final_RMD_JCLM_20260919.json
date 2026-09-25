@@ -1,0 +1,33 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-20T01:39:01.560209+00:00",
+  "source": "Artefatos_Revisao/Preflight/46_Validacao_Final_JCLM_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "db_name": "JCLMPRD",
+  "indicadores": {
+    "RMD_CONTROLE_OBJETOS": 3,
+    "RMD_MAP_UNIDADES": 110,
+    "BKP_RMD_UNID_MAP": 110,
+    "BKP_RMD_13_TSIIMP": 1,
+    "TSIIMP_CODREL_848": 1,
+    "OBJETOS_INVALIDOS": 50,
+    "TRIGGERS_TGFITE_HABILITADOS": 2,
+    "BKP_RMD_GOL_TSIPAR": 1,
+    "BKP_RMD_PAR_MATRIZ": 1,
+    "BKP_RMD_CARD_TTKINDAGT": 1,
+    "BKP_CLASSICMS_TGFPAR": 24,
+    "BKP_AJNP_TGFPAR": 19,
+    "BKP_RMD_PAD_TGFPAR": 160,
+    "BKP_RMD_PAD_TGFPRO": 0,
+    "BKP_RMD_PAD_TSIBAI": 45044,
+    "BKP_RMD_PAD_TSIEND": 646115,
+    "CARD09_BASE": 2,
+    "CARD09_APTOS": 0,
+    "CARD09_SEM_VDUP_XML": 2
+  },
+  "tgffin_inserido_card09": 0,
+  "dml_executado": false,
+  "ddl_executado": false
+}

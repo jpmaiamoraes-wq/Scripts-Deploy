@@ -1,0 +1,22 @@
+{
+  "status": "CONSULTAS_READ_ONLY_CONCLUIDAS_COM_LIMITACAO_DE_VISIBILIDADE",
+  "usuario_sessao": "FRANCISCO_JUNIOR",
+  "schema_atual": "SANKHYA",
+  "tablespace_padrao_usuario_sessao": "USERS",
+  "user_ts_quotas": [],
+  "consulta_user_quota_em_utc": "2026-09-22T23:09:33.193573+00:00",
+  "consulta_quota_schema_proprietario": {
+    "owner_consultado": "SANKHYA",
+    "view": "DBA_TS_QUOTAS",
+    "status": "NAO_VISIVEL_A_SESSAO",
+    "erro": "ORA-00942: table or view SYS.DBA_TS_QUOTAS does not exist"
+  },
+  "evidencia_persistencia_existente": [
+    "Logs/MOVE_MAS_20260922_163600.log: a sessao FRANCISCO_JUNIOR/SANKHYA criou RMD_CONTROLE_OBJETOS e concluiu o lote Master.",
+    "Logs/MOVE_MRG_20260922_01.log: mapa persistente com 7711 linhas e backups de 428 bairros e 7283 enderecos.",
+    "Logs/MOVE_DEL_20260922_01.log: backups e auditoria persistidos e pos-validacao concluida."
+  ],
+  "decisao": "USER_TS_QUOTAS vazio nao foi tratado como bloqueio universal. Ha evidencias de persistencia bem-sucedida sob o schema SANKHYA na mesma revisao; o lote 32A ainda depende da confirmacao nativa e dos guards de colisao.",
+  "dml_executado": false,
+  "ddl_executado": false
+}

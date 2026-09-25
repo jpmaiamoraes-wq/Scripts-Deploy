@@ -1,0 +1,30 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_local": "2026-09-23T10:09:17-03:00",
+  "source": "Preflight_ReadOnly_RIOSLTDAPRD.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "dml_executado": false,
+  "ddl_executado": false,
+  "metricas": {
+    "ALTER_ANY_PROCEDURE": 0,
+    "EMPRESAS_TSIEMP": 1,
+    "OBJETOS_INVALIDOS": 46,
+    "OBJETOS_REQUERIDOS_AUSENTES": 0,
+    "TGFCGM_DESTINOS": 0,
+    "TGFCGM_ORIGEM_EMP1_1900_1": 1,
+    "TGFCMV_CODCONFIG_1": 1,
+    "TGFPAR_TOTAL": 336,
+    "TGFPRO_TOTAL": 93,
+    "TGFTIT_TOTAL": 62,
+    "TGFTPV_TOTAL": 19,
+    "TGFVOL_DESCRICAO_MINUSCULA": 0,
+    "TGFVOL_TOTAL": 21,
+    "TSIBAI_TOTAL": 45995,
+    "TSICID_TOTAL": 5572,
+    "TSIEND_TOTAL": 681891,
+    "USER_TS_QUOTAS_LINHAS": 0
+  }
+}

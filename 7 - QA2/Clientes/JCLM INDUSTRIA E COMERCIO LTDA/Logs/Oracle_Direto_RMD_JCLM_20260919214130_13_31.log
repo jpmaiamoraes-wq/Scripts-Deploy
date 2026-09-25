@@ -1,0 +1,18 @@
+ID_EXECUCAO_LOTE=RMD_JCLM_20260919214130
+ENTRADA=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Continuacao_Master_Deploy_JCLM_13_31.sql
+SHA256_SUITE=582bf72324cdb9c096bc97fffc1ba55142def045d1895c9dfbd77a10ca3dd67c
+POS_VALIDACAO=Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Artefatos_Revisao/Preflight/00_Precheck_Etapas_18_31_PostValidation.sql
+SESSION_USER=FRANCISCO_JUNIOR
+CURRENT_SCHEMA=SANKHYA
+SERVICE_NAME=jclmprd.sankhyacloud.com.br
+PRIVILEGIOS=["ALTER ANY TABLE", "CREATE ANY TABLE", "DROP ANY TABLE"]
+QUOTAS=[]
+[OK 1/1038] PLSQL_OR_DDL_BLOCK Clientes/JCLM INDUSTRIA E COMERCIO LTDA/Continuacao_Master_Deploy_JCLM_13_31.sql:9 ROWCOUNT=0
+DBMS_OUTPUT=ID_MASTER_PRESERVADO=RMD_RUN_20260919211829041
+[OK 2/1038] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql:5 ROWCOUNT=0
+[ERRO 3/1038] PLSQL_OR_DDL_BLOCK Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql:12 DatabaseError: ORA-06550: line 3, column 14:
+PL/SQL: ORA-01031: insufficient privileges
+ORA-06550: line 3, column 2:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+STATUS=LOTE_COM_ERRO

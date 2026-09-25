@@ -1,0 +1,200 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T19:45:45.926177+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Inventario_PosFalha_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 36,
+  "colunas": [
+    "TABLE_NAME",
+    "OWNER",
+    "TABLESPACE_NAME"
+  ],
+  "linhas": [
+    {
+      "TABLE_NAME": "BKP_RMD_01_TSIPAR",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_02_TGFEMP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_03_TGFTOP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_04_TGFPRO",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_05_TGFTPV",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_06_TGFCAB",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_07_TGFCAB",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_08_TGFITE",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_09_TGFPRO",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_10_TGFPRO",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_11_TGFEMP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_12_TGFTOP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_13_TSIIMP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_14_TGFPRO",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_CARD_TTKINDAGT",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_GOL_TGFCGM",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_GOL_TGFCMV",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_GOL_TSIPAR",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TGFPAR",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TGFPRO",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TGFTIT",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TGFTPV",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TSIBAI",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TSICID",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAD_TSIEND",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_PAR_MATRIZ",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_TSICFG",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_MAP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFCOI2",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFGIR1",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFITE",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFPAP",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFPRO",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFVOA",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "BKP_RMD_UNID_TGFVOL",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    },
+    {
+      "TABLE_NAME": "RMD_CONTROLE_OBJETOS",
+      "OWNER": "SANKHYA",
+      "TABLESPACE_NAME": "SANKHYA"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

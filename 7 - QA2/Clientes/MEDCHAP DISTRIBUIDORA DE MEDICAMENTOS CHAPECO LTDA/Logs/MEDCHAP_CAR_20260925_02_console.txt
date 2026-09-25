@@ -1,0 +1,33 @@
+{
+  "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+  "entrypoint": "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/33_Caracteres_Cadastros_MEDCHAP.sql",
+  "arquivos": [
+    "Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/33_Caracteres_Cadastros_MEDCHAP.sql"
+  ],
+  "qtd_instrucoes": 6,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 5,
+    "CREATE": 1
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [],
+  "sha256_suite": "94702d7a2a4cdfdb32479fe7636d3fddb66a4fca217924561eb824512ca3b9b6",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "execution_id": "MEDCHAP_CAR_20260925_02",
+  "dml_ddl_executado": true,
+  "log": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_CAR_20260925_02.log",
+  "capabilities": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "medchapprd.sankhyacloud.com.br",
+    "db_name": "MEDCHAPPRD",
+    "privilegios_relevantes": [
+      "ALTER ANY TABLE",
+      "CREATE ANY TABLE",
+      "DROP ANY TABLE"
+    ],
+    "quotas": [],
+    "dml_ddl_executado": false
+  }
+}

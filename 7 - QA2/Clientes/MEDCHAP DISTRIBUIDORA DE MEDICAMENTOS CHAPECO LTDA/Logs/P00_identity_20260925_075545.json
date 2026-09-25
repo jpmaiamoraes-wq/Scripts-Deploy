@@ -1,0 +1,34 @@
+{
+  "status": "IDENTIDADE_VALIDADA_READ_ONLY",
+  "executado_em_utc": "2026-09-25T10:59:16.236868+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "service_compativel": true,
+  "empresas": [
+    {
+      "codemp": 1,
+      "razao_social": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH"
+    },
+    {
+      "codemp": 2,
+      "razao_social": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH"
+    },
+    {
+      "codemp": 3,
+      "razao_social": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH"
+    },
+    {
+      "codemp": 4,
+      "razao_social": "PROWIN COMPANY LTDA"
+    },
+    {
+      "codemp": 5,
+      "razao_social": "SALUTH ADMINISTRADORA E LOCADORA DE BENS"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

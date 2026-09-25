@@ -1,0 +1,96 @@
+SQL> PROMPT CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 10 A 31
+CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 10 A 31
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [12/31] INICIO
+[12/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/12_Habilitar_Ruptura_Empresas.sql"
+SQL> -- Executa somente quando AD_SEGMENTACAOEMPRESAS existe no CURRENT_SCHEMA.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE
+  2   v_tab NUMBER;v_id VARCHAR2(30):='RMD_RUPE_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER;v_u PLS_INTEGER;
+  4  BEGIN
+  5   SELECT COUNT(*) INTO v_tab FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='AD_SEGMENTACAOEMPRESAS';
+  6   IF v_tab=0 THEN DBMS_OUTPUT.PUT_LINE('BLOCO_IGNORADO=AD_SEGMENTACAOEMPRESAS inexistente');RETURN;END IF;
+  7   BEGIN
+  8    EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_11_TGFEMP AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  9    CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+ 10    CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,E.RUPTURAEST RUPTURAEST_ANTES FROM TGFEMP E WHERE 1=0]';
+ 11   EXCEPTION WHEN OTHERS THEN
+ 12    IF SQLCODE <> -955 THEN RAISE; END IF;
+ 13   END;
+ 14   EXECUTE IMMEDIATE q'[INSERT INTO BKP_RMD_11_TGFEMP
+ 15   SELECT :id_execucao,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),
+ 16   ROWIDTOCHAR(E.ROWID),E.RUPTURAEST FROM TGFEMP E WHERE NVL(E.RUPTURAEST,'N')<>'S' AND EXISTS(
+ 17   SELECT 1 FROM AD_SEGMENTACAOEMPRESAS S JOIN TSIEMP T ON T.CGC=S.CGC WHERE S.SEGMENTACAO<>'S' AND T.CODEMP=E.CODEMP)]' USING v_id;
+ 18   v_b:=SQL%ROWCOUNT;
+ 19   EXECUTE IMMEDIATE q'[UPDATE TGFEMP E SET E.RUPTURAEST='S' WHERE NVL(E.RUPTURAEST,'N')<>'S' AND EXISTS(
+ 20   SELECT 1 FROM AD_SEGMENTACAOEMPRESAS S JOIN TSIEMP T ON T.CGC=S.CGC WHERE S.SEGMENTACAO<>'S' AND T.CODEMP=E.CODEMP)]';
+ 21   v_u:=SQL%ROWCOUNT;
+ 22   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20230,'Backup e atualizacao de empresas divergiram.');END IF;
+ 23   COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);DBMS_OUTPUT.PUT_LINE('EMPRESAS_ALTERADAS='||v_u);
+ 24  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+ 25  /
+Rollback
+DECLARE
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+ORA-06512: at line 24
+ORA-06512: at line 14
+Help: https://docs.oracle.com/error-help/db/ora-01031/
+
+SQL> PROMPT [12/31] FIM
+SQL> PROMPT [13/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql"
+SQL> PROMPT [13/31] FIM
+SQL> PROMPT [14/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql"
+SQL> PROMPT [14/31] FIM
+SQL> PROMPT [15/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/15_Desativar_Rastro_Sem_Controle.sql"
+SQL> PROMPT [15/31] FIM
+SQL> PROMPT [16/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/16_Aplicar_Higienizacao_TSICFG.sql"
+SQL> PROMPT [16/31] FIM
+SQL> PROMPT [17/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/17_Normalizar_Unidades.sql"
+SQL> PROMPT [17/31] FIM
+SQL> PROMPT [18-30] PREPARAR BACKUPS
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Preparar_Backups_18_30.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Ajustar_Preferencias_GOL.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/20_Atualizar_Cards_Deploy.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/21_Classificar_ICMS_Parceiros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/22_Ajustar_Nomes_Parceiros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/23_Validar_Reabilitar_Objetos.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/24_Padronizar_Parceiros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/25_Padronizar_Produtos.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/26_Padronizar_Tipos_Titulo.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/27_Padronizar_Cidades.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/28_Padronizar_Tipos_Venda.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/29_Padronizar_Bairros.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/30_Padronizar_Enderecos.sql"
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+SQL> PROMPT CONTINUIDADE_10_31_CONCLUIDA
+SQL> SPOOL OFF
+SQL> SPOOL OFF

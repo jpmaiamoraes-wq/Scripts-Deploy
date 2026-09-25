@@ -1,0 +1,8 @@
+-- Preflight read-only FOCUSFINTAXPRD. Somente SELECT/WITH via oracle_direct.py query. Sem DML/DDL.
+SELECT U.CODUSU,
+       TRIM(U.NOMEUSU) AS NOMEUSU,
+       LOWER(TRIM(U.EMAIL)) AS EMAIL,
+       U.CODGRUPO,
+       U.CODEMP
+  FROM TSIUSU U
+ ORDER BY LOWER(TRIM(U.EMAIL)), U.CODUSU

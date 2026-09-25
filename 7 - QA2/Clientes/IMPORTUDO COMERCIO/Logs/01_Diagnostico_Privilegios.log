@@ -1,0 +1,234 @@
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SCHEMA_ATUAL
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICO                                                                                                                                                                                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+SANKHYA                                                                                                                                                                                                                                         
+importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                
+
+
+SQL> SELECT TABLE_NAME, GRANTEE, PRIVILEGE FROM ALL_TAB_PRIVS WHERE TABLE_SCHEMA='SANKHYA' AND (TABLE_NAME LIKE 'BKP_RMD_%' OR TABLE_NAME LIKE 'RMD_%') ORDER BY TABLE_NAME,GRANTEE,PRIVILEGE;
+
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+GRANTEE                                                                                                                          PRIVILEGE                               
+-------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+BKP_RMD_01_TSIPAR                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_01_TSIPAR                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_01_TSIPAR                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_01_TSIPAR                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_01_TSIPAR                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_02_TGFEMP                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_02_TGFEMP                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_02_TGFEMP                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_02_TGFEMP                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_02_TGFEMP                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_03_TGFTOP                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_03_TGFTOP                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_03_TGFTOP                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_03_TGFTOP                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_03_TGFTOP                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_04_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_04_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_04_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_04_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_04_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_05_TGFTPV                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_05_TGFTPV                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_05_TGFTPV                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_05_TGFTPV                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_05_TGFTPV                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_06_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_06_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_06_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_06_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_06_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_07_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_07_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_07_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_07_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_07_TGFCAB                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_08_TGFITE                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_08_TGFITE                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_08_TGFITE                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_08_TGFITE                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_08_TGFITE                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+BKP_RMD_09_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+BKP_RMD_09_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+BKP_RMD_09_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+BKP_RMD_09_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+BKP_RMD_09_TGFPRO                                                                                                                
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+RMD_CONTROLE_OBJETOS                                                                                                             
+RLCONSULTOR                                                                                                                      ALTER                                   
+
+RMD_CONTROLE_OBJETOS                                                                                                             
+RLCONSULTOR                                                                                                                      DELETE                                  
+
+RMD_CONTROLE_OBJETOS                                                                                                             
+RLCONSULTOR                                                                                                                      INSERT                                  
+
+RMD_CONTROLE_OBJETOS                                                                                                             
+RLCONSULTOR                                                                                                                      SELECT                                  
+
+RMD_CONTROLE_OBJETOS                                                                                                             
+RLCONSULTOR                                                                                                                      UPDATE                                  
+
+
+50 rows selected. 
+
+SQL> SELECT ROLE FROM SESSION_ROLES ORDER BY ROLE;
+
+ROLE                                                                                                                            
+--------------------------------------------------------------------------------------------------------------------------------
+CONNECT
+RLCONSULTOR
+
+SQL> SELECT OWNER,OBJECT_NAME,OBJECT_TYPE,STATUS FROM ALL_OBJECTS WHERE OWNER='SANKHYA' AND (OBJECT_NAME LIKE 'BKP_RMD_%' OR OBJECT_NAME LIKE 'RMD_%') ORDER BY OBJECT_NAME;
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          
+BKP_RMD_01_TSIPAR                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_02_TGFEMP                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_03_TGFTOP                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_04_TGFPRO                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_05_TGFTPV                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_06_TGFCAB                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_07_TGFCAB                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_08_TGFITE                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+BKP_RMD_09_TGFPRO                                                                                                                TABLE                   VALID  
+
+SANKHYA                                                                                                                          
+RMD_CONTROLE_OBJETOS                                                                                                             TABLE                   VALID  
+
+
+10 rows selected. 
+
+SQL> SELECT * FROM SANKHYA.RMD_CONTROLE_OBJETOS;
+
+ID_MASTER                      ID_EXECUCAO                    DH_REGISTRO                 USUARIO_EXECUCAO
+------------------------------ ------------------------------ --------------------------- --------------------------------------------------------------------------------------------------------------------------------
+OBJECT_TYPE                    OBJECT_NAME                                                                                                                      STATUS_ANTES                   STATUS_DEPOIS
+------------------------------ -------------------------------------------------------------------------------------------------------------------------------- ------------------------------ ------------------------------
+DH_REABILITACAO            
+---------------------------
+RMD_RUN_20260910152821307      RMD_ITEM_20260910152829785     10/09/26 15:28:29,919628000 FRANCISCO_JUNIOR                                                                                                                 
+TRIGGER                        TRG_UPT_TGFITE                                                                                                                   ENABLED                        ENABLED                        
+10/09/26 15:28:30,201896000
+
+
+SQL> PROMPT DIAGNOSTICO_PRIVILEGIOS_FIM
+DIAGNOSTICO_PRIVILEGIOS_FIM
+SQL> SPOOL OFF

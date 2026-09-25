@@ -1,0 +1,546 @@
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Verificacao_Onboarding_ReadOnly.sql"
+SQL> -- VERIFICACAO GENERICA DE ONBOARDING - SOMENTE LEITURA
+SQL> --
+SQL> -- Objetivo:
+SQL> --   Fornecer o snapshot tecnico da base para confronto com os arquivos mais
+SQL> --   recentes da pasta do cliente em "8. Onboarding Deploy".
+SQL> --
+SQL> -- Uso:
+SQL> --   1. Executar conectado ao schema da base revisada.
+SQL> --   2. Preservar a saida integral em log por cliente e data.
+SQL> --   3. Confrontar os resultados com os arquivos do onboarding.
+SQL> --   4. Registrar divergencias comprovadas, sem transformar linhas de modelo
+SQL> --      ou registros adicionais da base em erro automatico.
+SQL> --
+SQL> -- Seguranca:
+SQL> --   - Este roteiro nao contem DML, DDL, COMMIT ou senha.
+SQL> --   - Credenciais SMTP nunca sao exibidas; somente metadados e presenca.
+SQL> --   - Nao preencher tabelas temporarias nem alterar a base para comparar.
+SQL> 
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET HEADING ON
+SQL> SET LINESIZE 240
+SQL> SET LONG 2000
+SQL> SET PAGESIZE 1000
+SQL> SET TAB OFF
+SQL> SET VERIFY OFF
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT IDENTIDADE DA CONEXAO
+IDENTIDADE DA CONEXAO
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT USER AS USUARIO,
+  2         SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV', 'SERVICE_NAME') AS SERVICO
+  4    FROM DUAL;
+
+USUARIO
+--------------------------------------------------------------------------------------------------------------------------------
+SCHEMA_ATUAL
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICO                                                                                                                                                                                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                 
+SANKHYA                                                                                                                                                                                                                                         
+vitrinediretaprd.sankhyacloud.com.br                                                                                                                                                                                                            
+
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 01 - EMPRESAS: TSIEMP + CIDADE/UF
+01 - EMPRESAS: TSIEMP + CIDADE/UF
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT E.CODEMP,
+  2         E.RAZAOSOCIAL,
+  3         E.CGC,
+  4         E.INSCESTAD,
+  5         E.CODCID,
+  6         C.NOMECID,
+  7         C.UF
+  8    FROM TSIEMP E
+  9    LEFT JOIN TSICID C ON C.CODCID = E.CODCID
+ 10   ORDER BY E.CODEMP;
+
+    CODEMP RAZAOSOCIAL                              CGC            INSCESTAD            CODCID NOMECID                                                              UF
+---------- ---------------------------------------- -------------- ---------------- ---------- ------------------------------------------------------------ ----------
+         1 ACM BRASIL LTDA                          41934554000143 63255073               1347 FORTALEZA                                                            21
+         2 ACMINAS SUPRIMENTOS PARA COMUNICACAO VIS 09307310000128 0043454690072          2754 BELO HORIZONTE                                                        2
+         3 VITRINE DIRETA S.A.                      25300362000390 126161234113           9668 SAO PAULO                                                             1
+         4 ACM BRASIL LTDA                          41934554000224 104294760              5216 CARUARU                                                              10
+         5 VITRINE DIRETA S.A.                      25300362000129 87189740               6912 DUQUE DE CAXIAS                                                       7
+         7 VITRINE DIRETA S.A.                      25300362000552 083844147              2028 SERRA                                                                16
+
+6 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 07 - SMTP GLOBAL: TSIPAR - METADADOS SEM CREDENCIAIS
+07 - SMTP GLOBAL: TSIPAR - METADADOS SEM CREDENCIAIS
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT CHAVE,
+  2         REGEXP_SUBSTR(TEXTO, '[^;]+', 1, 1) AS SERVIDOR_PORTA,
+  3         REGEXP_SUBSTR(TEXTO, '[^;]+', 1, 2) AS CRIPTOGRAFIA,
+  4         REGEXP_SUBSTR(TEXTO, '[^;]+', 1, 3) AS REMETENTE,
+  5         CASE
+  6           WHEN TEXTO IS NULL THEN 'AUSENTE'
+  7           WHEN REGEXP_COUNT(TEXTO, ';') >= 3 THEN 'CREDENCIAL_PRESENTE_NAO_EXIBIDA'
+  8           ELSE 'FORMATO_INCOMPLETO'
+  9         END AS CREDENCIAL
+ 10    FROM TSIPAR
+ 11   WHERE CHAVE = 'MSDSMTPPROP';
+
+CHAVE
+---------------
+SERVIDOR_PORTA
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CRIPTOGRAFIA
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REMETENTE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREDENCIAL                     
+-------------------------------
+MSDSMTPPROP     
+email-smtp.us-east-1.amazonaws.com:587                                                                                                                                                                                                          
+P                                                                                                                                                                                                                                               
+noreply@sankhya.com.br                                                                                                                                                                                                                          
+CREDENCIAL_PRESENTE_NAO_EXIBIDA
+
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT SMTP POR EMPRESA: TSIEMP - METADADOS SEM CREDENCIAIS
+SMTP POR EMPRESA: TSIEMP - METADADOS SEM CREDENCIAIS
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT CODEMP,
+  2         SERVIDORSMTP,
+  3         TIPOSMTP,
+  4         PORTASMTP,
+  5         SEGURANCASMTP,
+  6         CASE WHEN USUARIOSMTP IS NULL THEN 'AUSENTE' ELSE 'PRESENTE' END AS USUARIO_SMTP,
+  7         CASE WHEN SENHASMTP IS NULL THEN 'AUSENTE' ELSE 'PRESENTE_NAO_EXIBIDA' END AS SENHA_SMTP
+  8    FROM TSIEMP
+  9   ORDER BY CODEMP;
+
+    CODEMP SERVIDORSMTP                                                                     T  PORTASMTP S USUARIO_ SENHA_SMTP          
+---------- -------------------------------------------------------------------------------- - ---------- - -------- --------------------
+         1                                                                                  N         25 N AUSENTE  AUSENTE             
+         2                                                                                  N         25 N AUSENTE  AUSENTE             
+         3                                                                                  N         25 N AUSENTE  AUSENTE             
+         4                                                                                  N         25 N AUSENTE  AUSENTE             
+         5                                                                                  N         25 N AUSENTE  AUSENTE             
+         7                                                                                  N         25 N AUSENTE  AUSENTE             
+
+6 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - CONTAS BANCARIAS: TSICTA
+08 - CONTAS BANCARIAS: TSICTA
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT A.CODCTABCOINT,
+  2         A.CODEMP,
+  3         A.CODBCO,
+  4         A.CODAGE,
+  5         A.CODCTABCO,
+  6         A.EMITEBOLETA,
+  7         A.ATIVA
+  8    FROM TSICTA A
+  9   ORDER BY A.CODEMP, A.CODCTABCOINT;
+
+CODCTABCOINT     CODEMP     CODBCO CODAG CODCTABCO         E A
+------------ ---------- ---------- ----- ----------------- - -
+           1          1         99 9999  CAIXA PDV         N N
+           2          1         98 9998  CAIXA TESOURARIA  N S
+           4          2        341 5807  997761            S S
+           5          2        341 6429  207001            S S
+           3                    98 9998  CAIXA CREDITO     N N
+
+5 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - USUARIOS: TSIUSU - METADADOS SEM CREDENCIAIS SMTP
+08 - USUARIOS: TSIUSU - METADADOS SEM CREDENCIAIS SMTP
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT U.CODUSU,
+  2         U.NOMEUSU,
+  3         U.EMAIL,
+  4         U.CODGRUPO,
+  5         U.CODEMP,
+  6         U.CODVEND
+  7    FROM TSIUSU U
+  8   ORDER BY LOWER(U.EMAIL), U.CODUSU;
+
+    CODUSU NOMEUSU                                            EMAIL                                                                              CODGRUPO     CODEMP    CODVEND
+---------- -------------------------------------------------- -------------------------------------------------------------------------------- ---------- ---------- ----------
+        11 EVERALDO                                           administrativo@acmbrasil.com                                                              8          3          0
+        12 EARLISSON                                          administrativo@acmbrasil.com                                                              8          1          0
+        18 BIANCA.ALVES                                       bianca.alves@vitrinedireta.com.br                                                         1          2          0
+        13 CLEISON                                            cd.caruaru@acmbrasil.com                                                                  6          1          0
+        14 ALVES                                              cdfortaleza@acmbrasil.com                                                                 6          1          0
+        20 LEDIANE.ARAUJO                                     creditoecobranca@davinciinvestimentos.com.br                                              4          2          0
+        23 DANIEL.CAMARANO                                    daniel@vitrinedireta.com.br                                                               2          2          0
+        15 DENIZE.CARVALHO                                    denize@acmbrasil.com                                                                     10          1          0
+         8 ELOIZIO.GOMES                                      eloizio.gomes@acminas.com.br                                                             10          1          0
+         9 ERLANE                                             erlane.chaves@acminas.com.br                                                             10          1          0
+        21 SIMONE.LUCIO                                       financeiro1@acmbrasil.com                                                                13          2          0
+        19 FABIANA.STOREL                                     financeiro@davinciinvestimentos.com.br                                                    4          2          0
+        10 GABRIELA.ESTEVES                                   gabriela.esteves@vitrinedireta.com.br                                                     4          3          0
+        16 J¿SSICA.KIMURA                                     jessica.kimura@vitrinedireta.com.br                                                       1          2          0
+        17 RILDO.BRITO                                        rildo.brito@acminas.com.br                                                                2          2          0
+        22 WESLEY.SANTOS                                      wesley.santos@vitrinedireta.com.br                                                       17          2          0
+         0 SUP                                                                                                                                          0          1          0
+         1 COTACAOB2B                                                                                                                                   0          1          0
+         2 SKWCLOUD                                                                                                                                     0                     0
+         3 VENDEDOR                                                                                                                                     0          1          2
+         4 GERENTE                                                                                                                                      0          1          1
+         5 SANKHYA                                                                                                                                      0          1          0
+         6 SKWCLOUDAPI                                                                                                                                  0                     0
+         7 LIBERADOR                                                                                                                                    0          1          0
+
+24 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - VENDEDORES/COMPRADORES: TGFVEN
+08 - VENDEDORES/COMPRADORES: TGFVEN
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT V.CODVEND,
+  2         V.APELIDO,
+  3         V.EMAIL,
+  4         V.CODEMP,
+  5         V.ATIVO,
+  6         V.ATUACOMPRADOR
+  7    FROM TGFVEN V
+  8   ORDER BY V.CODVEND;
+
+   CODVEND APELIDO                        EMAIL                                                                                CODEMP A A
+---------- ------------------------------ -------------------------------------------------------------------------------- ---------- - -
+         0 <SEM VENDEDOR>                                                                                                             S N
+         1 GERENTE                                                                                                                    S S
+         2 VENDEDOR                                                                                                                   S S
+
+3 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - GRUPOS DE PRODUTO: TGFGRU
+08 - GRUPOS DE PRODUTO: TGFGRU
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT G.CODGRUPOPROD,
+  2         G.DESCRGRUPOPROD,
+  3         G.CODGRUPAI,
+  4         G.ATIVO
+  5    FROM TGFGRU G
+  6   ORDER BY G.CODGRUPOPROD;
+
+CODGRUPOPROD DESCRGRUPOPROD                  CODGRUPAI A
+------------ ------------------------------ ---------- -
+           0 <SEM GRUPO>                             0 S
+     1000000 SERVIÇOS CONTRATADOS           -999999999 S
+     1010000 SERVIÇOS DE CONCESSIONÁRIAS       1000000 S
+
+3 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - CENTROS DE RESULTADO: TSICUS
+08 - CENTROS DE RESULTADO: TSICUS
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT C.CODCENCUS,
+  2         C.DESCRCENCUS,
+  3         C.CODCENCUSPAI,
+  4         C.ATIVO,
+  5         C.ANALITICO
+  6    FROM TSICUS C
+  7   ORDER BY C.CODCENCUS;
+
+ CODCENCUS DESCRCENCUS                                        CODCENCUSPAI A A
+---------- -------------------------------------------------- ------------ - -
+         0 <SEM CENTRO DE RESULTADO>                                     0 S S
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - NATUREZAS: TGFNAT
+08 - NATUREZAS: TGFNAT
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT N.CODNAT,
+  2         N.DESCRNAT,
+  3         N.CODNATPAI,
+  4         N.ATIVA,
+  5         N.ANALITICA
+  6    FROM TGFNAT N
+  7   ORDER BY N.CODNAT;
+
+    CODNAT DESCRNAT                                       CODNATPAI A A
+---------- --------------------------------------------- ---------- - -
+         0 <SEM NATUREZA>                                           S S
+   1000000 RESULTADO                                     -999999999 S N
+   1010000 RECEITAS OPERACIONAIS                            1000000 S N
+   1010100 RECEITAS DE VENDAS                               1010000 S N
+   1010101 RECEITA COM VENDAS DE PRODUTOS                   1010100 S S
+   1010102 RECEITA COM VENDA E-COMMERCE                     1010100 S S
+   1010200 RECEITA COM SERVICOS                             1010000 S N
+   1010201 RECEITA COM SERVIÇOS DE TRANSPORTES              1010200 S S
+   1010202 RECEITA COM PRESTACAO SERVIÇO                    1010200 S S
+   1020000 (-) DEDUCOES DE VENDA                            1000000 S N
+   1020200 IMPOSTO SOBRE VENDAS                             1020000 S N
+   1020201 ICMS S/ VENDAS                                   1020200 S S
+   1020202 PIS S/ FATURAMENTO                               1020200 S S
+   1020203 COFINS                                           1020200 S S
+   1020204 ISSQN                                            1020200 S S
+   1020205 IRPJ                                             1020200 S S
+   1020206 CSLL                                             1020200 S S
+   1020207 DAS SN                                           1020200 S S
+   1020300 COMISSOES                                        1020000 S N
+   1020301 COMISSAO SOBRE VENDAS                            1020300 S S
+   1020400 OUTRAS DEDUCOES                                  1020000 S N
+   1020401 FRETES SOBRE VENDAS                              1020400 S S
+   1020402 DEVOLUÇÕES DE VENDAS                             1020400 S S
+   1020403 REEMBOLSOS A CLIENTES                            1020400 S S
+   1030000 RECEITAS NAO OPERACIONAIS                        1000000 S N
+   1030100 RECEITAS NAO OPERACIONAIS                        1030000 S N
+   1030101 RENDIMENTOS FINANCEIROS                          1030100 S S
+   1030102 JUROS/MULTAS RECEBIDOS                           1030100 S S
+   1030103 DESCONTOS OBTIDOS                                1030100 S S
+   1030104 VENDA DE ATIVO IMOBILIZADO                       1030100 S S
+   1030105 RECUPERACAO DE DESPESA                           1030100 S S
+   1030106 GANHO DE CAPITAL                                 1030100 S S
+   1030107 REEMBOLSO DE SEGURO                              1030100 S S
+   1030108 REEMBOLSO DE VIAGEM                              1030100 S S
+   1040000 DESPESAS COM PESSOAL                             1000000 S N
+   1040100 REMUNERACAO                                      1040000 S N
+   1040101 SALARIOS                                         1040100 S S
+   1040102 ADIANTAMENTO SALARIAL                            1040100 S S
+   1040103 HORAS EXTRAS                                     1040100 S S
+   1040104 BONUS DE PRODUTIVIDADE                           1040100 S S
+   1040105 RESCISOES                                        1040100 S S
+   1040106 FERIAS                                           1040100 S S
+   1040107 13 SALARIO                                       1040100 S S
+   1040108 SALARIO FAMILIA                                  1040100 S S
+   1040109 BOLSA ESTAGIO                                    1040100 S S
+   1040110 PRO-LABORE                                       1040100 S S
+   1040111 REMUNERACAO FIXA                                 1040100 S S
+   1040200 ENCARGOS                                         1040000 S N
+   1040201 INSS EMPREGADOR                                  1040200 S S
+   1040202 FGTS                                             1040200 S S
+   1040203 INSS EMPREGADO                                   1040200 S S
+   1040204 IRRF S/ SALARIO                                  1040200 S S
+   1040205 CONTRIBUICAO SINDICAL                            1040200 S S
+   1040206 CONTRIBUICAO ASSISTENCIAL                        1040200 S S
+   1040207 AVISO PREVIO / INDENIZACOES                      1040200 S S
+   1040300 BENEFICIOS                                       1040000 S N
+   1040301 ASSISTENCIA MEDICA SOCIAL                        1040300 S S
+   1040302 REFEICAO E LANCHES                               1040300 S S
+   1040303 SEGURO DE VIDA EM GRUPO                          1040300 S S
+   1040304 EXAME MEDICOS/PCMSO/PPRA                         1040300 S S
+   1040305 UNIFORMES                                        1040300 S S
+   1040306 CONFRATERNIZACAO                                 1040300 S S
+   1040307 AJUDA DE CUSTOS                                  1040300 S S
+   1040308 VALE TRANSPORTE                                  1040300 S S
+   1040400 OUTRAS DESPESAS COM PESSOAL                      1040000 S N
+   1040401 TREINAMENTOS                                     1040400 S S
+   1040402 MEDICINA E SEGURANCA DO TRABALHO                 1040400 S S
+   1050000 DESPESAS ADMINISTRATIVAS                         1000000 S N
+   1050100 DESPESAS COM TRANSPORTES                         1050000 S N
+   1050101 COMBUSTIVEL                                      1050100 S S
+   1050102 MANUTENCAO DE VEICULOS                           1050100 S S
+   1050103 PECAS DE REPOSICAO DE VEICULOS                   1050100 S S
+   1050104 IPVA / LICENCIAMENTO                             1050100 S S
+   1050105 SEGURO / FRANQUIA                                1050100 S S
+   1050106 MULTAS DE TRANSITO                               1050100 S S
+   1050107 LAVAGEM DE VEICULOS                              1050100 S S
+   1050108 LEASING                                          1050100 S S
+   1050109 CONDUCAO / TAXI                                  1050100 S S
+   1050200 DESPESAS DE LOCACAO                              1050000 S N
+   1050201 LOCACAO MAQUINAS E EQUIPAMENTOS                  1050200 S S
+   1050202 LOCACAO DE VEICULOS                              1050200 S S
+   1050203 LOCACAO IMOVEIS                                  1050200 S S
+   1050300 MANUTENCOES                                      1050000 S N
+   1050301 MANUTENCAO DE HARDWARE                           1050300 S S
+   1050302 MANUTENCAO DE SOFTWARE                           1050300 S S
+   1050303 MANUTENCAO DE MOVEIS E EQUIPAMENTOS              1050300 S S
+   1050400 DESPESA COM TELECOMUNICACAO                      1050000 S N
+   1050401 TELEFONE FIXO                                    1050400 S S
+   1050402 TELEFONE CELULAR                                 1050400 S S
+   1050403 INTERNET                                         1050400 S S
+   1050500 DESPESA COM CONCESSIONARIAS                      1050000 S N
+   1050501 AGUA E ESGOTO                                    1050500 S S
+   1050502 ENERGIA ELETRICA                                 1050500 S S
+   1050600 DESPESAS C/ SERVICOS PROF. DE TERCEIROS          1050000 S N
+   1050601 CONTABILIDADE                                    1050600 S S
+   1050602 AUDITORIAS / CONSULTORIAS                        1050600 S S
+   1050700 DESPESAS JUDICIAIS / CARTORIAIS                  1050000 S N
+   1050701 HONORARIOS ADVOCATICIOS                          1050700 S S
+   1050702 CUSTAS PROCESSUAIS                               1050700 S S
+   1050703 CUSTAS CERTIDOES                                 1050700 S S
+   1050704 INDENIZACOES JUDICIAIS                           1050700 S S
+   1050705 CARTORIO                                         1050700 S S
+   1050706 CUSTAS COM PROTESTO                              1050700 S S
+   1050707 DESPESAS DE CADASTRO                             1050700 S S
+   1050800 OUTROS IMPOSTOS E TAXAS                          1050000 S N
+   1050801 IPTU                                             1050800 S S
+   1050802 TAXAS MUNICIPAIS                                 1050800 S S
+   1050803 TAXAS FEDERAIS                                   1050800 S S
+   1050804 TAXAS ESTADUAIS                                  1050800 S S
+   1050805 CONTRIBUICAO SINDICAL PATRONAL                   1050800 S S
+   1050806 PIS SOBRE OUTRAS RECEITAS                        1050800 S S
+   1050807 COFINS SOBRE OUTRAS RECEITAS                     1050800 S S
+   1050808 CSLL                                             1050800 S S
+   1050809 ÍPI                                              1050800 S S
+   1050900 DESPESAS GERAIS                                  1050000 S N
+   1050901 JORNAIS E REVISTAS                               1050900 S S
+   1050902 CORREIO                                          1050900 S S
+   1050903 GAS DE COZINHA                                   1050900 S S
+   1050904 DEDETIZACAO                                      1050900 S S
+   1050905 SEGUROS                                          1050900 S S
+   1050906 DOACOES                                          1050900 S S
+   1050907 ALARME / MONITORAMENTO                           1050900 S S
+   1050908 CONDOMINIO                                       1050900 S S
+   1051000 DESPESAS S/ COMPRAS                              1050000 S N
+   1051001 FRETES SOBRE COMPRAS                             1051000 S S
+   1051100 ESTOQUE                                          1050000 S N
+   1051101 MATERIAIS DE LIMPEZA                             1051100 S S
+   1051102 MATERIAIS DE COPA/COZINHA                        1051100 S S
+   1051103 MATERIAIS DE ESCRITORIO                          1051100 S S
+   1051104 SUPRIMENTOS DE INFORMATICA                       1051100 S S
+   1060000 DESPESAS COM MARKETING                           1000000 S N
+   1060100 PROPAGANDA E PUBLICIDADE                         1060000 S N
+   1060101 PATROCINIOS                                      1060100 S S
+   1060102 BRINDES                                          1060100 S S
+   1060103 FEIRAS E EVENTOS                                 1060100 S S
+   1060104 GRAFICA                                          1060100 S S
+   1060105 AGENCIA DE PUBLICIDADE                           1060100 S S
+   1060106 ANUNCIOS / PROPAGANDA                            1060100 S S
+   1070000 DESPESAS COMERCIAIS                              1000000 S N
+   1070100 DESPESAS COMERCIAIS                              1070000 S N
+   1070101 PASSAGEM                                         1070100 S N
+   1070102 HOSPEDAGEM                                       1070100 S N
+   1070103 ALIMENTACAO                                      1070100 S N
+   1070104 TRANSPORTE E LOCOMOCAO                           1070100 S N
+   1070105 PEDAGIO                                          1070100 S N
+   1070106 ACAO DE RELACIONAMENTO                           1070100 S N
+   1070107 OUTRAS DESPESAS COMERCIAIS                       1070100 S N
+   1080000 DESPESAS FINANCEIRAS                             1000000 S N
+   1080100 TARIFAS BANCARIAS                                1080000 S N
+   1080101 MANUTENCAO DE CONTAS                             1080100 S S
+   1080102 RENOVACAO DE CADASTRO                            1080100 S S
+   1080103 TAXAS DUPLICATAS                                 1080100 S S
+   1080104 TED / DOC                                        1080100 S S
+   1080105 TAXAS DE CARTAO                                  1080100 S S
+   1080106 TARIFAS CHEQUES                                  1080100 S S
+   1080107 COBRANCA BANCARIA                                1080100 S S
+   1080108 SERASA / SPC                                     1080100 S S
+   1080200 JUROS E DESCONTOS                                1080000 S N
+   1080201 JUROS S/ EMPRESTIMOS                             1080200 S S
+   1080202 JUROS E MULTAS S/ DUPL. A PAGAR                  1080200 S S
+   1080203 JUROS E MULTAS S/ TRIBUTOS                       1080200 S S
+   1080204 JUROS S/ANTECIPACAO                              1080200 S S
+   1080205 DESCONTOS CONCEDIDOS                             1080200 S S
+   1080206 IOF                                              1080200 S S
+   1080300 ESTORNOS                                         1080000 S N
+   1080301 PAGAMENTO ESTORNADO                              1080300 S S
+   1080302 ESTORNO DE DEBITO                                1080300 S S
+   1090000 DESPESAS COM SOCIOS                              1000000 S N
+   1090100 DISTRIBUICAO RESULTADO                           1090000 S N
+   1090101 DISTRIBUICAO LUCROS                              1090100 S S
+   1090102 DESPESAS PESSOAIS SOCIOS                         1090100 S S
+   2000000 ADIANTAMENTOS E EMPRESTIMOS                   -999999999 S N
+   2010000 DIREITOS COM TERCEIROS                           2000000 S N
+   2010100 ADIANTAMENTOS                                    2010000 S N
+   2010101 ADIANTAMENTO A FORNECEDORES                      2010100 S N
+   2010200 EMPRESTIMOS                                      2010000 S N
+   2010201 EMPRESTIMOS PF                                   2010200 S S
+   2010202 EMPRESTIMOS PJ                                   2010200 S S
+   2010203 BNDES                                            2010200 S S
+   2010204 CAPITAL DE GIRO                                  2010200 S S
+   2020000 OBRIGACOES COM TERCEIROS                         2000000 S N
+   2020100 ADIANTAMENTO DE CLIENTES                         2020000 S N
+   2020101 ADIANTAMENTO DE CLIENTES                         2020100 S S
+   2020200 RETENCOES DE TERCEIROS                           2020000 S N
+   2020201 INSS RETIDO                                      2020200 S S
+   2020202 IR RETIDO                                        2020200 S S
+   2020300 REEMBOLSOS                                       2020000 S N
+   2020301 REEMBOLSOS A FORNECEDORES                        2020300 S S
+   3000000 INVESTIMENTOS                                 -999999999 S N
+   3010000 INVESTIMENTOS                                    3000000 S N
+   3010100 ESTOQUE                                          3010000 S N
+   3010101 PRODUTOS DE REVENDA                              3010100 S S
+   3010102 MATERIA-PRIMA                                    3010100 S S
+   3010103 PECAS / ACESSORIOS DE VEICULOS                   3010100 S S
+   3010104 PECAS DE MANUTENCAO                              3010100 S S
+   3020000 INVESTIMENTOS EM PERMANENTES                     3000000 S N
+   3020100 INVESTIMENTOS EM ATIVO                           3020000 S N
+   3020101 TERRENOS                                         3020100 S S
+   3020102 INSTALACOES                                      3020100 S S
+   3020103 MOVEIS E UTENSILIOS                              3020100 S S
+   3020104 MAQUINAS E EQUIPAMENTOS                          3020100 S S
+   3020105 VEICULOS                                         3020100 S S
+   3020106 SOFTWARE / LICENCAS DE USO                       3020100 S S
+   3020107 PARTICIPACOES ACIONARIAS                         3020100 S S
+   3020108 EDIFICACOES                                      3020100 S S
+   3020109 FERRAMENTAS                                      3020100 S S
+   3030000 OUTROS INVESTIMENTOS                             3000000 S N
+   3030100 OUTROS INVESTIMENTOS                             3030000 S N
+   3030101 APORTE DE CAPITAL                                3030100 S N
+
+209 rows selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT 08 - LOCAIS DE ESTOQUE: TGFLOC
+08 - LOCAIS DE ESTOQUE: TGFLOC
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SELECT L.CODLOCAL,
+  2         L.DESCRLOCAL,
+  3         L.CODLOCALPAI,
+  4         L.ATIVO,
+  5         L.ANALITICO
+  6    FROM TGFLOC L
+  7   ORDER BY L.CODLOCAL;
+
+  CODLOCAL DESCRLOCAL                               CODLOCALPAI A A
+---------- ---------------------------------------- ----------- - -
+         0 <SEM LOCAL>                                        0 S S
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> PROMPT FIM - SNAPSHOT READ-ONLY DE ONBOARDING
+FIM - SNAPSHOT READ-ONLY DE ONBOARDING
+SQL> PROMPT ======================================================================
+======================================================================
+SQL> SPOOL OFF

@@ -1,0 +1,63 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T20:30:07.893144+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MOVE GESTAO DE ENERGIA LTDA/Artefatos_Revisao/PostValidacao/04_Merge_PosExclusao_MOVE_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "moveenergiaprd.sankhyacloud.com.br",
+  "db_name": "MOVEENERGIAPRD",
+  "service_esperado": "MOVEENERGIAPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 11,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "SESSION_USER",
+      "VALOR": "FRANCISCO_JUNIOR"
+    },
+    {
+      "METRICA": "CURRENT_SCHEMA",
+      "VALOR": "SANKHYA"
+    },
+    {
+      "METRICA": "SERVICE_NAME",
+      "VALOR": "moveenergiaprd.sankhyacloud.com.br"
+    },
+    {
+      "METRICA": "MAPA_BAI",
+      "VALOR": "428"
+    },
+    {
+      "METRICA": "MAPA_END",
+      "VALOR": "7283"
+    },
+    {
+      "METRICA": "BACKUP_BAI_OBSOLETO",
+      "VALOR": "428"
+    },
+    {
+      "METRICA": "BACKUP_END_OBSOLETO",
+      "VALOR": "7283"
+    },
+    {
+      "METRICA": "AUDITORIA_REFERENCIAS",
+      "VALOR": "61206"
+    },
+    {
+      "METRICA": "EXCECOES",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "PAIS_BAI_OBSOLETO_REMANESCENTE",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "PAIS_END_OBSOLETO_REMANESCENTE",
+      "VALOR": "0"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

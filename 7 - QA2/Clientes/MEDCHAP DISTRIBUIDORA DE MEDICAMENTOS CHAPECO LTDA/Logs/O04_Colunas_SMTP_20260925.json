@@ -1,0 +1,150 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T13:57:58.966077+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Onboarding/O04_Colunas_SMTP.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 26,
+  "colunas": [
+    "TABLE_NAME",
+    "COLUMN_NAME",
+    "DATA_TYPE"
+  ],
+  "linhas": [
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "CODMODEMAILNFE",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "CODSMTP",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "EMAILCONTADOR",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "EMAILNOTFECREINF",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "ENVEMAILCONF",
+      "DATA_TYPE": "CHAR"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "IGCERTIFSMTPXML",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "INSXMLPORIMPSMTPXML",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "INTCONSSMTPXML",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "MODEMAILLIBLIM",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "PORTASMTPXML",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "PROXEXECSMTPXML",
+      "DATA_TYPE": "DATE"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "SENHASMTPXML",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "SERVIDORSMTPXML",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "SUPRIMIREMAILDEST",
+      "DATA_TYPE": "CHAR"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "TIPCONEXSMTPXML",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TGFEMP",
+      "COLUMN_NAME": "USUARIOSMTPXML",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "EMAIL",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "PORTASMTP",
+      "DATA_TYPE": "NUMBER"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "SEGURANCASMTP",
+      "DATA_TYPE": "CHAR"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "SENHASMTP",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "SERVIDORSMTP",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "TIPOSMTP",
+      "DATA_TYPE": "CHAR"
+    },
+    {
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "USUARIOSMTP",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIPAR",
+      "COLUMN_NAME": "CHAVE",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSIPAR",
+      "COLUMN_NAME": "TEXTO",
+      "DATA_TYPE": "VARCHAR2"
+    },
+    {
+      "TABLE_NAME": "TSISMTP",
+      "COLUMN_NAME": "CODSMTP",
+      "DATA_TYPE": "NUMBER"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

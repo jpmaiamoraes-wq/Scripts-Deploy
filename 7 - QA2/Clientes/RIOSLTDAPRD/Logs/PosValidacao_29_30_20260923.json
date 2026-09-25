@@ -1,0 +1,75 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T13:30:38.689207+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/RIOSLTDAPRD/PosValidacao_29_30_ReadOnly_RIOSLTDAPRD.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "riosltdaprd.sankhyacloud.com.br",
+  "db_name": "RIOSLTDAPRD",
+  "service_esperado": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 11,
+  "colunas": [
+    "ITEM",
+    "QTD",
+    "DETALHE"
+  ],
+  "linhas": [
+    {
+      "ITEM": "BACKUP_BAIRROS_LINHAS",
+      "QTD": 428,
+      "DETALHE": "RMD_RIO_2930_BAI"
+    },
+    {
+      "ITEM": "BACKUP_ENDERECOS_LINHAS",
+      "QTD": 7283,
+      "DETALHE": "RMD_RIO_2930_END"
+    },
+    {
+      "ITEM": "BAIRROS_ATUAIS",
+      "QTD": 45567,
+      "DETALHE": "TSIBAI"
+    },
+    {
+      "ITEM": "BAIRROS_DUPLICADOS_NORMALIZADOS",
+      "QTD": 0,
+      "DETALHE": "TSIBAI"
+    },
+    {
+      "ITEM": "BAIRROS_OBSOLETOS_PRESENTES",
+      "QTD": 0,
+      "DETALHE": "TSIBAI"
+    },
+    {
+      "ITEM": "ENDERECOS_ATUAIS",
+      "QTD": 674608,
+      "DETALHE": "TSIEND"
+    },
+    {
+      "ITEM": "ENDERECOS_DUPLICADOS_NORMALIZADOS",
+      "QTD": 0,
+      "DETALHE": "TSIEND"
+    },
+    {
+      "ITEM": "ENDERECOS_OBSOLETOS_PRESENTES",
+      "QTD": 0,
+      "DETALHE": "TSIEND"
+    },
+    {
+      "ITEM": "EXCECOES",
+      "QTD": 0,
+      "DETALHE": "RMD_RIO_2930_EXC"
+    },
+    {
+      "ITEM": "MAPA_LINHAS",
+      "QTD": 7711,
+      "DETALHE": "RMD_RIO_2930_MAP"
+    },
+    {
+      "ITEM": "REFERENCIAS_AUDITADAS",
+      "QTD": 61211,
+      "DETALHE": "RMD_RIO_2930_DEP"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,43 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/FOCUSFINTAXPRD/32A_Card09_Mapear_Direto_XML_FOCUSFINTAXPRD.sql",
+  "arquivos": [
+    "Clientes/FOCUSFINTAXPRD/32A_Card09_Mapear_Direto_XML_FOCUSFINTAXPRD.sql"
+  ],
+  "qtd_instrucoes": 6,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 2,
+    "CREATE": 2,
+    "SELECT": 2
+  },
+  "binds_sqlplus": [],
+  "defines_sqlplus": [
+    {
+      "acao": "DEFINE",
+      "nome": "ID_EXECUCAO"
+    },
+    {
+      "acao": "DEFINE",
+      "nome": "TBL_BASE"
+    },
+    {
+      "acao": "DEFINE",
+      "nome": "TBL_PPG"
+    },
+    {
+      "acao": "DEFINE",
+      "nome": "LOG_FILE"
+    }
+  ],
+  "sha256_suite": "9cc0be9e38732f5d4b281c116b53eab3bb03fb19bbc81d90922363cc63072420",
+  "dml_ddl_permitidos_no_lote": true,
+  "confirmacao_por_instrucao": false,
+  "preflight": {
+    "status": "PREFLIGHT_APROVADO",
+    "qtd_bloqueios": 0,
+    "qtd_avisos": 0,
+    "bloqueios": [],
+    "avisos": []
+  },
+  "dml_ddl_executado": false
+}

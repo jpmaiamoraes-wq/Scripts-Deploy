@@ -1,0 +1,12 @@
+{
+  "pedido": "25_atividade33_r02.json",
+  "inicio_local": "2026-09-25T09:59:05-03:00",
+  "id": "MEDCHAP_CAR_20260925_02",
+  "tipo": "batch_apply",
+  "status": "CONCLUIDO",
+  "rc": 0,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_CAR_20260925_02_console.txt",
+  "log_lote": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/MEDCHAP_CAR_20260925_02.log",
+  "fim_local": "2026-09-25T10:00:32-03:00",
+  "duracao_s": 87.0
+}

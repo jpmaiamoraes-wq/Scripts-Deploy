@@ -1,0 +1,16 @@
+-- Estado persistente somente leitura apos a falha na atividade TGFEMP.
+SELECT OWNER,
+       OBJECT_TYPE,
+       OBJECT_NAME,
+       STATUS,
+       CREATED,
+       LAST_DDL_TIME
+  FROM ALL_OBJECTS
+ WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+   AND (
+       OBJECT_NAME LIKE 'RMD%'
+       OR OBJECT_NAME LIKE 'BKP_RMD%'
+       OR OBJECT_NAME LIKE 'MAP_RMD%'
+       OR OBJECT_NAME LIKE 'AUD_RMD%'
+   )
+ ORDER BY OBJECT_TYPE, OBJECT_NAME;

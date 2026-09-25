@@ -1,0 +1,12 @@
+{
+  "pedido": "21_c02r02.json",
+  "inicio_local": "2026-09-25T09:47:49-03:00",
+  "id": "MEDCHAP_C02_20260925_02",
+  "tipo": "query",
+  "status": "ERRO_EXECUTOR",
+  "rc": 1,
+  "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/C02_Lista_Caracteres_Atipicos_20260925_R02.json",
+  "log_lote": null,
+  "fim_local": "2026-09-25T09:47:49-03:00",
+  "duracao_s": 0.7
+}

@@ -1,0 +1,51 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T20:21:40.569082+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MOVE GESTAO DE ENERGIA LTDA/Artefatos_Revisao/PostValidacao/03_Diagnostico_Divergencia_CODEND_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "moveenergiaprd.sankhyacloud.com.br",
+  "db_name": "MOVEENERGIAPRD",
+  "service_esperado": "MOVEENERGIAPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 8,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "LINHAS_EM_GRUPOS_DE_COLISAO",
+      "VALOR": "14226"
+    },
+    {
+      "METRICA": "GRUPOS_DE_COLISAO",
+      "VALOR": "6943"
+    },
+    {
+      "METRICA": "CODIGOS_OBSOLETOS_PELA_REGRA_SQL",
+      "VALOR": "7283"
+    },
+    {
+      "METRICA": "CODEND_NULOS_EM_GRUPOS_DE_COLISAO",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "GRUPOS_COM_CODEND_NULO",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "MAPA_END",
+      "VALOR": "7283"
+    },
+    {
+      "METRICA": "BACKUP_END_OBSOLETO",
+      "VALOR": "7283"
+    },
+    {
+      "METRICA": "PAIS_MAPEADOS_AINDA_VIVOS",
+      "VALOR": "7283"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

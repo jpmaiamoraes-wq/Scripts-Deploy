@@ -1,0 +1,30 @@
+{
+  "status": "LOTE_CONCLUIDO_POS_VALIDADO",
+  "execution_id": "MOVE_FDUP_20260922_01",
+  "arquivo_sql": "32_Card09_Mapa_PosValidacao_MOVE_READONLY.sql",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "base_total_mapa": 185,
+  "status_mapa": {
+    "APTO_PARA_VALIDACAO_FINAL": {
+      "linhas": 184,
+      "notas_distintas": 184
+    },
+    "SEM_VDUP_XML": {
+      "linhas": 1,
+      "notas_distintas": 1
+    }
+  },
+  "aptos_com_tgffin_pos_mapa": 0,
+  "mapas": [
+    "BKP_RMD_FDUP_20260922",
+    "BKP_RMD_FDUP_20260922_PPG"
+  ],
+  "dml_executado": false,
+  "ddl_executado": true,
+  "tgffin_alterada": false
+}

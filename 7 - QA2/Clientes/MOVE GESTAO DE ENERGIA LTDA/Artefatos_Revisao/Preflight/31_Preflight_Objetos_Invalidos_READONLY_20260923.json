@@ -1,0 +1,48 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T11:01:48.571872+00:00",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "arquivo_sql": "Artefatos_Revisao/Preflight/31_Preflight_Objetos_Invalidos_READONLY.sql",
+  "sha256_sql": "ea91ce4934cb0ff6c9f644ed6ad681b73a38427c4e219273e163b887db479400",
+  "objetos_invalidos": [
+    "FUNCTION:FSP_DATA_DIA_UTIL",
+    "FUNCTION:FSP_RETURN_DATAS_UTEIS",
+    "FUNCTION:GET_PREVISAO_CREDITO_DEBITO",
+    "FUNCTION:GET_PROXIMO_DIA_UTIL"
+  ],
+  "quantidade_objetos_invalidos": 4,
+  "alter_any_procedure_presente": false,
+  "privilegios_ativos": [
+    "ALTER ANY TABLE",
+    "ALTER ANY TRIGGER",
+    "CREATE ANY INDEX",
+    "CREATE ANY MATERIALIZED VIEW",
+    "CREATE ANY PROCEDURE",
+    "CREATE ANY SEQUENCE",
+    "CREATE ANY TABLE",
+    "CREATE ANY TRIGGER",
+    "CREATE ANY TYPE",
+    "CREATE ANY VIEW",
+    "CREATE SESSION",
+    "DROP ANY INDEX",
+    "DROP ANY MATERIALIZED VIEW",
+    "DROP ANY PROCEDURE",
+    "DROP ANY SEQUENCE",
+    "DROP ANY TABLE",
+    "DROP ANY TRIGGER",
+    "DROP ANY TYPE",
+    "DROP ANY VIEW",
+    "EXECUTE ANY CLASS",
+    "EXECUTE ANY PROCEDURE",
+    "EXECUTE ANY TYPE",
+    "SELECT ANY SEQUENCE",
+    "SET CONTAINER"
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,18 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T12:06:26.942787+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "fonte": "Inventario_Card09_Estado_ReadOnly.sql",
+  "qtd_linhas_retorno": 35,
+  "tabelas_card09_fdup_encontradas": [],
+  "artefatos_card09_persistidos": false,
+  "mapa_card09_persistido": false,
+  "auditoria_insert_card09_persistida": false,
+  "pos_validacao_card09_persistida": false,
+  "dml_executado": false,
+  "ddl_executado": false,
+  "conclusao": "Nao ha evidencia de execucao do Card 09 nesta base; permanecem pendentes mapa direto XML, revisao de candidatos, eventual insert separado e pos-validacao."
+}

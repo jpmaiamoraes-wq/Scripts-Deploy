@@ -1,0 +1,144 @@
+-- NAO EXECUTAR SEM APROVACAO EXPRESSA PARA A BASE E ID_CARGA.
+-- Aplica somente linhas aprovadas e cria backup persistente para reversao.
+
+SET SERVEROUTPUT ON SIZE UNLIMITED;
+SET DEFINE ON;
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK;
+
+ACCEPT ID_CARGA CHAR PROMPT 'Informe o ID_CARGA aprovado: '
+ACCEPT CONFIRMACAO CHAR PROMPT 'Digite APLICAR PERFIS CNAE para continuar: '
+
+DECLARE
+  c_id_carga    CONSTANT VARCHAR2(30) := '&ID_CARGA';
+  c_confirmacao CONSTANT VARCHAR2(40) := '&CONFIRMACAO';
+  c_id_execucao CONSTANT VARCHAR2(30) :=
+    'PPC_' || TO_CHAR(SYSTIMESTAMP, 'YYYYMMDDHH24MISSFF3');
+  v_perfis      PLS_INTEGER := 0;
+  v_backups     PLS_INTEGER := 0;
+  v_atualizados PLS_INTEGER := 0;
+  v_erros       PLS_INTEGER := 0;
+  v_duplicados  PLS_INTEGER := 0;
+BEGIN
+  SAVEPOINT PPC_INICIO;
+
+  IF c_confirmacao <> 'APLICAR PERFIS CNAE' THEN
+    RAISE_APPLICATION_ERROR(-20100, 'Confirmacao invalida. Nenhuma alteracao realizada.');
+  END IF;
+
+  SELECT COUNT(*) INTO v_erros
+    FROM STG_PPC_PARCEIRO S
+   WHERE S.ID_CARGA = c_id_carga
+     AND S.STATUS_VALIDACAO = 'APROVADO'
+     AND (NVL(S.CONFIANCA, '-') <> 'ALTA'
+          OR NVL(S.SITUACAO_CADASTRAL, '-') <> 'Ativa'
+          OR LENGTH(S.CNPJ) <> 14
+          OR NOT EXISTS (SELECT 1 FROM TGFPAR P WHERE P.CODPARC = S.CODPARC)
+          OR EXISTS (
+               SELECT 1 FROM TGFPAR P
+                WHERE P.CODPARC = S.CODPARC
+                  AND REGEXP_REPLACE(P.CGC_CPF, '[^0-9]', '') <> S.CNPJ
+             )
+          OR NOT EXISTS (
+               SELECT 1
+                 FROM TGFTPP T
+                WHERE T.CODTIPPARC = S.CODTIPPARC_SUGERIDO
+                  AND T.ANALITICO = 'S'
+                  AND T.ATIVO = 'S'
+               UNION ALL
+               SELECT 1
+                 FROM STG_PPC_PERFIL N
+                WHERE N.ID_CARGA = S.ID_CARGA
+                  AND N.CODTIPPARC = S.CODTIPPARC_SUGERIDO
+                  AND N.STATUS_VALIDACAO = 'APROVADO'
+                  AND N.ANALITICO = 'S'
+                  AND N.ATIVO = 'S'
+             ));
+
+  IF v_erros > 0 THEN
+    RAISE_APPLICATION_ERROR(-20101, 'Carga possui linhas aprovadas que nao atendem aos criterios automaticos.');
+  END IF;
+
+  SELECT COUNT(*) INTO v_duplicados
+    FROM (
+      SELECT CODPARC
+        FROM STG_PPC_PARCEIRO
+       WHERE ID_CARGA = c_id_carga
+         AND STATUS_VALIDACAO = 'APROVADO'
+       GROUP BY CODPARC
+      HAVING COUNT(*) > 1
+    );
+
+  IF v_duplicados > 0 THEN
+    RAISE_APPLICATION_ERROR(-20103, 'Carga possui parceiros aprovados duplicados.');
+  END IF;
+
+  FOR R IN (
+      SELECT N.*
+        FROM STG_PPC_PERFIL N
+       WHERE N.ID_CARGA = c_id_carga
+         AND N.STATUS_VALIDACAO = 'APROVADO'
+         AND NOT EXISTS (SELECT 1 FROM TGFTPP T WHERE T.CODTIPPARC = N.CODTIPPARC)
+       ORDER BY N.GRAU, N.CODTIPPARC
+  ) LOOP
+    INSERT INTO TGFTPP (
+      CODTIPPARC, DESCRTIPPARC, CODTIPPARCPAI, GRAU, ANALITICO, ATIVO, SEGATUA
+    ) VALUES (
+      R.CODTIPPARC, R.DESCRTIPPARC, R.CODTIPPARCPAI, R.GRAU,
+      R.ANALITICO, R.ATIVO, R.SEGATUA
+    );
+
+    INSERT INTO BKP_PPC_TGFTPP (
+      ID_EXECUCAO, ID_CARGA, DH_EXECUCAO, USUARIO_EXECUCAO,
+      CODTIPPARC, DESCRTIPPARC, CODTIPPARCPAI, GRAU, ANALITICO, ATIVO, SEGATUA
+    ) VALUES (
+      c_id_execucao, c_id_carga, SYSDATE, SYS_CONTEXT('USERENV','SESSION_USER'),
+      R.CODTIPPARC, R.DESCRTIPPARC, R.CODTIPPARCPAI, R.GRAU,
+      R.ANALITICO, R.ATIVO, R.SEGATUA
+    );
+    v_perfis := v_perfis + 1;
+  END LOOP;
+
+  INSERT INTO BKP_PPC_TGFPAR (
+    ID_EXECUCAO, ID_CARGA, DH_EXECUCAO, USUARIO_EXECUCAO,
+    CODPARC, CODTIPPARC_ANTES, CODTIPPARC_DEPOIS
+  )
+  SELECT c_id_execucao, c_id_carga, SYSDATE,
+         SYS_CONTEXT('USERENV','SESSION_USER'),
+         P.CODPARC, P.CODTIPPARC, S.CODTIPPARC_SUGERIDO
+    FROM STG_PPC_PARCEIRO S
+    JOIN TGFPAR P ON P.CODPARC = S.CODPARC
+   WHERE S.ID_CARGA = c_id_carga
+     AND S.STATUS_VALIDACAO = 'APROVADO'
+     AND S.CONFIANCA = 'ALTA'
+     AND NVL(P.CODTIPPARC, 0) = 0;
+  v_backups := SQL%ROWCOUNT;
+
+  MERGE INTO TGFPAR P
+  USING (
+      SELECT S.CODPARC, S.CODTIPPARC_SUGERIDO
+        FROM STG_PPC_PARCEIRO S
+       WHERE S.ID_CARGA = c_id_carga
+         AND S.STATUS_VALIDACAO = 'APROVADO'
+         AND S.CONFIANCA = 'ALTA'
+  ) S
+     ON (P.CODPARC = S.CODPARC)
+   WHEN MATCHED THEN UPDATE
+        SET P.CODTIPPARC = S.CODTIPPARC_SUGERIDO
+      WHERE NVL(P.CODTIPPARC, 0) = 0;
+  v_atualizados := SQL%ROWCOUNT;
+
+  IF v_backups <> v_atualizados THEN
+    RAISE_APPLICATION_ERROR(-20102, 'Quantidade atualizada difere do backup.');
+  END IF;
+
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO=' || c_id_execucao);
+  DBMS_OUTPUT.PUT_LINE('PERFIS_CRIADOS=' || v_perfis);
+  DBMS_OUTPUT.PUT_LINE('PARCEIROS_ATUALIZADOS=' || v_atualizados);
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK TO PPC_INICIO;
+    DBMS_OUTPUT.PUT_LINE('ERRO=' || SQLERRM);
+    RAISE;
+END;
+/

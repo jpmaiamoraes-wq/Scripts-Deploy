@@ -1,0 +1,79 @@
+=== CARD 09 - POS-VALIDACAO INSTITUTO MOREIRA SALLES ===
+=== IDENTIFICACAO DA EXECUCAO ===
+
+ID_EXECUCAO                 CURRENT_SCHEMA                                                                                                                                                                                                                                                   SESSION_USER                                                                                                                                                                                                                                                     SERVICE_NAME                                                                                                                                                                                                                                                     DH_VALIDACAO                      
+--------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------
+RMD_FDUP_IMS_20260914165524 SANKHYA                                                                                                                                                                                                                                                          FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 imsprd.sankhyacloud.com.br                                                                                                                                                                                                                                       15/09/26 08:38:06,544337000 -03:00
+
+=== AUDITORIA DA INCLUSAO ===
+
+AUDITORIA_LINHAS AUDITORIA_NOTAS PRIMEIRO_NUFIN ULTIMO_NUFIN VLRDESDOB_AUDITADO
+---------------- --------------- -------------- ------------ ------------------
+              24              24            895          918             919,03
+
+=== TGFFIN LOCALIZADO PELA AUDITORIA ===
+
+TGFFIN_MATCH_AUDITORIA TGFFIN_NOTAS TGFFIN_NUFIN PRIMEIRO_NUFIN ULTIMO_NUFIN
+---------------------- ------------ ------------ -------------- ------------
+                    24           24           24            895          918
+
+=== TGFFIN COM VALORES E DATAS EXATOS DA AUDITORIA ===
+
+TGFFIN_CAMPOS_EXATOS
+--------------------
+                  24
+
+=== UMA LINHA FINANCEIRA POR NOTA TRATADA ===
+
+NOTAS_COM_QTD_TGFFIN_DIVERGENTE
+-------------------------------
+                              0
+
+=== TGFNUM E CONTINUIDADE DA FAIXA GERADA ===
+
+ARQUIVO                              ULTCOD  MIN_NUFIN  MAX_NUFIN QTD_AUDITADA STATUS_ STATUS_
+-------------------------------- ---------- ---------- ---------- ------------ ------- -------
+TGFFIN                                  918        895        918           24 OK      OK     
+
+
+TGFNUM_TGFFIN_ROWS
+------------------
+                 1
+
+=== CONSISTENCIA MAPA X AUDITORIA X TGFFIN ===
+
+MAPA_AUDITORIA_TGFFIN_EXATOS
+----------------------------
+                          24
+
+=== DISTRIBUICAO FINAL DO MAPA ===
+
+STATUS_MAPA                          QTD
+----------------------------- ----------
+APTO_PARA_INSERCAO_CONTROLADA         24
+SEM_CONTA_ATIVA                       16
+SEM_DUP_XML                           24
+
+
+MAPA_APTOS MAPA_NOTAS_APTAS MAPA_APTOS_SEM_PREEXISTENTE MAPA_APTOS_COM_CONTA
+---------- ---------------- --------------------------- --------------------
+        24               24                          24                   24
+
+=== FUNCAO XML E ERROS DE COMPILACAO ===
+
+OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                VALID  
+
+
+ERROS_FUNCAO_XML
+----------------
+               0
+
+=== STATUS FINAL DO CARD 09 ===
+
+STATUS_CARD09
+-----------------------------------
+CARD09_POSVALIDADO_SEM_DIVERGENCIAS
+
+=== CARD 09 - POS-VALIDACAO CONCLUIDA ===

@@ -1,0 +1,25 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:21.297969+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P06B_Unidades_Candidatos_Automaticos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 1,
+  "colunas": [
+    "FROM_CODE",
+    "TO_CODE",
+    "MOTIVOS"
+  ],
+  "linhas": [
+    {
+      "FROM_CODE": "KIT",
+      "TO_CODE": "KT",
+      "MOTIVOS": "DESCRICAO_EQUIVALENTE"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

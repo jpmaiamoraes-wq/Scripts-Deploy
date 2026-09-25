@@ -1,0 +1,44 @@
+{
+  "executado_em_utc": "2026-09-23T13:23:46.987566+00:00",
+  "identidade": {"session_user": "FRANCISCO_JUNIOR", "current_schema": "SANKHYA", "service_name": "casadasessenciasprd.sankhyacloud.com.br"},
+  "fontes": [
+    "19_PosValidacao_Atividades_READONLY.sql",
+    "14_Controle_Objetos_Apos_Tentativa_READONLY.sql",
+    "04_Card09_Resumo_READONLY.sql",
+    "05_Volumetria_Integridade_READONLY.sql"
+  ],
+  "atividade": {
+    "controles_pendentes": 0,
+    "objetos_invalidos_function_sankhya": 43,
+    "alter_any_procedure": 0,
+    "atividade_10_icms_saldo": 0,
+    "atividade_11_ruptura_saldo": 0,
+    "atividade_12_segmentacao_total": 0,
+    "atividade_14_analise_848": 1,
+    "atividade_15_rastro_saldo": 0,
+    "tsicfg_total": 994,
+    "rmd_map_unidades_total": 110,
+    "bkp_rmd_11_tgfemp": 0
+  },
+  "card09": {
+    "base_total": 15,
+    "registros_tgfnfe": 0,
+    "multiplos_xml": 0,
+    "sem_xml": 15,
+    "aptos_notas": 0,
+    "aptos_linhas": 0,
+    "status_sem_vdup_xml": 15,
+    "tgfnum_tgffin_linhas": 1,
+    "tgfnum_tgffin_ultcod": 110648
+  },
+  "volumetria_integridade": {
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 22,
+    "codigos_fiscais_cidades_duplicados": 0,
+    "gate_pdf": "BLOQUEADO"
+  },
+  "triggers": "Todos os registros do ID_MASTER consultados com STATUS_DEPOIS=ENABLED; controles pendentes=0",
+  "dml_executado": false,
+  "ddl_executado": false
+}

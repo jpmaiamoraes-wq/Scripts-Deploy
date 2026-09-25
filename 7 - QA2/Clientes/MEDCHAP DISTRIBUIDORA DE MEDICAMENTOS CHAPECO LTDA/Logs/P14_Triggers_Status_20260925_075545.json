@@ -1,0 +1,27 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:33.039185+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P14_Triggers_Status.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 2,
+  "colunas": [
+    "STATUS",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "STATUS": "DISABLED",
+      "QTD": 9
+    },
+    {
+      "STATUS": "ENABLED",
+      "QTD": 907
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

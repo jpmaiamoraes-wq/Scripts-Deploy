@@ -1,0 +1,1 @@
+{"id": "MEDCHAP_O01_20260925_01", "tipo": "query", "sql_file": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Onboarding/O01_Empresas.sql", "saida": "7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Logs/O01_Empresas_20260925.json", "descricao": "onboarding read-only"}

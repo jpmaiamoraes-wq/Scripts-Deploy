@@ -1,0 +1,127 @@
+SQL> 
+SQL> PROMPT === CONTINUIDADE REVISAO ANDORINHA COMERCIAL: ETAPAS 05 A 31 ===
+=== CONTINUIDADE REVISAO ANDORINHA COMERCIAL: ETAPAS 05 A 31 ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> SELECT CODEMP, RAZAOSOCIAL FROM TSIEMP WHERE CODEMP=1;
+
+    CODEMP RAZAOSOCIAL                             
+---------- ----------------------------------------
+         1 ANDORINHA COMERCIAL LTDA                
+
+SQL> 
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER:='RMD_RUN_20260908092241054'; END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT ID_MASTER, COUNT(*) REGISTROS_CONTROLE
+  2    FROM RMD_CONTROLE_OBJETOS
+  3   WHERE ID_MASTER=:RMD_ID_MASTER
+  4   GROUP BY ID_MASTER;
+no rows selected
+SQL> 
+SQL> PROMPT [05/31] INICIO - 05_Habilitar_Calculo_Giro_Produtos.sql
+[05/31] INICIO - 05_Habilitar_Calculo_Giro_Produtos.sql
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/05_Habilitar_Calculo_Giro_Produtos.sql"
+SQL> -- Bloco 04_Habilitar_Calculo_Giro_Produtos; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_04_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_04_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.CALCULOGIRO VALOR_ANTES, CAST('G' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_GIRO_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_04_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),CALCULOGIRO,CAST('G' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE USOPROD IN ('V','R') AND NVL(CALCULOGIRO,'?')<>'G';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET CALCULOGIRO='G' WHERE USOPROD IN ('V','R') AND NVL(CALCULOGIRO,'?')<>'G';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 04_Habilitar_Calculo_Giro_Produtos.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_GIRO_20260908095527114
+REGISTROS_ALTERADOS=179
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [05/31] FIM - 05_Habilitar_Calculo_Giro_Produtos.sql
+[05/31] FIM - 05_Habilitar_Calculo_Giro_Produtos.sql
+SQL> PROMPT [06/31] INICIO - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+[06/31] INICIO - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/06_Zerar_Parcelas_Tipos_Negociacao.sql"
+SQL> -- Bloco 05_Zerar_Parcelas_Tipos_Negociacao; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_05_TGFTPV';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_05_TGFTPV AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.NROPARCELAS VALOR_ANTES, CAST(0 AS NUMBER) VALOR_DEPOIS FROM TGFTPV T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_PARC_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_05_TGFTPV
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),NROPARCELAS,CAST(0 AS NUMBER)
+  7   FROM TGFTPV WHERE NVL(NROPARCELAS,-1)<>0;
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFTPV SET NROPARCELAS=0 WHERE NVL(NROPARCELAS,-1)<>0;
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 05_Zerar_Parcelas_Tipos_Negociacao.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_PARC_20260908095528046
+REGISTROS_ALTERADOS=17
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [06/31] FIM - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+[06/31] FIM - 06_Zerar_Parcelas_Tipos_Negociacao.sql
+SQL> PROMPT [07/31] INICIO - 07_Preencher_Data_Movimento.sql
+[07/31] INICIO - 07_Preencher_Data_Movimento.sql
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/07_Preencher_Data_Movimento.sql"
+SQL> -- Bloco 06_Preencher_Data_Movimento; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_06_TGFCAB';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_06_TGFCAB AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECU

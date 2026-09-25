@@ -1,0 +1,20 @@
+{
+  "status": "IDENTIDADE_VALIDADA_READ_ONLY",
+  "executado_em_utc": "2026-09-19T23:58:42.191080+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "service_esperado": "JCLMPRD.SANKHYACLOUD.COM.BR",
+  "db_name": "JCLMPRD",
+  "empresas": [
+    {"codemp": 1, "razao_social": "JCLM INDUSTRIA E COMERCIO LTDA"},
+    {"codemp": 2, "razao_social": "FUTURA PRODUTOS ALIMENTICIOS LTDA"},
+    {"codemp": 3, "razao_social": "INDUSTRIA DE SUCOS SUMO INDUSTRIAL LTDA"},
+    {"codemp": 4, "razao_social": "JCLM INDUSTRIA E COMERCIO LTDA"},
+    {"codemp": 5, "razao_social": "JULIO CESAR MOMESSO LTDA"},
+    {"codemp": 6, "razao_social": "JAF DISTRIBUIDORA DE BEBIDAS LTDA"}
+  ],
+  "dml_executado": false,
+  "ddl_executado": false,
+  "senha_em_arquivo": false
+}

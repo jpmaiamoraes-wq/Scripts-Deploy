@@ -1,0 +1,28 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "base": "MOVE GESTAO DE ENERGIA LTDA",
+  "execution_id_lote": "MOVE_FDUP32B_20260922_02",
+  "tentativa_anterior": {
+    "execution_id_lote": "MOVE_FDUP32B_20260922_01",
+    "status": "LOTE_COM_ERRO",
+    "resultado_dml": "ROLLBACK_CONFIRMADO_READ_ONLY",
+    "causa": "CODCTABCOINT fixo 4 nao existe ativo na TSICTA"
+  },
+  "execution_id_mapa_auditoria": "MOVE_FDUP_20260922_01",
+  "entrada": "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Executor_MOVE_20260922.sql",
+  "arquivos_lote": [
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Executor_MOVE_20260922.sql",
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Inserir_Notas_Sem_Financeiro_DUP.sql"
+  ],
+  "qtd_instrucoes": 3,
+  "sha256_lote": "23ecc376b95f0dc9285dd1fa334820bf3f0dc55f6aacd6b7bbf706ad177a2b77",
+  "pos_validacao": "Clientes/MOVE GESTAO DE ENERGIA LTDA/Artefatos_Revisao/PostValidacao/32B_Card09_PosValidacao_MOVE_READONLY.sql",
+  "sha256_pos_validacao": "4dbf8c1ee6fc2526d0a10102541cc6378790603bc2e072653d03e630032744ec",
+  "correcao_validada": "TGFFIN.CODCTABCOINT recebe CODCTABCOINT da TGFPPG persistido no mapa; os 184 candidatos estao nulos nessa coluna, e TGFFIN permite nulo.",
+  "preflight": {
+    "status": "PREFLIGHT_APROVADO",
+    "bloqueios": 0,
+    "avisos": 0
+  },
+  "dml_ddl_executado": false
+}

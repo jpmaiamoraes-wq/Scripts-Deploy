@@ -1,0 +1,1275 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-21T18:52:59.961009+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Diagnostico_Trigger_TSIPAR_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 209,
+  "colunas": [
+    "TIPO",
+    "OBJETO",
+    "LINHA",
+    "TEXTO"
+  ],
+  "linhas": [
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 1,
+      "TEXTO": "PROCEDURE STP_GRAVATABLOG\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 2,
+      "TEXTO": "(\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 3,
+      "TEXTO": "  P_TABELA IN VARCHAR2,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 4,
+      "TEXTO": "  P_CHAVE  IN VARCHAR2,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 5,
+      "TEXTO": "  P_CAMPO  IN VARCHAR2, \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 6,
+      "TEXTO": "  P_CODUSU IN INT,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 7,
+      "TEXTO": "  P_ACAO   IN VARCHAR2,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 8,
+      "TEXTO": "  P_NEW    IN VARCHAR2, \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 9,
+      "TEXTO": "  P_OLD    IN VARCHAR2\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 10,
+      "TEXTO": ")\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 11,
+      "TEXTO": "AS\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 12,
+      "TEXTO": "BEGIN \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 13,
+      "TEXTO": "DECLARE     V_USUARIO_BANCO VARCHAR2(60);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 14,
+      "TEXTO": "            V_USUARIO_REDE  VARCHAR2(60);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 15,
+      "TEXTO": "            V_NOMEMAQUINA   VARCHAR2(60);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 16,
+      "TEXTO": "            V_IPMAQUINA     VARCHAR2(60);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 17,
+      "TEXTO": "            V_PROGRAMA      VARCHAR2(60);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 18,
+      "TEXTO": "            V_USUARIOSIS    VARCHAR2(60);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 19,
+      "TEXTO": "            V_CODUSUAUX     VARCHAR2(100);\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 20,
+      "TEXTO": "BEGIN \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 21,
+      "TEXTO": "    IF (P_CODUSU IS NULL) OR (P_CODUSU = 0) OR (P_TABELA = 'TSIUSU') THEN\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 22,
+      "TEXTO": "      V_CODUSUAUX := Tsiusu_Log_Pkg.V_CODUSULOG;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 23,
+      "TEXTO": "      V_USUARIOSIS := Tsiusu_Log_Pkg.V_NOMEUSULOG;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 24,
+      "TEXTO": "    ELSE\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 25,
+      "TEXTO": "      V_CODUSUAUX := P_CODUSU;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 26,
+      "TEXTO": "      BEGIN\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 27,
+      "TEXTO": "        SELECT USU.NOMEUSU INTO V_USUARIOSIS FROM TSIUSU USU WHERE USU.CODUSU = V_CODUSUAUX;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 28,
+      "TEXTO": "      EXCEPTION WHEN NO_DATA_FOUND THEN\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 29,
+      "TEXTO": "        V_USUARIOSIS := 'USUARIO NAO LOCALIZADO NA TSIUSU ' || V_CODUSUAUX;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 30,
+      "TEXTO": "      END;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 31,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 32,
+      "TEXTO": "  \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 33,
+      "TEXTO": "    SELECT   \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 34,
+      "TEXTO": "        USERNAME, \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 35,
+      "TEXTO": "        OSUSER,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 36,
+      "TEXTO": "        MACHINE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 37,
+      "TEXTO": "        sys_context('USERENV','IP_ADDRESS'),\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 38,
+      "TEXTO": "        PROGRAM\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 39,
+      "TEXTO": "    INTO\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 40,
+      "TEXTO": "        V_USUARIO_BANCO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 41,
+      "TEXTO": "        V_USUARIO_REDE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 42,
+      "TEXTO": "        V_NOMEMAQUINA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 43,
+      "TEXTO": "        V_IPMAQUINA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 44,
+      "TEXTO": "        V_PROGRAMA\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 45,
+      "TEXTO": "    FROM\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 46,
+      "TEXTO": "        V$SESSION\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 47,
+      "TEXTO": "    WHERE  AUDSID = (SELECT USERENV('SESSIONID') FROM DUAL)\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 48,
+      "TEXTO": "        AND ROWNUM = 1;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 49,
+      "TEXTO": "\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 50,
+      "TEXTO": "    INSERT INTO TSILGT\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 51,
+      "TEXTO": "    (\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 52,
+      "TEXTO": "        NOMETAB,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 53,
+      "TEXTO": "        DHACAO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 54,
+      "TEXTO": "        ACAO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 55,
+      "TEXTO": "        USUBANCO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 56,
+      "TEXTO": "        USUREDE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 57,
+      "TEXTO": "        NOMMAQUINA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 58,
+      "TEXTO": "        IPMAQUINA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 59,
+      "TEXTO": "        PROGRAMA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 60,
+      "TEXTO": "        USUARIOSIS,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 61,
+      "TEXTO": "        CHAVE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 62,
+      "TEXTO": "        CAMPO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 63,
+      "TEXTO": "        NOVO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 64,
+      "TEXTO": "        VELHO\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 65,
+      "TEXTO": "    )\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 66,
+      "TEXTO": "    VALUES\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 67,
+      "TEXTO": "    (\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 68,
+      "TEXTO": "        P_TABELA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 69,
+      "TEXTO": "        SYSDATE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 70,
+      "TEXTO": "        P_ACAO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 71,
+      "TEXTO": "        V_USUARIO_BANCO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 72,
+      "TEXTO": "        V_USUARIO_REDE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 73,
+      "TEXTO": "        V_NOMEMAQUINA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 74,
+      "TEXTO": "        V_IPMAQUINA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 75,
+      "TEXTO": "        V_PROGRAMA,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 76,
+      "TEXTO": "        V_USUARIOSIS,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 77,
+      "TEXTO": "        P_CHAVE,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 78,
+      "TEXTO": "        P_CAMPO,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 79,
+      "TEXTO": "        P_NEW,\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 80,
+      "TEXTO": "        P_OLD   \n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 81,
+      "TEXTO": "    );\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 82,
+      "TEXTO": "END;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 83,
+      "TEXTO": "\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 84,
+      "TEXTO": "END;\n"
+    },
+    {
+      "TIPO": "PROCEDURE",
+      "OBJETO": "STP_GRAVATABLOG",
+      "LINHA": 85,
+      "TEXTO": "\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 1,
+      "TEXTO": "TRIGGER \"SANKHYA\".\"TRG_INC_UPD_DLT_TSIPAR_LOG\" BEFORE  INSERT OR UPDATE OR DELETE  ON TSIPAR FOR EACH ROW\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 2,
+      "TEXTO": "DECLARE P_ACAO VARCHAR2(10); P_CHAVEPK VARCHAR(400);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 3,
+      "TEXTO": "BEGIN\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 4,
+      "TEXTO": "  P_CHAVEPK := 'PK [' || 'CHAVE' || '=' || :NEW.CHAVE  || 'CODUSU' || '=' || :NEW.CODUSU || ']';\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 5,
+      "TEXTO": "  IF INSERTING THEN  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 6,
+      "TEXTO": "    IF :NEW.ABA IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 7,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'ABA',:NEW.CODUSU,'INSERT',:NEW.ABA,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 8,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 9,
+      "TEXTO": "    IF :NEW.CHAVE IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 10,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CHAVE',:NEW.CODUSU,'INSERT',:NEW.CHAVE,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 11,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 12,
+      "TEXTO": "    IF :NEW.CLASSE IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 13,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CLASSE',:NEW.CODUSU,'INSERT',:NEW.CLASSE,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 14,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 15,
+      "TEXTO": "    IF :NEW.CODUSU IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 16,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CODUSU',:NEW.CODUSU,'INSERT',:NEW.CODUSU,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 17,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 18,
+      "TEXTO": "    IF TO_CHAR(:NEW.DATA,'dd/mm/yyyy hh24:mm:ss') IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 19,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'DATA',:NEW.CODUSU,'INSERT',TO_CHAR(:NEW.DATA,'dd/mm/yyyy hh24:mm:ss'),' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 20,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 21,
+      "TEXTO": "    IF :NEW.DESCRICAO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 22,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'DESCRICAO',:NEW.CODUSU,'INSERT',:NEW.DESCRICAO,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 23,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 24,
+      "TEXTO": "    IF :NEW.INTEIRO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 25,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'INTEIRO',:NEW.CODUSU,'INSERT',:NEW.INTEIRO,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 26,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 27,
+      "TEXTO": "    IF :NEW.LOGICO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 28,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'LOGICO',:NEW.CODUSU,'INSERT',:NEW.LOGICO,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 29,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 30,
+      "TEXTO": "    IF :NEW.MODULO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 31,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'MODULO',:NEW.CODUSU,'INSERT',:NEW.MODULO,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 32,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 33,
+      "TEXTO": "    IF :NEW.NUMDEC IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 34,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'NUMDEC',:NEW.CODUSU,'INSERT',:NEW.NUMDEC,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 35,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 36,
+      "TEXTO": "    IF :NEW.TEXTO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 37,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'TEXTO',:NEW.CODUSU,'INSERT',:NEW.TEXTO,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 38,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 39,
+      "TEXTO": "    IF :NEW.TIPO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 40,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'TIPO',:NEW.CODUSU,'INSERT',:NEW.TIPO,' ');\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 41,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 42,
+      "TEXTO": "    RETURN;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 43,
+      "TEXTO": "  ELSIF DELETING THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 44,
+      "TEXTO": "    P_CHAVEPK := 'PK [' || 'CHAVE' || '=' || :OLD.CHAVE  || 'CODUSU' || '=' || :OLD.CODUSU || ']';\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 45,
+      "TEXTO": "    IF :OLD.ABA IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 46,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'ABA',:OLD.CODUSU,'DELETE',' ',:OLD.ABA);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 47,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 48,
+      "TEXTO": "    IF :OLD.CHAVE IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 49,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CHAVE',:OLD.CODUSU,'DELETE',' ',:OLD.CHAVE);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 50,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 51,
+      "TEXTO": "    IF :OLD.CLASSE IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 52,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CLASSE',:OLD.CODUSU,'DELETE',' ',:OLD.CLASSE);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 53,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 54,
+      "TEXTO": "    IF :OLD.CODUSU IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 55,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CODUSU',:OLD.CODUSU,'DELETE',' ',:OLD.CODUSU);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 56,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 57,
+      "TEXTO": "    IF TO_CHAR(:OLD.DATA,'dd/mm/yyyy hh24:mm:ss') IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 58,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'DATA',:OLD.CODUSU,'DELETE',' ',TO_CHAR(:OLD.DATA,'dd/mm/yyyy hh24:mm:ss'));\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 59,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 60,
+      "TEXTO": "    IF :OLD.DESCRICAO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 61,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'DESCRICAO',:OLD.CODUSU,'DELETE',' ',:OLD.DESCRICAO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 62,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 63,
+      "TEXTO": "    IF :OLD.INTEIRO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 64,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'INTEIRO',:OLD.CODUSU,'DELETE',' ',:OLD.INTEIRO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 65,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 66,
+      "TEXTO": "    IF :OLD.LOGICO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 67,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'LOGICO',:OLD.CODUSU,'DELETE',' ',:OLD.LOGICO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 68,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 69,
+      "TEXTO": "    IF :OLD.MODULO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 70,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'MODULO',:OLD.CODUSU,'DELETE',' ',:OLD.MODULO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 71,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 72,
+      "TEXTO": "    IF :OLD.NUMDEC IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 73,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'NUMDEC',:OLD.CODUSU,'DELETE',' ',:OLD.NUMDEC);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 74,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 75,
+      "TEXTO": "    IF :OLD.TEXTO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 76,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'TEXTO',:OLD.CODUSU,'DELETE',' ',:OLD.TEXTO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 77,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 78,
+      "TEXTO": "    IF :OLD.TIPO IS NOT NULL THEN   \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 79,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'TIPO',:OLD.CODUSU,'DELETE',' ',:OLD.TIPO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 80,
+      "TEXTO": "    END IF;  \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 81,
+      "TEXTO": "    RETURN;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 82,
+      "TEXTO": "  ELSIF UPDATING THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 83,
+      "TEXTO": "    IF NVL(:OLD.ABA, 0) <> NVL(:NEW.ABA, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 84,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'ABA', :NEW.CODUSU, 'UPDATE',:NEW.ABA,:OLD.ABA);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 85,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 86,
+      "TEXTO": "    IF NVL(:OLD.CHAVE, 0) <> NVL(:NEW.CHAVE, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 87,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CHAVE', :NEW.CODUSU, 'UPDATE',:NEW.CHAVE,:OLD.CHAVE);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 88,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 89,
+      "TEXTO": "    IF NVL(:OLD.CLASSE, 0) <> NVL(:NEW.CLASSE, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 90,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CLASSE', :NEW.CODUSU, 'UPDATE',:NEW.CLASSE,:OLD.CLASSE);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 91,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 92,
+      "TEXTO": "    IF NVL(:OLD.CODUSU, 0) <> NVL(:NEW.CODUSU, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 93,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'CODUSU', :NEW.CODUSU, 'UPDATE',:NEW.CODUSU,:OLD.CODUSU);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 94,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 95,
+      "TEXTO": "    IF :OLD.DATA <> :NEW.DATA THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 96,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'DATA', :NEW.CODUSU, 'UPDATE',TO_CHAR(:NEW.DATA,'dd/mm/yyyy hh24:mm:ss'),TO_CHAR(:OLD.DATA,'dd/mm/yyyy hh24:mm:ss'));\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 97,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 98,
+      "TEXTO": "    IF NVL(:OLD.DESCRICAO, 0) <> NVL(:NEW.DESCRICAO, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 99,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'DESCRICAO', :NEW.CODUSU, 'UPDATE',:NEW.DESCRICAO,:OLD.DESCRICAO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 100,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 101,
+      "TEXTO": "    IF NVL(:OLD.INTEIRO, 0) <> NVL(:NEW.INTEIRO, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 102,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'INTEIRO', :NEW.CODUSU, 'UPDATE',:NEW.INTEIRO,:OLD.INTEIRO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 103,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 104,
+      "TEXTO": "    IF NVL(:OLD.LOGICO, 0) <> NVL(:NEW.LOGICO, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 105,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'LOGICO', :NEW.CODUSU, 'UPDATE',:NEW.LOGICO,:OLD.LOGICO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 106,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 107,
+      "TEXTO": "    IF NVL(:OLD.MODULO, 0) <> NVL(:NEW.MODULO, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 108,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'MODULO', :NEW.CODUSU, 'UPDATE',:NEW.MODULO,:OLD.MODULO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 109,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 110,
+      "TEXTO": "    IF NVL(:OLD.NUMDEC, 0) <> NVL(:NEW.NUMDEC, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 111,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'NUMDEC', :NEW.CODUSU, 'UPDATE',:NEW.NUMDEC,:OLD.NUMDEC);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 112,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 113,
+      "TEXTO": "    IF NVL(:OLD.TEXTO, 0) <> NVL(:NEW.TEXTO, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 114,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'TEXTO', :NEW.CODUSU, 'UPDATE',:NEW.TEXTO,:OLD.TEXTO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 115,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 116,
+      "TEXTO": "    IF NVL(:OLD.TIPO, 0) <> NVL(:NEW.TIPO, 0) THEN \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 117,
+      "TEXTO": "      STP_GRAVATABLOG('TSIPAR', P_CHAVEPK,'TIPO', :NEW.CODUSU, 'UPDATE',:NEW.TIPO,:OLD.TIPO);\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 118,
+      "TEXTO": "    END IF;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 119,
+      "TEXTO": "    RETURN;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 120,
+      "TEXTO": "  END IF;            \n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 121,
+      "TEXTO": "END;\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 122,
+      "TEXTO": "\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 123,
+      "TEXTO": "\n"
+    },
+    {
+      "TIPO": "TRIGGER",
+      "OBJETO": "TRG_INC_UPD_DLT_TSIPAR_LOG",
+      "LINHA": 124,
+      "TEXTO": "\n"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

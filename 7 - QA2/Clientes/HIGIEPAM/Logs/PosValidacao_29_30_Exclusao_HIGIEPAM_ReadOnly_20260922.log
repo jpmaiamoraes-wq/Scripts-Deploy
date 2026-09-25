@@ -1,0 +1,47 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T11:45:13.308790+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/PosValidacao_29_30_Exclusao_HIGIEPAM_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 7,
+  "colunas": [
+    "METRICA",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "METRICA": "BAIRROS_OBSOLETOS_REMANESCENTES",
+      "QTD": 0
+    },
+    {
+      "METRICA": "ENDERECOS_OBSOLETOS_REMANESCENTES",
+      "QTD": 0
+    },
+    {
+      "METRICA": "BAIRROS_NORM_DUPLICADOS",
+      "QTD": 0
+    },
+    {
+      "METRICA": "ENDERECOS_NORM_DUPLICADOS",
+      "QTD": 0
+    },
+    {
+      "METRICA": "BACKUP_EXCLUSAO_TSIBAI",
+      "QTD": 850
+    },
+    {
+      "METRICA": "BACKUP_EXCLUSAO_TSIEND",
+      "QTD": 14230
+    },
+    {
+      "METRICA": "EXCECOES_FASE_EXCLUSAO",
+      "QTD": 0
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

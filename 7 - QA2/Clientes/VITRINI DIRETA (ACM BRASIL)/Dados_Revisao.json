@@ -1,0 +1,270 @@
+{
+  "cliente_informado": "VITRINI DIRETA (ACM BRASIL)",
+  "pasta_cliente": "VITRINI DIRETA (ACM BRASIL)",
+  "hostname": "10.110.106.12",
+  "port": 1521,
+  "servicename": "VITRINEDIRETAPRD.SANKHYACLOUD.COM.BR",
+  "username": "FRANCISCO_JUNIOR",
+  "gp_email": "gabriel.chaves@sankhya.com.br",
+  "gp_nome": "Gabriel Chaves",
+  "analista_projetos": {
+    "nome": "Ana Paula Rodrigues",
+    "email": "ana.rodrigues@sankhya.com.br",
+    "confirmada": true,
+    "observacao": "Destinatária confirmada pelo solicitante; envio somente para a analista, sem cópia para o GP."
+  },
+  "comunicacao_email": {
+    "status": "AGUARDANDO_ANEXO_MANUAL_CONTA_CORPORATIVA",
+    "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
+    "corpo_modelo": "Olá,\n\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\n\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\n\nAtenciosamente,",
+    "anexo_permitido": "somente o PDF final validado",
+    "destinatario": "ana.rodrigues@sankhya.com.br",
+    "copia": [],
+    "assunto_envio": "Conclusão da revisão Master Deploy — VITRINI DIRETA (ACM BRASIL)",
+    "anexo_envio": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Relatorio_Entrega_Tecnica_VITRINI_DIRETA_ACM_BRASIL_FINAL.pdf",
+    "observacao": "Rascunho preparado na conta corporativa; o Gmail/Chrome recusou o seletor automático de arquivos mesmo após autorização. Anexar manualmente o PDF e enviar."
+  },
+  "preparado_em": "2026-09-18T08:08:32-03:00",
+  "porta_oracle_acessivel": false,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 11,
+    "saida": "NAO_CADASTRADO: 10.110.106.12 não está na lista de exceções e a porta 1521 está inacessível."
+  },
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": true,
+  "preflight_oracle_realizado": true,
+  "banco_alterado": true,
+  "id_execucao": "RMD_VDA_20260918080832",
+  "status_revisao": "MASTER_01_31_CONCLUIDO_29_30_CONSOLIDADO_CARD09_CONCLUIDO_6_INSERCOES",
+  "identidade_empresa": {
+    "validacao_textual_original": "BLOQUEADA: TSIEMP nao possui RAZAOSOCIAL exata VITRINI DIRETA (ACM BRASIL)",
+    "diagnostico_read_only": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Logs/Identidade_Empresas_ReadOnly_RMD_VDA_20260918080832.log",
+    "linhas_tsiemp_encontradas": 6,
+    "variacoes_observadas": [
+      "ACM BRASIL / ACM BRASIL LTDA",
+      "VITRINE DIRETA / VITRINE DIRETA S.A."
+    ],
+    "observacao": "O solicitante informou que as variacoes pertencem ao mesmo grupo/empresa e autorizou a execucao. O diagnostico encontrou 6 linhas em TSIEMP; a linha ACMINAS foi preservada como observacao e nao foi usada como prova textual isolada.",
+    "autorizacao_solicitante": true
+  },
+  "conexao_vs_code": {
+    "perfil_salvo": true,
+    "nome": "VITRINI DIRETA (ACM BRASIL)",
+    "hostname": "10.110.106.12",
+    "port": 1521,
+    "servicename": "VITRINEDIRETAPRD.SANKHYACLOUD.COM.BR",
+    "username": "FRANCISCO_JUNIOR",
+    "senha_salva": false,
+    "sessao_oracle_validada": true
+  },
+  "preflight": {
+    "status": "BLOQUEADO_POR_REGRA_TEXTUAL_RECLASSIFICADO_COM_AUTORIZACAO",
+    "log": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Logs/Preflight_RMD_VDA_20260918080832.log",
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "vitrinediretaprd.sankhyacloud.com.br",
+    "qtd_empresa_exata": 0,
+    "qtd_linhas_tsiemp_diagnostico": 6,
+    "versao": "Versão sistema: 4.36b126; Nro de Revisão: 0; ID da Compilação: 126; Data da Compilação: 11/08/2026 11:20",
+    "dml_ddl_executados": false
+  },
+  "execucao_master": {
+    "id_master": "RMD_RUN_20260918083819561",
+    "inicio": "2026-09-18T08:38:18-03:00",
+    "fim": "2026-09-18T08:46:38-03:00",
+    "resultado": "CONCLUIDO_SEM_ERRO_SQL_NAO_TRATADO",
+    "atividades_01_31_processadas": true,
+    "atividade_31": "IGNORADO_SEM_PRIVILEGIO; OBJETOS_INVALIDOS=49; PRIVILEGIO_NECESSARIO=ALTER ANY PROCEDURE",
+    "card_09": "CONCLUIDO_ETAPA_SEPARADA; MAPA_DIRETO_XML; 6_INSERCOES_AUDITADAS; POS_VALIDACAO_OK"
+  },
+  "ticket_sankhya_cloud": {
+    "numero": "711178",
+    "url": "https://ajuda.sankhya.com.br/hc/pt-br/requests/711178",
+    "status": "ABERTO",
+    "data_abertura": "2026-09-18",
+    "organizacao": "ACM BRASIL-81357",
+    "prioridade": "Normal",
+    "categoria_produto": "Personalizar Objeto de Banco de Dados",
+    "ambiente": "Produção",
+    "ambiente_banco": "Oracle",
+    "assunto": "Recompilação de 49 objetos nativos inválidos — VITRINI DIRETA (ACM BRASIL)"
+  },
+  "consolidacao_29_30": {
+    "id_execucao": "RMD_VDA_2930_20260918085910599",
+    "log": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Logs/29_30_Merge_Antifragil_RMD_VDA_20260918080832.log",
+    "script": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/29_30_Merge_Antifragil_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "mapa_bairros_obsoletos": 428,
+    "backup_bairros": 848,
+    "mapa_enderecos_obsoletos": 7283,
+    "backup_enderecos": 14226,
+    "pais_bai_excluidos": 428,
+    "pais_end_excluidos": 7283,
+    "excecoes": 0,
+    "referencias_remanescentes": 0,
+    "colisoes_remanescentes_bairros": 0,
+    "colisoes_remanescentes_enderecos": 0,
+    "rollback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Artefatos_Revisao/Rollback/Reverter_29_30_Merge_Antifragil_RMD_VDA_2930_20260918085910599.sql"
+  },
+  "card_09_execucao": {
+    "id_execucao": "VDA_ACM_FDUP_20260918_02",
+    "mapa_base": "BKP_RMD_VDA_FDUP_20260918_02",
+    "mapa_ppg": "BKP_RMD_VDA_FDUP_20260918_02_PPG",
+    "auditoria_insert": "BKP_RMD_VDA_FDUP_20260918_02_INS",
+    "candidatos_mapa": 21,
+    "aptos_validados": 6,
+    "sem_vdup_xml": 15,
+    "financeiros_inseridos": 6,
+    "nufin_inicial": 35861,
+    "nufin_final": 35866,
+    "aptos_sem_financeiro": 0,
+    "duplicidades_por_nunota": 0,
+    "script_mapa": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/32A_Card09_Mapear_Direto_XML_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "script_executor": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/32B_Card09_Inserir_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "script_pos_validacao": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/32D_Card09_PosValidacao_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "script_rollback": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/32C_Card09_Rollback_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "comprovante": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Card09_Execucao_VDA_20260918_02.md"
+  },
+  "volumetria_consulta_direta": {
+    "status": "CONCLUIDA_READ_ONLY",
+    "executado_em": "2026-09-19T18:38:51-03:00",
+    "fonte_relatorio": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Base Relatório de Entrega/REL_ENTEGA_NOVO_05.jrxml",
+    "fonte_dashboard_complementar": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Volumetria_Cards_17_20_ReadOnly.sql",
+    "evidencia": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Volumetria_Consulta_Direta_20260919_R01.json",
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "vitrinediretaprd.sankhyacloud.com.br",
+    "db_name": "VITRINEDIRETAPRD",
+    "dml_executado": false,
+    "ddl_executado": false,
+    "indicadores": {
+      "notas_cabecalhos": 18555,
+      "itens": 63636,
+      "periodo_movimentacao": "13/06/2022 a 18/09/2026",
+      "financeiros": 35868,
+      "contas_receber": 31512,
+      "contas_pagar": 4356,
+      "produtos": 2346,
+      "parceiros": 2353,
+      "referencias_duplicadas": 348,
+      "produtos_referencias_duplicadas": 700,
+      "descricoes_duplicadas": 276,
+      "produtos_descricoes_duplicadas": 671,
+      "cnpj_cpf_repetidos": 0,
+      "parceiros_cnpj_cpf_repetidos": 0,
+      "classificacao_fiscal_divergente": 0,
+      "financeiros_sem_nota": 0,
+      "notas_sem_financeiro": 15,
+      "produtos_vendidos_sem_entrada": 517,
+      "produtos_custo_zero": 2161,
+      "produtos_sem_custo": 0,
+      "itens_sem_cabecalho": 0,
+      "cabecalhos_sem_itens": 0,
+      "cidades_codigos_fiscais_duplicados": 0,
+      "itens_sem_tabela_preco": 15,
+      "itens_descricao_similar": 1652,
+      "cnpj_matrizes": 15,
+      "produtos_comprados_sem_saida": 1614,
+      "regras_tributarias_inseridas": 23030
+    }
+  },
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Logs/Revisao_Master_20260918_080832.log",
+  "master_ativo": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql",
+  "atividades": {
+    "01-31": "CONCLUIDAS_COM_LOG_MASTER; 29_30_CONSOLIDADAS_COM_MAPA_BACKUP_FK; 31_SEM_PRIVILEGIO"
+  },
+  "cards": {
+    "08": "EXECUTADO_MASTER; VOLUMETRIA_ATUAL=0",
+    "09": "CONCLUIDO_MAPA_DIRETO_XML_6_INSERCOES_POS_VALIDACAO_OK; VOLUMETRIA_ATUAL=15",
+    "13": "EXECUTADO_MASTER; VOLUMETRIA_ATUAL=0",
+    "14": "EXECUTADO_MASTER; VOLUMETRIA_ATUAL=0",
+    "15": "EXECUTADO_MASTER; VOLUMETRIA_ATUAL=0",
+    "29": "CONCLUIDO_COM_MAPA_BACKUP_FK; EXCECOES=0; REFERENCIAS_REMANESCENTES=0",
+    "30": "CONCLUIDO_COM_MAPA_BACKUP_FK; EXCECOES=0; REFERENCIAS_REMANESCENTES=0"
+  },
+  "pendencias": [
+    "Variacao de nomes autorizada pelo solicitante; manter a evidencia do diagnostico e a divergencia de contagem (6 linhas TSIEMP observadas versus 7 informadas)",
+    "Atividade 31 nao recompilou 49 objetos invalidos por falta de ALTER ANY PROCEDURE",
+    "Ticket Sankhya Cloud #711178 aberto para análise/recompilação ou correção dos 49 objetos inválidos",
+    "Comparacao documental do onboarding parcialmente consolidada; confirmar CNPJ 25.300.362/0002-00 e concluir TGFPRO, TSICTA versus planilha bancaria e SMTP"
+  ],
+  "artefatos_preparados": [
+    "Executar_Revisao_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "00_Preflight_Gate_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "00_Precheck_Unidades.sql",
+    "00_Precheck_Etapas_18_31.sql",
+    "Artefatos_Revisao/Limpar_Objetos_Revisao.sql",
+    "29_30_Preflight_FK_ReadOnly_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "29_30_Merge_Antifragil_VITRINI_DIRETA_ACM_BRASIL.sql",
+    "Artefatos_Revisao/Rollback/Reverter_29_30_Merge_Antifragil_RMD_VDA_2930_20260918085910599.sql",
+    "Artefatos_Revisao/Rollback/*.sql"
+  ],
+  "onboarding": {
+    "status": "SNAPSHOT_ORACLE_CONCLUIDO_COMPARACAO_DOCUMENTAL_PARCIAL",
+    "pasta_raiz_titulo": "8. Onboarding Deploy",
+    "pasta_cliente_titulo": "ACM BRASIL [p_mrj9q43737l]",
+    "pasta_cliente_url": "https://drive.google.com/drive/folders/1NsukP3ahDBtX0dF4bpFyckBdnY9TgVY7",
+    "etapas_com_fonte": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"],
+    "arquivos_nao_lidos_por_seguranca": ["certificados_digitais"],
+    "classificacao_atual": "SNAPSHOT_ORACLE_CONCLUIDO_COMPARACAO_DOCUMENTAL_PARCIAL",
+    "snapshot_oracle": {
+      "status": "CONCLUIDO_SEM_ERRO_SQL_NAO_TRATADO",
+      "log": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Logs/Verificacao_Onboarding_ReadOnly_VDA_20260918_R02.log",
+      "script_wrapper": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/VITRINI DIRETA (ACM BRASIL)/Verificacao_Onboarding_ReadOnly_VITRINI_DIRETA_ACM_BRASIL.sql",
+      "executado_em": "2026-09-18",
+      "usuario": "FRANCISCO_JUNIOR",
+      "schema": "SANKHYA",
+      "servico": "vitrinediretaprd.sankhyacloud.com.br",
+      "qtd_empresas_tsiemp": 6,
+      "qtd_smtp_global_tsipar": 1,
+      "qtd_smtp_por_empresa_tsiemp": 6,
+      "qtd_contas_tsicta": 5,
+      "qtd_usuarios_tsiusu": 24,
+      "qtd_vendedores_tgfven": 3,
+      "qtd_grupos_produto_tgfgru": 3,
+      "qtd_centros_resultado_tsicus": 1,
+      "qtd_naturezas_tgfnat": 209,
+      "qtd_locais_estoque_tgfloc": 1,
+      "credenciais_smtp_exibidas": false,
+      "fim_snapshot_presente": true,
+      "erros_ora_pls_sp2_no_log": false,
+      "observacao_identidade": "TSIEMP retornou 6 empresas: CODEMP 1/4 ACM BRASIL LTDA, CODEMP 2 ACMINAS SUPRIMENTOS PARA COMUNICACAO VISUAL e CODEMP 3/5/7 VITRINE DIRETA S.A.; a variacao de nomes permanece autorizada pelo solicitante."
+    },
+    "comparacao_documental": {
+      "status": "PARCIAL_COM_PONTOS_DE_CONFERENCIA",
+      "fontes_consultadas": ["01", "04", "05", "07", "08", "10", "11"],
+      "identidade_empresarial": {
+        "qtd_empresas_onboarding": 7,
+        "qtd_empresas_oracle": 6,
+        "cnpj_onboarding_sem_linha_tsiemp": "25.300.362/0002-00",
+        "classificacao": "DIVERGENCIA_DE_QUANTIDADE_A_CONFIRMAR; VARIACAO_NOMINAL_AUTORIZADA"
+      },
+      "usuarios": {
+        "qtd_linhas_negocio_planilha": 15,
+        "qtd_linhas_negocio_oracle": 16,
+        "emails_correspondentes": 15,
+        "usuario_oracle_adicional": "daniel@vitrinedireta.com.br; CODUSU=23",
+        "contas_tecnicas_oracle_excluidas_da_comparacao": true
+      },
+      "planilha_produtos": {
+        "arquivo_acessivel": true,
+        "secoes_identificadas": 6,
+        "linhas_secao_principal": 1467,
+        "comparacao_tgfpro": "PENDENTE; O SNAPSHOT GENERICO NAO CONSULTA TGFPRO"
+      },
+      "contas_bancarias": {
+        "arquivo_acessivel": true,
+        "comparacao_tsicta": "PENDENTE; ARQUIVO OFFICE LEGADO NAO PERMITE LEITURA POR LINHAS NO CONNECTOR SEM CONVERSAO"
+      },
+      "smtp": {
+        "snapshot_oracle_disponivel": true,
+        "comparacao_pdf": "PENDENTE; RESUMO PDF NAO RETORNOU TEXTO E CREDENCIAIS NAO FORAM CONSULTADAS"
+      }
+    },
+    "limitacoes": [
+      "O snapshot Oracle foi realizado em modo somente leitura; a comparação documental foi parcialmente consolidada, mas ainda requer confirmação do CNPJ 25.300.362/0002-00 e dos pontos pendentes de produtos, contas bancárias e SMTP",
+      "VITRINE DIRETA S.A. no resumo e na TSIEMP não foi tratado como divergência de VITRINI DIRETA (ACM BRASIL), conforme autorização registrada",
+      "Certificados digitais não foram lidos nem expostos"
+    ]
+  }
+}

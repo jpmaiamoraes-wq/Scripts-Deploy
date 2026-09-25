@@ -1,0 +1,8 @@
+-- Diagnostico read-only MEDCHAP: cabecalhos sem itens por TIPMOV (indicador oficial exclui TIPMOV='Z'), com datas para provar anterioridade ao Master.
+SELECT C.TIPMOV, COUNT(*) AS QTD,
+       TO_CHAR(MIN(C.DTNEG),'YYYY-MM-DD') AS MIN_DTNEG, TO_CHAR(MAX(C.DTNEG),'YYYY-MM-DD') AS MAX_DTNEG,
+       TO_CHAR(MAX(C.DTALTER),'YYYY-MM-DD HH24:MI:SS') AS MAX_DTALTER
+  FROM TGFCAB C
+ WHERE NOT EXISTS (SELECT 1 FROM TGFITE I WHERE I.NUNOTA = C.NUNOTA)
+ GROUP BY C.TIPMOV
+ ORDER BY C.TIPMOV

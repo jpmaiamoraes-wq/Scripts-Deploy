@@ -1,0 +1,463 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T11:33:41.870957+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/HIGIEPAM/Logs/Inventario_Colunas_Referencia_29_30_ReadOnly.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "higiepamprd.sankhyacloud.com.br",
+  "db_name": "HIGIEPAMPRD",
+  "service_esperado": "HIGIEPAMPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 63,
+  "colunas": [
+    "OWNER",
+    "TABLE_NAME",
+    "COLUMN_NAME",
+    "DATA_TYPE",
+    "COLUMN_ID"
+  ],
+  "linhas": [
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TCCEMP",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 3
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TCCEMP",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 4
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TCOMEVTNFSE",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 8
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TCOMEVTNFSE",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 7
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPAEN",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 8
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPAEN",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPALTERFUN",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 20
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPALTERFUN",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 17
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPCATR",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 47
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPCTI",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 9
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPCTI",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 4
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPDEP",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 3
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPFUN",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 7
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPFUN",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 4
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPPCA",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 3
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPPONRAIO",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 12
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPPONRAIO",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 13
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPREQADM",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 17
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPREQADM",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 14
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPTAT",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TFPTAT",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 4
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGAENT",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 7
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGAENT",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 4
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFCTT",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 9
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFCTT",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFITE",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 210
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFLCDPRR0030",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 14
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFLCDPRR0030",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 13
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFLCDPRR0040",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 21
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFLCDPRR0040",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 20
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFLOCOPER",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 12
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFLOCOPER",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 13
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 10
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFPAR",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 7
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFSIT",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 7
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFSIT",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 4
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGFVOR",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWCTE",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWDCA",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 2
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEND",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWENDVAZ",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWENP",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEPL",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEST",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWESTVAL",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEST_UPD",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEXC",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEXG",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEXL",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEXP",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWEXU",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 1
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWHAJ",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWINV",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWIVR",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWMOC",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWRAG",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 5
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TGWTROCADEPO",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 2
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 11
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIAGE",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 8
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSICEP",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 2
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSICEP",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 3
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "CODBAI",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 9
+    },
+    {
+      "OWNER": "SANKHYA",
+      "TABLE_NAME": "TSIEMP",
+      "COLUMN_NAME": "CODEND",
+      "DATA_TYPE": "NUMBER",
+      "COLUMN_ID": 6
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,33 @@
+VERIFICACAO FINAL DE ONBOARDING - IMPORTUDO COMERCIO
+Data: 2026-09-11
+Fonte: PDFs e planilha da pasta de onboarding identificada no Drive; log Oracle read-only.
+
+1. DADOS DAS EMPRESAS
+
+Conferencias por CNPJ:
+- CNPJ 32.662.020/0001-14: localizado no CODEMP 1. Razao social e CNPJ conferem. O onboarding informa IE vazia, mas a base possui IE 263545342. Ponto de atencao para confirmar se a IE deve ser mantida.
+- CNPJ 28.348.156/0001-87: localizado no CODEMP 2. Razao social e CNPJ conferem. O onboarding informa IE vazia, mas a base possui IE 206569354110. Ponto de atencao para confirmar se a IE deve ser mantida.
+- CNPJ 32.662.020/0003-86: localizado no CODEMP 4. CNPJ e razao social conferem; UF esperada SP.
+- CNPJ 29.080.641/0001-85: localizado no CODEMP 3, embora o onboarding o enumere como Empresa 4. CNPJ confere. O onboarding informa razao social com sufixo LTDA., enquanto a base registra EIRELI. Confirmar a denominacao juridica vigente. IE 206570751111 confere.
+
+Conclusao: os quatro CNPJs estao cadastrados e corretamente associados aos CODEMP. Ha duas IEs preenchidas na base quando o PDF deixou o campo vazio e uma divergencia de sufixo juridico no nome da empresa 4.
+
+2. SMTP
+
+Onboarding: servidor mail.importudo.com.br, porta 465, SSL, remetente Sistema/sistema@importudo.com.br.
+Base (TSIPAR.MSDSMTPPROP): mail.importudo.com.br:465;S;sistema@importudo.com.br;sistema@importudo.com.br;[segredo codificado];false.
+Resultado: servidor, porta, SSL e endereco conferem. A senha nao foi lida nem registrada. Diferenca apenas de capitalizacao do nome remetente, sem impacto funcional aparente.
+
+3. PLANILHAS
+
+Foi localizado somente `[MODELO SANKHYA] Contas Bancarias.xls`. O arquivo e identificado como modelo e nao ha outros arquivos de planilha na pasta na data da verificacao.
+TSICTA possui 6 registros: CAIXA PDV, CAIXA TESOURARIA, 994720/ITAU CAXIAS DO SUL-S.PELEGRINO e TE2/TE3/TE4. A planilha modelo contem uma conta identificada para o CNPJ 32.662.020/0001-14, tipo corrente; os demais campos nao puderam ser confirmados de forma estruturada no formato XLS legado. O cadastro CAIXA PDV (CODCTABCOINT=1, banco 99, agencia 9999, CODEMP=1) e candidato a correspondencia, mas requer conferencia visual dos campos da planilha.
+TSIUSU possui 11 registros, TGFVEN 3 registros (incluindo SEM VENDEDOR, GERENTE e VENDEDOR), TGFGRU 3 registros (incluindo SEM GRUPO e dois grupos de servico), TSICUS 1 registro (SEM CENTRO DE RESULTADO) e TGFLOC 1 registro (SEM LOCAL). Nao ha arquivos de onboarding correspondentes para confronto.
+
+4. ERRO/IMPEDIMENTO DE VERIFICACAO
+
+Na primeira execucao, `SELECT * FROM TSINAT` retornou ORA-00942 (tabela ou view inexistente no schema SANKHYA). O nome correto informado posteriormente e `TGFNAT`; a consulta foi corrigida para a proxima execucao. Nenhuma alteracao foi executada.
+
+ACAO RECOMENDADA
+
+Confirmar as duas IEs omitidas no onboarding e a denominacao LTDA/EIRELI. Conferir visualmente os campos da conta indicada na planilha contra o cadastro CAIXA PDV. Executar a consulta corrigida de `TGFNAT` e, se necessario, solicitar a planilha de Naturezas.

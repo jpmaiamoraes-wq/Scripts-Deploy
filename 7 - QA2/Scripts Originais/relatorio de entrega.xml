@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 5.1.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REL_ENTREGA_BASE_DEPLOY_VOLUMETRIA_JAVA7" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="40eacbab-4a71-4b5d-b831-6c85d0c2390e">
+	<property name="ireport.definition"/>
+	<parameter name="P_CLIENTE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_RESPONSAVEL" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_PONTOS_ATENCAO_PROJETO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Total_de_notas_cabecalhos_processados" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Total_de_itens_processados" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Periodo_de_movimentacao" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Total_de_registros_financeiros" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Contas_a_receber" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Contas_a_pagar" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Total_de_produtos_cadastrados" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Total_de_parceiros_cadastrados" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Referencias_duplicadas" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Produtos_envolvidos_em_referencias_duplicadas" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Descricoes_duplicadas" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Produtos_envolvidos_em_descricoes_duplicadas" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_CNPJ_CPF_repetidos" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Parceiros_envolvidos_em_CNPJ_CPF_repetido" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Classificacao_fiscal_divergente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Financeiros_sem_nota" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Notas_sem_financeiro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Produtos_vendidos_sem_registro_de_entrada" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Produtos_com_custo_zero" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Produtos_sem_registro_de_custo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Itens_sem_cabecalho" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Cabecalhos_sem_itens" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="OBS_Codigos_fiscais_de_cidades_duplicados" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *
+FROM (
+    SELECT
+        1 AS ORDEM,
+        'GERAL' AS SECAO,
+        'Total de notas/cabecalhos processados' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Registros existentes na TGFCAB' AS OBSERVACAO
+    FROM TGFCAB
+
+    UNION ALL
+
+    SELECT
+        2 AS ORDEM,
+        'GERAL' AS SECAO,
+        'Total de itens processados' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Registros existentes na TGFITE' AS OBSERVACAO
+    FROM TGFITE
+
+    UNION ALL
+
+    SELECT
+        3 AS ORDEM,
+        'GERAL' AS SECAO,
+        'Periodo de movimentacao' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'De ' || TO_CHAR(MIN(DTNEG), 'DD/MM/YYYY') || ' ate ' || TO_CHAR(MAX(DTNEG), 'DD/MM/YYYY') AS OBSERVACAO
+    FROM TGFCAB
+    WHERE DTNEG IS NOT NULL
+
+    UNION ALL
+
+    SELECT
+        4 AS ORDEM,
+        'FINANCEIRO' AS SECAO,
+        'Total de registros financeiros' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Registros existentes na TGFFIN' AS OBSERVACAO
+    FROM TGFFIN
+
+    UNION ALL
+
+    SELECT
+        5 AS ORDEM,
+        'FINANCEIRO' AS SECAO,
+        'Contas a receber' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'TGFFIN.RECDESP = 1' AS OBSERVACAO
+    FROM TGFFIN
+    WHERE RECDESP = 1
+
+    UNION ALL
+
+    SELECT
+        6 AS ORDEM,
+        'FINANCEIRO' AS SECAO,
+        'Contas a pagar' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'TGFFIN.RECDESP = -1' AS OBSERVACAO
+    FROM TGFFIN
+    WHERE RECDESP = -1
+
+    UNION ALL
+
+    SELECT
+        7 AS ORDEM,
+        'CADASTROS' AS SECAO,
+        'Total de produtos cadastrados' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Produtos cadastrados, desconsiderando CODPROD 0' AS OBSERVACAO
+    FROM TGFPRO
+    WHERE CODPROD <> 0
+
+    UNION ALL
+
+    SELECT
+        8 AS ORDEM,
+        'CADASTROS' AS SECAO,
+        'Total de parceiros cadastrados' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Registros existentes na TGFPAR' AS OBSERVACAO
+    FROM TGFPAR
+
+    UNION ALL
+
+    SELECT
+        9 AS ORDEM,
+        'PRODUTOS' AS SECAO,
+        'Referencias duplicadas' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Referencias com mais de um produto vinculado' AS OBSERVACAO
+    FROM (
+        SELECT REFERENCIA
+        FROM TGFPRO
+        WHERE REFERENCIA IS NOT NULL
+        GROUP BY REFERENCIA
+        HAVING COUNT(*) > 1
+    )
+
+    UNION ALL
+
+    SELECT
+        10 AS ORDEM,
+        'PRODUTOS' AS SECAO,
+        'Produtos envolvidos em referencias duplicadas' AS INDICADOR,
+        NVL(SUM(QTD), 0) AS QTD,
+        'Produtos que compartilham a mesma referencia/codigo de barras' AS OBSERVACAO
+    FROM (
+        SELECT REFERENCIA, COUNT(*) AS QTD
+        FROM TGFPRO
+        WHERE REFERENCIA IS NOT NULL
+        GROUP BY REFERENCIA
+        HAVING COUNT(*) > 1
+    )
+
+    UNION ALL
+
+    SELECT
+        11 AS ORDEM,
+        'PRODUTOS' AS SECAO,
+        'Descricoes duplicadas' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Descricoes/NCM/origem com mais de um produto' AS OBSERVACAO
+    FROM (
+        SELECT NCM, DESCRPROD, ORIGPROD
+        FROM TGFPRO
+        GROUP BY NCM, DESCRPROD, ORIGPROD
+        HAVING COUNT(*) > 1
+    )
+
+    UNION ALL
+
+    SELECT
+        12 AS ORDEM,
+        'PRODUTOS' AS SECAO,
+        'Produtos envolvidos em descricoes duplicadas' AS INDICADOR,
+        NVL(SUM(QTD), 0) AS QTD,
+        'Produtos que possuem mesma descricao, NCM e origem' AS OBSERVACAO
+    FROM (
+        SELECT NCM, DESCRPROD, ORIGPROD, COUNT(*) AS QTD
+        FROM TGFPRO
+        GROUP BY NCM, DESCRPROD, ORIGPROD
+        HAVING COUNT(*) > 1
+    )
+
+    UNION ALL
+
+    SELECT
+        13 AS ORDEM,
+        'PARCEIROS' AS SECAO,
+        'CNPJ/CPF repetidos' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Grupos de CNPJ/CPF repetidos' AS OBSERVACAO
+    FROM (
+        SELECT CGC_CPF, IDENTINSCESTAD
+        FROM TGFPAR
+        WHERE CGC_CPF IS NOT NULL
+        GROUP BY CGC_CPF, IDENTINSCESTAD
+        HAVING COUNT(*) > 1
+    )
+
+    UNION ALL
+
+    SELECT
+        14 AS ORDEM,
+        'PARCEIROS' AS SECAO,
+        'Parceiros envolvidos em CNPJ/CPF repetido' AS INDICADOR,
+        NVL(SUM(QTD), 0) AS QTD,
+        'Cadastros envolvidos em duplicidade' AS OBSERVACAO
+    FROM (
+        SELECT CGC_CPF, IDENTINSCESTAD, COUNT(*) AS QTD
+        FROM TGFPAR
+        WHERE CGC_CPF IS NOT NULL
+        GROUP BY CGC_CPF, IDENTINSCESTAD
+        HAVING COUNT(*) > 1
+    )
+
+    UNION ALL
+
+    SELECT
+        15 AS ORDEM,
+        'FISCAL' AS SECAO,
+        'Classificacao fiscal divergente' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Parceiros cuja classificacao ICMS difere da classificacao esperada' AS OBSERVACAO
+    FROM (
+        SELECT
+            P.CODPARC,
+            P.CLASSIFICMS,
+            CASE
+                WHEN P.TIPPESSOA = 'J'
+                 AND P.IDENTINSCESTAD IS NOT NULL
+                 AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO'
+                    THEN 'R'
+                WHEN P.TIPPESSOA = 'F'
+                 AND P.IDENTINSCESTAD IS NOT NULL
+                 AND UPPER(P.IDENTINSCESTAD) <> 'ISENTO'
+                    THEN 'P'
+                WHEN NVL(P.IDENTINSCESTAD, 'ISENTO') = 'ISENTO'
+                    THEN 'C'
+            END AS CLASSIFICMS_ESPERADO
+        FROM TGFPAR P
+    )
+    WHERE CLASSIFICMS_ESPERADO IS NOT NULL
+      AND CLASSIFICMS <> CLASSIFICMS_ESPERADO
+
+    UNION ALL
+
+    SELECT
+        16 AS ORDEM,
+        'FINANCEIRO' AS SECAO,
+        'Financeiros sem nota' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Financeiros cujo NUNOTA nao existe na TGFCAB' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT F.NUFIN
+        FROM TGFFIN F
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM TGFCAB C
+            WHERE C.NUNOTA = F.NUNOTA
+        )
+    )
+
+    UNION ALL
+
+    SELECT
+        17 AS ORDEM,
+        'FINANCEIRO' AS SECAO,
+        'Notas sem financeiro' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Notas com TOP que atualiza financeiro, mas sem registro na TGFFIN' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT C.NUNOTA
+        FROM TGFCAB C
+        INNER JOIN TGFTOP T
+            ON T.CODTIPOPER = C.CODTIPOPER
+           AND T.DHALTER = C.DHTIPOPER
+        WHERE T.ATUALFIN <> 0
+          AND C.TIPMOV <> 'Z'
+          AND NOT EXISTS (
+              SELECT 1
+              FROM TGFFIN F
+              WHERE F.NUNOTA = C.NUNOTA
+          )
+    )
+
+    UNION ALL
+
+    SELECT
+        18 AS ORDEM,
+        'PRODUTOS' AS SECAO,
+        'Produtos vendidos sem registro de entrada' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Produtos com venda identificada, mas sem entrada correspondente' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT I.CODPROD
+        FROM TGFITE I
+        INNER JOIN TGFCAB C
+            ON C.NUNOTA = I.NUNOTA
+        WHERE C.TIPMOV = 'V'
+          AND NOT EXISTS (
+              SELECT 1
+              FROM TGFITE IC
+              INNER JOIN TGFCAB CC
+                  ON CC.NUNOTA = IC.NUNOTA
+                 AND CC.TIPMOV = 'C'
+              WHERE IC.CODPROD = I.CODPROD
+          )
+    )
+
+    UNION ALL
+
+    SELECT
+        19 AS ORDEM,
+        'CUSTOS' AS SECAO,
+        'Produtos com custo zero' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Produtos de revenda/venda com custo medio sem ICMS igual a zero' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT P.CODPROD
+        FROM TGFPRO P
+        INNER JOIN TGFCUS C
+            ON C.CODPROD = P.CODPROD
+        WHERE C.CUSSEMICM = 0
+          AND P.USOPROD IN ('V', 'R')
+    )
+
+    UNION ALL
+
+    SELECT
+        20 AS ORDEM,
+        'CUSTOS' AS SECAO,
+        'Produtos sem registro de custo' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Produtos de revenda/venda sem registro na TGFCUS' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT P.CODPROD
+        FROM TGFPRO P
+        LEFT JOIN TGFCUS C
+            ON C.CODPROD = P.CODPROD
+        WHERE C.CODPROD IS NULL
+          AND P.USOPROD IN ('V', 'R')
+          AND P.CODPROD <> 0
+    )
+
+    UNION ALL
+
+    SELECT
+        21 AS ORDEM,
+        'INTEGRIDADE' AS SECAO,
+        'Itens sem cabecalho' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Itens existentes na TGFITE sem correspondente na TGFCAB' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT I.NUNOTA
+        FROM TGFITE I
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM TGFCAB C
+            WHERE C.NUNOTA = I.NUNOTA
+        )
+    )
+
+    UNION ALL
+
+    SELECT
+        22 AS ORDEM,
+        'INTEGRIDADE' AS SECAO,
+        'Cabecalhos sem itens' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Notas existentes na TGFCAB sem itens na TGFITE' AS OBSERVACAO
+    FROM (
+        SELECT DISTINCT C.NUNOTA
+        FROM TGFCAB C
+        WHERE C.TIPMOV <> 'Z'
+          AND NOT EXISTS (
+              SELECT 1
+              FROM TGFITE I
+              WHERE I.NUNOTA = C.NUNOTA
+          )
+    )
+
+    UNION ALL
+
+    SELECT
+        23 AS ORDEM,
+        'CADASTROS' AS SECAO,
+        'Codigos fiscais de cidades duplicados' AS INDICADOR,
+        COUNT(*) AS QTD,
+        'Codigos CODMUNFIS com mais de uma cidade vinculada' AS OBSERVACAO
+    FROM (
+        SELECT CODMUNFIS
+        FROM TSICID
+        WHERE CODMUNFIS IS NOT NULL
+        GROUP BY CODMUNFIS
+        HAVING COUNT(*) > 1
+    )
+)
+WHERE ORDEM NOT IN (3, 10, 12, 14, 16, 21, 22, 23)
+ORDER BY
+    CASE SECAO
+        WHEN 'GERAL' THEN 1
+        WHEN 'FINANCEIRO' THEN 2
+        WHEN 'CADASTROS' THEN 3
+        WHEN 'PRODUTOS' THEN 4
+        WHEN 'PARCEIROS' THEN 5
+        WHEN 'FISCAL' THEN 6
+        WHEN 'CUSTOS' THEN 7
+        WHEN 'INTEGRIDADE' THEN 8
+        ELSE 99
+    END,
+    ORDEM]]>
+	</queryString>
+	<field name="ORDEM" class="java.math.BigDecimal"/>
+	<field name="SECAO" class="java.lang.String"/>
+	<field name="INDICADOR" class="java.lang.String"/>
+	<field name="QTD" class="java.math.BigDecimal"/>
+	<field name="OBSERVACAO" class="java.lang.String"/>
+	<variable name="TOTAL_INDICADORES" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{INDICADOR}]]></variableExpression>
+	</variable>
+	<group name="GRP_SECAO">
+		<groupExpression><![CDATA[$F{SECAO}]]></groupExpression>
+		<groupHeader>
+			<band height="58" splitType="Prevent">
+				<rectangle>
+					<reportElement x="0" y="14" width="555" height="24" backcolor="#2B3447" uuid="17aad760-42a1-42c0-93e2-51d977051a19"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField isBlankWhenNull="true">
+					<reportElement x="12" y="18" width="520" height="16" forecolor="#FFFFFF" uuid="9e387103-6418-467b-b9e9-f633bff8f6c4"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="13" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECAO}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="0" y="38" width="555" height="4" backcolor="#63C36B" uuid="4d84d512-be69-4258-93ea-9dd27e44d54a"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="e2e7afda-8b8b-4670-96ab-5244ae268f01"/>
+					<graphicElement>
+						<pen lineWidth="0.4" lineColor="#DDDDDD"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="105">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="34" backcolor="#2B3447" uuid="c13c083d-fe12-4aed-9f46-69511d195619"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#1D2230"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="16" y="7" width="430" height="20" forecolor="#FFFFFF" uuid="e607b054-795f-42a3-a29c-8b19f0030b7e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio Deploy - Volumetria da Base]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="458" y="8" width="80" height="18" forecolor="#FFFFFF" uuid="6c2de8ce-ff60-4744-a2ba-d7eabb31b1e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPLOY]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="34" width="555" height="6" backcolor="#63C36B" uuid="06a35477-384e-4aed-86d2-5767ad8447ab"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="50" width="555" height="16" forecolor="#2B3447" uuid="46d9404b-2c20-49a7-83fa-103fbfd7cd47"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumo executivo de volumetria, cadastros e pontos de atencao]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="74" width="220" height="14" forecolor="#222222" uuid="8b9975a6-e4ec-45a8-9cd9-1b85ad1498e9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cliente: " + (($P{P_CLIENTE} == null || $P{P_CLIENTE}.trim().equals("")) ? "Nao informado" : $P{P_CLIENTE})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="225" y="74" width="180" height="14" forecolor="#222222" uuid="71e9515c-5493-4620-80a4-17a0fc72ac12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Responsavel: " + (($P{P_RESPONSAVEL} == null || $P{P_RESPONSAVEL}.trim().equals("")) ? "Nao informado" : $P{P_RESPONSAVEL})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="74" width="145" height="14" forecolor="#222222" uuid="fa7b59c8-1e7d-45f5-bc1c-2c8b9a9b6bbb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34">
+			<staticText>
+				<reportElement x="0" y="2" width="555" height="24" forecolor="#222222" uuid="cb019fcb-2ff7-4687-a883-c1aa9bf33217"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Este documento consolida as informacoes processadas no Deploy, apresentando a volumetria da base, os cadastros estruturados e os principais pontos de atencao identificados.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="555" height="1" uuid="9aab7d61-fd0b-476f-9adc-fa1642d401ef"/>
+				<graphicElement>
+					<pen lineWidth="0.4" lineColor="#CFCFCF"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="1"/>
+	</columnHeader>
+	<detail>
+		<band height="86" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="16" y="6" width="523" height="18" forecolor="#222222" uuid="4cacc54e-edc3-4f80-baa7-1bc49f078ef4"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDICADOR} + " : " + ($F{QTD} == null ? "0" : new java.text.DecimalFormat("#,##0").format($F{QTD}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="32" width="36" height="14" forecolor="#666666" uuid="fdde2592-e7aa-4ba8-92fc-370e0cd877ae">
+					<printWhenExpression><![CDATA[($F{ORDEM}.intValue() == 1 ? $P{OBS_Total_de_notas_cabecalhos_processados} :
+$F{ORDEM}.intValue() == 2 ? $P{OBS_Total_de_itens_processados} :
+$F{ORDEM}.intValue() == 3 ? $P{OBS_Periodo_de_movimentacao} :
+$F{ORDEM}.intValue() == 4 ? $P{OBS_Total_de_registros_financeiros} :
+$F{ORDEM}.intValue() == 5 ? $P{OBS_Contas_a_receber} :
+$F{ORDEM}.intValue() == 6 ? $P{OBS_Contas_a_pagar} :
+$F{ORDEM}.intValue() == 7 ? $P{OBS_Total_de_produtos_cadastrados} :
+$F{ORDEM}.intValue() == 8 ? $P{OBS_Total_de_parceiros_cadastrados} :
+$F{ORDEM}.intValue() == 9 ? $P{OBS_Referencias_duplicadas} :
+$F{ORDEM}.intValue() == 10 ? $P{OBS_Produtos_envolvidos_em_referencias_duplicadas} :
+$F{ORDEM}.intValue() == 11 ? $P{OBS_Descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 12 ? $P{OBS_Produtos_envolvidos_em_descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 13 ? $P{OBS_CNPJ_CPF_repetidos} :
+$F{ORDEM}.intValue() == 14 ? $P{OBS_Parceiros_envolvidos_em_CNPJ_CPF_repetido} :
+$F{ORDEM}.intValue() == 15 ? $P{OBS_Classificacao_fiscal_divergente} :
+$F{ORDEM}.intValue() == 16 ? $P{OBS_Financeiros_sem_nota} :
+$F{ORDEM}.intValue() == 17 ? $P{OBS_Notas_sem_financeiro} :
+$F{ORDEM}.intValue() == 18 ? $P{OBS_Produtos_vendidos_sem_registro_de_entrada} :
+$F{ORDEM}.intValue() == 19 ? $P{OBS_Produtos_com_custo_zero} :
+$F{ORDEM}.intValue() == 20 ? $P{OBS_Produtos_sem_registro_de_custo} :
+$F{ORDEM}.intValue() == 21 ? $P{OBS_Itens_sem_cabecalho} :
+$F{ORDEM}.intValue() == 22 ? $P{OBS_Cabecalhos_sem_itens} :
+$F{ORDEM}.intValue() == 23 ? $P{OBS_Codigos_fiscais_de_cidades_duplicados} :
+"") != null && !($F{ORDEM}.intValue() == 1 ? $P{OBS_Total_de_notas_cabecalhos_processados} :
+$F{ORDEM}.intValue() == 2 ? $P{OBS_Total_de_itens_processados} :
+$F{ORDEM}.intValue() == 3 ? $P{OBS_Periodo_de_movimentacao} :
+$F{ORDEM}.intValue() == 4 ? $P{OBS_Total_de_registros_financeiros} :
+$F{ORDEM}.intValue() == 5 ? $P{OBS_Contas_a_receber} :
+$F{ORDEM}.intValue() == 6 ? $P{OBS_Contas_a_pagar} :
+$F{ORDEM}.intValue() == 7 ? $P{OBS_Total_de_produtos_cadastrados} :
+$F{ORDEM}.intValue() == 8 ? $P{OBS_Total_de_parceiros_cadastrados} :
+$F{ORDEM}.intValue() == 9 ? $P{OBS_Referencias_duplicadas} :
+$F{ORDEM}.intValue() == 10 ? $P{OBS_Produtos_envolvidos_em_referencias_duplicadas} :
+$F{ORDEM}.intValue() == 11 ? $P{OBS_Descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 12 ? $P{OBS_Produtos_envolvidos_em_descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 13 ? $P{OBS_CNPJ_CPF_repetidos} :
+$F{ORDEM}.intValue() == 14 ? $P{OBS_Parceiros_envolvidos_em_CNPJ_CPF_repetido} :
+$F{ORDEM}.intValue() == 15 ? $P{OBS_Classificacao_fiscal_divergente} :
+$F{ORDEM}.intValue() == 16 ? $P{OBS_Financeiros_sem_nota} :
+$F{ORDEM}.intValue() == 17 ? $P{OBS_Notas_sem_financeiro} :
+$F{ORDEM}.intValue() == 18 ? $P{OBS_Produtos_vendidos_sem_registro_de_entrada} :
+$F{ORDEM}.intValue() == 19 ? $P{OBS_Produtos_com_custo_zero} :
+$F{ORDEM}.intValue() == 20 ? $P{OBS_Produtos_sem_registro_de_custo} :
+$F{ORDEM}.intValue() == 21 ? $P{OBS_Itens_sem_cabecalho} :
+$F{ORDEM}.intValue() == 22 ? $P{OBS_Cabecalhos_sem_itens} :
+$F{ORDEM}.intValue() == 23 ? $P{OBS_Codigos_fiscais_de_cidades_duplicados} :
+"").trim().equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Obs:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="56" y="32" width="483" height="38" forecolor="#222222" uuid="0a07de6e-a260-4f17-a22b-185b16d9d99e">
+					<printWhenExpression><![CDATA[($F{ORDEM}.intValue() == 1 ? $P{OBS_Total_de_notas_cabecalhos_processados} :
+$F{ORDEM}.intValue() == 2 ? $P{OBS_Total_de_itens_processados} :
+$F{ORDEM}.intValue() == 3 ? $P{OBS_Periodo_de_movimentacao} :
+$F{ORDEM}.intValue() == 4 ? $P{OBS_Total_de_registros_financeiros} :
+$F{ORDEM}.intValue() == 5 ? $P{OBS_Contas_a_receber} :
+$F{ORDEM}.intValue() == 6 ? $P{OBS_Contas_a_pagar} :
+$F{ORDEM}.intValue() == 7 ? $P{OBS_Total_de_produtos_cadastrados} :
+$F{ORDEM}.intValue() == 8 ? $P{OBS_Total_de_parceiros_cadastrados} :
+$F{ORDEM}.intValue() == 9 ? $P{OBS_Referencias_duplicadas} :
+$F{ORDEM}.intValue() == 10 ? $P{OBS_Produtos_envolvidos_em_referencias_duplicadas} :
+$F{ORDEM}.intValue() == 11 ? $P{OBS_Descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 12 ? $P{OBS_Produtos_envolvidos_em_descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 13 ? $P{OBS_CNPJ_CPF_repetidos} :
+$F{ORDEM}.intValue() == 14 ? $P{OBS_Parceiros_envolvidos_em_CNPJ_CPF_repetido} :
+$F{ORDEM}.intValue() == 15 ? $P{OBS_Classificacao_fiscal_divergente} :
+$F{ORDEM}.intValue() == 16 ? $P{OBS_Financeiros_sem_nota} :
+$F{ORDEM}.intValue() == 17 ? $P{OBS_Notas_sem_financeiro} :
+$F{ORDEM}.intValue() == 18 ? $P{OBS_Produtos_vendidos_sem_registro_de_entrada} :
+$F{ORDEM}.intValue() == 19 ? $P{OBS_Produtos_com_custo_zero} :
+$F{ORDEM}.intValue() == 20 ? $P{OBS_Produtos_sem_registro_de_custo} :
+$F{ORDEM}.intValue() == 21 ? $P{OBS_Itens_sem_cabecalho} :
+$F{ORDEM}.intValue() == 22 ? $P{OBS_Cabecalhos_sem_itens} :
+$F{ORDEM}.intValue() == 23 ? $P{OBS_Codigos_fiscais_de_cidades_duplicados} :
+"") != null && !($F{ORDEM}.intValue() == 1 ? $P{OBS_Total_de_notas_cabecalhos_processados} :
+$F{ORDEM}.intValue() == 2 ? $P{OBS_Total_de_itens_processados} :
+$F{ORDEM}.intValue() == 3 ? $P{OBS_Periodo_de_movimentacao} :
+$F{ORDEM}.intValue() == 4 ? $P{OBS_Total_de_registros_financeiros} :
+$F{ORDEM}.intValue() == 5 ? $P{OBS_Contas_a_receber} :
+$F{ORDEM}.intValue() == 6 ? $P{OBS_Contas_a_pagar} :
+$F{ORDEM}.intValue() == 7 ? $P{OBS_Total_de_produtos_cadastrados} :
+$F{ORDEM}.intValue() == 8 ? $P{OBS_Total_de_parceiros_cadastrados} :
+$F{ORDEM}.intValue() == 9 ? $P{OBS_Referencias_duplicadas} :
+$F{ORDEM}.intValue() == 10 ? $P{OBS_Produtos_envolvidos_em_referencias_duplicadas} :
+$F{ORDEM}.intValue() == 11 ? $P{OBS_Descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 12 ? $P{OBS_Produtos_envolvidos_em_descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 13 ? $P{OBS_CNPJ_CPF_repetidos} :
+$F{ORDEM}.intValue() == 14 ? $P{OBS_Parceiros_envolvidos_em_CNPJ_CPF_repetido} :
+$F{ORDEM}.intValue() == 15 ? $P{OBS_Classificacao_fiscal_divergente} :
+$F{ORDEM}.intValue() == 16 ? $P{OBS_Financeiros_sem_nota} :
+$F{ORDEM}.intValue() == 17 ? $P{OBS_Notas_sem_financeiro} :
+$F{ORDEM}.intValue() == 18 ? $P{OBS_Produtos_vendidos_sem_registro_de_entrada} :
+$F{ORDEM}.intValue() == 19 ? $P{OBS_Produtos_com_custo_zero} :
+$F{ORDEM}.intValue() == 20 ? $P{OBS_Produtos_sem_registro_de_custo} :
+$F{ORDEM}.intValue() == 21 ? $P{OBS_Itens_sem_cabecalho} :
+$F{ORDEM}.intValue() == 22 ? $P{OBS_Cabecalhos_sem_itens} :
+$F{ORDEM}.intValue() == 23 ? $P{OBS_Codigos_fiscais_de_cidades_duplicados} :
+"").trim().equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ORDEM}.intValue() == 1 ? $P{OBS_Total_de_notas_cabecalhos_processados} :
+$F{ORDEM}.intValue() == 2 ? $P{OBS_Total_de_itens_processados} :
+$F{ORDEM}.intValue() == 3 ? $P{OBS_Periodo_de_movimentacao} :
+$F{ORDEM}.intValue() == 4 ? $P{OBS_Total_de_registros_financeiros} :
+$F{ORDEM}.intValue() == 5 ? $P{OBS_Contas_a_receber} :
+$F{ORDEM}.intValue() == 6 ? $P{OBS_Contas_a_pagar} :
+$F{ORDEM}.intValue() == 7 ? $P{OBS_Total_de_produtos_cadastrados} :
+$F{ORDEM}.intValue() == 8 ? $P{OBS_Total_de_parceiros_cadastrados} :
+$F{ORDEM}.intValue() == 9 ? $P{OBS_Referencias_duplicadas} :
+$F{ORDEM}.intValue() == 10 ? $P{OBS_Produtos_envolvidos_em_referencias_duplicadas} :
+$F{ORDEM}.intValue() == 11 ? $P{OBS_Descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 12 ? $P{OBS_Produtos_envolvidos_em_descricoes_duplicadas} :
+$F{ORDEM}.intValue() == 13 ? $P{OBS_CNPJ_CPF_repetidos} :
+$F{ORDEM}.intValue() == 14 ? $P{OBS_Parceiros_envolvidos_em_CNPJ_CPF_repetido} :
+$F{ORDEM}.intValue() == 15 ? $P{OBS_Classificacao_fiscal_divergente} :
+$F{ORDEM}.intValue() == 16 ? $P{OBS_Financeiros_sem_nota} :
+$F{ORDEM}.intValue() == 17 ? $P{OBS_Notas_sem_financeiro} :
+$F{ORDEM}.intValue() == 18 ? $P{OBS_Produtos_vendidos_sem_registro_de_entrada} :
+$F{ORDEM}.intValue() == 19 ? $P{OBS_Produtos_com_custo_zero} :
+$F{ORDEM}.intValue() == 20 ? $P{OBS_Produtos_sem_registro_de_custo} :
+$F{ORDEM}.intValue() == 21 ? $P{OBS_Itens_sem_cabecalho} :
+$F{ORDEM}.intValue() == 22 ? $P{OBS_Cabecalhos_sem_itens} :
+$F{ORDEM}.intValue() == 23 ? $P{OBS_Codigos_fiscais_de_cidades_duplicados} :
+""]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="16" y="78" width="523" height="1" uuid="8d06c44a-ff9b-44e5-bfac-9dc9454e6639"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#E4E4E4"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="430" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="4" width="555" height="1" uuid="45772f55-5f5f-4b51-8624-9b40f4d3136f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#CFCFCF"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="18" width="555" height="18" forecolor="#2B3447" uuid="1400b488-d47b-4ddc-85a1-0cc2ffd8d09d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pontos de atencao do projeto]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="44" width="555" height="76" forecolor="#222222" uuid="95365a77-c869-4569-b049-cfcbccc6ea1a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{P_PONTOS_ATENCAO_PROJETO} == null || $P{P_PONTOS_ATENCAO_PROJETO}.trim().equals("")) ? "Nao informado." : $P{P_PONTOS_ATENCAO_PROJETO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="132" width="555" height="1" uuid="e463581a-3017-4e82-be3b-ab79a2971d95"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#CFCFCF"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="146" width="555" height="16" forecolor="#2B3447" uuid="5ffef3d8-82a5-4bdf-90dc-1cc5bba692e6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consideracoes finais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="170" width="555" height="46" forecolor="#222222" uuid="e0aa9b73-f0ad-449e-9753-04d8ad66f72a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Os indicadores acima consolidam a volumetria processada, os cadastros estruturados e os principais pontos de atencao identificados na base. As observacoes podem ser utilizadas para complementar a entrega interna e orientar os ajustes necessarios antes da entrada em producao.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="222" width="250" height="14" forecolor="#2B3447" uuid="61250721-0b4f-43e1-bf63-6e6ce970538b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total de indicadores listados: " + $V{TOTAL_INDICADORES}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="262" width="555" height="18" forecolor="#2B3447" uuid="a87a0317-166c-41d1-aace-2df1424e9c23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assinatura dos participantes]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="322" width="240" height="1" uuid="c2fe7a6d-dfcc-4ac3-b799-bf2a609e4ba5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#555555"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="330" width="240" height="18" uuid="537f4ba0-2878-4ecc-b083-cd8bcb12fd8b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gerente de Projeto]]></text>
+			</staticText>
+			<line>
+				<reportElement x="315" y="322" width="240" height="1" uuid="20284811-0da9-4c51-9979-2bf9b05cea21"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#555555"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="315" y="330" width="240" height="18" uuid="d603f2f0-4e78-4fda-b446-6e4fcc2e8bf2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consultor do Projeto]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="392" width="240" height="1" uuid="479c37a2-674e-4119-80fe-21c8a340b3eb"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#555555"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="400" width="240" height="18" uuid="b2b7ae0b-08a5-4456-adb0-b94000530538"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consultor do Deploy]]></text>
+			</staticText>
+			<line>
+				<reportElement x="315" y="392" width="240" height="1" uuid="80a89ae8-b262-4515-b619-83e54ad8fb25"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#555555"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="315" y="400" width="240" height="18" uuid="52370642-c00a-48a6-909e-f1e0e5ced2da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Analista de Projetos Deploy]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

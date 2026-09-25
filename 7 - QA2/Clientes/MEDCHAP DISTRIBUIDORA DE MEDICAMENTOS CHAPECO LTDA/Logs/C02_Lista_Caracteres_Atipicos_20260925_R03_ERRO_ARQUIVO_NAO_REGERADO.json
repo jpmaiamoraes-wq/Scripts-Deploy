@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_direct.py", line 706, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_direct.py", line 693, in main
+    return args.func(args)
+           ~~~~~~~~~^^^^^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_direct.py", line 576, in query
+    return query_rows(args, path.read_text(encoding="utf-8"), str(path))
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/Automacao/oracle_direct.py", line 529, in query_rows
+    cursor.execute(sql)
+    ~~~~~~~~~~~~~~^^^^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/.venv/lib/python3.14/site-packages/oracledb/cursor.py", line 898, in wrapped_f
+    return self._connection._impl.process_sync_operation(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, f.__name__, args, kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "src/oracledb/impl/base/connection.pyx", line 452, in oracledb.base_impl.BaseConnImpl.process_sync_operation
+  File "src/oracledb/impl/base/connection.pyx", line 448, in oracledb.base_impl.BaseConnImpl.process_sync_operation
+  File "src/oracledb/impl/base/connection.pyx", line 441, in oracledb.base_impl.BaseConnImpl.process_sync_operation
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/.venv/lib/python3.14/site-packages/oracledb/cursor.py", line 204, in _execute
+    self._prepare_for_execute(statement, parameters, keyword_parameters)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/.venv/lib/python3.14/site-packages/oracledb/cursor.py", line 356, in _prepare_for_execute
+    self._impl._prepare_for_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<2 lines>...
+        keyword_parameters,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "src/oracledb/impl/base/cursor.pyx", line 408, in oracledb.base_impl.BaseCursorImpl._prepare_for_execute
+  File "src/oracledb/impl/thin/cursor.pyx", line 192, in oracledb.thin_impl.ThinCursorImpl._prepare
+  File "src/oracledb/impl/thin/connection.pyx", line 601, in oracledb.thin_impl.ThinConnImpl._get_statement
+  File "src/oracledb/impl/thin/statement_cache.pyx", line 105, in oracledb.thin_impl.StatementCache.get_statement
+  File "src/oracledb/impl/thin/statement_cache.pyx", line 111, in oracledb.thin_impl.StatementCache.get_statement
+  File "src/oracledb/impl/thin/statement.pyx", line 389, in oracledb.thin_impl.Statement._prepare
+  File "src/oracledb/impl/thin/statement.pyx", line 263, in oracledb.thin_impl.StatementParser.parse
+  File "src/oracledb/impl/base/parsers.pyx", line 222, in oracledb.base_impl.BaseParser.parse_quoted_string
+  File "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/.venv/lib/python3.14/site-packages/oracledb/errors.py", line 215, in _raise_err
+    raise _create_exception(error_num, context_error_message, cause, **args)
+oracledb.exceptions.ProgrammingError: DPY-2041: missing ending quote (')

@@ -1,0 +1,272 @@
+SQL> 
+SQL> PROMPT ============================================================
+============================================================
+SQL> PROMPT RETOMADA MASTER DEPLOY - PRODUTOS ALHEIRO LTDA - INICIO
+RETOMADA MASTER DEPLOY - PRODUTOS ALHEIRO LTDA - INICIO
+SQL> PROMPT ATIVIDADES 01-28 NAO SERAO REPETIDAS
+ATIVIDADES 01-28 NAO SERAO REPETIDAS
+SQL> SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY HH24:MI:SS') DATA_HORA_INICIO FROM DUAL;
+
+DATA_HORA_INICIO
+-------------------
+16/09/2026 16:18:34
+
+1 row selected. 
+
+SQL> PROMPT ============================================================
+============================================================
+SQL> 
+SQL> PROMPT === PREFLIGHT SOMENTE LEITURA ===
+=== PREFLIGHT SOMENTE LEITURA ===
+SQL> @@00_Preflight_Gate_ALHEIRO.sql
+SQL> -- Preflight da Revisao Master Deploy - somente leitura.
+SQL> -- A quota e informada, mas o bloqueio preventivo foi dispensado por aprovacao formal.
+SQL> SET DEFINE OFF
+SQL> SET ECHO OFF
+=== PREFLIGHT GATE - IDENTIDADE DA SESSAO ===
+
+USUARIO_SESSAO                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR
+
+1 row selected. 
+
+
+SCHEMA_ATUAL                                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+
+1 row selected. 
+
+
+SERVICE_NAME                                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+alheiroprd.sankhyacloud.com.br
+
+1 row selected. 
+
+
+DB_NAME                                                                                                                         
+--------------------------------------------------------------------------------------------------------------------------------
+ALHEIROPRD
+
+1 row selected. 
+
+
+INSTANCE_NAME                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------
+dbs3pc13
+
+1 row selected. 
+
+
+USUARIO_ESPERADO SERVICE_ESPERADO     
+---------------- ---------------------
+OK               OK                   
+
+1 row selected. 
+
+=== PREFLIGHT GATE - EMPRESA E VERSAO ===
+
+QTD_EMPRESA_EXATA STATUS_EMPRESA             
+----------------- ---------------------------
+                1 OK                         
+
+1 row selected. 
+
+
+VERSAO_SISTEMA_CURTA          
+------------------------------
+4.36b146
+
+1 row selected. 
+
+
+VERSAO_ORACLE                                                                                                           
+------------------------------------------------------------------------------------------------------------------------
+Oracle AI Database 26ai EE High Perf Release 23.26.2.0.0 - Production
+
+1 row selected. 
+
+=== PREFLIGHT GATE - QUOTA E INVALIDOS ===
+
+QTD_LINHAS_USER_TS_QUOTAS
+-------------------------
+                        0
+
+1 row selected. 
+
+
+QTD_OBJETOS_INVALIDOS
+---------------------
+                    0
+
+1 row selected. 
+
+PREFLIGHT_GATE_STATUS=APROVADO_IDENTIDADE_EMPRESA; QUOTA=INFORMADA_SEM_BLOQUEIO_PREVENTIVO
+OWNER_OPERACIONAL=SANKHYA
+
+
+PL/SQL procedure successfully completed.
+
+=== FIM PREFLIGHT GATE - SOMENTE LEITURA ===
+=== CONFIRMACAO FORMAL DA BASE ===
+
+PL/SQL procedure successfully completed.
+
+=== VALIDACAO DOS BACKUPS PERSISTENTES ANTES DAS ATIVIDADES 29-30 ===
+BACKUPS_PERSISTENTES_29_30=VALIDADOS
+
+
+PL/SQL procedure successfully completed.
+
+
+OBJETO                    QTD
+------------------ ----------
+BKP_RMD_PAD_TSIBAI      45047
+BKP_RMD_PAD_TSIEND     646115
+
+2 rows selected. 
+
+=== ATIVIDADES 29/30 NOMINAIS CONCLUIDAS NA TENTATIVA ANTERIOR ===
+29_Padronizar_Bairros.sql: STATUS=CONCLUIDO; REGISTROS=0
+30_Padronizar_Enderecos.sql: STATUS=CONCLUIDO; REGISTROS=0
+=== CARD 29/30 - MAPA, BACKUP, FKs E EXCLUSAO QUALIFICADA ===
+TABELAS_AUDITORIA_29_30=CRIADAS_OU_EXISTENTES
+
+
+PL/SQL procedure successfully completed.
+
+ID_EXECUCAO=RMD_ALH_2930_20260916161842236
+OWNER_OPERACIONAL=SANKHYA
+QTD_LINHAS_USER_TS_QUOTAS=0; GATE_PREVENTIVO_DISPENSADO=SIM
+MAPA_BAI=428; BACKUP_BAI=848
+MAPA_END=7283; BACKUP_END=14226
+RAMO_OK|BKP_TGFITE_NOVO|CODEND|0
+RAMO_OK|BKP_TGFPAR_NOVO|CODBAI|9
+RAMO_OK|BKP_TGFPAR_NOVO|CODEND|21
+RAMO_OK|TCCEMP|CODBAI|0
+RAMO_OK|TCCEMP|CODEND|0
+RAMO_OK|TCOMEVTNFSE|CODBAI|0
+RAMO_OK|TCOMEVTNFSE|CODEND|0
+RAMO_OK|TFPAEN|CODBAI|0
+RAMO_OK|TFPAEN|CODEND|0
+RAMO_OK|TFPALTERFUN|CODBAI|0
+RAMO_OK|TFPALTERFUN|CODEND|0
+RAMO_OK|TFPCATR|CODBAI|0
+RAMO_OK|TFPCTI|CODBAI|0
+RAMO_OK|TFPCTI|CODEND|0
+RAMO_OK|TFPDEP|CODEND|0
+RAMO_OK|TFPFUN|CODBAI|0
+RAMO_OK|TFPFUN|CODEND|0
+RAMO_OK|TFPPCA|CODBAI|0
+RAMO_OK|TFPPONRAIO|CODBAI|0
+RAMO_OK|TFPPONRAIO|CODEND|0
+RAMO_OK|TFPREQADM|CODBAI|0
+RAMO_OK|TFPREQADM|CODEND|0
+RAMO_OK|TFPTAT|CODBAI|0
+RAMO_OK|TFPTAT|CODEND|0
+RAMO_OK|TGAENT|CODBAI|0
+RAMO_OK|TGAENT|CODEND|0
+RAMO_OK|TGFCTT|CODBAI|0
+RAMO_OK|TGFCTT|CODEND|0
+RAMO_OK|TGFITE|CODEND|0
+RAMO_OK|TGFLCDPRR0030|CODBAI|0
+RAMO_OK|TGFLCDPRR0030|CODEND|0
+RAMO_OK|TGFLCDPRR0040|CODBAI|0
+RAMO_OK|TGFLCDPRR0040|CODEND|0
+RAMO_OK|TGFLOCOPER|CODBAI|0
+RAMO_OK|TGFLOCOPER|CODEND|0
+RAMO_OK|TGFPAR|CODBAI|9
+RAMO_OK|TGFPAR|CODEND|21
+RAMO_OK|TGFSIT|CODBAI|0
+RAMO_OK|TGFSIT|CODEND|0
+RAMO_OK|TGFVOR|CODEND|0
+RAMO_OK|TGWCTE|CODEND|0
+RAMO_OK|TGWDCA|CODEND|0
+RAMO_OK|TGWEND|CODEND|0
+RAMO_OK|TGWENDVAZ|CODEND|0
+RAMO_OK|TGWENP|CODEND|0
+RAMO_OK|TGWEPL|CODEND|0
+RAMO_OK|TGWEST|CODEND|0
+RAMO_OK|TGWESTVAL|CODEND|0
+RAMO_OK|TGWEST_UPD|CODEND|0
+RAMO_OK|TGWEXC|CODEND|0
+RAMO_OK|TGWEXG|CODEND|0
+RAMO_OK|TGWEXL|CODEND|0
+RAMO_OK|TGWEXP|CODEND|0
+RAMO_OK|TGWEXU|CODEND|0
+RAMO_OK|TGWHAJ|CODEND|0
+RAMO_OK|TGWINV|CODEND|0
+RAMO_OK|TGWIVR|CODEND|0
+RAMO_OK|TGWMOC|CODEND|0
+RAMO_OK|TGWRAG|CODEND|0
+RAMO_OK|TGWTROCADEPO|CODEND|0
+RAMO_OK|TSIAGE|CODBAI|0
+RAMO_OK|TSIAGE|CODEND|0
+RAMO_OK|TSICEP|CODBAI|11456
+RAMO_OK|TSICEP|CODEND|49746
+RAMO_OK|TSIEMP|CODBAI|0
+RAMO_OK|TSIEMP|CODEND|1
+FK_RAMO_OK|TFPCATR|CODENDLOCALCAT|0
+FK_RAMO_OK|TFPEST|CODBAIAGTINTEG|0
+FK_RAMO_OK|TFPEST|CODBAIINSTENS|0
+FK_RAMO_OK|TFPEST|CODENDAGTINTEG|0
+FK_RAMO_OK|TFPEST|CODENDINSTENS|0
+FK_RAMO_OK|TGFCPL|CODBAIENTREGA|0
+FK_RAMO_OK|TGFCPL|CODBAIRECEB|0
+FK_RAMO_OK|TGFCPL|CODBAITRAB|0
+FK_RAMO_OK|TGFCPL|CODENDENTREGA|0
+FK_RAMO_OK|TGFCPL|CODENDRECEB|0
+FK_RAMO_OK|TGFCPL|CODENDTRAB|0
+FK_RAMO_OK|TIMCAR|CARBAIRRO|0
+FK_RAMO_OK|TIMEDG|EDGBAIRRO|0
+FK_RAMO_OK|TIMEDG|EDGCODEND|0
+FK_RAMO_OK|TIMEPR|EPRBAIRRO|0
+FK_RAMO_OK|TIMEPR|EPRCODEND|0
+FK_RAMO_OK|TIMFAC|FACBAIRROIMOVEL|0
+FK_RAMO_OK|TIMIMV|IMVBAIRRO|0
+FK_RAMO_OK|TIMIMV|IMVCODEND|0
+FK_RAMO_OK|TIMLOT|LOTBAIRRO|0
+FK_RAMO_OK|TIMPPR|PPRBAIRRO|0
+FK_RAMO_OK|TIMPPR|PPRCODEND|0
+PAIS_BAI_EXCLUIDOS=428
+PAIS_END_EXCLUIDOS=7283
+REFERENCIAS_REMANESCENTES=0
+STATUS=CONCLUIDO_COM_MAPA_BACKUP_FK; ID_EXECUCAO=RMD_ALH_2930_20260916161842236
+
+
+PL/SQL procedure successfully completed.
+
+=== POS-VALIDACAO 29/30 - DUPLICIDADES ===
+
+ITEM                                       QTD
+----------------------------------- ----------
+TSIBAI_GRUPOS_COLISAO_REMANESCENTES          0
+TSIEND_GRUPOS_COLISAO_REMANESCENTES          0
+
+2 rows selected. 
+
+=== FIM MERGE ANTIFRAGIL ALHEIRO 29/30 ===
+=== FIM CARD 29/30 ANTIFRAGIL ===
+=== [31/31] INICIO - 31_Recompilar_Objetos_Invalidos.sql ===
+STATUS=CONCLUIDO; OBJETOS_INVALIDOS=0
+
+
+PL/SQL procedure successfully completed.
+
+
+0 rows selected. 
+
+=== FIM RECOMPILACAO OBJETOS INVALIDOS ===
+=== [31/31] FIM - 31_Recompilar_Objetos_Invalidos.sql ===
+============================================================
+RETOMADA MASTER DEPLOY - ATIVIDADES 29-31 - FIM
+
+DATA_HORA_FIM      
+-------------------
+16/09/2026 16:19:14
+
+1 row selected. 
+
+============================================================

@@ -1,0 +1,11 @@
+=== CARD 09 - MAPA DIRETO XML ===
+ID_EXECUCAO=VDA_ACM_FDUP_20260918_02
+FONTE_XML=SANKHYA.TGFNFE.XML; EXTRACAO=XMLTABLE; TGFFIN_ALTERADO=NAO
+Rollback
+DECLARE
+*
+ERROR at line 1:
+ORA-20340: Uma tabela do mapa ja existe; use novo ID antes de repetir.
+ORA-06512: at line 9
+Help: https://docs.oracle.com/error-help/db/ora-20340/
+

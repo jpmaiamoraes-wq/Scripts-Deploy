@@ -1,0 +1,42 @@
+=== CARD 09 - VALIDACAO FINAL ANTES DA INCLUSAO ===
+
+OWNER                                                                                                                            OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+SANKHYA                                                                                                                          FNC_BUSCA_TAG_XML_GERAL                                                                                                          FUNCTION                VALID  
+
+
+ERROS_COMPILACAO
+----------------
+               0
+
+=== DISTRIBUICAO DO MAPA ===
+
+STATUS_MAPA                   QTD_LINHAS  QTD_NOTAS
+----------------------------- ---------- ----------
+APTO_PARA_INSERCAO_CONTROLADA         24         24
+SEM_CONTA_ATIVA                       16         16
+SEM_DUP_XML                           24         24
+
+=== TESTES DAS LINHAS APTAS ===
+
+LINHAS_APTAS NOTAS_APTAS VDUP_NUMERICO DVENC_VALIDO TITULOS_VALIDOS TGFTPV_EXATA CONTAS_RESOLVIDAS SEM_TGFFIN TGFNUM_UNICO UMA_LINHA_POR_NOTA
+------------ ----------- ------------- ------------ --------------- ------------ ----------------- ---------- ------------ ------------------
+          24          24            24           24              24           24                24         24           24                 24
+
+=== PRECONDICOES CONSOLIDADAS ===
+
+STATUS_VALIDACAO_FINAL
+---------------------------------
+APTO_PARA_CONFIRMACAO_DE_INSERCAO
+
+=== LINHAS QUE PERMANECEM FORA DA INCLUSAO ===
+
+STATUS_MAPA                       CODEMP QTD_LINHAS PRIMEIRA_NUNOTA ULTIMA_NUNOTA
+----------------------------- ---------- ---------- --------------- -------------
+SEM_CONTA_ATIVA                        2         16             903          1491
+SEM_DUP_XML                            1         16              42           230
+SEM_DUP_XML                            2          2             338           819
+SEM_DUP_XML                            4          5              40           127
+SEM_DUP_XML                            5          1             128           128
+
+=== CARD 09 - VALIDACAO FINAL CONCLUIDA; TGFFIN AINDA NAO FOI ALTERADA ===

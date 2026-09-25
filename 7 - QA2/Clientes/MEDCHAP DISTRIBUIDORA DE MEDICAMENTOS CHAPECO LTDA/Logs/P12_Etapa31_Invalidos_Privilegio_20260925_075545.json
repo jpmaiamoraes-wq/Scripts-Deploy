@@ -1,0 +1,39 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T10:59:30.822881+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/P12_Etapa31_Invalidos_Privilegio.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 5,
+  "colunas": [
+    "ITEM",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "ITEM": "OBJETOS_INVALIDOS",
+      "QTD": 0
+    },
+    {
+      "ITEM": "PRIV_CREATE_ANY_PROCEDURE",
+      "QTD": 1
+    },
+    {
+      "ITEM": "PRIV_DROP_ANY_PROCEDURE",
+      "QTD": 1
+    },
+    {
+      "ITEM": "PRIV_EXECUTE_ANY_PROCEDURE",
+      "QTD": 1
+    },
+    {
+      "ITEM": "QTD_PRIVS_ANY_PROCEDURE",
+      "QTD": 3
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,25 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T20:06:37.702351+00:00",
+  "source_sql": "29_30_Preflight_Artefatos_Move_READONLY.sql",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "objetos": [
+    {"nome": "BKP_RMD_MVE_20260922_BAI", "temporary": "AUSENTE", "status": "AUSENTE"},
+    {"nome": "BKP_RMD_MVE_20260922_END", "temporary": "AUSENTE", "status": "AUSENTE"},
+    {"nome": "BKP_TGFITE_NOVO", "temporary": "N", "status": "VALID"},
+    {"nome": "BKP_TGFPAR_NOVO", "temporary": "N", "status": "VALID"},
+    {"nome": "RMD_MVE_MRG_20260922", "temporary": "AUSENTE", "status": "AUSENTE"},
+    {"nome": "RMD_MVE_MRG_20260922_DEP", "temporary": "AUSENTE", "status": "AUSENTE"},
+    {"nome": "RMD_MVE_MRG_20260922_EXC", "temporary": "AUSENTE", "status": "AUSENTE"},
+    {"nome": "TGWENDVAZ", "temporary": "Y", "status": "VALID"}
+  ],
+  "backups_existentes_preservados": ["BKP_TGFITE_NOVO", "BKP_TGFPAR_NOVO"],
+  "tabela_temporaria_excluida": "TGWENDVAZ",
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,163 @@
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICO                                                                                                                                                                                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                
+
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR UPPER(SYS_CONTEXT('USERENV','SESSION_USER')) <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> SELECT SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL FROM DUAL;
+
+SCHEMA_ATUAL                                                                                                                                                                                                                                    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+
+SQL> SELECT CODEMP, RAZAOSOCIAL FROM SANKHYA.TSIEMP WHERE CODEMP=1;
+
+    CODEMP RAZAOSOCIAL                             
+---------- ----------------------------------------
+         1 IMPORTUDO COMERCIO, IMPORTACAO E EXPORTA
+
+SQL> SELECT PRIVILEGE FROM SESSION_PRIVS ORDER BY PRIVILEGE;
+
+PRIVILEGE                               
+----------------------------------------
+ALTER ANY TABLE
+ALTER ANY TRIGGER
+CREATE ANY INDEX
+CREATE ANY MATERIALIZED VIEW
+CREATE ANY PROCEDURE
+CREATE ANY SEQUENCE
+CREATE ANY TABLE
+CREATE ANY TRIGGER
+CREATE ANY TYPE
+CREATE ANY VIEW
+CREATE SESSION
+DROP ANY INDEX
+DROP ANY MATERIALIZED VIEW
+DROP ANY PROCEDURE
+DROP ANY SEQUENCE
+DROP ANY TABLE
+DROP ANY TRIGGER
+DROP ANY TYPE
+DROP ANY VIEW
+EXECUTE ANY CLASS
+EXECUTE ANY PROCEDURE
+EXECUTE ANY TYPE
+SELECT ANY SEQUENCE
+SET CONTAINER
+
+24 rows selected. 
+
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/IMPORTUDO COMERCIO/00_Precheck_Unidades.sql"
+SQL> -- Analise somente leitura da TGFVOL antes da Revisao Master.
+SQL> -- Execute primeiro; nao altera dados e nao contem senha.
+SQL> 
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> SET PAGESIZE 200
+SQL> SET LINESIZE 220
+SQL> 
+SQL> PROMPT === PRECHECK DE UNIDADES ===
+=== PRECHECK DE UNIDADES ===
+SQL> 
+SQL> SELECT CODVOL,DESCRVOL,
+  2         CASE WHEN REGEXP_LIKE(CODVOL,'[0-9]') THEN 'IGNORAR_NUMERAL'
+  3              WHEN DESCRVOL<>UPPER(DESCRVOL) THEN 'DESCRICAO_MINUSCULA'
+  4              ELSE 'AVALIAR' END SITUACAO
+  5  FROM TGFVOL
+  6  ORDER BY CODVOL;
+
+CODVOL DESCRVOL                       SITUACAO           
+------ ------------------------------ -------------------
+0      <SEM VOLUME>                   IGNORAR_NUMERAL    
+BR     BARRA                          AVALIAR            
+BT     BOTIJA                         AVALIAR            
+CJ     CONJUNTO                       AVALIAR            
+CM     CMX                            AVALIAR            
+CX     CAIXA                          AVALIAR            
+DZ     DÚZIA                          AVALIAR            
+GF     GARRAFA                        AVALIAR            
+GR     GRAMA                          AVALIAR            
+HR     HORAS                          AVALIAR            
+K      QUILATE                        AVALIAR            
+KG     QUILOGRAMA                     AVALIAR            
+KW     KILOWATT HORA                  AVALIAR            
+LT     LITRO                          AVALIAR            
+M2     METRO QUADRADO                 IGNORAR_NUMERAL    
+M3     METRO CÚBICO                   IGNORAR_NUMERAL    
+ML     MILILITRO                      AVALIAR            
+MT     METRO                          AVALIAR            
+PC     PEÇA                           AVALIAR            
+PT     PACOTE                         AVALIAR            
+RL     ROLO                           AVALIAR            
+TN     TONELADA                       AVALIAR            
+UN     UNIDADE                        AVALIAR            
+
+23 rows selected. 
+
+SQL> 
+SQL> PROMPT === CANDIDATOS AUTOMATICOS DE ALTA CONFIANCA ===
+=== CANDIDATOS AUTOMATICOS DE ALTA CONFIANCA ===
+SQL> 
+SQL> WITH DESTINOS(TO_CODE) AS (
+  2    SELECT 'CD' FROM DUAL UNION ALL SELECT 'CX' FROM DUAL UNION ALL SELECT 'KG' FROM DUAL
+  3    UNION ALL SELECT 'LT' FROM DUAL UNION ALL SELECT 'PC' FROM DUAL UNION ALL SELECT 'UN' FROM DUAL
+  4    UNION ALL SELECT 'MT' FROM DUAL UNION ALL SELECT 'PT' FROM DUAL UNION ALL SELECT 'TN' FROM DUAL
+  5    UNION ALL SELECT 'RL' FROM DUAL UNION ALL SELECT 'BL' FROM DUAL UNION ALL SELECT 'FR' FROM DUAL
+  6    UNION ALL SELECT 'JG' FROM DUAL UNION ALL SELECT 'SC' FROM DUAL UNION ALL SELECT 'CJ' FROM DUAL
+  7    UNION ALL SELECT 'FL' FROM DUAL UNION ALL SELECT 'DZ' FROM DUAL UNION ALL SELECT 'KT' FROM DUAL
+  8    UNION ALL SELECT 'BD' FROM DUAL UNION ALL SELECT 'BG' FROM DUAL UNION ALL SELECT 'M2' FROM DUAL
+  9    UNION ALL SELECT 'M3' FROM DUAL UNION ALL SELECT 'GR' FROM DUAL UNION ALL SELECT 'FD' FROM DUAL
+ 10    UNION ALL SELECT 'PAR' FROM DUAL
+ 11  ), CANONICOS AS (
+ 12    SELECT D.TO_CODE,V.DESCRVOL FROM DESTINOS D JOIN TGFVOL V ON V.CODVOL=D.TO_CODE
+ 13  ), CANDIDATOS AS (
+ 14    SELECT S.CODVOL FROM_CODE,D.TO_CODE,'CODIGO_SEM_PONTUACAO' MOTIVO
+ 15    FROM TGFVOL S JOIN CANONICOS D
+ 16      ON REGEXP_REPLACE(TRANSLATE(UPPER(S.CODVOL),
+ 17         'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC'),'[^A-Z]','')=D.TO_CODE
+ 18    WHERE S.CODVOL<>D.TO_CODE AND NOT REGEXP_LIKE(S.CODVOL,'[0-9]')
+ 19    UNION ALL
+ 20    SELECT S.CODVOL,D.TO_CODE,'DESCRICAO_EQUIVALENTE'
+ 21    FROM TGFVOL S JOIN CANONICOS D
+ 22      ON REGEXP_REPLACE(REGEXP_REPLACE(TRANSLATE(UPPER(TRIM(S.DESCRVOL)),
+ 23         'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC'),'[^A-Z]',''),'S$','')
+ 24       = REGEXP_REPLACE(REGEXP_REPLACE(TRANSLATE(UPPER(TRIM(D.DESCRVOL)),
+ 25         'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC'),'[^A-Z]',''),'S$','')
+ 26    WHERE S.CODVOL<>D.TO_CODE AND NOT REGEXP_LIKE(S.CODVOL,'[0-9]')
+ 27  )
+ 28  SELECT FROM_CODE,MAX(TO_CODE) TO_CODE,LISTAGG(MOTIVO,',') WITHIN GROUP(ORDER BY MOTIVO) MOTIVOS
+ 29  FROM CANDIDATOS
+ 30  GROUP BY FROM_CODE
+ 31  HAVING COUNT(DISTINCT TO_CODE)=1
+ 32  ORDER BY FROM_CODE;
+no rows selected
+SQL> 
+SQL> PROMPT === DESCRICOES QUE SERAO CONVERTIDAS PARA MAIUSCULAS ===
+=== DESCRICOES QUE SERAO CONVERTIDAS PARA MAIUSCULAS ===
+SQL> SELECT CODVOL,DESCRVOL,UPPER(DESCRVOL) DESCRVOL_DEPOIS
+  2  FROM TGFVOL
+  3  WHERE DESCRVOL<>UPPER(DESCRVOL)
+  4  ORDER BY CODVOL;
+no rows selected
+SQL> 
+SQL> PROMPT === FIM PRECHECK DE UNIDADES ===
+=== FIM PRECHECK DE UNIDADES ===
+SQL> PROMPT IDENTIDADE_PRECHECK_CONCLUIDO
+IDENTIDADE_PRECHECK_CONCLUIDO
+SQL> SPOOL OFF

@@ -1,0 +1,18 @@
+{
+  "executado_em": "2026-09-25T09:16:41-03:00",
+  "chave_origem": "KEYCHAIN",
+  "chave_exibida": false,
+  "operacao_somente_leitura": true,
+  "etapa": "BUSCAR",
+  "criterio": {
+    "cnpj_raiz": "00577604",
+    "nome": "MEDCHAP"
+  },
+  "http_status": 403,
+  "erro_transporte": null,
+  "duracao_ms": 68,
+  "total_lista": 0,
+  "encontrados": [],
+  "observacao": "modo lista traz somente onboardings CONCLUIDOS",
+  "resposta_integral": null
+}

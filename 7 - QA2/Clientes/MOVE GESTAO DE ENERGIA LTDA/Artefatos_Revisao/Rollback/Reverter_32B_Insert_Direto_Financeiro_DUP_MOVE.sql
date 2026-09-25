@@ -1,0 +1,66 @@
+-- Reversao pareada e autocontida do 32B para a MOVE.
+-- A chave combina NUNOTA e NUFIN da auditoria; CONFIRMA_ROLLBACK permanece NAO.
+-- So alterar para SIM apos identificar divergencia e aprovar a reversao.
+
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+DEFINE CONFIRMA_ROLLBACK = 'NAO'
+
+DECLARE
+  v_confirm VARCHAR2(3) := UPPER('&&CONFIRMA_ROLLBACK');
+  v_audit NUMBER;
+  v_fin NUMBER;
+  v_min NUMBER;
+  v_max NUMBER;
+  v_num NUMBER;
+  v_current NUMBER;
+  v_deleted NUMBER;
+BEGIN
+  SELECT COUNT(*), MIN(NUFIN), MAX(NUFIN)
+    INTO v_audit, v_min, v_max
+    FROM BKP_RMD_FDUP_20260922_INS
+   WHERE ID_EXECUCAO='MOVE_FDUP_20260922_01';
+  SELECT COUNT(*) INTO v_fin
+    FROM TGFFIN F
+   WHERE EXISTS (
+       SELECT 1 FROM BKP_RMD_FDUP_20260922_INS A
+        WHERE A.ID_EXECUCAO='MOVE_FDUP_20260922_01'
+          AND A.NUNOTA=F.NUNOTA AND A.NUFIN=F.NUFIN
+   );
+  DBMS_OUTPUT.PUT_LINE('AUDITADOS='||v_audit||'; TGFFIN_ENCONTRADOS='||v_fin);
+  IF v_confirm <> 'SIM' THEN
+    DBMS_OUTPUT.PUT_LINE('STATUS=NAO_EXECUTADO; CONFIRMA_ROLLBACK permanece NAO.');
+    RETURN;
+  END IF;
+  IF v_fin <> v_audit THEN
+    RAISE_APPLICATION_ERROR(-20340,'A quantidade auditada nao coincide com TGFFIN; reversao interrompida.');
+  END IF;
+  DELETE FROM TGFFIN F
+   WHERE EXISTS (
+       SELECT 1 FROM BKP_RMD_FDUP_20260922_INS A
+        WHERE A.ID_EXECUCAO='MOVE_FDUP_20260922_01'
+          AND A.NUNOTA=F.NUNOTA AND A.NUFIN=F.NUFIN
+   );
+  v_deleted := SQL%ROWCOUNT;
+  SELECT COUNT(*) INTO v_num FROM TGFNUM WHERE ARQUIVO='TGFFIN';
+  IF v_num=1 AND v_audit>0 AND v_max-v_min+1=v_audit THEN
+    SELECT ULTCOD INTO v_current FROM TGFNUM WHERE ARQUIVO='TGFFIN' FOR UPDATE WAIT 5;
+    IF v_current=v_max THEN
+      UPDATE TGFNUM SET ULTCOD=v_min-1 WHERE ARQUIVO='TGFFIN';
+      DBMS_OUTPUT.PUT_LINE('TGFNUM_RESTAURADO='||(v_min-1));
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('TGFNUM_NAO_ALTERADO; ULTCOD atual diferente do topo auditado.');
+    END IF;
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('TGFNUM_NAO_ALTERADO; sequencia auditada nao continua ou cadastro inconsistente.');
+  END IF;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('TGFFIN_REMOVIDOS='||v_deleted);
+  DBMS_OUTPUT.PUT_LINE('STATUS=ROLLBACK_EXECUTADO');
+EXCEPTION WHEN OTHERS THEN
+  ROLLBACK;
+  RAISE;
+END;
+/

@@ -1,0 +1,33 @@
+{
+  "status": "PLANO_LOTE_VALIDADO",
+  "entrypoint": "Clientes/MOVE GESTAO DE ENERGIA LTDA/32A_Card09_Mapear_Direto_XML_MOVE.sql",
+  "arquivos": [
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32A_Card09_Mapear_Direto_XML.sql",
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32A_Card09_Mapear_Direto_XML_MOVE.sql"
+  ],
+  "qtd_instrucoes": 5,
+  "tipos": {
+    "PLSQL_OR_DDL_BLOCK": 1,
+    "CREATE": 2,
+    "SELECT": 2
+  },
+  "binds_sqlplus": [],
+  "sha256_suite": "876338189237e69ebe61f9573aed5552b1ff80d4e59c630d3260772968b76e4b",
+  "preflight_status": "PREFLIGHT_APROVADO",
+  "preflight_bloqueios": 0,
+  "preflight_avisos": 0,
+  "post_script": "Clientes/MOVE GESTAO DE ENERGIA LTDA/Artefatos_Revisao/PostValidacao/32_Card09_Mapa_PosValidacao_MOVE_READONLY.sql",
+  "post_script_sha256": "09f12f31aeb691f14fc154da8e026b0b036c0e43b62c75c991268320cbc4d20e",
+  "rollback_script": "Clientes/MOVE GESTAO DE ENERGIA LTDA/Artefatos_Revisao/Rollback/Reverter_32A_Mapear_Insert_Direto_Financeiro_DUP.sql",
+  "rollback_plan_sha256": "a1fba6c70eaf2fd3ea05c61f15213a303c0b5d2c4f4a898b18fa834adb48146a",
+  "execution_id": "MOVE_FDUP_20260922_01",
+  "mapa_criado": true,
+  "execucao_status": "LOTE_CONCLUIDO_POS_VALIDADO",
+  "confirmacao": "CONFIRMACAO_NATIVA",
+  "log": "Logs/MOVE_FDUP_20260922_01_MAPA.log",
+  "pos_validacao_json": "Artefatos_Revisao/PostValidacao/32_Card09_Mapa_PosValidacao_MOVE_20260922.json",
+  "dml_ddl_executado": true,
+  "dml_executado": false,
+  "ddl_executado": true,
+  "tgffin_alterada": false
+}

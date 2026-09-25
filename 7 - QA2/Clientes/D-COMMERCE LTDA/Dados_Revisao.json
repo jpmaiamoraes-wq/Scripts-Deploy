@@ -1,0 +1,20 @@
+{
+  "cliente_informado": "D-COMMERCE LTDA",
+  "pasta_cliente": "D-COMMERCE LTDA",
+  "hostname": "10.100.56.20",
+  "port": 1521,
+  "servicename": "INFLOWSOFAPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": "adirvanildo.pinto@sankhya.com.br",
+  "gp_nome": "Adirvanildo da Silva Pinto",
+  "preparado_em": "2026-09-11T12:11:11-03:00",
+  "porta_oracle_acessivel": false,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 10,
+    "saida": "ROTA_NECESSARIA: 10.100.56.20 cadastrado; VPN=utun5/10.250.0.108; porta 1521 inacessível."
+  },
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": false,
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/D-COMMERCE LTDA/Logs/Revisao_Master_20260911_121110.log"
+}

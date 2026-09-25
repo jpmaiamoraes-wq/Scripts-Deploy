@@ -1,0 +1,960 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-25T12:33:18.052636+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA/Preflight/Onboarding/O02_Usuarios_Grupos.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "medchapprd.sankhyacloud.com.br",
+  "db_name": "MEDCHAPPRD",
+  "service_esperado": "MEDCHAPPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 104,
+  "colunas": [
+    "CODUSU",
+    "NOMEUSU",
+    "EMAIL",
+    "CODGRUPO",
+    "NOMEGRUPO",
+    "CODEMP",
+    "DTLIMACESSO"
+  ],
+  "linhas": [
+    {
+      "CODUSU": 89,
+      "NOMEUSU": "LARISSA.SANTOS",
+      "EMAIL": "agendamento.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 41,
+      "NOMEUSU": "AMANDA.BEDIN",
+      "EMAIL": "amanda.bedin@medchap.com.br",
+      "CODGRUPO": 21,
+      "NOMEGRUPO": "INTELIGENCIA GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 81,
+      "NOMEUSU": "DANIEL.CAETANO",
+      "EMAIL": "armazenamento.cbs@medchap.com.br",
+      "CODGRUPO": 12,
+      "NOMEGRUPO": "ALMOXARIFADO OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 98,
+      "NOMEUSU": "JOSE.ZAMBRANO",
+      "EMAIL": "armazenamento.sjp@medchap.com.br",
+      "CODGRUPO": 12,
+      "NOMEGRUPO": "ALMOXARIFADO OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 35,
+      "NOMEUSU": "EVELYN.PAIM",
+      "EMAIL": "cadastro@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 37,
+      "NOMEUSU": "KAREN.SANTANA",
+      "EMAIL": "cadastro@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 30,
+      "NOMEUSU": "CARLA.FANTIN",
+      "EMAIL": "carla.fantin@medchap.com.br",
+      "CODGRUPO": 2,
+      "NOMEGRUPO": "DIRETORIA",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 36,
+      "NOMEUSU": "JULIANA.PRETTO",
+      "EMAIL": "cobranca@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 12,
+      "NOMEUSU": "GESSIKA.SILVA",
+      "EMAIL": "comercial.gc02@medchap.com.br",
+      "CODGRUPO": 15,
+      "NOMEGRUPO": "VENDAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 14,
+      "NOMEUSU": "MARIA.CARLI",
+      "EMAIL": "comercial01@medchap.com.br",
+      "CODGRUPO": 15,
+      "NOMEGRUPO": "VENDAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 68,
+      "NOMEUSU": "JULIANE.SOARES",
+      "EMAIL": "comercial04@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 16,
+      "NOMEUSU": "SANDRA.BRUM",
+      "EMAIL": "comercial06@medchap.com.br",
+      "CODGRUPO": 15,
+      "NOMEGRUPO": "VENDAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 11,
+      "NOMEUSU": "CLAUDIENE.LIFANTE",
+      "EMAIL": "comercial@medchap.com.br",
+      "CODGRUPO": 15,
+      "NOMEGRUPO": "VENDAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 20,
+      "NOMEUSU": "MIGUEL.TOLOTTI",
+      "EMAIL": "compras01@medchap.com.br",
+      "CODGRUPO": 11,
+      "NOMEGRUPO": "COMPRAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 18,
+      "NOMEUSU": "KATRINY.PEDROSO",
+      "EMAIL": "compras02@medchap.com.br",
+      "CODGRUPO": 11,
+      "NOMEGRUPO": "COMPRAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 22,
+      "NOMEUSU": "THIAGO.DAMAZZINI",
+      "EMAIL": "compras05@medchap.com.br",
+      "CODGRUPO": 11,
+      "NOMEGRUPO": "COMPRAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 17,
+      "NOMEUSU": "JOSIANE.SANTIN",
+      "EMAIL": "compras@medchap.com.br",
+      "CODGRUPO": 3,
+      "NOMEGRUPO": "COMPRAS GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 23,
+      "NOMEUSU": "CRISTIANE.SILVA",
+      "EMAIL": "contabilidade02@medchap.com.br",
+      "CODGRUPO": 14,
+      "NOMEGRUPO": "FISCAL/CONT. OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 25,
+      "NOMEUSU": "HELEN.FAE",
+      "EMAIL": "contabilidade@medchap.com.br",
+      "CODGRUPO": 5,
+      "NOMEGRUPO": "FISCAL/CONTABIL GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 32,
+      "NOMEUSU": "AMANDA.WARKEN",
+      "EMAIL": "contasapagar@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 34,
+      "NOMEUSU": "DANIELA.COMINETTI",
+      "EMAIL": "contasareceber@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 40,
+      "NOMEUSU": "VITORIA.CARVALHO",
+      "EMAIL": "contasareceber@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 43,
+      "NOMEUSU": "ALANA.SILVA",
+      "EMAIL": "contato@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 28,
+      "NOMEUSU": "DRUSIANE.PELISSER",
+      "EMAIL": "drusiane.pelisser@medchap.com.br",
+      "CODGRUPO": 1,
+      "NOMEGRUPO": "ADMINISTRADOR",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 58,
+      "NOMEUSU": "ENI.SANTOS",
+      "EMAIL": "eni.santos@medchap.com.br",
+      "CODGRUPO": 9,
+      "NOMEGRUPO": "RH OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 82,
+      "NOMEUSU": "MARCOS.OLIVEIRA",
+      "EMAIL": "expedicao.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 93,
+      "NOMEUSU": "VALQUIRIA.MACEDA",
+      "EMAIL": "expedicao.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 83,
+      "NOMEUSU": "ANDERSON.BORGES",
+      "EMAIL": "faturamento.cbs@medchap.com.br",
+      "CODGRUPO": 8,
+      "NOMEGRUPO": "FATURAMENTO",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 84,
+      "NOMEUSU": "KETHELLI.SILVA",
+      "EMAIL": "faturamento.cbs@medchap.com.br",
+      "CODGRUPO": 8,
+      "NOMEGRUPO": "FATURAMENTO",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 95,
+      "NOMEUSU": "PAULA.PRESTES",
+      "EMAIL": "faturamento.sjp@medchap.com.br",
+      "CODGRUPO": 8,
+      "NOMEGRUPO": "FATURAMENTO",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 96,
+      "NOMEUSU": "MAYARA.SILVA",
+      "EMAIL": "faturamento.sjp@medchap.com.br",
+      "CODGRUPO": 8,
+      "NOMEGRUPO": "FATURAMENTO",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 38,
+      "NOMEUSU": "MARIA.RIBEIRO",
+      "EMAIL": "financeiro08@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 33,
+      "NOMEUSU": "CALITA.AVILA",
+      "EMAIL": "financeiro09@medchap.com.br",
+      "CODGRUPO": 13,
+      "NOMEGRUPO": "FINANCEIRO OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 39,
+      "NOMEUSU": "RICHARD.MENEGHIN",
+      "EMAIL": "financeiro@medchap.com.br",
+      "CODGRUPO": 4,
+      "NOMEGRUPO": "FINANCEIRO GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 27,
+      "NOMEUSU": "TAINAN.SILVA",
+      "EMAIL": "fiscal01@medchap.com.br",
+      "CODGRUPO": 14,
+      "NOMEGRUPO": "FISCAL/CONT. OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 24,
+      "NOMEUSU": "DOUGLAS.SILVA",
+      "EMAIL": "fiscal@medchap.com.br",
+      "CODGRUPO": 5,
+      "NOMEGRUPO": "FISCAL/CONTABIL GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 85,
+      "NOMEUSU": "DIEGO.FACHINI",
+      "EMAIL": "gerente.cbs@medchap.com.br",
+      "CODGRUPO": 17,
+      "NOMEGRUPO": "LOGIST/EXPED GERENCIAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 97,
+      "NOMEUSU": "JULIANO.BARTOLAMEI",
+      "EMAIL": "gerente.sjp@medchap.com.br",
+      "CODGRUPO": 17,
+      "NOMEGRUPO": "LOGIST/EXPED GERENCIAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 75,
+      "NOMEUSU": "GUSTAVO.SCHWARZ",
+      "EMAIL": "gustavo.schwarz@medchap.com.br",
+      "CODGRUPO": 1,
+      "NOMEGRUPO": "ADMINISTRADOR",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 78,
+      "NOMEUSU": "ISADORA.ZANCKETT",
+      "EMAIL": "isadora.zanckett@medchap.com.br",
+      "CODGRUPO": 27,
+      "NOMEGRUPO": "TRADE MARKETING",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 13,
+      "NOMEUSU": "JOAO.JESUS",
+      "EMAIL": "joao.jesus@medchap.com.br",
+      "CODGRUPO": 10,
+      "NOMEGRUPO": "VENDAS GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 88,
+      "NOMEUSU": "KAUANE.ALMEIDA",
+      "EMAIL": "logistica.auxiliar.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 90,
+      "NOMEUSU": "WESLLEY.FOGACA",
+      "EMAIL": "logistica.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 47,
+      "NOMEUSU": "FRANCIELE.BOAKOSKI",
+      "EMAIL": "logistica.compras@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 101,
+      "NOMEUSU": "LUCAS.SOUSA",
+      "EMAIL": "logistica.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 102,
+      "NOMEUSU": "JOAO.GON¿ALVES",
+      "EMAIL": "logistica01.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 50,
+      "NOMEUSU": "SONIA.CAON",
+      "EMAIL": "logistica01@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 45,
+      "NOMEUSU": "EMILLY.LEAO",
+      "EMAIL": "logistica02@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 46,
+      "NOMEUSU": "GABRIEL.MAROCCO",
+      "EMAIL": "logistica05@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 44,
+      "NOMEUSU": "DAIANE.BOLZAN",
+      "EMAIL": "logistica@medchap.com.br",
+      "CODGRUPO": 17,
+      "NOMEGRUPO": "LOGIST/EXPED GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 19,
+      "NOMEUSU": "LUCAS.FAE",
+      "EMAIL": "lucas@medchap.com.br",
+      "CODGRUPO": 1,
+      "NOMEGRUPO": "ADMINISTRADOR",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 79,
+      "NOMEUSU": "LUISA.FRUET",
+      "EMAIL": "luisa.fruet@medchap.com.br",
+      "CODGRUPO": 27,
+      "NOMEGRUPO": "TRADE MARKETING",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 48,
+      "NOMEUSU": "MARCO.GABIATTI",
+      "EMAIL": "marco.gabiatti@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 26,
+      "NOMEUSU": "MARCOS.BAMPI",
+      "EMAIL": "marcos.bampi@medchap.com.br",
+      "CODGRUPO": 14,
+      "NOMEGRUPO": "FISCAL/CONT. OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 76,
+      "NOMEUSU": "MARCOS.POERARI",
+      "EMAIL": "marcos.poerari@medchap.com.br",
+      "CODGRUPO": 26,
+      "NOMEGRUPO": "TI GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 55,
+      "NOMEUSU": "LETHICIA.SCHREINER",
+      "EMAIL": "marketing01@medchap.com.br",
+      "CODGRUPO": 22,
+      "NOMEGRUPO": "MARKETING GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 52,
+      "NOMEUSU": "CAROLINE.DEZENGRINI",
+      "EMAIL": "marketing02@medchap.com.br",
+      "CODGRUPO": 22,
+      "NOMEGRUPO": "MARKETING GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 56,
+      "NOMEUSU": "LUQUIELISON.RIGO",
+      "EMAIL": "marketing03@medchap.com.br",
+      "CODGRUPO": 22,
+      "NOMEGRUPO": "MARKETING GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 53,
+      "NOMEUSU": "DAIANE.HOFFMANN",
+      "EMAIL": "marketing@medchap.com.br",
+      "CODGRUPO": 22,
+      "NOMEGRUPO": "MARKETING GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 42,
+      "NOMEUSU": "MAXWEL.BASILIO",
+      "EMAIL": "maxwel.basilio@medchap.com.br",
+      "CODGRUPO": 21,
+      "NOMEGRUPO": "INTELIGENCIA GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 54,
+      "NOMEUSU": "KEMILI.BARBOSA",
+      "EMAIL": "mkt.auxiliar@medchap.com.br",
+      "CODGRUPO": 22,
+      "NOMEGRUPO": "MARKETING GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 31,
+      "NOMEUSU": "NATHALIA.FAE",
+      "EMAIL": "nathalia@medchap.com.br",
+      "CODGRUPO": 24,
+      "NOMEGRUPO": "PROWIN",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 29,
+      "NOMEUSU": "NERI",
+      "EMAIL": "neri@medchap.com.br",
+      "CODGRUPO": 1,
+      "NOMEGRUPO": "ADMINISTRADOR",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 49,
+      "NOMEUSU": "PATRICIA.SANTOS",
+      "EMAIL": "patricia.santos@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 77,
+      "NOMEUSU": "PAULINE.PAVAN",
+      "EMAIL": "pauline.pavan@medchap.com.br",
+      "CODGRUPO": 26,
+      "NOMEGRUPO": "TI GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 51,
+      "NOMEUSU": "WILLIAM.CARIMBA",
+      "EMAIL": "posvendas@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 80,
+      "NOMEUSU": "RAQUEL.SANTOS",
+      "EMAIL": "raquel.santos@medchap.com.br",
+      "CODGRUPO": 27,
+      "NOMEGRUPO": "TRADE MARKETING",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 91,
+      "NOMEUSU": "EDENILSON.VARELA",
+      "EMAIL": "recebimento.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 94,
+      "NOMEUSU": "LEOMAR.MARTIM",
+      "EMAIL": "recebimento.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 87,
+      "NOMEUSU": "DANIELI.MAXIMIANO",
+      "EMAIL": "responsaveltecnico.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 100,
+      "NOMEUSU": "HELLEN.SAPORSKI",
+      "EMAIL": "responsaveltecnico.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 60,
+      "NOMEUSU": "MARCIA.MARTINS",
+      "EMAIL": "rh.auxiliar@medchap.com.br",
+      "CODGRUPO": 9,
+      "NOMEGRUPO": "RH OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 92,
+      "NOMEUSU": "MAIARA.SANTOS",
+      "EMAIL": "rh.cbs@medchap.com.br",
+      "CODGRUPO": 9,
+      "NOMEGRUPO": "RH OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 59,
+      "NOMEUSU": "JULIA.FORTE",
+      "EMAIL": "rh01@medchap.com.br",
+      "CODGRUPO": 9,
+      "NOMEGRUPO": "RH OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 57,
+      "NOMEUSU": "ALINE.SOARES",
+      "EMAIL": "rh@medchap.com.br",
+      "CODGRUPO": 16,
+      "NOMEGRUPO": "RH GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 15,
+      "NOMEUSU": "ROBERTA.VARGAS",
+      "EMAIL": "roberta.vargas@medchap.com.br",
+      "CODGRUPO": 15,
+      "NOMEGRUPO": "VENDAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 86,
+      "NOMEUSU": "ALLYFER.VIEIRA",
+      "EMAIL": "segregacao.cbs@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 4,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 99,
+      "NOMEUSU": "RAFAEL.LIMA",
+      "EMAIL": "segregacao.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 103,
+      "NOMEUSU": "YGOR.SILVA",
+      "EMAIL": "suporte.sjp@medchap.com.br",
+      "CODGRUPO": 6,
+      "NOMEGRUPO": "LOGIST/EXPED OPERACIONAL",
+      "CODEMP": 3,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 71,
+      "NOMEUSU": "MARISA.ESPINDOLA",
+      "EMAIL": "televendas02@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 73,
+      "NOMEUSU": "SUZIEL.SILVA",
+      "EMAIL": "televendas03@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 64,
+      "NOMEUSU": "CLAUCIA.SCHNEIDER",
+      "EMAIL": "televendas05@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 70,
+      "NOMEUSU": "MARIVANIA.ZANCKETT",
+      "EMAIL": "televendas06@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 62,
+      "NOMEUSU": "CAROLINY.WOGINSKI",
+      "EMAIL": "televendas08@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 74,
+      "NOMEUSU": "VITORIA.BERTONCELLO",
+      "EMAIL": "televendas10@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 72,
+      "NOMEUSU": "MILENA.KORNOWSKI",
+      "EMAIL": "televendas11@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 63,
+      "NOMEUSU": "CASSIA.NOBRE",
+      "EMAIL": "televendas12@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 66,
+      "NOMEUSU": "ELISIANE.GABIATTI",
+      "EMAIL": "televendas17@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 67,
+      "NOMEUSU": "FABIANA.ROSA",
+      "EMAIL": "televendas@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 21,
+      "NOMEUSU": "THIAGO.FAE",
+      "EMAIL": "thiago@medchap.com.br",
+      "CODGRUPO": 11,
+      "NOMEGRUPO": "COMPRAS OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 69,
+      "NOMEUSU": "MARILIANE.ROSA",
+      "EMAIL": "vendas01@medchap.com.br",
+      "CODGRUPO": 19,
+      "NOMEGRUPO": "CALL CENTER GERENCIAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 65,
+      "NOMEUSU": "DANIELLI.LOPES",
+      "EMAIL": "vendas@medchap.com.br",
+      "CODGRUPO": 18,
+      "NOMEGRUPO": "CALL CENTER OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 61,
+      "NOMEUSU": "VITORIA.VIVIAN",
+      "EMAIL": "vitoria.vivian@medchap.com.br",
+      "CODGRUPO": 9,
+      "NOMEGRUPO": "RH OPERACIONAL",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 0,
+      "NOMEUSU": "SUP",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 1,
+      "NOMEUSU": "COTACAOB2B",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 2,
+      "NOMEUSU": "SKWCLOUD",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 3,
+      "NOMEUSU": "VENDEDOR",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 4,
+      "NOMEUSU": "GERENTE",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 5,
+      "NOMEUSU": "SANKHYA",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 6,
+      "NOMEUSU": "LIBERADOR",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 7,
+      "NOMEUSU": "INTEGRAÇÃO.PONTOTEL",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 8,
+      "NOMEUSU": "INTEGRAÇÃO.MINDSIGHT",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 9,
+      "NOMEUSU": "INTEGRAÇÃO.VIXTING",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": 1,
+      "DTLIMACESSO": null
+    },
+    {
+      "CODUSU": 10,
+      "NOMEUSU": "SKWCLOUDAPI",
+      "EMAIL": null,
+      "CODGRUPO": 0,
+      "NOMEGRUPO": "<SEM GRUPO>",
+      "CODEMP": null,
+      "DTLIMACESSO": null
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,96 @@
+{
+  "status": "CONCLUIDA_READ_ONLY_COM_DIVERGENCIAS_DOCUMENTAIS",
+  "executado_em_utc": "2026-09-21T10:55:05.378995+00:00",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "db_name": "JCLMPRD",
+  "dml_executado": false,
+  "ddl_executado": false,
+  "fontes_drive": {
+    "pasta_matriz": "https://drive.google.com/drive/folders/1GRYQxhUp0pxz6DuWHD80GvgQqBWRNsQl",
+    "pasta_importada": "https://drive.google.com/drive/folders/1VM3cV7BYZSEf7fhlQ53PbOCVKhhz3hLE",
+    "dados_iniciais": "dados-iniciais.pdf; gerado em 24/08/2026",
+    "resumo_dados_empresa": "Resumo - 01 - Dados da Empresa.pdf; localizado na pasta importada em 15/09/2026",
+    "smtp": "smtp-config.pdf; dados sensíveis omitidos",
+    "contas": "CONTAS_BANCARIAS_MODELO_VAL_2026_06_V3 (1).xlsx",
+    "produtos": "produtos-info.pdf",
+    "fiscal": "fiscal-info.pdf",
+    "xml": "resumo-xmls.pdf"
+  },
+  "empresas_oracle": [
+    {"codemp": 1, "razao_social": "JCLM INDUSTRIA E COMERCIO LTDA", "cgc": "33649134000278", "uf": 1},
+    {"codemp": 2, "razao_social": "FUTURA PRODUTOS ALIMENTICIOS LTDA", "cgc": "37008355000137", "uf": 1},
+    {"codemp": 3, "razao_social": "INDUSTRIA DE SUCOS SUMO INDUSTRIAL LTDA", "cgc": "07056520000165", "uf": 22},
+    {"codemp": 4, "razao_social": "JCLM INDUSTRIA E COMERCIO LTDA", "cgc": "33649134000197", "uf": 22},
+    {"codemp": 5, "razao_social": "JULIO CESAR MOMESSO LTDA", "cgc": "05334986000150", "uf": 1},
+    {"codemp": 6, "razao_social": "JAF DISTRIBUIDORA DE BEBIDAS LTDA", "cgc": "04816115000100", "uf": 1}
+  ],
+  "confronto_empresas": {
+    "dados_iniciais": {"esperadas": 3, "localizadas": 3, "ausentes": 0, "classificacao": "CORRESPONDENTE_SEM_DIVERGENCIA_COMPROVADA"},
+    "resumo_dados_empresa": {"esperadas": 3, "localizadas": 2, "ausentes": 1, "cnpj_ausente": "33649134000359", "classificacao": "DADO_AUSENTE_E_DIVERGENCIA_DOCUMENTAL_A_CONFIRMAR"}
+  },
+  "smtp_oracle": {
+    "global_servidor_porta": "email-smtp.us-east-1.amazonaws.com:587",
+    "global_criptografia": "T",
+    "global_remetente": "noreply@sankhya.com.br",
+    "credencial": "PRESENTE_NAO_EXIBIDA",
+    "por_empresa": "campos de servidor, usuário e senha ausentes nas seis empresas"
+  },
+  "smtp_documental_sem_credenciais": {
+    "provedor": "Servidor Próprio",
+    "servidor": "smtp.jclm.com.br",
+    "porta": 587,
+    "criptografia": "TLS",
+    "remetente": "nfe@jclm.com.br"
+  },
+  "confronto_smtp": "DIVERGENCIA_DE_CONFIGURACAO_COMPROVADA",
+  "contas_bancarias_por_empresa": [
+    {"codemp": 1, "cgc": "33649134000278", "contas": 2, "emitem_boleto": 0, "ativas": 1},
+    {"codemp": 2, "cgc": "37008355000137", "contas": 1, "emitem_boleto": 1, "ativas": 1},
+    {"codemp": 3, "cgc": "07056520000165", "contas": 1, "emitem_boleto": 1, "ativas": 1},
+    {"codemp": 4, "cgc": "33649134000197", "contas": 2, "emitem_boleto": 2, "ativas": 2},
+    {"codemp": 5, "cgc": "05334986000150", "contas": 1, "emitem_boleto": 1, "ativas": 1},
+    {"codemp": 6, "cgc": "04816115000100", "contas": 1, "emitem_boleto": 1, "ativas": 1}
+  ],
+  "contas_documentais": "A planilha localizada informa uma conta para o CNPJ 33649134000197; o Oracle possui duas contas para essa empresa. Confronto detalhado de dados bancários não reproduzido neste resumo.",
+  "contagens_oracle": {
+    "TSICTA": 9,
+    "TSIUSU": 33,
+    "TGFVEN": 8,
+    "TGFGRU": 3,
+    "TSICUS": 1,
+    "TGFNAT": 210,
+    "TGFLOC": 1,
+    "TGFPRO": 5565
+  },
+  "usuarios": {
+    "fonte_site": "Onboarding Deploy",
+    "arquivo": "USUARIOS_MODELO_VAL_2026_06_V2.xls",
+    "enviado_em": "2026-09-11T18:55:00-03:00",
+    "onboarding_total": 27,
+    "oracle_total": 33,
+    "oracle_com_grupo": 25,
+    "oracle_sem_grupo_modelo": 8,
+    "ausentes_na_base": [
+      {"email": "comercial@sumobrasil.com.br", "nome": "Jeferson Costa", "empresa": "SUMO", "codgrupo": 15},
+      {"email": "controle@sumobrasil.com.br", "nome": "Vanessa Oliveira Sandes", "empresa": "SUMO", "codgrupo": 13}
+    ],
+    "extras_na_base_por_email": 0,
+    "divergencias_de_grupo": 0,
+    "divergencia_codeemp": "Os 25 registros Oracle com grupo preenchido possuem CODEMP=1; 15 deles estão rotulados como FUTURA ou SUMO no onboarding.",
+    "comparacao_detalhada": "Onboarding_Comparacao_Usuarios_20260921.md"
+  },
+  "produtos_documentais": "Os documentos informam 467, 3862 e 51 produtos por empresa; TGFPRO é cadastro global e retornou 5565. A comparação por empresa não foi inferida sem chave correspondente.",
+  "consultas": [
+    "Artefatos_Revisao/Preflight/52_Onboarding_Identidade_Empresas_READONLY.sql",
+    "Artefatos_Revisao/Preflight/53_Onboarding_SMTP_READONLY.sql",
+    "Artefatos_Revisao/Preflight/53A_Onboarding_SMTP_Global_READONLY.sql",
+    "Artefatos_Revisao/Preflight/54_Onboarding_Contagens_READONLY.sql",
+    "Artefatos_Revisao/Preflight/55_Onboarding_Contas_por_Empresa_READONLY.sql",
+    "Artefatos_Revisao/Preflight/56_Onboarding_Empresas_Fontes_READONLY.sql",
+    "Artefatos_Revisao/Preflight/57_Onboarding_Usuarios_Grupo_READONLY.sql",
+    "Artefatos_Revisao/Preflight/58_Onboarding_Usuarios_Resumo_READONLY.sql",
+    "Artefatos_Revisao/Preflight/59_Onboarding_Usuarios_Ausentes_READONLY.sql"
+  ]
+}

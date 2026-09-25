@@ -1,0 +1,101 @@
+SQL> PROMPT CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 13 A 31
+CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 13 A 31
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [14/31] INICIO
+[14/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql"
+SQL> -- Mantem o modelo aprovado da Analise de Giro 848, com backup pontual.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER;BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_13_TSIIMP';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_13_TSIIMP AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  4   CAST(NULL AS TIMESTAMP) DH_EXECUCAO,CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+  5   I.CODREL,I.LISTA1 LISTA1_ANTES FROM TSIIMP I WHERE 1=0]';END IF;
+  6   SELECT COUNT(*) INTO v FROM TSIIMP WHERE CODREL=848;
+  7   IF v<>1 THEN RAISE_APPLICATION_ERROR(-20340,'Esperada exatamente uma configuracao TSIIMP CODREL=848.');END IF;
+  8  END;
+  9  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v_id VARCHAR2(30):='RMD_G848_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');v_b NUMBER;v_u NUMBER;BEGIN
+  2   INSERT INTO BKP_RMD_13_TSIIMP SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),CODREL,LISTA1 FROM TSIIMP WHERE CODREL=848;
+  3   v_b:=SQL%ROWCOUNT;
+  4   UPDATE TSIIMP SET LISTA1='{"periodos":[["Jan 1, 2026 12:00:00 AM","Jan 8, 2026 12:00:00 AM"],["Dec 1, 2025 12:00:00 AM","Dec 31, 2025 12:00:00 AM"],["Nov 1, 2025 12:00:00 AM","Nov 30, 2025 12:00:00 AM"],["Oct 1, 2025 12:00:00 AM","Oct 31, 2025 12:00:00 AM"],["Sep 1, 2025 12:00:00 AM","Sep 30, 2025 12:00:00 AM"],["Aug 1, 2025 12:00:00 AM","Aug 31, 2025 12:00:00 AM"],["Jul 1, 2025 12:00:00 AM","Jul 31, 2025 12:00:00 AM"],["Jun 1, 2025 12:00:00 AM","Jun 30, 2025 12:00:00 AM"],["May 1, 2025 12:00:00 AM","May 31, 2025 12:00:00 AM"],["Apr 1, 2025 12:00:00 AM","Apr 30, 2025 12:00:00 AM"],["Mar 1, 2025 12:00:00 AM","Mar 31, 2025 12:00:00 AM"],["Feb 1, 2025 12:00:00 AM","Feb 28, 2025 12:00:00 AM"]],"codRel":848,"resourceID":"br.com.sankhya.com.rotinas.analisegiro","descricao":"An�lise Mensal com giro","qtdPeriodosDinamicos":12,"intervaloPeriodoDinamico":"MES","tipoPeriodo":"D","utilizarPeriodosFechados":"S","agrupaProdAltern":"N","incluirSemEstoque":"N","incluirSemGiro":"N","unidadeCompra":"N","apresentaEmpresa":"S","apresentaMatriz":"N","apresentaLocal":"N","apresentaControle":"N","desprezarPeriodoGiro":0,"detalhe":"P","custo":"CUSSEMICM","percAcrescimoSugestao":0,"diasEstocagem":30,"estMinIncluiVendaZero":"S","naoAtuSugestaoZero":"S","desconsiderarPeriodoRupturaGiroMedDiario":"N","filterParams":{},"desconsiderarPedidosCompraVenda":"N","temListaFiltros":"S","nomeUsu":"SUP","dtCriacao":"24/11/2022","listarPCVPend":"N"}'
+  5   WHERE CODREL=848;
+  6   v_u:=SQL%ROWCOUNT;
+  7   IF v_b<>1 OR v_u<>1 THEN RAISE_APPLICATION_ERROR(-20341,'Backup ou atualizacao da Analise 848 divergente.');END IF;
+  8   COMMIT;DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);DBMS_OUTPUT.PUT_LINE('ANALISE_GIRO_848_ATUALIZADA=1');
+  9  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;END;
+ 10  /
+ID_EXECUCAO=RMD_G848_20260910155155080
+ANALISE_GIRO_848_ATUALIZADA=1
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [14/31] FIM
+[14/31] FIM
+SQL> PROMPT [15/31] INICIO
+[15/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/15_Desativar_Rastro_Sem_Controle.sql"
+SQL> -- Bloco 14_Desativar_Rastro_Sem_Controle; backup por execucao e atualizacao apenas de divergencias.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_14_TGFPRO';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_14_TGFPRO AS
+  4   SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO, CAST(NULL AS TIMESTAMP) DH_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO, CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL,
+  6   T.TEMRASTROLOTE VALOR_ANTES, CAST('N' AS VARCHAR2(1)) VALOR_DEPOIS FROM TGFPRO T WHERE 1=0]'; END IF;
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2   v_id VARCHAR2(30):='RMD_RAST_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3');
+  3   v_b PLS_INTEGER; v_u PLS_INTEGER;
+  4  BEGIN
+  5   INSERT INTO BKP_RMD_14_TGFPRO
+  6   SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),TEMRASTROLOTE,CAST('N' AS VARCHAR2(1))
+  7   FROM TGFPRO WHERE TEMRASTROLOTE='S' AND TIPCONTEST='N';
+  8   v_b:=SQL%ROWCOUNT;
+  9   UPDATE TGFPRO SET TEMRASTROLOTE='N' WHERE TEMRASTROLOTE='S' AND TIPCONTEST='N';
+ 10   v_u:=SQL%ROWCOUNT;
+ 11   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20201,'Backup e atualizacao divergiram em 14_Desativar_Rastro_Sem_Controle.'); END IF;
+ 12   COMMIT;
+ 13   DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id);
+ 14   DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;
+ 16  END;
+ 17  /
+ID_EXECUCAO=RMD_RAST_20260910155155945
+REGISTROS_ALTERADOS=0
+
+
+PL/SQL procedure successfully completed.
+
+SQL> PROMPT [15/31] FIM
+[15/31] FIM
+SQL> SPOOL OFF

@@ -1,0 +1,20 @@
+{
+  "cliente_informado": "Produtos Macalé LTDA",
+  "pasta_cliente": "PRODUTOS MACALE LTDA",
+  "hostname": "10.100.56.20",
+  "port": 1521,
+  "servicename": "MACALEPRD.SANKHYACLOUD.COM.BR",
+  "username": "francisco_junior",
+  "gp_email": "marcelo.thaisen@sankhya.com.br",
+  "gp_nome": "Marcelo Renato Fialho Thaisen",
+  "preparado_em": "2026-09-09T08:01:35-03:00",
+  "porta_oracle_acessivel": true,
+  "verificacao_rota": {
+    "modo": "--check",
+    "codigo": 0,
+    "saida": "OK: 10.100.56.20:1521 já está acessível. Nenhuma alteração necessária."
+  },
+  "senha_armazenada": false,
+  "execucao_oracle_realizada": false,
+  "log_esperado": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS MACALE LTDA/Logs/Revisao_Master_20260909_080135.log"
+}

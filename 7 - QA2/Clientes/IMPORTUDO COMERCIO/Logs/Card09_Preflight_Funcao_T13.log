@@ -1,0 +1,33 @@
+SQL> PROMPT CARD 09 - VALIDACAO DA FUNCAO DE LEITURA XML
+CARD 09 - VALIDACAO DA FUNCAO DE LEITURA XML
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER:='RMD_RUN_CONT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT OWNER,OBJECT_NAME,OBJECT_TYPE,STATUS FROM ALL_OBJECTS WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL';
+no rows selected
+SQL> SELECT OWNER,OBJECT_NAME,ARGUMENT_NAME,POSITION,DATA_TYPE FROM ALL_ARGUMENTS WHERE OBJECT_NAME='FNC_BUSCA_TAG_XML_GERAL' ORDER BY OWNER,POSITION;
+no rows selected
+SQL> PROMPT CARD09_PENDENTE_FUNCAO_XML_AUSENTE
+CARD09_PENDENTE_FUNCAO_XML_AUSENTE
+SQL> SPOOL OFF

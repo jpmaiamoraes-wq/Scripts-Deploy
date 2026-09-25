@@ -1,0 +1,75 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T19:10:28.990857+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Artefatos_Revisao/PostValidacao/00_Master_PosExecucao_FOCUSFINTAXPRD_READONLY.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 14,
+  "colunas": [
+    "METRICA",
+    "VALOR"
+  ],
+  "linhas": [
+    {
+      "METRICA": "BACKUPS_RMD",
+      "VALOR": "39"
+    },
+    {
+      "METRICA": "CONTROLE_PENDENTE",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "CONTROLE_TOTAL",
+      "VALOR": "9"
+    },
+    {
+      "METRICA": "CURRENT_SCHEMA",
+      "VALOR": "SANKHYA"
+    },
+    {
+      "METRICA": "DB_NAME",
+      "VALOR": "FOCUSFINTAXPRD"
+    },
+    {
+      "METRICA": "INTEG_CAB_SEM_ITENS",
+      "VALOR": "22"
+    },
+    {
+      "METRICA": "INTEG_ITENS_SEM_CAB",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "OBJETOS_INVALIDOS",
+      "VALOR": "27"
+    },
+    {
+      "METRICA": "SERVICE_NAME",
+      "VALOR": "focusfintaxprd.sankhyacloud.com.br"
+    },
+    {
+      "METRICA": "SESSION_USER",
+      "VALOR": "FRANCISCO_JUNIOR"
+    },
+    {
+      "METRICA": "TRIGGERS_NAO_ENABLED",
+      "VALOR": "0"
+    },
+    {
+      "METRICA": "TSIBAI_TOTAL",
+      "VALOR": "45561"
+    },
+    {
+      "METRICA": "TSIEND_TOTAL",
+      "VALOR": "674484"
+    },
+    {
+      "METRICA": "UNIDADES_MAPEADAS",
+      "VALOR": "93"
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

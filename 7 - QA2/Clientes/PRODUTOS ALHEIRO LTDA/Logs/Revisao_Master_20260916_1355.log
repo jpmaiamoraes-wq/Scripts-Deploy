@@ -1,0 +1,99 @@
+=== PREFLIGHT SOMENTE LEITURA ===
+=== PREFLIGHT GATE - IDENTIDADE DA SESSAO ===
+
+USUARIO_SESSAO                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR
+
+1 row selected. 
+
+
+SCHEMA_ATUAL                                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+SANKHYA
+
+1 row selected. 
+
+
+SERVICE_NAME                                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+alheiroprd.sankhyacloud.com.br
+
+1 row selected. 
+
+
+DB_NAME                                                                                                                         
+--------------------------------------------------------------------------------------------------------------------------------
+ALHEIROPRD
+
+1 row selected. 
+
+
+INSTANCE_NAME                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------
+dbs3pc13
+
+1 row selected. 
+
+
+USUARIO_ESPERADO SERVICE_ESPERADO     
+---------------- ---------------------
+OK               OK                   
+
+1 row selected. 
+
+=== PREFLIGHT GATE - EMPRESA E VERSAO ===
+
+QTD_EMPRESA_EXATA STATUS_EMPRESA             
+----------------- ---------------------------
+                1 OK                         
+
+1 row selected. 
+
+
+VERSAO_SISTEMA_CURTA          
+------------------------------
+4.36b146
+
+1 row selected. 
+
+
+VERSAO_ORACLE                                                                                                           
+------------------------------------------------------------------------------------------------------------------------
+Oracle AI Database 26ai EE High Perf Release 23.26.2.0.0 - Production
+
+1 row selected. 
+
+=== PREFLIGHT GATE - QUOTA E INVALIDOS ===
+
+QTD_LINHAS_USER_TS_QUOTAS
+-------------------------
+                        0
+
+1 row selected. 
+
+
+QTD_OBJETOS_INVALIDOS
+---------------------
+                    0
+
+1 row selected. 
+
+PREFLIGHT_GATE_STATUS=APROVADO_IDENTIDADE_EMPRESA; QUOTA=INFORMADA_SEM_BLOQUEIO_PREVENTIVO
+OWNER_OPERACIONAL=SANKHYA
+
+
+PL/SQL procedure successfully completed.
+
+=== FIM PREFLIGHT GATE - SOMENTE LEITURA ===
+=== QUOTA: CRITERIO PREVENTIVO DISPENSADO POR APROVACAO DO USUARIO ===
+O MASTER TENTARA CRIAR/PREENCHER OS BACKUPS PREVISTOS NOS INCLUDES.
+FALHA DE GRAVACAO DE BACKUP SERA TRATADA COMO ERRO DE ATIVIDADE.
+Rollback
+BEGIN
+*
+ERROR at line 1:
+ORA-20500: Execucao cancelada: confirmacao da base divergente.
+ORA-06512: at line 3
+Help: https://docs.oracle.com/error-help/db/ora-20500/
+

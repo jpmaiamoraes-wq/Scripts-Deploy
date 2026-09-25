@@ -1,0 +1,21 @@
+{
+  "status": "PENDENTE_FONTE_ONBOARDING_SEM_RENDERIZACAO",
+  "executado_em_local": "2026-09-23T10:09:17-03:00",
+  "fonte_primaria": {
+    "titulo_aba": "Onboarding Deploy — Sankhya",
+    "url_exibida": "20069-51233.build.mitralab.io/",
+    "versao_mais_recente_visivel": false,
+    "motivo": "A aba abriu, mas permaneceu visualmente vazia e sem texto acessível após recarregamento."
+  },
+  "oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "riosltdaprd.sankhyacloud.com.br",
+    "db_name": "RIOSLTDAPRD",
+    "empresas_tsiemp": 1
+  },
+  "comparacao_empresas": "NAO_EXECUTADA_SEM_FONTE_PRIMARIA_LEGIVEL",
+  "comparacao_usuarios": "NAO_EXECUTADA_SEM_FONTE_PRIMARIA_LEGIVEL",
+  "dml_executado": false,
+  "ddl_executado": false
+}

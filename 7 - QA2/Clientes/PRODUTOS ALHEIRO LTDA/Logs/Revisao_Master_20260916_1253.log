@@ -1,0 +1,359 @@
+SQL> 
+SQL> PROMPT === PREFLIGHT SOMENTE LEITURA ===
+=== PREFLIGHT SOMENTE LEITURA ===
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/PRODUTOS ALHEIRO LTDA/00_Preflight_ALHEIRO.sql"
+SQL> -- Preflight somente leitura da Revisao Master Deploy - PRODUTOS ALHEIRO LTDA.
+SQL> -- Nao contem senha, credenciais ou comandos de alteracao.
+SQL> SET DEFINE OFF
+SQL> SET ECHO OFF
+=== PRECHECK RMD / IDENTIDADE DA SESSAO ===
+
+USUARIO_SESSAO
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+SCHEMA_ATUAL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICE_NAME
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+DB_NAME
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSTANCE_NAME
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+IP_ORIGEM                                                                                                                                                       
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                
+SANKHYA                                                                                                                                                         
+alheiroprd.sankhyacloud.com.br                                                                                                                                  
+ALHEIROPRD                                                                                                                                                      
+dbs3pc13                                                                                                                                                        
+10.200.21.6                                                                                                                                                     
+
+
+1 row selected. 
+
+
+USUARIO_ SERVICE_ SCHEMA_ESPERADO           
+-------- -------- --------------------------
+OK       OK       INFORMAR_OWNER_OPERACIONAL
+
+1 row selected. 
+
+
+VERSAO_ORACLE                                                                                                                    
+---------------------------------------------------------------------------------------------------------------------------------
+Oracle AI Database 26ai EE High Perf Release 23.26.2.0.0 - Production
+
+1 row selected. 
+
+=== EMPRESA ESPERADA ===
+
+    CODEMP RAZAOSOCIAL                             
+---------- ----------------------------------------
+         1 PRODUTOS ALHEIRO LTDA                   
+
+1 row selected. 
+
+
+QTD_EMPRESA_EXATA STATUS_EMPRESA             
+----------------- ---------------------------
+                1 OK                         
+
+1 row selected. 
+
+=== VERSAO_SISTEMA_CURTA ===
+
+VERSAO_SISTEMA_CURTA                                                                                                                                            
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.36b146
+
+1 row selected. 
+
+=== TABELAS_CORE_NO_OWNER_OPERACIONAL ===
+
+TABLE_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+OWNER                                                                                                                              NUM_ROWS
+-------------------------------------------------------------------------------------------------------------------------------- ----------
+TGFCAB                                                                                                                           
+SANKHYA                                                                                                                               32146
+
+TGFCGM                                                                                                                           
+SANKHYA                                                                                                                                   1
+
+TGFCMV                                                                                                                           
+SANKHYA                                                                                                                                   2
+
+TGFCOI2                                                                                                                          
+SANKHYA                                                                                                                                   0
+
+TGFFIN                                                                                                                           
+SANKHYA                                                                                                                               38209
+
+TGFGIR1                                                                                                                          
+SANKHYA                                                                                                                               18087
+
+TGFITE                                                                                                                           
+SANKHYA                                                                                                                              629013
+
+TGFNUM                                                                                                                           
+SANKHYA                                                                                                                                 194
+
+TGFPAP                                                                                                                           
+SANKHYA                                                                                                                                8102
+
+TGFPAR                                                                                                                           
+SANKHYA                                                                                                                                1006
+
+TGFPPG                                                                                                                           
+SANKHYA                                                                                                                                  31
+
+TGFPRO                                                                                                                           
+SANKHYA                                                                                                                                3718
+
+TGFTIT                                                                                                                           
+SANKHYA                                                                                                                                  65
+
+TGFTOP                                                                                                                           
+SANKHYA                                                                                                                                1444
+
+TGFTPV                                                                                                                           
+SANKHYA                                                                                                                                  20
+
+TGFVOA                                                                                                                           
+SANKHYA                                                                                                                                2784
+
+TGFVOL                                                                                                                           
+SANKHYA                                                                                                                                  35
+
+TSIBAI                                                                                                                           
+SANKHYA                                                                                                                               46106
+
+TSICFG                                                                                                                           
+SANKHYA                                                                                                                                 893
+
+TSICID                                                                                                                           
+SANKHYA                                                                                                                                5572
+
+TSICTA                                                                                                                           
+SANKHYA                                                                                                                                   6
+
+TSIEMP                                                                                                                           
+SANKHYA                                                                                                                                   1
+
+TSIEND                                                                                                                           
+SANKHYA                                                                                                                              682557
+
+TSIIMP                                                                                                                           
+SANKHYA                                                                                                                                 496
+
+TSIPAR                                                                                                                           
+SANKHYA                                                                                                                                2350
+
+TTKEVT                                                                                                                           
+SANKHYA                                                                                                                               33207
+
+TTKINDAGT                                                                                                                        
+SANKHYA                                                                                                                                   1
+
+TTKNOT                                                                                                                           
+SANKHYA                                                                                                                               32124
+
+
+28 rows selected. 
+
+=== PRIVILEGIOS E QUOTA ===
+
+PRIVILEGE                               
+----------------------------------------
+ALTER ANY TRIGGER
+CREATE ANY TABLE
+DROP ANY TABLE
+
+3 rows selected. 
+
+
+0 rows selected. 
+
+=== TRIGGERS RELEVANTES E ESTADO ATUAL ===
+
+TABLE_NAME                                                                                                                       STATUS
+-------------------------------------------------------------------------------------------------------------------------------- --------
+TRIGGERING_EVENT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+QTD_TRIGGERS
+------------
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                
+           2
+
+TGFCUS                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                      
+           1
+
+TGFCUS                                                                                                                           ENABLED  
+UPDATE OR DELETE                                                                                                                                                
+           1
+
+TGFITE                                                                                                                           ENABLED  
+DELETE                                                                                                                                                          
+           8
+
+TGFITE                                                                                                                           ENABLED  
+INSERT                                                                                                                                                          
+           3
+
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                
+           9
+
+TGFITE                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                      
+           7
+
+TGFITE                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                          
+           5
+
+TGFPRO                                                                                                                           ENABLED  
+DELETE                                                                                                                                                          
+           1
+
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE                                                                                                                                                
+           5
+
+TGFPRO                                                                                                                           ENABLED  
+INSERT OR UPDATE OR DELETE                                                                                                                                      
+           2
+
+TGFPRO                                                                                                                           ENABLED  
+UPDATE                                                                                                                                                          
+           1
+
+
+12 rows selected. 
+
+=== CANDIDATOS DOS CARDS BLOQUEANTES ===
+
+CANDIDATOS_CARD08_PROTOCOLAMENTO
+--------------------------------
+                               0
+
+1 row selected. 
+
+
+CANDIDATOS_CARD13_TOPS_GOL
+--------------------------
+                         0
+
+1 row selected. 
+
+
+CANDIDATOS_CARD14_ANALISE_848
+-----------------------------
+                            1
+
+1 row selected. 
+
+
+CANDIDATOS_CARD15_RASTRO
+------------------------
+                      24
+
+1 row selected. 
+
+=== COLISOES NORMALIZADAS DOS CARDS 29 E 30 ===
+
+GRUPOS_COLISAO_BAIRROS
+----------------------
+                   420
+
+1 row selected. 
+
+
+GRUPOS_COLISAO_ENDERECOS
+------------------------
+                    6943
+
+1 row selected. 
+
+=== FUNCAO XML DO CARD 09 ===
+
+0 rows selected. 
+
+=== OBJETOS DE RECALCULO DE CUSTOS E CONSOLIDACAO GOL ===
+
+OWNER
+--------------------------------------------------------------------------------------------------------------------------------
+OBJECT_NAME                                                                                                                      OBJECT_TYPE             STATUS
+-------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------
+CREATED  LAST_DDL
+-------- --------
+SANKHYA                                                                                                                          
+PFCM_CONSOLIDACAO                                                                                                                PROCEDURE               VALID  
+05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+SNK_MATGIRCALCTOTAIS                                                                                                             PROCEDURE               VALID  
+05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_CALCCUSTOMEDIOPRODGENERICO                                                                                                   PROCEDURE               VALID  
+05/02/26 10/09/26
+
+SANKHYA                                                                                                                          
+STP_CALCULARCUSTOMEDIODIA                                                                                                        PROCEDURE               VALID  
+05/02/26 10/09/26
+
+SANKHYA                                                                                                                          
+STP_CALCULARCUSTOMEDIOFAMILIA                                                                                                    PROCEDURE               VALID  
+05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_CALCULARCUSTOPRODGENERICO                                                                                                    PROCEDURE               VALID  
+05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_EFETIVA_CONSOLIDACAO_GOL                                                                                                     PROCEDURE               VALID  
+05/02/26 10/07/26
+
+SANKHYA                                                                                                                          
+STP_PROCESSOATUALCUSTO                                                                                                           PROCEDURE               VALID  
+05/02/26 10/07/26
+
+
+8 rows selected. 
+
+
+QTD_OBJETOS_CUSTO_GOL_VALIDOS
+-----------------------------
+                            8
+
+1 row selected. 
+
+=== OBJETOS INVALIDOS - UM POR LINHA ===
+
+0 rows selected. 
+
+
+QTD_OBJETOS_INVALIDOS
+---------------------
+                    0
+
+1 row selected. 
+
+=== VALIDACAO FINAL DO PREFLIGHT ===
+PREFLIGHT_STATUS=APROVADO_PARA_ANALISE_COM_BACKUP
+OWNER_OPERACIONAL=SANKHYA
+USUARIO_AUDITORIA=FRANCISCO_JUNIOR
+
+
+PL/SQL procedure successfully completed.
+
+Rollback
+DECLARE
+*
+ERROR at line 1:
+ORA-20502: Execucao bloqueada: USER_TS_QUOTAS sem quota para backups persistentes.
+ORA-06512: at line 8
+Help: https://docs.oracle.com/error-help/db/ora-20502/
+

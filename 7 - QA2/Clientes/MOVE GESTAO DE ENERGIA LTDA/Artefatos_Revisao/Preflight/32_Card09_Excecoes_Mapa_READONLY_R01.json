@@ -1,0 +1,32 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-22T23:20:18.413926+00:00",
+  "arquivo_sql": "32_Card09_Excecoes_Mapa_READONLY.sql",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "moveenergiaprd.sankhyacloud.com.br",
+    "db_name": "MOVEENERGIAPRD"
+  },
+  "qtd_linhas": 1,
+  "excecoes": [
+    {
+      "NUNOTA": 13881,
+      "CODEMP": 2,
+      "NUMNOTA": 2760,
+      "SERIENOTA": "1",
+      "CODPARC": 160,
+      "CODTIPOPER": 1128,
+      "DESCROPER": "VENDA - ENERGIA MOD 55",
+      "QTD_XML_NUNOTA": 1,
+      "VDUP_XML": null,
+      "DVENC_XML": null,
+      "NDUP_XML": null,
+      "STATUS_MAPA": "SEM_VDUP_XML",
+      "OBSERVACAO": "vDup nao foi localizado no XML."
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false,
+  "tgffin_alterada": false
+}

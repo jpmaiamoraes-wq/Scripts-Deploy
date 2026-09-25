@@ -1,0 +1,462 @@
+{
+  "base": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+  "executado_em": "2026-09-25T12:34:34+00:00",
+  "fonte_onboarding": {
+    "arquivo": "Onboarding - MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA.zip",
+    "origem": "Onboarding Deploy - botao Baixar Tudo (25/09/2026 09:30)",
+    "api": "indisponivel (HTTP 403, aguardando Adelcione)"
+  },
+  "dml_executado": false,
+  "ddl_executado": false,
+  "identidade_oracle": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "medchapprd.sankhyacloud.com.br",
+    "db_name": "MEDCHAPPRD"
+  },
+  "empresas": {
+    "onboarding": 5,
+    "oracle_tsiemp": 5,
+    "comparacao": [
+      {
+        "cnpj": "00577604000103",
+        "razao_onboarding": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+        "tipo_onboarding": "Matriz",
+        "codemp": 1,
+        "razao_oracle": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+        "status": "CORRESPONDE",
+        "divergencias": []
+      },
+      {
+        "cnpj": "00577604000367",
+        "razao_onboarding": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+        "tipo_onboarding": "Filial",
+        "codemp": 2,
+        "razao_oracle": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+        "status": "CORRESPONDE",
+        "divergencias": []
+      },
+      {
+        "cnpj": "00577604000448",
+        "razao_onboarding": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+        "tipo_onboarding": "Filial",
+        "codemp": 3,
+        "razao_oracle": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CH",
+        "status": "CORRESPONDE",
+        "divergencias": []
+      },
+      {
+        "cnpj": "31794188000110",
+        "razao_onboarding": "PROWIN COMPANY LTDA",
+        "tipo_onboarding": "Filial",
+        "codemp": 4,
+        "razao_oracle": "PROWIN COMPANY LTDA",
+        "observacao": "UF nao informada no onboarding; Oracle=SC",
+        "status": "DIVERGENTE",
+        "divergencias": [
+          "marcada como FILIAL no onboarding, mas CNPJ de outra raiz (empresa distinta)"
+        ]
+      },
+      {
+        "cnpj": "42824603000158",
+        "razao_onboarding": "SALUTH ADMINISTRADORA E LOCADORA DE BENS LTDA",
+        "tipo_onboarding": "Filial",
+        "codemp": 5,
+        "razao_oracle": "SALUTH ADMINISTRADORA E LOCADORA DE BENS",
+        "observacao": "UF nao informada no onboarding; Oracle=SC",
+        "status": "DIVERGENTE",
+        "divergencias": [
+          "marcada como FILIAL no onboarding, mas CNPJ de outra raiz (empresa distinta)"
+        ]
+      }
+    ],
+    "adicionais_no_oracle": [],
+    "observacao": "quantidade de empresas nao e gate (BASE_INTEIRA)"
+  },
+  "usuarios": {
+    "planilha_linhas": 93,
+    "oracle_total": 104,
+    "oracle_com_grupo": 93,
+    "oracle_sem_grupo_modelo": 11,
+    "usuarios_modelo_sem_grupo": [
+      {
+        "codusu": 0,
+        "nome": "SUP"
+      },
+      {
+        "codusu": 1,
+        "nome": "COTACAOB2B"
+      },
+      {
+        "codusu": 2,
+        "nome": "SKWCLOUD"
+      },
+      {
+        "codusu": 3,
+        "nome": "VENDEDOR"
+      },
+      {
+        "codusu": 4,
+        "nome": "GERENTE"
+      },
+      {
+        "codusu": 5,
+        "nome": "SANKHYA"
+      },
+      {
+        "codusu": 6,
+        "nome": "LIBERADOR"
+      },
+      {
+        "codusu": 7,
+        "nome": "INTEGRAÇÃO.PONTOTEL"
+      },
+      {
+        "codusu": 8,
+        "nome": "INTEGRAÇÃO.MINDSIGHT"
+      },
+      {
+        "codusu": 9,
+        "nome": "INTEGRAÇÃO.VIXTING"
+      },
+      {
+        "codusu": 10,
+        "nome": "SKWCLOUDAPI"
+      }
+    ],
+    "criterio": "chave e-mail + NOMEUSU (a planilha repete e-mails compartilhados); somente TSIUSU.CODGRUPO>0",
+    "mapa_empresa": {
+      "MATRIZ": 1,
+      "FILIAL - CBS": 2,
+      "FILIAL - SJP": 3
+    },
+    "correspondem": 80,
+    "divergentes": [
+      {
+        "linha": 72,
+        "email": "armazenamento.cbs@medchap.com.br",
+        "nome": "DANIEL CAETANO",
+        "grupo_planilha": "ALMOXARIFADO OPERACIONAL",
+        "codgrupo_oracle": 12,
+        "grupo_oracle": "ALMOXARIFADO OPERACIONAL",
+        "codusu": 81,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 73,
+        "email": "expedicao.cbs@medchap.com.br",
+        "nome": "MARCOS OLIVEIRA",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 82,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 74,
+        "email": "faturamento.cbs@medchap.com.br",
+        "nome": "ANDERSON BORGES",
+        "grupo_planilha": "FATURAMENTO",
+        "codgrupo_oracle": 8,
+        "grupo_oracle": "FATURAMENTO",
+        "codusu": 83,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 75,
+        "email": "faturamento.cbs@medchap.com.br",
+        "nome": "KETHELLI SILVA",
+        "grupo_planilha": "FATURAMENTO",
+        "codgrupo_oracle": 8,
+        "grupo_oracle": "FATURAMENTO",
+        "codusu": 84,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 76,
+        "email": "gerente.cbs@medchap.com.br",
+        "nome": "DIEGO FACHINI",
+        "grupo_planilha": "LOGISTICA/EXPED GERENCIAL",
+        "codgrupo_oracle": 17,
+        "grupo_oracle": "LOGIST/EXPED GERENCIAL",
+        "codusu": 85,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 77,
+        "email": "segregacao.cbs@medchap.com.br",
+        "nome": "ALLYFER VIEIRA",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 86,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 78,
+        "email": "responsaveltecnico.cbs@medchap.com.br",
+        "nome": "DANIELI MAXIMIANO",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 87,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 79,
+        "email": "logistica.auxiliar.cbs@medchap.com.br",
+        "nome": "KAUANE ALMEIDA",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 88,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 80,
+        "email": "agendamento.cbs@medchap.com.br",
+        "nome": "LARISSA SANTOS",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 89,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 81,
+        "email": "logistica.cbs@medchap.com.br",
+        "nome": "WESLLEY FOGACA",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 90,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 82,
+        "email": "recebimento.cbs@medchap.com.br",
+        "nome": "EDENILSON VARELA",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 91,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 83,
+        "email": "rh.cbs@medchap.com.br",
+        "nome": "MAIARA SANTOS",
+        "grupo_planilha": "RH OPERACIONAL",
+        "codgrupo_oracle": 9,
+        "grupo_oracle": "RH OPERACIONAL",
+        "codusu": 92,
+        "codemp_oracle": 4,
+        "divergencias": [
+          "empresa planilha=FILIAL - CBS(CODEMP 2) oracle CODEMP=4"
+        ]
+      },
+      {
+        "linha": 93,
+        "email": "logistica01.sjp@medchap.com.br",
+        "nome": "JOAO GONCALVES",
+        "grupo_planilha": "LOGIST/EXPED OPERACIONAL",
+        "codgrupo_oracle": 6,
+        "grupo_oracle": "LOGIST/EXPED OPERACIONAL",
+        "codusu": 102,
+        "codemp_oracle": 3,
+        "divergencias": [
+          "correspondencia por email (nome diferente): oracle JOAO.GON¿ALVES <logistica01.sjp@medchap.com.br>"
+        ]
+      }
+    ],
+    "ausentes_no_oracle": [],
+    "extras_no_oracle": [],
+    "equivalencia_grupos_planilha_x_oracle": {
+      "ADMINISTRADOR": {
+        "1-ADMINISTRADOR": 4
+      },
+      "ALMOXARIFADO OPERACIONAL": {
+        "12-ALMOXARIFADO OPERACIONAL": 2
+      },
+      "COMPRAS GERENCIAL": {
+        "3-COMPRAS GERENCIAL": 1
+      },
+      "COMPRAS OPERACIONAL": {
+        "11-COMPRAS OPERACIONAL": 4
+      },
+      "Callcenter": {
+        "18-CALL CENTER OPERACIONAL": 12
+      },
+      "Callcenter Gerencial": {
+        "19-CALL CENTER GERENCIAL": 1
+      },
+      "Comercial": {
+        "15-VENDAS OPERACIONAL": 5
+      },
+      "Comercial Gerencial": {
+        "10-VENDAS GERENCIAL": 1
+      },
+      "DIRETORIA": {
+        "2-DIRETORIA": 1
+      },
+      "FATURAMENTO": {
+        "8-FATURAMENTO": 4
+      },
+      "FINANCEIRO GERENCIAL": {
+        "4-FINANCEIRO GERENCIAL": 1
+      },
+      "FINANCEIRO OPERACIONAL": {
+        "13-FINANCEIRO OPERACIONAL": 8
+      },
+      "FISCAL/CONT. GERENCIAL": {
+        "5-FISCAL/CONTABIL GERENCIAL": 2
+      },
+      "FISCAL/CONT. OPERACIONAL": {
+        "14-FISCAL/CONT. OPERACIONAL": 3
+      },
+      "Inteligência": {
+        "21-INTELIGENCIA GERENCIAL": 2
+      },
+      "LOGIST/EXPED GERENCIAL": {
+        "17-LOGIST/EXPED GERENCIAL": 1
+      },
+      "LOGIST/EXPED OPERACIONAL": {
+        "6-LOGIST/EXPED OPERACIONAL": 22
+      },
+      "LOGISTICA/EXPED GERENCIAL": {
+        "17-LOGIST/EXPED GERENCIAL": 2
+      },
+      "Marketing": {
+        "22-MARKETING GERENCIAL": 5
+      },
+      "Prowin": {
+        "24-PROWIN": 1
+      },
+      "RH GERENCIAL": {
+        "16-RH GERENCIAL": 1
+      },
+      "RH OPERACIONAL": {
+        "9-RH OPERACIONAL": 5
+      },
+      "TI - Infra": {
+        "26-TI GERENCIAL": 2
+      },
+      "Trade Marketing": {
+        "27-TRADE MARKETING": 3
+      }
+    },
+    "grupos_com_mais_de_um_destino": {}
+  },
+  "contas_bancarias": {
+    "planilha": 4,
+    "oracle_tsicta": 7,
+    "comparacao": [
+      {
+        "conta_planilha": 1,
+        "cnpj": "00577604000103",
+        "codbco": 1,
+        "banco": "Banco do Brasil S.A.",
+        "conta_final2": "52",
+        "codctabcoint": 104,
+        "codemp": 1,
+        "status": "DIVERGENTE",
+        "divergencias": [
+          "agencia diferente (comparacao por hash)"
+        ]
+      },
+      {
+        "conta_planilha": 2,
+        "cnpj": "00577604000103",
+        "codbco": 33,
+        "banco": "Banco Santander (Brasil) S.A.",
+        "conta_final2": "31",
+        "codctabcoint": 105,
+        "codemp": 1,
+        "status": "CORRESPONDE",
+        "divergencias": []
+      },
+      {
+        "conta_planilha": 3,
+        "cnpj": "00577604000103",
+        "codbco": 341,
+        "banco": "Itaú Unibanco S.A.",
+        "conta_final2": "11",
+        "codctabcoint": 106,
+        "codemp": 1,
+        "status": "CORRESPONDE",
+        "divergencias": []
+      },
+      {
+        "conta_planilha": 4,
+        "cnpj": "00577604000103",
+        "codbco": 756,
+        "banco": "Banco Cooperativo Sicoob S.A.",
+        "conta_final2": "73",
+        "codctabcoint": 107,
+        "codemp": 1,
+        "status": "CORRESPONDE",
+        "divergencias": []
+      }
+    ],
+    "extras_no_oracle": [
+      {
+        "codctabcoint": 101,
+        "codemp": 1,
+        "codbco": 99,
+        "banco": "CAIXA PDV",
+        "ativa": "S",
+        "conta_final2": null
+      },
+      {
+        "codctabcoint": 102,
+        "codemp": 1,
+        "codbco": 98,
+        "banco": "CAIXA TESOURARIA",
+        "ativa": "S",
+        "conta_final2": null
+      },
+      {
+        "codctabcoint": 103,
+        "codemp": null,
+        "codbco": 98,
+        "banco": "CAIXA TESOURARIA",
+        "ativa": "N",
+        "conta_final2": null
+      }
+    ],
+    "mascaramento": "agencia/conta comparadas por SHA-256 dos digitos; exibidos so os 2 ultimos digitos"
+  }
+}

@@ -1,0 +1,74 @@
+SQL> 
+SQL> PROMPT === CARD 09 - PREFLIGHT DA FUNCAO XML - SOMENTE LEITURA ===
+=== CARD 09 - PREFLIGHT DA FUNCAO XML - SOMENTE LEITURA ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') AS SESSION_USER,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') AS SERVICE_NAME,
+  4         SYS_CONTEXT('USERENV','DB_NAME') AS DB_NAME
+  5    FROM DUAL;
+
+SESSION_USER                                                                                                                                                                                                                                                     CURRENT_SCHEMA                                                                                                                                                                                                                                                   SERVICE_NAME                                                                                                                                                                                                                                                     DB_NAME                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          alheiroprd.sankhyacloud.com.br                                                                                                                                                                                                                                   ALHEIROPRD                                                                                                                                                                                                                                                      
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === OBJETO FNC_BUSCA_TAG_XML_GERAL ===
+=== OBJETO FNC_BUSCA_TAG_XML_GERAL ===
+SQL> SELECT OWNER, OBJECT_NAME, OBJECT_TYPE, STATUS, LAST_DDL_TIME
+  2    FROM ALL_OBJECTS
+  3   WHERE OBJECT_NAME = 'FNC_BUSCA_TAG_XML_GERAL'
+  4   ORDER BY OWNER, OBJECT_TYPE;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === ARGUMENTOS DA FUNCAO ===
+=== ARGUMENTOS DA FUNCAO ===
+SQL> SELECT OWNER, OBJECT_NAME, PACKAGE_NAME, POSITION, ARGUMENT_NAME,
+  2         DATA_TYPE, IN_OUT, DEFAULTED
+  3    FROM ALL_ARGUMENTS
+  4   WHERE OBJECT_NAME = 'FNC_BUSCA_TAG_XML_GERAL'
+  5   ORDER BY OWNER, POSITION;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === ERROS ATUAIS DO OBJETO ===
+=== ERROS ATUAIS DO OBJETO ===
+SQL> SELECT OWNER, NAME, TYPE, LINE, POSITION, TEXT
+  2    FROM ALL_ERRORS
+  3   WHERE NAME = 'FNC_BUSCA_TAG_XML_GERAL'
+  4   ORDER BY OWNER, SEQUENCE;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === PRIVILEGIOS RELEVANTES DA SESSAO ===
+=== PRIVILEGIOS RELEVANTES DA SESSAO ===
+SQL> SELECT PRIVILEGE
+  2    FROM SESSION_PRIVS
+  3   WHERE PRIVILEGE IN ('CREATE PROCEDURE', 'CREATE ANY PROCEDURE', 'ALTER ANY PROCEDURE')
+  4   ORDER BY PRIVILEGE;
+
+PRIVILEGE
+----------------------------------------
+CREATE ANY PROCEDURE
+
+1 row selected. 
+
+SQL> 
+SQL> PROMPT === QUOTA DA SESSAO ===
+=== QUOTA DA SESSAO ===
+SQL> SELECT TABLESPACE_NAME, BYTES, MAX_BYTES
+  2    FROM USER_TS_QUOTAS
+  3   ORDER BY TABLESPACE_NAME;
+
+0 rows selected. 
+
+SQL> 
+SQL> PROMPT === PREFLIGHT DA FUNCAO XML CONCLUIDO; NENHUM DDL OU DML EXECUTADO ===
+=== PREFLIGHT DA FUNCAO XML CONCLUIDO; NENHUM DDL OU DML EXECUTADO ===
+SQL> 
+SQL> SPOOL OFF

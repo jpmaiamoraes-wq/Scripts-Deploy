@@ -1,0 +1,23 @@
+{
+  "atividade": "35 - teste de envio SMTP",
+  "base": "MEDCHAP DISTRIBUIDORA DE MEDICAMENTOS CHAPECO LTDA",
+  "executado_em": "2026-09-25T11:40:11-03:00",
+  "meio": "navegador do app (Claude), sessao aberta pelo proprio usuario; nenhuma senha digitada ou lida",
+  "tela": "Configuracoes > Avancado > Envio de Mensagens > Servidor SMTP (br.com.sankhya.bim.smtp)",
+  "conta": "parametro MSDSMTPPROP - smtp.office365.com:587, TLS, remetente envio@medchap.com.br",
+  "destinatario": "francisco.junior@sankhya.com.br (autorizado pelo usuario no chat)",
+  "mensagem_tela": "Informação: Mensagem de teste enviada!",
+  "recebimento": {
+    "fonte": "Gmail (conector, somente leitura)",
+    "assunto": "BI Móvel - Teste SMTP",
+    "remetente": "envio@medchap.com.br",
+    "recebido_em_utc": "2026-09-25T14:40:22Z",
+    "pasta": "INBOX",
+    "trecho": "Serviço de SMTP configurado corretamente!"
+  },
+  "observacao": "ha outro e-mail de teste identico recebido as 14:09:31Z (11:09 local), anterior a este teste e nao disparado pelo agente",
+  "pos_teste": "campo Destinatario limpo a pedido do usuario; botao Confirmar nao acionado; MSDSMTPPROP inalterado (Logs/S00_R02_Diagnostico_SMTP_Pos_Teste_20260925.json)",
+  "resultado": "TESTE_ENVIO_OK",
+  "dml_executado": false,
+  "ddl_executado": false
+}

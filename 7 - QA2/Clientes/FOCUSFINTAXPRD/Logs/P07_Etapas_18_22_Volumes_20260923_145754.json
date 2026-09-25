@@ -1,0 +1,55 @@
+{
+  "status": "CONSULTA_READ_ONLY_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T17:58:01.530078+00:00",
+  "source": "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/FOCUSFINTAXPRD/Preflight/P07_Etapas_18_22_Volumes.sql",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "focusfintaxprd.sankhyacloud.com.br",
+  "db_name": "FOCUSFINTAXPRD",
+  "service_esperado": "FOCUSFINTAXPRD.SANKHYACLOUD.COM.BR",
+  "qtd_linhas": 9,
+  "colunas": [
+    "ITEM",
+    "QTD"
+  ],
+  "linhas": [
+    {
+      "ITEM": "18_TGFCGM_ORIGEM_EMP1_1900_1",
+      "QTD": 1
+    },
+    {
+      "ITEM": "18_TGFCMV_CODCONFIG_1",
+      "QTD": 1
+    },
+    {
+      "ITEM": "18_TGFCGM_DESTINOS",
+      "QTD": 3
+    },
+    {
+      "ITEM": "19_PARCEIROS_TOTAL",
+      "QTD": 111
+    },
+    {
+      "ITEM": "20_TTKINDAGT_SEQUENCIA_1",
+      "QTD": 1
+    },
+    {
+      "ITEM": "20_TTKNOT_TOTAL",
+      "QTD": 392
+    },
+    {
+      "ITEM": "20_TTKEVT_TOTAL",
+      "QTD": 392
+    },
+    {
+      "ITEM": "21_ICMS_DIVERGENTES",
+      "QTD": 81
+    },
+    {
+      "ITEM": "22_PARCEIROS_A_ANALISAR",
+      "QTD": 110
+    }
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

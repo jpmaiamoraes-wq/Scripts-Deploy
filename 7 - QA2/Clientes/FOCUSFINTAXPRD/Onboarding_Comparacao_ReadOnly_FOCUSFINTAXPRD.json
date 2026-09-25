@@ -1,0 +1,152 @@
+{
+  "status": "CONFERENCIA_ONBOARDING_READ_ONLY_CONCLUIDA_COM_LIMITACAO",
+  "base": "FOCUSFINTAXPRD",
+  "escopo": "BASE_INTEIRA",
+  "consultado_em": "ESTIMADO 2026-09-23T15:10-03:00 a 15:19-03:00 (navegador interno, sessao do usuario)",
+  "fonte_site": {
+    "site": "https://20069-51233.build.mitralab.io/",
+    "tela": "Onboardings > FOCUS FINTAX LTDA (Gestão Empresarial Novos) > Ver Registros",
+    "registro": "FOCUS FINTAX LTDA",
+    "cnpj_principal": "50654800000102",
+    "status_projeto": "Concluído (etapa 11/11; Revisão concluída em 2026-09-21 12:53)",
+    "gerente_projetos": "MARCELO BOREL",
+    "gerente_projetos_email": "marcelo.borel@sankhya.com.br",
+    "criado_em": "2026-09-02T13:30:34",
+    "arquivo_usuarios": {
+      "nome": "MODELO SANKHYA Usuarios atualizado.xlsx",
+      "enviado_em": "2026-09-21 12:48",
+      "qtd_linhas_dados": 5,
+      "leitura": "Visualizar sem baixar (sem download)"
+    },
+    "arquivo_contas_bancarias": {
+      "nome": "Contas Bancarias - Grupo AGf.xlsx",
+      "enviado_em": "2026-09-21 12:33",
+      "leitura": "NAO_REALIZADA - visualizacao negada pela politica de dados pessoais/financeiros do agente; comparacao TSICTA nao executada"
+    },
+    "outros_registros_nao_usados": "Registros 'Gestão de Pessoas' (FOCUS FINTAX +3; FINTAX CONSULTORIA) pertencem a outro produto e nao foram usados"
+  },
+  "oracle": {
+    "identidade": "FRANCISCO_JUNIOR/SANKHYA/focusfintaxprd.sankhyacloud.com.br",
+    "fontes": [
+      "Logs/P04_Identidade_Empresa_Variacoes_20260923_145754.json",
+      "Logs/P18_Onboarding_Usuarios_TSIUSU_20260923_145754.json"
+    ],
+    "usuarios_total": 16,
+    "usuarios_codgrupo_maior_zero": 0,
+    "usuarios_modelo_sem_grupo": 16
+  },
+  "comparacao_empresas": {
+    "onboarding": [
+      {
+        "cnpj": "50654800000102",
+        "nome_onboarding": "FOCUS FINTAX LTDA",
+        "codemp": 1,
+        "razao_oracle": "FOCUS FINTAX LTDA",
+        "resultado": "CORRESPONDENTE"
+      },
+      {
+        "cnpj": "68306961000162",
+        "nome_onboarding": "AGF NITEROI CONTABILIDADE LTDA",
+        "codemp": 2,
+        "razao_oracle": "AGF NITEROI CONTABILIDADE LTDA",
+        "resultado": "CORRESPONDENTE"
+      },
+      {
+        "cnpj": "68338126000104",
+        "nome_onboarding": "FINTAX CONSULTORIA E AUDITORIA LTDA",
+        "codemp": 3,
+        "razao_oracle": "FINTAX CONSULTORIA E AUDITORIA LTDA",
+        "resultado": "CORRESPONDENTE"
+      }
+    ],
+    "adicionais_na_base": [
+      {
+        "codemp": 4,
+        "razao_oracle": "AF SOLUCOES E GESTAO LTDA",
+        "cnpj": "63378050000127",
+        "resultado": "ADICIONAL_NA_BASE"
+      }
+    ],
+    "ausentes_no_oracle": [],
+    "observacao": "Quantidade de empresas nao e gate; nenhuma inclusao/remocao realizada."
+  },
+  "comparacao_usuarios": {
+    "criterio": "e-mail; populacao Oracle somente TSIUSU.CODGRUPO>0",
+    "correspondencias_ativas": 0,
+    "linhas": [
+      {
+        "email": "controller@grupoagfcontabil.com.br",
+        "nome_onboarding": "Vanessa Ferreira",
+        "empresa_onboarding": "Todas",
+        "grupo_onboarding": null,
+        "oracle": {
+          "codusu": 11,
+          "nomeusu": "VANESSA.FERREIRA",
+          "codgrupo": 0,
+          "codemp": 1
+        },
+        "resultado": "SOMENTE_REGISTRO_MODELO_SEM_GRUPO",
+        "divergencia_nominal": false
+      },
+      {
+        "email": "financeiro@grupoagfcontabil.com.br",
+        "nome_onboarding": "Raquel Canton",
+        "empresa_onboarding": "Todas",
+        "grupo_onboarding": null,
+        "oracle": {
+          "codusu": 12,
+          "nomeusu": "RAQUEL.CANTON",
+          "codgrupo": 0,
+          "codemp": 1
+        },
+        "resultado": "SOMENTE_REGISTRO_MODELO_SEM_GRUPO",
+        "divergencia_nominal": false
+      },
+      {
+        "email": "juridico@grupoagfcontabil.com.br",
+        "nome_onboarding": "Jessica Souto",
+        "empresa_onboarding": "Todas",
+        "grupo_onboarding": null,
+        "oracle": {
+          "codusu": 13,
+          "nomeusu": "JESSICA.SOUTO",
+          "codgrupo": 0,
+          "codemp": 1
+        },
+        "resultado": "SOMENTE_REGISTRO_MODELO_SEM_GRUPO",
+        "divergencia_nominal": false
+      },
+      {
+        "email": "adm@grupoagfcontabil.com.br",
+        "nome_onboarding": "Ramon Pacheco",
+        "empresa_onboarding": "Todas",
+        "grupo_onboarding": null,
+        "oracle": {
+          "codusu": 14,
+          "nomeusu": "RAMON.PACHECO",
+          "codgrupo": 0,
+          "codemp": 1
+        },
+        "resultado": "SOMENTE_REGISTRO_MODELO_SEM_GRUPO",
+        "divergencia_nominal": false
+      },
+      {
+        "email": "paulo.marcos@grupoagfcontabil.com.br",
+        "nome_onboarding": "Paulo Marcos",
+        "empresa_onboarding": "Todas",
+        "grupo_onboarding": null,
+        "oracle": {
+          "codusu": 15,
+          "nomeusu": "PABLO.MARCOS",
+          "codgrupo": 0,
+          "codemp": 1
+        },
+        "resultado": "SOMENTE_REGISTRO_MODELO_SEM_GRUPO",
+        "divergencia_nominal": true
+      }
+    ],
+    "observacao": "Os 5 e-mails do onboarding existem no Oracle somente em registros com CODGRUPO=0 (tratados como modelo e excluidos da populacao ativa); planilha sem CODGRUPO e com empresa 'Todas'; Oracle CODEMP=1. Nenhuma alteracao realizada."
+  },
+  "dml_executado": false,
+  "ddl_executado": false
+}

@@ -1,0 +1,462 @@
+SQL> 
+SQL> PROMPT === RETOMADA NOVA REVISAO: ETAPAS 08 A 31 ===
+=== RETOMADA NOVA REVISAO: ETAPAS 08 A 31 ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                              
+
+SQL> 
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER:='RMD_RUN_20260908102607051'; END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT [08/31] INICIO
+[08/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/08_Preencher_Protocolos_Documentos_Legados.sql"
+SQL> -- Bloco 07. Mantem a regra funcional aprovada com snapshot das linhas.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_07_TGFCAB';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_07_TGFCAB AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  4   CAST(NULL AS TIMESTAMP) DH_EXECUCAO, CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL, T.NUMPROTOC NUMPROTOC_ANTES, T.NUMPROTOCCTE NUMPROTOCCTE_ANTES FROM TGFCAB T WHERE 1=0]'; END IF;
+  6  END;
+  7  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v_id VARCHAR2(30):='RMD_PROT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); v_b PLS_INTEGER; v_u PLS_INTEGER;
+  2  BEGIN
+  3   INSERT INTO BKP_RMD_07_TGFCAB SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),NUMPROTOC,NUMPROTOCCTE FROM TGFCAB WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=TGFCAB.NUNOTA)
+  4   AND ((NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55))
+  5     OR (NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57)));
+  6   v_b:=SQL%ROWCOUNT;
+  7   UPDATE TGFCAB SET NUMPROTOC=CASE WHEN NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55) THEN 0 ELSE NUMPROTOC END,
+  8   NUMPROTOCCTE=CASE WHEN NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57) THEN '0' ELSE NUMPROTOCCTE END WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=TGFCAB.NUNOTA)
+  9   AND ((NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55))
+ 10     OR (NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57)));
+ 11   v_u:=SQL%ROWCOUNT;
+ 12   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20210,'Backup e atualizacao divergiram em Preencher_Protocolos_Documentos_Legados.'); END IF;
+ 13   COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id); DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 14  
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END;
+ 16  /
+Rollback
+ UPDATE TGFCAB SET NUMPROTOC=CASE WHEN NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55) THEN 0 ELSE NUMPROTOC END,
+                                                                                                                                                                                                *
+ERROR at line 7:
+ORA-06550: line 7, column 193:
+PL/SQL: ORA-00932: inconsistent datatypes: expected NUMBER got CHAR
+ORA-06550: line 7, column 2:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+SQL> PROMPT [08/31] FIM
+SQL> PROMPT [09/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/09_Liberar_Itens_Documentos_Legados.sql"
+SQL> PROMPT [09/31] FIM
+SQL> PROMPT [10/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/10_Habilitar_ICMS_Gerencial.sql"
+SQL> PROMPT [10/31] FIM
+SQL> PROMPT [11/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/11_Habilitar_Ruptura_Produtos.sql"
+SQL> PROMPT [11/31] FIM
+SQL> PROMPT [12/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/12_Habilitar_Ruptura_Empresas.sql"
+SQL> PROMPT [12/31] FIM
+SQL> PROMPT [13/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/13_Configurar_TOPs_Giro_GOL.sql"
+SQL> PROMPT [13/31] FIM
+SQL> PROMPT [14/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/14_Configurar_Analise_Giro_848.sql"
+SQL> PROMPT [14/31] FIM
+SQL> PROMPT [15/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/15_Desativar_Rastro_Sem_Controle.sql"
+SQL> PROMPT [15/31] FIM
+SQL> PROMPT [16/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/16_Aplicar_Higienizacao_TSICFG.sql"
+SQL> PROMPT [16/31] FIM
+SQL> PROMPT [17/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/17_Normalizar_Unidades.sql"
+SQL> PROMPT [17/31] FIM
+SQL> PROMPT [18/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/18_Ajustar_Preferencias_GOL.sql"
+SQL> PROMPT [18/31] FIM
+SQL> PROMPT [19/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/19_Ajustar_Parceiro_Matriz.sql"
+SQL> PROMPT [19/31] FIM
+SQL> PROMPT [20/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/20_Atualizar_Cards_Deploy.sql"
+SQL> PROMPT [20/31] FIM
+SQL> PROMPT [21/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/21_Classificar_ICMS_Parceiros.sql"
+SQL> PROMPT [21/31] FIM
+SQL> PROMPT [22/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/22_Ajustar_Nomes_Parceiros.sql"
+SQL> PROMPT [22/31] FIM
+SQL> PROMPT [23/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/23_Validar_Reabilitar_Objetos.sql"
+SQL> PROMPT [23/31] FIM
+SQL> PROMPT [24/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/24_Padronizar_Parceiros.sql"
+SQL> PROMPT [24/31] FIM
+SQL> PROMPT [25/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/25_Padronizar_Produtos.sql"
+SQL> PROMPT [25/31] FIM
+SQL> PROMPT [26/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/26_Padronizar_Tipos_Titulo.sql"
+SQL> PROMPT [26/31] FIM
+SQL> PROMPT [27/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/27_Padronizar_Cidades.sql"
+SQL> PROMPT [27/31] FIM
+SQL> PROMPT [28/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/28_Padronizar_Tipos_Venda.sql"
+SQL> PROMPT [28/31] FIM
+SQL> PROMPT [29/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/29_Padronizar_Bairros.sql"
+SQL> PROMPT [29/31] FIM
+SQL> PROMPT [30/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/30_Padronizar_Enderecos.sql"
+SQL> PROMPT [30/31] FIM
+SQL> PROMPT [31/31] INICIO
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/31_Recompilar_Objetos_Invalidos.sql"
+SQL> PROMPT [31/31] FIM
+SQL> PROMPT === RETOMADA NOVA REVISAO CONCLUIDA ===
+SQL> SPOOL OFF
+SQL> -- Validacao final somente leitura da nova revisao.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> PROMPT === VALIDACAO NOVA REVISAO ===
+=== VALIDACAO NOVA REVISAO ===
+SQL> DECLARE
+  2    v_n NUMBER;
+  3    v_name VARCHAR2(128);
+  4    TYPE t_names IS TABLE OF VARCHAR2(128);
+  5    v_names t_names := t_names(
+  6      'RMD_CONTROLE_OBJETOS','BKP_RMD_01_TSIPAR','BKP_RMD_02_TGFEMP',
+  7      'BKP_RMD_03_TGFTOP','BKP_RMD_04_TGFPRO','BKP_RMD_05_TGFTPV',
+  8      'BKP_RMD_06_TGFCAB','BKP_RMD_07_TGFCAB','BKP_RMD_08_TGFITE',
+  9      'BKP_RMD_09_TGFPRO','BKP_RMD_10_TGFPRO','BKP_RMD_11_TGFEMP',
+ 10      'BKP_RMD_12_TGFTOP','BKP_RMD_13_TSIIMP','BKP_RMD_14_TGFPRO',
+ 11      'RMD_MAP_UNIDADES');
+ 12  BEGIN
+ 13    FOR i IN 1..v_names.COUNT LOOP
+ 14      v_name := v_names(i);
+ 15      SELECT COUNT(*) INTO v_n FROM USER_TABLES WHERE TABLE_NAME=v_name;
+ 16      IF v_n=0 THEN DBMS_OUTPUT.PUT_LINE(v_name||'|AUSENTE');
+ 17      ELSE EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM '||v_name INTO v_n;
+ 18        DBMS_OUTPUT.PUT_LINE(v_name||'|REGISTROS='||v_n);
+ 19      END IF;
+ 20    END LOOP;
+ 21  END;
+ 22  /
+RMD_CONTROLE_OBJETOS|AUSENTE
+BKP_RMD_01_TSIPAR|AUSENTE
+BKP_RMD_02_TGFEMP|AUSENTE
+BKP_RMD_03_TGFTOP|AUSENTE
+BKP_RMD_04_TGFPRO|AUSENTE
+BKP_RMD_05_TGFTPV|AUSENTE
+BKP_RMD_06_TGFCAB|AUSENTE
+BKP_RMD_07_TGFCAB|AUSENTE
+BKP_RMD_08_TGFITE|AUSENTE
+BKP_RMD_09_TGFPRO|AUSENTE
+BKP_RMD_10_TGFPRO|AUSENTE
+BKP_RMD_11_TGFEMP|AUSENTE
+BKP_RMD_12_TGFTOP|AUSENTE
+BKP_RMD_13_TSIIMP|AUSENTE
+BKP_RMD_14_TGFPRO|AUSENTE
+RMD_MAP_UNIDADES|AUSENTE
+
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT 'TSICFG' OBJETO, COUNT(*) QTD FROM TSICFG
+  2  UNION ALL SELECT 'TSIBAI', COUNT(*) FROM TSIBAI
+  3  UNION ALL SELECT 'TSIEND', COUNT(*) FROM TSIEND
+  4  ORDER BY 1;
+
+OBJETO        QTD
+------ ----------
+TSIBAI      46516
+TSICFG        861
+TSIEND     687424
+
+SQL> PROMPT === FIM VALIDACAO ===
+=== FIM VALIDACAO ===
+SQL> -- Diagnostico somente leitura para resolver divergencia de schema/instancia.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> PROMPT === RASTREIO OBJETOS REVISAO ===
+=== RASTREIO OBJETOS REVISAO ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO,
+  4         SYS_CONTEXT('USERENV','DB_NAME') DB_NAME,
+  5         SYS_CONTEXT('USERENV','INSTANCE_NAME') INSTANCE_NAME
+  6    FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                          DB_NAME                                                                                                                                                                                                                                                          INSTANCE_NAME                                                                                                                                                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                               ANDORINHABRPRD                                                                                                                                                                                                                                                   DBS6PC9                                                                                                                                                                                                                                                         
+
+SQL> 
+SQL> SELECT OWNER, TABLE_NAME
+  2    FROM ALL_TABLES
+  3   WHERE TABLE_NAME LIKE 'BKP_RMD%'
+  4      OR TABLE_NAME IN ('RMD_CONTROLE_OBJETOS','RMD_MAP_UNIDADES')
+  5   ORDER BY OWNER, TABLE_NAME;
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                      
+-------------------------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------------------------
+SANKHYA                                                                                                                          BKP_RMD_01_TSIPAR                                                                                                               
+SANKHYA                                                                                                                          BKP_RMD_02_TGFEMP                                                                                                               
+SANKHYA                                                                                                                          BKP_RMD_03_TGFTOP                                                                                                               
+SANKHYA                                                                                                                          BKP_RMD_04_TGFPRO                                                                                                               
+SANKHYA                                                                                                                          BKP_RMD_05_TGFTPV                                                                                                               
+SANKHYA                                                                                                                          BKP_RMD_06_TGFCAB                                                                                                               
+SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                               
+SANKHYA                                                                                                                          RMD_CONTROLE_OBJETOS                                                                                                            
+
+8 rows selected. 
+
+SQL> 
+SQL> SELECT OWNER, OBJECT_TYPE, OBJECT_NAME, STATUS
+  2    FROM ALL_OBJECTS
+  3   WHERE (OBJECT_NAME LIKE 'BKP_RMD%' OR OBJECT_NAME IN ('RMD_CONTROLE_OBJETOS','RMD_MAP_UNIDADES'))
+  4   ORDER BY OWNER, OBJECT_TYPE, OBJECT_NAME;
+
+OWNER                                                                                                                            OBJECT_TYPE             OBJECT_NAME                                                                                                                      STATUS 
+-------------------------------------------------------------------------------------------------------------------------------- ----------------------- -------------------------------------------------------------------------------------------------------------------------------- -------
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_01_TSIPAR                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_02_TGFEMP                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_03_TGFTOP                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_04_TGFPRO                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_05_TGFTPV                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_06_TGFCAB                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   BKP_RMD_07_TGFCAB                                                                                                                VALID  
+SANKHYA                                                                                                                          TABLE                   RMD_CONTROLE_OBJETOS                                                                                                             VALID  
+
+8 rows selected. 
+
+SQL> PROMPT === FIM RASTREIO ===
+=== FIM RASTREIO ===
+SQL> -- Diagnóstico isolado da etapa 08 da nova revisão.
+SQL> -- Execute conectado à ANDORINHA COMERCIAL como SCRIPT (F5).
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> SET ECHO ON
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === ETAPA 08 ISOLADA ===
+=== ETAPA 08 ISOLADA ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO,
+  4         SYS_CONTEXT('USERENV','DB_NAME') DB_NAME,
+  5         SYS_CONTEXT('USERENV','INSTANCE_NAME') INSTANCE_NAME
+  6  FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                          DB_NAME                                                                                                                                                                                                                                                          INSTANCE_NAME                                                                                                                                                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                               ANDORINHABRPRD                                                                                                                                                                                                                                                   DBS6PC9                                                                                                                                                                                                                                                         
+
+SQL> 
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER := 'RMD_RUN_20260908102607051'; END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === EXECUTANDO 08_PREENCHER_PROTOCOLOS_DOCUMENTOS_LEGADOS ===
+=== EXECUTANDO 08_PREENCHER_PROTOCOLOS_DOCUMENTOS_LEGADOS ===
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/08_Preencher_Protocolos_Documentos_Legados.sql"
+SQL> -- Bloco 07. Mantem a regra funcional aprovada com snapshot das linhas.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_07_TGFCAB';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_07_TGFCAB AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  4   CAST(NULL AS TIMESTAMP) DH_EXECUCAO, CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL, T.NUMPROTOC NUMPROTOC_ANTES, T.NUMPROTOCCTE NUMPROTOCCTE_ANTES FROM TGFCAB T WHERE 1=0]'; END IF;
+  6  END;
+  7  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v_id VARCHAR2(30):='RMD_PROT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); v_b PLS_INTEGER; v_u PLS_INTEGER;
+  2  BEGIN
+  3   INSERT INTO BKP_RMD_07_TGFCAB SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),NUMPROTOC,NUMPROTOCCTE FROM TGFCAB WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=TGFCAB.NUNOTA)
+  4   AND ((NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55))
+  5     OR (NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57)));
+  6   v_b:=SQL%ROWCOUNT;
+  7   UPDATE TGFCAB SET NUMPROTOC=CASE WHEN NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55) THEN 0 ELSE NUMPROTOC END,
+  8   NUMPROTOCCTE=CASE WHEN NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57) THEN '0' ELSE NUMPROTOCCTE END WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=TGFCAB.NUNOTA)
+  9   AND ((NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55))
+ 10     OR (NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57)));
+ 11   v_u:=SQL%ROWCOUNT;
+ 12   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20210,'Backup e atualizacao divergiram em Preencher_Protocolos_Documentos_Legados.'); END IF;
+ 13   COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id); DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 14  
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END;
+ 16  /
+Rollback
+ UPDATE TGFCAB SET NUMPROTOC=CASE WHEN NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55) THEN 0 ELSE NUMPROTOC END,
+                                                                                                                                                                                                *
+ERROR at line 7:
+ORA-06550: line 7, column 193:
+PL/SQL: ORA-00932: inconsistent datatypes: expected NUMBER got CHAR
+ORA-06550: line 7, column 2:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+SQL> 
+SQL> PROMPT === OBJETO GERADO E CONTAGEM ===
+SQL> SELECT OWNER, TABLE_NAME
+  2  FROM ALL_TABLES
+  3  WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  4    AND TABLE_NAME = 'BKP_RMD_07_TGFCAB';
+SQL> 
+SQL> DECLARE
+  2    v_n NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*) INTO v_n FROM BKP_RMD_07_TGFCAB;
+  5    DBMS_OUTPUT.PUT_LINE('BKP_RMD_07_TGFCAB_REGISTROS='||v_n);
+  6  END;
+  7  /
+SQL> 
+SQL> PROMPT === FIM ETAPA 08 ISOLADA ===
+SQL> -- Diagnóstico isolado da etapa 08 da nova revisão.
+SQL> -- Execute conectado à ANDORINHA COMERCIAL como SCRIPT (F5).
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> SET ECHO ON
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> 
+SQL> PROMPT === ETAPA 08 ISOLADA ===
+=== ETAPA 08 ISOLADA ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO,
+  4         SYS_CONTEXT('USERENV','DB_NAME') DB_NAME,
+  5         SYS_CONTEXT('USERENV','INSTANCE_NAME') INSTANCE_NAME
+  6  FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                          DB_NAME                                                                                                                                                                                                                                                          INSTANCE_NAME                                                                                                                                                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          andorinhabrprd.sankhyacloud.com.br                                                                                                                                                                                                                               ANDORINHABRPRD                                                                                                                                                                                                                                                   DBS6PC9                                                                                                                                                                                                                                                         
+
+SQL> 
+SQL> SELECT COLUMN_NAME, DATA_TYPE, DATA_LENGTH, DATA_PRECISION, DATA_SCALE
+  2  FROM ALL_TAB_COLUMNS
+  3  WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  4    AND TABLE_NAME = 'TGFCAB'
+  5    AND COLUMN_NAME IN ('NUMPROTOC','NUMPROTOCCTE')
+  6  ORDER BY COLUMN_NAME;
+
+COLUMN_NAME                                                                                                                      DATA_TYPE                                                                                                                        DATA_LENGTH DATA_PRECISION DATA_SCALE
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------- -------------- ----------
+NUMPROTOC                                                                                                                        VARCHAR2                                                                                                                                  30                          
+NUMPROTOCCTE                                                                                                                     VARCHAR2                                                                                                                                  30                          
+
+SQL> 
+SQL> VARIABLE RMD_ID_MASTER VARCHAR2(30)
+SQL> BEGIN :RMD_ID_MASTER := 'RMD_RUN_20260908102607051'; END;
+  2  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === EXECUTANDO 08_PREENCHER_PROTOCOLOS_DOCUMENTOS_LEGADOS ===
+=== EXECUTANDO 08_PREENCHER_PROTOCOLOS_DOCUMENTOS_LEGADOS ===
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Revisao Master Deploy/08_Preencher_Protocolos_Documentos_Legados.sql"
+SQL> -- Bloco 07. Mantem a regra funcional aprovada com snapshot das linhas.
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> DECLARE v NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO v FROM ALL_TABLES WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND TABLE_NAME='BKP_RMD_07_TGFCAB';
+  3   IF v=0 THEN EXECUTE IMMEDIATE q'[CREATE TABLE BKP_RMD_07_TGFCAB AS SELECT CAST(NULL AS VARCHAR2(30)) ID_EXECUCAO,
+  4   CAST(NULL AS TIMESTAMP) DH_EXECUCAO, CAST(NULL AS VARCHAR2(128)) USUARIO_EXECUCAO,
+  5   CAST(NULL AS VARCHAR2(30)) ROWID_ORIGINAL, T.NUMPROTOC NUMPROTOC_ANTES, T.NUMPROTOCCTE NUMPROTOCCTE_ANTES FROM TGFCAB T WHERE 1=0]'; END IF;
+  6  END;
+  7  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE v_id VARCHAR2(30):='RMD_PROT_'||TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3'); v_b PLS_INTEGER; v_u PLS_INTEGER;
+  2  BEGIN
+  3   INSERT INTO BKP_RMD_07_TGFCAB SELECT v_id,SYSTIMESTAMP,SYS_CONTEXT('USERENV','SESSION_USER'),ROWIDTOCHAR(ROWID),NUMPROTOC,NUMPROTOCCTE FROM TGFCAB WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=TGFCAB.NUNOTA)
+  4   AND ((NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55))
+  5     OR (NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57)));
+  6   v_b:=SQL%ROWCOUNT;
+  7   UPDATE TGFCAB SET NUMPROTOC=CASE WHEN NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55) THEN '0' ELSE NUMPROTOC END,
+  8   NUMPROTOCCTE=CASE WHEN NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57) THEN '0' ELSE NUMPROTOCCTE END WHERE EXISTS (SELECT 1 FROM TTKNOT N WHERE N.NUNOTA=TGFCAB.NUNOTA)
+  9   AND ((NUMPROTOC IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=55))
+ 10     OR (NUMPROTOCCTE IS NULL AND EXISTS (SELECT 1 FROM TGFTOP T WHERE T.CODTIPOPER=TGFCAB.CODTIPOPER AND T.DHALTER=TGFCAB.DHTIPOPER AND T.CODMODDOC=57)));
+ 11   v_u:=SQL%ROWCOUNT;
+ 12   IF v_b<>v_u THEN RAISE_APPLICATION_ERROR(-20210,'Backup e atualizacao divergiram em Preencher_Protocolos_Documentos_Legados.'); END IF;
+ 13   COMMIT; DBMS_OUTPUT.PUT_LINE('ID_EXECUCAO='||v_id); DBMS_OUTPUT.PUT_LINE('REGISTROS_ALTERADOS='||v_u);
+ 14  
+ 15  EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END;
+ 16  /
+ID_EXECUCAO=RMD_PROT_20260908103716558
+REGISTROS_ALTERADOS=5
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === OBJETO GERADO E CONTAGEM ===
+=== OBJETO GERADO E CONTAGEM ===
+SQL> SELECT OWNER, TABLE_NAME
+  2  FROM ALL_TABLES
+  3  WHERE OWNER = SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+  4    AND TABLE_NAME = 'BKP_RMD_07_TGFCAB';
+
+OWNER                                                                                                                            TABLE_NAME                                                                                                                      
+-------------------------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------------------------
+SANKHYA                                                                                                                          BKP_RMD_07_TGFCAB                                                                                                               
+
+SQL> 
+SQL> DECLARE
+  2    v_n NUMBER;
+  3  BEGIN
+  4    SELECT COUNT(*) INTO v_n FROM BKP_RMD_07_TGFCAB;
+  5    DBMS_OUTPUT.PUT_LINE('BKP_RMD_07_TGFCAB_REGISTROS='||v_n);
+  6  END;
+  7  /
+BKP_RMD_07_TGFCAB_REGISTROS=5
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> PROMPT === FIM ETAPA 08 ISOLADA ===
+=== FIM ETAPA 08 ISOLADA ===
+SQL> -- Retomada da nova revisao a partir da etapa 09.
+SQL> -- Etapas 01-08 ja executadas e validadas; nao repetir.
+SQL> -- Execute conectado a ANDORINHA COMERCIAL como SCRIPT (F5).
+SQL> SET DEFINE OFF
+SQL> SET SERVEROUTPUT ON SIZE UNLIMITED
+SQL> SET SQLBLANKLINES ON
+SQL> SET ECHO ON
+SQL> WHENEVER OSERROR EXIT FAILURE ROLLBACK
+SQL> WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SQL> SPOOL "/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/ANDORINHA COMERCIAL/Logs/Continuidade_Nova_Revisao_09_31.log"

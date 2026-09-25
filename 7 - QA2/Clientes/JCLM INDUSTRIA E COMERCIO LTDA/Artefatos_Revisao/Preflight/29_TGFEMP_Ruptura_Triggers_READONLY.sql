@@ -1,0 +1,11 @@
+-- Triggers da TGFEMP que mencionam RUPTURAEST; somente leitura.
+SELECT OWNER,
+       NAME,
+       TYPE,
+       LINE,
+       TEXT
+  FROM ALL_SOURCE
+ WHERE OWNER='SANKHYA'
+   AND TYPE='TRIGGER'
+   AND UPPER(TEXT) LIKE '%RUPTURAEST%'
+ ORDER BY NAME, LINE;

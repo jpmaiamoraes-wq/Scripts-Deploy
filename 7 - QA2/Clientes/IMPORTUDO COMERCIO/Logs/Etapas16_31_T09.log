@@ -1,0 +1,185 @@
+SQL> PROMPT CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 13 A 31
+CONTINUIDADE IMPORTUDO COMERCIO - ETAPAS 13 A 31
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO, SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL, SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO                                                                                                                                                                                                                                                          SCHEMA_ATUAL                                                                                                                                                                                                                                                     SERVICO                                                                                                                                                                                                                                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                                 SANKHYA                                                                                                                                                                                                                                                          importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                                
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA=SANKHYA;
+
+Session altered.
+
+SQL> BEGIN
+  2   IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> 'IMPORTUDOPRD.SANKHYACLOUD.COM.BR' OR SYS_CONTEXT('USERENV','SESSION_USER') <> 'FRANCISCO_JUNIOR' THEN
+  3   RAISE_APPLICATION_ERROR(-20501,'Conexao divergente'); END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE n NUMBER; BEGIN
+  2   SELECT COUNT(*) INTO n FROM ALL_TABLES WHERE OWNER='SANKHYA' AND TABLE_NAME='RMD_REF_TSICFG_MODELO';
+  3   IF n=0 THEN EXECUTE IMMEDIATE 'CREATE TABLE SANKHYA.RMD_REF_TSICFG_MODELO AS SELECT * FROM SANKHYA.TSICFG WHERE 1=0'; END IF;
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> @@"/Users/spadarojr/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy/7 - QA2/Clientes/IMPORTUDO COMERCIO/00_Precheck_Etapas_18_31.sql"
+SQL> -- Precheck consolidado e somente leitura das etapas 18 a 31.
+SQL> SET DEFINE OFF
+SQL> SET ECHO ON
+SQL> SET PAGESIZE 200
+SQL> SET LINESIZE 240
+SQL> 
+SQL> PROMPT === IDENTIDADE ===
+=== IDENTIDADE ===
+SQL> SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+  2         SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+  3         SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO FROM DUAL;
+
+USUARIO
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SCHEMA_ATUAL
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICO                                                                                                                                                                                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FRANCISCO_JUNIOR                                                                                                                                                                                                                                
+SANKHYA                                                                                                                                                                                                                                         
+importudoprd.sankhyacloud.com.br                                                                                                                                                                                                                
+
+
+SQL> 
+SQL> PROMPT === ETAPAS 18 A 23 ===
+=== ETAPAS 18 A 23 ===
+SQL> SELECT '18_TGFCGM_ORIGEM_EMP1_1900_1' ITEM,COUNT(*) QTD FROM TGFCGM WHERE CODEMP=1 AND ANO=1900 AND MES=1
+  2  UNION ALL SELECT '18_TGFCMV_CODCONFIG_1',COUNT(*) FROM TGFCMV WHERE CODCONFIG=1
+  3  UNION ALL SELECT '18_TGFCGM_DESTINOS',COUNT(*) FROM TGFCGM WHERE CODEMP<>1
+  4  UNION ALL SELECT '19_PARCEIROS_TOTAL',COUNT(*) FROM TGFPAR
+  5  UNION ALL SELECT '20_TTKINDAGT_SEQUENCIA_1',COUNT(*) FROM TTKINDAGT WHERE SEQUENCIA=1
+  6  UNION ALL SELECT '20_TTKNOT_TOTAL',COUNT(*) FROM TTKNOT
+  7  UNION ALL SELECT '20_TTKEVT_TOTAL',COUNT(*) FROM TTKEVT
+  8  UNION ALL SELECT '21_ICMS_DIVERGENTES',COUNT(*) FROM TGFPAR
+  9   WHERE (TIPPESSOA='J' AND IDENTINSCESTAD IS NOT NULL AND UPPER(TRIM(IDENTINSCESTAD))<>'ISENTO' AND NVL(CLASSIFICMS,'Z')<>'R')
+ 10      OR (TIPPESSOA='F' AND IDENTINSCESTAD IS NOT NULL AND UPPER(TRIM(IDENTINSCESTAD))<>'ISENTO' AND NVL(CLASSIFICMS,'Z')<>'P')
+ 11      OR (NVL(UPPER(TRIM(IDENTINSCESTAD)),'ISENTO')='ISENTO' AND NVL(CLASSIFICMS,'Z')<>'C')
+ 12  UNION ALL SELECT '22_PARCEIROS_A_ANALISAR',COUNT(*) FROM TGFPAR WHERE CGC_CPF IS NOT NULL
+ 13  UNION ALL SELECT '23_OBJETOS_PENDENTES',COUNT(*) FROM RMD_CONTROLE_OBJETOS
+ 14   WHERE STATUS_ANTES='ENABLED' AND NVL(STATUS_DEPOIS,'PENDENTE')<>'ENABLED';
+
+ITEM                                QTD
+---------------------------- ----------
+18_TGFCGM_ORIGEM_EMP1_1900_1          1
+18_TGFCMV_CODCONFIG_1                 1
+18_TGFCGM_DESTINOS                    0
+19_PARCEIROS_TOTAL                 2902
+20_TTKINDAGT_SEQUENCIA_1              1
+20_TTKNOT_TOTAL                    6259
+20_TTKEVT_TOTAL                    6726
+21_ICMS_DIVERGENTES                  31
+22_PARCEIROS_A_ANALISAR            2901
+23_OBJETOS_PENDENTES                  0
+
+10 rows selected. 
+
+SQL> 
+SQL> PROMPT === OBJETOS OBRIGATORIOS 18 A 31 ===
+=== OBJETOS OBRIGATORIOS 18 A 31 ===
+SQL> SELECT N.NOME OBJETO,N.TIPO_ESPERADO,
+  2         NVL(O.OBJECT_TYPE,'AUSENTE') TIPO_ENCONTRADO,
+  3         NVL(O.STATUS,'AUSENTE') STATUS
+  4  FROM (
+  5   SELECT 'TGFCGM' NOME,'TABLE' TIPO_ESPERADO FROM DUAL UNION ALL SELECT 'TGFCMV','TABLE' FROM DUAL
+  6   UNION ALL SELECT 'TTKINDAGT','TABLE' FROM DUAL UNION ALL SELECT 'TTKNOT','TABLE' FROM DUAL
+  7   UNION ALL SELECT 'TTKEVT','TABLE' FROM DUAL UNION ALL SELECT 'TGFPAR','TABLE' FROM DUAL
+  8   UNION ALL SELECT 'TGFPRO','TABLE' FROM DUAL UNION ALL SELECT 'TGFTIT','TABLE' FROM DUAL
+  9   UNION ALL SELECT 'TSICID','TABLE' FROM DUAL UNION ALL SELECT 'TGFTPV','TABLE' FROM DUAL
+ 10   UNION ALL SELECT 'TSIBAI','TABLE' FROM DUAL UNION ALL SELECT 'TSIEND','TABLE' FROM DUAL
+ 11  ) N LEFT JOIN ALL_OBJECTS O
+ 12   ON O.OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND O.OBJECT_NAME=N.NOME AND O.OBJECT_TYPE=N.TIPO_ESPERADO
+ 13  ORDER BY N.NOME;
+
+OBJETO    TIPO_ TIPO_ENCONTRADO         STATUS 
+--------- ----- ----------------------- -------
+TGFCGM    TABLE TABLE                   VALID  
+TGFCMV    TABLE TABLE                   VALID  
+TGFPAR    TABLE TABLE                   VALID  
+TGFPRO    TABLE TABLE                   VALID  
+TGFTIT    TABLE TABLE                   VALID  
+TGFTPV    TABLE TABLE                   VALID  
+TSIBAI    TABLE TABLE                   VALID  
+TSICID    TABLE TABLE                   VALID  
+TSIEND    TABLE TABLE                   VALID  
+TTKEVT    TABLE TABLE                   VALID  
+TTKINDAGT TABLE TABLE                   VALID  
+TTKNOT    TABLE TABLE                   VALID  
+
+12 rows selected. 
+
+SQL> 
+SQL> PROMPT === VOLUMES DAS ETAPAS 24 A 28 ===
+=== VOLUMES DAS ETAPAS 24 A 28 ===
+SQL> SELECT '24_TGFPAR_TOTAL' ITEM,COUNT(*) QTD FROM TGFPAR
+  2  UNION ALL SELECT '25_TGFPRO_TOTAL',COUNT(*) FROM TGFPRO
+  3  UNION ALL SELECT '26_TGFTIT_TOTAL',COUNT(*) FROM TGFTIT
+  4  UNION ALL SELECT '27_TSICID_TOTAL',COUNT(*) FROM TSICID
+  5  UNION ALL SELECT '28_TGFTPV_TOTAL',COUNT(*) FROM TGFTPV;
+
+ITEM                   QTD
+--------------- ----------
+24_TGFPAR_TOTAL       2902
+25_TGFPRO_TOTAL       1542
+26_TGFTIT_TOTAL         64
+27_TSICID_TOTAL       1753
+28_TGFTPV_TOTAL         20
+
+SQL> 
+SQL> PROMPT === ETAPA 29 BAIRROS ===
+=== ETAPA 29 BAIRROS ===
+SQL> SELECT 'TSIBAI_TOTAL' ITEM,COUNT(*) QTD FROM TSIBAI
+  2  UNION ALL
+  3  SELECT 'TSIBAI_GRUPOS_COLISAO',COUNT(*) FROM (
+  4   SELECT REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+  5   FROM TSIBAI GROUP BY REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEBAI),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+  6   HAVING COUNT(*)>1
+  7  );
+
+ITEM                         QTD
+--------------------- ----------
+TSIBAI_TOTAL               41749
+TSIBAI_GRUPOS_COLISAO        339
+
+SQL> 
+SQL> PROMPT === ETAPA 30 ENDERECOS ===
+=== ETAPA 30 ENDERECOS ===
+SQL> SELECT 'TSIEND_TOTAL' ITEM,COUNT(*) QTD FROM TSIEND
+  2  UNION ALL
+  3  SELECT 'TSIEND_GRUPOS_COLISAO',COUNT(*) FROM (
+  4   SELECT TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ') N
+  5   FROM TSIEND GROUP BY TIPO,REGEXP_REPLACE(TRIM(TRANSLATE(UPPER(NOMEEND),'ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ','AAAAAEEEEIIIIOOOOOUUUUC')),' {2,}',' ')
+  6   HAVING COUNT(*)>1
+  7  );
+
+ITEM                         QTD
+--------------------- ----------
+TSIEND_TOTAL              683907
+TSIEND_GRUPOS_COLISAO       6943
+
+SQL> 
+SQL> PROMPT === ETAPA 31 OBJETOS INVALIDOS E PRIVILEGIO ===
+=== ETAPA 31 OBJETOS INVALIDOS E PRIVILEGIO ===
+SQL> SELECT 'OBJETOS_INVALIDOS' ITEM,COUNT(*) QTD FROM ALL_OBJECTS
+  2   WHERE OWNER=SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AND STATUS='INVALID'
+  3  UNION ALL
+  4  SELECT 'ALTER_ANY_PROCEDURE',COUNT(*) FROM SESSION_PRIVS WHERE PRIVILEGE='ALTER ANY PROCEDURE';
+
+ITEM                       QTD
+------------------- ----------
+OBJETOS_INVALIDOS            0
+ALTER_ANY_PROCEDURE          0
+
+SQL> 
+SQL> PROMPT === FIM PRECHECK ETAPAS 18 A 31 ===
+=== FIM PRECHECK ETAPAS 18 A 31 ===
+SQL> SPOOL OFF

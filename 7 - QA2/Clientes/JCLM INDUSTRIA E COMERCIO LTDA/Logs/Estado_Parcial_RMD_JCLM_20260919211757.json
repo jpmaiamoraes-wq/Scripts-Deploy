@@ -1,0 +1,32 @@
+{
+  "status": "PARCIAL_MASTER_PARADO_NA_ATIVIDADE_03",
+  "id_execucao_lote": "RMD_JCLM_20260919211757",
+  "id_master": "RMD_RUN_20260919211829041",
+  "session_user": "FRANCISCO_JUNIOR",
+  "current_schema": "SANKHYA",
+  "service_name": "jclmprd.sankhyacloud.com.br",
+  "quotas": [],
+  "objetos_criados": [
+    "RMD_CONTROLE_OBJETOS",
+    "BKP_RMD_01_TSIPAR",
+    "BKP_RMD_02_TGFEMP"
+  ],
+  "atividade_02": {
+    "id_execucao": "RMD_PORT_20260919211830012",
+    "backup": "BKP_RMD_01_TSIPAR",
+    "registros_backup": 4,
+    "registros_alterados": 4
+  },
+  "atividade_03": {
+    "backup": "BKP_RMD_02_TGFEMP",
+    "registros_alvo": 5,
+    "registros_backup_confirmados_antes_da_retomada": 0,
+    "registros_alterados_confirmados_antes_da_retomada": 0,
+    "erro": "ORA-06550/ORA-01031: insufficient privileges na execucao do DML estatico em PL/SQL",
+    "acao": "retomada isolada com DML dinamico, sem repetir atividades 01 e 02"
+  },
+  "dml_executado": true,
+  "ddl_executado": true,
+  "log_oracle": "Logs/Oracle_Direto_RMD_JCLM_20260919211757.log",
+  "estado_para_retomada": "CONTROLE_E_BACKUPS_PERSISTENTES_PRESERVADOS"
+}

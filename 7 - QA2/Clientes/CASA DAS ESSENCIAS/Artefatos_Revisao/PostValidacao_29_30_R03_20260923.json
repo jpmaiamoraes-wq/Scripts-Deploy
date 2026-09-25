@@ -1,0 +1,31 @@
+{
+  "status": "POS_VALIDACAO_29_30_CONCLUIDA",
+  "executado_em_utc": "2026-09-23T14:25:09.936746+00:00",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "casadasessenciasprd.sankhyacloud.com.br",
+    "db_name": "CASADASESSENCIASPRD"
+  },
+  "mapa": {
+    "bairros_obsoletos": 430,
+    "enderecos_obsoletos": 7284,
+    "referencias_auditadas": 61596,
+    "excecoes": 0,
+    "auditoria_exclusao": 7714
+  },
+  "saldos": {
+    "tsibai_total": 46197,
+    "tsiend_total": 681939,
+    "tsibai_obsoletos_remanescentes": 0,
+    "tsiend_obsoletos_remanescentes": 0,
+    "grupos_duplicados_codreg_nome": 0,
+    "grupos_duplicados_tipo_codlogradouro_nome": 0
+  },
+  "dml_executado": false,
+  "ddl_executado": false,
+  "fontes": [
+    "Preflight/29_30_R03_PosValidacao_READONLY.sql",
+    "Preflight/29_30_R03_Colisoes_PosValidacao_READONLY.sql"
+  ]
+}
