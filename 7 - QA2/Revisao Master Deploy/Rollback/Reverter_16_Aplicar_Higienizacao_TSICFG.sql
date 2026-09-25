@@ -1,0 +1,37 @@
+-- Reverte uma execucao de Aplicar_Higienizacao_TSICFG.sql.
+-- Informe exatamente o ID exibido na execucao original.
+SET DEFINE ON
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+
+ACCEPT P_ID_EXECUCAO CHAR PROMPT 'ID da execucao RMD_CFG_: '
+
+DECLARE
+  v_backup NUMBER;
+  v_atual  NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_backup
+    FROM BKP_RMD_TSICFG
+   WHERE ID_EXECUCAO = '&&P_ID_EXECUCAO';
+  IF v_backup = 0 THEN
+    RAISE_APPLICATION_ERROR(-20103,'Backup TSICFG nao encontrado para o ID.');
+  END IF;
+
+  DELETE FROM TSICFG;
+  INSERT INTO TSICFG
+  SELECT B.CHAVE, B.CODUSU, B.TIPO, B.CONFIG, B.CHAVEPAI
+    FROM BKP_RMD_TSICFG B
+   WHERE B.ID_EXECUCAO = '&&P_ID_EXECUCAO';
+
+  SELECT COUNT(*) INTO v_atual FROM TSICFG;
+  IF v_atual <> v_backup THEN
+    RAISE_APPLICATION_ERROR(-20104,
+      'Restauracao TSICFG divergente: backup='||v_backup||', atual='||v_atual);
+  END IF;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('TSICFG_RESTAURADA='||v_atual);
+END;
+/
+UNDEFINE P_ID_EXECUCAO
+PROMPT === FIM REVERSAO TSICFG ===

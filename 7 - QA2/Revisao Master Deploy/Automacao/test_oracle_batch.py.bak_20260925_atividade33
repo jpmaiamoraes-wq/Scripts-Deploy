@@ -1,0 +1,84 @@
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+
+import oracle_batch
+
+
+class OracleBatchPreflightTests(unittest.TestCase):
+    def write_script(self, directory: Path, text: str) -> Path:
+        path = directory / "case.sql"
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def report(self, text: str) -> dict[str, object]:
+        with tempfile.TemporaryDirectory(dir=oracle_batch.PROJECT_ROOT) as directory:
+            plan = oracle_batch.parse_plan(self.write_script(Path(directory), text))
+            return oracle_batch.run_preflight(plan)
+
+    def codes(self, report: dict[str, object]) -> set[str]:
+        issues = [*report["bloqueios"], *report["avisos"]]
+        return {issue["codigo"] for issue in issues}
+
+    def test_valid_bind_is_approved(self) -> None:
+        report = self.report(
+            "VARIABLE RMD_ID_MASTER VARCHAR2(30)\n"
+            "BEGIN\n"
+            "  :RMD_ID_MASTER := 'TESTE';\n"
+            "END;\n"
+            "/\n"
+        )
+        self.assertEqual(report["status"], "PREFLIGHT_APROVADO")
+        self.assertEqual(report["qtd_bloqueios"], 0)
+
+    def test_undeclared_bind_blocks(self) -> None:
+        report = self.report("BEGIN :RMD_NAO_DECLARADO := 'TESTE'; END;\n/\n")
+        self.assertEqual(report["status"], "PREFLIGHT_BLOQUEADO")
+        self.assertIn("BIND_NAO_DECLARADO", self.codes(report))
+
+    def test_define_redefinition_blocks(self) -> None:
+        report = self.report(
+            "DEFINE P_ID = 'A'\n"
+            "DEFINE P_ID = 'B'\n"
+            "SELECT 1 FROM DUAL;\n"
+        )
+        self.assertEqual(report["status"], "PREFLIGHT_BLOQUEADO")
+        self.assertIn("DEFINE_REDEFINIDO", self.codes(report))
+
+    def test_undefine_allows_explicit_redefinition(self) -> None:
+        report = self.report(
+            "DEFINE P_ID = 'A'\n"
+            "UNDEFINE P_ID\n"
+            "DEFINE P_ID = 'B'\n"
+            "SELECT 1 FROM DUAL;\n"
+        )
+        self.assertEqual(report["status"], "PREFLIGHT_APROVADO")
+
+    def test_dynamic_ctas_xmltable_blocks(self) -> None:
+        report = self.report(
+            "BEGIN\n"
+            "  EXECUTE IMMEDIATE q'[CREATE TABLE RMD_TESTE AS "
+            "SELECT * FROM XMLTABLE('/x' PASSING NULL COLUMNS ID NUMBER PATH '.') ]';\n"
+            "END;\n"
+            "/\n"
+        )
+        self.assertEqual(report["status"], "PREFLIGHT_BLOQUEADO")
+        self.assertIn("CTAS_XMLTABLE_DINAMICO", self.codes(report))
+
+    def test_cursor_wildcard_with_explicit_column_blocks(self) -> None:
+        report = self.report(
+            "BEGIN\n"
+            "  FOR item IN (SELECT T.*, T.CODIGO FROM TABELA T) LOOP\n"
+            "    NULL;\n"
+            "  END LOOP;\n"
+            "END;\n"
+            "/\n"
+        )
+        self.assertEqual(report["status"], "PREFLIGHT_BLOQUEADO")
+        self.assertIn("PLS00402_RISCO_WILDCARD", self.codes(report))
+
+
+if __name__ == "__main__":
+    unittest.main()

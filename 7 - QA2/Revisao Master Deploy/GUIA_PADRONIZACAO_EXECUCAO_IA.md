@@ -1,0 +1,692 @@
+# Guia de padronização e execução por IA — Revisão Master Deploy
+
+**Versão de referência:** 23/09/2026
+**Finalidade:** transferir para outras IAs e colegas as regras, limites, parâmetros, artefatos e estruturas de execução atualmente usadas na Revisão Master Deploy do Sankhya Deploy Agent.
+
+## 0. Aviso de maturidade
+
+Este material é uma linha de base operacional, não uma especificação definitivamente congelada. O processo ainda é evolutivo: cada execução pode revelar uma diferença de versão Oracle, privilégio, quota, dependência, estrutura de chave, origem XML ou comportamento de script. O erro ou impedimento deve ser preservado como evidência, tratado no escopo da execução e convertido em melhoria do script genérico, do README, da skill ou do prompt da próxima base.
+
+A fonte de verdade de um resultado é a evidência da execução: log/spool completo, preflight, mapa ou backup persistente, auditoria, pós-validação e, quando aplicável, rollback. Prompt, diferença de arquivo, mensagem final do Master ou quantidade exibida depois de um erro não são, sozinhos, prova de execução bem-sucedida.
+
+## 1. Objetivo e escopo positivo
+
+A revisão trata a situação pós-Deploy Agent da base Oracle, com foco em:
+
+- verificar identidade, conexão, schema, serviço, versão curta e correspondência segura da base; a quantidade de empresas cadastradas não é gate;
+- executar e validar o Master Deploy revisado, com 31 atividades na ordem definida;
+- corrigir somente registros elegíveis segundo critérios determinísticos e documentados;
+- preservar estado anterior, mapas, auditoria, logs e reversões;
+- tratar colisões de bairros e endereços com merge controlado quando as etapas 29/30 deixarem grupos pendentes;
+- tratar separadamente o Card 09 — Notas sem Financeiro — com mapa, revisão e confirmação próprios;
+- registrar objetos inválidos e encaminhar pendências externas sem inventar solução ou ticket;
+- realizar a conferência de onboarding em modo somente leitura antes do relatório final;
+- produzir primeiro relatório textual; PDF é uma etapa posterior e autorizada.
+
+O Master ativo é:
+
+`7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql`
+
+Ele deve ser executado como **script/F5**, na pasta que contém os arquivos chamados por `@@`. O arquivo legado `MASTER_POS_DEPLOY_AGENT.sql` não deve ser escolhido apenas porque tem nome conhecido; o agente deve confirmar o Master ativo no checkout real.
+
+## 2. Estrutura de papéis para outra IA
+
+### 2.1 Agente principal
+
+Responsável por coordenar a revisão, conferir evidências, executar somente o que estiver autorizado, manter o estado da base, integrar resultados de subagentes e decidir os gates de continuidade.
+
+Padrão atual do projeto:
+
+- modelo preferencial: `gpt-5.6-luna`;
+- esforço: `xhigh` para o agente principal;
+- interação: mínima, interrompendo somente por conexão, privilégio ou quota impeditivos do ramo afetado, ambiguidade destrutiva, erro de transporte sem sessão válida, aprovação formal fora da autorização já registrada ou escopo divergente;
+- não solicitar senha, token, código de autenticação, chave de API ou arquivo `.p8` pelo chat, nem exibir ou persistir segredos em arquivos/logs do projeto. Se a credencial Oracle estiver ausente, permitir somente a janela macOS protegida do executor ou o provedor Vault oficialmente aprovado.
+
+O agente principal deve trabalhar com continuidade: concluir primeiro as atividades independentes e seguras, preservar o erro da atividade bloqueada e retomar somente o ramo afetado. Um erro não deve ser escondido nem transformar o restante da revisão em falsa conclusão.
+
+### 2.2 Subagente `ticket_objetos_invalidos`
+
+Acionar somente quando a etapa 31 encontrar objetos nativos `INVALID` e o log comprovar que a conexão não possui `ALTER ANY PROCEDURE`.
+
+Contrato:
+
+- modelo: `gpt-5.6-luna`;
+- esforço: `medium`;
+- no máximo um subagente simultâneo;
+- somente leitura e preparação;
+- não pode fazer DML, DDL, login, upload, envio externo ou manipulação de credenciais;
+- deve retornar resumo curto com base, execução, schema, usuário, contagem, lista completa dos objetos, evidência do privilégio ausente, organização esperada, assunto, descrição e campos do formulário;
+- deve informar `PRONTO`, `PENDENTE_AMBIGUIDADE` ou `TICKET_EXISTENTE`;
+- nunca inventa número, URL ou status de chamado.
+
+A skill correspondente é:
+
+`.agents/skills/sankhya-ticket-objetos-invalidos/SKILL.md`
+
+O agente principal revisa o rascunho e confirma a organização real do cliente no portal. Com a autorização operacional registrada para a base, pode preencher e enviar automaticamente, sem nova pergunta ou clique solicitado ao usuário. Depois do envio efetivo, registra número, URL, status e campos em `Dados_Revisao.json`, no relatório e no registro da base. Se já houver ticket para o mesmo `ID_EXECUCAO`/base, se a organização estiver ambígua ou se o portal falhar, não criar duplicidade nem contornar o bloqueio sem decisão explícita.
+
+Campos padrão do ticket:
+
+- organização real do cliente, nunca `SANKHYA JIVA` para este motivo;
+- prioridade `Normal`;
+- `Cloud/SaaS` → `Solicitação Cloud` → `Personalizar Objeto de Banco de Dados`;
+- ambiente `Produção`;
+- banco `Oracle`;
+- nenhum anexo por padrão: não anexar logs, credenciais ou artefatos sem autorização específica.
+
+### 2.3 Agente de relatório `relatorio_entrega_tecnica`
+
+Fluxo separado e somente após os artefatos técnicos estarem finalizados. O agente de relatório:
+
+- lê logs, prechecks, mapas, backups, auditorias, rollbacks e estados finais;
+- produz TXT antes de PDF;
+- não acessa Oracle nem executa DML/DDL;
+- não manipula credenciais;
+- não envia tickets;
+- não publica ou compartilha Drive sem autorização própria;
+- não altera evidência ou base;
+- só gera PDF após aprovação explícita do texto e atendimento dos gates de onboarding e cards críticos;
+- renderiza e inspeciona visualmente o PDF antes da entrega.
+
+### 2.4 Skills e instruções
+
+Uma implementação equivalente em outra IA deve separar:
+
+1. instruções do repositório/projeto, equivalentes ao `AGENTS.md`;
+2. skills procedimentais, com objetivo, evidências mínimas, proibições, formato de retorno e critérios de bloqueio;
+3. agentes especializados com escopo disjunto e permissões menores que as do agente principal;
+4. modelos SQL e artefatos persistentes versionados;
+5. um registro de lições para transformar incidentes em guardas reutilizáveis.
+
+O nome do modelo pode mudar em outra IA; o contrato de segurança, evidência, delegação e confirmação não deve ser relaxado.
+
+### 2.5 Quota, custo e escalonamento
+
+Antes de iniciar uma nova revisão completa, consultar o limite disponível quando a plataforma oferecer essa informação:
+
+- abaixo de 30% restante: não iniciar nova base completa;
+- entre 30% e 60%: trabalhar somente com o agente principal;
+- acima de 60%: permitir no máximo um subagente `gpt-5.6-luna` com esforço `medium`;
+- usar `gpt-5.6-terra` com esforço alto apenas para ambiguidade, falha de script ou análise que o agente principal não consiga fechar com evidência;
+- usar `gpt-5.6-sol` com esforço extra alto/máximo somente para validação crítica de DML, rollback, integridade ou conflito complexo;
+- não ativar esforço Ultra automaticamente e não propor upgrade/paralelismo apenas por percepção de lentidão;
+- acompanhar consumo, tempo, erros e qualidade por base.
+
+Qualquer ganho de velocidade deve conservar preflight, backup/mapa, auditoria, pós-validação e reversão.
+
+### 2.6 Medição leve por atividade
+
+Em cada nova base, manter um único `Clientes/<BASE>/Artefatos_Revisao/MEDICAO_EXECUCAO.csv`. Registrar uma linha por atividade simples do Master, uma linha para preparação/conexão e atividades externas aplicáveis (ticket/e-mail), e linhas por fase apenas nos ramos complexos (29/30, Card 09, onboarding, volumetria e relatório). Não criar arquivos por comando ou consulta.
+
+Campos mínimos: `unidade`, `fase`, `id_execucao`, `inicio_local`, `fim_local`, `duracao_decorrida_s`, `espera_externa_s`, `duracao_lote_s`, `tentativas`, `erros`, `retrabalhos`, `subagentes_usados`, `arquivos_processo_criados_alterados`, `linhas_processo_delta`, `arquivos_evidencia_criados_alterados`, `tokens_disponiveis`, `resultado`, `bloqueio_proxima_acao`. Processo inclui SQL/código/instruções/prompts; evidência inclui logs, mapas, backups e relatórios. Não contar evidência gerada como reescrita de script. Registrar horários e duração com base em eventos/logs disponíveis; marcar `NAO_DISPONIVEL` ou `ESTIMADO` quando a plataforma não fornecer medição exata. Nunca reconstruir uma duração passada como se fosse observada.
+
+Use `0` para um valor medido igual a zero, `NAO_APLICAVEL` quando o campo não fizer sentido e `NAO_DISPONIVEL` quando não houver medição; marque qualquer aproximação como `ESTIMADO`. `duracao_decorrida_s` é o intervalo total entre início e fim; `espera_externa_s` é somente a parcela de espera observada, não uma estimativa de tempo ativo por subtração.
+
+Regras para manter baixo o custo da medição:
+
+- contar tentativas de execução e reescritas motivadas por falha/divergência; toda reescrita deve citar a evidência ou requisito concreto que a justifica;
+- contar arquivos e linhas apenas com base em artefatos/diffs observáveis; não estimar;
+- registrar tokens por atividade somente se a plataforma os reportar nessa granularidade. Não distribuir tokens de um turno/base entre atividades nem inferi-los por número de linhas;
+- separar, quando observável, tempo de execução do lote e espera externa. Durações de trabalho paralelo se sobrepõem e não podem ser somadas como tempo total da base;
+- não gerar consultas, mensagens ao usuário, aprovações ou controles adicionais para preencher a medição; não duplicar evidência;
+- tratar o CSV como artefato interno de melhoria do processo, sem anexá-lo ao cliente/e-mail de entrega e sem incluir credenciais ou dados pessoais desnecessários;
+- se a atividade já estava em andamento antes do início da medição, marcar o trecho anterior como `NAO_INSTRUMENTADO` e medir a partir do próximo evento, sem inventar histórico.
+
+No Card 09, além da duração, registrar explicitamente os estados `PREFLIGHT_EXECUTADO`, `MAPA_CRIADO`, `MAPA_VALIDADO`, `INSERT_AUTORIZADO` e `POS_VALIDACAO_CONCLUIDA`, a contagem `APTO_PARA_VALIDACAO_FINAL`, o gate atual e o próximo passo. A medição apoia comparação entre execuções semelhantes; não autoriza remover controles de segurança nem concluir simplificação com base em uma única base.
+
+## 3. Parâmetros obrigatórios e identidade
+
+### 3.1 Parâmetros de preparação
+
+O comando atual de preparação segue este formato, sem senha:
+
+```bash
+python3 revisao_deploy.py prepare \
+  --client "NOME DO CLIENTE" \
+  --hostname "HOST_ORACLE" \
+  --port 1521 \
+  --service "SERVICENAME.SANKHYACLOUD.COM.BR" \
+  --username "USUARIO_ORACLE" \
+  --gp "Nome do GP <gp@sankhya.com.br>"
+# sem --assistente, o terminal pergunta: 1 = Ana Paula Rodrigues, 2 = Gabriela Stabile Lemos
+```
+
+Parâmetros:
+
+- `client`: nome informado da base; a pasta é normalizada para nome seguro;
+- `hostname`, `port`, `service`: dados de conexão e roteamento;
+- `username`: usuário informado para a conexão, sem senha;
+- `gp`: nome completo ou e-mail do Gerente de Projetos;
+- `assistente`: opcional, `1` (Ana Paula Rodrigues) ou `2` (Gabriela Stabile Lemos). Se omitido, é perguntado no terminal; em execução não interativa fica `ASSISTENTE_PENDENTE` e é perguntado no chat antes do encerramento. Com a assistente 2, informar o e-mail do GP em `--gp`, pois ele é o destinatário principal;
+- `--output`: raiz alternativa somente quando necessário para homologação;
+- `--apply-route`: alteração de rota previamente cadastrada, somente com autorização específica;
+- `--force`: sobrescrita de metadados/executor existentes, somente após conferência da pasta.
+
+O `prepare` verifica dependências, rota e TCP quando possível, cria metadados e artefatos, mas **não executa DML Oracle**. A conexão direta do executor é o caminho padrão; não trocar automaticamente para VS Code/SQL Developer. Se houver limitação, seguir somente o fallback legado e os gates definidos em `AGENTS.md`; em possível alteração parcial, primeiro inventariar o estado. Se o executor direto estiver bloqueado, registrar a limitação objetiva.
+
+### 3.2 `Dados_Revisao.json`
+
+Deve guardar metadados sem senha, incluindo, quando conhecidos:
+
+- cliente informado e nome seguro da pasta;
+- host, porta e service name;
+- usuário, GP e data de preparação;
+- assistente de projetos (código 1/2, nome, e-mail) e `plano_destinatarios` (status, para, cc);
+- resultado da verificação de rota e acessibilidade TCP;
+- `senha_armazenada: false` — significa que nenhum segredo é gravado nos arquivos/metadados do projeto; não impede o uso do Keychain macOS ou do Vault aprovado;
+- mecanismo e status da credencial (`KEYCHAIN`, `VAULT` ou `NAO_CONFIGURADO`), sem senha, token ou conteúdo secreto;
+- estado de execução Oracle;
+- `id_master` e IDs de execução de cada ramo mutável;
+- logs, tabelas de backup/mapa/auditoria e scripts de reversão;
+- status por atividade e card;
+- caminho para `Artefatos_Revisao/MEDICAO_EXECUCAO.csv` e estado da instrumentação;
+- pendências externas e tickets efetivamente existentes;
+- estado do onboarding e limitações da comparação.
+- evidência atual da volumetria, fonte da consulta, data/hora, quantitativos e confirmação de DML/DDL não executados;
+- assunto, corpo, destinatários e status do e-mail de encerramento, sem armazenar credenciais.
+
+Não copiar credenciais presentes em documentos de onboarding para este arquivo.
+
+### 3.3 Identidade da sessão e da empresa
+
+Antes de qualquer alteração, confirmar e registrar na mesma sessão:
+
+```sql
+SELECT SYS_CONTEXT('USERENV','SESSION_USER') AS SESSION_USER,
+       SYS_CONTEXT('USERENV','CURRENT_SCHEMA') AS CURRENT_SCHEMA,
+       SYS_CONTEXT('USERENV','SERVICE_NAME') AS SERVICE_NAME
+  FROM DUAL;
+```
+
+Também validar versão curta, banco/instância quando disponível, serviço esperado, quota, privilégios e correspondência da base. A revisão é `BASE_INTEIRA`; não contar empresas como gate. Use `TSIEMP.RAZAOSOCIAL` apenas para confirmar que a base conectada corresponde ao nome informado e para diagnosticar variações, sem restringir o escopo por `CODEMP`.
+
+Se não houver correspondência segura, executar diagnóstico read-only de `NOMEFANTASIA`/`RAZAOSOCIAL`, listar as variações e solicitar validação do usuário antes de continuar. A autorização da variação nominal não libera automaticamente outro serviço ou DML fora do escopo.
+
+Se ocorrer `ORA-17002`, `ORA-17008` ou encerramento de sessão, reconectar, validar novamente `USER`, `CURRENT_SCHEMA` e `SERVICE_NAME` e só então repetir a fase. Erro de transporte não é evidência de sucesso nem de falha lógica.
+
+## 4. Preparação local e artefatos
+
+Estrutura esperada por base:
+
+```text
+7 - QA2/
+├── Revisao Master Deploy/                 # scripts genéricos e Master ativo
+├── Scripts Originais/                     # fontes preservadas e hashes
+├── 00_Identidade_Empresa...MODELO.sql
+├── 32_Card09_...MODELO.sql                # modelos Card 09
+└── Clientes/<BASE>/
+    ├── Dados_Revisao.json
+    ├── Executar_Revisao_<BASE>.sql
+    ├── 00_Precheck_Unidades.sql
+    ├── 00_Precheck_Etapas_18_31.sql
+    ├── Logs/
+    ├── Artefatos_Revisao/
+    │   ├── Backups/
+    │   ├── Rollback/
+    │   ├── MEDICAO_EXECUCAO.csv
+    │   └── Limpar_Objetos_Revisao.sql
+    ├── mapas e scripts específicos da base
+    └── relatório textual e registros de onboarding
+```
+
+Scripts genéricos permanecem em `7 - QA2`; artefatos específicos ficam em `Clientes/<BASE>`. Não reorganizar bases antigas sem autorização.
+
+Antes de qualquer prompt de senha, consultar `oracle_direct.py credential status` para o host, porta, service e usuário exatos. Se o Keychain for a fonte escolhida e retornar `CREDENCIAL_KEYCHAIN_PRESENTE`, reutilizar a credencial e não executar `credential set` nem solicitar novamente a senha Oracle. Se houver fonte Vault aprovada explicitamente configurada, usar o cliente/OIDC documentado; nunca copiar o segredo Vault ao Keychain. Sem Vault configurado e sem item Keychain, a conexão normal abre uma única janela protegida; a senha é salva no Keychain local somente após o Oracle aceitar a autenticação. Consultas read-only e lotes compartilham o fluxo. O item é específico à combinação da conexão e à conta/macOS local; outra combinação pode exigir cadastro inicial próprio. Um pedido do macOS para desbloquear/autorizar o Keychain não é um novo pedido da senha Oracle. Em `ORA-01017` ou falha semelhante, não repetir o prompt em ciclo: interromper e diagnosticar. Senha rotacionada deve ser atualizada uma vez pelo fluxo protegido; a sessão OIDC é independente.
+
+O executor gerado valida o `SERVICE_NAME`, exibe usuário/schema/serviço/empresa e exige a frase:
+
+`EXECUTAR <CLIENTE>`
+
+A VPN continua manual pelo FortiClient. A conexão Oracle usa o executor direto e o Keychain/Vault autorizado conforme acima. Senha não entra no prompt do chat, argumento, arquivo, log, relatório ou memória persistente do projeto.
+
+## 5. Gates de execução
+
+### Gate 1 — checkout e fontes
+
+- validar `pwd` e o checkout local efetivo;
+- ler `7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql`;
+- confirmar todos os `@@` no mesmo diretório;
+- não confundir workspace remoto ausente com erro Oracle;
+- preservar alterações do usuário e não apagar logs, mapas ou backups.
+
+### Gate 2 — preflight somente leitura
+
+Executar antes do lote:
+
+- identidade da sessão e service name;
+- razão social/variações em `TSIEMP`;
+- existência e estado dos objetos/tabelas necessários;
+- volumetria e candidatos;
+- objetos inválidos;
+- triggers e objetos que podem ser temporariamente desabilitados;
+- quota e privilégios necessários, distinguindo diagnóstico de quota de um bloqueio real para o ramo que precisa criar mapa/backup/auditoria persistente;
+- colisões 29/30, chaves e dependências conhecidas;
+- estado prévio de tentativa parcial;
+- Card 09 e existência de `TGFFIN`, `TGFNFE`, `TGFPPG`, `TGFTPV`, `TGFTIT`, `TGFNUM`, `TSICTA`.
+
+O preflight não deve executar DML/DDL de negócio. Pode criar apenas artefatos de controle explicitamente necessários e registrados.
+
+### Gate 3 — execução do Master
+
+O Master usa `SET DEFINE OFF`, `SERVEROUTPUT`, `ECHO`, `SPOOL` e:
+
+```sql
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+```
+
+O erro não tratado interrompe o Master. O agente não deve interpretar a linha final de conclusão como prova suficiente: revisar o log completo, IDs, erros `ORA-`, `PLS-`, `SP2-`, status de cada etapa e pós-validação.
+
+Se uma etapa falhar, preservar o log e executar separadamente somente atividades independentes e seguras, com nova evidência e sem fingir que a execução original foi limpa. Dependências da etapa bloqueada não podem ser executadas como se estivessem validadas.
+
+### Gate 4 — alteração controlada por rotina
+
+Para cada rotina mutável:
+
+1. preflight da rotina;
+2. gerar `ID_EXECUCAO` único;
+3. criar backup persistente das linhas afetadas, separado por tabela, ou mapa persistente das linhas inseridas;
+4. validar quantidade salva e escopo;
+5. aplicar alteração apenas ao conjunto validado;
+6. fazer `COMMIT` depois das validações;
+7. executar pós-validação independente;
+8. manter rollback pareado, autocontido e com o ID/objetos esperados.
+
+Para `UPDATE`/`DELETE`, guardar valores anteriores suficientes para restaurar. Para `INSERT`, guardar chaves, `ROWID` quando apropriado e ID de execução; o rollback remove somente registros daquela auditoria. Nunca usar tabela inteira, chave parcial ou critério amplo para reversão.
+
+### Gate 5 — objetos temporariamente alterados
+
+Registrar o estado anterior em `RMD_CONTROLE_OBJETOS`, restaurar em caminho normal e de exceção e executar verificação final independente. Reabilitar somente o que estava habilitado antes. `INVALID` em `ALL_OBJECTS` não substitui a verificação de `ALL_TRIGGERS.STATUS`.
+
+## 6. Master 01–31 — escopo funcional
+
+O Master ativo chama, nesta ordem:
+
+| Etapa | Finalidade resumida |
+|---|---|
+| 01 | preparar controle de objetos temporariamente alterados |
+| 02 | liberar filtros de portais |
+| 03 | padronizar DANFE e parâmetros das empresas |
+| 04 | desativar custo em TOPs de devolução, quando elegível |
+| 05 | habilitar cálculo de giro de produtos |
+| 06 | zerar parcelas em tipos de negociação conforme regra |
+| 07 | preencher data de movimento ausente |
+| 08 | preencher protocolos de documentos legados |
+| 09 | liberar itens de documentos legados |
+| 10 | habilitar ICMS gerencial |
+| 11 | habilitar ruptura de produtos |
+| 12 | habilitar ruptura de empresas |
+| 13 | configurar TOPs para giro/Gerente On-Line, preservando limitações conhecidas |
+| 14 | configurar análise de giro 848 com backup pontual |
+| 15 | desativar rastreamento de lote sem controle adicional, quando elegível |
+| 16 | aplicar higienização aprovada da `TSICFG`, com snapshot e reversão |
+| 17 | normalizar unidades com controle de triggers e backup |
+| 18 | ajustar preferências do GOL; o subpasso de preparação de backups ocorre antes das etapas 18–30 |
+| 19 | ajustar parceiro matriz com critério de raiz de CNPJ e divergências comprovadas |
+| 20 | atualizar cards/configurações de Deploy somente no escopo esperado |
+| 21 | classificar ICMS de parceiros, vinculada funcionalmente ao Card 16 |
+| 22 | ajustar nomes de parceiros conforme algoritmo e preflight |
+| 23 | validar e reabilitar objetos temporariamente desabilitados |
+| 24 | padronizar parceiros |
+| 25 | padronizar produtos |
+| 26 | padronizar tipos de título |
+| 27 | padronizar cidades |
+| 28 | padronizar tipos de venda |
+| 29 | padronizar bairros; colisões podem exigir merge posterior |
+| 30 | padronizar endereços; `TIPO` faz parte do critério quando aplicável |
+| 31 | diagnosticar/tentar recompilar objetos inválidos; não possui rollback de dados |
+
+Cards informativos não devem gerar DML desnecessário. Atividade e Card são conceitos diferentes: quando uma atividade trata um Card, manter os dois vínculos documentados.
+
+Regras funcionais permanentes:
+
+- a higienização integral da `TSICFG` só pode ocorrer após snapshot completo, validação e rollback;
+- a cobertura parcial aprovada de TOPs de giro deve ser registrada como limitação conhecida;
+- a análise de giro 848 usa o modelo aprovado e backup pontual;
+- a normalização de unidades deve reabilitar triggers e validar estado anterior/posterior;
+- o dicionário Oracle deve ser compatível entre versões: não depender de `VIRTUAL_COLUMN`/`IDENTITY_COLUMN` de `ALL_TAB_COLUMNS`;
+- binds SQL*Plus devem ser declarados e inicializados;
+- quando uma tabela de backup é criada e consultada no mesmo bloco PL/SQL, usar referência dinâmica/estrutura compatível para evitar `ORA-00942` de compilação antecipada;
+- em mapas com grupos de mais de dois registros, consolidar o valor do pai mantido (`MAX`/`MIN`) antes do `UPDATE`, evitando `ORA-30926`; nunca incluir tabelas `BKP_%`/`RMD_%` na varredura de dados dependentes;
+- após `COMMIT_LOTE=OK`, uma falha da consulta de pós-validação não autoriza repetir DML: corrigir somente o SQL read-only e preservar as duas evidências;
+- uma linha posterior de sucesso não neutraliza erro anterior de sintaxe, SQL*Plus ou “Error starting at line”.
+
+## 7. Cards 29 e 30 — colisões de bairros e endereços
+
+`CONCLUIDO_PARCIAL` não encerra as etapas 29/30. Os grupos de colisão devem seguir para merge controlado posterior na mesma revisão ou ser formalmente isolados.
+
+Fluxo obrigatório:
+
+1. identificar grupos por chave de negócio normalizada;
+2. escolher registro retido por regra determinística e precedência documentada;
+3. gerar ID de execução próprio;
+4. persistir mapa `obsoleto -> mantido`;
+5. validar a possibilidade de persistência usando proprietário real e artefato já disponível, sem aguardar provisão de quota;
+6. usar proprietário/schema explícitos nos artefatos;
+7. descobrir tabelas físicas com `ALL_TAB_COLUMNS JOIN ALL_TABLES`;
+8. descobrir PK/UK/FK com `ALL_CONSTRAINTS` e `ALL_CONS_COLUMNS`, incluindo chaves compostas e colunas com nomes não óbvios, como `TGFCPL.CODENDENTREGA`;
+9. respaldar pais e dependentes antes da alteração;
+10. redirecionar referências para o registro retido;
+11. validar referências físicas remanescentes e duplicidades;
+12. excluir obsoletos somente com zero referências e mapa completo;
+13. fazer pós-validação antes do `COMMIT`;
+14. manter rollback autocontido.
+
+Dependência nova, FK/UK composta ou conflito não pode levar a exclusão por tentativa. Isolar o ramo em mapa de exceção, concluir apenas ramos comprovados e incorporar a descoberta ao script genérico para a próxima base.
+
+## 8. Card 09 — Notas sem Financeiro
+
+O Card 09 é etapa regular separada, após 01–31 e antes do relatório técnico. Não é incluído automaticamente no Master e nunca deve ser resolvido com `INSERT` avulso em `TGFFIN` ou troca de TOP para esconder o indicador.
+
+### 8.1 Escopo elegível inicial
+
+Reduzir primeiro pela volumetria do dashboard:
+
+- `ATUALFIN <> 0`;
+- `TIPMOV <> 'Z'`;
+- ausência de registro correspondente em `TGFFIN`.
+
+Depois ler `TGFNFE.XML` diretamente com `XMLTABLE` e extrair `<Dup>`, `vDup`, `dVenc` e `nDup`. O caminho direto é o padrão porque não exige compilação de `FNC_BUSCA_TAG_XML_GERAL`.
+
+### 8.2 Estado e nomes
+
+Antes de qualquer retomada, executar o inventário `32_Card09_Estado_Execucao_MODELO.sql`. Ele deve distinguir:
+
+- `NAO_INICIADO`;
+- base criada, classificação pendente;
+- mapa completo, DML pendente;
+- DML auditado, pós-validação pendente;
+- estados de erro/diagnóstico.
+
+Cada tentativa deve receber novo `ID_EXECUCAO` e novos nomes de tabelas de mapa, classificação e auditoria. Depois de tentativa parcial, não repetir CTAS protegido, não consultar tabela inexistente e não apagar objetos para aparentar limpeza.
+
+### 8.3 Mapa e classificação
+
+Criar o mapa com `CREATE TABLE AS SELECT` direto. Não envolver um CTAS com `XMLTABLE` em `EXECUTE IMMEDIATE`, pois o parser pode produzir `PLS-00103` em `PASSING`.
+
+Manter no mapa aptos e não aptos para auditoria. Exemplos de classificações:
+
+- `SEM_TGFPPG`;
+- `REVISAR_DUPLICIDADE_TGFPPG`;
+- `REVISAR_MULTIPLOS_XML`;
+- `SEM_VDUP_XML`;
+- `DVENC_XML_INVALIDO`;
+- `SEM_CODTIPTITPAD`;
+- `REVISAR_TGFNUM`;
+- `APTO_PARA_VALIDACAO_FINAL`.
+
+Mais de um `TGFNFE` para a mesma `NUNOTA` vira `REVISAR_MULTIPLOS_XML`; nunca selecionar silenciosamente um `ROWID`.
+
+### 8.4 Gate do DML financeiro
+
+Usar wrapper parametrizado:
+
+- `CONFIRMA_INSERCAO=NAO` durante preparação, mapa e revisão;
+- alterar para `SIM` somente na confirmação operacional imediatamente anterior ao DML;
+- permitir DML exclusivamente para `STATUS_MAPA='APTO_PARA_VALIDACAO_FINAL'`;
+- impedir nova inclusão se a nota já possui `TGFFIN`;
+- garantir uma linha apta por `NUNOTA`;
+- validar a versão exata de `TGFTPV` usada no cabeçalho;
+- confirmar `CODTIPTITPAD` existente em `TGFTIT`;
+- aceitar somente uma linha `TGFNUM` para `ARQUIVO='TGFFIN'`;
+- bloquear `TGFNUM.ULTCOD` com `FOR UPDATE WAIT`;
+- registrar auditoria persistente por `NUNOTA`/`NUFIN`;
+- fazer `COMMIT` somente depois dos guards.
+
+Regras de preenchimento consolidadas:
+
+- `CODTIPTIT` vem de `TGFPPG.CODTIPTITPAD`;
+- `VLRDESDOB` vem de `vDup` com conversão numérica explícita;
+- `DTVENC` vem de `dVenc` com formato `YYYY-MM-DD` validado;
+- `nDup` é preservado como número da duplicata;
+- `TIPRECDESP`: `I/R/1` → `1`; `D/P/-1` → `-1`; se ausente, usar sentido de `TIPMOV` (`V=1`, `C=-1`);
+- `CODBCO` nulo recebe `0`;
+- marcador textual `I` de `TGFTPV.TIPJURO` vira valor numérico `1`;
+- `CODCTABCOINT` vem do mapa; se nulo, selecionar conta ativa em `TSICTA` para a empresa e abortar se não houver;
+- não fixar valores que deveriam vir da condição de venda ou do cadastro ativo.
+
+### 8.5 Pós-validação e reversão
+
+Após o commit, usar spool novo e dedicado para confirmar:
+
+- quantidade inserida e quantidade auditada;
+- ausência de mais de um financeiro por nota tratada;
+- `VLRDESDOB` e `DTVENC` conforme XML;
+- `CODTIPTIT`/`TGFTPV` válidos;
+- `TGFNUM.ULTCOD` e uma única linha de contador;
+- zero aptos restantes sem financeiro;
+- auditoria completa e referências corretas;
+- Card 09 recalculado.
+
+O spool definitivo não pode conter `ORA-`, `PLS-` ou `SP2-`. Diagnóstico, tentativa e guard usam logs separados. Um status posterior correto não valida um spool contaminado por erro.
+
+Rollback usa `CONFIRMA_ROLLBACK=NAO` até a revisão da auditoria, remove somente `TGFFIN` auditados pelo ID e só reduz `TGFNUM` quando a sequência auditada for contínua e ainda estiver no topo.
+
+### 8.6 Fallback legado
+
+Usar `FNC_BUSCA_TAG_XML_GERAL` somente se a leitura direta não for viável. Nesse caso:
+
+- validar `ALL_OBJECTS`, `ALL_ARGUMENTS` e `ALL_ERRORS`;
+- usar fonte versionada somente com autorização;
+- registrar schema, DDL, status anterior/posterior, hash da fonte e erros;
+- prosseguir somente com `VALID` e zero erros;
+- se faltar privilégio ou a função continuar inválida, isolar o Card 09 sem mapa e sem DML, mantendo atividades independentes.
+
+## 9. Objetos inválidos e atuação externa
+
+Na etapa 31, separar claramente:
+
+- objeto encontrado e válido;
+- objeto inválido recompilado e validado;
+- objeto inválido que não pôde ser recompilado por privilégio;
+- erro de compilação efetivamente comprovado.
+
+Não afirmar recompilação por existir comando no script. Se faltar `ALTER ANY PROCEDURE`, registrar o status `IGNORADO_SEM_PRIVILEGIO`, schema, usuário, contagem, lista objeto por linha e evidência do privilégio ausente. Após confirmar a organização real e verificar duplicidade, o ticket Cloud deve ser preparado e enviado automaticamente sob a autorização operacional da base, sem solicitar confirmação ou clique adicional. Erro do portal, organização ambígua ou ticket já aberto exige pausa.
+
+## 10. Onboarding e relatório
+
+No início da revisão, executar automaticamente a skill `.agents/skills/sankhya-onboarding-readonly`, em paralelo às atividades independentes, usando primeiro a fonte mais recente exibida no site Onboarding Deploy. Não esperar uma solicitação posterior do usuário; usar documentos locais/Drive somente para complementar dado não exposto no site.
+
+A conferência read-only deve:
+
+- dados da empresa contra `TSIEMP`/`TSICID`;
+- metadados SMTP contra `TSIPAR`, sem exibir credenciais;
+- contas e usuários contra `TSICTA` e `TSIUSU`;
+- quando existirem, vendedores, grupos, centros de resultado, naturezas e locais contra `TGFVEN`, `TGFGRU`, `TSICUS`, `TGFNAT` e `TGFLOC`.
+
+Registrar fonte, arquivo, data, quantidades, correspondências, divergências comprovadas, linhas de modelo e registros extras. Para usuários, comparar por e-mail somente `TSIUSU.CODGRUPO > 0`, excluindo os usuários de modelo sem grupo e usando o arquivo mais recente quando houver duplicatas. Para empresas, comparar CNPJs/razões sociais apenas como informação de escopo, sem usar a contagem como gate e sem incluir/remover empresa automaticamente. Ausência de arquivo aplicável não é divergência automática. Certificados e credenciais não são lidos nem expostos.
+
+Relatório:
+
+1. ler `Base Relatório de Entrega/REL_ENTEGA_NOVO_05.jrxml` e consultar o dashboard `Volumetria Deploy Agent.xml` quando houver cards complementares;
+2. executar a volumetria pela conexão Oracle direta, incluindo os indicadores normalmente ocultos, e persistir a evidência na pasta da base;
+3. produzir TXT/Markdown completo com os quantitativos atuais;
+4. revisar e obter aprovação explícita;
+5. verificar os quatro indicadores de integridade — financeiros sem nota, itens sem cabeçalho, cabeçalhos sem itens e códigos fiscais de cidades duplicados — que devem ser zero;
+6. incluir situação final do Card 09, 29 e 30;
+7. gerar PDF somente após os gates anteriores;
+8. renderizar o PDF em imagens e conferir layout, tabelas, cabeçalhos, rodapés e conclusões;
+9. conferir a assistente de projetos (1 = Ana: somente ela; 2 = Gabriela: para o GP com ela em cópia) e preparar o envio do PDF final aos destinatários corretos.
+
+O relatório deve mostrar resultado final comprovado, finalidade, status, objetos, parâmetros, quantidades, backups, IDs, reversões e pendências realmente relevantes. Não destacar tentativas transitórias já superadas, não inventar quantitativos e não criar a seção “Identidade e limites da evidência” salvo solicitação.
+
+Padrão de entrega e linguagem:
+
+- escrever para gerentes de projeto e consultores, explicando a finalidade da atividade/card;
+- preferir “verificação preliminar”, “registro do estado”, “verificação obrigatória” e “reversão”;
+- não criar uma seção sobre GP ausente, publicação/compartilhamento no Drive ou o estado genérico `PENDENTE_VALIDACAO`;
+- não colocar capa/texto de entrega com `ID da execução`, `ID do Master` ou `Estado deste artefato`, salvo solicitação de rastreabilidade técnica detalhada;
+- no índice de reversão, uma linha por etapa/card com código, descrição e artefato;
+- na lista de objetos inválidos, um objeto por linha;
+- quando o relatório for publicado, o único link clicável no corpo deve ser a pasta de entrega; nomes de scripts, logs e rollbacks permanecem em texto comum.
+
+Publicação é uma etapa autorizada separadamente. Quando autorizada, organizar artefatos em `Revisoes Deploy Agent/<base>`, compartilhar somente com o domínio `sankhya.com.br` como leitor, sem acesso público ou pesquisa/listagem por domínio, e manter o arquivo de limpeza opcional. Não publicar credenciais.
+
+## 11. Escopo negativo — o que a IA não deve fazer
+
+Não executar ou afirmar:
+
+- solicitar segredos pelo chat, exibir credenciais ou persistir senha/token/código/chave/certificado/`.p8` em arquivos, logs ou memória do projeto; Keychain macOS e Vault aprovado são os únicos mecanismos externos permitidos;
+- fazer DML/DDL pelo comando `prepare` ou pelo terminal;
+- permitir que subagente de ticket faça login, DML, DDL, upload ou envio;
+- enviar ticket, publicar Drive ou compartilhar artefato sem autorização correspondente;
+- enviar e-mail sem PDF final aprovado/validado, sem destinatários confirmados ou com anexos diferentes do PDF de entrega;
+- inventar ticket, número, URL, status, contagem, execução ou validação;
+- considerar conexão salva ou teste TCP como prova de execução Oracle;
+- declarar sucesso por uma linha final depois de erro `ORA-`, `PLS-`, `SP2-` ou “Error starting at line”;
+- executar `Limpar_Objetos_Revisao.sql` automaticamente; ele pode remover backups e inutilizar rollbacks;
+- excluir colisões com `DELETE` genérico, sem mapa, FK/UK, backup e precedência;
+- escolher silenciosamente o primeiro XML/ROWID quando houver múltiplos XMLs;
+- inserir financeiro avulso em `TGFFIN`;
+- trocar TOP somente para remover linha do Card 09;
+- inserir `TGFFIN` sem `<Dup>`/`<dVenc>` válidos, mapa revisado, `TGFPPG`, `TGFTPV`, `TGFTIT`, `TGFNUM`, auditoria e rollback;
+- reutilizar ID ou nome de tabela após tentativa parcial;
+- tratar `CONCLUIDO_PARCIAL` como conclusão;
+- tratar autorização de identidade nominal como autorização de DML;
+- executar recálculo/consolidação de custos diretamente sem autorização específica;
+- incorporar projeto separado de perfis CNAE, tributação ou outras correções não homologadas ao Master;
+- gerar PDF antes da aprovação textual, onboarding e cards críticos;
+- corrigir ou reorganizar bases antigas sem autorização;
+- apagar logs, backups, mapas, fontes originais ou histórico para deixar o resultado “limpo”.
+
+## 12. Status e critérios de encerramento
+
+Estados úteis para cada atividade/card:
+
+- `NAO_INICIADO`;
+- `PREPARADO`;
+- `EXECUTANDO`;
+- `CONCLUIDO`;
+- `CONCLUIDO_SEM_DIVERGENCIAS`;
+- `CONCLUIDO_COM_ALERTA`;
+- `SEM_CANDIDATOS_APTOS`;
+- `IGNORADO_COLISAO`;
+- `IGNORADO_SEM_PRIVILEGIO`;
+- `ISOLADO`;
+- `CONCLUIDO_PARCIAL` — sempre requer tratamento posterior ou decisão explícita;
+- `PENDENTE_VALIDACAO` — estado interno, não usar como conclusão genérica no relatório final.
+
+A revisão só pode ser apresentada como encerrada quando as atividades aplicáveis tiverem estado final comprovado, as dependências dos parciais tiverem sido tratadas, os cards críticos estiverem zerados ou formalmente isolados, backups/auditorias/rollbacks existirem, objetos temporários estiverem no estado correto, onboarding estiver confrontado ou sua limitação registrada e o relatório textual estiver atualizado.
+
+## 13. Prompt-base reutilizável para outra IA
+
+O prompt preenchível e atualizado fica em:
+
+`7 - QA2/Revisao Master Deploy/Prompt_Handoff_Nova_Revisao_Master_Deploy_MODELO.md`
+
+Esse arquivo é a fonte única do handoff por base. Preencha somente nome da base,
+host, porta, service e usuário Oracle; nunca inclua senha. Ele inicia a preparação
+e o trabalho somente de leitura, mas mantém `EXECUTAR <BASE>` como autorização
+explícita para a onda mutável após confirmação da identidade. Assim, não se
+confunde um prompt genérico ou dados de conexão com autorização de DML/DDL.
+
+## 14. Exemplos de evolução do padrão
+
+### 14.1 Card 09: da dependência de function ao XML direto
+
+Em execução anterior, a dependência de `FNC_BUSCA_TAG_XML_GERAL` gerou bloqueio de compilação/identificação. A melhoria foi tornar `TGFNFE.XML` + `XMLTABLE` o caminho padrão, mantendo a função apenas como fallback. Isso eliminou uma dependência desnecessária de compilação sem eliminar revisão de mapa, confirmação do `INSERT`, bloqueio de `TGFNUM`, auditoria, pós-validação e rollback.
+
+### 14.2 29/30: do merge por nomes ao inventário físico de FKs
+
+Uma tentativa de colisões encontrou `ORA-00942` por proprietário/schema incorreto; outra revelou quota insuficiente (`ORA-01950`) e uma exclusão foi bloqueada por FK real não descoberto apenas pelo nome da coluna. O padrão passou a exigir proprietário explícito, persistência já disponível sem aguardar provisão de quota, `ALL_TAB_COLUMNS JOIN ALL_TABLES`, descoberta de `ALL_CONSTRAINTS`/`ALL_CONS_COLUMNS`, mapas persistentes, exceções por ramo e validação física antes da exclusão.
+
+### 14.3 Card 09 concluído sem DML
+
+Em uma base recente, o mapa preservou uma nota, mas nenhum registro possuía `<Dup>` válido. O Card foi encerrado como `SEM_CANDIDATOS_APTOS` somente porque mapa, auditoria vazia, `TGFNUM` preservado e pós-validação comprovaram que nenhum `TGFFIN` deveria ser alterado. “Zero inserções” é válido apenas com essa evidência; não é sinônimo de “não executar a análise”.
+
+### 14.4 Identidade nominal sem inferência
+
+Em uma base, o nome informado não apareceu exatamente em `TSIEMP`, mas variações de razão social e nome fantasia foram encontradas. O fluxo correto foi diagnóstico read-only, preservação da contagem, autorização explícita e registro da exceção. Não houve inferência automática nem liberação genérica de DML.
+
+### 14.5 Execução em lote sem interrupções repetidas
+
+O cenário Oracle direto mostrou que uma confirmação nativa por instrução ou por
+janela interrompe a revisão mesmo quando o escopo já foi autorizado. A partir
+de 21/09/2026, `EXECUTAR <BASE>` é autorização operacional prévia para a onda
+aprovada. O executor pode usar `--preauthorized` com o marcador explícito,
+mantendo a validação de identidade, serviço, allowlist, plano, hash, backup,
+auditoria, pós-validação e reversão. Retomadas usam novo plano/hash/ID e
+inventário do estado; não repetem o Master inteiro.
+
+### 14.6 Primeira onda e quota
+
+As falhas acumuladas da execução em lote foram convertidas em validações
+prévias por bloco: binds usados, `DEFINE`, schema/proprietário, ordem de
+criação/consulta de backups, guards de estado, CTAS/XMLTABLE direto, colunas
+duplicadas e dependências físicas/FK. Isso cobre os padrões de `ORA-00942`,
+`SP2-0552`, `DPY-4008`, `ORA-01031`, `PLS-00103`, `PLS-00402`, `ORA-01950`
+e `ORA-20340` já observados. Quota é registrada como diagnóstico e só bloqueia
+o ramo que realmente precisa persistir mapa, backup ou auditoria no
+tablespace; não bloqueia a revisão inteira nem a conferência read-only.
+
+### 14.7 Onboarding automático
+
+A comparação do onboarding passou a ser procedimento automático no início da
+revisão, preferencialmente em skill própria e em paralelo às atividades
+independentes. A fonte primária é a versão mais recente exibida no site
+Onboarding Deploy. A quantidade de empresas não decide o escopo; os CNPJs são
+relacionados apenas como divergência documental. Usuários são comparados por
+e-mail somente quando `TSIUSU.CODGRUPO > 0`, separando os usuários padrão sem
+grupo e sempre preferindo o arquivo mais recente.
+
+### 14.8 Card 09: distinguir gate correto de retrabalho
+
+Em uma execução recente da MOVE Energia, o usuário relatou mais de 20 arquivos
+editados e mais de 500 linhas sem inserção na `TGFFIN`. Esses quantitativos são
+um relato do usuário, não uma medição retrospectiva independente. No último
+estado consultado naquela ocasião, havia um preflight read-only preparado, mas
+ainda não executado; portanto, mapa e inserção ainda não estavam prontos. O caso
+mostra duas coisas diferentes: não inserir antes do mapa validado é o gate
+correto, mas muitas alterações sem avanço visível exigem transparência sobre a
+fase, o bloqueio e a próxima ação. Em execuções futuras, medir arquivos/linhas
+de processo separadamente dos arquivos de evidência e não reconstruir duração
+ou retrabalho histórico sem logs.
+
+## 15. Fontes canônicas no repositório
+
+Arquivos que devem ser consultados e mantidos alinhados:
+
+- `AGENTS.md` — regras de projeto, delegação, custos e linguagem;
+- `7 - QA2/Revisao Master Deploy/Prompt_Handoff_Nova_Revisao_Master_Deploy_MODELO.md` — handoff parametrizado por base;
+- `7 - QA2/Revisao Master Deploy/README.md` — arquitetura e fluxo;
+- `7 - QA2/Revisao Master Deploy/REVISAO_TECNICA.md` — riscos e decisões de reescrita;
+- `7 - QA2/Revisao Master Deploy/Automacao/README.md` — preparação, execução assistida e lições;
+- `7 - QA2/Revisao Master Deploy/Automacao/revisao_deploy.py` — parâmetros, geração do executor e análise de log;
+- `7 - QA2/Revisao Master Deploy/Revisao_Master_Deploy.sql` — ordem real do Master;
+- `7 - QA2/Revisao Master Deploy/ETAPA_32_CARD09_NOTAS_SEM_FINANCEIRO.md` — procedimento Card 09;
+- `7 - QA2/Revisao Master Deploy/LECOES_CARD09_EXECUCAO_DIRETA_XML.md` — lições XML direto;
+- `7 - QA2/00_Identidade_Empresa_Variacoes_ReadOnly_MODELO.sql` — variações de identidade;
+- `7 - QA2/32_Card09_Estado_Execucao_MODELO.sql` — inventário de retomada;
+- `7 - QA2/32A_Card09_Mapear_Direto_XML.sql` — mapa direto;
+- `7 - QA2/32B_Card09_Executor_Wrapper_MODELO.sql` e `32B_Card09_Inserir_Notas_Sem_Financeiro_DUP.sql` — confirmação e DML controlado;
+- `7 - QA2/32C_Card09_Rollback_Notas_Sem_Financeiro_DUP.sql` — reversão;
+- `7 - QA2/32D_Card09_PosValidacao_MODELO.sql` — pós-validação;
+- `7 - QA2/Revisao Master Deploy/Relatorio Sankhya/ORIENTACOES_CARDS_VOLUMETRIA.md` — interpretação dos 21 cards;
+- `7 - QA2/Revisao Master Deploy/Relatorio Sankhya/PADRAO_RELATORIO_ENTREGA.md` — relatório, aprovação e PDF;
+- `.agents/skills/sankhya-ticket-objetos-invalidos/SKILL.md` — skill do ticket de objetos inválidos;
+- `.agents/skills/sankhya-onboarding-readonly/SKILL.md` — conferência automática do onboarding;
+- `7 - QA2/Clientes/<BASE>/` — evidência específica, sempre prevalecendo o log/pós-validação real da base.
+
+## 16. Checklist curto de replicação
+
+Antes de dizer que outra IA está pronta para executar:
+
+- [ ] recebeu este contrato e as instruções do projeto;
+- [ ] sabe consultar `credential status`, reutilizar Keychain e evitar novos prompts para credencial já presente;
+- [ ] registra uma única medição por atividade/fase no `MEDICAO_EXECUCAO.csv`, sem acrescentar gates ou artefatos por consulta;
+- [ ] sabe diferenciar Master, Card e atividade;
+- [ ] confirma checkout, Master, includes e conexão real;
+- [ ] não pede nem armazena senha;
+- [ ] executa preflight antes de DML/DDL de negócio;
+- [ ] cria ID novo, backup/mapa, auditoria e rollback;
+- [ ] trata 29/30 com FK/PK/UK real e quota;
+- [ ] trata Card 09 por XML direto por padrão;
+- [ ] separa spool definitivo de diagnóstico;
+- [ ] delega tickets somente no gatilho correto;
+- [ ] mantém relatório separado da execução técnica;
+- [ ] lê e executa a fonte local da volumetria pela conexão Oracle direta;
+- [ ] registra os quatro indicadores de integridade e bloqueia o PDF se algum for maior que zero;
+- [ ] faz onboarding read-only e bloqueia PDF antes dos gates;
+- [ ] confere a assistente de projetos (1/2) e envia somente o PDF final aos destinatários da regra;
+- [ ] preserva evidências e transforma incidentes em melhorias;
+- [ ] sabe declarar pendência sem inventar sucesso.

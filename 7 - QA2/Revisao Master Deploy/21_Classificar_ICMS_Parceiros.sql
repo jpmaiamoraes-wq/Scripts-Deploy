@@ -1,0 +1,93 @@
+-- Classifica parceiros para ICMS de forma idempotente e auditavel.
+-- O backup persistente armazena apenas os registros efetivamente alterados.
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+DECLARE
+  v_existe NUMBER;
+BEGIN
+  SELECT COUNT(*)
+    INTO v_existe
+    FROM ALL_OBJECTS
+   WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')
+     AND OBJECT_NAME = 'BKP_CLASSICMS_TGFPAR'
+     AND OBJECT_TYPE = 'TABLE';
+  IF v_existe = 0 THEN
+    EXECUTE IMMEDIATE 'CREATE TABLE BKP_CLASSICMS_TGFPAR (' ||
+      'ID_EXECUCAO VARCHAR2(30) NOT NULL, ' ||
+      'DH_EXECUCAO TIMESTAMP(6) NOT NULL, ' ||
+      'CODPARC NUMBER NOT NULL, ' ||
+      'CLASSIFICMS_ANTES VARCHAR2(1), ' ||
+      'CLASSIFICMS_DEPOIS VARCHAR2(1))';
+  END IF;
+END;
+/
+DECLARE
+  v_id_execucao VARCHAR2(30) := 'CLASSICMS_' || TO_CHAR(SYSTIMESTAMP, 'YYYYMMDDHH24MISSFF3');
+  v_backup       NUMBER;
+  v_atualizados  NUMBER;
+BEGIN
+  INSERT INTO BKP_CLASSICMS_TGFPAR
+    (ID_EXECUCAO, DH_EXECUCAO, CODPARC, CLASSIFICMS_ANTES, CLASSIFICMS_DEPOIS)
+  SELECT v_id_execucao,
+         SYSTIMESTAMP,
+         CODPARC,
+         CLASSIFICMS,
+         CASE
+           WHEN TIPPESSOA = 'J'
+            AND IDENTINSCESTAD IS NOT NULL
+            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'R'
+           WHEN TIPPESSOA = 'F'
+            AND IDENTINSCESTAD IS NOT NULL
+            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'P'
+           WHEN NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO' THEN 'C'
+         END
+    FROM TGFPAR
+   WHERE (TIPPESSOA = 'J'
+          AND IDENTINSCESTAD IS NOT NULL
+          AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+          AND NVL(CLASSIFICMS, 'Z') <> 'R')
+      OR (TIPPESSOA = 'F'
+          AND IDENTINSCESTAD IS NOT NULL
+          AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+          AND NVL(CLASSIFICMS, 'Z') <> 'P')
+      OR (NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO'
+          AND NVL(CLASSIFICMS, 'Z') <> 'C');
+  v_backup := SQL%ROWCOUNT;
+  UPDATE TGFPAR
+     SET CLASSIFICMS = CASE
+           WHEN TIPPESSOA = 'J'
+            AND IDENTINSCESTAD IS NOT NULL
+            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'R'
+           WHEN TIPPESSOA = 'F'
+            AND IDENTINSCESTAD IS NOT NULL
+            AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO' THEN 'P'
+           WHEN NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO' THEN 'C'
+         END
+   WHERE (TIPPESSOA = 'J'
+          AND IDENTINSCESTAD IS NOT NULL
+          AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+          AND NVL(CLASSIFICMS, 'Z') <> 'R')
+      OR (TIPPESSOA = 'F'
+          AND IDENTINSCESTAD IS NOT NULL
+          AND UPPER(TRIM(IDENTINSCESTAD)) <> 'ISENTO'
+          AND NVL(CLASSIFICMS, 'Z') <> 'P')
+      OR (NVL(UPPER(TRIM(IDENTINSCESTAD)), 'ISENTO') = 'ISENTO'
+          AND NVL(CLASSIFICMS, 'Z') <> 'C');
+  v_atualizados := SQL%ROWCOUNT;
+  IF v_atualizados <> v_backup THEN
+    RAISE_APPLICATION_ERROR(-20031,
+      'Backup e atualizacao divergiram: backup=' || v_backup ||
+      ', atualizados=' || v_atualizados);
+  END IF;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('OK: Classificacao ICMS concluida. ID_EXECUCAO=' || v_id_execucao ||
+                       ', parceiros=' || v_atualizados);
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+    DBMS_OUTPUT.PUT_LINE('ERRO: Classificacao ICMS revertida. ' || SQLERRM);
+    RAISE;
+END;
+/
+PROMPT === FIM CLASSIFICACAO ICMS ===

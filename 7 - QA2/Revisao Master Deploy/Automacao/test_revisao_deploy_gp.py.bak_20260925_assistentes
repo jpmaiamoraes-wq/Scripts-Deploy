@@ -1,0 +1,19 @@
+import unittest
+import revisao_deploy as r
+
+
+class ParseGpTests(unittest.TestCase):
+    def test_formatos_aceitos(self):
+        self.assertEqual(r.parse_gp("Marcelo Borel <marcelo.borel@sankhya.com.br>"), ("Marcelo Borel", "marcelo.borel@sankhya.com.br"))
+        self.assertEqual(r.parse_gp("Marcelo Borel (Marcelo.Borel@sankhya.com.br)"), ("Marcelo Borel", "marcelo.borel@sankhya.com.br"))
+        self.assertEqual(r.parse_gp("marcelo.borel@sankhya.com.br"), (None, "marcelo.borel@sankhya.com.br"))
+        self.assertEqual(r.parse_gp("Marcelo Borel"), ("Marcelo Borel", None))
+
+    def test_formatos_invalidos(self):
+        for v in ("", "   ", "a@b", "Nome <a@b>"):
+            with self.assertRaises(ValueError):
+                r.parse_gp(v)
+
+
+if __name__ == "__main__":
+    unittest.main()

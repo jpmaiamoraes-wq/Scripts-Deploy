@@ -1,0 +1,427 @@
+#!/usr/bin/env python3
+"""Prepara e analisa uma revisao Deploy Agent sem armazenar credenciais."""
+
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import os
+import re
+import shutil
+import socket
+import subprocess
+import sys
+import unicodedata
+from pathlib import Path
+
+
+HERE = Path(__file__).resolve().parent
+SUITE = HERE.parent
+QA2 = SUITE.parent
+DEFAULT_CLIENTS = QA2 / "Clientes"
+ROUTE_TOOL = QA2.parent.parent / "Ferramentas" / "RotaVPN_v2.command"
+ROUTE_IPS_FILE = HERE / "ips-roteamento-vpn.txt"
+MASTER = SUITE / "Revisao_Master_Deploy.sql"
+CLEANUP = SUITE / "Limpar_Objetos_Revisao.sql"
+ROLLBACK = SUITE / "Rollback"
+UNIT_PRECHECK = SUITE / "00_Precheck_Unidades.sql"
+POST17_PRECHECK = SUITE / "00_Precheck_Etapas_18_31.sql"
+IDENTITY_VARIATIONS = QA2 / "00_Identidade_Empresa_Variacoes_ReadOnly_MODELO.sql"
+CARD09_STATE = QA2 / "32_Card09_Estado_Execucao_MODELO.sql"
+CARD09_MAP = QA2 / "32A_Card09_Mapear_Direto_XML.sql"
+CARD09_WRAPPER = QA2 / "32B_Card09_Executor_Wrapper_MODELO.sql"
+CARD09_EXECUTOR = QA2 / "32B_Card09_Inserir_Notas_Sem_Financeiro_DUP.sql"
+CARD09_ROLLBACK = QA2 / "32C_Card09_Rollback_Notas_Sem_Financeiro_DUP.sql"
+CARD09_POST = QA2 / "32D_Card09_PosValidacao_MODELO.sql"
+
+
+def safe_name(value: str) -> str:
+    plain = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode()
+    plain = re.sub(r"[^A-Za-z0-9 _.-]+", "", plain).strip(" .")
+    plain = re.sub(r"\s+", " ", plain)
+    if not plain or plain in {".", ".."}:
+        raise ValueError("Nome do cliente invalido.")
+    return plain.upper()
+
+
+EMAIL_RE = r"[^@\s<>]+@[^@\s<>]+\.[^@\s<>]+"
+
+
+def parse_gp(value: str) -> tuple[str | None, str | None]:
+    """Aceita 'Nome', 'email@dominio' ou 'Nome <email@dominio>' e devolve (nome, email)."""
+    text = (value or "").strip()
+    if not text:
+        raise ValueError("Informe o nome ou e-mail do GP.")
+    combined = re.fullmatch(r"(.+?)\s*[<(]\s*(" + EMAIL_RE + r")\s*[>)]", text)
+    if combined:
+        return combined.group(1).strip(), combined.group(2).lower()
+    if "@" in text:
+        if not re.fullmatch(EMAIL_RE, text):
+            raise ValueError("E-mail do GP invalido.")
+        return None, text.lower()
+    return text, None
+
+
+def validate(args: argparse.Namespace) -> None:
+    try:
+        socket.inet_aton(args.hostname)
+    except OSError as exc:
+        raise ValueError(f"IPv4 invalido: {args.hostname}") from exc
+    if not 1 <= args.port <= 65535:
+        raise ValueError("Porta fora do intervalo 1..65535.")
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", args.username):
+        raise ValueError("Usuario Oracle invalido.")
+    if not re.fullmatch(r"[A-Za-z0-9._-]+(?:\.[A-Za-z0-9._-]+)+", args.service):
+        raise ValueError("Service name invalido.")
+    args.gp_nome, args.gp_email = parse_gp(args.gp)
+    if bool(args.analista_nome) != bool(args.analista_email):
+        raise ValueError("Informe nome e e-mail da analista de projetos juntos, ou deixe ambos para confirmar antes do encerramento.")
+    if args.analista_email and not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", args.analista_email):
+        raise ValueError("E-mail da analista de projetos invalido.")
+    for required in (
+        MASTER,
+        CLEANUP,
+        ROLLBACK,
+        UNIT_PRECHECK,
+        POST17_PRECHECK,
+        IDENTITY_VARIATIONS,
+        CARD09_STATE,
+        CARD09_MAP,
+        CARD09_WRAPPER,
+        CARD09_EXECUTOR,
+        CARD09_ROLLBACK,
+        CARD09_POST,
+        ROUTE_TOOL,
+        ROUTE_IPS_FILE,
+    ):
+        if not required.exists():
+            raise FileNotFoundError(f"Dependencia ausente: {required}")
+
+
+def tcp_check(host: str, port: int) -> bool:
+    try:
+        with socket.create_connection((host, port), timeout=2):
+            return True
+    except OSError:
+        return False
+
+
+def route_check(host: str, port: int, apply: bool) -> dict[str, object]:
+    mode = "--apply" if apply else "--check"
+    environment = os.environ.copy()
+    environment["ROTASVPN_IPS_FILE"] = str(ROUTE_IPS_FILE)
+    proc = subprocess.run(
+        [str(ROUTE_TOOL), mode, host, str(port)],
+        text=True,
+        capture_output=True,
+        check=False,
+        env=environment,
+    )
+    return {
+        "modo": mode,
+        "codigo": proc.returncode,
+        "saida": (proc.stdout + proc.stderr).strip(),
+    }
+
+
+def sql_quote(value: str) -> str:
+    return value.replace("'", "''")
+
+
+def wrapper_sql(client: str, service: str, log_path: Path) -> str:
+    confirmation = f"EXECUTAR {client}"
+    return f"""-- Gerado automaticamente. Nao contem senha.
+-- Abra este arquivo conectado a base correta e execute como SCRIPT (F5).
+SET DEFINE ON
+SET SERVEROUTPUT ON SIZE UNLIMITED
+SET SQLBLANKLINES ON
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+SPOOL \"{log_path}\"
+
+PROMPT === IDENTIDADE DA CONEXAO ===
+SELECT SYS_CONTEXT('USERENV','SESSION_USER') USUARIO,
+       SYS_CONTEXT('USERENV','CURRENT_SCHEMA') SCHEMA_ATUAL,
+       SYS_CONTEXT('USERENV','SERVICE_NAME') SERVICO
+  FROM DUAL;
+-- A revisão é BASE_INTEIRA; a quantidade de empresas não é gate.
+SELECT CODEMP, RAZAOSOCIAL, CGC FROM TSIEMP ORDER BY CODEMP;
+
+ACCEPT P_CONFIRMA CHAR PROMPT 'Digite {confirmation} para confirmar a base: '
+BEGIN
+  IF UPPER(TRIM('&&P_CONFIRMA')) <> '{sql_quote(confirmation.upper())}' THEN
+    RAISE_APPLICATION_ERROR(-20500,'Execucao cancelada: confirmacao da base divergente.');
+  END IF;
+  IF UPPER(SYS_CONTEXT('USERENV','SERVICE_NAME')) <> '{sql_quote(service.upper())}' THEN
+    RAISE_APPLICATION_ERROR(-20501,'Execucao cancelada: SERVICE_NAME diferente do esperado ({sql_quote(service.upper())}).');
+  END IF;
+END;
+/
+UNDEFINE P_CONFIRMA
+
+@@\"{MASTER}\"
+
+SPOOL OFF
+"""
+
+
+def legacy_fallback_markdown(client: str, service: str, execution_sql: Path) -> str:
+    return f"""# Roteiro de fallback — execução legada pelo VS Code
+
+Base: `{client}`  
+Serviço esperado: `{service}`
+
+## Quando usar
+
+Este roteiro preserva a abordagem anterior caso o executor Oracle direto não
+possa ser utilizado. Ele deve ser acionado somente quando:
+
+- a falha ocorreu antes de qualquer DML/DDL; ou
+- o estado da execução parcial foi conferido, a identidade foi reconfirmada e
+  a continuação pelo fluxo legado foi autorizada.
+
+Se o executor direto já iniciou alterações e o estado não estiver comprovado,
+pare. Não execute o wrapper legado por tentativa. Preserve o log, faça o
+inventário do estado e escolha entre retomada segura ou reversão específica.
+
+## Rota legada preservada
+
+Wrapper gerado para esta base:
+
+`{execution_sql}`
+
+Abra o arquivo no VS Code, conecte manualmente o perfil Oracle correto e execute
+como script (`F5`). A senha deve ser informada somente pela tela segura da
+conexão manual; nunca deve ser copiada para arquivo, terminal, chat ou log.
+
+## Procedimento rápido
+
+1. Interrompa o executor direto e preserve o log da tentativa.
+2. Confirme a VPN FortiClient e a conexão salva no VS Code.
+3. Execute primeiro a identidade/preflight em modo leitura.
+4. Confira `SESSION_USER`, `CURRENT_SCHEMA`, `SERVICE_NAME` e a base esperada.
+5. Execute o wrapper legado somente se não houver alteração parcial sem análise.
+6. Grave o resultado em um log novo, separado da tentativa direta.
+7. Analise o log com `revisao_deploy.py analyze` e preserve todos os artefatos.
+
+## Regras de segurança
+
+- Não repetir uma fase que já tenha `ID_EXECUCAO` concluído.
+- Não remover backups, mapas ou logs da tentativa direta.
+- Não trocar de rota para encobrir erro de transporte ou erro lógico.
+- Para Card 09, manter mapa, confirmação financeira, auditoria e pós-validação
+  como fases separadas.
+
+O fallback é uma rota de continuidade operacional, não uma autorização para
+reexecutar scripts ou ignorar os gates de identidade, backup e reversão.
+"""
+
+
+def prepare(args: argparse.Namespace) -> int:
+    validate(args)
+    client = safe_name(args.client)
+    root = Path(args.output).expanduser().resolve() if args.output else DEFAULT_CLIENTS
+    client_dir = root / client
+    client_dir.mkdir(parents=True, exist_ok=True)
+    logs = client_dir / "Logs"
+    artifacts = client_dir / "Artefatos_Revisao"
+    rollbacks = artifacts / "Rollback"
+    logs.mkdir(exist_ok=True)
+    rollbacks.mkdir(parents=True, exist_ok=True)
+
+    timestamp = dt.datetime.now().astimezone().strftime("%Y%m%d_%H%M%S")
+    log_path = logs / f"Revisao_Master_{timestamp}.log"
+    execution_sql = client_dir / f"Executar_Revisao_{client.replace(' ', '_')}.sql"
+    metadata_path = client_dir / "Dados_Revisao.json"
+    unit_precheck_path = client_dir / "00_Precheck_Unidades.sql"
+    post17_precheck_path = client_dir / "00_Precheck_Etapas_18_31.sql"
+    fallback_path = client_dir / "ROTEIRO_FALLBACK_LEGADO_VSCODE.md"
+
+    if metadata_path.exists() and not args.force:
+        raise FileExistsError(
+            f"{metadata_path} ja existe. Use --force somente depois de conferir a pasta."
+        )
+
+    route_check_result = route_check(args.hostname, args.port, False)
+    automatic_route = False
+    if args.apply_route or (args.auto_route and route_check_result["codigo"] == 10):
+        route = route_check(args.hostname, args.port, True)
+        route["checagem_inicial"] = route_check_result
+        automatic_route = not args.apply_route
+    else:
+        route = route_check_result
+    reachable = tcp_check(args.hostname, args.port)
+    metadata = {
+        "cliente_informado": args.client,
+        "pasta_cliente": client,
+        "hostname": args.hostname,
+        "port": args.port,
+        "servicename": args.service,
+        "username": args.username,
+        "gp_email": args.gp_email,
+        "gp_nome": args.gp_nome,
+        "analista_projetos": {
+            "nome": args.analista_nome,
+            "email": args.analista_email,
+            "confirmada": bool(args.analista_nome and args.analista_email),
+        },
+        "comunicacao_email": {
+            "status": "AGUARDANDO_PDF_FINAL_E_CONFIRMACAO_DOS_DESTINATARIOS",
+            "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
+            "corpo_modelo": "Olá,\\n\\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\\n\\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\\n\\nAtenciosamente,",
+            "anexo_permitido": "somente o PDF final validado",
+        },
+        "preparado_em": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
+        "porta_oracle_acessivel": reachable,
+        "verificacao_rota": route,
+        "roteamento_automatico": automatic_route,
+        "senha_armazenada": False,
+        "execucao_oracle_realizada": False,
+        "log_esperado": str(log_path),
+        "rotas_execucao": {
+            "primaria": "ORACLE_DIRETO_LOTE",
+            "fallback": "VSCODE_SCRIPT_LEGADO",
+            "wrapper_legado": str(execution_sql),
+            "roteiro_fallback": str(fallback_path),
+            "troca_automatica": False,
+            "catalogo_ips": str(ROUTE_IPS_FILE),
+            "aplica_rota_cadastrada_automaticamente": bool(args.auto_route),
+        },
+    }
+    metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n")
+    execution_sql.write_text(wrapper_sql(client, args.service, log_path))
+    fallback_path.write_text(
+        legacy_fallback_markdown(client, args.service, execution_sql),
+        encoding="utf-8",
+    )
+    shutil.copy2(UNIT_PRECHECK, unit_precheck_path)
+    shutil.copy2(POST17_PRECHECK, post17_precheck_path)
+    for source in (
+        IDENTITY_VARIATIONS,
+        CARD09_STATE,
+        CARD09_MAP,
+        CARD09_WRAPPER,
+        CARD09_EXECUTOR,
+        CARD09_ROLLBACK,
+        CARD09_POST,
+    ):
+        shutil.copy2(source, client_dir / source.name)
+    shutil.copy2(CLEANUP, artifacts / CLEANUP.name)
+    for source in sorted(ROLLBACK.glob("*.sql")):
+        shutil.copy2(source, rollbacks / source.name)
+
+    print(f"PASTA_CLIENTE={client_dir}")
+    print(f"SCRIPT_MASTER_LEGADO={execution_sql}")
+    print(f"ROTEIRO_FALLBACK_LEGADO={fallback_path}")
+    print(f"EXECUTOR_ORACLE_DIRETO={HERE / 'oracle_direct.py'}")
+    print(f"PRECHECK_UNIDADES={unit_precheck_path}")
+    print(f"PRECHECK_ETAPAS_18_31={post17_precheck_path}")
+    print(f"LOG_ESPERADO={log_path}")
+    print(f"PORTA_ORACLE_ACESSIVEL={'SIM' if reachable else 'NAO'}")
+    print(f"ROTA_STATUS={route['codigo']}: {route['saida']}")
+    print(f"ROTA_APLICADA_AUTOMATICAMENTE={'SIM' if automatic_route else 'NAO'}")
+    print("BANCO_ALTERADO=NAO")
+    print(f"ANALISTA_PROJETOS={'CONFIRMADA' if metadata['analista_projetos']['confirmada'] else 'INFORMAR_ANTES_DO_ENCERRAMENTO'}")
+    return 0
+
+
+def analyze(args: argparse.Namespace) -> int:
+    log = Path(args.log).expanduser().resolve()
+    if not log.is_file():
+        raise FileNotFoundError(f"Log nao encontrado: {log}")
+    text = log.read_text(errors="replace")
+    errors = [line.strip() for line in text.splitlines() if re.search(r"\b(?:ORA|SP2)-\d+", line)]
+    ids = re.findall(r"ID_EXECUCAO\s*=\s*([^;\s]+)", text, flags=re.I)
+    skipped = [line.strip() for line in text.splitlines() if "STATUS=IGNORADO_COLISAO" in line]
+    privilege_lines = [line.strip() for line in text.splitlines() if "STATUS=IGNORADO_SEM_PRIVILEGIO" in line]
+    ticket = (args.ticket or "").strip()
+    ticket_ok = bool(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._/-]{1,63}", ticket))
+    completed = "REVISAO MASTER DEPLOY - CONCLUIDO SEM ERRO SQL NAO TRATADO" in text
+    result = {
+        "log": str(log),
+        "conclusao_master_encontrada": completed,
+        "ids_execucao": list(dict.fromkeys(ids)),
+        "colisoes_ignoradas": skipped,
+        "objetos_invalidos_sem_privilegio": privilege_lines,
+        "ticket_sankhya_cloud": ticket if ticket_ok else None,
+        "erros_oracle_sqlplus": errors,
+        "requer_revisao_manual": bool(errors or skipped or privilege_lines or not completed or (privilege_lines and not ticket_ok)),
+    }
+    json_path = log.with_suffix(".resultado.json")
+    md_path = log.with_suffix(".resumo.md")
+    json_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    md = [
+        "# Resumo da Revisao Master Deploy",
+        "",
+        f"- Log: `{log.name}`",
+        f"- Conclusao final encontrada: {'sim' if completed else 'nao'}",
+        f"- IDs de execucao encontrados: {len(result['ids_execucao'])}",
+        f"- Colisoes ignoradas: {len(skipped)}",
+        f"- Erros ORA/SP2 encontrados: {len(errors)}",
+        f"- Objetos invalidos sem privilegio: {len(privilege_lines)}",
+        f"- Ticket Sankhya Cloud: `{ticket}`" if ticket_ok else "- Ticket Sankhya Cloud: pendente",
+        f"- Revisao manual necessaria: {'sim' if result['requer_revisao_manual'] else 'nao'}",
+        "",
+    ]
+    if skipped:
+        md.extend(["## Colisoes", "", *[f"- `{x}`" for x in skipped], ""])
+    if errors:
+        md.extend(["## Erros", "", *[f"- `{x}`" for x in errors], ""])
+    if privilege_lines:
+        md.extend([
+            "## Chamado obrigatorio ao Sankhya Cloud", "",
+            "A base possui objetos invalidos que nao puderam ser recompilados pela conexao de revisao.",
+            "Solicitar ao Sankhya Cloud a recompilacao/correcao das funcoes do schema informado, anexando a lista de objetos invalidos e o log desta revisao.",
+            "Texto sugerido para o chamado:", "",
+            "> Durante a revisao da base, foram identificados objetos INVALID do schema informado. A conexao utilizada nao possui privilegio ALTER ANY PROCEDURE e a recompilacao nao foi realizada. Solicito a analise e recompilacao/correcao dos objetos listados no anexo, validando dependencias e erros de compilacao. Favor retornar o numero do chamado e o resultado do atendimento.",
+            "", "Objetos/saidas detectados:", *[f"- `{x}`" for x in privilege_lines], "",
+        ])
+    md_path.write_text("\n".join(md))
+    print(f"RESULTADO_JSON={json_path}")
+    print(f"RESUMO_MD={md_path}")
+    print(f"REVISAO_MANUAL={'SIM' if result['requer_revisao_manual'] else 'NAO'}")
+    return 2 if result["requer_revisao_manual"] else 0
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(description="Automacao assistida da Revisao Master Deploy")
+    sub = root.add_subparsers(dest="command", required=True)
+    prep = sub.add_parser("prepare", help="prepara pasta, rota e executor SQL")
+    prep.add_argument("--client", required=True)
+    prep.add_argument("--hostname", required=True)
+    prep.add_argument("--port", type=int, default=1521)
+    prep.add_argument("--service", required=True)
+    prep.add_argument("--username", required=True)
+    prep.add_argument("--gp", required=True, help="nome, e-mail ou 'Nome <e-mail>' do Gerente de Projetos")
+    prep.add_argument("--analista-nome", help="nome completo da analista de projetos; confirmar antes do encerramento se omitido")
+    prep.add_argument("--analista-email", help="e-mail da analista de projetos; confirmar antes do encerramento se omitido")
+    prep.add_argument("--output", help="raiz alternativa, util para homologacao")
+    prep.add_argument("--apply-route", action="store_true", help="forca a tentativa de aplicar somente a rota cadastrada")
+    prep.add_argument(
+        "--no-auto-route",
+        dest="auto_route",
+        action="store_false",
+        help="somente verifica a rota; nao aplica automaticamente uma rota cadastrada",
+    )
+    prep.set_defaults(auto_route=True)
+    prep.add_argument("--force", action="store_true", help="sobrescreve metadados e executor gerados")
+    prep.set_defaults(func=prepare)
+    scan = sub.add_parser("analyze", help="analisa o log produzido pelo executor direto ou lote aprovado")
+    scan.add_argument("--log", required=True)
+    scan.add_argument("--ticket", help="numero do chamado Sankhya Cloud, obrigatorio quando houver objetos invalidos sem privilegio")
+    scan.set_defaults(func=analyze)
+    return root
+
+
+def main() -> int:
+    try:
+        args = parser().parse_args()
+        return args.func(args)
+    except (ValueError, FileNotFoundError, FileExistsError) as exc:
+        print(f"ERRO: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

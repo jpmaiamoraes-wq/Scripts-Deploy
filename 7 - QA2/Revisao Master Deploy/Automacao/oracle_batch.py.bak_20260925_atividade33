@@ -1,0 +1,1004 @@
+#!/usr/bin/env python3
+"""Executor de lote aprovado para a Revisao Master Deploy.
+
+O lote abre uma unica sessao Oracle e executa scripts versionados sem pedir
+confirmacao por comando. Por padrao, faz uma confirmacao nativa antes das
+alteracoes; o modo --preauthorized exige o marcador explicito EXECUTAR <BASE>
+e elimina essa interrupcao, mantendo todos os gates tecnicos. Nao e um
+terminal SQL generico: os includes precisam permanecer dentro da suite
+Revisao Master Deploy e diretivas interativas sao rejeitadas.
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import hashlib
+import json
+import re
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+from oracle_direct import add_vault_arguments, connect, load_driver, strip_sql_comments, tcp_check
+
+
+HERE = Path(__file__).resolve().parent
+PROJECT_ROOT = HERE.parents[1]
+SECURITY_SENSITIVE_ENTRYPOINTS = {"Limpar_Objetos_Revisao.sql"}
+APPROVED_ENTRYPOINTS = {
+    "Revisao Master Deploy/Revisao_Master_Deploy.sql",
+    "Revisao Master Deploy/32A_Mapear_Insert_Direto_Financeiro_DUP.sql",
+    # One reviewed MOVE Card 09 financial-phase wrapper; deliberately not a generic 32B prefix.
+    "Clientes/MOVE GESTAO DE ENERGIA LTDA/32B_Card09_Executor_MOVE_20260922.sql",
+}
+APPROVED_CLIENT_ENTRYPOINT_PREFIXES = (
+    "29_30_Merge_Antifragil_",
+    "32A_Card09_Mapear_Direto_XML_",
+    "Continuacao_Master_Deploy_",
+)
+
+
+class BatchError(RuntimeError):
+    pass
+
+
+@dataclass(frozen=True)
+class SourceLine:
+    path: Path
+    number: int
+    text: str
+
+
+@dataclass(frozen=True)
+class Statement:
+    path: Path
+    line: int
+    sql: str
+    kind: str
+
+
+@dataclass(frozen=True)
+class DefineEvent:
+    action: str
+    name: str
+    value: str | None
+    path: Path
+    line: int
+
+
+@dataclass
+class BatchPlan:
+    entrypoint: Path
+    statements: list[Statement]
+    bind_names: list[str]
+    files: list[Path]
+    sha256: str
+    define_events: list[DefineEvent]
+
+
+def relative_to_suite(path: Path) -> str:
+    try:
+        return str(path.relative_to(PROJECT_ROOT))
+    except ValueError as exc:
+        raise BatchError(f"Arquivo fora da raiz QA2 autorizada: {path}") from exc
+
+
+def expand_lines(path: Path, stack: tuple[Path, ...] = ()):
+    path = path.resolve()
+    relative_to_suite(path)
+    if path in stack:
+        chain = " -> ".join(relative_to_suite(item) for item in (*stack, path))
+        raise BatchError(f"Ciclo de include detectado: {chain}")
+    if not path.is_file():
+        raise BatchError(f"Arquivo SQL nao encontrado: {path}")
+
+    for number, text in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        stripped = text.strip()
+        if stripped.startswith("@@") or stripped.startswith("@"):
+            marker_size = 2 if stripped.startswith("@@") else 1
+            raw_target = stripped[marker_size:].strip().rstrip(";").strip()
+            target_text = raw_target.strip('"').strip("'")
+            target = (path.parent / target_text).resolve()
+            relative_to_suite(target)
+            yield from expand_lines(target, (*stack, path))
+        else:
+            yield SourceLine(path, number, text)
+
+
+def directive(line: str) -> str | None:
+    stripped = line.strip()
+    upper = stripped.upper()
+    if not stripped or stripped.startswith("--") or stripped.startswith("/*"):
+        return "COMMENT"
+    if upper.startswith("SET ") or upper.startswith("WHENEVER "):
+        return "CONTROL"
+    if upper.startswith(("PROMPT ", "SPOOL ", "REM ", "COLUMN ", "PRINT ", "SHOW ")):
+        return "CONTROL"
+    if upper.startswith("UNDEFINE ") or upper in {"EXIT", "QUIT"}:
+        return "CONTROL"
+    if upper.startswith("VARIABLE "):
+        return "VARIABLE"
+    if upper.startswith("ACCEPT "):
+        return "INTERACTIVE"
+    if upper.startswith("DEFINE "):
+        return "DEFINE"
+    if upper.startswith(("HOST ", "CONNECT ", "DISCONNECT", "START ", "RUN")):
+        return "FORBIDDEN"
+    return None
+
+
+def statement_kind(sql: str) -> str:
+    head = re.sub(r"^\s*(?:--[^\n]*\n|/\*.*?\*/\s*)*", "", sql, flags=re.S)
+    upper = head.lstrip().upper()
+    if upper.startswith(("DECLARE", "BEGIN", "CREATE OR REPLACE")):
+        return "PLSQL_OR_DDL_BLOCK"
+    match = re.match(r"([A-Z]+)", upper)
+    return match.group(1) if match else "UNKNOWN"
+
+
+def starts_slash_terminated_block(sql: str) -> bool:
+    return statement_kind(sql) == "PLSQL_OR_DDL_BLOCK"
+
+
+def parse_variable(line: str, source: SourceLine) -> str:
+    match = re.match(r"^\s*VARIABLE\s+([A-Za-z][A-Za-z0-9_$#]*)\s+", line, flags=re.I)
+    if not match:
+        raise BatchError(f"VARIABLE nao reconhecido em {relative_to_suite(source.path)}:{source.number}")
+    return match.group(1).upper()
+
+
+def parse_define(
+    line: str,
+    source: SourceLine,
+    defines: dict[str, str],
+) -> tuple[str, str]:
+    match = re.match(
+        r"^\s*DEFINE\s+([A-Za-z][A-Za-z0-9_$#]*)\s*=\s*(.*?)\s*$",
+        line,
+        flags=re.I,
+    )
+    if not match:
+        raise BatchError(
+            f"DEFINE nao reconhecido em {relative_to_suite(source.path)}:{source.number}"
+        )
+    name, raw_value = match.group(1).upper(), match.group(2)
+    value = raw_value.strip()
+    if len(value) >= 2 and value[0] == value[-1] == "'":
+        value = value[1:-1]
+    elif len(value) >= 2 and value[0] == value[-1] == '"':
+        value = value[1:-1]
+    if not re.fullmatch(r"[A-Za-z0-9_$#.-]+|&&[A-Za-z][A-Za-z0-9_$#]*", value):
+        raise BatchError(
+            f"Valor DEFINE nao permitido para {name} em "
+            f"{relative_to_suite(source.path)}:{source.number}"
+        )
+    defines[name] = value
+    return name, value
+
+
+def undefine(line: str, source: SourceLine, defines: dict[str, str]) -> str:
+    match = re.match(r"^\s*UNDEFINE\s+([A-Za-z][A-Za-z0-9_$#]*)\s*$", line, flags=re.I)
+    if not match:
+        raise BatchError(
+            f"UNDEFINE nao reconhecido em {relative_to_suite(source.path)}:{source.number}"
+        )
+    name = match.group(1).upper()
+    defines.pop(name, None)
+    return name
+
+
+def resolve_define(name: str, defines: dict[str, str], stack: tuple[str, ...] = ()) -> str:
+    name = name.upper()
+    if name in stack:
+        raise BatchError(f"Ciclo de DEFINE detectado: {' -> '.join((*stack, name))}")
+    if name not in defines:
+        raise BatchError(f"DEFINE ausente para &{name}")
+    value = defines[name]
+    reference = re.fullmatch(r"&&([A-Za-z][A-Za-z0-9_$#]*)", value)
+    if reference:
+        value = resolve_define(reference.group(1), defines, (*stack, name))
+    if not re.fullmatch(r"[A-Za-z0-9_$#.-]+", value):
+        raise BatchError(f"Valor DEFINE nao permitido para {name}")
+    return value
+
+
+def substitute_defines(text: str, source: SourceLine, defines: dict[str, str]) -> str:
+    def replacement(match: re.Match[str]) -> str:
+        marker = match.group(1)
+        name = match.group(2).upper()
+        if name not in defines and marker != "&&":
+            # O Master possui textos armazenados com entidades HTML, como
+            # &amp; e &lt;. Somente referencias conhecidas sao expandidas;
+            # referencias duplas desconhecidas continuam sendo erro.
+            return match.group(0)
+        try:
+            return resolve_define(name, defines)
+        except BatchError as exc:
+            raise BatchError(
+                f"{exc} em {relative_to_suite(source.path)}:{source.number}"
+            ) from exc
+
+    return re.sub(r"(&&|&)([A-Za-z][A-Za-z0-9_$#]*)", replacement, text)
+
+
+def parse_plan(entrypoint: Path) -> BatchPlan:
+    statements: list[Statement] = []
+    bind_names: list[str] = []
+    files: set[Path] = set()
+    define_events: list[DefineEvent] = []
+    buffer: list[SourceLine] = []
+    block = False
+    defines: dict[str, str] = {}
+
+    for source in expand_lines(entrypoint):
+        files.add(source.path)
+        stripped = source.text.strip()
+        kind = directive(source.text)
+
+        if not buffer and kind == "COMMENT":
+            continue
+        if not buffer and kind == "CONTROL":
+            if stripped.upper().startswith("UNDEFINE "):
+                name = undefine(source.text, source, defines)
+                define_events.append(
+                    DefineEvent("UNDEFINE", name, None, source.path, source.number)
+                )
+            continue
+        if not buffer and kind == "VARIABLE":
+            name = parse_variable(source.text, source)
+            if name not in bind_names:
+                bind_names.append(name)
+            continue
+        if not buffer and kind == "DEFINE":
+            name, value = parse_define(source.text, source, defines)
+            define_events.append(
+                DefineEvent("DEFINE", name, value, source.path, source.number)
+            )
+            continue
+        if not buffer and kind in {"INTERACTIVE", "FORBIDDEN"}:
+            detail = {
+                "INTERACTIVE": "ACCEPT",
+                "FORBIDDEN": "diretiva externa",
+            }[kind]
+            raise BatchError(
+                f"{detail} exige parametrizacao explicita antes do lote: "
+                f"{relative_to_suite(source.path)}:{source.number}"
+            )
+        if not buffer and stripped == "/":
+            raise BatchError(f"Bloco vazio em {relative_to_suite(source.path)}:{source.number}")
+
+        if not buffer:
+            block = starts_slash_terminated_block(source.text)
+        rendered = substitute_defines(source.text, source, defines)
+        buffer.append(SourceLine(source.path, source.number, rendered))
+
+        if stripped == "/":
+            sql_lines = buffer[:-1]
+            if not sql_lines:
+                raise BatchError(f"Bloco vazio em {relative_to_suite(source.path)}:{source.number}")
+            sql = "\n".join(item.text for item in sql_lines).strip()
+            if sql:
+                statements.append(Statement(sql_lines[0].path, sql_lines[0].number, sql, statement_kind(sql)))
+            buffer = []
+            block = False
+        elif not block and stripped.endswith(";"):
+            sql = "\n".join(item.text for item in buffer).strip()
+            sql = sql[:-1].rstrip()
+            if sql:
+                statements.append(Statement(buffer[0].path, buffer[0].number, sql, statement_kind(sql)))
+            buffer = []
+
+    if buffer:
+        source = buffer[0]
+        raise BatchError(
+            f"Instrucao sem terminador em {relative_to_suite(source.path)}:{source.number}"
+        )
+
+    if not statements:
+        raise BatchError("Nenhuma instrucao executavel foi encontrada.")
+
+    digest = hashlib.sha256()
+    for path in sorted(files):
+        digest.update(relative_to_suite(path).encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+
+    return BatchPlan(
+        entrypoint=entrypoint.resolve(),
+        statements=statements,
+        bind_names=bind_names,
+        files=sorted(files),
+        sha256=digest.hexdigest(),
+        define_events=define_events,
+    )
+
+
+def plan_summary(plan: BatchPlan) -> dict[str, object]:
+    counts: dict[str, int] = {}
+    for statement in plan.statements:
+        counts[statement.kind] = counts.get(statement.kind, 0) + 1
+    return {
+        "entrypoint": relative_to_suite(plan.entrypoint),
+        "arquivos": [relative_to_suite(path) for path in plan.files],
+        "qtd_instrucoes": len(plan.statements),
+        "tipos": counts,
+        "binds_sqlplus": plan.bind_names,
+        "defines_sqlplus": [
+            {"acao": event.action, "nome": event.name}
+            for event in plan.define_events
+        ],
+        "sha256_suite": plan.sha256,
+        "dml_ddl_permitidos_no_lote": True,
+        "confirmacao_por_instrucao": False,
+    }
+
+
+def _preflight_issue(
+    severity: str,
+    code: str,
+    message: str,
+    *,
+    statement: Statement | None = None,
+    path: Path | None = None,
+    line: int | None = None,
+) -> dict[str, object]:
+    issue: dict[str, object] = {
+        "severidade": severity,
+        "codigo": code,
+        "mensagem": message,
+    }
+    if statement is not None:
+        path = statement.path
+        line = statement.line
+    if path is not None:
+        issue["arquivo"] = relative_to_suite(path)
+    if line is not None:
+        issue["linha"] = line
+    return issue
+
+
+def _mask_sql_literals(sql: str) -> str:
+    """Remove o conteúdo de literais para evitar falsos positivos textuais."""
+    chars = list(sql)
+    index = 0
+    while index < len(chars):
+        if chars[index] != "'":
+            index += 1
+            continue
+        chars[index] = " "
+        index += 1
+        while index < len(chars):
+            chars[index] = " " if chars[index] != "\n" else "\n"
+            if sql[index] == "'":
+                if index + 1 < len(sql) and sql[index + 1] == "'":
+                    chars[index + 1] = " "
+                    index += 2
+                    continue
+                index += 1
+                break
+            index += 1
+    return "".join(chars)
+
+
+def _select_projections(sql: str) -> list[str]:
+    """Encontra projeções SELECT no mesmo nível de parênteses."""
+    masked = _mask_sql_literals(strip_sql_comments(sql))
+    tokens: list[tuple[str, int, int]] = []
+    depth = 0
+    cursor = 0
+    token_pattern = re.compile(r"\b(SELECT|FROM)\b", flags=re.I)
+    for match in token_pattern.finditer(masked):
+        while cursor < match.start():
+            if masked[cursor] == "(":
+                depth += 1
+            elif masked[cursor] == ")":
+                depth = max(0, depth - 1)
+            cursor += 1
+        tokens.append((match.group(1).upper(), match.start(), depth))
+
+    projections: list[str] = []
+    for index, (word, start, select_depth) in enumerate(tokens):
+        if word != "SELECT":
+            continue
+        for next_word, next_start, next_depth in tokens[index + 1:]:
+            if next_word == "FROM" and next_depth == select_depth:
+                projection = masked[start + len("SELECT"):next_start].strip()
+                if " INTO " not in f" {projection.upper()} ":
+                    projections.append(projection)
+                break
+    return projections
+
+
+def _split_top_level(text: str) -> list[str]:
+    parts: list[str] = []
+    start = 0
+    depth = 0
+    for index, char in enumerate(text):
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth = max(0, depth - 1)
+        elif char == "," and depth == 0:
+            parts.append(text[start:index].strip())
+            start = index + 1
+    parts.append(text[start:].strip())
+    return [part for part in parts if part]
+
+
+def _projection_identity(item: str) -> tuple[str, str | None, bool] | None:
+    item = re.sub(r"^\s*(?:DISTINCT|ALL)\s+", "", item, flags=re.I).strip()
+    wildcard = re.fullmatch(r"(?:(\w+)\.)?\*", item)
+    if wildcard:
+        return "*", wildcard.group(1).upper() if wildcard.group(1) else None, True
+
+    alias_match = re.search(r"\s+AS\s+(\w+)\s*$", item, flags=re.I)
+    if alias_match:
+        return alias_match.group(1).upper(), None, False
+
+    simple = re.fullmatch(r"(?:(\w+)\.)?(\w+)", item)
+    if simple:
+        return simple.group(2).upper(), simple.group(1).upper() if simple.group(1) else None, False
+    return None
+
+
+def _preflight_bind_issues(plan: BatchPlan) -> list[dict[str, object]]:
+    issues: list[dict[str, object]] = []
+    declared = {name.upper() for name in plan.bind_names}
+    referenced: set[str] = set()
+    for statement in plan.statements:
+        names = {
+            name.upper()
+            for name in re.findall(r":(RMD_[A-Z0-9_$#]+)", statement.sql, flags=re.I)
+        }
+        referenced.update(names)
+        missing = sorted(names - declared)
+        if missing:
+            issues.append(_preflight_issue(
+                "BLOQUEIO",
+                "BIND_NAO_DECLARADO",
+                "O bloco usa bind(s) RMD sem declaração VARIABLE no lote: "
+                + ", ".join(missing),
+                statement=statement,
+            ))
+    for unused in sorted(declared - referenced):
+        issues.append(_preflight_issue(
+            "AVISO",
+            "BIND_NAO_UTILIZADO",
+            f"O bind {unused} foi declarado, mas não foi localizado em nenhuma instrução expandida.",
+        ))
+    return issues
+
+
+def _preflight_define_issues(plan: BatchPlan) -> list[dict[str, object]]:
+    issues: list[dict[str, object]] = []
+    active: dict[str, DefineEvent] = {}
+    for event in plan.define_events:
+        if event.action == "UNDEFINE":
+            active.pop(event.name, None)
+            continue
+        previous = active.get(event.name)
+        if previous is not None:
+            issues.append(_preflight_issue(
+                "BLOQUEIO",
+                "DEFINE_REDEFINIDO",
+                f"DEFINE {event.name} sobrescreve definição anterior em "
+                f"{relative_to_suite(previous.path)}:{previous.line}; "
+                "remova a redefinição ou use UNDEFINE de forma explícita.",
+                path=event.path,
+                line=event.line,
+            ))
+        active[event.name] = event
+    return issues
+
+
+def _preflight_sql_issues(statement: Statement) -> list[dict[str, object]]:
+    issues: list[dict[str, object]] = []
+    sql = strip_sql_comments(statement.sql)
+    upper = sql.upper()
+
+    if statement.kind == "UNKNOWN":
+        issues.append(_preflight_issue(
+            "BLOQUEIO",
+            "INSTRUCAO_NAO_RECONHECIDA",
+            "Não foi possível classificar a instrução para execução controlada.",
+            statement=statement,
+        ))
+
+    if statement.kind == "COMMIT":
+        issues.append(_preflight_issue(
+            "AVISO",
+            "COMMIT_INTERNO",
+            "A instrução contém COMMIT próprio; falhas posteriores não desfazem esse trecho.",
+            statement=statement,
+        ))
+
+    unresolved_double = re.findall(r"&&([A-Za-z][A-Za-z0-9_$#]*)", sql)
+    if unresolved_double:
+        issues.append(_preflight_issue(
+            "BLOQUEIO",
+            "SUBSTITUICAO_DUPLA_NAO_RESOLVIDA",
+            "Referência && não resolvida: " + ", ".join(sorted(set(unresolved_double))),
+            statement=statement,
+        ))
+
+    html_entities = {"amp", "lt", "gt", "quot", "apos", "nbsp"}
+    for match in re.finditer(r"(?<!&) &([A-Za-z][A-Za-z0-9_$#]*)(?:;|\b)", sql, flags=re.X):
+        if match.group(1).lower() not in html_entities:
+            issues.append(_preflight_issue(
+                "BLOQUEIO",
+                "SUBSTITUICAO_NAO_RESOLVIDA",
+                f"Referência SQL*Plus &{match.group(1)} pode abrir prompt ou alterar o SQL.",
+                statement=statement,
+            ))
+
+    if (
+        re.search(r"\bEXECUTE\s+IMMEDIATE\b", upper)
+        and re.search(r"\bCREATE\s+(?:GLOBAL\s+TEMPORARY\s+)?TABLE\b", upper)
+        and re.search(r"\bXMLTABLE\b", upper)
+    ):
+        issues.append(_preflight_issue(
+            "BLOQUEIO",
+            "CTAS_XMLTABLE_DINAMICO",
+            "CTAS/XMLTABLE aparece dentro de EXECUTE IMMEDIATE; usar DDL/consulta direta "
+            "ou separar a etapa antes do apply.",
+            statement=statement,
+        ))
+
+    if re.search(r"\b(?:CURSOR\s+\w+|FOR\s+\w+\s+IN\s*\()", upper):
+        for projection in _select_projections(sql):
+            explicit_names: dict[str, str] = {}
+            wildcard_aliases: set[str | None] = set()
+            explicit: list[tuple[str, str | None]] = []
+            for item in _split_top_level(_mask_sql_literals(projection)):
+                identity = _projection_identity(item)
+                if identity is None:
+                    continue
+                name, alias, is_wildcard = identity
+                if is_wildcard:
+                    wildcard_aliases.add(alias)
+                else:
+                    explicit.append((name, alias))
+                    if name in explicit_names:
+                        issues.append(_preflight_issue(
+                            "BLOQUEIO",
+                            "PLS00402_COLUNA_DUPLICADA",
+                            f"A projeção repete a coluna de saída {name}; cursores exigem nomes distintos.",
+                            statement=statement,
+                        ))
+                    explicit_names[name] = name
+            for alias in wildcard_aliases:
+                if alias is not None and any(item_alias == alias for _, item_alias in explicit):
+                    issues.append(_preflight_issue(
+                        "BLOQUEIO",
+                        "PLS00402_RISCO_WILDCARD",
+                        f"A projeção combina {alias}.* com coluna explícita do mesmo alias; "
+                        "isso pode repetir coluna no cursor.",
+                        statement=statement,
+                    ))
+
+    return issues
+
+
+def _preflight_order_issues(plan: BatchPlan) -> list[dict[str, object]]:
+    """Sinaliza referências estáticas a artefatos criados somente depois."""
+    issues: list[dict[str, object]] = []
+    created: dict[str, int] = {}
+    for index, statement in enumerate(plan.statements):
+        masked = _mask_sql_literals(strip_sql_comments(statement.sql))
+        for match in re.finditer(
+            r"\bCREATE\s+(?:GLOBAL\s+TEMPORARY\s+)?TABLE\s+([A-Z][A-Z0-9_$#]*)",
+            masked,
+            flags=re.I,
+        ):
+            created.setdefault(match.group(1).upper(), index)
+
+    for index, statement in enumerate(plan.statements):
+        masked = _mask_sql_literals(strip_sql_comments(statement.sql))
+        references = re.findall(
+            r"\b(?:FROM|JOIN|INTO|UPDATE|MERGE\s+INTO|DELETE\s+FROM)\s+"
+            r"([A-Z][A-Z0-9_$#]*)",
+            masked,
+            flags=re.I,
+        )
+        for name in sorted({item.upper() for item in references}):
+            created_at = created.get(name)
+            if created_at is not None and created_at > index and name.startswith(("BKP_", "RMD_", "MAP_")):
+                issues.append(_preflight_issue(
+                    "BLOQUEIO",
+                    "OBJETO_REFERENCIADO_ANTES_DA_CRIACAO",
+                    f"O objeto {name} é referenciado antes da instrução que o cria; "
+                    "revise a ordem ou a dependência entre blocos.",
+                    statement=statement,
+                ))
+    return issues
+
+
+def run_preflight(plan: BatchPlan) -> dict[str, object]:
+    issues: list[dict[str, object]] = []
+    issues.extend(_preflight_define_issues(plan))
+    issues.extend(_preflight_bind_issues(plan))
+    for statement in plan.statements:
+        issues.extend(_preflight_sql_issues(statement))
+    issues.extend(_preflight_order_issues(plan))
+    blockers = [item for item in issues if item["severidade"] == "BLOQUEIO"]
+    warnings = [item for item in issues if item["severidade"] == "AVISO"]
+    return {
+        "status": "PREFLIGHT_BLOQUEADO" if blockers else "PREFLIGHT_APROVADO",
+        "qtd_bloqueios": len(blockers),
+        "qtd_avisos": len(warnings),
+        "bloqueios": blockers,
+        "avisos": warnings,
+    }
+
+
+def preflight_error_message(report: dict[str, object]) -> str:
+    blockers = report.get("bloqueios", [])
+    lines = ["Preflight bloqueado; nenhum login, DML ou DDL foi executado."]
+    for issue in blockers:
+        location = ""
+        if issue.get("arquivo"):
+            location = f" ({issue['arquivo']}:{issue.get('linha', '?')})"
+        lines.append(f"[{issue['codigo']}] {issue['mensagem']}{location}")
+    return "\n".join(lines)
+
+
+def print_plan(plan: BatchPlan) -> int:
+    report = run_preflight(plan)
+    status = "PLANO_LOTE_VALIDADO" if report["status"] == "PREFLIGHT_APROVADO" else "PLANO_LOTE_BLOQUEADO"
+    print(json.dumps({
+        "status": status,
+        **plan_summary(plan),
+        "preflight": report,
+        "dml_ddl_executado": False,
+    }, ensure_ascii=False, indent=2))
+    return 0 if report["status"] == "PREFLIGHT_APROVADO" else 4
+
+
+def is_approved_entrypoint(path: Path) -> bool:
+    relative = Path(relative_to_suite(path))
+    if relative.as_posix() in APPROVED_ENTRYPOINTS:
+        return True
+    parts = relative.parts
+    if len(parts) != 3 or parts[0] != "Clientes":
+        return False
+    name = parts[-1]
+    return any(name.startswith(prefix) and name.endswith(".sql") for prefix in APPROVED_CLIENT_ENTRYPOINT_PREFIXES)
+
+
+def validate_read_only_plan(plan: BatchPlan) -> None:
+    forbidden = re.compile(
+        r"\b(INSERT|UPDATE|DELETE|MERGE|ALTER|DROP|TRUNCATE|CREATE|GRANT|REVOKE|"
+        r"COMMIT|ROLLBACK|BEGIN|DECLARE|EXECUTE\s+IMMEDIATE)\b",
+        flags=re.I,
+    )
+    for statement in plan.statements:
+        if statement.kind not in {"SELECT", "WITH"}:
+            raise BatchError(
+                "Pos-validacao deve conter somente SELECT/WITH; encontrado "
+                f"{statement.kind} em {relative_to_suite(statement.path)}:{statement.line}"
+            )
+        match = forbidden.search(strip_sql_comments(statement.sql))
+        if match:
+            raise BatchError(
+                "Pos-validacao contem comando nao permitido "
+                f"({match.group(1)}) em {relative_to_suite(statement.path)}:{statement.line}"
+            )
+
+
+def execute_post_validation(connection, plan: BatchPlan, log_lines: list[str]) -> None:
+    validate_read_only_plan(plan)
+    cursor = connection.cursor()
+    for index, statement in enumerate(plan.statements, start=1):
+        cursor.execute(statement.sql)
+        columns = [item[0] for item in (cursor.description or [])]
+        rows = cursor.fetchmany(2000)
+        log_lines.append(
+            f"[POST_OK {index}/{len(plan.statements)}] {statement.kind} "
+            f"{relative_to_suite(statement.path)}:{statement.line} ROWS={len(rows)}"
+        )
+        log_lines.append(
+            "POST_RESULT=" + json.dumps(
+                {"columns": columns, "rows": rows},
+                ensure_ascii=False,
+                default=str,
+            )
+        )
+
+
+def macos_confirm(summary: str) -> bool:
+    if sys.platform != "darwin":
+        raise BatchError("A confirmacao unica do lote requer o macOS.")
+    escaped = summary.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+    script = f'''
+        display dialog "{escaped}" ¬
+            buttons {{"Cancelar", "Executar lote"}} ¬
+            default button "Cancelar" cancel button "Cancelar"
+        return button returned of result
+    '''
+    import subprocess
+
+    result = subprocess.run(
+        ["osascript", "-e", script],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return result.returncode == 0 and result.stdout.strip() == "Executar lote"
+
+
+def identity_and_capabilities(oracledb, connection, expected_service: str) -> dict[str, object]:
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT
+                SYS_CONTEXT('USERENV','SESSION_USER'),
+                SYS_CONTEXT('USERENV','CURRENT_SCHEMA'),
+                SYS_CONTEXT('USERENV','SERVICE_NAME'),
+                SYS_CONTEXT('USERENV','DB_NAME')
+            FROM DUAL
+        """)
+        session_user, current_schema, service_name, db_name = cursor.fetchone()
+        if str(service_name or "").upper() != expected_service.upper():
+            raise BatchError(
+                f"SERVICE_NAME incompatível: atual={service_name!r}, esperado={expected_service!r}"
+            )
+        cursor.execute("""
+            SELECT PRIVILEGE
+              FROM SESSION_PRIVS
+             WHERE PRIVILEGE IN (
+                'CREATE TABLE','CREATE ANY TABLE','ALTER ANY TABLE','DROP ANY TABLE',
+                'ALTER ANY PROCEDURE','INSERT ANY TABLE','UPDATE ANY TABLE','DELETE ANY TABLE'
+             )
+             ORDER BY PRIVILEGE
+        """)
+        privileges = [row[0] for row in cursor.fetchall()]
+        cursor.execute("""
+            SELECT TABLESPACE_NAME, BYTES, MAX_BYTES
+              FROM USER_TS_QUOTAS
+             ORDER BY TABLESPACE_NAME
+        """)
+        quotas = [
+            {"tablespace": row[0], "bytes": row[1], "max_bytes": row[2]}
+            for row in cursor.fetchall()
+        ]
+    return {
+        "session_user": session_user,
+        "current_schema": current_schema,
+        "service_name": service_name,
+        "db_name": db_name,
+        "privilegios_relevantes": privileges,
+        "quotas": quotas,
+        "dml_ddl_executado": False,
+    }
+
+
+def drain_dbms_output(oracledb, cursor) -> list[str]:
+    lines: list[str] = []
+    line_var = cursor.var(str, arraysize=1)
+    status_var = cursor.var(int, arraysize=1)
+    while True:
+        cursor.callproc("DBMS_OUTPUT.GET_LINE", [line_var, status_var])
+        if status_var.getvalue() != 0:
+            return lines
+        value = line_var.getvalue()
+        if value is not None:
+            lines.append(str(value))
+
+
+def execute_plan(args, plan: BatchPlan, post_plan: BatchPlan | None = None) -> int:
+    preflight = run_preflight(plan)
+    if preflight["status"] != "PREFLIGHT_APROVADO":
+        raise BatchError(preflight_error_message(preflight))
+    if plan.entrypoint.name in SECURITY_SENSITIVE_ENTRYPOINTS:
+        raise BatchError("A limpeza de objetos exige um fluxo separado e não pode entrar no lote normal.")
+    if not is_approved_entrypoint(plan.entrypoint):
+        raise BatchError(
+            f"Entrada não aprovada para lote: {relative_to_suite(plan.entrypoint)}. "
+            "Use uma entrada versionada e homologada da suite."
+        )
+    if post_plan is not None:
+        validate_read_only_plan(post_plan)
+    if args.preauthorized:
+        authorization = str(args.authorization or "").strip()
+        authorization_parts = authorization.split(None, 1)
+        if (
+            len(authorization_parts) != 2
+            or authorization_parts[0].upper() != "EXECUTAR"
+            or len(authorization_parts[1].strip()) < 2
+        ):
+            raise BatchError(
+                "--preauthorized exige --authorization 'EXECUTAR <BASE>' com base informada."
+            )
+    if not tcp_check(args.host, args.port):
+        raise BatchError("A porta Oracle não está acessível; nenhum login foi tentado.")
+
+    log_path = Path(args.log).expanduser().resolve()
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    oracledb, connection = connect(args)
+    log_lines: list[str] = [
+        f"ID_EXECUCAO_LOTE={args.execution_id}",
+        f"ENTRADA={relative_to_suite(plan.entrypoint)}",
+        f"SHA256_SUITE={plan.sha256}",
+        f"POS_VALIDACAO={relative_to_suite(post_plan.entrypoint) if post_plan else 'NAO_INFORMADA'}",
+        f"AUTORIZACAO={'PRE_AUTORIZADA' if args.preauthorized else 'CONFIRMACAO_NATIVA'}",
+        f"PREFLIGHT_STATUS={preflight['status']}",
+        f"PREFLIGHT_BLOQUEIOS={preflight['qtd_bloqueios']}",
+        f"PREFLIGHT_AVISOS={preflight['qtd_avisos']}",
+    ]
+    try:
+        capabilities = identity_and_capabilities(oracledb, connection, args.service)
+        summary = plan_summary(plan)
+        confirmation = (
+            "EXECUÇÃO EM LOTE — alterações serão executadas na conexão validada.\n\n"
+            f"Base: {capabilities['service_name']}\n"
+            f"Usuário/schema: {capabilities['session_user']} / {capabilities['current_schema']}\n"
+            f"Entrada: {summary['entrypoint']}\n"
+            f"Instruções: {summary['qtd_instrucoes']}\n"
+            f"SHA-256: {plan.sha256[:16]}…\n\n"
+            + (
+                f"Pós-validação: {relative_to_suite(post_plan.entrypoint)}\n\n"
+                if post_plan is not None
+                else ""
+            )
+            + "A confirmação vale para todo o lote e não será repetida por comando."
+        )
+        if args.preauthorized:
+            log_lines.append("CONFIRMACAO_NATIVA=DISPENSADA_POR_EXECUTAR_BASE")
+        elif not macos_confirm(confirmation):
+            log_lines.append("STATUS=LOTE_CANCELADO_ANTES_DAS_ALTERACOES")
+            print(json.dumps({
+                "status": "LOTE_CANCELADO_ANTES_DAS_ALTERACOES",
+                **summary,
+                "dml_ddl_executado": False,
+                "log": str(log_path),
+            }, ensure_ascii=False, indent=2))
+            return 5
+
+        log_lines.extend([
+            f"SESSION_USER={capabilities['session_user']}",
+            f"CURRENT_SCHEMA={capabilities['current_schema']}",
+            f"SERVICE_NAME={capabilities['service_name']}",
+            f"PRIVILEGIOS={json.dumps(capabilities['privilegios_relevantes'], ensure_ascii=False)}",
+            f"QUOTAS={json.dumps(capabilities['quotas'], ensure_ascii=False, default=str)}",
+        ])
+        cursor = connection.cursor()
+        cursor.callproc("DBMS_OUTPUT.ENABLE", [None])
+        bind_values = {
+            name: cursor.var(oracledb.DB_TYPE_VARCHAR, arraysize=1)
+            for name in plan.bind_names
+        }
+        for index, statement in enumerate(plan.statements, start=1):
+            try:
+                uses_bind = bool(re.search(r":RMD_[A-Z0-9_$#]+", statement.sql, flags=re.I))
+                if uses_bind:
+                    statement_bind_names = sorted({
+                        name.upper()
+                        for name in re.findall(r":(RMD_[A-Z0-9_$#]+)", statement.sql, flags=re.I)
+                    })
+                    missing = [name for name in statement_bind_names if name not in bind_values]
+                    if missing:
+                        raise BatchError(f"Bind não declarado: {', '.join(sorted(set(missing)))}")
+                    statement_binds = {
+                        # Blocos PL/SQL precisam do objeto Var para receber
+                        # valores atribuídos ao bind. Em SQL de nível
+                        # superior, o driver deve receber o valor atual do
+                        # bind; enviar o Var novamente pode convertê-lo em
+                        # NULL após uma atribuição feita no bloco anterior.
+                        name: (
+                            bind_values[name]
+                            if statement.kind == "PLSQL_OR_DDL_BLOCK"
+                            else bind_values[name].getvalue()
+                        )
+                        for name in statement_bind_names
+                    }
+                    cursor.execute(statement.sql, statement_binds)
+                else:
+                    cursor.execute(statement.sql)
+                output = drain_dbms_output(oracledb, cursor)
+                log_lines.append(
+                    f"[OK {index}/{len(plan.statements)}] {statement.kind} "
+                    f"{relative_to_suite(statement.path)}:{statement.line} ROWCOUNT={cursor.rowcount}"
+                )
+                log_lines.extend(f"DBMS_OUTPUT={line}" for line in output)
+            except Exception as exc:
+                connection.rollback()
+                log_lines.append(
+                    f"[ERRO {index}/{len(plan.statements)}] {statement.kind} "
+                    f"{relative_to_suite(statement.path)}:{statement.line} {type(exc).__name__}: {exc}"
+                )
+                raise
+        connection.commit()
+        log_lines.append("COMMIT_LOTE=OK")
+        if post_plan is not None:
+            execute_post_validation(connection, post_plan, log_lines)
+            log_lines.append("STATUS=LOTE_CONCLUIDO_POS_VALIDADO")
+            final_status = "LOTE_CONCLUIDO_POS_VALIDADO"
+        else:
+            log_lines.append("STATUS=LOTE_CONCLUIDO")
+            final_status = "LOTE_CONCLUIDO"
+        print(json.dumps({
+            "status": final_status,
+            **summary,
+            "execution_id": args.execution_id,
+            "dml_ddl_executado": True,
+            "log": str(log_path),
+            "capabilities": capabilities,
+        }, ensure_ascii=False, indent=2, default=str))
+        return 0
+    except Exception:
+        log_lines.append("STATUS=LOTE_COM_ERRO")
+        raise
+    finally:
+        log_path.write_text("\n".join(log_lines) + "\n", encoding="utf-8")
+        connection.close()
+
+
+def common_connection_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--host", required=True)
+    parser.add_argument("--port", type=int, default=1521)
+    parser.add_argument("--service", required=True)
+    parser.add_argument("--username", required=True)
+    parser.add_argument("--prompt", choices=("macos", "terminal"), default="macos")
+    add_vault_arguments(parser)
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(description="Executor Oracle em lote aprovado")
+    sub = root.add_subparsers(dest="command", required=True)
+    def run_plan(args):
+        return print_plan(parse_plan(Path(args.script).expanduser().resolve()))
+
+    for command_name, help_text in (
+        ("plan", "valida o lote sem acessar o Oracle"),
+        ("preflight", "executa o preflight expandido sem acessar o Oracle"),
+    ):
+        plan_parser = sub.add_parser(command_name, help=help_text)
+        plan_parser.add_argument("--script", required=True)
+        plan_parser.set_defaults(func=run_plan)
+
+    apply_parser = sub.add_parser("apply", help="executa o lote após confirmação ou autorização prévia explícita")
+    common_connection_args(apply_parser)
+    apply_parser.add_argument("--script", required=True)
+    apply_parser.add_argument(
+        "--post-script",
+        help="script local contendo somente SELECT/WITH para a pós-validação",
+    )
+    apply_parser.add_argument("--execution-id", required=True)
+    apply_parser.add_argument("--log", required=True)
+    apply_parser.add_argument(
+        "--preauthorized",
+        action="store_true",
+        help="dispensa a janela nativa somente com --authorization 'EXECUTAR <BASE>'",
+    )
+    apply_parser.add_argument(
+        "--authorization",
+        help="marcador de autorização operacional, por exemplo: EXECUTAR JCLM INDUSTRIA E COMERCIO LTDA",
+    )
+    def run_apply(args):
+        plan = parse_plan(Path(args.script).expanduser().resolve())
+        post_plan = (
+            parse_plan(Path(args.post_script).expanduser().resolve())
+            if args.post_script
+            else None
+        )
+        return execute_plan(args, plan, post_plan)
+    apply_parser.set_defaults(func=run_apply)
+    return root
+
+
+def main() -> int:
+    try:
+        args = parser().parse_args()
+        return args.func(args)
+    except (BatchError, OSError, ValueError) as exc:
+        print(json.dumps({
+            "status": "LOTE_BLOQUEADO",
+            "mensagem": str(exc),
+            "dml_ddl_executado": False,
+        }, ensure_ascii=False, indent=2))
+        return 4
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
