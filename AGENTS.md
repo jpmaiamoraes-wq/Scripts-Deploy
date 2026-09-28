@@ -54,7 +54,15 @@ Relatórios finais devem permanecer em fluxo separado: um futuro agente de relat
 
 ## Handoff para nova base
 
-- Usar o modelo `7 - QA2/Revisao Master Deploy/Prompt_Handoff_Nova_Revisao_Master_Deploy_MODELO.md`; preencher somente nome da base e parâmetros de conexão, sem transferir senha, autorização, ID, ticket ou artefatos de outra base.
+- Usar o modelo `7 - QA2/Revisao Master Deploy/Prompt_Handoff_Nova_Revisao_Master_Deploy_MODELO.md`; preencher somente nome da base, parâmetros de conexão, GP e assistente de projetos (1/2), sem transferir senha, autorização, ID, ticket ou artefatos de outra base.
+- Todas as conversas com o usuário são em português brasileiro.
+
+## Kit_Nova_Base (desde 28/09/2026)
+
+- Base nova começa por `7 - QA2/Revisao Master Deploy/Kit_Nova_Base/instanciar_kit.py instanciar` (sem Oracle, sem senha). Ele gera em `Clientes/<BASE>/` o Pacote 1 read-only, os scripts de fila, o preflight (P/D/C/O/S/R), 29/30 (merge, exclusão, normalização), Card 09 mapa, atividades 33 e 35, pós-validações e reversões, já com identidade, IDs, mapas e backups nomeados. Nunca sobrescreve e registra hashes em `Artefatos_Revisao/Kit_Manifesto.json`.
+- Não reescrever à mão script que o kit gera. Ajuste só com falha, divergência ou requisito concreto, registrado na medição; melhoria que valha para outras bases vai para `Kit_Nova_Base/modelos/` e exige `test_instanciar_kit.py` verde (inclui a prova de equivalência com os scripts executados na MEDCHAP).
+- Marcadores adiados (`C_BAI`, `C_END`, `TRIGGERS_LINHA_BASE`, `CODSMTP_TESTE`) só por `instanciar_kit.py preencher`, a partir dos logs read-only. Antes de enfileirar qualquer `batch_apply` de script do kit, `instanciar_kit.py verificar --arquivo <script> --arquivo <pos> --arquivo <reversao>` deve retornar `STATUS=PRONTO`.
+- Autorização na fila: depois de `EXECUTAR <BASE>` no chat, o usuário encerra a fila (Ctrl+C) e roda `Iniciar_Fila_Alteracao_<TAG>.sh`, digitando a frase no Terminal; ao final, `Iniciar_Fila_SomenteLeitura_<TAG>.sh`.
 
 ## Executor Oracle direto e execução em lote
 
@@ -119,6 +127,8 @@ Relatórios finais devem permanecer em fluxo separado: um futuro agente de relat
 - Destinatários: assistente 1 (Ana) → enviar somente para ela, sem envolver o Gerente de Projetos. Assistente 2 (Gabriela) → enviar para o Gerente de Projetos da base, com a Gabriela em cópia; se o e-mail do GP não estiver registrado (`GP_EMAIL_PENDENTE`), solicitá-lo ao usuário antes do envio, sem inferir. Conferir `plano_destinatarios` em `Dados_Revisao.json` antes de criar o rascunho.
 - Assunto padrão: `Conclusão da revisão Master Deploy — <BASE>`.
 - Corpo padrão: `Olá,\n\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\n\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\n\nAtenciosamente,`.
+- Assinatura padrão (desde 28/09/2026): o conector Gmail não lê a assinatura configurada na conta nem a insere em rascunhos criados pela API; por isso o agente inclui no corpo do rascunho, no lugar de `Atenciosamente,`, o bloco fixo abaixo (em `htmlBody`, com e-mail e site como links, e em `body` como texto simples):
+  `Att,\nFrancisco Alvaro Spadaro Junior\nConsultor Especialista | Deploy Center\nfrancisco.junior@sankhya.com.br\n34 3221-1800\nwww.sankhya.com.br`.
 - O agente de relatório pode preparar o plano de destinatários e o rascunho, mas não deve enviar a mensagem externa; o envio fica sob responsabilidade do agente principal, após conferir base, assistente de projetos, GP, PDF anexado e destinatários.
 
 ### Estrutura única do relatório

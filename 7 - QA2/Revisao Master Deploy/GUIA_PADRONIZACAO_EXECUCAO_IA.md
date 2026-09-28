@@ -231,6 +231,8 @@ Estrutura esperada por base:
 
 Scripts genéricos permanecem em `7 - QA2`; artefatos específicos ficam em `Clientes/<BASE>`. Não reorganizar bases antigas sem autorização.
 
+Desde 28/09/2026 os artefatos específicos de uma base nova são gerados pelo `Revisao Master Deploy/Kit_Nova_Base/instanciar_kit.py` a partir dos scripts homologados na MEDCHAP/FOCUSFINTAXPRD (ver `Kit_Nova_Base/README.md`): Pacote 1 read-only, scripts da fila, preflight, 29/30, mapa do Card 09, atividades 33 e 35, pós-validações e reversões. Os marcadores que dependem do preflight são preenchidos por `instanciar_kit.py preencher`, e `instanciar_kit.py verificar` precisa retornar `STATUS=PRONTO` antes de qualquer `apply` desses scripts.
+
 Antes de qualquer prompt de senha, consultar `oracle_direct.py credential status` para o host, porta, service e usuário exatos. Se o Keychain for a fonte escolhida e retornar `CREDENCIAL_KEYCHAIN_PRESENTE`, reutilizar a credencial e não executar `credential set` nem solicitar novamente a senha Oracle. Se houver fonte Vault aprovada explicitamente configurada, usar o cliente/OIDC documentado; nunca copiar o segredo Vault ao Keychain. Sem Vault configurado e sem item Keychain, a conexão normal abre uma única janela protegida; a senha é salva no Keychain local somente após o Oracle aceitar a autenticação. Consultas read-only e lotes compartilham o fluxo. O item é específico à combinação da conexão e à conta/macOS local; outra combinação pode exigir cadastro inicial próprio. Um pedido do macOS para desbloquear/autorizar o Keychain não é um novo pedido da senha Oracle. Em `ORA-01017` ou falha semelhante, não repetir o prompt em ciclo: interromper e diagnosticar. Senha rotacionada deve ser atualizada uma vez pelo fluxo protegido; a sessão OIDC é independente.
 
 O executor gerado valida o `SERVICE_NAME`, exibe usuário/schema/serviço/empresa e exige a frase:
@@ -575,7 +577,7 @@ O prompt preenchível e atualizado fica em:
 `7 - QA2/Revisao Master Deploy/Prompt_Handoff_Nova_Revisao_Master_Deploy_MODELO.md`
 
 Esse arquivo é a fonte única do handoff por base. Preencha somente nome da base,
-host, porta, service e usuário Oracle; nunca inclua senha. Ele inicia a preparação
+host, porta, service, usuário Oracle, GP e assistente de projetos (1/2); nunca inclua senha. Ele inicia a preparação
 e o trabalho somente de leitura, mas mantém `EXECUTAR <BASE>` como autorização
 explícita para a onda mutável após confirmação da identidade. Assim, não se
 confunde um prompt genérico ou dados de conexão com autorização de DML/DDL.
