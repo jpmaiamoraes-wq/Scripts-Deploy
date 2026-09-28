@@ -57,6 +57,13 @@ def register_fonts() -> tuple[str, str]:
         pdfmetrics.registerFont(TTFont("ArialUnicode", str(arial_unicode)))
         pdfmetrics.registerFont(TTFont("ArialUnicode-Bold", str(arial_bold)))
         return "ArialUnicode", "ArialUnicode-Bold"
+    # Linux (VM do Cowork): LiberationSans cobre acentos e travessao; licao MEDCHAP 25/09/2026.
+    for base in (Path("/usr/share/fonts/truetype/liberation"), Path("/usr/share/fonts/truetype/liberation2")):
+        lib_regular, lib_bold = base / "LiberationSans-Regular.ttf", base / "LiberationSans-Bold.ttf"
+        if lib_regular.exists() and lib_bold.exists():
+            pdfmetrics.registerFont(TTFont("LiberationSans", str(lib_regular)))
+            pdfmetrics.registerFont(TTFont("LiberationSans-Bold", str(lib_bold)))
+            return "LiberationSans", "LiberationSans-Bold"
     return "Helvetica", "Helvetica-Bold"
 
 
