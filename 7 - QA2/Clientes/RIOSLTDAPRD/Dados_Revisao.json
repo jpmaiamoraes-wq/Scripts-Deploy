@@ -5,18 +5,35 @@
   "port": 1521,
   "servicename": "RIOSLTDAPRD.SANKHYACLOUD.COM.BR",
   "username": "francisco_junior",
-  "gp_email": null,
-  "gp_nome": "NAO_INFORMADO",
+  "gp_email": "mateus.coutinho@sankhya.com.br",
+  "gp_nome": "Mateus Neves Coutinho",
   "analista_projetos": {
-    "nome": null,
-    "email": null,
-    "confirmada": false
+    "papel": "assistente de projetos",
+    "codigo": "2",
+    "nome": "Gabriela Stabile Lemos",
+    "email": "gabriela.lemos@sankhya.com.br",
+    "confirmada": true
+  },
+  "plano_destinatarios": {
+    "status": "DEFINIDO",
+    "para": ["mateus.coutinho@sankhya.com.br"],
+    "cc": ["gabriela.lemos@sankhya.com.br"],
+    "regra": "Gabriela Stabile Lemos: para o Gerente de Projetos, com ela em copia",
+    "confirmado_pelo_usuario_em": "2026-09-25"
   },
   "comunicacao_email": {
-    "status": "AGUARDANDO_PDF_FINAL_E_CONFIRMACAO_DOS_DESTINATARIOS",
+    "status": "RASCUNHO_CRIADO_AGUARDANDO_ANEXO_E_ENVIO",
     "assunto_modelo": "Conclusão da revisão Master Deploy — <BASE>",
     "corpo_modelo": "Olá,\\n\\nConcluímos a etapa de revisão Master Deploy da base <BASE>.\\n\\nEncaminho em anexo o relatório de entrega técnica com o resumo do que foi executado.\\n\\nAtenciosamente,",
-    "anexo_permitido": "somente o PDF final validado"
+    "anexo_permitido": "somente o PDF final validado",
+    "assunto": "Conclusão da revisão Master Deploy — RIOSLTDAPRD",
+    "para": ["mateus.coutinho@sankhya.com.br"],
+    "cc": ["gabriela.lemos@sankhya.com.br"],
+    "rascunho_id": "r-2135179139783705638",
+    "mensagem_rascunho_id": "1a0da189dceb302e",
+    "anexo_confirmado": false,
+    "envio_verificado": false,
+    "pendencia": "Anexar somente o PDF final e enviar pela sessao Gmail corporativa; nenhum e-mail foi enviado."
   },
   "preparado_em": "2026-09-23T09:46:02-03:00",
   "porta_oracle_acessivel": true,

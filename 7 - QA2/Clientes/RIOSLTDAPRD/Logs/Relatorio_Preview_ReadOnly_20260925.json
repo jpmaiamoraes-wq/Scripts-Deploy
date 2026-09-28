@@ -1,0 +1,182 @@
+{
+  "status": "CONSULTAS_READ_ONLY_CONCLUIDAS",
+  "gerado_em_local": "2026-09-25T15:12:46-03:00",
+  "identidade": {
+    "session_user": "FRANCISCO_JUNIOR",
+    "current_schema": "SANKHYA",
+    "service_name": "riosltdaprd.sankhyacloud.com.br",
+    "db_name": "RIOSLTDAPRD",
+    "identidade_compativel": true
+  },
+  "volumetria_jrxml": {
+    "fonte": "REL_ENTEGA_NOVO_05.jrxml, queryString com indicadores excluídos incluídos",
+    "executado_em_utc": "2026-09-25T17:48:50.026114+00:00",
+    "dml_executado": false,
+    "ddl_executado": false,
+    "quantitativos": {
+      "total_notas_cabecalhos": 3364,
+      "total_itens": 7020,
+      "inicio_periodo": "2022-09-14",
+      "fim_periodo": "2026-09-25",
+      "total_financeiros": 3229,
+      "contas_a_receber": 3094,
+      "contas_a_pagar": 135,
+      "financeiros_sem_nota": 0,
+      "notas_sem_financeiro": 0,
+      "total_produtos": 92,
+      "total_parceiros": 336,
+      "codigos_fiscais_cidades_duplicados": 0,
+      "referencias_duplicadas": 0,
+      "produtos_em_referencias_duplicadas": 0,
+      "descricoes_duplicadas": 2,
+      "produtos_em_descricoes_duplicadas": 4,
+      "produtos_vendidos_sem_entrada": 30,
+      "grupos_cnpj_cpf_repetidos": 0,
+      "parceiros_em_cnpj_cpf_repetido": 0,
+      "classificacao_fiscal_divergente": 0,
+      "produtos_com_custo_zero": 68,
+      "produtos_sem_registro_de_custo": 0,
+      "itens_sem_cabecalho": 0,
+      "cabecalhos_sem_itens": 0
+    }
+  },
+  "complementos_dashboard": {
+    "fonte": "Volumetria Deploy Agent.xml, consultas agregadas dos níveis 17 a 20",
+    "executado_em_utc": "2026-09-25T18:04:16.581748+00:00",
+    "dml_executado": false,
+    "ddl_executado": false,
+    "quantitativos": {
+      "produtos_vendidos_sem_tabela_preco": 0,
+      "pares_produtos_descricoes_similares": 6,
+      "matrizes_cnpj_com_filiais": 7,
+      "produtos_comprados_sem_registro_saida": 39
+    },
+    "retorno_sem_dados_pessoais_ou_identificadores_fiscais": true
+  },
+  "indicadores_integridade_obrigatorios": {
+    "financeiros_sem_nota": 0,
+    "itens_sem_cabecalho": 0,
+    "cabecalhos_sem_itens": 0,
+    "codigos_fiscais_cidades_duplicados": 0
+  },
+  "atividade_33_caracteres": {
+    "charset": "WE8MSWIN1252",
+    "contagem_executada_em_utc": "2026-09-25T17:41:54.912497+00:00",
+    "campos_verificados": 16,
+    "interrogacao_invertida": 0,
+    "mojibake_utf8": 0,
+    "interrogacao_entre_letras": 0,
+    "lista_executada_em_utc": "2026-09-25T18:07:23.966025+00:00",
+    "linhas_suspeitas": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "objetos_invalidos_atual": {
+    "consultado_em_utc": "2026-09-25T17:41:55.409843+00:00",
+    "objetos_invalidos": 0,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "card09": {
+    "mapa_atual_consultado_em_utc": "2026-09-25T18:10:00.439663+00:00",
+    "base_total_atual": 0,
+    "mapa_classificacao_atual": 0,
+    "mapas_localizados": true,
+    "pos_validacao_2026_09_23": {
+      "aptos_para_validacao_final": 0,
+      "sem_vdup_xml": 0,
+      "insercoes_efetivadas": 0,
+      "auditoria_financeira_criada": false
+    },
+    "financeiros_snapshot_2026_09_23": 3227,
+    "financeiros_volumetria_2026_09_25": 3229,
+    "dml_executado_em_2026_09_25": false,
+    "ddl_executado_em_2026_09_25": false
+  },
+  "onboarding": {
+    "portal_fonte_primaria_ultimo_registro_confirmado": "2026-09-23",
+    "pacote_local": "Onboarding - RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LTDA.zip",
+    "arquivo_usuarios": "[MODELO SANKHYA] Usuarios (1).xlsx",
+    "arquivo_usuarios_enviado_em": "2026-08-26 12:19",
+    "empresas_onboarding_localizadas_no_oracle": 1,
+    "empresas_onboarding_ausentes": 0,
+    "empresas_adicionais_oracle": 0,
+    "empresa_codemp_1": "CNPJ correspondente; razão social Oracle abreviada de LTDA para LT",
+    "usuarios_onboarding": 7,
+    "usuarios_oracle_total": 18,
+    "usuarios_oracle_com_grupo": 7,
+    "usuarios_oracle_sem_grupo_modelo": 11,
+    "usuarios_correspondentes_por_email": 7,
+    "usuarios_ausentes": 0,
+    "usuarios_adicionais": 0,
+    "divergencias_de_grupo": 7,
+    "divergencias_de_nome": 0,
+    "divergencias_de_empresa": 0,
+    "atividade_34_aplicavel": false,
+    "dml_executado": false,
+    "ddl_executado": false,
+    "comparacao_bancaria": {
+      "consultada_em_utc": "2026-09-25T18:07:29.358049+00:00",
+      "contas_no_arquivo": 1,
+      "registros_tsi_cta_empresa_1": 3,
+      "correspondencias_por_hash": 1,
+      "contas_do_arquivo_sem_correspondencia": 0,
+      "registros_adicionais_oracle": 2,
+      "hashes_persistidos_ou_exibidos": false,
+      "dml_executado": false,
+      "ddl_executado": false
+    }
+  },
+  "atividade_35_smtp": {
+    "consultada_em_utc": "2026-09-25T17:56:58.757814+00:00",
+    "parametro_conta_principal": {
+      "registros": 1,
+      "campos_nao_secretos_incompletos": 0,
+      "contas_de_teste": 0
+    },
+    "contas_adicionais_tsismtp": {
+      "registros": 1,
+      "contas_de_teste": 1,
+      "contas_cliente": 0,
+      "campos_nao_secretos_incompletos": 0
+    },
+    "configuracao_smtp_no_pacote_onboarding": false,
+    "campo_senha_parametro_nao_acessado": true,
+    "senha_tokens_e_usuario_de_teste_nao_acessados": true,
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "ticket_712780": {
+    "ultimo_estado_comprovado": "ABERTO_NO_ENVIO_2026-09-23",
+    "status_atual_portal": "NAO_CONFIRMADO_LOGIN_SOLICITADO",
+    "objetos_invalidos_na_consulta_oracle_2026_09_25": 0
+  },
+  "previsao_relatorio_entrega": {
+    "arquivo": "Artefatos_Revisao/Previa_Relatorio_Entrega_Tecnica_RIOSLTDAPRD_20260925.txt",
+    "status": "PDF_GERADO_E_VALIDADO_VISUALMENTE",
+    "pdf_gerado": true,
+    "pdf_visualmente_validado": true,
+    "pdf_paginas": 13,
+    "pdf_arquivo": "Artefatos_Revisao/Relatorio_Entrega_Tecnica_RIOSLTDAPRD_20260925.pdf",
+    "empresa_exibida_no_pdf": "RIO'S DISTRIBUIDORA DE AGUA E BEBIDAS LTDA",
+    "dml_executado": false,
+    "ddl_executado": false
+  },
+  "fontes_consultadas": [
+    "REL_ENTEGA_NOVO_05.jrxml",
+    "Volumetria Deploy Agent.xml",
+    "33_Caracteres_Diagnostico_Contagem_ReadOnly.sql",
+    "33_Caracteres_Diagnostico_Lista_ReadOnly.sql",
+    "Objetos_Invalidos_ReadOnly_RIOSLTDAPRD.sql",
+    "Relatorio_Preview_SMTP_ReadOnly.sql",
+    "Relatorio_Preview_ContasBancarias_Hash_ReadOnly.sql",
+    "Relatorio_Preview_Dashboard_Complementos_ReadOnly.sql",
+    "Relatorio_Preview_Card09_Count_ReadOnly.sql",
+    "Logs/PosValidacao_Master_20260923.json",
+    "Logs/PosValidacao_29_30_20260923.json",
+    "Logs/PosValidacao_Card09_20260923.json",
+    "Logs/Onboarding_ReadOnly_20260923_1409.json"
+  ],
+  "dml_executado": false,
+  "ddl_executado": false
+}

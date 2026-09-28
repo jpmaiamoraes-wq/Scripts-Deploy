@@ -1,0 +1,165 @@
+# Prévia para validação
+
+## Relatório de Entrega Técnica — Revisão Master Deploy
+
+**Base:** RIOSLTDAPRD  
+**Data da consulta atual:** 25/09/2026  
+**Usuário da sessão Oracle:** FRANCISCO_JUNIOR
+
+## Resumo executivo
+
+A execução do Master 01–31 foi concluída em 23/09, com 1.085 de 1.085 instruções registradas como executadas e confirmação do lote. A etapa de bairros e endereços foi concluída com cópias de segurança e validação posterior sem registros obsoletos ou duplicidades normalizadas remanescentes. O Card 09 permaneceu como operação sem alterações: os mapas atuais continuam vazios e não houve inserções financeiras.
+
+A volumetria consultada diretamente na Oracle em 25/09 retornou zero nos quatro indicadores obrigatórios de integridade. A mesma consulta encontrou dois grupos de descrições duplicadas, 30 produtos vendidos sem entrada correspondente e 68 produtos com custo zero. Os indicadores complementares do dashboard também apontaram seis pares de produtos com descrições similares, sete matrizes de CNPJ com filiais e 39 produtos comprados sem registro de saída. Esses números orientam a conferência funcional e não justificam correção automática.
+
+Na comparação documental, a empresa do onboarding foi localizada em `CODEMP=1`. Os sete usuários da planilha foram encontrados, mas todos apresentaram diferença de grupo. A única conta bancária da planilha correspondeu a um registro da Oracle; outros dois registros de conta da empresa não aparecem na planilha. O diagnóstico SMTP encontrou uma conta interna de testes em `TSISMTP`; nenhuma alteração foi feita. O ticket 712780 foi enviado quando havia 46 objetos inválidos, mas a consulta atual encontrou zero. O estado atual do ticket ainda precisa ser confirmado no portal.
+
+## Resultado técnico das atividades
+
+| Atividade | Propósito | Resultado comprovado |
+|---|---|---|
+| 01 — Controles e rastreabilidade | Preparar controles, cópias de segurança e evidências da revisão. | O lote Master registrou 1.085 de 1.085 instruções e confirmou o encerramento. A pós-validação não encontrou objetos de controle ausentes; o mapa de unidades tinha 93 linhas. |
+| 02–09 — Portais, documentos e movimentação | Liberar filtros de portais; padronizar a emissão de DANFE por empresa; ajustar custo da TOP de devolução e cálculo de giro; tratar parcelas, data de movimento e documentos legados. | Instruções concluídas no lote sem erros Oracle, PL/SQL ou SQL*Plus. Os artefatos de reversão correspondentes estão listados adiante. |
+| 10–17 — Regras fiscais, giro e cadastros operacionais | Habilitar ICMS gerencial e ruptura; configurar TOPs e análise de giro; desativar rastreio sem controle; higienizar configuração e normalizar unidades. | Instruções concluídas no lote sem erros Oracle, PL/SQL ou SQL*Plus. O mapa de unidades foi preservado para auditoria. |
+| 18–23 — Preferências e validações funcionais | Aplicar preferências GOL; ajustar parceiro matriz; atualizar cartões de implantação; classificar ICMS; ajustar nomes de parceiros; validar objetos. | Instruções concluídas no lote sem erros Oracle, PL/SQL ou SQL*Plus. A validação de objetos inválidos foi complementada por nova consulta em 25/09, cujo resultado atual foi zero. |
+| 24–28 — Padronização de cadastros | Padronizar parceiros, produtos, títulos, cidades e tipos de venda. | Instruções concluídas no lote sem erros Oracle, PL/SQL ou SQL*Plus. Os registros de cópias de segurança e os arquivos de reversão estão inventariados abaixo. |
+| 29–30 — Bairros e endereços | Redirecionar referências, remover bairros e endereços obsoletos e preservar reversão. | Etapa antifrágil concluída com mapa de 7.711 linhas, 61.211 referências auditadas e zero exceções. Foram removidos 428 bairros e 7.283 endereços obsoletos com cópias de segurança. A pós-validação encontrou zero obsoletos e zero duplicidades normalizadas remanescentes. |
+| 31 — Objetos Oracle inválidos | Identificar objetos inválidos e verificar se a sessão podia recompilá-los. | Em 23/09 havia 46 objetos inválidos e a sessão não tinha `ALTER ANY PROCEDURE`; a recompilação foi ignorada e o ticket 712780 foi enviado. A consulta Oracle de 25/09 retornou zero objetos inválidos. O estado atual do ticket não foi confirmado no portal. |
+| 32 — Notas sem financeiro (Card 09) | Mapear notas sem registro financeiro, validar o XML e inserir somente candidatos aprovados. | Não houve candidato apto nem inserção. Os mapas atuais de base e classificação têm zero linhas. A pós-validação de 23/09 registrou `BASE_TOTAL=0`, `APTO_PARA_VALIDACAO_FINAL=0`, `SEM_VDUP_XML=0` e zero inserções. |
+| 33 — Caracteres em cadastros essenciais | Detectar caracteres corrompidos em produtos, parceiros, vendedores e usuários. | Diagnóstico somente leitura em 25/09: charset `WE8MSWIN1252`, 16 campos verificados e zero ocorrências nos padrões pesquisados; a lista detalhada retornou zero linhas. Nenhuma correção foi necessária ou executada. |
+| 34 — Empresa padrão de usuários | Corrigir `CODEMP` de usuário apenas quando a empresa divergir da evidência do onboarding. | Não aplicável: os sete usuários comparáveis estão na empresa 1, correspondente à empresa identificada pelo CNPJ. Nenhum script de alteração foi criado ou executado. |
+| 35 — Contas de e-mail (SMTP) | Comparar configurações com o onboarding e identificar a conta interna de testes. | Consulta somente leitura encontrou uma configuração principal com os campos não secretos consultados preenchidos e uma conta interna de testes em `TSISMTP`. O pacote local não contém parâmetros SMTP para comparação. Nenhuma remoção, gravação, senha ou token foi realizada ou consultada. |
+
+## Notas sem financeiro — Card 09
+
+O mapa persistido permanece vazio: `BASE_TOTAL=0` e mapa de classificação com zero linhas na consulta atual de 25/09. Na pós-validação de 23/09, `APTO_PARA_VALIDACAO_FINAL=0`, `SEM_VDUP_XML=0` e inserções efetivadas iguais a zero. A tabela de auditoria financeira do Card 09 não foi criada porque não houve inserção.
+
+A volumetria atual registra 3.229 financeiros. A pós-validação do Card 09 de 23/09 registrava 3.227 na fotografia daquela data. As quantidades pertencem a datas de consulta diferentes; o lote do Card 09 não inseriu registros. A consulta atual continua indicando zero notas sem financeiro.
+
+## Padronização de bairros e endereços — Cards 29 e 30
+
+O mapa relacionou 7.711 registros e auditou 61.211 referências. Foram preservadas cópias de segurança de 428 bairros e 7.283 endereços removidos. A pós-validação encontrou zero referência remanescente, zero bairro ou endereço obsoleto presente e zero duplicidade após normalização. As cópias de segurança e os roteiros de reversão permanecem na base.
+
+## Cards de volumetria e orientação aos consultores
+
+Quantidades do relatório JRXML consultadas diretamente na Oracle em 25/09/2026. Os quatro indicadores de integridade também foram conferidos nesta consulta. Os quatro complementos do dashboard foram contados de forma agregada, sem retornar nomes de produtos, parceiros ou identificadores fiscais.
+
+| Indicador | Resultado | Interpretação e orientação |
+|---|---:|---|
+| Notas e cabeçalhos na TGFCAB | 3.364 | Volume de documentos registrados. Período observado: 14/09/2022 a 25/09/2026. |
+| Itens na TGFITE | 7.020 | Volume de itens ligados às movimentações. |
+| Registros financeiros na TGFFIN | 3.229 | Total atual de títulos financeiros. |
+| Contas a receber | 3.094 | Registros com natureza de recebimento. |
+| Contas a pagar | 135 | Registros com natureza de pagamento. |
+| Financeiros sem nota | 0 | Nenhum financeiro aponta para cabeçalho inexistente. |
+| Notas sem financeiro | 0 | Nenhuma nota cujo tipo prevê financeiro ficou sem registro financeiro. |
+| Produtos cadastrados | 92 | Cadastro de produtos, desconsiderado o código zero. |
+| Parceiros cadastrados | 336 | Registros existentes na TGFPAR. |
+| Códigos fiscais de cidades duplicados | 0 | Nenhum código fiscal municipal duplicado. |
+| Referências de produtos duplicadas | 0 | Nenhuma referência compartilhada por mais de um produto. |
+| Produtos envolvidos em referências duplicadas | 0 | Nenhum produto afetado por essa condição. |
+| Grupos de descrições duplicadas | 2 | Dois grupos compartilham descrição, NCM e origem; revisar se representam itens distintos. |
+| Produtos envolvidos em descrições duplicadas | 4 | Quatro produtos pertencem aos dois grupos acima; validar antes de eventual padronização. |
+| Produtos vendidos sem entrada correspondente | 30 | Conferir a origem e o registro de entrada; o indicador não determina correção automática. |
+| Grupos de CNPJ/CPF repetidos | 0 | Nenhuma repetição de documento fiscal detectada. |
+| Parceiros envolvidos em CNPJ/CPF repetido | 0 | Nenhum parceiro afetado. |
+| Classificação fiscal divergente | 0 | Nenhuma divergência segundo os critérios da consulta. |
+| Produtos com custo zero | 68 | Conferir custo médio e movimentação dos produtos; não alterar automaticamente. |
+| Produtos sem registro de custo | 0 | Todos os produtos cobertos por este indicador têm registro na TGF CUS. |
+| Itens sem cabeçalho | 0 | Nenhum item sem nota correspondente. |
+| Cabeçalhos sem itens | 0 | Nenhuma nota sem item correspondente. |
+| Produtos vendidos sem tabela de preço (dashboard) | 0 | Nenhum produto vendido foi identificado sem registro na tabela de preço segundo o cartão. |
+| Pares de produtos com descrições similares (dashboard) | 6 | Conferir se são cadastros duplicados ou produtos distintos, sem alteração automática. |
+| Matrizes de CNPJ com filiais cadastradas (dashboard) | 7 | Indicador de relacionamento matriz-filial; confirmar se a estrutura cadastral está correta. |
+| Produtos comprados sem registro de saída (dashboard) | 39 | Pode representar estoque disponível. Conferir o fluxo antes de classificar como inconsistência. |
+
+## Verificação final dos indicadores de integridade
+
+| Verificação | Resultado atual |
+|---|---:|
+| Financeiros sem nota | 0 |
+| Itens sem cabeçalho | 0 |
+| Cabeçalhos sem itens | 0 |
+| Códigos fiscais de cidades duplicados | 0 |
+
+## Objetos inválidos e ticket relacionado
+
+Na consulta atual de 25/09, `ALL_OBJECTS` não retornou objetos inválidos no schema da sessão. Na revisão inicial de 23/09 foram registrados 46 objetos inválidos e ausência do privilégio necessário para recompilação. O ticket [712780](https://ajuda.sankhya.com.br/hc/pt-br/requests/712780) foi enviado e estava aberto no registro feito no momento do envio. A tentativa de consulta atual do portal levou à tela de login; portanto, seu estado atual não foi confirmado. O resultado Oracle atual não é apresentado como confirmação de encerramento do ticket.
+
+## Onboarding — conferência com a Oracle
+
+O último registro do portal confirmado nesta revisão é de 23/09/2026. O pacote local contém a planilha de usuários enviada em 26/08/2026 e a planilha de contas bancárias.
+
+- **Empresa:** um CNPJ do onboarding localizado em `TSIEMP.CODEMP=1`; nenhuma empresa ausente ou adicional. A razão social Oracle está abreviada de “LTDA” para “LT”, sem divergência de CNPJ.
+- **Usuários:** sete registros na planilha e sete usuários Oracle com grupo preenchido; os sete foram localizados por e-mail. Não há usuários ausentes ou adicionais. Os nomes correspondem após normalização e os sete estão na empresa 1. Onze registros Oracle com `CODGRUPO=0` foram excluídos da comparação por serem usuários de modelo.
+- **Grupos:** há sete divergências informativas. A planilha lista conjuntos de grupos, enquanto `TSIUSU` registra um `CODGRUPO` por usuário. Nenhum grupo, usuário, nome ou empresa foi alterado.
+- **Contas bancárias:** uma conta no arquivo correspondeu a um dos três registros da empresa 1 em `TSICTA`; os outros dois registros não aparecem no arquivo. A comparação usou hash dos dígitos de agência e conta. Os valores bancários não são reproduzidos nesta prévia.
+- **Empresa padrão dos usuários:** não há diferença entre a empresa indicada e `CODEMP=1`; por isso a atividade condicional de ajuste não se aplica.
+
+## Inventário resumido de cópias de segurança, mapas e auditorias
+
+- Cópias de segurança do Master: 45.045 linhas de bairros e 646.110 linhas de endereços. As cópias previstas para cidades, parceiros, produtos, tipos de venda e títulos estavam presentes com zero linhas na pós-validação.
+- Cards 29/30: cópias de segurança de 428 bairros e 7.283 endereços; mapa com 7.711 linhas; auditoria de 61.211 referências; zero exceções.
+- Unidades: mapa de 93 linhas. O controle de objetos não apresentou itens ausentes na pós-validação.
+- Card 09: mapas atuais de base e classificação com zero linhas; nenhuma tabela de auditoria financeira criada, pois não houve inserção.
+- Foram localizados 32 arquivos de reversão na pasta da base. Logs de execução, consultas somente leitura, comparações de onboarding e medição da revisão também foram preservados.
+
+## Índice de reversão
+
+| Atividade | Descrição | Arquivo de reversão |
+|---|---|---|
+| 02 | Liberar filtros de portais | `Reverter_02_Liberar_Filtros_Portais.sql` |
+| 03 | Padronizar DANFE por empresa | `Reverter_03_Padronizar_DANFE_Empresas.sql` |
+| 04 | Desativar custo da TOP de devolução | `Reverter_04_Desativar_Custo_TOP_Devolucao.sql` |
+| 05 | Habilitar cálculo de giro de produtos | `Reverter_05_Habilitar_Calculo_Giro_Produtos.sql` |
+| 06 | Zerar parcelas em tipos de negociação | `Reverter_06_Zerar_Parcelas_Tipos_Negociacao.sql` |
+| 07 | Preencher data de movimento | `Reverter_07_Preencher_Data_Movimento.sql` |
+| 08 | Preencher protocolos de documentos legados | `Reverter_08_Preencher_Protocolos_Documentos_Legados.sql` |
+| 09 | Liberar itens de documentos legados | `Reverter_09_Liberar_Itens_Documentos_Legados.sql` |
+| 10 | Habilitar ICMS gerencial | `Reverter_10_Habilitar_ICMS_Gerencial.sql` |
+| 11 | Habilitar ruptura de produtos | `Reverter_11_Habilitar_Ruptura_Produtos.sql` |
+| 12 | Habilitar ruptura por empresa | `Reverter_12_Habilitar_Ruptura_Empresas.sql` |
+| 13 | Configurar TOPs de giro GOL | `Reverter_13_Configurar_TOPs_Giro_GOL.sql` |
+| 14 | Configurar análise de giro 848 | `Reverter_14_Configurar_Analise_Giro_848.sql` |
+| 15 | Desativar rastreio sem controle | `Reverter_15_Desativar_Rastro_Sem_Controle.sql` |
+| 16 | Higienizar configuração TSICFG | `Reverter_16_Aplicar_Higienizacao_TSICFG.sql` |
+| 17 | Normalizar unidades | `Reverter_17_Normalizacao_Unidades.sql` |
+| 18 | Ajustar preferências GOL | `Reverter_18_Preferencias_GOL.sql` |
+| 19 | Ajustar parceiro matriz | `Reverter_19_Parceiro_Matriz.sql` |
+| 20 | Atualizar cartões de implantação | `Reverter_20_Cards_Deploy.sql` |
+| 21 | Classificar ICMS de parceiros | `Reverter_21_Classificacao_ICMS_Parceiros.sql` |
+| 22 | Ajustar nomes de parceiros | `Reverter_22_Ajuste_Nomes_Parceiros.sql` |
+| 24 | Padronizar parceiros | `Reverter_24_Padronizacao_Parceiros.sql` |
+| 25 | Padronizar produtos | `Reverter_25_Padronizacao_Produtos.sql` |
+| 26 | Padronizar tipos de título | `Reverter_26_Padronizacao_Tipos_Titulo.sql` |
+| 27 | Padronizar cidades | `Reverter_27_Padronizacao_Cidades.sql` |
+| 28 | Padronizar tipos de venda | `Reverter_28_Padronizacao_Tipos_Venda.sql` |
+| 29 | Padronizar bairros e remover os obsoletos | `Reverter_29_Padronizacao_Bairros.sql` e `Reverter_29_30_RIOSLTDAPRD_20260923.sql` |
+| 30 | Padronizar endereços e remover os obsoletos | `Reverter_30_Padronizacao_Enderecos.sql` e `Reverter_29_30_RIOSLTDAPRD_20260923.sql` |
+| 32A | Mapear notas sem financeiro a partir do XML | `Reverter_32A_Mapear_Insert_Direto_Financeiro_DUP.sql` |
+| 32B | Inserir financeiro para notas sem financeiro | `Reverter_32B_Insert_Direto_Financeiro_DUP.sql` |
+| 32 | Tratar notas sem financeiro | `Reverter_32_Notas_Sem_Financeiro_DUP.sql` |
+
+As reversões não foram executadas. As atividades 01 e 23/31 foram de controle ou validação e não têm arquivo de reversão específico neste índice. As atividades 33–35 não alteraram a base; a atividade 34 não se aplicou.
+
+## Pendências e pontos de atenção
+
+1. Confirmar no portal o estado atual do ticket 712780, que estava aberto no último registro de envio.
+2. Avaliar funcionalmente as sete divergências de grupo dos usuários; não foram alteradas automaticamente.
+3. Validar os dois registros de conta bancária da empresa 1 que não constam na planilha de onboarding; nenhum dado bancário foi incluído nesta prévia.
+4. Obter a configuração SMTP esperada no onboarding para comparação e definir o tratamento da conta interna de testes encontrada em `TSISMTP`. A retirada exige verificar referências e preparar cópia de segurança e reversão antes de qualquer alteração.
+5. Revisar os indicadores de produtos com descrições repetidas ou similares, produtos vendidos sem entrada e custos iguais a zero, conforme aplicabilidade operacional.
+
+## Fontes consultadas
+
+- Consulta direta Oracle do `REL_ENTEGA_NOVO_05.jrxml`, em 25/09/2026.
+- Consultas agregadas complementares dos cartões 17 a 20 do dashboard `Volumetria Deploy Agent.xml`, em 25/09/2026.
+- Logs do Master e pós-validações do Master, Cards 29/30 e Card 09, de 23/09/2026.
+- Consulta atual de objetos inválidos e diagnósticos de caracteres essenciais, em 25/09/2026.
+- Registro do portal Onboarding Deploy consultado em 23/09/2026 e planilhas do pacote local de onboarding.
+- Comparação mascarada de contas bancárias e consulta agregada SMTP, em 25/09/2026.
+- Inventário de cópias de segurança, mapas, auditorias e arquivos de reversão da pasta da base.
+
+## Consideração final
+
+A execução técnica registrada e a consulta atual de integridade não apontam falhas nos quatro indicadores obrigatórios. Permanecem decisões funcionais sobre grupos de usuários e cadastros bancários adicionais, o tratamento SMTP e a confirmação do status do ticket. Nenhuma alteração foi feita na base durante esta atualização da prévia.
