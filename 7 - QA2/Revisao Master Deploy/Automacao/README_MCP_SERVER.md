@@ -5,23 +5,38 @@ tipadas: `status`, `consultar`, `planejar`, `aplicar`. Nenhuma trava de
 segurança foi reimplementada — cada ferramenta só monta o comando equivalente
 e chama o script correspondente via `subprocess`. `aplicar` nunca passa
 `--preauthorized`/`--authorization`: a confirmação nativa do macOS continua
-obrigatória, decidida sempre por uma pessoa no teclado.
+obrigatória, decidida sempre por uma pessoa no teclado. `consultar` continua
+bloqueando DML/DDL/COMMIT/ROLLBACK por regex antes de tentar login. `aplicar`
+só executa lotes já aprovados e versionados no repositório (checado pelo
+próprio `oracle_batch.py`) — não aceita instrução solta digitada em um chat.
 
 ## O que já foi validado
 
 - Sintaxe e imports corretos (testado com `mcp` 2.x, `MCPServer`/`Context`).
-- `planejar()` roda de verdade contra `Revisao_Master_Deploy.sql` (entrypoint
-  real, 33 arquivos, sem tocar no Oracle).
+- Ambiente Python funcional dentro desta pasta: `.venv` (oracledb 26.0.1) e
+  `.mcp-venv` (mcp 2.2.0). `self-check` (`oracle_direct.py self-check`)
+  retorna `AMBIENTE_PYTHON_OK`, modo `thin` (não precisa de Oracle Instant
+  Client), DML/DDL desabilitados por padrão.
+- **Registro confirmado no Claude Code** (28/09/2026) — ver seção abaixo.
+  `claude mcp list` mostra `sankhya-revisao-master-deploy` com "✔ Connected";
+  dentro do `claude`, `/mcp` lista as 4 ferramentas.
+- `planejar()` rodou de verdade contra `Revisao_Master_Deploy.sql` (entrypoint
+  real: 33 arquivos expandidos, 1.085 instruções — 1.004 INSERT, 59 blocos
+  PL/SQL ou DDL, 7 UPDATE, 4 DELETE, 4 ALTER, 4 SELECT, 2 MERGE, 1 COMMIT),
+  sem tocar no Oracle, e sinalizou corretamente o COMMIT embutido em
+  `17_Normalizar_Unidades.sql` (linha 306).
 - Erros de caminho (`script_path` inexistente) são detectados antes de
   qualquer tentativa de conexão, tanto em `planejar()` quanto em `aplicar()`.
 - Detecção automática do interpretador certo para falar com o Oracle
   (`.venv` local, `ORACLE_PYTHON`, ou o interpretador que roda o próprio
   servidor, nessa ordem).
 
-O que **não pôde ser testado por aqui** (ponte remota, sem credencial real):
-`consultar()` e `aplicar()` contra um banco de verdade, e o self-check com o
-driver `oracledb` instalado (esse teste só faz sentido com o `.venv` real do
-Mac, que já existe e funciona conforme o README_ORACLE_DIRETO.md).
+## O que ainda não foi testado
+
+- `consultar()` e `aplicar()` contra um banco de verdade — falta um teste
+  completo de ponta a ponta com credencial real (Keychain ou Vault).
+- Login OIDC do Vault (`vault-login`) está bloqueado por um problema de
+  configuração externo a este repositório — ver aviso mais abaixo.
 
 ## Instalação (rodar no Terminal do seu Mac — não pela ponte remota)
 
@@ -45,55 +60,61 @@ O servidor detecta o `.venv` acima automaticamente (ou a variável de ambiente
 chamar `oracle_direct.py`/`oracle_batch.py` — não precisa ser o mesmo
 interpretador que roda `mcp_server.py`.
 
-## ⚠️ Ressalva importante sobre o registro no Cowork
+## Registro no Claude Code (caminho validado — não use o Cowork para isto)
 
-Fui checar a documentação oficial antes de escrever este passo, e encontrei
-uma informação relevante: servidores MCP locais configurados via
-`claude_desktop_config.json` são descritos pela Anthropic como "uma
-mecânica separada" dos conectores remotos, e a documentação afirma
-textualmente que eles usam a rede local, mas **"não estão disponíveis no
-Cowork ou no claude.ai"**. Ou seja: pelo que a documentação diz hoje, pode
-ser que este servidor não fique acessível para mim dentro de uma sessão
-Cowork como esta, mesmo depois de registrado.
+O Cowork (chat/GUI, incluindo sessões com ponte remota pro Mac) **não** é o
+lugar certo para registrar este servidor: a tela Personalizar → Conectores →
+"Adicionar conector personalizado" é bloqueada por permissão de owner da
+organização, e mesmo liberada não está confirmado que ela aceite um servidor
+local por comando+args (parece voltada a conectores remotos via URL). Além
+disso, a ponte remota (`device_bash`) roda dentro de uma VM Linux isolada no
+Mac — não é o Terminal nativo —, então nem Keychain nem o navegador para
+login OIDC do Vault funcionam por ali.
 
-Não tenho como confirmar isso com certeza sem você testar no seu Mac. Os
-dois caminhos possíveis, então:
+O caminho que funciona de verdade é o **Claude Code**, rodando nativamente no
+Terminal do Mac (sem VM isolada no meio, sem gate de admin):
 
-### Opção A — editar claude_desktop_config.json (o caminho "clássico")
+```bash
+# instalar (uma vez por Mac)
+npm install -g @anthropic-ai/claude-code
 
-Local típico no macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-(confirme no seu Mac — o caminho pode variar por versão do app). Adicione:
-
-```json
-{
-  "mcpServers": {
-    "sankhya-revisao-master-deploy": {
-      "command": "/CAMINHO/COMPLETO/PARA/.mcp-venv/bin/python3",
-      "args": [
-        "/CAMINHO/COMPLETO/PARA/7 - QA2/Revisao Master Deploy/Automacao/mcp_server.py"
-      ]
-    }
-  }
-}
+# registrar o servidor MCP (uma vez por clone do repositório)
+cd "<raiz do repositório, ex.: ~/Documents/Trabalho/Sankhya/Deploy Agent/Scripts-Deploy>"
+claude mcp add sankhya-revisao-master-deploy -- \
+  "<caminho absoluto>/7 - QA2/Revisao Master Deploy/Automacao/.mcp-venv/bin/python3" \
+  "<caminho absoluto>/7 - QA2/Revisao Master Deploy/Automacao/mcp_server.py"
 ```
 
-Substitua os dois `/CAMINHO/COMPLETO/PARA/...` pelos caminhos reais no seu
-Mac (caminho absoluto, não relativo). Depois, reinicie o Claude Desktop.
+Isso grava a configuração em `~/.claude.json` (escopo `local`, associado a
+este projeto) — persiste automaticamente para as próximas vezes que você
+rodar `claude` dentro desta pasta; não precisa repetir o `claude mcp add`.
+Validar com `claude mcp list` (deve aparecer "✔ Connected") e, dentro do
+chat do Claude Code, com `/mcp` (deve listar as 4 ferramentas).
 
-### Opção B — verificar em Settings > Extensions/Connectors
+Como o Claude Code roda direto no sistema operacional real do Mac, um
+subprocesso disparado por ele (por exemplo `oracle_direct.py` pedindo a
+senha) consegue acionar o Keychain nativamente ou abrir o navegador padrão
+para OIDC do Vault — ao contrário da ponte remota do Cowork.
 
-Antes de editar o JSON manualmente, vale checar direto no app: Settings >
-Extensions (ou Connectors) > "Advanced settings" > se existir alguma opção
-de instalar um servidor local (geralmente como pacote `.mcpb`). Essa pode
-ser a via oficialmente suportada para o seu app/versão, e não tenho como ver
-essa tela a partir daqui.
+## ⚠️ Bloqueio conhecido: login OIDC do Vault (redirect_uri_mismatch)
 
-**Se, depois de registrado, as ferramentas `status`/`consultar`/`planejar`/
-`aplicar` não aparecerem numa sessão Cowork como esta**, o wrapper continua
-com valor: dá pra usá-lo em conversas normais do Claude Desktop (fora do
-Cowork), ou eu continuo acionando `oracle_direct.py`/`oracle_batch.py`
-diretamente como já fazia antes — nada se perde, só não ganha a conveniência
-extra da chamada tipada dentro do Cowork.
+Registrado em 25/09/2026, ainda sem solução: `oracle_direct.py vault-login`
+(ou `vault login -method=oidc` direto) falha com **Erro 400:
+redirect_uri_mismatch** do Google. A porta padrão do callback (8250) estava
+livre no Mac — não é conflito de porta nem nada do lado do consultor. A causa
+é que a URL `http://localhost:8250/oidc/callback` não está cadastrada nas
+"Authorized redirect URIs" do client OAuth do Google usado por essa
+integração (`client_id
+25985837215-rcvpcrb8clqeel9c5hmkmu8btalu9b8i.apps.googleusercontent.com`).
+Só quem administra esse client no Google Cloud Console consegue corrigir,
+adicionando essa URL à lista. Isso é **independente de rodar pela ponte do
+Cowork ou pelo Terminal/Claude Code** — o problema é do lado do Google Cloud,
+não do ambiente local.
+
+E-mail formalizando o pedido foi enviado em 25/09/2026 para o supervisor
+(Paulo Henrique Silva Rabelo). Enquanto não resolvido, use
+`--credential-source keychain` (funciona nativamente no Mac/Claude Code, não
+pela ponte remota) em vez de `vault`.
 
 ## Ferramentas expostas
 
