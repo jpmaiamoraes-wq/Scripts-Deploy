@@ -6,3 +6,5 @@ __pycache__/
 **/.DS_Store
 .mcp-venv/
 Logs/mcp_server/
+Icon?
+._*
