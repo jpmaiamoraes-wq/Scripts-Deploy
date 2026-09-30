@@ -20,6 +20,13 @@ próprio `oracle_batch.py`) — não aceita instrução solta digitada em um cha
 - **Registro confirmado no Claude Code** (28/09/2026) — ver seção abaixo.
   `claude mcp list` mostra `sankhya-revisao-master-deploy` com "✔ Connected";
   dentro do `claude`, `/mcp` lista as 4 ferramentas.
+- **`status()` validado contra banco real** (30/09/2026, base `GOYAAGUAPRD`) —
+  primeiro teste de ponta a ponta com credencial real, via Keychain (primeira
+  autenticação salva automaticamente, sem repetir prompt depois). Retornou
+  `AMBIENTE_PYTHON_OK`; identidade `FRANCISCO_JUNIOR` / schema `SANKHYA`;
+  `service_compativel: true`; DB name `GOYAAGUAPRD`; 1 empresa em `TSIEMP`
+  (GOYA INDUSTRIA E COMERCIO DE AGUA MINERA); `dml_executado=false`,
+  `ddl_executado=false`.
 - `planejar()` rodou de verdade contra `Revisao_Master_Deploy.sql` (entrypoint
   real: 33 arquivos expandidos, 1.085 instruções — 1.004 INSERT, 59 blocos
   PL/SQL ou DDL, 7 UPDATE, 4 DELETE, 4 ALTER, 4 SELECT, 2 MERGE, 1 COMMIT),
@@ -33,8 +40,10 @@ próprio `oracle_batch.py`) — não aceita instrução solta digitada em um cha
 
 ## O que ainda não foi testado
 
-- `consultar()` e `aplicar()` contra um banco de verdade — falta um teste
-  completo de ponta a ponta com credencial real (Keychain ou Vault).
+- `consultar()` e `aplicar()` contra um banco de verdade — `status()` já foi
+  validado de ponta a ponta em 30/09/2026 (ver seção acima); falta o mesmo
+  teste para `consultar()`/`aplicar()`, com credencial real (Keychain ou
+  Vault).
 - Login OIDC do Vault (`vault-login`) está bloqueado por um problema de
   configuração externo a este repositório — ver aviso mais abaixo.
 
